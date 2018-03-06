@@ -1,0 +1,812 @@
+#+SETUPFILE: ../_style/style.setup
+#+TITLE: C# 基础笔记
+
+* 类和结构
+  类和结构是 .NET Framework 通用类型系统的两种基本构造
+  每种本质上都是一种数据结构, 其中封装了同属一个逻辑单元的一组数据和行.
+  数据和行为是类或结构的成员, 包括方法、属性和事件等
+
+  * 类是引用类型
+  * 结构是值类型
+
+  一般来说, 类用于对更复杂的行为或应在类对象创建后进行修改的数据建模
+  结构最适用于所含大部分数据不得在结构创建后进行修改的小型数据结构
+
+  * 封装有时称为面向对象的编程的第一支柱或原则.
+    根据封装原则, 类或结构可以指定自己的每个成员对外部代码的可访问性.
+    可以隐藏不得在类或程序集外部使用的方法和变量, 以限制编码错误或恶意攻击发生的可能性
+
+  [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/][官方指南]]
+
+** 示例代码
+#+BEGIN_SRC csharp
+  using System;
+
+  namespace ProgrammingGuide
+  {
+      // Class definition.
+      public class CustomClass
+      {
+          // Class members.
+          //
+          // Property.
+          public int Number { get; set; }
+
+          // Method.
+          public int Multiply(int num)
+              {
+                  return num * Number;
+              }
+
+          // Instance Constructor.
+          public CustomClass()
+              {
+                  Number = 0;
+              }
+      }
+
+      // Another class definition that contains Main, the program entry point.
+      class Program
+      {
+          static void Main(string[] args)
+              {
+                  // Create an object of type CustomClass.
+                  CustomClass custClass = new CustomClass();
+
+                  // Set the value of the public property.
+                  custClass.Number = 27;
+
+                  // Call the public method.
+                  int result = custClass.Multiply(4);
+                  Console.WriteLine($"The result is {result}.");
+              }
+      }
+  }
+  // The example displays the following output:
+  //      The result is 108.
+#+END_SRC
+
+** 成员
+   字段, 常量, 属性, 方法, 构造函数, 事件, 终结器, 索引器, 运算符, 嵌套类型
+
+*** 字段
+    字段是在类或结构中直接声明的任意类型的变量
+
+    类或结构可能具有 _实例字段_ 或 _静态字段_
+    实例字段特定于类型的实例.
+    如果你有包含实例字段 F 的类 T，则可以创建两个类型为 T 的对象并修改每个对象中 F 的值，而不会影响另一个对象中的值.
+    与此相比，静态字段属于类本身，并在该类的所有实例之间共享。 从实例 A 进行的更改将立刻呈现给实例 B 和 C（如果它们访问该字段）
+
+    字段是通过指定该字段的访问级别在类块中声明的，其后跟字段的类型，再跟字段的名称。 例如:
+
+#+BEGIN_SRC csharp
+  public class CalendarEntry
+  {
+      // private field
+      private DateTime date;
+
+      // public field (Generally not recommended.)
+      public string day;
+
+      // Public property exposes date field safely.
+      public DateTime Date 
+      {
+          get 
+          {
+              return date;
+          }
+          set 
+          {
+              // Set some reasonable boundaries for likely birth dates.
+              if (value.Year > 1900 && value.Year <= DateTime.Today.Year)
+              {
+                  date = value;
+              }
+              else
+                  throw new ArgumentOutOfRangeException();
+          }
+
+      }
+
+      // Public method also exposes date field safely.
+      // Example call: birthday.SetDate("1975, 6, 30");
+      public void SetDate(string dateString)
+      {
+          DateTime dt = Convert.ToDateTime(dateString);
+
+          // Set some reasonable boundaries for likely birth dates.
+          if (dt.Year > 1900 && dt.Year <= DateTime.Today.Year)
+          {
+              date = dt;
+          }
+          else
+              throw new ArgumentOutOfRangeException();
+      }
+
+      public TimeSpan GetTimeSpan(string dateString)
+      {
+          DateTime dt = Convert.ToDateTime(dateString);
+
+          if (dt != null && dt.Ticks < date.Ticks)
+          {
+              return date - dt;
+          }
+          else
+              throw new ArgumentOutOfRangeException();  
+
+      }
+  }
+#+END_SRC
+    
+    声明字段时，可以使用赋值运算符为字段指定一个初始值.
+    字段会在对象实例的构造函数被调用之前即刻初始化。 如果构造函数分配了字段的值，则它将覆盖在字段声明期间给定的任何值. \\
+    *注*:字段初始化表达式不能引用其他实例字段
+
+*** 常量
+    常量是不可变的值，在编译时是已知的，在程序的生命周期内不会改变。
+    常量使用 const 修饰符声明。 _仅 C# 内置类型（不包括 System.Object）可声明为 const_
+    用户定义的类型（包括类、结构和数组）不能为 const。 
+    使用 _readonly_ 修饰符创建在运行时一次性（例如在构造函数中）初始化的类、结构或数组，此后不能更改
+
+    * C# 不支持 const 方法、属性或事件
+    * 常量在声明时必须初始化
+    * 常量是作为静态字段访问的，因为常量的值对于该类型的所有实例都是相同的
+    * 不使用 static 关键字来声明这些常量
+    * 不在定义常量的类中的表达式必须使用类名、句点和常量名称来访问该常量
+
+*** 属性
+    属性是一种成员，它提供灵活的机制来读取、写入或计算私有字段的值。 
+    属性可用作公共数据成员，但它们实际上是称为访问器的特殊方法。
+    这使得可以轻松访问数据，还有助于提高方法的安全性和灵活性。
+
+    * *属性概述*
+      * 属性允许类公开获取和设置值的公共方法，而隐藏实现或验证代码
+      * *get* 属性访问器用于返回属性值，而 *set* 属性访问器用于分配新值。 这些访问器可以具有不同的访问级别
+      * *value* 关键字用于定义由 *set* 访问器分配的值
+      * 属性可以是读-写属性（既有 get 访问器又有 set 访问器）、
+        只读属性（有 get 访问器，但没有 set 访问器）或只写访问器（有 set 访问器，但没有 get 访问器）
+      * 不需要自定义访问器代码的简单属性可以作为表达式主体定义或自动实现的属性来实现 {get;set;}
+
+    *代码示例*
+
+#+BEGIN_SRC csharp
+  using System;
+
+  class TimePeriod
+  {
+          private double seconds;
+
+          public double Hours
+                  {
+                          get { return seconds / 3600; }
+                          set { 
+                                  if (value < 0 || value > 24)
+                                          throw new ArgumentOutOfRangeException(
+                                                  $"{nameof(value)} must be between 0 and 24.");
+
+                                  seconds = value * 3600; 
+                          }
+                  }
+  }
+
+  class Program
+  {
+          static void Main()
+                  {
+                          TimePeriod t = new TimePeriod();
+                          // The property assignment causes the 'set' accessor to be called.
+                          t.Hours = 24;
+
+                          // Retrieving the property causes the 'get' accessor to be called.
+                          Console.WriteLine($"Time in hours: {t.Hours}");
+                  }
+  }
+  // The example displays the following output:
+  //    Time in hours: 24
+#+END_SRC
+
+*** 方法
+    方法是包含一系列语句的代码块。
+    程序通过调用该方法并指定任何所需的方法参数使语句得以执行。 
+    在 C# 中，每个执行的指令均在方法的上下文中执行。
+    Main 方法是每个 C# 应用程序的入口点，并在启动程序时由公共语言运行时 (CLR) 调用
+   
+    * *方法签名*: 过指定访问级别、可选修饰符、返回值、方法的名称以及任何方法参数，
+      在 public 类 private或 abstract 结构 sealed中声明方法。 
+      这些部件一起构成方法的签名
+
+*** 事件
+    类或对象可以通过事件向其他类或对象通知发生的相关事情。
+    发送（或 引发）事件的类称为“发行者” ，接收（或 处理）事件的类称为“订户”
+
+    * *事件概述*
+      * 发行者确定何时引发事件；订户确定对事件作出何种响应
+      * 一个事件可以有多个订户。 订户可以处理来自多个发行者的多个事件
+      * 没有订户的事件永远也不会引发
+      * 事件通常用于表示用户操作，例如单击按钮或图形用户界面中的菜单选项
+      * 当事件具有多个订户时，引发该事件时会同步调用事件处理程序。 若要异步调用事件，请参阅 Calling Synchronous Methods Asynchronously
+      * 在 .NET Framework 类库中，事件基于 EventHandler 委托和 EventArgs 基类
+
+*** 运算符
+    [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/operators][相关资料链接]]
+
+*** 索引器
+    索引器允许类或结构的实例就像数组一样进行索引。
+    无需显式指定类型或实例成员，即可设置或检索索引值。
+    索引器类似于属性，不同之处在于它们的访问器需要使用参数
+
+    * *索引器概述*
+      * 使用索引器可以用类似于数组的方式为对象建立索引
+      * get 取值函数返回值。 set 取值函数分配值
+      * this 关键字用于定义索引器
+      * value 关键字用于定义 set 索引器所赋的值
+      * 索引器不必根据整数值进行索引；由你决定如何定义特定的查找机制
+      * 索引器可被重载
+      * 索引器可以有多个形参，例如当访问二维数组时
+
+    以下示例定义了一个泛型类，其中包含用于赋值和检索值的简单 get 和 set 访问器方法。
+    Program 类创建了此类的一个实例，用于存储字符串。
+
+#+BEGIN_SRC csharp
+  using System;
+
+  class SampleCollection<T>
+  {
+          // Declare an array to store the data elements.
+          private T[] arr = new T[100];
+
+          // Define the indexer to allow client code to use [] notation.
+          public T this[int i]
+                  {
+                          get { return arr[i]; }
+                          set { arr[i] = value; }
+                  }
+  }
+
+  class Program
+  {
+          static void Main()
+                  {
+                          var stringCollection = new SampleCollection<string>();
+                          stringCollection[0] = "Hello, World";
+                          Console.WriteLine(stringCollection[0]);
+                  }
+  }
+  // The example displays the following output:
+  //       Hello, World.
+#+END_SRC
+
+*** 构造函数
+    每当创建类或结构时，将会调用其构造函数。
+    类或结构可能具有采用不同参数的多个构造函数。 
+    使用构造函数，程序员能够设置默认值、限制实例化，并编写灵活易读的代码
+
+    * *默认构造函数*: 如果没有为类提供构造函数，默认情况下，
+      C# 将创建一个会实例化对象并将成员变量设置为默认值的构造函数.
+      如果没有为结构提供构造函数，C# 将依赖于隐式默认构造函数，
+      自动将值类型的每个字段初始化为其默认值
+
+    * *构造函数语法*: 构造函数是一种方法，其名称与其类型的名称相同。
+      其方法签名仅包含方法名称和其参数列表；它不包含返回类型
+      
+    *代码示例*
+
+#+BEGIN_SRC csharp
+  public class Person
+  {
+          private string last;
+          private string first;
+   
+          public Person(string lastName, string firstName)
+                  {
+                          last = lastName;
+                          first = firstName;
+                  }
+   
+          // Remaining implementation of Person class.
+  }
+#+END_SRC
+
+    * *静态构造函数*: 类或结构也可以具有静态构造函数，该静态构造函数初始化类型的静态成员。
+      静态构造函数是无参数构造函数。 如果未提供静态构造函数来初始化静态字段，C# 编译器将提供默认静态构造函数，
+      该静态构造函数会将静态字段初始化为其默认值
+
+    *代码示例*
+
+#+BEGIN_SRC csharp
+  public class Adult : Person
+  {
+          private static int minimumAge;
+   
+          public Adult(string lastName, string firstName) : base(lastName, firstName)
+                  { }
+
+          static Adult()
+                  {
+                          minimumAge = 18;
+                  }
+
+          // Remaining implementation of Adult class.
+  }
+#+END_SRC
+*** 终结器(析构函数)
+    终结器用于析构类的实例
+    
+    * *备注*
+      * 无法在结构中定义终结器, 它们仅用于类
+      * 一个类只能有一个终结器
+      * 不能继承或重载终结器
+      * 不能手动调用终结器, 可以自动调用它们
+      * 终结器不使用修饰符或参数
+
+    终结器可以作为表达式主体定义实现
+
+#+BEGIN_SRC csharp
+  using System;
+
+  public class Destroyer
+  {
+      public override string ToString() => GetType().Name;
+   
+      ~Destroyer() => Console.WriteLine($"The {ToString()} destructor is executing.");
+  }
+#+END_SRC
+
+    终结器隐式调用对象基类上的 Finalize。 因此，对终结器的调用会隐式转换为以下代码
+
+#+BEGIN_SRC csharp
+  protected override void Finalize()  
+  {  
+      try  
+      {  
+          // Cleanup statements...  
+      }  
+      finally  
+      {  
+          base.Finalize();  
+      }  
+  }
+#+END_SRC
+
+    这意味着, 对继承链（从派生程度最高到派生程度最低）中的所有实例以递归方式调用 Finalize 方法
+
+    * *示例*
+      以下示例创建了三个类，并且这三个类构成了一个继承链。
+      类 First 是基类，Second 派生自 First，Third 派生自 Second.
+      这三个类都具有终结器.
+      在 Main 中，已创建派生程度最高的类的一个实例.
+      程序运行时，请注意，将按顺序（从派生程度最高到派生程度最低）自动调用这三个类的终结器
+
+#+BEGIN_SRC csharp
+  class First
+  {
+      ~First()
+          {
+              System.Diagnostics.Trace.WriteLine("First's destructor is called.");
+          }
+  }
+
+  class Second : First
+  {
+      ~Second()
+          {
+              System.Diagnostics.Trace.WriteLine("Second's destructor is called.");
+          }
+  }
+
+  class Third : Second
+  {
+      ~Third()
+          {
+              System.Diagnostics.Trace.WriteLine("Third's destructor is called.");
+          }
+  }
+
+  class TestDestructors
+  {
+      static void Main()
+          {
+              Third t = new Third();
+          }
+
+  }
+  /* Output (to VS Output Window):
+     Third's destructor is called.
+     Second's destructor is called.
+     First's destructor is called.
+  ,*/
+#+END_SRC
+
+*** 嵌套类型
+    在类或结构中定义的类型称为嵌套类型。 例如:
+    
+#+BEGIN_SRC csharp
+  class Container
+  {
+          class Nested
+          {
+                  Nested() { }
+          }
+  }
+#+END_SRC
+
+    不论外部类型是类还是结构，嵌套类型均默认为 private；
+    仅可从其包含类型中进行访问。 在上一个示例中，Nested 类无法访问外部类型。
+
+    还可指定访问修饰符来定义嵌套类型的可访问性，如下所示：
+    * 类的嵌套类型可以是 public、protected、internal、protected internal 以及 private。
+    * 结构的嵌套类型可以是 public、internal 或 private
+
+    [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/nested-types][更多信息链接]]
+
+** 可访问性
+   使用访问修饰符 public、protected、internal、protected internal 和 private 可指定类型及其成员对客户端代码的可访问性。 
+   _可访问性的默认值为 private_
+
+   [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers][访问修饰符]]
+
+** 继承
+   继承（以及封装和多态）是面向对象的编程的三个主要特征之一。
+   通过继承，可以创建重用、扩展和修改在其他类中定义的行为的新类。
+   其成员被继承的类称为“基类”，继承这些成员的类称为“派生类”。
+   派生类只能有一个直接基类。 但是，继承是可传递的。 
+   如果 ClassC 派生自 ClassB，并且 ClassB 派生自 ClassA，则 ClassC 会继承在 ClassB 和 ClassA 中声明的成员
+   
+   *备注*: 结构不支持继承，但它们可以实现接口
+
+   [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/inheritance][官方指南]]
+
+** 接口
+   类和结构可以继承多个接口。 _继承自接口意味着类型实现接口中定义的所有方法_
+
+   [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/interfaces/index][官方指南]]
+
+* 数组
+  数组具有以下属性
+  * 数组可以是一维、多维或交错的
+  * 创建数组实例时，将建立纬度数量和每个纬度的长度。 这些值在 _实例的生存期_ 内无法更改
+  * _数值数组元素的默认值设置为零，而引用元素设置为 null_
+  * 交错数组是数组的数组，因此其元素为引用类型且被初始化为 null
+  * 数组从零开始编制索引：包含 n 元素的数组从 0 索引到 n-1
+  * 数组元素可以是任何类型，其中包括数组类型
+  * 数组类型是从抽象的基类型 Array 派生的引用类型
+    由于此类型实现 IEnumerable 和 IEnumerable<T>，因此可以在 C# 中的所有数组上使用 foreach 迭代
+
+** 作为对象的数组
+   在 C# 中，数组实际上是对象，而不只是如在 C 和 C++ 中的连续内存的可寻址区域
+   Array 是所有数组类型的抽象基类型
+   可以使用 Array 具有的属性和其他类成员
+
+   创建数组: type[] arrayName;
+
+   代码例:
+
+#+BEGIN_SRC csharp
+  int[] scores = new int[] { 97, 92, 81, 60 };
+#+END_SRC
+
+** 将数组作为参数传递
+   代码示例
+
+#+BEGIN_SRC csharp 
+  class ArrayClass
+  {
+      static void PrintArray(string[] arr)
+      {
+          for (int i = 0; i < arr.Length; i++)
+          {
+              System.Console.Write(arr[i] + "{0}", i < arr.Length - 1 ? " " : "");
+          }
+          System.Console.WriteLine();
+      }
+
+      static void ChangeArray(string[] arr)
+      {
+          // The following attempt to reverse the array does not persist when
+          // the method returns, because arr is a value parameter.
+          arr = (arr.Reverse()).ToArray();
+          // The following statement displays Sat as the first element in the array.
+          System.Console.WriteLine("arr[0] is {0} in ChangeArray.", arr[0]);
+      }
+
+      static void ChangeArrayElements(string[] arr)
+      {
+          // The following assignments change the value of individual array 
+          // elements. 
+          arr[0] = "Sat";
+          arr[1] = "Fri";
+          arr[2] = "Thu";
+          // The following statement again displays Sat as the first element
+          // in the array arr, inside the called method.
+          System.Console.WriteLine("arr[0] is {0} in ChangeArrayElements.", arr[0]);
+      }
+
+      static void Main()
+      {
+          // Declare and initialize an array.
+          string[] weekDays = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+
+          // Pass the array as an argument to PrintArray.
+          PrintArray(weekDays);
+
+          // ChangeArray tries to change the array by assigning something new
+          // to the array in the method. 
+          ChangeArray(weekDays);
+
+          // Print the array again, to verify that it has not been changed.
+          System.Console.WriteLine("Array weekDays after the call to ChangeArray:");
+          PrintArray(weekDays);
+          System.Console.WriteLine();
+
+          // ChangeArrayElements assigns new values to individual array
+          // elements.
+          ChangeArrayElements(weekDays);
+
+          // The changes to individual elements persist after the method returns.
+          // Print the array, to verify that it has been changed.
+          System.Console.WriteLine("Array weekDays after the call to ChangeArrayElements:");
+          PrintArray(weekDays);
+      }
+  }
+  // Output: 
+  // Sun Mon Tue Wed Thu Fri Sat
+  // arr[0] is Sat in ChangeArray.
+  // Array weekDays after the call to ChangeArray:
+  // Sun Mon Tue Wed Thu Fri Sat
+  // 
+  // arr[0] is Sat in ChangeArrayElements.
+  // Array weekDays after the call to ChangeArrayElements:
+  // Sat Fri Thu Wed Thu Fri Sat
+#+END_SRC
+* 字符串
+  字符串是值为文本的 _String_ 类型对象.
+  文本在内部存储为 _Char_ 对象的依序只读集合.
+  在 C# 字符串末尾没有 null 终止字符; 因此, 一个 C# 字符串可以包含任何数量的嵌入的 null 字符 ('\0').
+  字符串的 _Length_ 属性表示其包含的 _Char_ 对象数量, 而非 Unicode 字符数
+
+  *string* 与 *System.String* 是等效的
+
+  字符串可以通过下标访问单个字符
+
+** 声明和初始化字符串
+   可以使用各种方法声明和初始化字符串, 如以下示例中所示:
+
+#+BEGIN_SRC csharp
+  // Declare without initializing.
+  string message1;
+
+  // Initialize to null.
+  string message2 = null;
+
+  // Initialize as an empty string.
+  // Use the Empty constant instead of the literal "".
+  string message3 = System.String.Empty;
+
+  //Initialize with a regular string literal.
+  string oldPath = "c:\\Program Files\\Microsoft Visual Studio 8.0";
+
+  // Initialize with a verbatim string literal.
+  string newPath = @"c:\Program Files\Microsoft Visual Studio 9.0";
+
+  // Use System.String if you prefer.
+  System.String greeting = "Hello World!";
+
+  // In local variables (i.e. within a method body)
+  // you can use implicit typing.
+  var temp = "I'm still a strongly-typed System.String!";
+
+  // Use a const string to prevent 'message4' from
+  // being used to store another string value.
+  const string message4 = "You can't get rid of me!";
+
+  // Use the String constructor only when creating
+  // a string from a char*, char[], or sbyte*. See
+  // System.String documentation for details.
+  char[] letters = { 'A', 'B', 'C' };
+  string alphabet = new string(letters);
+#+END_SRC
+
+   请注意, 不要使用 _new_ 运算符创建字符串对象, 除非使用字符数组初始化字符串
+
+** 字符串对象的不可变性
+   字符串对象是 "不可变的": 它们在创建后无法更改
+   看起来是在修改字符串的所有 String 方法和 C# 运算符实际上都是在新的字符串对象中返回结果
+   *即*: 修改字符串时, 返回新的字符串对象, 旧的字符串对象被释放
+
+** 逐字字符串(@)
+   由 _@_ 修饰的字符串不进行转义变化 \\
+   _使用双引号在逐字字符串内部嵌入引号_
+
+   逐字字符串的一些常见用法:
+   
+#+BEGIN_SRC csharp
+string filePath = @"C:\Users\scoleridge\Documents\";
+  //Output: C:\Users\scoleridge\Documents\
+
+  string text = @"My pensive SARA ! thy soft cheek reclined
+      Thus on mine arm, most soothing sweet it is
+      To sit beside our Cot,...";
+  /* Output:
+     My pensive SARA ! thy soft cheek reclined
+     Thus on mine arm, most soothing sweet it is
+     To sit beside our Cot,... 
+  ,*/
+
+  string quote = @"Her name was ""Sara.""";
+  //Output: Her name was "Sara."
+#+END_SRC
+
+** 字符串转义序列(转义字符表)
+
+| 转义序列 | 字符名称                                 | Unicode编码  |
+|----------+------------------------------------------+--------------|
+| <c>      | <c>                                      | <c>          |
+|----------+------------------------------------------+--------------|
+| \'       | 单引号                                   | 0x0027       |
+| \"       | 双引号                                   | 0x0022       |
+| \\       | 反斜杠                                   | 0x005C       |
+| \0       | null                                     | 0x0000       |
+| \a       | 警报                                     | 0x0007       |
+| \b       | Backspace                                | 0x0008       |
+| \f       | 换页                                     | 0x000C       |
+| \r       | 回车                                     | 0x000A       |
+| \n       | 换行                                     | 0x000D       |
+| \t       | 水平制表符                               | 0x0009       |
+| \U       | 代理项对的Unicode转义序列                | \Unnnnnnnn   |
+| \u       | Unicode转义序列                          | \u0041 = "A" |
+| \v       | 垂直制表符                               | 0x000B       |
+| \x       | 除长度可变外, Unicode 转义序列与"\u"类似 | \x0041 = "A" |
+
+在编译时, 逐字字符串被转换为普通字符串, 并具有所有相同的转义序列
+
+** 格式化字符串(string.Format)
+   String.Format和WriteLine都遵守同样的格式化规则.
+   格式化的格式如下:"{ N [, M ][: formatString ]}", arg1, ... argN, 在这个格式中
+
+   1. N是从0开始的整数, 表示要格式化的参数的个数
+   2. M是一个可选的整数, 表示格式化后的参数所占的宽度, 
+      如果M是负数, 那么格式化后的值就是左对齐的, 如果M是正数, 那么格式化后的值是右对齐的
+   3. formatString是另外一个可选的参数, 表示格式代码
+   
+   例: string.Format("{0,-5:F2}", 1.234);
+
+*** 常用格式化表示符
+
+| 字母 | 含义                                          |
+|------+-----------------------------------------------|
+| <c>  | <c>                                           |
+|------+-----------------------------------------------|
+| D/d  | Decimal 十进制格式                            |
+| F/f  | Fixed point 固定精度格式                      |
+| N/n  | 用逗号分割千位的数字, 比如1234将会被变成1,234 |
+| X/x  | Hex 16进制格式                                |
+
+** 方法
+*** Split
+    分割字符串
+* 异常和异常处理
+  异常处理功能使用 try、catch 和 finally 关键字来尝试执行可能失败的操作、在你确定合理的情况下处理故障，以及在事后清除资源
+  异常是使用 throw 关键字创建而成
+
+  在以下示例中，方法用于测试除数是否为零，并捕获相应的错误.
+  如果没有异常处理功能，此程序将终止，并显示 DivideByZeroException was unhandled 错误
+
+#+BEGIN_SRC csharp
+  class ExceptionTest
+  {
+          static double SafeDivision(double x, double y)
+                  {
+                          if (y == 0)
+                                  throw new System.DivideByZeroException();
+                          return x / y;
+                  }
+          static void Main()
+                  {
+                          // Input for test purposes. Change the values to see
+                          // exception handling behavior.
+                          double a = 98, b = 0;
+                          double result = 0;
+
+                          try
+                          {
+                                  result = SafeDivision(a, b);
+                                  Console.WriteLine("{0} divided by {1} = {2}", a, b, result);
+                          }
+                          catch (DivideByZeroException e)
+                          {
+                                  Console.WriteLine("Attempted divide by zero.");
+                          }
+                  }
+  }
+#+END_SRC
+
+** 异常概述
+   异常具有以下属性:
+   * 异常是最终全都派生自 System.Exception 的类型
+   * 在可能抛出异常的语句周围使用 try 代码块
+   * 在 try 代码块中出现异常后，控制流会跳转到调用堆栈中任意位置上的首个相关异常处理程序。 在 C# 中，catch 关键字用于定义异常处理程序
+   * 如果给定的异常没有对应的异常处理程序，那么程序会停止执行，并显示错误消息
+   * 除非可以处理异常并让应用程序一直处于已知状态，否则不捕获异常。 如果捕获 System.Exception，使用 catch 代码块末尾的 throw 关键字重新抛出异常
+   * 如果 catch 代码块定义异常变量，可以用它来详细了解所发生的异常类型
+   * 使用 throw 关键字，程序可以显式生成异常
+   * 异常对象包含错误详细信息，如调用堆栈的状态和错误的文本说明
+   * 即使有异常抛出，finally 代码块中的代码仍会执行。 使用 finally 代码块可释放资源。例如，关闭在 try 代码块中打开的任何流或文件
+
+* 泛型
+** 泛型概述
+   * 使用泛型类型可以最大限度地重用代码、保护类型安全性以及提高性能
+   * 泛型最常见的用途是创建集合类
+   * 可以创建自己的泛型接口、泛型类、泛型方法、泛型事件和泛型委托
+   * 可以对泛型类进行约束以访问特定数据类型的方法
+   * 在泛型数据类型中所用类型的信息可在运行时通过使用反射来获取
+   * .NET Framework 类库在 System.Collections.Generic 命名空间中包含几个新的泛型集合类
+     应尽可能使用这些类来代替某些类, 如 System.Collections 命名空间中的 ArrayList
+
+** 示例代码
+#+BEGIN_SRC csharp
+  // Declare the generic class.
+  public class GenericList<T>
+  {
+      void Add(T input) { }
+  }
+
+  class TestGenericList
+  {
+      private class ExampleClass { }
+      static void Main()
+          {
+              // Declare a list of type int.
+              GenericList<int> list1 = new GenericList<int>();
+
+              // Declare a list of type string.
+              GenericList<string> list2 = new GenericList<string>();
+
+              // Declare a list of type ExampleClass.
+              GenericList<ExampleClass> list3 = new GenericList<ExampleClass>();
+          }
+  }
+#+END_SRC
+* 枚举类型
+  枚举类型（也称为枚举）提供了一种有效的方式来定义可能分配给变量的一组已命名整数常量
+
+#+BEGIN_SRC csharp
+  enum Day { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
+  enum Month : byte { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec };
+#+END_SRC
+
+  默认情况下，枚举中每个元素的基础类型都为 int. 可以使用冒号指定另一种整数类型，如上例所示
+
+  如果未为枚举器列表中的元素指定值，则值将自动按 1 递增
+
+  可以为枚举类型的枚举器列表中的元素分配任何值，也可以使用计算值
+
+#+BEGIN_SRC csharp
+  enum MachineState
+  {
+          PowerOff = 0,
+          Running = 5,
+          Sleeping = 10,
+          Hibernating = Sleeping + 5
+  }
+#+END_SRC
+
+** 使用 System.Enum 方法来发现和操作枚举值
+   所有枚举都是 System.Enum 类型的实例.
+   不能从 System.Enum 中派生新类，但可以使用它的方法来发现有关枚举实例中操作值的信息
+
+#+BEGIN_SRC csharp
+  string s = Enum.GetName(typeof(Day), 4);
+  Console.WriteLine(s);
+
+  Console.WriteLine("The values of the Day Enum are:");
+  foreach (int i in Enum.GetValues(typeof(Day)))
+          Console.WriteLine(i);
+
+  Console.WriteLine("The names of the Day Enum are:");
+  foreach (string str in Enum.GetNames(typeof(Day)))
+          Console.WriteLine(str);
+#+END_SRC
+
+* 相关链接
+** 微软官方文档
+   * [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/index][C#编程指南]]: C#语法特性讲解

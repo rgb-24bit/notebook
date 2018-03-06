@@ -1,0 +1,9 @@
+#+SETUPFILE:  ./_style/style.setup
+#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
+#+TITLE:      gdb 笔记
+#+AUTHOR:     rgb_24bit
+#+EMAIL:      rgb_24bit@foxmail.com
+
+* 单步调试和单步跟踪
+  - 单步调试: n
+  - 单步跟踪: s

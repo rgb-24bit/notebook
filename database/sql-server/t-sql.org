@@ -1,0 +1,107 @@
+#+SETUPFILE:  ./_style/style.setup
+#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
+#+TITLE:      t-sql 使用总结
+#+AUTHOR:     rgb-24bit
+#+EMAIL:      rgb-24bit@foxmail.com
+#+DATE:       <2018-01-23 周二>
+
+* 前言
+  本学期进行了 =数据库= 的教学, 由于平时对数据库的使用比较少, 
+  所以将一些常用的 =T-SQL/SQL= 语句总结一下.
+
+* 数据库的建立, 备份, 还原
+** 创建数据库
+   1. 简单创建:
+      #+BEGIN_SRC sql
+        CREATE DATABASE db_name;
+      #+END_SRC
+   
+   2. 指定参数:
+      #+BEGIN_SRC sql
+        CREATE DATABASE db_name
+            ON                  -- 指定数据文件
+             ( 
+               NAME = db_name_data,
+               FILENAME = '/path/db_name_data.mdf',    -- 使用 db_name 好管理
+               SIZE = 10,
+               MAXSIZE = 50,
+               FILEGROWTH = 5
+             )
+           LOG ON               -- 指定日志文件
+             (
+               NAME = db_name_log,
+               FILENAME = '/path/db_name_log.ldf',
+               SIZE = 5MB,
+               MAXSIZE = 25MB,
+               FILEGROWTH = 5MB
+             );
+      #+END_SRC
+      
+** 备份和还原
+   1. 备份指令:
+      #+BEGIN_SRC sql
+        BACKUP DATABASE db_name TO DISK='path/backfile';
+      #+END_SRC
+   
+   2. 还原指令:
+      #+BEGIN_SRC sql
+        RESTORE DATABASE db_name FROM DISK='path/backfile';
+      #+END_SRC
+
+   3. 不同机器上还原:
+      #+BEGIN_SRC sql
+        RESTORE FILELISTONLY FROM DISK='path/backfile';    -- 获取数据文件和日志文件的名称
+
+        RESTORE DATABASE db_name
+           FROM DISK='path/backfile'
+           WITH MOVE 'db_name_data' TO 'path/db_data',
+                MOVE 'db_name_log'  TO 'path/db_log';    -- 移动数据库到指定位置
+      #+END_SRC
+
+* 访问和权限
+** 创建登录名及用户名
+   1. 标准语句:
+      #+BEGIN_SRC sql
+        /* 创建登录名 */
+        CREATE LOGIN login_name
+          WITH PASSWORD = 'password'
+          MUST CHANGE;  -- MUST CHANGE 表名用户首次链接时必须修改密码(可选)
+
+        /* 创建用户名 */
+        CREATE USER user_name
+           FOR LOGIN login_name;  -- 需要制定登录名
+      #+END_SRC
+
+   2. T-SQL
+      #+BEGIN_SRC sql
+        EXEC SP_ADDLOGIN login_name, password;  -- 逗号
+        EXEC SP_ADDUSER user_name, login_name;  -- 逗号
+      #+END_SRC    
+
+** 允许登录名访问数据库
+   #+BEGIN_SRC sql
+     ALTER LOGIN login_name ENABLE;
+   #+END_SRC
+
+** 数据库角色
+   #+BEGIN_SRC sql
+     /* 创建数据库角色 */
+     CREATE ROLE role_name;
+
+     /* 添加成员 */
+     ALTER ROLE role_name ADD MEMBER user_name;  -- sql server 2012+
+
+     /* 添加成员 */
+     EXEC SP_ADDROLEMEMBER role_name, user_name;  -- 逗号
+
+     /* 删除成员 */
+     ALTER ROLE role_name DROP MEMBER user_name;
+   #+END_SRC
+   
+** 赋予权限
+   #+BEGIN_SRC sql
+     GRANT <权限列表>  -- 逗号分隔
+        ON <关系或视图名>
+        TO <用户或角色列表>
+   #+END_SRC
+   

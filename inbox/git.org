@@ -1,0 +1,9 @@
+[[https://git-scm.com/book/zh/v1/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4-Plumbing-%E5%92%8C%E9%AB%98%E5%B1%82%E5%91%BD%E4%BB%A4-Porcelain][低层原理]]
+
+[[http://www.ruanyifeng.com/blog/2014/06/git_remote.html][远程操作]]
+
+#+BEGIN_SRC bash
+  git remote add <name> <url>
+  git fetch <name>
+  git push <name> <branch>
+#+END_SRC

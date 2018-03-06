@@ -1,0 +1,151 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      Python 笔记
+
+* logging 模块
+** 简单的将日志打印到屏幕
+
+   #+BEGIN_SRC python :results output
+     import logging
+
+     logging.debug('This is debug message')
+     logging.info('This is info message')
+     logging.warning('This is warning message')
+
+   #+END_SRC
+
+   #+RESULTS:
+
+   : WARNING:root:This is warning message
+** 通过logging.basicConfig函数对日志的输出格式及方式做相关配置
+
+   #+BEGIN_SRC python
+     import logging
+
+     logging.basicConfig(level=logging.DEBUG,
+                         format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
+                         datefmt='%a, %d %b %Y %H:%M:%S',
+                         filename='myapp.log',
+                         filemode='w')
+
+     logging.debug('This is debug message')
+     logging.info('This is info message')
+     logging.warning('This is warning message')
+   #+END_SRC
+
+   #+RESULTS:
+   : None
+
+   file:./myapp.log
+
+   logging.basicConfig函数各参数:
+   filename: 指定日志文件名
+   filemode: 和file函数意义相同，指定日志文件的打开模式，'w'或'a'
+   format: 指定输出的格式和内容，format可以输出很多有用信息，如上例所示:
+   %(levelno)s: 打印日志级别的数值
+   %(levelname)s: 打印日志级别名称
+   %(pathname)s: 打印当前执行程序的路径，其实就是sys.argv[0]
+   %(filename)s: 打印当前执行程序名
+   %(funcName)s: 打印日志的当前函数
+   %(lineno)d: 打印日志的当前行号
+   %(asctime)s: 打印日志的时间
+   %(thread)d: 打印线程ID
+   %(threadName)s: 打印线程名称
+   %(process)d: 打印进程ID
+   %(message)s: 打印日志信息
+   datefmt: 指定时间格式，同time.strftime()
+   level: 设置日志级别，默认为logging.WARNING
+   stream: 指定将日志的输出流，可以指定输出到sys.stderr,sys.stdout或者文件，默认输出到sys.stderr，当stream和filename同时指定时，stream被忽略
+
+** 将日志同时输出到文件和屏幕
+
+   #+BEGIN_SRC python
+
+     import logging
+
+     logging.basicConfig(level=logging.DEBUG,
+                         format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
+                         datefmt='%a, %d %b %Y %H:%M:%S',
+                         filename='myapp.log',
+                         filemode='w')
+
+     #################################################################################################
+     #定义一个StreamHandler，将INFO级别或更高的日志信息打印到标准错误，并将其添加到当前的日志处理对象#
+     console = logging.StreamHandler()
+     console.setLevel(logging.INFO)
+     formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+     console.setFormatter(formatter)
+     logging.getLogger('').addHandler(console)
+     #################################################################################################
+
+     logging.debug('This is debug message')
+     logging.info('This is info message')
+     logging.warning('This is warning message')
+   #+END_SRC
+
+   #+RESULTS:
+* Python 调试
+** 简单启动方式
+   /Python -m pdb script.py/
+
+** 简单指令
+   * p print
+   * n 单步跳过(跳过函数)
+   * s 单步(不跳过函数)
+
+** 相关链接
+   - [[https://docs.python.org/2/library/pdb.html][官方文档]]
+
+* Python 应用方向
+** WEB 开发
+   主要技术栈:
+   1. Django :: 适合快速开发一个网站, 兼顾APP客户端的API调用请求
+   2. Flask :: 适合配合手机客户端开发后台API服务, 优势是后端、API，不适合构建全功能网站
+
+** 网络爬虫
+   工具积累:
+   1. Requests :: 模拟HTTP请求
+   2. PyQuery/BeautifulSoup :: HTML DOM 解析
+   3. Scrapy :: 自动化分布式爬取任务
+   4. 最简化数据库访问的各种ORM
+
+** 人工智能与机器学习
+** 数据分析处理
+** 服务器运维及其它小工具
+** 桌面程序
+** 多媒体应用
+* Python类、模块、包的区别
+** 模块
+   模块，在Python可理解为对应于一个文件。在创建了一个脚本文件后，定义了某些函数和变量。你在其他需要这些功能的文件中，导入这模块，就可重用这些函数和变量。一般用module_name.fun_name，和module_name.var_name进行使用。这样的语义用法使模块看起来很像类或者名字空间，可将module_name 理解为名字限定符。模块名就是文件名去掉.py后缀。
+   模块属性__name__，它的值由Python解释器设定。如果脚本文件是作为主程序调用，其值就设为__main__，如果是作为模块被其他文件导入，它的值就是其文件名
+
+   模块能像包含函数定义一样，可包含一些可执行语句。这些可执行语句通常用来进行模块的初始化工作。这些语句只在模块第一次被导入时被执行。这非常重要，有些人以为这些语句会多次导入多次执行，其实不然。
+
+   模块在被导入执行时，python解释器为加快程序的启动速度，会在与模块文件同一目录下生成.pyc文件。我们知道python是解释性的脚本语言，而.pyc是经过编译后的字节码，这一工作会自动完成，而无需程序员手动执行。
+
+** 包
+   通常包总是一个目录，可以使用import导入包，或者from + import来导入包中的部分模块。包目录下为首的一个文件便是 __init__.py。然后是一些模块文件和子目录，假如子目录中也有 __init__.py 那么它就是这个包的子包了。
+
+   创建许许多多模块后，我们可能希望将某些功能相近的文件组织在同一文件夹下，这里就需要运用包的概念了。包对应于文件夹，使用包的方式跟模块也类似，唯一需要注意的是，当文件夹当作包使用时，文件夹需要包含__init__.py文件，主要是为了避免将文件夹名当作普通的字符串。__init__.py的内容可以为空，一般用来进行包的某些初始化工作或者设置__all__值，__all__是在from package-name import *这语句使用的，全部导出定义过的模块。
+
+   可以从包中导入单独的模块。
+   1). import PackageA.SubPackageA.ModuleA,使用时必须用全路径名
+   2). 变种: from PackageA.SubPackageA import ModuleA, 可以直接使用模块名而不用加上包前缀。
+   3). 也可以直接导入模块中的函数或变量：from PackageA.SubPackageA.ModuleA import functionA
+
+   import语句语法：
+   1. 当使用from package import item时，item可以是package的子模块或子包，或是其他的定义在包中的名字（比如一个函数、类或变量）
+      首先检查item是否定义在包中，不过没找到，就认为item是一个模块并尝试加载它，失败时会抛出一个ImportError异常。
+   2. 当使用import item.subitem.subsubitem语法时，最后一个item之前的item必须是包，最后一个item可以是一个模块或包，但不能是类、函数和变量
+
+   3. from pacakge import *
+      如果包的__init__.py定义了一个名为__all__的列表变量，它包含的模块名字的列表将作为被导入的模块列表。
+      如果没有定义__all__， 这条语句不会导入所有的package的子模块，它只保证包package被导入，然后导入定义在包中的所有名字。
+
+   包是一个有层次的文件目录结构，它定义了由n个模块或n个子包组成的python应用程序执行环境。
+   通俗一点：包是一个包含__init__.py 文件的目录，该目录下一定得有这个__init__.py文件和其它模块或子包
+** =__main__.py 和 =__init__.py=
+
+   如果你希望 python 将一个文件夹作为 package 对待，那么这个文件夹中必须包含一个名为 =__init__.py= 的文件，即使它是空的
+
+   如果你需要 python 讲一个文件夹作为 package 执行，那么这个文件夹中必须包含一个名为 =__main__.py= 的文件，
+   当执行 python -m hhlb 或者python hhlb 的时候，这个文件中的代码都会被执行

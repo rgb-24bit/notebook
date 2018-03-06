@@ -1,0 +1,3 @@
+
+下载包使用: pipenv install -d --skip-lock
+用 lock 文件简直不靠谱

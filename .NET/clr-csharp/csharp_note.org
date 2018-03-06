@@ -1,0 +1,246 @@
+#+SETUPFILE:  ../_style/style.setup
+#+TITLE: C# 笔记
+
+* 程序部分
+** C# 通用程序结构
+   C# 程序可由一个或多个文件组成。
+   每个文件均可包含零个或多个命名空间。 
+   一个命名空间除了可包含其他命名空间外,还可包含类、结构、接口、枚举、委托等类型。 
+   下面是包含所有这些元素的 C# 程序主干。
+
+#+BEGIN_SRC csharp
+  // A skeleton of a C# program 
+  using System;
+  namespace YourNamespace
+  {
+      class YourClass
+      {
+      }
+
+      struct YourStruct
+      {
+      }
+
+      interface IYourInterface 
+      {
+      }
+
+      delegate int YourDelegate();
+
+      enum YourEnum 
+      {
+      }
+
+      namespace YourNestedNamespace
+      {
+          struct YourStruct 
+          {
+          }
+      }
+
+      class YourMainClass
+      {
+          static void Main(string[] args) 
+              {
+                  //Your program starts here...
+              }
+      }
+  }
+#+END_SRC
+
+** Main() 和 命令行参数
+   *Main* 方法是 C# 应用程序的入口点。 （库和服务不要求使用 Main 方法作为入口点）\\
+   *Main* 方法是应用程序启动后调用的第一个方法
+
+   _C# 程序中只能有一个入口点。_ 
+   如果多个类包含 Main 方法，必须使用 /main 编译器选项来编译程序，以指定将哪个 Main 方法用作入口点。
+
+*** Main 方法相关
+    1. Main 在类或结构中声明。 Main 必须是静态方法，不得为公共方法
+    2. Main 可以具有 *void* 、 *int* 返回类型开头
+    3. 使用或不使用包含命令行自变量的 _string[]_ 参数声明 Main 方法都行
+
+*** 命令行参数    
+    可以通过以下方式之一定义方法来将自变量发送到 Main 方法:
+
+#+BEGIN_SRC csharp
+  static int Main(string[] args)
+
+
+  static void Main(string[] args)
+
+  // 个人更喜欢argv
+#+END_SRC
+
+* 语言部分
+** 语句、表达式和运算符
+   构成应用程序的 C# 代码由关键字、表达式和运算符组成的语句所组成。
+
+*** 语句的类型
+
+| 类别         | C#关键字/说明                                                                            |
+|--------------+------------------------------------------------------------------------------------------|
+| <l>          | <l>                                                                                      |
+|--------------+------------------------------------------------------------------------------------------|
+| 声明语句     | 声明语句引入新的变量或常量. 变量声明可以选择为变量赋值. _在常量(const)声明中必须赋值_      |
+| 表达式语句   | 用于计算值的表达式语句必须在变量中存储该值                                               |
+| 选择语句     | 选择语句用于根据一个或多个指定条件分支到不同的代码段, [[https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/selection-statements][选择语句参考指南]]                   |
+| 迭代语句     | 迭代语句用于遍历集合（如数组），或重复执行同一组语句直到满足指定的条件, [[https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/iteration-statements][迭代语句参考指南]] |
+| 跳转语句     | 跳转语句将控制转移给另一代码段, [[https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/jump-statements][跳转语句参考指南]]                                         |
+| 异常处理语句 | 异常处理语句用于从运行时发生的异常情况正常恢复, [[https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/exception-handling-statements][异常处理语句参考指南]]                     |
+| ...          | ...                                                                                      |
+    
+*** Lambda 表达式
+    Lambda 基本形式: *(input-parameters) => expression*
+
+** 类型、变量和值
+   * *备注*: 在 C# 中, bool 不能转化为 int, 所以条件判断不能直接用整型值代替bool值
+
+*** 值类型和引用类型
+    * *值类型*
+      - 值类型直接包含值, 即对于值类型变量, 没有单独的堆分配或垃圾回收开销
+      - 值类型分为两类: 结构和枚举, (内置数值类型是结构, 包含可以访问的属性和方法)
+    * *引用类型*
+      - 定义为 _类, 委托, 数组或接口_ 的类型是引用类型
+      - 所有数组都是引用类型，即使元素是值类型，也不例外
+    * *默认值*
+      - 值类型: 0
+      - 引用类型: null
+
+** 类和结构
+   类是引用类型, 结构是值类型
+    
+*** 结构
+    通过结构关键字 *struct* 来定义结构
+    * 在结构声明中，除非将字段声明为 const 或 static，否则无法初始化(在声明同时初始化)
+    * 结构不能声明默认构造函数（没有参数的构造函数）或终结器
+    * 结构可以声明具有参数的构造函数
+    * 一个结构无法继承自另一个结构或类，并且它不能为类的基类。 所有结构都直接继承自 System.ValueType，后者继承自 System.Object
+    * 结构可以实现接口
+
+*** 继承
+    *备注*: 结构不支持继承，但它们可以实现接口
+
+    定义要从其他类派生的类时，派生类会隐式获得基类的所有成员 _(除了其构造函数和终结器)_ 
+
+    *基类成员的派生隐藏*: 派生类可以通过使用相同名称和签名声明成员来隐藏基类成员.
+    new 修饰符可以用于显式指示成员不应作为基类成员的重写。 使用 new 不是必需的，但如果未使用 new，则会生成编译器警告
+
+*** 多态性
+    * *虚成员*: 当派生类从基类继承时，它会获得基类的所有方法、字段、属性和事件。 派生类的设计器可以选择是否
+      - 重写基类中的虚拟成员
+      - 继承最接近的基类方法而不重写它
+      - 定义隐藏基类实现的成员的新非虚实现
+
+   仅当基类成员声明为 virtual 或 abstract 时，派生类才能重写基类成员。 
+   派生成员必须使用 override 关键字显式指示该方法将参与虚调用。 以下代码提供了一个示例：
+
+#+BEGIN_SRC csharp
+  public class BaseClass
+  {
+      public virtual void DoWork() { }
+      public virtual int WorkProperty
+          {
+              get { return 0; }
+          }
+  }
+  public class DerivedClass : BaseClass
+  {
+      public override void DoWork() { }
+      public override int WorkProperty
+          {
+              get { return 0; }
+          }
+  }
+#+END_SRC   
+
+   字段不能是虚拟的，只有方法、属性、事件和索引器才可以是虚拟的。
+   当派生类重写某个虚拟成员时，即使该派生类的实例被当作基类的实例访问，也会调用该成员。
+   以下代码提供了一个示例：
+
+#+BEGIN_SRC csharp
+  DerivedClass B = new DerivedClass();
+  B.DoWork();  // Calls the new method.
+
+  BaseClass A = (BaseClass)B;
+  A.DoWork();  // Also calls the new method.
+#+END_SRC
+
+    * *使用新成员隐藏基类成员*
+      如果希望派生成员具有与基类中的成员相同的名称，但又不希望派生成员参与虚调用，则可以使用 new 关键字。 
+      _new 关键字放置在要替换的类成员的返回类型之前_
+
+#+BEGIN_SRC csharp
+  public class BaseClass
+  {
+      public void DoWork() { WorkField++; }
+      public int WorkField;
+      public int WorkProperty
+          {
+              get { return 0; }
+          }
+  }
+
+  public class DerivedClass : BaseClass
+  {
+      public new void DoWork() { WorkField++; }
+      public new int WorkField;
+      public new int WorkProperty
+      {
+          get { return 0; }
+      }
+  }
+#+END_SRC
+
+    * *more*...
+
+*** 抽象类、密封类及类成员
+    使用 abstract 关键字可以创建不完整且 _必须在派生类中实现的类和 class 成员_
+    使用 sealed 关键字可以防止继承以前标记为 virtual 的类或某些类成员
+
+    * 通过在类定义前面放置关键字 abstract，可以将类声明为抽象类
+    * *抽象类不能实例化,* 抽象类的用途是提供一个可供多个派生类共享的通用基类定义
+    * 抽象类也可以定义 *抽象方法*. 方法是将关键字 abstract 添加到方法的返回类型的前面
+    * 抽象方法没有实现，所以方法定义后面是分号，而不是常规的方法块。 
+      _抽象类的派生类必须实现所有抽象方法_ 。
+      当抽象类从基类继承虚方法时， _抽象类可以使用抽象方法重写该虚方法_
+
+    *代码示例*
+ 
+#+BEGIN_SRC csharp
+  public abstract class A
+  {
+      public abstract void DoWork(int i);
+  }
+
+  // compile with: /target:library
+  public class D
+  {
+      public virtual void DoWork(int i)
+          {
+              // Original implementation.
+          }
+  }
+
+  public abstract class E : D
+  {
+      public abstract override void DoWork(int i);
+  }
+
+  public class F : E
+  {
+      public override void DoWork(int i)
+          {
+              // New implementation.
+          }
+  }
+#+END_SRC
+
+*** 静态类和静态类成员
+    _静态类无法实例化_
+
+* 平台部分
+* 相关链接
+** 官方文档链接
+   * [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/index][C# 编程指南]]
+   * [[https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/][C# 语言参考]]

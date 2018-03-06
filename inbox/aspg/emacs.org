@@ -1,0 +1,23 @@
+* 这个家伙的博客不错
+  [[https://qiwulun.github.io/][齐物论]]
+* dirmode(没怎么用)
+  [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
+  
+* org-mode
+  分段问题: 在导出网页的时候, 如果分段时没有空行的话, 分段是无效的.
+
+  即分段应该是这样的:
+
+  1. xxxxxxx
+
+     abdcddsfgg
+
+ 而不是这样:
+
+ 1. xxxxxxxx
+    abasfasfasfgaf
+* 正则表达式
+  https://www.emacswiki.org/emacs/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B8%AE%E5%8A%A9
+* python
+  spc m V a 目录为: venv
+* ctrl + 方向键: 在空行间移动

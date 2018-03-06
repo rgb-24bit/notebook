@@ -1,0 +1,239 @@
+#+SETUPFILE:  ../_style/style.setup
+#+TITLE:      sql server 笔记
+
+* 环境搭建
+  鉴于完整 SQL Server 环境的庞大, 所以选择 Sqllocaldb 搭建小型开发环境
+
+** 简单搭建方式
+   * 安装 ::
+           1. 安装 VS
+           2. 使用 VS 下载程序安装:
+              sqllocaldb, sql 命令行实用工具, sql client native
+   * 优点 :: 安装方便
+   * 缺点 :: 需要安装 VS
+** 复杂搭建方式
+   * 安装 ::
+           1. 分别从微软官网下载 sqllocaldb, sql 命令行实用工具, sql client native 组件
+           2. 分别进行安装即可
+   * 优点 :: 小巧, 实用
+   * 缺点 :: 安装不方便, 可能出错
+* 基本使用
+** Sqllocaldb
+   * *Sqllocaldb 只能简单管理数据库引擎实例, 不能直接执行 sql 语句*
+   * 默认数据库实例: MSSQLLocalDB
+
+   *常用指令*:
+
+   #+BEGIN_EXAMPLE
+   sqllocaldb -?    获取帮助
+   sqllocaldb c msgdata    创建msgdata实例
+   sqllocaldb h msgdata msgdata    共享msgdata实例
+   sqllocaldb u msgdata    取消共享
+   sqllocaldb d msgdata    删除实例, 有文件残留
+   sqllocaldb s msgdata    启动实例
+   sqllocaldb p msgdata    停止实例
+   sqllocaldb i    列出现有所有实例
+   sqllocaldb i msgdata    列出msgdata实例信息
+   #+END_EXAMPLE
+
+   * 相关链接
+     * [[https://docs.microsoft.com/zh-cn/sql/tools/sqllocaldb-utility][官方文档A]]
+     * [[https://docs.microsoft.com/zh-cn/sql/database-engine/configure-windows/sql-server-2016-express-localdb][官方文档B]]
+
+** Sqlcmd
+   * 连接数据库实例
+     * sqlcmd -S (localdb)\msgdata :: 连接数据库实例对象
+     * sqlcmd -S (localdb)\msgdata -E *.sql :: 连接数据库实例对象, 并执行sql脚本指令
+   * 有用的技巧
+     - 创建数据库的默认保存位置为用户目录
+     - 获取当前连接的数据库名: Print DB_NAME()
+     - 默认连接数据库为 master
+     - 查询当前数据库中所有表名
+       select * from sysobjects where xtype='U'
+       xtype='U': 表示所有用户表, xtype='S': 表示所有系统表
+     - 获取所有数据库名
+       select name from master.dbo.sysdatabases;
+     - 查询指定表中的所有字段名
+       select name from syscolumns where id=Object_Id('table_name')
+     - T-SQL 变量不能直接当做命令使用, 要看其值, 用Print
+     - :r 指令 :: 执行指定路径的sql脚本
+
+   *创建指定路径数据库*:
+
+   #+BEGIN_SRC sql
+     create database name
+     on
+     (
+     name=name_data,                   -- 自定义就可以了
+     filename='path\name_data.mdf',    -- .mdf必须
+     -- 其他选项
+     )
+     log on
+     (
+     name=name_log,                    -- 自定义
+     filename='path\name_log.ldf',     -- .ldf
+     -- 其他选项
+     );
+     go
+   #+END_SRC
+
+* 系统库表
+** 系统库
+   - master :: master数据库是SQL Server中最重要的数据库, 它是SQL Server的核心数据库,
+               如果该数据库被损坏, SQL Server将无法正常工作,
+               master数据库中包含
+               所有的登录名或用户ID所属的较角色, 服务器中的数据库的名称及相关的信息, 数据库的位置, SQL Server如何初始化四个方面的重要信息
+   - model :: 用户创建数据库时是以一套预定义的标准为模型
+              若希望所有的数据库都有确定的初始大小, 或者都有特定的信息集, 那么可以吧这些信息放在model数据库中, 以model数据库作为其他数据库的模板数据库.
+              如果想要使用所有的数据库都有一个特定的表, 可以把该表放在model数据库里
+   - model数据库是tempdb数据库的基础.对model数据库的任何改动都将反映在tempdb数据库中, 所以, 在决定对model数据库有所改变时, 必须预先考虑好
+   - msdb :: msdb数据库给SQL Server代理提供必要的信息来运行作业, 因而它是 SQL Server中另一个十分重要的数据库
+   - tempdb :: tempdb数据库用作系统的临时存储空间,
+               其主要作用是存储用户建立的临时表和临时存储过程, 存储用户说明的全局变量值,
+               为数据排序创建临时表, 存储用户利用游标说明所筛选出来的数据.
+* Sqlcmd
+** Sqlcmd 指令
+   + :!! [<command>]
+     - Executes a command in the Windows command shell.
+   + :connect server[\instance] [-l timeout] [-U user [-P password]]
+     - Connects to a SQL Server instance.
+   + :ed
+     - Edits the current or last executed statement cache.
+   + :error <dest>
+     - Redirects error output to a file, stderr, or stdout.
+   + :exit
+     - Quits sqlcmd immediately.
+   + :exit()
+     - Execute statement cache; quit with no return value.
+   + :exit(<query>)
+     - Execute the specified query; returns numeric result.
+   + go [<n>]
+     - Executes the statement cache (n times).
+   + :help
+     - Shows this list of commands.
+   + :list
+     - Prints the content of the statement cache.
+   + :listvar
+     - Lists the set sqlcmd scripting variables.
+   + :on error [exit|ignore]
+     - Action for batch or sqlcmd command errors.
+   + :out <filename>|stderr|stdout
+     - Redirects query output to a file, stderr, or stdout.
+   + :perftrace <filename>|stderr|stdout
+     - Redirects timing output to a file, stderr, or stdout.
+   + :quit
+     - Quits sqlcmd immediately.
+   + :r <filename>
+     - Append file contents to the statement cache.
+   + :reset
+     - Discards the statement cache.
+   + :serverlist
+     - Lists local and SQL Servers on the network.
+   + :setvar {variable}
+     - Removes a sqlcmd scripting variable.
+   + :setvar <variable> <value>
+     - Sets a sqlcmd scripting variable.
+** 相关链接
+   + [[https://docs.microsoft.com/zh-cn/sql/relational-databases/scripting/sqlcmd-use-the-utility][官方文档]]
+
+* 用C#操作
+** 五大核心组件
+   * Connection :: 数据库连接
+   * Command :: 数据库的命令
+   * DataSet :: 数据集
+   * DataReader :: 数据库的读取器
+   * DataAdaper :: 数据库的适配器
+** Connection类
+   和数据库交互, 必须连接它.
+   连接帮助指明数据库服务器, 数据库名字, 用户名, 密码, 和连接数据库所需要的其它参数.
+   Connection对象会被Command对象使用, 这样就能够知道是在哪个数据源上面执行命令.
+   与数据库交互的过程意味着必须指明想要执行的操作, 这是依靠Command对象执行的.
+   开发人员使用Command对象来发送SQL语句给数据库.
+   Command对象使用Connection对象来指出与哪个数据源进行连接.
+   开发人员能够单独使用Command对象来直接执行命令, 或者将一个Command对象的引用传递给DataAdapter, 它保存了一组能够操作下面描述的一组数据的命令.
+*** 属性
+    * ConnectionString :: 打开或连接数据库的字符串
+    * ConnectionTimeOut :: 尝试建立连接时终止尝试并生成错误之前所等待的时间
+    * Database :: 获取当前打开的数据库
+    * State :: 连接到当前状态
+    * DataSourse :: 获取打开数据库的连接实例
+*** 方法
+    * open :: 打开数据库连接
+    * close :: 关闭数据库连接
+    * CreateCommand :: 创建并返回一个与该链接相关联的Command对象
+    * BeginTransation :: 开始数据库事物
+    * ChangeDatabase :: 更改当前打开的数据库
+** Command类
+   成功与数据建立连接后, 就可以用Command对象来执行查询, 修改, 插入, 删除等命令
+   Command对象常用的方法有ExecuteReader()方法, ExecuteScalar() 方法和ExecuteNonQuery()方法
+   插入数据可用ExecuteNonQuery()方法来执行插入命令
+*** 属性
+    * Connection :: 设置或获取Command对象使用的Connection对象实例
+    * ConnectionType :: (设置或获取执行语句的类型)
+                        * StoredProceduce :: 储存过程
+                        * TableDirectText :: 标准的SQL语句
+                        * Text :: 默认
+    * CommandText :: 设置或获取需要执行的sql语句或储存过程名
+    * Parameter :: 取得参数值集合
+*** 方法
+    * ExecuteReader :: 执行CommandText指定的SQL语句或储存过程名, 返回值类型为DataReader
+    * ExecuteNonQuery :: 执行后不返回任何行, 对于update, insert, delete语句, 返回影响的行数对于其他类型的语句, 返回值为-1
+    * ExecuteScalar :: 返回第一个结果集中的第一行中的第一列数据
+    * ExecuteXMLReader :: 将CommandText发送到Connection并生成一个XmlReader
+** DataAdaper类
+   某些时候开发人员使用的数据主要是只读的, 并且开发人员很少需要将其改变至底层的数据源
+   同样一些情况要求在内存中缓存数据, 以此来减少并不改变的数据被数据库调用的次数
+   DataAdapter通过断开模型来帮助开发人员方便的完成对以上情况的处理
+   当在一单批次的对数据库的读写操作的持续的改变返回至数据库的时候,  DataAdapter 填充(fill)DataSet对象
+   DataAadapter包含对连接对象以及当对数据库进行读取或者写入的时候自动的打开或者关闭连接的引用
+   另外, DataAdapter包含对数据的SELECT, INSERT, UPDATE和DELETE操作的Command对象引用
+   开发人员将为DataSet中的每一个Table都定义DataAadapter, 它将为开发人员照顾所有与数据库的连接
+   所以开发人员将做的工作是告诉DataAdapter什么时候装载或者写入到数据库
+*** 属性
+    * SelectCommand :: 用于设置从记录集中选择记录的命令
+    * InsertCommand :: 用于设置从记录集中添加记录的命令
+    * UpdateCommand :: 用于设置从记录集中更新记录的命令
+    * DeleteCommand :: 用于设置从记录集中删除记录的命令
+*** 方法
+    * Fill :: 用于在DataSet中添加或者刷新行
+    * FillSchema :: 用于将DataTable添加到DataSet中, 并匹配与数据源匹配的框架
+    * GetFillParameters :: 获取当前执行SQL的SELECT语句时用户设置参数
+    * Update :: 用于对DataSet记录集进行操作
+    * Dispose :: 用于销毁SQLDataAdaper对象
+** DataReader类
+   许多数据操作要求开发人员只是读取一串数据
+   DataReader对象允许开发人员获得从Command对象的SELECT语句得到的结果
+   考虑性能的因素, 从DataReader返回的数据都是快速的且只是"向前"的数据流
+   这意味着开发人员只能按照一定的顺序从数据流中取出数据
+   这对于速度来说是有好处的, 但是如果开发人员需要操作数据, 更好的办法是使用DataSet
+*** 属性
+    * FiledCount :: 显示当前数据记录的字段总和
+    * IsClosed :: 判断 DataReader对象是否已经关闭
+*** 方法
+    * Close :: 关闭DataReader对象
+    * GetString :: 以String类型返回指定列中的对象
+    * Getvalue :: 以自身的类型返回指定列中值
+    * Getvalues :: 返回当前记录所有字段的集合
+    * Read :: 将光标指向DataReader对象的下一记录
+** DataSet类
+   DataSet对象是数据在内存中的表示形式
+   它包括多个DataTable对象, 而DataTable包含列和行, 就象一个普通的数据库中的表。
+   开发人员甚至能够定义表之间的关系来创建主从关系
+   DataSet是在特定的场景下使用――帮助管理内存中的数据并支持对数据的断开操作的
+   DataSet是被所有Data Providers使用的对象, 因此它并不像Data Provider一样需要特别的前缀
+   DataSet 这个对象可以视为一个暂存区(Cache), 可以把从数据库中所查询到的数据保留起来, 甚至可以将整个数据库显示出来
+   DataSet 的能力不只是可以储存多个Table 而已, 还可以透过DataSetCommand 对象取得一些例如主键等的数据表结构, 并可以记录数据表间的关联
+   DataSet 对象可以说是ADO.NET 中重量级的对象, 这个对象架构在DataSetCommand 对象上, 本身不具备和数据源沟通的能力
+   也就是说我们是将DataSetCommand 对象当做DataSet 对象以及数据源间传输数据的桥梁
+** 简单使用总结
+   * Connection 类建立连接, 连接字符串用于声明连接对象
+   * Command 类, 建立命令对象类, 用于执行SQL指令, 可以用初始命令和数据库链接对象实例化
+   * DataAdapter类, 数据库适配器, 用于在必要时对数据库建立连接, 内置命令对象, 可以用 sqlcmd 对象实例化
+   * DataReader 类, 保存读取到的数据库数据, 若为读取到数据, Read() 方法返回值为false
+   * DataSet类, 数据集, 保存从数据库中的数据, 结构类似数据库, 可以用 适配器的 Fill 方法进行填充
+   * 命令构建类, 通过适配器对象实例化, 用适配器对象的更新方法更新数据库中的数据, 更新方法参数为数据集对象
+* 权限管理
+  修改密码: exec sp_password NULL, 'newpas', 'login_name';
+            ALTER LOGIN sa WITH PASSWORD = 'newpas';
+
+  赋予登录权限: ALTER LOGIN sa ENABLE;

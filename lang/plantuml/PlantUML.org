@@ -1,0 +1,32 @@
+#+SETUPFILE:  ../_style/style.setup
+#+TITLE:      PlantUML 笔记
+
+* 环境搭建
+** 基本安装
+   1. Java 依赖
+   2. plantuml.jar 下载
+** Emacs搭建
+   1. 下载 *plantuml.jar* 文件([[http://plantuml.com/download][官网下载页面]])
+   2. 安装生成图片用软件 *Graphviz*
+   3. 在 *.emacs* 里添加配置，把 *plantuml* 添加到 *org-babel-load-languages* 加载语言列表里
+   4. 设置 *plantuml.jar* 文件的存放路径
+
+   *配置代码*
+
+   #+BEGIN_SRC emacs-lisp
+     ;; 第三步
+     ;; active Org-babel languages
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '(;; other Babel languages
+        (plantuml . t)))
+
+     ;; 第四步
+     (setq org-plantuml-jar-path
+           (expand-file-name "~/path/to/plantuml.jar"))
+   #+END_SRC
+
+* Java 直接编译指令
+  : java -jar plantuml.jar filename
+* 中文乱码解决
+  编译选项： ~-charset=utf-8~

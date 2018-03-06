@@ -1,0 +1,41 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      树结构笔记
+
+* 二叉查找树(Binary Search Tree)
+  定义: 是指一棵空树或者具有下列性质的 [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91][二叉树]]:
+  1. 若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值；
+  2. 若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值；
+  3. 任意节点的左、右子树也分别为二叉查找树；
+  4. 没有键值相等的节点。
+
+  维基百科: [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9][二叉查找树]]
+
+** LeetCode 题:
+   #+BEGIN_EXAMPLE
+     Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
+
+     According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself).”
+
+             _______6______
+            /              \
+         ___2__          ___8__
+        /      \        /      \
+        0      _4       7       9
+              /  \
+              3   5
+     For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another example is LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
+   #+END_EXAMPLE
+
+   #+BEGIN_SRC C
+     struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p, struct TreeNode* q) {
+       if (root->val > p->val && root->val > q->val) {
+         return lowestCommonAncestor(root->left, p , q);
+       }
+       else if(root->val < p->val && root->val < q->val) {
+         return lowestCommonAncestor(root->right, p, q);
+       }
+       else{
+         return root;
+       }
+     }
+   #+END_SRC

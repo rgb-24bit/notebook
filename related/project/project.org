@@ -1,0 +1,255 @@
+#+SETUPFILE:  ../_style/style.setup
+#+TITLE:      项目相关
+
+: 编程是一种技艺, 编程是艰难的工作
+: 成功的工具会适应使用它们的双手
+
+* 项目开始之前
+  1. 在项目开始之前, 你需要确定各种需求.
+     不要在编程到一半后才发现需要重头来过
+  2. 传统智慧和约束管理.
+     在做需求, 分析, 编码, 测试的时候遇到的困难不像最初看起来那么困难
+  3. 启动太快是一个问题, 但等太久可能会更糟.
+  4. 没有什么能代替思考 !
+
+** 需求
+   + 名言:
+     - 完美, 不是在没有什么需要增加, 而是在没有什么需要去掉时达到的
+   + 提示:
+     - 不要收集需求--挖掘它们
+     - 需求是对需要完成的某件事情的 _陈述_
+     - 将政策的文档与需求的文档分开
+     - 找出用户为何要做特定的事情的 _原因_, 而不是他们目前做这件事的方式
+     - 与用户一同工作, 以像用户一样思考
+     - 需求不是架构, 需求也不是设计, 也不是用户界面. 需求是需要.
+     - 抽象比细节活的更长久
+
+*** 需求文档 - 用例
+    使用结构化文档或用例图
+    
+#+NAME: 用例模板
+#+BEGIN_EXAMPLE
+  A. 特征信息
+     - 目标及其语境
+     - 范围
+     - 级别
+     - 前条件
+     - 成功结束条件
+     - 失败结束条件
+     - 主要参与方
+     - 触发
+  B. 主要成功情景
+  C. 扩展
+  E. 变更
+  D. 相关信息
+     - 优先级
+     - 履行目标
+     - 频度
+     - 上层用例
+     - 下层用例
+     - 主要参与方联系渠道
+     - 协助参与方
+     - 协助参与方联系渠道
+  F. 进度表
+  G. 未决问题
+#+END_EXAMPLE
+
+#+NAME: 用例样本
+#+BEGIN_EXAMPLE
+  * 用例: 安装
+  ** 特征信息
+     + 目标及其语境: 使用者通过命令行的形式用本程序下载安装应用程序
+     + 范围: 个人
+     + 前条件: 知道需要下载安装的应用程序的链接地址, 链接的类型, 应用程序名
+     + 成功结束条件: 成功安装应用程序
+     + 失败结束条件: 未能安装应用程序
+     + 触发: 接收到安装应用程序的指令时
+  ** 主要成功情景
+     1. 使用者输入指令要求下载安装应用程序
+     2. Wpkg 获取应用程序的链接地址, 链接类型, 应用程序名
+     3. Wpkg 通过获取的信息下载应用程序安装包
+     4. Wpkg 通过安装包后缀名获取安装包类型
+     5. Wpkg 根据相应的安装包类型安装应用程序
+     6. Wpkg 成功安装应用程序
+  ** 扩展
+     + 链接无效: 结束安装, 并输出错误信息
+     + 链接解析失败: 结束安装, 并输出失败原因
+     + 应用程序安装失败: 输出错误信息
+  ** 变更
+     + 使用者可以通过文本编辑器编写一个文件来配置应用程序的相关信息
+  ** 相关信息
+     + 优先级: 高
+     + 履行目标: 能够安装主要几个类型的安装包, 能够解析 =一般和镜像链接地址=
+  ** 进度表
+  ** 未决问题
+     + 安装路径的问题怎么处理 ?
+#+END_EXAMPLE
+
+  
+
+#+NAME: 用例图
+#+BEGIN_SRC plantuml :file ../../@Resourse/images/usecase.png
+  @startuml
+
+  User -> (Start)
+  User --> (Use the application) : A small label
+
+  :Main Admin: ---> (Use the application) : This is\nyet another\nlabel
+
+  @enduml
+#+END_SRC
+
+#+RESULTS: 用例图
+[[file:../../@Resourse/images/usecase.png]]
+
+    + 注意: 制作需求文档时的一大危险是太过具体, 好的需求文档会保持抽象
+*** 维护词列表
+    要创建并维护项目词汇表 -- 这是定义项目中使用的术语和词汇的地方.
+* 先分析后编码
+  在开始编码之前, 应该进行分析.
+  通过对需求的分析大致设计出程序的轮廓框架, 让自己在编码时知道该做什么!
+
+** 编码
+   1. 注意编码规范, 一个项目中使用同一的规范
+   2. 合理的注释
+* 项目文件结构
+** C-C++ 项目
+
+#+NAME: C-C++ project struct
+#+BEGIN_EXAMPLE
+   + project  -- 根目录
+     + include  -- 公共头文件
+       - <moudle1>/*.h    -- 依赖库头文件(头文件路径只添加include)
+       - <moudle2>/*.h
+       - *.h              -- 公共头文件, 不是依赖库
+     + lib      -- 依赖库
+       - <moudle1>/       -- 依赖库源码
+       - <moudle2>/
+       - moudle1.a        -- 依赖库对应静态库
+       - moudle2.a
+       - Makefile         -- 依赖库编译
+     + src      -- 源代码
+       - *.c
+       - *.h
+       - Makefile    -- src 编译
+     + docs     -- 项目文档
+       - doxyfile    -- 文档配置
+     + tests    -- 单元测试
+       - test_*.c    -- 测试相应模块
+       - Makefile    -- 单元测试编译
+     + Makefile -- 整个程序的编译
+     + ...
+#+END_EXAMPLE
+
+: 在lib文件夹中编译生成的库的头文件放在include文件夹内同名包内一份
+
+*** 防止重复定义    
+    首先，最关键的， *不要把全局变量以及全局方法的定义放在头文件里！！！！*
+
+**** 给每一个头文件加上条件编译
+     给每一个头文件加上条件编译，避免该文件被多次引用时被多次解释，这是个应该是习惯。这个方法会解决大部分低级问题。
+
+     例:
+
+  #+BEGIN_SRC c
+    #ifndef TEST_H_H
+    #define TEST_H_H
+
+    .....
+
+    #endif
+  #+END_SRC
+
+**** 使用extern定义全局变量:
+     可以把所有的全局变量放入一个头文件 global.h (名字随意起，但要加条件编译)中，每一个变量前面加extern，声明一下这些变量将在其它文件中定义。 
+     然后建立一个和头文件名字对应的.c or .cpp文件 如global.c。在里面声明所有的全局变量。例如：
+     void(*Handl_Display)();
+     然后，让涉及到全局变量的文件include ”global.h“。这样编译时，会先对global.c编译生成一个global.o ，然后再和其它文件的.o链接生成可执行文件。
+     简单一点说，就是在变量前加extern，之后变量的声明放在.c中。
+
+**** 相关链接
+     * [[https://www.cnblogs.com/fnlingnzb-learner/p/5890065.html][博客园-Boblim]]
+
+** Python 项目
+   
+#+NAME: Python project struct
+#+BEGIN_EXAMPLE
+  Project
+  |-- docs
+  |   |-- img
+  |   `-- conf.py
+  |   `-- index.rst
+  |   `-- make.bat
+  |   `-- Makefile
+  |-- tests
+  |   |-- test_mod.py
+  |-- venv
+  |-- Pkg
+  |   |-- __init__.py
+  |   `-- __main__.py
+  |-- .gitignore
+  |-- Makefile
+  |-- README.md
+  |-- requirements.txt
+  |-- setup.py
+#+END_EXAMPLE
+
+: 必备包 ipython, pytest, sphinx, 如果要发布 - pyinstaller
+* 项目文档生成
+** Python 文档生成
+   + 工具: Sphinx
+   + 使用:
+     - 安装 :: pip install Sphinx
+     - 快速开始 :: 在 docs 目录执行: sphinx-quickstart, autodoc 要选中
+     - 构建文档 :: 使用 docs 目录的 Makefile, Make html
+     - 内容 :: automoudle -- 模块, 不是包, autoclass -- 类, autofunction -- 函数
+     - conf.py :: 文档主题 -- scrolls
+     - conf.py :: 文档语言 -- en
+     - 注释规范 
+       1. 类构造函数参数注释写在类注释中 :: :param 参数:
+       2. 参数类型 :: :type 参数:
+       3. 返回值 :: :return: 不需要参数
+   + 文档: [[http://zh-sphinx-doc.readthedocs.io/en/latest/contents.html][Sphinx使用手册]]
+** C-C++ 文档生成
+   + 工具: doxygen
+* 项目Make构建
+** Python Make 构建
+
+#+NAME: Makefile 例
+#+BEGIN_EXAMPLE
+  # Authour: rgb_24bit
+  # Datetime: 2017/12/09
+  # Description: 程序构建, 单元测试, 文档生成
+
+  test:
+      @echo .. > venv/pkg.pth
+      @cd tests; pytest --tb=short
+
+  docs:
+      $(MAKE) -C docs html
+
+  Wpkg:
+      pyinstall Wpkg.py
+      pyinstall -F Wpkg.py
+
+  .PHONY: test docs Wpkg
+#+END_EXAMPLE
+
+** C-C++ Make 构建
+   没有固定模板, 但几个文件夹需要 Makefile 文件
+   - lib
+   - src
+   - tests
+   - docs
+* 项目单元测试
+** Python 单元测试
+   + 工具: pytest
+   + 使用:
+     - 测试文件以test_开头
+     - 测试类以Test开头，并且不能带有 __init__ 方法
+     - 测试函数以test_开头
+     - 断言使用基本的assert即可
+       
+** C-C++ 单元测试
+** 日志打印
+

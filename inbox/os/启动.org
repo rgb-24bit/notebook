@@ -1,0 +1,2 @@
+* 启动过程·
+  http://www.ruanyifeng.com/blog/2013/02/booting.html

@@ -1,0 +1,45 @@
+#+SETUPFILE:  ./_style/style.setup
+#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
+#+TITLE:      位运算
+#+AUTHOR:     rgb_24bit
+#+EMAIL:      rgb_24bit@foxmail.com
+#+DATE:       <2018-02-05 周一>
+
+* 简单的技巧
+  + 判断奇偶: ~num & 1 = 0~ 为偶, ~num & 1 = 1~ 为奇.
+  + int 型最大值: ~(1 << 31) - 1~ 或 =~(1 << 31)=.
+  + int 型最小值: ~1 << 31~.
+  + 乘2: ~num << 1~.
+  + 除2: ~num >> 1~.
+  + 乘2的n次方: ~num << n~.
+  + 除2的n次方: ~num >> n~.
+
+* 加减乘除 
+  #+BEGIN_SRC C
+    /* 位运算 + */
+    int add(int a, int b) {
+      int sum = a;
+      int carry = n;
+
+      while (carry) {
+        int tmp = sum;
+        sum = tmp ^ carry;
+        carry = (tmp & carry) << 1;
+      }
+
+      return sum;
+    }
+
+
+    /* 位运算 - */
+    int sub(int a, int b) {
+      int diff = add(~b, 1);
+
+      diff = add(a, diff);
+
+      return diff;
+    }
+  #+END_SRC
+
+  乘除: [[http://www.cnblogs.com/kiven-code/archive/2012/09/15/2686922.html][博客园]]
+  
