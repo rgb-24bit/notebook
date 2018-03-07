@@ -1,0 +1,9 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      diff 算法
+
+* 教程
+  + [[http://cjting.me/misc/how-git-generate-diff/][Git是怎样生成diff的：Myers算法]]
+
+* 相关算法
+  + _LCS 算法(算法导论)_
+

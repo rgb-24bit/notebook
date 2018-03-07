@@ -1,4 +1,0 @@
-* Gpg
-  [[http://www.ruanyifeng.com/blog/2013/07/gpg.html][阮一峰博客]]
-
-  输入数学符号： C-x RET C-\ TeX RET

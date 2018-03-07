@@ -1,3 +1,0 @@
-[[http://cjting.me/misc/how-git-generate-diff/][Git是怎样生成diff的：Myers算法]]
-[[http://www.xmailserver.org/diff2.pdf][An O(ND) Difference Algorithm and Its Variations]]
-_LCS 算法(算法导论)_

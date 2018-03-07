@@ -29,7 +29,10 @@ def get_sub_file(root):
 
 
 def is_ignore_dir(path):
-    ignore_dir = ('.git', 'inbox', '_style', 'img', 'code', 'front-end')
+    ignore_dir = (
+        '.git', 'inbox', '_style',
+        'img', 'trash', 'front-end'
+    )
     dir_name = os.path.split(path)[-1]
     return dir_name in ignore_dir
 

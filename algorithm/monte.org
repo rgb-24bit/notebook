@@ -1,0 +1,37 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      蒙特卡罗方法
+
+* 维基百科
+  + [[https://zh.wikipedia.org/zh-hans/%E8%92%99%E5%9C%B0%E5%8D%A1%E7%BE%85%E6%96%B9%E6%B3%95][蒙特卡罗方法]]
+
+* 应用
+** 求π
+   #+BEGIN_SRC c
+     #include <stdio.h>
+     #include <stdlib.h>
+     #include <time.h>
+
+
+     int main(int argc, char* argv[]) {
+       int times = 0, sum = 0;
+
+       printf("Input times: ");
+       scanf("%d", &times);
+
+       srand(time(0));
+       for (int i = 0; i < times; ++i) {
+         double x = (double)rand() / RAND_MAX;
+         double y = (double)rand() / RAND_MAX;
+
+         if ((x * x + y * y) <= 1.0) {
+           sum++;
+         }
+       }
+
+       double pi = 4.0 * sum / times;
+       printf("pi = %f", pi);
+
+       return 0;
+     }
+   #+END_SRC
+

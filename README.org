@@ -6,7 +6,9 @@
     - [[file:.\.NET\clr-csharp\csharp_note.org][C# 笔记]]
 - *algorithm*
   - [[file:.\algorithm\blockchain.org][区块链]]
+  - [[file:.\algorithm\diff.org][diff 算法]]
   - [[file:.\algorithm\MD5.org][MD5 算法笔记]]
+  - [[file:.\algorithm\monte.org][蒙特卡罗方法]]
   - [[file:.\algorithm\RAS.org][RAS 算法笔记]]
   - [[file:.\algorithm\simple.org][简单算法笔记]]
   - [[file:.\algorithm\tree.org][树结构笔记]]
@@ -55,4 +57,5 @@
     - [[file:.\related\version-control\git.org][Git 笔记]]
   - [[file:.\related\cmd.org][命令行笔记]]
   - [[file:.\related\google.org][GooGle]]
-- *trash*
+  - [[file:.\related\gpg.org][gpg 使用]]
+  - [[file:.\related\pdf.org][pdf 文档格式]]

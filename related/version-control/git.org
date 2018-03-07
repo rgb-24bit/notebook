@@ -35,3 +35,5 @@
 * 本地分支提交
   1. git fetch origin
   2. git push
+* 远程操作
+  + [[http://www.ruanyifeng.com/blog/2014/06/git_remote.html][阮一峰博客]]
