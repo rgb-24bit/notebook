@@ -32,3 +32,6 @@
   git push ...
   #+END_EXAMPLE
 
+* 本地分支提交
+  1. git fetch origin
+  2. git push

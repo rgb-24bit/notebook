@@ -1,4 +1,3 @@
-#+SETUPFILE: style.setup
 #+TITLE: Table of Contents
 
 - *.NET*
@@ -37,7 +36,6 @@
     - [[file:.\math\discrete\2-基本结构.org][集合、函数、序列、求和与矩阵]]
   - *linear*
     - [[file:.\math\linear\1-矩阵和方程组.org][矩阵和方程组]]
-  - [[file:.\math\TODO.org][TODO.org]]
 - *network*
 - *os*
 - *python*
@@ -57,3 +55,4 @@
     - [[file:.\related\version-control\git.org][Git 笔记]]
   - [[file:.\related\cmd.org][命令行笔记]]
   - [[file:.\related\google.org][GooGle]]
+- *trash*
