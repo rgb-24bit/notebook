@@ -1,5 +1,3 @@
-: Windows 上 Python库 链接有问题, 暂时不做收录
-
 * 混合编程
   [[https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/][Python 调用 C]]
   [[http://blog.csdn.net/forever_jc/article/details/7743106][C调用Python]]
@@ -7,45 +5,7 @@
 
 * 数据库操作
   [[http://python.jobbole.com/88954/][伯乐在线]]
+
 * 命令行参数
   [[http://blog.csdn.net/azhao_dn/article/details/6921441][CSDN博客]]
 
-* 生成器
-  http://pyzh.readthedocs.io/en/latest/the-python-yield-keyword-explained.html
-  
-* 乘方
-  : 1**.5 就是 1的0.5次方...
-
-* 元类
-  https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820064557c69858840b4c48d2b8411bc2ea9099ba000
-
-* __slots__
-  https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868200605560b1bd3c660bf494282ede59fee17e781000
-* ord & chr
-  ord: 转化为ascii
-  chr: 转化为字符
-  
-* 元组列表
-  #+BEGIN_SRC python
-    l = [0]
-    t = (1,)
-
-    l += t  # 可以
-    l + t   # 不可以
-
-    self.accu = [0]
-            for num in nums: 
-                self.accu += self.accu[-1] + num,
-
-    1, == (1,)
-  #+END_SRC
-  [[https://segmentfault.com/q/1010000013028452][问题]]
-* 反转列表
-  l = [1,2,3]
-  l = l[::-1]
-* 变量保护
-  [[http://blog.csdn.net/liangpz521/article/details/8089723][CSDN Blog]]
-* 魔法方法
-  [[http://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html][网页]]
-* 正负无穷
-  [[http://blog.csdn.net/shennongzhaizhu/article/details/51997887][CSDN]]

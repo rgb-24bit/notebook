@@ -9,6 +9,7 @@
   - [[file:.\algorithm\diff.org][diff 算法]]
   - [[file:.\algorithm\MD5.org][MD5 算法笔记]]
   - [[file:.\algorithm\monte.org][蒙特卡罗方法]]
+  - [[file:.\algorithm\rand.org][随机算法]]
   - [[file:.\algorithm\RAS.org][RAS 算法笔记]]
   - [[file:.\algorithm\simple.org][简单算法笔记]]
   - [[file:.\algorithm\tree.org][树结构笔记]]
@@ -41,6 +42,7 @@
 - *network*
 - *os*
 - *python*
+  - [[file:.\python\log.org][Python 日志]]
   - [[file:.\python\Python.org][Python 笔记]]
   - [[file:.\python\re.org][Python 正则表达式]]
 - *related*
