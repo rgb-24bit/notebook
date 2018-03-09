@@ -9,6 +9,7 @@
   - [[#初次运行-git-前的配置][初次运行 Git 前的配置]]
   - [[#获取帮助][获取帮助]]
 - [[#git-基础-1][Git 基础]]
+  - [[#获取-git-仓库][获取 Git 仓库]]
   - [[#简单的命令][简单的命令]]
   - [[#忽略文件][忽略文件]]
 
@@ -61,6 +62,48 @@
    #+END_SRC
 
 * Git 基础
+** 获取 Git 仓库
+   + *在现有目录中初始化仓库*
+     : $ git init
+
+   + *克隆现有的仓库*
+     : $ git clone [url]
+
+   Git 可以使用四种主要的协议来传输数据：
+   + 本地传输 :: 本地传输可以用两种克隆方式：
+             #+BEGIN_SRC bash
+               $ git clone /opt/git/project.git
+
+               # or
+
+               $ git clone file:///opt/git/project.git
+             #+END_SRC
+
+             添加本地仓库作为现有 Git 项目的远程仓库：
+             #+BEGIN_SRC bash
+               $ git remote add local_proj /opt/git/project.git
+             #+END_SRC
+
+   + SSH 协议 :: 克隆方式与注意事项：
+               #+BEGIN_SRC bash
+                 $ git clone ssh://user@server/project.git
+
+                 # 不指明某个协议 — 默认使用 SSH:
+                 $ git clone user@server:project.git
+
+                 # 如果不指明用户，Git 会默认使用当前登录的用户名连接服务器
+               #+END_SRC
+
+   + Git 协议 :: 这是一个包含在 Git 软件包中的特殊守护进程; 它会监听一个提供类似于 SSH 服务的特定端口（9418）， 而无需任何授权。
+               打算支持 Git 协议的仓库，需要先创建 ~git-daemon-export-ok~ 文件 — 它是协议进程提供仓库服务的必要条件 — 但除此之外该服务没有什么安全措施
+
+   + HTTP 协议 :: 很常用的一种方式吧
+                #+BEGIN_SRC bash
+                  $ git clone http://example.com/gitproject.git
+                #+END_SRC
+
+   *PS:* 除了 HTTP 协议外，其他所有协议都要求在服务器端安装并运行 Git
+
 ** 简单的命令
    #+BEGIN_SRC bash
      # 初始化仓库
