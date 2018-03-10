@@ -45,6 +45,7 @@
   - [[file:.\python\log.org][Python 日志]]
   - [[file:.\python\Python.org][Python 笔记]]
   - [[file:.\python\re.org][Python 正则表达式]]
+  - [[file:.\python\setup.org][setup.py]]
 - *related*
   - *edit*
     - [[file:.\related\edit\emacs.org][emacs 笔记]]
@@ -58,6 +59,5 @@
     - [[file:.\related\version-control\git-book.org][Git-Book 阅读笔记]]
     - [[file:.\related\version-control\git.org][Git 笔记]]
   - [[file:.\related\cmd.org][命令行笔记]]
-  - [[file:.\related\google.org][GooGle]]
   - [[file:.\related\gpg.org][gpg 使用]]
   - [[file:.\related\pdf.org][pdf 文档格式]]

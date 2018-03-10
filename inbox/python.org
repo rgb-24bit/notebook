@@ -1,0 +1,5 @@
+* 命令行脚本 -- setup.py
+  http://python-packaging-zh.readthedocs.io/zh_CN/latest/command-line-scripts.html
+
+* 内置类型
+  https://docs.python.org/2/library/stdtypes.html#numeric-types-int-float-long-complex
