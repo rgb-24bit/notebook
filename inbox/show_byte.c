@@ -12,6 +12,14 @@ void show_bytes(byte_pointer start, size_t len) {
 
 
 int main(int argc, char* argv[]) {
-  int num = 0x01234567;
-  show_bytes((byte_pointer)&num, sizeof(int));
+  int i_num = 0x01234567;
+  float f_num = 0x01234567f;
+
+  printf("%p\n", &i_num);
+  show_bytes((byte_pointer)&i_num, sizeof(int));
+
+  printf("%p\n", &f_num);
+  show_bytes((byte_pointer)&f_num, sizeof(float));
+
+  return 0;
 }

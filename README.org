@@ -7,6 +7,7 @@
 - *algorithm*
   - [[file:.\algorithm\blockchain.org][区块链]]
   - [[file:.\algorithm\diff.org][diff 算法]]
+  - [[file:.\algorithm\leetcode.org][LeetCode 笔记]]
   - [[file:.\algorithm\MD5.org][MD5 算法笔记]]
   - [[file:.\algorithm\monte.org][蒙特卡罗方法]]
   - [[file:.\algorithm\rand.org][随机算法]]
@@ -41,6 +42,8 @@
     - [[file:.\math\linear\1-矩阵和方程组.org][矩阵和方程组]]
 - *network*
 - *os*
+  - [[file:.\os\base.org][基础内容]]
+  - [[file:.\os\start_up.org][计算机启动]]
 - *python*
   - [[file:.\python\log.org][Python 日志]]
   - [[file:.\python\Python.org][Python 笔记]]
