@@ -1,0 +1,52 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      Python 内置类型
+
+* 官网文档
+  + [[https://docs.python.org/2/library/stdtypes.html][Python2.7]]
+  + [[https://docs.python.org/3.6/library/stdtypes.html][Python3.6]]
+
+* Bool
+  + ~bool~ 判断为 ~False~ ::
+       + ~None~
+       + ~False~
+       + 任何数字类型的零
+       + 任何空序列
+       + 任何空映射
+         
+  + ~bool~ 操作符 :: ~or~, ~and~, ~not~
+         
+  + 比较操作符 :: ~<~, ~<=~, ~>~, ~>=~, ~==~, ~!=~, ~is~, ~is not~
+
+* 数值类型
+  + int(long) 和 float ::
+    - ~math.trunc(x)~: 取整， ~1.2 --> 1~
+    - ~round(x[, n])~: 四舍五入为 ~n~ 位数， 默认 ~n=0~
+    - ~math.floor(x)~: 向下取整， ~2.7~ 会转化为 ~float~
+    - ~math.ceil(x)~: 向上取整， ~2.7~ 会转化为 ~float~
+
+  + int ::
+    - ~int.bit_length()~: 该数的二进制长度
+
+    - ~to_bytes(length, byteorder, *, signed=False)~: (~Python3~) 转化为字节字符串。
+
+      *length*: 字节字符串的长度
+
+      *byteorder*: 'big' 代表大端模式， 'little' 代表小端模式
+
+      *signed*: 是否为有符号数， 为 ~False~ 时， 负数会报错
+
+    - ~from_bytes(bytes, byteorder, *, signed=False)~: (~Python3~) 和 ~to_bytes~ 相反
+
+  + float ::
+    - ~as_integer_ratio()~: 返回一个整数元组， 元组的两个元素的比等于这个浮点数
+
+    - ~is_integer()~: 小数位只有 ~0~ 返回 ~True~, 反之返回 ~False~
+
+    - ~hex()~: 转化为十六进制
+
+    - ~from_hex(s)~: 从十六进制转化为浮点数， 十六进制字符串格式：
+      #+BEGIN_EXAMPLE
+        [sign] ['0x'] integer ['.' fraction] ['p' exponent]
+      #+END_EXAMPLE
+
+
