@@ -136,6 +136,38 @@
     Func func = fib;
   #+END_SRC
 
+* 传递指针参数
+  指针也是 ~按值~ 传参的：
+  #+BEGIN_SRC c
+    #include <stdio.h>
+
+    void test_point(int* point) {
+      int num = 10;
+      point = &num;
+      printf("%p\n", point);
+    }
+
+    int main(void) {
+      int num = 10;
+      int* point = &num;
+
+      printf("%p\n", point);
+      test_point(point);
+      printf("%p\n", point);
+
+      return 0;
+    }
+  #+END_SRC
+
+  输出结果：
+  #+BEGIN_EXAMPLE
+    000000000022FE44
+    000000000022FE0C
+    000000000022FE44
+  #+END_EXAMPLE
+
+  所以， 如果要在递归中对指针进行 ~realloc~, 可能在递归中将指针原来指向的内存清理了。
+
 * 细节问题
 ** 运算符优先级
    ~*p++~, 先 ~*p~, 后 ~p++~.
