@@ -29,6 +29,17 @@
   + 处理仅用空格(或其他空白字符) 分隔的字符串常量序列时， 就把它们串联起来
     : "1234"   "4567"  ==> "12344567"
 
+* 类型转化
+  链接： [[http://zh.cppreference.com/w/c/language/conversion][隐式转换]]
+
+  + 一般情况 :: 自动转换将 ~比较窄的~ 操作数 转换为 ~比较宽~ 的操作数。
+            #+BEGIN_EXAMPLE
+              char, short --> int --> unsigned --> long -- > double
+                                                             ^
+                                                             |
+                                                             float
+            #+END_EXAMPLE
+
 * static
 ** C语言中static关键字的作用
    1. 在修饰变量的时候，static修饰的静态局部变量只执行一次，而且延长了局部变量的生命周期，直到程序运行结束以后才释放

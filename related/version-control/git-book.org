@@ -1,17 +1,14 @@
 #+SETUPFILE:  ../_style/style.setup
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
 #+TITLE:      Git-Book 阅读笔记
 #+AUTHOR:     rgb_24bit
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#起步][起步]]
   - [[#git-基础][Git 基础]]
-  - [[#初次运行-git-前的配置][初次运行 Git 前的配置]]
-  - [[#获取帮助][获取帮助]]
+  - [[#git-配置][Git 配置]]
 - [[#git-基础-1][Git 基础]]
   - [[#获取-git-仓库][获取 Git 仓库]]
-  - [[#简单的命令][简单的命令]]
-  - [[#忽略文件][忽略文件]]
+  - [[#记录每次更新到仓库][记录每次更新到仓库]]
 
 * 起步
 ** Git 基础
@@ -26,7 +23,7 @@
    2. 暂存文件， 将文件的快照放入暂存区域
    3. 提交更新， 找到暂存区域的文件， 将快照永久性存储到 Git 仓库目录
 
-** 初次运行 Git 前的配置
+** Git 配置
    配置文件位置：
    1. ~etc/gitconfig~ 文件： 包含系统上每一个用户及他们仓库的通用配置。 如果使用带有 ~--system~ 选项的 ~git config~ 时，它会从此文件读写配置变量。
    2. ~~/.gitconfig~ 或 ~~/.config/git/config~ 文件：只针对当前用户。 可以传递 ~--global~ 选项让 Git 读写此文件。
@@ -53,114 +50,29 @@
      $ git config <key>
    #+END_SRC
 
-** 获取帮助
-   获取帮助的三种方法：
-   #+BEGIN_SRC bash
-     $ git help <verb>
-     $ git <verb> --help
-     $ man git-<verb>
-   #+END_SRC
-
 * Git 基础
 ** 获取 Git 仓库
-   + *在现有目录中初始化仓库*
-     : $ git init
-
-   + *克隆现有的仓库*
-     : $ git clone [url]
-
-   Git 可以使用四种主要的协议来传输数据：
-   + 本地传输 :: 本地传输可以用两种克隆方式：
-             #+BEGIN_SRC bash
-               $ git clone /opt/git/project.git
-
-               # or
-
-               $ git clone file:///opt/git/project.git
-             #+END_SRC
-
-             添加本地仓库作为现有 Git 项目的远程仓库：
-             #+BEGIN_SRC bash
-               $ git remote add local_proj /opt/git/project.git
-             #+END_SRC
-
-   + SSH 协议 :: 克隆方式与注意事项：
-               #+BEGIN_SRC bash
-                 $ git clone ssh://user@server/project.git
-
-                 # 不指明某个协议 — 默认使用 SSH:
-                 $ git clone user@server:project.git
-
-                 # 如果不指明用户，Git 会默认使用当前登录的用户名连接服务器
-               #+END_SRC
-
-   + Git 协议 :: 这是一个包含在 Git 软件包中的特殊守护进程; 它会监听一个提供类似于 SSH 服务的特定端口（9418）， 而无需任何授权。
-               打算支持 Git 协议的仓库，需要先创建 ~git-daemon-export-ok~ 文件 — 它是协议进程提供仓库服务的必要条件 — 但除此之外该服务没有什么安全措施
-
-   + HTTP 协议 :: 很常用的一种方式吧
-                #+BEGIN_SRC bash
-                  $ git clone http://example.com/gitproject.git
-                #+END_SRC
-
-   *PS:* 除了 HTTP 协议外，其他所有协议都要求在服务器端安装并运行 Git
-
-** 简单的命令
    #+BEGIN_SRC bash
-     # 初始化仓库
+     # 在现有项目或目录下导入所有文件到 Git 中
      $ git init
 
-     # 文件跟踪 - add 和 提交 - commit
-     $ git add *.c
-     $ git add LICENSE
-     $ git commit -m 'initial project version'
-
-     # 克隆仓库
+     # 从一个服务器克隆一个现有的 Git 仓库
      $ git clone [url]
-
-     # 检查当前文件状态
-     $ git status
-
-     # 状态概览
-     $ git status -s
-     $ git status --short
-
-     # 查看尚未暂存的文件更新了哪些部分
-     $ git diff
-
-     # 查看已暂存的将要添加到下次提交里的内容
-     $ git diff --cached
-     $ git diff --staged
-
-     # 启动文本编辑器输入本次提交的说明
-     $ git commit
-
-     # 跳过 add
-     $ git commit -a
-
-     # 移除文件
-     $ git rm
-
-     # 强制删除
-     $ git rm -f
-
-     # 从暂存区删除
-     $ git rm --cached
-
-     # 移动文件或重命名
-     $ git mv
    #+END_SRC
 
-** 忽略文件
-   文件 ~.gitignore~ 的格式规范如下：
-   + 所有空行或者以 ~#~ 开头的行都会被 Git 忽略
-   + 可以使用标准的 glob 模式匹配
-   + 匹配模式可以以 ~/~ 开头防止递归
-   + 匹配模式可以以 ~/~ 结尾指定目录
-   + 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号 ~!~ 取反
+** 记录每次更新到仓库
+   + 检查当前文件状态 :: 使用 ~git status~ 命令
+   + 跟踪新文件/暂存已修改文件 :: 使用命令 ~git add~ 开始跟踪/暂存一个文件
+   + 忽略文件 :: 使用名为 ~.gitignore~ 的文件，列出要忽略的文件模式
 
-   glob 模式：
-   + ~*~ 匹配任意多字符
-   + ~[abc]~ 匹配任何 *一个* 列在方括号中的字符
-   + ~?~ 匹配 *一个* 任意字符
-   + ~[0-9]~ 匹配 ~0-9~ 任意一个字符
-   + ~**~ 匹配任意中间目录， 如 ~a/**/z~ 可以匹配 ~a/z~, ~a/b/z~ 或 ~a/b/c/z~ 等
+             文件 ~.gitignore~ 的格式规范如下：
+     + 所有空行或者以 ~#~ 开头的行都会被 Git 忽略
+     + 可以使用标准的 [[https://en.wikipedia.org/wiki/Glob_(programming)][glob]] 模式匹配
+     + 匹配模式可以以 ~/~ 开头防止递归
+     + 匹配模式可以以 ~/~ 结尾指定目录
+     + 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号 ~!~ 取反
+   + 查看已暂存和未暂存的修改 :: 要查看尚未暂存的文件更新了哪些部分，不加参数直接输入 ~git diff~,
+                     若要查看已暂存的将要添加到下次提交里的内容，可以用 ~git diff --cached~ 命令（
+                     Git 1.6.1 及更高版本还允许使用 ~git diff --staged~, 效果是相同的）
+   + 提交更新 :: 启动文本编辑器并输入本次提交的说明 ~git commit~, ~-v~ 选项可以将所做的改变的 ~diff~ 输出放到编辑器中
+             从而知道本次提交具体做了哪些修改。可以在 ~commit~ 命令后添加 ~-m~ 选项，将提交信息与命令放在同一行

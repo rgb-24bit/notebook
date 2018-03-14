@@ -64,4 +64,5 @@
     - [[file:.\related\version-control\git.org][Git 笔记]]
   - [[file:.\related\cmd.org][命令行笔记]]
   - [[file:.\related\gpg.org][gpg 使用]]
+  - [[file:.\related\markup.org][标记语言]]
   - [[file:.\related\pdf.org][pdf 文档格式]]
