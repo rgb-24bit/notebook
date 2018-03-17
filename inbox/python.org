@@ -2,4 +2,7 @@
   + [[http://python-packaging-zh.readthedocs.io/zh_CN/latest/command-line-scripts.html][命令行脚本]]
 
 * 命令行参数
-  + [[http://www.cnblogs.com/captain_jack/archive/2011/01/11/1933366.html][Python模块学习——optparse]]
+  + [[http://blog.xiayf.cn/2013/03/30/argparse/][argparse]]
+
+* yaml
+  + [[http://axiaoxin.com/article/220/][PyYAML有序更新yaml文件]]
