@@ -1,5 +1,5 @@
 * 命令行脚本 -- setup.py
-  http://python-packaging-zh.readthedocs.io/zh_CN/latest/command-line-scripts.html
+  + [[http://python-packaging-zh.readthedocs.io/zh_CN/latest/command-line-scripts.html][命令行脚本]]
 
-* 内置类型
-  https://docs.python.org/2/library/stdtypes.html#numeric-types-int-float-long-complex
+* 命令行参数
+  + [[http://www.cnblogs.com/captain_jack/archive/2011/01/11/1933366.html][Python模块学习——optparse]]
