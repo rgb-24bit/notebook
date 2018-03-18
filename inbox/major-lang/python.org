@@ -6,6 +6,3 @@
 * 数据库操作
   [[http://python.jobbole.com/88954/][伯乐在线]]
 
-* 命令行参数
-  [[http://blog.csdn.net/azhao_dn/article/details/6921441][CSDN博客]]
-
