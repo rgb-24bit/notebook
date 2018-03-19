@@ -9,6 +9,11 @@
 - [[#git-基础-1][Git 基础]]
   - [[#获取-git-仓库][获取 Git 仓库]]
   - [[#记录每次更新到仓库][记录每次更新到仓库]]
+  - [[#查看提交历史][查看提交历史]]
+  - [[#撤销操作][撤销操作]]
+  - [[#远程仓库的使用][远程仓库的使用]]
+  - [[#打标签][打标签]]
+  - [[#git-别名][Git 别名]]
 
 * 起步
 ** Git 基础
@@ -76,3 +81,60 @@
                      Git 1.6.1 及更高版本还允许使用 ~git diff --staged~, 效果是相同的）
    + 提交更新 :: 启动文本编辑器并输入本次提交的说明 ~git commit~, ~-v~ 选项可以将所做的改变的 ~diff~ 输出放到编辑器中
              从而知道本次提交具体做了哪些修改。可以在 ~commit~ 命令后添加 ~-m~ 选项，将提交信息与命令放在同一行
+   + 移除文件 :: ~git rm~ 可以完成这一工作。 如果删除之前修改过并且已经放到暂存区域的话，则必须要用强制删除选项 ~-f~.
+             把文件从 ~Git~ 仓库中删除（亦即从暂存区域移除），但仍然希望保留在当前工作目录中， 使用 ~--cached~ 选项。
+   + 移动文件 :: 使用 ~git mv~
+
+** 查看提交历史
+   #+BEGIN_SRC bash
+     $ git config --global alias.lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+   #+END_SRC
+
+** 撤销操作
+   运行带有 ~--amend~ 选项的提交命令尝试重新提交:
+   : $ git commit --amend
+
+   例如，提交后发现忘记了暂存某些需要的修改，可以像下面这样操作：
+   #+BEGIN_SRC bash
+     $ git commit -m 'initial commit'
+     $ git add forgotten_file
+     $ git commit --amend
+   #+END_SRC
+
+   最终只会有一个提交 - 第二次提交将代替第一次提交的结果。
+
+   + 取消暂存的文件 :: 使用 ~git reset HEAD <file>...~ 来取消暂存
+   + 撤消对文件的修改 :: 使用 ~git checkout -- [file]~ 来撤销对文件的修改， 但是
+                 对那个文件做的任何修改都会消失。
+
+** 远程仓库的使用
+   - 查看远程仓库 :: ~git remote~ 列出你指定的每一个远程服务器的简写，
+               ~git remote -v~ 显示需要读写远程仓库使用的 ~Git~ 保存的简写与其对应的 ~URL~
+   - 添加远程仓库 :: 运行 ~git remote add <shortname> <url>~ 添加一个新的远程 ~Git~ 仓库，同时指定一个可以轻松引用的简写。
+   - 从远程仓库中抓取与拉取 :: 执行 ~git fetch [remote-name]~ 访问远程仓库，从中拉取所有还没有的数据。
+                    如果使用 ~clone~ 命令克隆了一个仓库，命令会自动将其添加为远程仓库并默认以 ~origin~ 为简写。
+                    如果一个分支设置为跟踪一个远程分支，可以使用 ~git pull~ 命令来自动的抓取然后合并远程分支到当前分支。
+   - 推送到远程仓库 :: 简单直接： ~git push [remote-name]~
+   - 查看远程仓库 :: 看某一个远程仓库的更多信息，可以使用 ~git remote show [remote-name]~ 命令
+   - 远程仓库的移除与重命名 :: 运行 ~git remote rename~ 修改一个远程仓库的简写名， 使用 ~git remote rm~ 移除一个远程仓库。
+
+** 打标签
+   *PS:* ~Github~ 可以根据 ~tag~ 自动生成 ~release~.
+
+   + 列出标签 :: 列出所有标签使用 ~git tag~, 使用通配符： git tag -l "*"
+   + 创建标签 :: 附注标签 git tag -a version -m "comment", ~git show~ 命令可以看到标签信息与对应的提交信息。
+             轻量标签 ~git tag version~.
+   + 后期打标签 :: 可以对过去的提交打标签， ~git tag -a version 9fceb02~.
+   + 共享标签 :: 运行 ~git push origin [tagname]~, 带有 ~--tags~ 选项的 ~git push~ 命令
+             会把所有不在远程仓库服务器上的标签全部传送到那里。
+   + 检出标签 :: 使用 ~git checkout -b [branchname] [tagname]~ 在特定的标签上创建一个新分支。
+
+** Git 别名 
+   看一下例子就清楚了：
+   #+BEGIN_SRC bash
+     $ git config --global alias.co checkout
+     $ git config --global alias.br branch
+     $ git config --global alias.ci commit
+     $ git config --global alias.st status
+   #+END_SRC
+
