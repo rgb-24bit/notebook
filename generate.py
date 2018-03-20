@@ -15,50 +15,59 @@ from __future__ import unicode_literals
 import re
 import io
 import os
+import glob
 
 
-def get_sub_dir(parent_dir):
-    """ Get subdirectory."""
-    for sub_dir in os.listdir(parent_dir):
-        sub_dir = os.path.join(parent_dir, sub_dir)
-        if os.path.isdir(sub_dir):
-            yield sub_dir
+class Storage(dict):
+    def __getattr__(self, key):
+        try:
+            return self[key]
+        except KeyError as k:
+            raise AttributeError(k)
+
+    def __setattr__(self, key, value):
+        self[key] = value
+
+    def __delattr__(self, key):
+        try:
+            del self[key]
+        except KeyError as k:
+            raise AttributeError(k)
+
+    def __repr__(self):
+        return '<Storage ' + dict.__repr__(self) + '>'
 
 
-def get_sub_file(parent_dir):
-    """ Get subfile."""
-    for sub_file in os.listdir(parent_dir):
-        sub_file = os.path.join(parent_dir, sub_file)
-        if os.path.isfile(sub_file):
-            yield sub_file
+def glob_dir(dir_name, glob_pattern=list()):
+    """ 获取指定目录下符合 glob pattern 的 sub_dir, sub_file."""
+    glob_res = Storage(sub_dir=list(), sub_file=list())
+
+    for pattern in glob_pattern:
+        for match in glob.glob(os.path.join(dir_name, pattern)):
+            if os.path.isdir(match):
+                glob_res.sub_dir.append(match)
+            else:
+                glob_res.sub_file.append(match)
+
+    return glob_res
 
 
-def is_ignore_dir(dir_path):
-    """ Determine if the folder is ignored."""
-    ignore_dir = ('.git', 'inbox', '_style', 'trash')
+def get_glob_pattern(dir_name):
+    """ 获取该目录的 glob 匹配模式."""
+    glob_pattern = list()
 
-    if os.path.split(dir_path)[-1] in ignore_dir:
-        return True
-
-    for sub_file in get_sub_file(dir_path):
-        if not is_ignore_file(sub_file):
-            break
-    else:
-        return True  # No valid subfile exists
-
-    return False
+    file_name = os.path.join(dir_name, '.generate')
+    if os.path.isfile(file_name):
+        with io.open(file_name, 'r', encoding='utf-8') as fp:
+            for line in fp:
+                if not line[0] == '#':
+                    glob_pattern.append(line.strip())
+    return glob_pattern
 
 
-def is_ignore_file(file_path):
-    """ Determine if the file is ignored."""
-    file_type = os.path.splitext(file_path)[-1]
-    file_name = os.path.split(file_path)[-1]
-    return file_type != '.org' or file_name == 'README.org'
-
-
-def get_file_title(file_path):
-    """ Get file title."""
-    with io.open(file_path, 'r', encoding='utf-8') as fp:
+def get_file_title(file_name):
+    """ 获取文件标题."""
+    with io.open(file_name, 'r', encoding='utf-8') as fp:
         pattern = r'#\+TITLE:.+'
 
         match = re.search(pattern, fp.read())
@@ -66,33 +75,41 @@ def get_file_title(file_path):
             title = match.group(0).split(':')[-1]
             return title.strip()
 
-        return os.path.split(file_path)[-1]
+        return os.path.split(file_name)[-1]
 
 
-def generate_content(parent_dir, fp, digree=0):
-    format = '- [[file:{path}][{name}]]\n'
+def generate_content(root_dir, root_glob_pattern, stream, digree=0):
+    """ 生成 README.org 的内容"""
+    kind_format = '- *{name}*\n'
+    link_format = '- [[file:{path}][{name}]]\n'
 
-    for sub_dir in get_sub_dir(parent_dir):
-        if is_ignore_dir(sub_dir):
-            continue
+    glob_pattern = get_glob_pattern(root_dir)
+    if not glob_pattern:
+        glob_pattern = root_glob_pattern
 
-        content = digree * '  ' + '- *' + os.path.basename(sub_dir) + '*\n'
-        fp.write(content)
+    glob_res = glob_dir(root_dir, glob_pattern)
+    for sub_dir in glob_res.sub_dir:
+        # TODO 去除重复 glob 匹配
+        if glob_dir(sub_dir, glob_pattern).sub_file:
+            kind = digree * '  ' + kind_format.format(
+                name = os.path.basename(sub_dir[0:-1])
+            )
+            stream.write(kind)
 
-        generate_content(sub_dir, fp, digree + 1)
+            generate_content(sub_dir, glob_pattern, stream, digree + 1)
 
-    for sub_file in get_sub_file(parent_dir):
-        if is_ignore_file(sub_file):
-            continue
+    for sub_file in glob_res.sub_file:
+        link = digree * '  ' + link_format.format(
+            path = sub_file,
+            name = get_file_title(sub_file)
+        )
+        stream.write(link)
 
-        content = digree * '  ' + format.format(path=sub_file, name=get_file_title(sub_file))
-        fp.write(content)
-
-
-def generate_file(parent_dir, file_name):
-    with io.open(file_name, 'w', encoding='utf-8') as fp:
-        fp.write('#+TITLE: Table of Contents\n\n')
-        generate_content(parent_dir, fp, 0)
+def generate_file(root_dir, file_name):
+    """ 生成 README.org 文件"""
+    with io.open(file_name, 'w', encoding='utf-8') as stream:
+        stream.write('#+TITLE: Table of Contents\n\n')
+        generate_content(root_dir, list(), stream, 0)
 
 
 if __name__ == '__main__':
