@@ -54,6 +54,26 @@
                                                              |
                                                              float
             #+END_EXAMPLE
+* stdin, stdout, stderr
+  + 标准输入 *stdin*
+  + 标准输出 *stdout*
+  + 标准错误 *stderr*
+
+  #+BEGIN_SRC C
+    #include <stdio.h>
+
+    int main(int argc, char* argv[]) {
+      fprintf(stdout, "%s\n", "stdout");
+      fprintf(stderr, "%s\n", "stderr");
+
+      char str[10] = {0};
+      fscanf(stdin, "%s", str);
+      printf("%s", str);
+
+      return 0;
+    }
+  #+END_SRC
+
 * static
 ** C语言中static关键字的作用
    1. 在修饰变量的时候，static修饰的静态局部变量只执行一次，而且延长了局部变量的生命周期，直到程序运行结束以后才释放
