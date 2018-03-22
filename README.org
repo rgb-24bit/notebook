@@ -30,6 +30,7 @@
   - [[file:.\lang\graphviz.org][graphviz 笔记]]
 - *os*
   - [[file:.\os\base.org][基础内容]]
+  - [[file:.\os\info.org][信息的表示和处理]]
   - [[file:.\os\start_up.org][计算机启动]]
 - *python*
   - [[file:.\python\built_in_type.org][Python 内置类型]]
