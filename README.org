@@ -37,6 +37,7 @@
   - [[file:.\python\Python.org][Python 笔记]]
   - [[file:.\python\re.org][Python 正则表达式]]
   - [[file:.\python\setup.org][setup.py]]
+  - [[file:.\python\socket.org][Python socket]]
   - [[file:.\python\text_process.org][Python 文本处理]]
 - *related*
   - *edit*

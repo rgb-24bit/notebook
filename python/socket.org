@@ -1,0 +1,158 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      Python socket
+
+* server & client
+  #+BEGIN_SRC plantuml :file img/socket.png :cmdline -charset utf-8
+    @startuml
+
+    start
+
+    : 服务器启动;
+
+    : 监听端口并等待链接;
+
+    while (获得来自客户端的链接请求) is (True)
+    : 与客户端建立连接;
+    : 完成服务;
+    endwhile
+
+    : 服务器关闭;
+
+    end
+
+    @enduml
+  #+END_SRC
+
+  [[file:img/socket.png]]
+
+* socket
+  计算机网络数据结构 - ~socket~.
+
+  + 基于同一主机的套接字， ~AF_LOCAL(AF_UNIX)~, 可用于进程间通信
+  + 基于网络的套接字, ~AF_INET, AF_INET6~, 用于网络通信
+
+  ~socket~ 地址： ~(主机, 端口)~ 对.
+
+  有效的端口范围： ~0-65535~, 其中小于 ~1024~ 的端口号预留给系统.
+
+  + 面向连接的套接字 :: 进行通信前必须先建立一个连接（流套接字）
+
+                实现这种连接类型的主要协议是 *传输控制协议(TCP)*, 创建
+                ~TCP~ 套接字应该使用 ~SOCK_STREAM~ 作为套接字类型
+
+  + 无连接的套接字 :: 在通信开始前并不需要建立连接
+
+               实现这种连接类型的主要协议是 *用户数据报协议(UDP)*, 创建
+               ~UDP~ 套接字应该使用 ~SOCK_DGRAM~ 作为套接字类型
+
+* socket module
+  #+BEGIN_SRC python
+    import socket
+
+    # 创建套接字 socket.socket(socket_family, socket_type, protocol=0)
+    tcp_skt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # udp - socket.SOCK_DGRAM
+
+    # 绑定 (主机, 端口号) 对
+    skt.bind(('127.0.0.1', 10000))
+
+    # 开始监听
+    skt.listen()
+
+    # 获取来自客户端的链接， cs 是和客户端建立连接的新套接字
+    cs = skt.accept()  # 阻塞式操作， 只有获取到链接才会执行后面的代码
+
+    # 获取来自客户端的数据
+    cs.recv(1024)
+
+    # 向客户端发送数据
+    cs.send('')
+
+    # 关闭套接字
+    cs.close()
+
+    skt.close()
+  #+END_SRC
+
+  #+BEGIN_SRC python
+    import socket
+
+    # 创建套接字
+    skt = socket.socket(AF_INET, socket.SOCK_STREAM)
+
+    # 链接至服务器
+    skt.connect(('127.0.0.1', 10000))
+
+    # 发送数据到服务器
+    skt.send()
+
+    # 获取来自服务器的数据
+    skt.recv(1024)
+
+    # 关闭套接字
+    skt.close()
+  #+END_SRC
+
+  一般情况下， 客户端和服务器之间的数据传输是不能一次完成的， 所以往往需要
+  使用循环来不断的 ~发送/接受~ 数据.
+
+  同样， 服务器往往会接受多个链接， 一次可以用循环接受多个客户端的链接， 并
+  使用一个线程来处理一个连接
+
+  *存在的问题：* 服务器端会因为死循环的原因无法正常关闭， 很有可能需要使用 ~Ctrl+break~ 来退出程序。 ~Ctrl + c~
+  貌似不能停止程序.
+
+  + 文档链接 [[https://docs.python.org/3/library/socket.html][socket]]
+  
+  #+BEGIN_SRC python
+    import socket
+
+    # 局域网 socket ip
+    host = socket.gethostbyname_ex(socket.gethostname())[-1][0]
+
+
+    # 计算接受消息的大小
+
+    import struct
+
+    # 与客户端约定头信息的大小为 128sl
+    head_info_size = struct.calcsize('128sl')
+    head_info = self.request.recv(head_info_size)
+
+
+    # 数据打包解包
+    struct.pack()
+    struct.unpack()
+  #+END_SRC
+
+* UDP
+  #+BEGIN_SRC python
+    import socket
+
+    # 创建套接字
+    skt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    # 绑定地址
+    skt.bind(('127.0.0.1', 10000))
+
+    # 由于 UDP 是无连接的套接字， 所以不需要监听/获取链接的过程
+    # 直接获取发送来的数据即可
+    data, addr = skt.recvfrom(1024)  # 返回数据及客户端地址
+
+    # 发送数据
+    skt.sendto(data, addr)
+
+    # UDP 的客户端很简单
+    # 创建完套接字就可以 发送/接受 数据了
+    skt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    skt.sendto(data, addr)
+    data, addr = skt.recvfrom(1024)
+  #+END_SRC
+
+* socketserver
+  ~Python2~ - ~SocketServer~
+  
+  ~Python3~ - ~socketserver~
+
+  文档： [[https://docs.python.org/3/library/socketserver.html][socketserver]]
+
