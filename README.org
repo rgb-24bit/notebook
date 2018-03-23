@@ -33,7 +33,6 @@
   - [[file:.\os\info.org][信息的表示和处理]]
   - [[file:.\os\start_up.org][计算机启动]]
 - *python*
-  - [[file:.\python\built_in_type.org][Python 内置类型]]
   - [[file:.\python\log.org][Python 日志]]
   - [[file:.\python\Python.org][Python 笔记]]
   - [[file:.\python\re.org][Python 正则表达式]]
