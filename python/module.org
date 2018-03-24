@@ -1,0 +1,41 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      Python 模块
+
+* itertools
+  为高效循环创建迭代器
+
+  + count(start, [step]) :: start, start+step, start+2*step, …
+
+  + cycle(p) :: p0, p1, … plast, p0, p1, …
+
+  + repeat(elem [,n]) :: elem, elem, elem, … endlessly or up to n times
+
+  + chain(p, q, …) :: p0, p1, … plast, q0, q1, …
+
+  + compress(data, selectors) :: (d[0] if s[0]), (d[1] if s[1]), …
+
+  + groupby(iterable[, key]	) :: 按键值（v）分组的子迭代器
+
+  + product(p, q, … [repeat=1]) :: product('ABCD', repeat=2) AA AB AC AD BA BB BC BD CA CB CC CD DA DB DC DD
+
+  + permutations(p[, r]) :: permutations('ABCD', 2)	 	AB AC AD BA BC BD CA CB CD DA DB DC
+
+  + ... :: ...... 
+
+  + [[https://docs.python.org/2.7/library/itertools.html][Python2]]
+  + [[https://docs.python.org/3/library/itertools.html][Python3]]
+
+* traceback
+  打印或检索堆栈回溯
+  
+  异常处理
+
+* StringIO
+  ~Python2~ - ~StringIO~, ~Python3~ - ~io.StringIO~.
+
+  像文件那样读写 ~string~.
+
+  + [[https://docs.python.org/2.7/library/stringio.html][Python2]]
+  + [[https://docs.python.org/3/library/io.html#text-i-o][Python3]]
+  
+  
