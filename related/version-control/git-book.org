@@ -222,5 +222,14 @@
    + [[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF][Git-分支-远程分支]]
 
 ** 变基
+   + 变基 :: 提取在一个分支中引入的补丁和修改， 然后在另一个分支的基础上应用一次。
+           #+BEGIN_SRC bash
+             # 切换到要提取修改的分支
+             $ git checkout <branch>
+
+             # 变基到目标分支
+             $ git rebase <branch>
+           #+END_SRC
+
    + [[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA][Git 分支 - 变基]]
 
