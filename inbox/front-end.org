@@ -1,0 +1,3 @@
+* 教程
+  + [[https://jgthms.com/web-design-in-4-minutes/][css]]
+  + [[https://jgthms.com/javascript-in-14-minutes/][JavaScript]]
