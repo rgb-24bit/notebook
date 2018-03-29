@@ -1,0 +1,80 @@
+#+SETUPFILE:  ./_style/style.setup
+#+TITLE:      Python Tkinter
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#tkpy][tk.py]]
+- [[#hello-world][Hello World]]
+- [[#文档链接][文档链接]]
+
+* tk.py
+  ~Python2~ 和 ~Python3~ 的 ~Tkinter~ 模块不兼容， 如果需要编写兼容的程序的话， 需要一点处理。
+
+  #+BEGIN_SRC python
+    # -*- coding: utf-8 -*-
+
+    import sys
+
+    _ver = sys.version_info[0]
+
+    if _ver == 2:
+        from Tkinter import *
+        import ScrolledText as scrolledtext
+        import tkColorChooser as colorchooser
+        import tkCommonDialog as commondialog
+        import tkFileDialog as filedialog
+        import tkFont as font
+        import tkMessageBox as messagebox
+        import tkSimpleDialog as simpledialog
+        import Tkdnd as dnd
+        import turtle
+    else:
+        from tkinter import *
+        import tkinter.scrolledtext as scrolledtext
+        import tkinter.colorchooser as colorchooser
+        import tkinter.commondialog as commondialog
+        import tkinter.filedialog as filedialog
+        import tkinter.font as font
+        import tkinter.messagebox as messagebox
+        import tkinter.simpledialog as simpledialog
+        import tkinter.dnd as dnd
+        import turtle
+  #+END_SRC
+
+* Hello World
+  #+BEGIN_SRC python
+    # -*- coding: utf-8 -*-
+
+    import tk
+
+    class Application(tk.Frame):
+        def __init__(self, master=None):
+            tk.Frame.__init__(self, master)
+            self.pack()
+            self.create_widgets()
+
+        def create_widgets(self):
+            self.hi_there = tk.Button(self)
+            self.hi_there["text"] = "Hello World\n(click me)"
+            self.hi_there["command"] = self.say_hi
+            self.hi_there.pack(side="top")
+
+            self.quit = tk.Button(self, text="QUIT", fg="red",
+                                  command=root.destroy)
+            self.quit.pack(side="bottom")
+
+        def say_hi(self):
+            print("hi there, everyone!")
+
+    root = tk.Tk()
+    app = Application(master=root)
+    app.mainloop()
+  #+END_SRC
+
+  这不是最简单的 ~Tkinter~ 程序， 但是较为完整的表现了 ~Tkinter~ 程序的结构。
+
+  *控件*, *布局管理器*, *事件*.
+
+* 文档链接
+  + [[https://docs.python.org/2.7/library/tkinter.html][Python2.7 Tkinter]]
+  + [[https://docs.python.org/3.6/library/tkinter.html][Python3.6 tkinter]]
+  + [[http://www.tkdocs.com/tutorial/index.html][TkDocs]]

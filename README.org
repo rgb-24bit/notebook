@@ -35,6 +35,7 @@
 - *python*
   - [[file:.\python\log.org][Python 日志]]
   - [[file:.\python\module.org][Python 模块]]
+  - [[file:.\python\python-tk.org][Python Tkinter]]
   - [[file:.\python\Python.org][Python 笔记]]
   - [[file:.\python\re.org][Python 正则表达式]]
   - [[file:.\python\setup.org][setup.py]]
@@ -56,4 +57,6 @@
   - [[file:.\related\gpg.org][gpg 使用]]
   - [[file:.\related\markup.org][标记语言及其他文本格式]]
   - [[file:.\related\pdf.org][pdf 文档格式]]
+- *front-end*
+  - [[file:.\front-end\javascript.org][JavaScript 基础]]
 - [[file:.\README.org][README.org]]
