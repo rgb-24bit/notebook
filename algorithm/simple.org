@@ -67,3 +67,6 @@
 
    公式： *dr(n) = 1 + ((n - 1) mod 9)*
 
+* 欧几里得-欧拉定理
+  + [[https://zh.wikipedia.org/wiki/%E6%AD%90%E5%B9%BE%E9%87%8C%E5%BE%97-%E6%AD%90%E6%8B%89%E5%AE%9A%E7%90%86][维基百科]]
+  + [[https://leetcode-cn.com/problems/perfect-number/description/][leetcode]]
