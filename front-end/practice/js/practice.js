@@ -1,15 +1,29 @@
-var inner = "From JavaScript";
-var write = 2.333333333333333;
+// use strict
+'use strict';
+
+// output format
+var format = 'result: ';
 
 
-// 定义函数
-function myfunc() {
-    document.getElementById("test").innerHTML=inner;
+// array
+var arr = [];
+for (var num = 0; num < 100; ++num) {
+    document.write(format + num);
+    arr.push(num);
 }
+document.write('<hr/>');
 
-function myfunc2() {
-    document.write(write);
+
+// for ... in
+for (var num in arr) {
+    document.write(format + num);
 }
+document.write('<hr/>');
 
-// 调用函数
-myfunc();
+
+// string
+var arr = ['\x48', '\x65', '\x6c', '\x6c', '\x6f', '\x20', '\u4e16', '\u754c'];
+for (var ch in arr) {
+    document.write(format + arr.join(''));
+}
+document.write('<hr/>');

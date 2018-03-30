@@ -41,3 +41,110 @@
 
 
   - 可以使用 ~\u####~ 的形式表示 ~Unicode~ 字符
+
+
+  - 使用反引号 ~`~ 表示多行字符串， 需要 ~ES6~ 标准支持
+
+
+  - *对象* 是动态类型， 可以自由地给一个对象添加或删除属性， 删除使用 ~delete obj.name~
+
+
+  - 使用 ~in~ 操作符判断一个对象是否拥有某个属性， 这个属性可能是继承的
+
+
+  - 使用 ~hasOwnProperty()~ 方法判断一个属性是否是自身拥有的
+
+
+  - ~JavaScript~ 把 ~null~, ~undefined~, ~0~, ~NaN~ 和 *空字符串* 视为 ~false~. 其他值一概视为 ~true~
+
+
+  - 循环 ~for (var i = 0; i < 3; i++)~, 循环 ~for (var i in obj)~, 循环 ~while(condition)~,
+    循环 ~do...while~
+
+  #+BEGIN_SRC html
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>JavaScript Pratice</title>
+
+        <!-- JavaScript Practice -->
+        <script>
+          // use strict
+          'use strict';
+
+          // output format
+          var format = 'result: ';
+
+
+          // array
+          var arr = [];
+          for (var num = 0; num < 100; ++num) {
+                                  document.write(format + num);
+                                  arr.push(num);
+                                  }
+                                  document.write('<hr/>');
+
+
+                                  // for ... in
+                                  for (var num in arr) {
+                                  document.write(format + num);
+                                  }
+                                  document.write('<hr/>');
+
+
+                                  // string
+                                  var arr = ['\x48', '\x65', '\x6c', '\x6c', '\x6f', '\x20', '\u4e16', '\u754c'];
+                                  for (var ch in arr) {
+                                  document.write(format + arr.join(''));
+                                  }
+                                  document.write('<hr/>');
+                                  </script>
+
+      </head>
+      <body>
+      </body>
+    </html>
+  #+END_SRC
+
+* 函数笔记
+  + *函数定义：* 两种方式等价
+    #+BEGIN_SRC javascript
+      function name(x) {
+      }
+
+      var name = function (x) {
+      };
+    #+END_SRC
+
+    
+  + ~JavaScript~ 允许传入任意个参数而不影响调用，因此传入的参数比定义的参数多也没有问题
+
+
+  + 传入的参数比定义的少也没有问题， 未传入的参数为 ~undefined~
+
+    
+  + 利用关键字 ~arguments~ 可以对传入的所有参数进行处理
+
+
+  + 如果一个变量在函数体内部申明，则该变量的作用域为整个函数体，在函数体外不可引用该变量
+
+
+  + 函数可以嵌套，此时，内部函数可以访问外部函数定义的变量，反过来则不行
+
+
+  + 函数在查找变量时从自身函数定义开始，从 “内” 向 “外” 查找。
+    如果内部函数定义了与外部函数重名的变量，则内部函数的变量将“屏蔽”外部函数的变量。
+
+
+  + 不在任何函数内定义的变量就具有全局作用域， 默认全局作用域 ~window~
+
+
+  + ~ES6~ 引入了 ~let~ 关键字， 支持 *局部作用域*
+
+  
+  + *方法：* 绑定到对象上的函数， 在对象内部使用 ~this~ 关键字
+
+
+  + ~this~ 是一个特殊变量，它始终指向当前对象
+
