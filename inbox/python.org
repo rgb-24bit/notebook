@@ -1,4 +1,2 @@
 * 线程锁
   + [[https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html][线程锁]]
-* 正则表达式
-  + [[http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html][细节问题]]
