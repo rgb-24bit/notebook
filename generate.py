@@ -59,14 +59,14 @@ def generate(file_name='README.org'):
                 # 分类子文件夹的子文件夹的子文件
                 for sub_sub_file in get_sub_file(sub_sub_dir):
                     link = link_format.format(
-                        path=sub_sub_dir,
+                        path=sub_sub_file,
                         name=get_file_title(sub_sub_file))
                     fp.write('    ' + link)
 
             # 分类子文件夹的子文件
             for sub_file in get_sub_file(sub_dir):
                 link = link_format.format(
-                    path=sub_dir,
+                    path=sub_file,
                     name=get_file_title(sub_file))
                 fp.write('  ' + link)
 
