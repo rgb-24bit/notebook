@@ -3,56 +3,72 @@
 """
 Generate README.org
 ~~~~~~~~~~~~~~~~~~~
-     __      _
-  /\ \ \___ | |_ ___
- /  \/ / _ \| __/ _ \
-/ /\  / (_) | ||  __/
-\_\ \/ \___/ \__\___|
+
+1. Only .org files required.
+2. Depth does not exceed 2.
 """
 
 from __future__ import unicode_literals
 
-import re
-import io
-import os
-import glob
+import re, io, os, glob
 
 
-def get_glob_pattern(file_name='./config'):
-    with io.open(file_name, 'r', encoding='utf-8') as fp:
-        for line in fp:
-            if line.strip() and line[0] != '#':
-                yield line.strip()
+def get_sub_dir(path):
+    for sub_dir in glob.glob(os.path.join(path, '*/')):
+        yield os.path.normpath(sub_dir)
 
 
-def get_req_file(pattern):
-    for f in glob.glob(pattern):
-        yield f
+def get_sub_file(path):
+    for sub_file in glob.glob(os.path.join(path, '*.org')):
+        yield os.path.normpath(sub_file)
 
 
-def get_file_title(file_name):
-    with io.open(file_name, 'r', encoding='utf-8') as fp:
+def get_file_title(path):
+    with io.open(path, 'r', encoding='utf-8') as fp:
         match = re.search(r'#\+TITLE:.+', fp.read())
-
         if match:
             title = match.group(0).split(':')[-1]
             return title.strip()
-
-        return os.path.split(file_name)[-1]
+    return os.path.split(path)[-1]
 
 
 def generate(file_name='README.org'):
-    list_format = '- {name} -- [[file:{path}][{title}]] ::\n'
+    link_format = '- [[file:{path}][{name}]]\n'
     with io.open(file_name, 'w', encoding='utf-8') as fp:
         fp.write('#+TITLE: Note\n\n')
 
-        sep = '\\' if os.name == 'nt' else '/'
+        sep = '\\' if os.name == 'nt' else '/'  # 不同系统下的分隔符
+        ignore_dir = ('trash', 'inbox')  # 忽略的文件夹
 
-        for pt in get_glob_pattern():
-            for path in get_req_file(pt):
-                name = os.path.normpath(path).split(sep)[0]
-                title = get_file_title(path)
-                fp.write(list_format.format(name=name, path=path, title=title))
+        # 分类子文件夹
+        for sub_dir in get_sub_dir('.'):
+            if sub_dir in ignore_dir:
+                continue
+
+            fp.write('- *{name}*\n'.format(name=sub_dir))
+
+            # 分类子文件夹的子文件夹
+            for sub_sub_dir in get_sub_dir(sub_dir):
+                # 剔除无意义的子文件夹
+                if len(list(get_sub_file(sub_sub_dir))) == 0:
+                    continue
+
+                name = sub_sub_dir.split(sep)[-1]
+                fp.write('  - *{name}*\n'.format(name=name))
+
+                # 分类子文件夹的子文件夹的子文件
+                for sub_sub_file in get_sub_file(sub_sub_dir):
+                    link = link_format.format(
+                        path=sub_sub_dir,
+                        name=get_file_title(sub_sub_file))
+                    fp.write('    ' + link)
+
+            # 分类子文件夹的子文件
+            for sub_file in get_sub_file(sub_dir):
+                link = link_format.format(
+                    path=sub_dir,
+                    name=get_file_title(sub_file))
+                fp.write('  ' + link)
 
 
 if __name__ == '__main__':
