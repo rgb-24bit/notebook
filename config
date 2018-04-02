@@ -1,0 +1,33 @@
+# .NET
+./.NET/*/*.org
+
+# algorithm
+./algorithm/*.org
+
+# c-c++
+./c-c++/*.org
+
+# database
+./database/*.org
+./database/*/*.org
+
+# front-end
+./front-end/*.org
+
+# lang
+./lang/*.org
+./lang/*/*.org
+
+# math
+./math/*.org
+./math/*/*.org
+
+# os
+./os/*.org
+
+# python
+./python/*.org
+
+# related
+./related/*.org
+./related/*/*.org
