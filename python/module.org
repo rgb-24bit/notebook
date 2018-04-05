@@ -2,6 +2,8 @@
 #+TITLE:      Python 模块
 
 * itertools
+  [[http://wklken.me/posts/2013/08/20/python-extra-itertools.html][PYTHON-进阶-ITERTOOLS模块小结]]
+  
   为高效循环创建迭代器
 
   + count(start, [step]) :: start, start+step, start+2*step, …
@@ -17,6 +19,8 @@
   + groupby(iterable[, key]	) :: 按键值（v）分组的子迭代器
 
   + product(p, q, … [repeat=1]) :: product('ABCD', repeat=2) AA AB AC AD BA BB BC BD CA CB CC CD DA DB DC DD
+
+       生成笛卡尔积， ~repeat~ 为重复次数。 如 ~[1,2,3], repeat=2~ ==> ~[1,2,3], [1,2,3]~
 
   + permutations(p[, r]) :: permutations('ABCD', 2)	 	AB AC AD BA BC BD CA CB CD DA DB DC
 

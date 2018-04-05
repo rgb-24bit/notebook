@@ -1,2 +1,17 @@
 * 线程锁
   + [[https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html][线程锁]]
+* 全局变量
+  https://blog.csdn.net/my2010sam/article/details/17735159
+* flask
+  结构： http://www.cnblogs.com/franknihao/p/7301122.html
+  教程： https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+  
+  扩展： ~flask-wtf~ 用于表单
+
+
+* Pip
+  https://www.zhihu.com/question/54906859
+* 实现
+  + [[https://zh.wikipedia.org/wiki/Python#%E5%AE%9E%E7%8E%B0][维基]]
+  + cython
+  + numba
