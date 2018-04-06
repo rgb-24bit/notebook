@@ -38,3 +38,5 @@
 * evil
   ** Type  %  to find a matching ),], or } **
 
+* 归档
+  https://orgmode.org/manual/Archiving.html

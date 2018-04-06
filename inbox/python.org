@@ -3,11 +3,13 @@
 * 全局变量
   https://blog.csdn.net/my2010sam/article/details/17735159
 * flask
-  结构： http://www.cnblogs.com/franknihao/p/7301122.html
   教程： https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
   
   扩展： ~flask-wtf~ 用于表单
+  扩展： ~flask-SQLAlchemy~ 数据库操作
+  扩展： ~flask-migrate~ 数据库迁移
 
+  *整体结构的梳理*
 
 * Pip
   https://www.zhihu.com/question/54906859
@@ -15,3 +17,8 @@
   + [[https://zh.wikipedia.org/wiki/Python#%E5%AE%9E%E7%8E%B0][维基]]
   + cython
   + numba
+* 导入的问题
+  https://loggerhead.me/posts/python-de-import-ji-zhi.html
+
+* 装饰器
+  http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html

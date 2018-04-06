@@ -1,0 +1,24 @@
+* 回文数
+  + [[https://leetcode-cn.com/problems/palindrome-number/description/][问题链接]]
+
+  #+BEGIN_SRC python
+    class Solution:
+        def isPalindrome(self, x):
+            """
+            :type x: int
+            :rtype: bool
+            """
+            if x < 0 or (x % 10 == 0 and x != 0):
+                return False
+        
+            revertedNumber = 0
+            while x > revertedNumber:
+                revertedNumber = revertedNumber * 10 + x % 10
+                x = x // 10
+        
+            return revertedNumber == x or x == revertedNumber // 10
+  #+END_SRC
+
+* 罗马数字
+  + [[https://leetcode-cn.com/problems/roman-to-integer/description/][问题链接]]
+  + 问题关键： 从前向后遍历罗马数字，如果某个数比前一个数小，则加上该数。反之，减去前一个数的两倍然后加上该数
