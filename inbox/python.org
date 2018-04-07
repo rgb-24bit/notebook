@@ -22,3 +22,18 @@
 
 * 装饰器
   http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html
+* 重复调用
+  http://www.cnblogs.com/blackmatrix/p/5681480.html
+* 名字空间
+  http://www.cnblogs.com/wanxsb/archive/2013/05/07/3064783.html
+
+* doctest
+  https://docs.python.org/2/library/doctest.html
+
+* SQLAlchemy
+  https://segmentfault.com/a/1190000004618621
+* nav-web
+  + [[http://www.pythondoc.com/flask-sqlalchemy/index.html][Flask-SQLAlchemy]]
+  + [[https://github.com/miguelgrinberg/flasky][flasky]]
+  + [[https://segmentfault.com/a/1190000004618621][Flask-SQLAlchemy 学习总结]]
+  + [[https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world][The Flask Mega-Tutorial]]
