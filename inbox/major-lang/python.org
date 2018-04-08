@@ -1,8 +1,0 @@
-* 混合编程
-  [[https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/][Python 调用 C]]
-  [[http://blog.csdn.net/forever_jc/article/details/7743106][C调用Python]]
-  [[http://blog.csdn.net/feitianxuxue/article/details/41129677][C调用Python]]
-
-* 数据库操作
-  [[http://python.jobbole.com/88954/][伯乐在线]]
-

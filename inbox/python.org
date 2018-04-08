@@ -1,34 +1,14 @@
-* 线程锁
-  + [[https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html][线程锁]]
-* 全局变量
-  https://blog.csdn.net/my2010sam/article/details/17735159
-* flask
-  教程： https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
-  
-  扩展： ~flask-wtf~ 用于表单
-  扩展： ~flask-SQLAlchemy~ 数据库操作
-  扩展： ~flask-migrate~ 数据库迁移
-
-  *整体结构的梳理*
-
-* Pip
-  https://www.zhihu.com/question/54906859
-* 实现
-  + [[https://zh.wikipedia.org/wiki/Python#%E5%AE%9E%E7%8E%B0][维基]]
-  + cython
-  + numba
-* 导入的问题
-  https://loggerhead.me/posts/python-de-import-ji-zhi.html
-
-* 装饰器
-  http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html
-* 重复调用
-  http://www.cnblogs.com/blackmatrix/p/5681480.html
-* 名字空间
-  http://www.cnblogs.com/wanxsb/archive/2013/05/07/3064783.html
-
-* doctest
-  https://docs.python.org/2/library/doctest.html
+* Wait
+  + 线程
+    + [[https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html][线程锁]]
+  + 混合编程
+    + [[https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/][Python 调用 C]]
+    + [[http://blog.csdn.net/forever_jc/article/details/7743106][C调用Python]]
+    + [[http://blog.csdn.net/feitianxuxue/article/details/41129677][C调用Python]]
+  + 数据库
+    + [[http://python.jobbole.com/88954/][伯乐在线]]
+  + 装饰器
+    + [[http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html][在函数上添加包装器]]
 
 * SQLAlchemy
   https://segmentfault.com/a/1190000004618621

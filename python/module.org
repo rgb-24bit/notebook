@@ -43,3 +43,15 @@
   + [[https://docs.python.org/3/library/io.html#text-i-o][Python3]]
   
   
+* doctest
+  文档链接： [[https://docs.python.org/2/library/doctest.html][doctest — Test interactive Python examples]]
+
+  对文档字符串中的交互式文档进行测试：
+  #+BEGIN_SRC python
+    if __name__ == "__main__":
+        import doctest
+        doctest.testmod()
+  #+END_SRC
+
+  参数 ~-v~ 列出详细的测试用例: ~python script.py -v~
+

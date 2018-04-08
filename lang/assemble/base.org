@@ -1,0 +1,5 @@
+#+TITLE:      汇编基础
+
+* Tool
+  + IDE: [[http://www.emu8086.com/][emu8086]]
+

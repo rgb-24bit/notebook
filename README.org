@@ -29,6 +29,8 @@
   - [[file:front-end\javascript.org][JavaScript 笔记]]
 - *jvm*
 - *lang*
+  - *assemble*
+    - [[file:lang\assemble\base.org][汇编基础]]
   - *plantuml*
     - [[file:lang\plantuml\PlantUML.org][PlantUML 笔记]]
   - [[file:lang\graphviz.org][graphviz 笔记]]

@@ -1,25 +1,79 @@
 #+SETUPFILE:  ./_style/style.setup
 #+TITLE:      LeetCode 笔记
 
-* 题 746
-  On a staircase, the ~i~-th step has some non-negative cost ~cost[i]~ assigned (0 indexed).
-  
-  Once you pay the cost, you can either climb one or two steps. You need to find minimum cost to reach the top of the floor,
-  and you can either start from the step with index 0, or the step with index 1.
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#回文数---题-9][回文数 - 题 9]]
+- [[#罗马数字转整数---题-13][罗马数字转整数 - 题 13]]
+- [[#最大子序和---题-53][最大子序和 - 题 53]]
+- [[#使用最小花费爬楼梯---题-746][使用最小花费爬楼梯 - 题 746]]
 
-  Example1:
-  #+BEGIN_EXAMPLE
-    Input: cost = [10, 15, 20]
-    Output: 15
-    Explanation: Cheapest is start on cost[1], pay that cost and go to the top.
-  #+END_EXAMPLE
+* 回文数 - 题 9
+  + [[https://leetcode-cn.com/problems/palindrome-number/description/][Question]]
 
-  Example2:
-  #+BEGIN_EXAMPLE
-    Input: cost = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
-    Output: 6
-    Explanation: Cheapest is start on cost[0], and only step on 1s, skipping cost[3].
-  #+END_EXAMPLE
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def isPalindrome(self, x):
+            """
+            :type x: int
+            :rtype: bool
+            """
+            if x < 0 or (x % 10 == 0 and x != 0):
+                return False
+        
+            revertedNumber = 0
+            while x > revertedNumber:
+                revertedNumber = revertedNumber * 10 + x % 10
+                x = x // 10
+        
+            return revertedNumber == x or x == revertedNumber // 10
+  #+END_SRC
+
+* 罗马数字转整数 - 题 13
+  + [[https://leetcode-cn.com/problems/roman-to-integer/description/][Question]]
+
+  *思路:* 从前向后遍历罗马数字，如果某个数比前一个数小，则加上该数。
+  反之，减去前一个数的两倍然后加上该数。
+
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def romanToInt(self, s):
+            """
+            :type s: str
+            :rtype: int
+            """
+            roman = dict(I=1, V=5, X=10, L=50, C=100, D=500, M=1000)
+            pre = res = roman[s[0]]
+            for n in s[1:]:
+                if roman[n] <= pre:
+                    res += roman[n]
+                else:
+                    res = res - 2*pre + roman[n]
+                pre = roman[n]
+            return res
+  #+END_SRC
+
+* 最大子序和 - 题 53
+  + [[https://leetcode-cn.com/problems/maximum-subarray/description/][Question]]
+
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def maxSubArray(self, nums):
+            """
+            :type nums: List[int]
+            :rtype: int
+            """
+            maxSub = maxCur = nums[0]
+            for num in nums[1:]:
+                maxCur = max(maxCur + num, num)
+                maxSub = max(maxCur, maxSub)
+            return maxSub
+    #+END_SRC
+    
+* 使用最小花费爬楼梯 - 题 746
+  + [[https://leetcode-cn.com/problems/min-cost-climbing-stairs/description/][Question]]
 
   Python:
   #+BEGIN_SRC python

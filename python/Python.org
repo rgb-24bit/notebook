@@ -2,30 +2,28 @@
 #+TITLE:      Python 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#pip][pip]]
 - [[#调试][调试]]
 - [[#兼容][兼容]]
 - [[#乘方][乘方]]
 - [[#元类][元类]]
+- [[#import][import]]
 - [[#type][*type()*]]
 - [[#__slots__][*__slots__*]]
 - [[#正负无穷][正负无穷]]
-- [[#翻转序列][翻转序列]]
-- [[#魔术方法][魔术方法]]
+- [[#全局变量][全局变量]]
 - [[#变量保护][变量保护]]
-- [[#应用方向][应用方向]]
-  - [[#web-开发][WEB 开发]]
-  - [[#网络爬虫][网络爬虫]]
-  - [[#人工智能与机器学习][人工智能与机器学习]]
-  - [[#数据分析处理][数据分析处理]]
-  - [[#服务器运维及其它小工具][服务器运维及其它小工具]]
-  - [[#桌面程序][桌面程序]]
-  - [[#多媒体应用][多媒体应用]]
 - [[#命令行参数][命令行参数]]
+- [[#python-的实现][Python 的实现]]
 - [[#类模块包][类、模块、包]]
   - [[#模块][模块]]
   - [[#包][包]]
   - [[#__main__py-和-__init__py][*__main__.py* 和 *__init__.py*]]
 - [[#类属性和实例属性][类属性和实例属性]]
+
+* pip
+  + python -m ensurepip, 安装 Pip
+  + [[https://docs.python.org/3/library/ensurepip.html][ensurepip — Bootstrapping the pip installer]]
 
 * 调试
   + 启动： ~Python -m pdb script.py~
@@ -69,6 +67,14 @@
   3. 类继承的父类集合
   4. 类的方法集合
 
+* import
+  + [[https://loggerhead.me/posts/python-de-import-ji-zhi.html][Python 的 import 机制]]
+
+  ~sys.path~ 在初始化时，会按照顺序添加以下路径：
+  1. 脚本 所在目录或 *当前目录*
+  2. 环境变量 ~PYTHONPATH~ 中列出的目录
+  3. ~site~ 模块被 ~import~ 时添加的路径
+
 * *type()*
   ~type()~ 的两个作用：
   1. 查看一个类型或变量的类型
@@ -86,7 +92,6 @@
   1. class 的名称
   2. 继承的父类集合， Python 支持多重继承， 因此这个参数应该是一个元组
   3. class 的方法名称与函数绑定， 这里把函数 ~fn~ 绑定到方法名 ~hello~ 上
-
 * *__slots__*
   在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*
 
@@ -120,7 +125,6 @@
 
 
   文档： [[https://docs.python.org/2/reference/datamodel.html?highlight=__slots__#slots][ __slots__]]
-
 * 正负无穷
   #+BEGIN_SRC python
     >>> float('inf')  # 正无穷
@@ -135,38 +139,26 @@
     nan  #  not a number
   #+END_SRC
 
-* 翻转序列
-  : s[::-1]
-
-* 魔术方法
-  + [[http://pycoders-weekly-chinese.readthedocs.io/en/latest/issue6/a-guide-to-pythons-magic-methods.html][Python 魔术方法指南]]
+* 全局变量
+  1. 内部函数，不修改全局变量可以访问全局变量
+  2. 内部函数，修改同名全局变量，则 python 会认为它是一个局部变量
+  3. 在内部函数修改同名全局变量之前调用变量名称(example: print sum), 则引发Unbound-LocalError
 
 * 变量保护
   + ~__xxx__~ 系统定义名字
   + ~_xxx~ 保护变量， 只有类对象和子类对象自己能访问到这些变量
   + ~__xxx~ 私有成员， 只有类对象自己能访问，连子类对象也不能访问到这个数据
-
-* 应用方向
-** WEB 开发
-
-   主要技术栈:
-   1. Django :: 适合快速开发一个网站, 兼顾APP客户端的API调用请求
-   2. Flask :: 适合配合手机客户端开发后台API服务, 优势是后端、API，不适合构建全功能网站
-
-** 网络爬虫
-   工具积累:
-   1. Requests :: 模拟HTTP请求
-   2. PyQuery/BeautifulSoup :: HTML DOM 解析
-   3. Scrapy :: 自动化分布式爬取任务
-   4. 最简化数据库访问的各种ORM
-
-** 人工智能与机器学习
-** 数据分析处理
-** 服务器运维及其它小工具
-** 桌面程序
-** 多媒体应用
+ 
 * 命令行参数
   + [[http://blog.xiayf.cn/2013/03/30/argparse/][argparse 教程]]
+
+* Python 的实现
+  + CPython
+  + Jython
+  + PyPy
+  + IronPython
+  + cython
+  + numba
 
 * 类、模块、包
 ** 模块
