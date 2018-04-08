@@ -10,6 +10,10 @@
   + 装饰器
     + [[http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html][在函数上添加包装器]]
 
+* 相对导入
+  + http://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p03_import_submodules_by_relative_names.html
+  + https://stackoverflow.com/questions/41816973/modulenotfounderror-what-does-it-mean-main-is-not-a-package
+
 * SQLAlchemy
   https://segmentfault.com/a/1190000004618621
 * nav-web
