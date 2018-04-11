@@ -6,6 +6,8 @@
 - [[#罗马数字转整数---题-13][罗马数字转整数 - 题 13]]
 - [[#最大子序和---题-53][最大子序和 - 题 53]]
 - [[#使用最小花费爬楼梯---题-746][使用最小花费爬楼梯 - 题 746]]
+- [[#重复叠加字符串匹配---题-686][重复叠加字符串匹配 - 题 686]]
+- [[#计数二进制子串---题-696][计数二进制子串 - 题 696]]
 
 * 回文数 - 题 9
   + [[https://leetcode-cn.com/problems/palindrome-number/description/][Question]]
@@ -101,6 +103,63 @@
       }
 
       return f1 > f2 ? f2 : f1;
+    }
+  #+END_SRC
+
+* 重复叠加字符串匹配 - 题 686
+  + [[https://leetcode-cn.com/problems/repeated-string-match/description/][Question]]
+
+  #+BEGIN_SRC python
+    class Solution(object):
+        def repeatedStringMatch(self, A, B):
+            q = (len(B) - 1) // len(A) + 1
+            for i in range(2):
+                if B in A * (q+i): return q+i
+            return -1
+  #+END_SRC
+
+* 计数二进制子串 - 题 696
+  + [[https://leetcode-cn.com/problems/count-binary-substrings/description/][Question]]
+
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def countBinarySubstrings(self, s):
+            """
+            :type s: str
+            :rtype: int
+            """
+            group = [1]
+            for i in range(1, len(s)):
+                if s[i] != s[i - 1]:
+                    group.append(1)
+                else:
+                    group[-1] += 1
+                
+            ans = 0
+            for i in range(1, len(group)):
+                ans += min(group[i], group[i - 1])
+        
+            return ans
+  #+END_SRC
+
+  C:
+  #+BEGIN_SRC C
+    int countBinarySubstrings(char* s) {
+      int ans = 0, prev = 0, cur = 1;
+    
+      for (int i = 1; s[i] != '\0'; ++i) {
+        if (s[i] != s[i - 1]) {
+          ans += prev < cur ? prev : cur;
+          prev = cur;
+          cur = 1;
+        }
+        else {
+          cur += 1;
+        }
+      }
+    
+      return ans + (prev < cur ? prev : cur);
     }
   #+END_SRC
 
