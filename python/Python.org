@@ -7,6 +7,7 @@
 - [[#兼容][兼容]]
 - [[#乘方][乘方]]
 - [[#元类][元类]]
+- [[#作用域][作用域]]
 - [[#import][import]]
 - [[#type][*type()*]]
 - [[#__slots__][*__slots__*]]
@@ -66,6 +67,9 @@
   2. 类的名字
   3. 类继承的父类集合
   4. 类的方法集合
+
+* 作用域
+  ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量, 外部也是可以访问的。
 
 * import
   + [[https://loggerhead.me/posts/python-de-import-ji-zhi.html][Python 的 import 机制]]

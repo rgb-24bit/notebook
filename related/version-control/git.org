@@ -37,3 +37,5 @@
   2. git push
 * 远程操作
   + [[http://www.ruanyifeng.com/blog/2014/06/git_remote.html][阮一峰博客]]
+* diff
+  ~git diff 低版本 高版本~, 高版本相对低版本做出的修改
