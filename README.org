@@ -31,6 +31,9 @@
 - *lang*
   - *assemble*
     - [[file:lang\assemble\base.org][汇编基础]]
+  - *emacs-lisp*
+    - [[file:lang\emacs-lisp\note.org][emacs-lisp note]]
+    - [[file:lang\emacs-lisp\tutorial.org][emacs-lisp 教程代码]]
   - *plantuml*
     - [[file:lang\plantuml\PlantUML.org][PlantUML 笔记]]
   - [[file:lang\graphviz.org][graphviz 笔记]]
