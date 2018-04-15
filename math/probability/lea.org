@@ -1,0 +1,6 @@
+#+TITLE:      Python Lea
+
+* 概率编程
+  + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][Probabilistic programming language]]
+  + [[https://bitbucket.org/piedenis/lea/overview][Lea]] - *Discrete probability distributions in Python*.
+

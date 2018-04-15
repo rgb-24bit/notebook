@@ -29,8 +29,6 @@
   - [[file:front-end\javascript.org][JavaScript 笔记]]
 - *jvm*
 - *lang*
-  - *assemble*
-    - [[file:lang\assemble\base.org][汇编基础]]
   - *emacs-lisp*
     - [[file:lang\emacs-lisp\note.org][emacs-lisp note]]
     - [[file:lang\emacs-lisp\tutorial.org][emacs-lisp 教程代码]]
@@ -43,9 +41,12 @@
     - [[file:math\discrete\2-基本结构.org][集合、函数、序列、求和与矩阵]]
   - *linear*
     - [[file:math\linear\1-矩阵和方程组.org][矩阵和方程组]]
+  - *probability*
+    - [[file:math\probability\lea.org][Python Lea]]
 - *network*
 - *os*
   - [[file:os\base.org][基础内容]]
+  - [[file:os\express.org][程序的机器级表示]]
   - [[file:os\info.org][信息的表示和处理]]
   - [[file:os\start_up.org][计算机启动]]
 - *python*
