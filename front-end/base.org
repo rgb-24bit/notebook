@@ -1,0 +1,72 @@
+#+TITLE:      前端基础笔记
+
+* HTML
+  *速查列表*: [[http://www.runoob.com/html/html-quicklist.html][HTML 速查列表]]
+  
+  *字符实体*:
+  #+CAPTION: 字符实体
+  |----------+--------------|
+  | 文字字符 | 等价字符引用 |
+  |----------+--------------|
+  | <        | &lt;         |
+  | >        | &gt;         |
+  | "        | &quot;       |
+  | '        | &apos;       |
+  | &        | &amp;        |
+  |----------+--------------|
+
+  *通用属性*:
+  #+CAPTION: 通用属性
+  |-------+---------------------------------------------------------------|
+  | 属性  | 描述                                                          |
+  |-------+---------------------------------------------------------------|
+  | class | 为html元素定义一个或多个类名（classname）(类名从样式文件引入) |
+  | id    | 定义元素的唯一id                                              |
+  | style | 规定元素的行内样式（inline style）                            |
+  | title | 描述了元素的额外信息 (作为工具条使用)                         |
+  |-------+---------------------------------------------------------------|
+
+  *注释*:
+  #+BEGIN_SRC html
+    <!-- comment -->
+  #+END_SRC
+
+  *<link>*:
+  #+BEGIN_SRC html
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="theme.css">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  #+END_SRC
+  *PS:* 浏览器会自动获取网站根目录下的 ~favicon.ico~ 作为网站图标
+
+  *<script>*:
+  #+BEGIN_SRC html
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <script>
+      document.write("script");
+    </script>
+  #+END_SRC
+
+  *<style>*:
+  #+BEGIN_SRC html
+    <style>
+      body {background-color:yellow;}
+    </style>
+  #+END_SRC
+
+  *<meta>*:
+  #+BEGIN_SRC html
+    <meta charset="UTF-8">
+  #+END_SRC
+
+* CSS
+  + *选择器*: [[http://www.w3school.com.cn/css/css_selector_type.asp][CSS 元素选择器]]
+  + *盒子模型*: [[http://www.w3school.com.cn/css/css_boxmodel.asp][CSS 盒子模型概述]]
+  + *定位*: [[http://www.w3school.com.cn/css/css_positioning.asp][CSS 定位概述]]
+  + *显示*: [[http://www.runoob.com/css/css-display-visibility.html][CSS Display(显示) 与 Visibility（可见性）]]
+  + *媒体类型*: [[http://www.runoob.com/css/css-mediatypes.html][CSS 媒体类型]]
+

@@ -1,5 +1,0 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      JavaScript 笔记
-
-* JavaScript 指南
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
