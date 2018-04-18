@@ -6,6 +6,7 @@
 - [[#罗马数字转整数---题-13][罗马数字转整数 - 题 13]]
 - [[#最大子序和---题-53][最大子序和 - 题 53]]
 - [[#x-的平方根---题-69][x 的平方根 - 题 69]]
+- [[#爬楼梯---题-70][爬楼梯 - 题 70]]
 - [[#使用最小花费爬楼梯---题-746][使用最小花费爬楼梯 - 题 746]]
 - [[#重复叠加字符串匹配---题-686][重复叠加字符串匹配 - 题 686]]
 - [[#计数二进制子串---题-696][计数二进制子串 - 题 696]]
@@ -121,6 +122,33 @@
       }
 
       return 0;
+    }
+  #+END_SRC
+
+* 爬楼梯 - 题 70
+  + [[https://leetcode-cn.com/problems/climbing-stairs/description/][Question]] - 其实就是斐波那契数列
+
+  Python:
+  #+BEGIN_SRC python 
+    class Solution:
+        def climbStairs(self, n):
+            ans, pre, cur = 1, 0, 1
+            for i in range(n):
+                ans = pre + cur
+                pre, cur = cur, ans
+            return ans
+  #+END_SRC
+
+  C:
+  #+BEGIN_SRC C
+    int climbStairs(int n) {
+      int ans = 1, pre = 0, cur = 1;
+      for (int i = 0; i < n; ++i) {
+        ans = pre + cur;
+        pre = cur;
+        cur = ans;
+      }
+      return ans;
     }
   #+END_SRC
 

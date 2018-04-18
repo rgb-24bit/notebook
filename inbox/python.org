@@ -14,3 +14,6 @@
   https://segmentfault.com/a/1190000004618621
 * 函数注解
   + https://mozillazg.com/2016/01/python-function-argument-type-check-base-on-function-annotations.html
+
+* fstring
+  + https://cito.github.io/blog/f-strings/

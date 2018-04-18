@@ -20,5 +20,7 @@
 * 正则表达式
   + [[http://www.cnblogs.com/RigorosLee/archive/2011/05/13/2045806.html][博客园]]
 
+  简单的正则匹配： ~/pattern/~
+
 * 不重启更新配置
   * ~:so %~
