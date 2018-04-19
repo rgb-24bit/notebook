@@ -25,8 +25,7 @@
     - [[file:database\sql-server\t-sql.org][t-sql 使用总结]]
   - [[file:database\sql.org][SQL 笔记]]
 - *front-end*
-  - [[file:front-end\html.org][HTML 笔记]]
-  - [[file:front-end\javascript.org][JavaScript 笔记]]
+  - [[file:front-end\javascript.org][JavaScript 基础笔记]]
 - *jvm*
 - *lang*
   - *emacs-lisp*

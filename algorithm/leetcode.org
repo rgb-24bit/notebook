@@ -7,6 +7,7 @@
 - [[#最大子序和---题-53][最大子序和 - 题 53]]
 - [[#x-的平方根---题-69][x 的平方根 - 题 69]]
 - [[#爬楼梯---题-70][爬楼梯 - 题 70]]
+- [[#合并两个有序数组---题-88][合并两个有序数组 - 题 88]]
 - [[#使用最小花费爬楼梯---题-746][使用最小花费爬楼梯 - 题 746]]
 - [[#重复叠加字符串匹配---题-686][重复叠加字符串匹配 - 题 686]]
 - [[#计数二进制子串---题-696][计数二进制子串 - 题 696]]
@@ -149,6 +150,53 @@
         cur = ans;
       }
       return ans;
+    }
+  #+END_SRC
+
+* 合并两个有序数组 - 题 88
+  + [[https://leetcode-cn.com/problems/merge-sorted-array/description/][Question]]
+
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def merge(self, nums1, m, nums2, n):
+            cur, cur_size = 0, m
+            for i in range(n):
+                while nums1[cur] < nums2[i] and cur < cur_size:
+                    cur += 1
+            
+                for j in range(cur_size, cur, -1):
+                    nums1[j] = nums1[j - 1]
+                nums1[cur] = nums2[i]
+                cur_size += 1
+  #+END_SRC
+
+  Better Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def merge(self, nums1, m, nums2, n):
+            while n > 0:
+                if m <= 0 or nums2[n - 1] > nums1[m - 1]:
+                    nums1[m + n - 1] = nums2[n - 1]
+                    n -= 1
+                else:
+                    nums1[m + n - 1] = nums1[m - 1]
+                    m -= 1
+  #+END_SRC
+
+  C:
+  #+BEGIN_SRC C
+    void merge(int* nums1, int m, int* nums2, int n) {
+      while (n > 0) {
+        if (m <= 0 || nums2[n - 1] > nums1[m - 1]) {
+          nums1[m + n - 1] = nums2[n - 1];
+          n -= 1;
+        }
+        else {
+          nums1[m + n - 1] = nums1[m - 1];
+          m -= 1;
+        }
+      }
     }
   #+END_SRC
 
