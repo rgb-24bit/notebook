@@ -1,2 +1,11 @@
 * org-mode
   + S + left/right 改变列表类型
+
+* profiler
+  + profiler-start
+  + profiler-report
+
+* C-x 1 2 3
+  + C-x 1 保留一个窗口
+  + C-x 2 上下分割窗口
+  + C-x 3 左右分割窗口

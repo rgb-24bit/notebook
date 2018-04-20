@@ -1,0 +1,2 @@
+* 条件码寄存器
+  + https://en.wikipedia.org/wiki/FLAGS_register
