@@ -1,5 +1,6 @@
 * org-mode
   + S + left/right 改变列表类型
+  + link::tag 确定页内链接
 
 * profiler
   + profiler-start
@@ -9,3 +10,6 @@
   + C-x 1 保留一个窗口
   + C-x 2 上下分割窗口
   + C-x 3 左右分割窗口
+    
+* C-x C-z
+  最小化窗口

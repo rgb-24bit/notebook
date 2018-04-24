@@ -1,0 +1,9 @@
+* URL 编码
+  http://www.ruanyifeng.com/blog/2010/02/url_encoding.html
+
+* HTTP
+  http://www.runoob.com/http/http-intro.htmL
+  https://developer.mozilla.org/zh-CN/docs/Web/HTTP
+
+* Headers
+  https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers
