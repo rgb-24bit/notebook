@@ -7,3 +7,9 @@
 
 * Headers
   https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers
+* 设备ip地址分配及变化
+* 特殊的ip地址
+  + 0.0.0.0
+  + 255.255.255.255
+  + 127.0.0.1
+  + ........
