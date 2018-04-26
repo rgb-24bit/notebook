@@ -4,3 +4,6 @@
   https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/description/
 * 平衡二叉树
   + https://leetcode-cn.com/problems/balanced-binary-tree/description/
+
+* 杨辉三角
+  + https://leetcode-cn.com/problems/pascals-triangle/description/

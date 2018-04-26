@@ -31,3 +31,8 @@
   有问题 ？ 谷歌和源码
 * 问
   获取一个对象的属性时的具体流程
+* flask 部署 IIS
+  + https://segmentfault.com/a/1190000008909201
+
+* IIS 开机启动
+  + http://t81036343.lofter.com/post/1ce56468_6ddc146
