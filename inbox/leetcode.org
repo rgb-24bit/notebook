@@ -7,3 +7,10 @@
 
 * 杨辉三角
   + https://leetcode-cn.com/problems/pascals-triangle/description/
+
+* 买卖股票的最佳时机
+  + https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/description/
+
+* 只出现一次的数字
+  + https://leetcode-cn.com/problems/single-number/description/
+  + https://leetcode.com/problems/single-number/solution/

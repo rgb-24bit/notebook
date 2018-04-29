@@ -36,3 +36,12 @@
 
 * IIS 开机启动
   + http://t81036343.lofter.com/post/1ce56468_6ddc146
+* 文件操作
+  + os
+  + os.path
+  + file
+  + shutil
+
+  + http://www.cnblogs.com/funsion/p/4017989.html
+
+  看一下 shutil 源码

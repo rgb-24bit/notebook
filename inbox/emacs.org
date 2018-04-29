@@ -1,6 +1,7 @@
 * org-mode
   + S + left/right 改变列表类型
   + link::tag 确定页内链接
+  + C-c C-l 编写修改链接
 
 * profiler
   + profiler-start
@@ -13,3 +14,5 @@
     
 * C-x C-z
   最小化窗口
+* spacemacs
+  https://scarletsky.github.io/2016/01/22/spacemacs-usage/
