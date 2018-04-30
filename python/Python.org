@@ -8,9 +8,8 @@
 - [[#乘方][乘方]]
 - [[#元类][元类]]
 - [[#作用域][作用域]]
-- [[#import][import]]
-- [[#type][*type()*]]
 - [[#__slots__][*__slots__*]]
+- [[#super][super]]
 - [[#正负无穷][正负无穷]]
 - [[#全局变量][全局变量]]
 - [[#变量保护][变量保护]]
@@ -71,31 +70,6 @@
 * 作用域
   ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量, 外部也是可以访问的。
 
-* import
-  + [[https://loggerhead.me/posts/python-de-import-ji-zhi.html][Python 的 import 机制]]
-
-  ~sys.path~ 在初始化时，会按照顺序添加以下路径：
-  1. 脚本 所在目录或 *当前目录*
-  2. 环境变量 ~PYTHONPATH~ 中列出的目录
-  3. ~site~ 模块被 ~import~ 时添加的路径
-
-* *type()*
-  ~type()~ 的两个作用：
-  1. 查看一个类型或变量的类型
-  2. 创建出新的类型（Python 解释器也是调用 type 创建类）
-
-  创建类：
-  #+BEGIN_SRC python
-    def fn(self, name='world'): # 先定义函数
-        print('Hello, %s.' % name)
-
-    Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
-  #+END_SRC
-
-  参数：
-  1. class 的名称
-  2. 继承的父类集合， Python 支持多重继承， 因此这个参数应该是一个元组
-  3. class 的方法名称与函数绑定， 这里把函数 ~fn~ 绑定到方法名 ~hello~ 上
 * *__slots__*
   在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*
 
@@ -129,6 +103,9 @@
 
 
   文档： [[https://docs.python.org/2/reference/datamodel.html?highlight=__slots__#slots][ __slots__]]
+* super
+  + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]]
+
 * 正负无穷
   #+BEGIN_SRC python
     >>> float('inf')  # 正无穷
