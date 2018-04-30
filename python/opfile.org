@@ -1,0 +1,8 @@
+#+TITLE:      Python 文件操作
+
+* 相关模块
+  + os
+  + os.path
+  + shutil
+
+  方法链接: [[http://www.cnblogs.com/funsion/p/4017989.html][Python默认模块 os和shutil 实用函数]]

@@ -13,3 +13,7 @@
   + 255.255.255.255
   + 127.0.0.1
   + ........
+* Cookie and Session
+  + https://web.stanford.edu/~ouster/cgi-bin/cs142-fall10/lecture.php?topic=cookie
+* websocket
+  + https://juejin.im/entry/5a337d9df265da4322414094

@@ -1,2 +1,0 @@
-* cp
-  + cp -rf from to, 如果 to 存在， from 会成为 to 的子目录

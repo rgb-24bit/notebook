@@ -8,6 +8,12 @@
 - [[#x-的平方根---题-69][x 的平方根 - 题 69]]
 - [[#爬楼梯---题-70][爬楼梯 - 题 70]]
 - [[#合并两个有序数组---题-88][合并两个有序数组 - 题 88]]
+- [[#对称二叉树---题-101][对称二叉树 - 题 101]]
+- [[#将有序数组转换为二叉搜索树---题-108][将有序数组转换为二叉搜索树 - 题 108]]
+- [[#平衡二叉树][平衡二叉树]]
+- [[#杨辉三角---题-118][杨辉三角 - 题 118]]
+- [[#买卖股票的最佳时机---题-121][买卖股票的最佳时机 - 题 121]]
+- [[#只出现一次的数字---题-136][只出现一次的数字 - 题 136]]
 - [[#使用最小花费爬楼梯---题-746][使用最小花费爬楼梯 - 题 746]]
 - [[#重复叠加字符串匹配---题-686][重复叠加字符串匹配 - 题 686]]
 - [[#计数二进制子串---题-696][计数二进制子串 - 题 696]]
@@ -197,6 +203,145 @@
           m -= 1;
         }
       }
+    }
+  #+END_SRC
+
+* 对称二叉树 - 题 101
+  + [[https://leetcode-cn.com/problems/symmetric-tree/description/][Question]]
+
+  C:
+  #+BEGIN_SRC C
+    bool judge(struct TreeNode* left, struct TreeNode* right) {
+      if (left && right) {
+        if (left->val == right->val) {
+          return judge(left->left, right->right) && judge(left->right, right->left);
+        }
+        else {
+          return false;
+        }
+      }
+
+      else if (left || right) {
+        return false;
+      }
+
+      return true;
+    }
+
+    bool isSymmetric(struct TreeNode* root) {
+      if (root == NULL) {
+        return true;
+      }
+      return judge(root->left, root->right);
+    }
+  #+END_SRC
+
+* 将有序数组转换为二叉搜索树 - 题 108
+  + [[https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/description/][Question]]
+
+  C:
+  #+BEGIN_SRC C
+    struct TreeNode* helper(int* nums, int left, int right) {
+      if (left > right) {
+        return NULL;
+      }
+
+      int mid = (left + right) / 2;
+      struct TreeNode* node = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+      node->val = nums[mid];
+      node->left = helper(nums, left, mid - 1);
+      node->right = helper(nums, mid + 1, right);
+
+      return node;
+    }
+
+
+    struct TreeNode* sortedArrayToBST(int* nums, int numsSize) {
+      return helper(nums, 0, numsSize - 1);
+    }
+  #+END_SRC
+
+* 平衡二叉树
+  + [[https://leetcode-cn.com/problems/balanced-binary-tree/description/][Question]]
+
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def isBalanced(self, root):
+            """
+            :type root: TreeNode
+            :rtype: bool
+            """
+            def dfsHeight(root):
+                if not root:
+                    return 0
+            
+                left = dfsHeight(root.left)
+                if left == -1:
+                    return -1
+            
+                right = dfsHeight(root.right)
+                if right == -1:
+                    return -1
+            
+                if (abs(left - right) > 1):
+                    return -1
+            
+                return max(left, right) + 1
+        
+            return dfsHeight(root) != -1
+  #+END_SRC
+
+* 杨辉三角 - 题 118
+  + [[https://leetcode-cn.com/problems/pascals-triangle/description/][Question]]
+
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def generate(self, numRows):
+            ans = [[1]]
+            for num in range(1, numRows):
+                ans.append(list(map(lambda x, y: x + y, [0] + ans[-1], ans[-1] + [0])))
+            return ans[:numRows]
+  #+END_SRC
+
+* 买卖股票的最佳时机 - 题 121
+  + [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/description/][Question]]
+
+  C:
+  #+BEGIN_SRC C
+    int maxProfit(int* prices, int pricesSize) {
+      int profit = 0, min = INT_MAX;
+
+      for (int i = 0; i < pricesSize; ++i) {
+        if (prices[i] < min) {
+          min = prices[i];
+        }
+        else {
+          if (prices[i] - min > profit) {
+            profit = prices[i] - min;
+          }
+        }
+      }
+
+      return profit;
+    }
+  #+END_SRC
+
+* 只出现一次的数字 - 题 136
+  + [[https://leetcode-cn.com/problems/single-number/description/][Question]]
+  + [[https://leetcode.com/problems/single-number/solution/][解决方案]]
+    
+  C:
+  #+BEGIN_SRC C
+    int singleNumber(int* nums, int numsSize) {
+      int ans = 0;
+
+      for (int i = 0; i < numsSize; ++i) {
+        ans ^= nums[i];
+      }
+
+      return ans;
     }
   #+END_SRC
 

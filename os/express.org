@@ -1,5 +1,8 @@
 #+TITLE:      程序的机器级表示
 
+* 条件码寄存器
+  + [[https://en.wikipedia.org/wiki/FLAGS_register][维基百科]]
+
 * ATT 与 Intel 汇编代码格式
   对比 ~ATT~ 格式， ~Intel~ 汇编代码格式做出了这些修改：
   1. 省略了指示大小的后缀

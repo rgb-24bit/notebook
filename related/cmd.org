@@ -2,5 +2,8 @@
 #+TITLE:      命令行笔记
 
 * CMD
-   * Copy 指令 :: /copy b xxx.jpg + xxx.rar xxx.jpg/  --  合成图片和压缩包
-   * for :: /for /L %i in (1, 1, 10) do mkdir Chapter_%i/  -- 创建10个文件夹
+   + Copy 指令 :: /copy b xxx.jpg + xxx.rar xxx.jpg/  --  合成图片和压缩包
+   + for :: /for /L %i in (1, 1, 10) do mkdir Chapter_%i/  -- 创建10个文件夹
+
+* Bash
+  + cp :: cp -rf src dst, 如果 dst 存在， src 会成为 dst 的子目录
