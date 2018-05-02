@@ -1,0 +1,19 @@
+* 模板
+  + http://www.fidding.me/article/18
+
+* 文件变量
+  + https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables
+
+* 分123页符
+  + C-q C-l
+* 分页符
+  + C-q C-l
+
+* 字符转义
+  + C-q
+
+* 文件头
+  + https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html
+  + https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html
+
+
