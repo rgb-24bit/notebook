@@ -24,3 +24,11 @@
 
 * unittest
   + https://docs.python.org/2/library/unittest.html
+
+* await/async 
+  + https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5
+
+* gzip
+  + http://blog.knownsec.com/2012/04/about-content-encoding-gzip
+    
+

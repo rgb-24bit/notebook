@@ -48,3 +48,21 @@
   }
 
 #+END_SRC
+
+* 柔性数组
+  + https://blog.csdn.net/gatieme/article/details/64131322
+
+* 内存对齐
+  + https://www.cnblogs.com/clover-toeic/p/3853132.html
+
+  + CSAPP p189
+
+* 对齐
+  #+BEGIN_SRC C
+    size_t alingn4(size_t size) {
+      if (size & 0x3 == 0) {
+        return size;
+      }
+      return ((size >> 2) + 1) << 2;
+    }
+  #+END_SRC

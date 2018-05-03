@@ -1,19 +1,14 @@
-* URL 编码
-  http://www.ruanyifeng.com/blog/2010/02/url_encoding.html
+* 协议
+  + http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html
 
-* HTTP
-  http://www.runoob.com/http/http-intro.htmL
-  https://developer.mozilla.org/zh-CN/docs/Web/HTTP
-
-* Headers
-  https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers
 * 设备ip地址分配及变化
 * 特殊的ip地址
   + 0.0.0.0
   + 255.255.255.255
   + 127.0.0.1
   + ........
-* Cookie and Session
-  + https://web.stanford.edu/~ouster/cgi-bin/cs142-fall10/lecture.php?topic=cookie
+
+
+
 * websocket
   + https://juejin.im/entry/5a337d9df265da4322414094
