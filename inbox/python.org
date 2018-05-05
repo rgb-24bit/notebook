@@ -7,8 +7,6 @@
     + [[http://blog.csdn.net/feitianxuxue/article/details/41129677][C调用Python]]
   + 数据库
     + [[http://python.jobbole.com/88954/][伯乐在线]]
-  + 装饰器
-    + [[http://python3-cookbook.readthedocs.io/zh_CN/latest/c09/p01_put_wrapper_around_function.html][在函数上添加包装器]]
   + 3.6 特性
     + [[https://mozillazg.com/2016/01/python-function-argument-type-check-base-on-function-annotations.html][函数注解]]
     + [[https://cito.github.io/blog/f-strings/][f-strings]]
@@ -32,3 +30,106 @@
   + http://blog.knownsec.com/2012/04/about-content-encoding-gzip
     
 
+* 垃圾回收机制
+  + http://python.jobbole.com/82061/
+
+* 模块导入原理
+  + https://blog.csdn.net/u012422440/article/details/41791433
+
+* with 和 as 语句
+  + with 后不一定必须要 as, 只不过没有 as 无法捕获上下文对象
+  + as 可以在 import, except, with 语句后使用
+* 线程
+  + [[https://blog.csdn.net/u012063703/article/details/51601579][守护线程]]
+  + [[http://yoyzhou.github.io/blog/2013/02/28/python-threads-synchronization-locks/][Python线程同步机制]]
+
+  #+BEGIN_SRC python
+    >>> help(threading.Lock().acquire)
+    Help on built-in function acquire:
+
+    acquire(...)
+        acquire([wait]) -> bool
+        (acquire_lock() is an obsolete synonym)
+
+        Lock the lock.  Without argument, this blocks if the lock is already
+        locked (even by the same thread), waiting for another thread to release
+        the lock, and return True once the lock is acquired.
+        With an argument, this will only block if the argument is true,
+        and the return value reflects whether the lock is acquired.
+        The blocking operation is not interruptible.
+  #+END_SRC
+
+  + [[https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832845200f6513494f0c64bd882f25818a0281e80000][threadlocal]]
+
+* 装饰器
+  + 不带参数的装饰器等价于 ~decorate(func)~
+  + 带参数的装饰器等价于 ~decorate(args)(func)~
+
+  不带参数的装饰器调用时， 会自动传入 ~func~ 作为装饰器函数的第一个参数。
+
+  带参数的装饰器调用时， 首先传入给定的参数， 然后在传入 ~func~ 给返回的 *可调用对象*
+
+
+* 只有一个类
+  + cls.py
+    #+BEGIN_SRC python
+      # -*- coding: utf-8 -*-
+
+      class Test(object):
+          _insance = set()
+
+          def __init__(self):
+              Test._insance.add(self)
+    #+END_SRC
+  + a.py
+    #+BEGIN_SRC python
+      # -*- coding: utf-8 -*-
+
+      from cls import Test
+
+      print('In a module Test id', id(Test))
+
+      a = Test()
+    #+END_SRC
+  + b.py
+    #+BEGIN_SRC python
+      # -*- coding: utf-8 -*-
+
+      from a import a
+      from cls import Test
+
+      print('In b module a id', id(a))
+
+      print('In b module Test id', id(Test))
+
+      b = Test()
+    #+END_SRC
+  + test.py
+    #+BEGIN_SRC python
+      # -*- coding: utf-8 -*-
+
+      from a import a
+      from b import b
+      from cls import Test
+
+      print('In test module a id', id(a))
+
+      print('In test module Test id', id(Test))
+
+      print(Test._insance)
+    #+END_SRC
+
+  执行结果：
+  #+BEGIN_SRC python
+    In a module Test id 38100248
+    In b module a id 38104080
+    In b module Test id 38100248
+    In test module a id 38104080
+    {<cls.Test object at 0x02456C10>, <cls.Test object at 0x0247BCD0>}
+  #+END_SRC
+
+  *结论:* Python 中， ~class~ 是 ~type~ 的实例， 这个实例全局只会存在一个。
+  在不同的模块中引用这个类时， 引用的是同一个 *类对象*.
+  
+  *扩*: 定义在一个模块中的 *对象*, 在其他不同的模块调用这个对象的时候， 调用的都是 *同一个对象*.
+  

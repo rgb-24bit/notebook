@@ -1,0 +1,8 @@
+* 伪代码编写
+  + https://en.wikipedia.org/wiki/Pseudocode
+
+* PDL
+  + https://en.wikipedia.org/wiki/Page_description_language
+
+* 事件驱动程序设计
+  + https://zh.wikipedia.org/wiki/%E4%BA%8B%E4%BB%B6%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88

@@ -1,7 +1,9 @@
 * 协议
   + http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html
 
-* 设备ip地址分配及变化
+* ip 地址分配
+  + http://blog.51cto.com/shawnpingchen/508189
+
 * 特殊的ip地址
   + 0.0.0.0
   + 255.255.255.255
@@ -12,3 +14,8 @@
 
 * websocket
   + https://juejin.im/entry/5a337d9df265da4322414094
+
+
+
+* cgi...
+  + https://www.biaodianfu.com/cgi-fastcgi-wsgi.html
