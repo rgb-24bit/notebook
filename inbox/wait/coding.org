@@ -1,0 +1,4 @@
+#+TITLE:      编程相关
+
++ [[https://en.wikipedia.org/wiki/Pseudocode][伪代码]]
++ [[https://zh.wikipedia.org/wiki/%E4%BA%8B%E4%BB%B6%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88][事件驱动程序设计]]

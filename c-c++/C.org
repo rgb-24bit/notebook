@@ -44,6 +44,24 @@
   + 处理仅用空格(或其他空白字符) 分隔的字符串常量序列时， 就把它们串联起来
     : "1234"   "4567"  ==> "12344567"
 
+* 柔性数组
+  在结构体最后一个成员定义为长度为 0 的数组。
+
+  这个数组的实际大小为 0, 数组的地址就是结构体后内存区域的地址。
+
+  #+BEGIN_SRC C
+    struct Example {
+      int num;
+      char data[];
+    }
+  #+END_SRC
+
+  + [[https://blog.csdn.net/gatieme/article/details/64131322][柔性数组]]
+
+* 内存对齐
+  + [[https://www.cnblogs.com/clover-toeic/p/3853132.html][C语言字节对齐问题详解]]
+  + CSAPP-189
+
 * 类型转化
   链接： [[http://zh.cppreference.com/w/c/language/conversion][隐式转换]]
 

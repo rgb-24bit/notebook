@@ -1,0 +1,4 @@
+#+TITLE:      Emacs
+
++ [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs自动更新文件头]]
++ [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs自动添加文件头]]

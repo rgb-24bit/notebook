@@ -62,3 +62,14 @@
   + C-x 3 左右分割窗口
   + C-x C-z 隐藏窗口
     
+* 使用模板
+  + [[http://www.fidding.me/article/18][emacs yasnippet自定义模版配置与使用]]
+
+* 文件变量
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables][Specifying File Variables]]
+
+  :   -*- mode: modename; var: value; ... -*-
+
+* 字符转义
+  + C-q 
+  + C-q C-l 分页符

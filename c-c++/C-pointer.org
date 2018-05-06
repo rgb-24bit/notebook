@@ -3,6 +3,7 @@
 #+TITLE:      C 语言指针
 
 - [[http://home.netcom.com/~tjensen/ptr/pointers.htm][完整教程]]
+- [[http://www.runoob.com/w3cnote/c-pointer-detail.html][C 指针详解]]
 
 * 指针与数组
   : An object is a named region of storage; an lvalue is an expression referring to an object.

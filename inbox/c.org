@@ -1,61 +1,4 @@
-#+BEGIN_SRC C
-  #include <stdio.h>
-  #include <stdlib.h>
-
-  char KCHAR = 'C';
-  char* KCHAR_PTR = "Hello World !";
-  char KCHAR_ARR[] = "Hello World !";
-
-  int KINT = 10;
-  int* KINT_PTR = NULL;  // 全局变量定义时不能使用函数
-  int KINT_ARR[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-  unsigned int KUINT = 10;
-  short KSHORT = 10;
-  float KFLOAT = 1.0;
-  double KDOUBLE = 1.0;
-
-
-  int main(int argc, char* argv[]) {
-    // KINT_PTR = (int*)malloc(4 * sizeof(int));  K & R C
-
-    char ch = 'C';
-    char* ch_ptr = "Hello World !";
-    char ch_arr[] = "Hello World !";
-
-    int i = 10;
-    int* i_ptr = (int*)malloc(4 * sizeof(int));
-    int i_arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-    unsigned int ui = 10;
-    short si = 10;
-    float f = 1.0;
-    double d = 1.0;
-
-    KINT_PTR = (int*)malloc(4 * sizeof(int));
-
-
-    ch = (char)i;
-    i = (int)ch;
-
-    i = (in)float;
-    f = (float)i;
-
-    f = (float)d;
-    d = (double)f;
-
-    return 0;
-  }
-
-#+END_SRC
-
-* 柔性数组
-  + https://blog.csdn.net/gatieme/article/details/64131322
-
-* 内存对齐
-  + https://www.cnblogs.com/clover-toeic/p/3853132.html
-
-  + CSAPP p189
+#+TITLE:      C 语言相关
 
 * 对齐
   #+BEGIN_SRC C
@@ -66,3 +9,4 @@
       return ((size >> 2) + 1) << 2;
     }
   #+END_SRC
+

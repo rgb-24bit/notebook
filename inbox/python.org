@@ -19,17 +19,21 @@
     }
   #+END_SRC
 
+  
+* 源码阅读
+  + shutil
+  + _thread_local
 
 * unittest
   + https://docs.python.org/2/library/unittest.html
 
 * await/async 
   + https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5
-
+    
 * gzip
   + http://blog.knownsec.com/2012/04/about-content-encoding-gzip
     
-
+    
 * 垃圾回收机制
   + http://python.jobbole.com/82061/
 
@@ -132,4 +136,8 @@
   在不同的模块中引用这个类时， 引用的是同一个 *类对象*.
   
   *扩*: 定义在一个模块中的 *对象*, 在其他不同的模块调用这个对象的时候， 调用的都是 *同一个对象*.
+  
+  *扩*: 如果这个对象是 *数值类型* 的话， 不同模块间的对象并不是同一个对象。 *引用类型* 才是同一个对象。
+  
+  + [[http://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html][Python 直接赋值、浅拷贝和深度拷贝解析]]
   

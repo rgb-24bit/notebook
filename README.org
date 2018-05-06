@@ -5,6 +5,7 @@
   - [[file:algorithm\blockchain.org][区块链]]
   - [[file:algorithm\diff.org][diff 算法]]
   - [[file:algorithm\leetcode.org][LeetCode 笔记]]
+  - [[file:algorithm\leetcode2.org][LeetCode 笔记2]]
   - [[file:algorithm\MD5.org][MD5 算法笔记]]
   - [[file:algorithm\monte.org][蒙特卡罗方法]]
   - [[file:algorithm\rand.org][随机算法]]

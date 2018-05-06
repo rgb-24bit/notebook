@@ -27,3 +27,12 @@
 
 * 加密文件
   + vim -x filename
+* 矩形编辑
+  + Nomal, C-v
+
+* 字符转义
+  + Insert, C-v
+
+* 退出插入模式到正常模式
+  + ESC
+  + C-[
