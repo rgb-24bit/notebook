@@ -1,15 +1,16 @@
 * Wait
-  + 线程
-    + [[https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html][线程锁]]
   + 混合编程
     + [[https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/][Python 调用 C]]
     + [[http://blog.csdn.net/forever_jc/article/details/7743106][C调用Python]]
     + [[http://blog.csdn.net/feitianxuxue/article/details/41129677][C调用Python]]
   + 数据库
     + [[http://python.jobbole.com/88954/][伯乐在线]]
-  + 3.6 特性
+  + 3.x 特性
     + [[https://mozillazg.com/2016/01/python-function-argument-type-check-base-on-function-annotations.html][函数注解]]
     + [[https://cito.github.io/blog/f-strings/][f-strings]]
+    + [[https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5][await/async]]
+
+
 
 * http.server.BaseHTTPRequestHandler.responses
   #+BEGIN_SRC python
@@ -19,21 +20,15 @@
     }
   #+END_SRC
 
-  
-* 源码阅读
-  + shutil
-  + _thread_local
-
 * unittest
   + https://docs.python.org/2/library/unittest.html
 
-* await/async 
-  + https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5
-    
 * gzip
   + http://blog.knownsec.com/2012/04/about-content-encoding-gzip
     
-    
+
+ 
+   
 * 垃圾回收机制
   + http://python.jobbole.com/82061/
 
@@ -43,6 +38,7 @@
 * with 和 as 语句
   + with 后不一定必须要 as, 只不过没有 as 无法捕获上下文对象
   + as 可以在 import, except, with 语句后使用
+
 * 线程
   + [[https://blog.csdn.net/u012063703/article/details/51601579][守护线程]]
   + [[http://yoyzhou.github.io/blog/2013/02/28/python-threads-synchronization-locks/][Python线程同步机制]]
@@ -73,8 +69,7 @@
 
   带参数的装饰器调用时， 首先传入给定的参数， 然后在传入 ~func~ 给返回的 *可调用对象*
 
-
-* 只有一个类
+* 数值类型和引用类型
   + cls.py
     #+BEGIN_SRC python
       # -*- coding: utf-8 -*-
@@ -122,7 +117,7 @@
 
       print(Test._insance)
     #+END_SRC
-
+    
   执行结果：
   #+BEGIN_SRC python
     In a module Test id 38100248
