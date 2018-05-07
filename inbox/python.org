@@ -134,5 +134,13 @@
   
   *扩*: 如果这个对象是 *数值类型* 的话， 不同模块间的对象并不是同一个对象。 *引用类型* 才是同一个对象。
   
+  *补*: 如果是通过 ~import module~, 然后使用 ~module.xxx~ 调用对象的话， 不同模块之间调用的是同一对象。
+
+  如果是直接 ~import~ 一个 *数值对象* 的话， 是获取了那个对象的值，并绑定到本模块。
+
+  如果是直接 ~import~ 一个 *引用对象* 的话， 只是在本模块对那个对象进行了引用， 本模块的修改会反应到元模块上。
+
   + [[http://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html][Python 直接赋值、浅拷贝和深度拷贝解析]]
   
+* 闭包
+  + https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431835236741e42daf5af6514f1a8917b8aaadff31bf000

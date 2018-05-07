@@ -2,3 +2,4 @@
 
 + [[https://en.wikipedia.org/wiki/Pseudocode][伪代码]]
 + [[https://zh.wikipedia.org/wiki/%E4%BA%8B%E4%BB%B6%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88][事件驱动程序设计]]
++ [[https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000][函数式编程]]
