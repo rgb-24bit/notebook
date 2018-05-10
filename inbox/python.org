@@ -144,3 +144,9 @@
   
 * 闭包
   + https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431835236741e42daf5af6514f1a8917b8aaadff31bf000
+
+* ast
+  + ast 的源码可以了解一下
+
+* abstractmethod
+  + 抽象类了解一下

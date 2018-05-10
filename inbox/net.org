@@ -19,3 +19,7 @@
 
 * cgi...
   + https://www.biaodianfu.com/cgi-fastcgi-wsgi.html
+  + https://www.python.org/dev/peps/pep-3333/
+  + http://www.runoob.com/python/python-cgi.html
+  + https://en.wikipedia.org/wiki/Common_Gateway_Interface
+  + https://docs.python.org/2.7/howto/webservers.html

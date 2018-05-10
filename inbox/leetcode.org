@@ -1,0 +1,5 @@
+* 打家劫舍
+  + https://leetcode-cn.com/problems/house-robber/description/
+
+* 快乐数
+  + https://leetcode-cn.com/problems/happy-number/description/
