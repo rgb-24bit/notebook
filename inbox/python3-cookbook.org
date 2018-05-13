@@ -1,0 +1,50 @@
+#+TITLE: Python3-cookbook 阅读笔记
+
+* 第一章: 数据结构和算法
+** 解压序列赋值给多个变量
+   *任何* 可迭代的对象都可以通过下面的方式进行 *解压赋值*:
+   #+BEGIN_SRC python
+     >>> a, b, c, d, e = 'Hello'
+   #+END_SRC
+
+   *PS:* 变量的数量必须跟序列元素的数量一样
+
+** 解压可迭代对象赋值给多个变量
+   变量的数量和序列元素的数量不一样是可以通过下面的方式进行 *解压赋值*:
+   #+BEGIN_SRC python
+     >>> record = ('Dave', 'dave@example.com', '773-555-1212', '847-555-1212')
+     >>> name, email, *phone_numbers = record
+     >>> name
+     'Dave'
+     >>> email
+     'dave@example.com'
+     >>> phone_numbers
+     ['773-555-1212', '847-555-1212']
+   #+END_SRC
+
+** 保留最后 N 个元素
+   使用 ~collections.deque~ 保留迭代操作或者其他操作的最后有限的几个元素的历史记录：
+   #+BEGIN_SRC python
+     >>> from collections import deque
+     >>> q = deque(maxlen=5)
+     >>> q.extend([1,2,3,4,5,6,7,8,9,0])
+     >>> q
+     deque([6, 7, 8, 9, 0], maxlen=5)
+   #+END_SRC
+
+** 查找最大或最小的 N 个元素
+   使用 ~heapq.nlargest()~ 和 ~heapq.nsmallest()~ 从一个集合中获得最大或者最小的 N 个元素列表：
+   #+BEGIN_SRC python
+     portfolio = [
+         {'name': 'IBM', 'shares': 100, 'price': 91.1},
+         {'name': 'AAPL', 'shares': 50, 'price': 543.22},
+         {'name': 'FB', 'shares': 200, 'price': 21.09},
+         {'name': 'HPQ', 'shares': 35, 'price': 31.75},
+         {'name': 'YHOO', 'shares': 45, 'price': 16.35},
+         {'name': 'ACME', 'shares': 75, 'price': 115.65}
+     ]
+     cheap = heapq.nsmallest(3, portfolio, key=lambda s: s['price'])
+     expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])
+   #+END_SRC
+
+   *PS:* 可以通过调用 ~heapq.heapify()~ 对一个序列进行 *堆排序*

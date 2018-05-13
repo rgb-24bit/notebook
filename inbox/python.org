@@ -150,3 +150,17 @@
 
 * abstractmethod
   + 抽象类了解一下
+* 函数参数
+  + https://www.v2ex.com/t/453924
+
+* pip
+  + https://packaging.python.org/tutorials/installing-packages/
+
+* function attribute
+  + https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses
+  + https://www.python.org/dev/peps/pep-0232/
+* PEP 8
+  + https://www.python.org/dev/peps/pep-0008/
+
+* __dict__
+  + https://blog.csdn.net/lis_12/article/details/53521554
