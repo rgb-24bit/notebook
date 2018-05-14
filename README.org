@@ -1,16 +1,16 @@
 #+TITLE: Note
 
 - *algorithm*
-  - [[file:algorithm\algorithm.org][算法笔记]]
-  - [[file:algorithm\blockchain.org][区块链]]
-  - [[file:algorithm\diff.org][diff 算法]]
-  - [[file:algorithm\leetcode.org][LeetCode 笔记]]
-  - [[file:algorithm\leetcode2.org][LeetCode 笔记2]]
-  - [[file:algorithm\MD5.org][MD5 算法笔记]]
-  - [[file:algorithm\monte.org][蒙特卡罗方法]]
-  - [[file:algorithm\rand.org][随机算法]]
-  - [[file:algorithm\RAS.org][RAS 算法笔记]]
-  - [[file:algorithm\tree.org][树结构笔记]]
+  - [[file:algorithm\algorithm.org][部分算法笔记]]
+  - [[file:algorithm\encrypt.org][加密算法笔记]]
+  - [[file:algorithm\hash.org][Hash 算法笔记]]
+  - [[file:algorithm\leetcode[0].org][LeetCode[1-200]]]
+  - [[file:algorithm\leetcode[1].org][LeetCode[201-400]]]
+  - [[file:algorithm\leetcode[2].org][LeetCode[401-600]]]
+  - [[file:algorithm\leetcode[3].org][LeetCode[601-800]]]
+  - [[file:algorithm\random.org][随机相关算法]]
+  - [[file:algorithm\search_sort.org][查找和排序算法笔记]]
+  - [[file:algorithm\struct.org][数据结构笔记]]
 - *c-c++*
   - [[file:c-c++\bit-op.org][位运算]]
   - [[file:c-c++\C-pointer.org][C 语言指针]]

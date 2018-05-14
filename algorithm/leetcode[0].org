@@ -1,5 +1,4 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      LeetCode 笔记
+#+TITLE:      LeetCode[1-200]
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#回文数---题-9][回文数 - 题 9]]
@@ -14,13 +13,12 @@
 - [[#杨辉三角---题-118][杨辉三角 - 题 118]]
 - [[#买卖股票的最佳时机---题-121][买卖股票的最佳时机 - 题 121]]
 - [[#只出现一次的数字---题-136][只出现一次的数字 - 题 136]]
-- [[#使用最小花费爬楼梯---题-746][使用最小花费爬楼梯 - 题 746]]
-- [[#重复叠加字符串匹配---题-686][重复叠加字符串匹配 - 题 686]]
-- [[#计数二进制子串---题-696][计数二进制子串 - 题 696]]
-- [[#数组的度---题-697][数组的度 - 题 697]]
-- [[#1-比特与-2-比特字符---题-317][1 比特与 2 比特字符 - 题 317]]
-- [[#词典中最长的单词---题-720][词典中最长的单词 - 题 720]]
-- [[#寻找数组的中心索引---题-724][寻找数组的中心索引 - 题 724]]
+- [[#excel表列名称][Excel表列名称]]
+- [[#求众数][求众数]]
+- [[#阶乘后的零][阶乘后的零]]
+- [[#旋转数组][旋转数组]]
+- [[#颠倒二进制串][颠倒二进制串]]
+- [[#位-1-的个数][位 1 的个数]]
 
 * 回文数 - 题 9
   + [[https://leetcode-cn.com/problems/palindrome-number/description/][Question]]
@@ -344,196 +342,130 @@
       return ans;
     }
   #+END_SRC
+* Excel表列名称
+  + [[https://leetcode-cn.com/problems/excel-sheet-column-title/description/][Quesion]]
 
-* 使用最小花费爬楼梯 - 题 746
-  + [[https://leetcode-cn.com/problems/min-cost-climbing-stairs/description/][Question]]
+  + 本质就是进制转换
 
-  Python:
   #+BEGIN_SRC python
     class Solution:
-        def minCostClimbingStairs(self, cost):
-            """
-            :type cost: List[int]
-            :rtype: int
-            """
-            f1 = f2 = 0
-            for x in reversed(cost):
-                f1, f2 = x + min(f1, f2), f1
-            return min(f1, f2)
-  #+END_SRC
-
-  C:
-  #+BEGIN_SRC C
-    int minCostClimbingStairs(int* cost, int costSize) {
-      int f1 = 0, f2 = 0;
-
-      for (int i = costSize - 1; i >= 0; --i) {
-        int tmp = f1;
-        f1 = cost[i] + (f1 > f2 ? f2 : f1);
-        f2 = tmp;
-      }
-
-      return f1 > f2 ? f2 : f1;
-    }
-  #+END_SRC
-
-* 重复叠加字符串匹配 - 题 686
-  + [[https://leetcode-cn.com/problems/repeated-string-match/description/][Question]]
-
-  #+BEGIN_SRC python
-    class Solution(object):
-        def repeatedStringMatch(self, A, B):
-            q = (len(B) - 1) // len(A) + 1
-            for i in range(2):
-                if B in A * (q+i): return q+i
-            return -1
-  #+END_SRC
-
-* 计数二进制子串 - 题 696
-  + [[https://leetcode-cn.com/problems/count-binary-substrings/description/][Question]]
-
-  Python:
-  #+BEGIN_SRC python
-    class Solution:
-        def countBinarySubstrings(self, s):
-            """
-            :type s: str
-            :rtype: int
-            """
-            group = [1]
-            for i in range(1, len(s)):
-                if s[i] != s[i - 1]:
-                    group.append(1)
-                else:
-                    group[-1] += 1
-                
-            ans = 0
-            for i in range(1, len(group)):
-                ans += min(group[i], group[i - 1])
-        
+        def convertToTitle(self, n):
+            capital = list(map(chr, range(65, 91)))
+            ans = str()
+            while n > 0:
+                n -= 1
+                ans = capital[n % 26] + ans
+                n //= 26
             return ans
   #+END_SRC
 
-  C:
+* 求众数
+  + [[https://leetcode-cn.com/problems/majority-element/description/][Quesion]]
+
   #+BEGIN_SRC C
-    int countBinarySubstrings(char* s) {
-      int ans = 0, prev = 0, cur = 1;
+    int majorityElement(int* nums, int numsSize) {
+      int majority = 0, count = 0;
     
-      for (int i = 1; s[i] != '\0'; ++i) {
-        if (s[i] != s[i - 1]) {
-          ans += prev < cur ? prev : cur;
-          prev = cur;
-          cur = 1;
+      for (int i = 0; i < numsSize; ++i) {
+        if (count == 0) {
+          majority = nums[i];
+          count++;
+        }
+        else if (nums[i] == majority) {
+          count++;
         }
         else {
-          cur += 1;
+          count--;
         }
       }
     
-      return ans + (prev < cur ? prev : cur);
+      return majority;
     }
   #+END_SRC
 
-* 数组的度 - 题 697
-  + [[https://leetcode-cn.com/problems/degree-of-an-array/description/][Question]]
+* 阶乘后的零
+  + [[https://leetcode-cn.com/problems/factorial-trailing-zeroes/description/][Quesion]]
 
-  Python:
   #+BEGIN_SRC python
-    # https://leetcode.com/problems/degree-of-an-array/solution/
+    class Solution:
+        def trailingZeroes(self, n):
+            ans = 0
+            while n:
+                n = n // 5
+                ans += n
+            return ans
+  #+END_SRC
+
+* 旋转数组
+  + [[https://leetcode-cn.com/problems/rotate-array/description/][Quesion]]
+  + [[https://leetcode.com/problems/rotate-array/solution/][Solution]]
+
+  #+BEGIN_SRC python
+    class Solution:
+        def rotate(self, nums, k):
+            def reverse(start, end):
+                while start < end:
+                    nums[start], nums[end] = nums[end], nums[start]
+                    start += 1
+                    end -= 1
+            length = len(nums)
+            k = k % length
+            reverse(0, length - 1)
+            reverse(0, k - 1)
+            reverse(k, length - 1)
+  #+END_SRC
+
+* 颠倒二进制串
+  + [[https://leetcode-cn.com/problems/reverse-bits/description/][Quesion]]
+
+  #+BEGIN_SRC C
+    uint32_t reverseBits(uint32_t n) {
+      uint32_t ans = 0;
+    
+      for (int i = 0; i < 32; ++i) {
+        ans = (ans << 1) + (n & 1);
+        n = n >> 1;
+      }
+    
+      return ans;
+    }
+  #+END_SRC
+
+  #+BEGIN_SRC C
+    uint32_t reverseBits(uint32_t n) {
+      n = ((n >> 1) & 0x55555555) | ((n & 0x55555555) << 1);
+      n = ((n >> 2) & 0x33333333) | ((n & 0x33333333) << 2);
+      n = ((n >> 4) & 0x0F0F0F0F) | ((n & 0x0F0F0F0F) << 4);
+      n = ((n >> 8) & 0x00FF00FF) | ((n & 0x00FF00FF) << 8);
+      n = (n >> 16) | (n << 16);
+
+      return n;
+    }
+  #+END_SRC
+
+* 位 1 的个数
+  + [[https://leetcode-cn.com/problems/number-of-1-bits/description/][Quesion]]
+
+  #+BEGIN_SRC C
+    int hammingWeight(uint32_t n) {
+      int count = 0;
+    
+      while (n) {
+        count += n & 1;
+        n = n >> 1;
+      }
+    
+      return count;
+    }
+  #+END_SRC
+
+  #+BEGIN_SRC python
     class Solution(object):
-        def findShortestSubArray(self, nums):
-            left, right, count = {}, {}, {}
-            for i, x in enumerate(nums):
-                if x not in left: left[x] = i
-                right[x] = i
-                count[x] = count.get(x, 0) + 1
-
-            ans = len(nums)
-            degree = max(count.values())
-            for x in count:
-                if count[x] == degree:
-                    ans = min(ans, right[x] - left[x] + 1)
-
-            return ans
+        def hammingWeight(self, n):
+            count = 0
+            while n != 0:
+                count += 1
+                n = n & (n - 1)
+            return count
   #+END_SRC
 
-* 1 比特与 2 比特字符 - 题 317
-  + [[https://leetcode-cn.com/problems/1-bit-and-2-bit-characters/description/][Question]]
-
-  Python:
-  #+BEGIN_SRC python
-    class Solution:
-        def isOneBitCharacter(self, bits):
-            index = 0
-            while index < len(bits) - 1:
-                if bits[index] == 1:
-                    index += 2
-                else:
-                    index += 1
-            return index == len(bits) - 1
-  #+END_SRC
-
-  C:
-  #+BEGIN_SRC C
-    bool isOneBitCharacter(int* bits, int bitsSize) {
-      for (int i = 0; i < bitsSize; ++i) {
-        if (bits[i] == 1) {
-          if ((i + 2) == bitsSize) {
-            return false;
-          }
-          i += 1;  /* 循环会自动加 1 */
-        }
-      }
-      return true;
-    }
-  #+END_SRC
-
-* 词典中最长的单词 - 题 720
-  + [[https://leetcode-cn.com/problems/longest-word-in-dictionary/description/][Question]]
-
-  Python:
-  #+BEGIN_SRC python
-    class Solution:
-        def longestWord(self, words):
-            ans, wordset = str(), set(words)
-            for word in words:
-                if len(word) > len(ans) or (len(word) == len(ans) and word < ans):
-                    if all(word[:k] in wordset for k in range(1, len(word))):
-                        ans = word
-            return ans
-  #+END_SRC
-
-* 寻找数组的中心索引 - 题 724
-  + [[https://leetcode-cn.com/problems/find-pivot-index/description/][Question]]
-    
-  Python:
-  #+BEGIN_SRC python
-    class Solution:
-        def pivotIndex(self, nums):
-            nsum, leftSum = sum(nums), 0
-            for i, num in enumerate(nums):
-                if leftSum == (nsum - num - leftSum):
-                    return i
-                leftSum += num
-            return -1
-  #+END_SRC
-
-  C:
-  #+BEGIN_SRC C
-    int pivotIndex(int* nums, int numsSize) {
-      int sum = 0;
-      for (int i = 0; i < numsSize; ++i) {
-        sum += nums[i];
-      }
-
-      int leftSum = 0;
-      for (int i = 0; i < numsSize; ++i) {
-        if (leftSum == (sum - nums[i] - leftSum)) {
-          return i;
-        }
-        leftSum += nums[i];
-      }
-
-      return -1;
-    }
-  #+END_SRC

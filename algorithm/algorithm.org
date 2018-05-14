@@ -1,80 +1,39 @@
-#+TITLE:      算法笔记
+#+TITLE:      部分算法笔记
 
-* Nonce 串
-  在安全工程中, Nonce是一个在加密通信只能使用一次的数字
-  在认证协议中, 它往往是一个 _随机或伪随机数_, 以避免重放攻击
-  
-* 二分法查找
-  #+BEGIN_SRC C
-    int bsearchWithoutRecursion(int array[], int low, int high, int target)
-    {
-      while(low <= high)
-      {
-        int mid = (low + high)/2;
-        if (array[mid] > target)
-          high = mid - 1;
-        else if (array[mid] < target)
-          low = mid + 1;
-        else //find the target
-          return mid;
-      }
-      //the array does not contain the target
-      return -1;
-    }
-  #+END_SRC
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#nonce][Nonce]]
+- [[#数字根][数字根]]
+- [[#整数分解][整数分解]]
+- [[#马儿科夫链][马儿科夫链]]
+- [[#欧几里得-欧拉定理][欧几里得-欧拉定理]]
 
-  : (low + high) / 2 == low + (high - low) / 2
-  : 这样不会溢出
-
-* 质因数分解
-  1. 每个合数都可以写成几个质数相乘的形式, 这几个质数就都叫做这个合数的质因数
-  2. 任何正整数皆有独一无二的质因子分解式, 只有一个质因子的正整数为质数
-
-  *Pollard Rho因数分解*
-  程序分析:
-  1. 对 ~n~ 进行分解质因数, 应先找到一个最小的质数 ~k~
-  2. 如果这个质数恰等于 ~n~, 则说明分解质因数的过程已经结束，打印出即可
-  3. 如果 ~n<>k~, 但 ~n~ 能被 ~k~ 整除, 则应打印出 ~k~ 的值, 并用 ~n~ 除以 ~k~ 的商, 作为新的正整数 ~n~,
-  　 重复执行第 2 步
-  4. 如果 ~n~ 不能被 ~k~ 整除, 则用 ~k+1~ 作为 ~k~ 的值, 重复执行第 2 步 
-
-  #+BEGIN_SRC c++
-    //返回质因数数组
-    Integer[] decPrime(int n) {
-      List<Integer> list = new ArrayList<Integer>();
-      for (int i = 2;i <= n;++i){
-        while (n != i) {
-          if (n % i != 0) {
-            break;//不能整除肯定不是因数，能够整除在这里一定是质数。因为所有的2，3,5,7
-            //都被除完之后。剩下的因数只能是奇数，且是质数。
-          }
-          list.add(Integer.valueOf(i));
-          n = n / i;
-        }
-      }
-      list.add(Integer.valueOf(n));
-      return list.toArray(new Integer[list.size()]);
-    }
-  #+END_SRC
+* Nonce
+  + 在信息安全中， ~Nonce~ 是一个在加密通信只能使用一次的数字
+  + 在认证协议中，它往往是一个随机或伪随机数，以避免重放攻击
+  + ~Nonce~ 也用于流密码以确保安全。 如果需要使用相同的密钥加密一个以上的消息，
+    就需要 ~Nonce~ 来确保不同的消息与该密钥加密的密钥流不同
 
 * 数字根
    数字根(digital root)是自然数的一种性质，即每个自然数都有一个数字根。
 
-   数字根是将一自然数的各个位数相加(即横向相加)，若加完后的值大于等于10的话，则继续将各位数进行横向相加直到其值小于10为止。
+   数字根是将一自然数的各个位数相加(即横向相加)，若加完后的值大于等于 10 的话，则继续将各位数进行横向相加直到其值小于10为止。
 
    数字根： *0的数字根为0，9的倍数的数字根为9，其他自然数的数字根为其除以9的余数*
 
    公式： *dr(n) = 1 + ((n - 1) mod 9)*
 
-* 欧几里得-欧拉定理
-  可用于完美数判断：
-  对于一个 正整数，如果它和除了它自身以外的所有正因子之和相等，我们称它为完善数。
+* 整数分解
+  *整数分解(integer factorization)* 将一个正整数写成几个约数的乘积。
 
-  + [[https://zh.wikipedia.org/wiki/%E6%AD%90%E5%B9%BE%E9%87%8C%E5%BE%97-%E6%AD%90%E6%8B%89%E5%AE%9A%E7%90%86][维基百科]]
-  + [[https://leetcode-cn.com/problems/perfect-number/description/][leetcode]]
+  + [[https://zh.wikipedia.org/wiki/%E6%95%B4%E6%95%B0%E5%88%86%E8%A7%A3][维基百科 - 整数分解]]
 
-* 遗传算法
-  + [[https://zh.wikipedia.org/wiki/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95][维基百科]]
-  + [[https://www.zhihu.com/question/23293449/answer/120220974][知乎上的回答]]
 * 马儿科夫链
-  + [[https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE][维基百科]]
+  *马尔可夫链* 为状态空间中经过从一个状态到另一个状态的转换的 *随机过程*.
+
+  + [[https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE][维基百科 - 马尔可夫链]]
+  
+* 欧几里得-欧拉定理
+  *欧几里得-欧拉定理(Euclid–Euler theorem)* 是一条联系 *偶完全数* 与 *梅森质数* 的定理。
+
+  + [[https://zh.wikipedia.org/wiki/%E6%AD%90%E5%B9%BE%E9%87%8C%E5%BE%97-%E6%AD%90%E6%8B%89%E5%AE%9A%E7%90%86][维基百科 - 欧几里得-欧拉定理]]
+

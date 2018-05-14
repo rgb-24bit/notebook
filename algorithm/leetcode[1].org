@@ -1,0 +1,35 @@
+#+TITLE:      LeetCode[201-400]
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#1-比特与-2-比特字符---题-317][1 比特与 2 比特字符 - 题 317]]
+
+* 1 比特与 2 比特字符 - 题 317
+  + [[https://leetcode-cn.com/problems/1-bit-and-2-bit-characters/description/][Question]]
+
+  Python:
+  #+BEGIN_SRC python
+    class Solution:
+        def isOneBitCharacter(self, bits):
+            index = 0
+            while index < len(bits) - 1:
+                if bits[index] == 1:
+                    index += 2
+                else:
+                    index += 1
+            return index == len(bits) - 1
+  #+END_SRC
+
+  C:
+  #+BEGIN_SRC C
+    bool isOneBitCharacter(int* bits, int bitsSize) {
+      for (int i = 0; i < bitsSize; ++i) {
+        if (bits[i] == 1) {
+          if ((i + 2) == bitsSize) {
+            return false;
+          }
+          i += 1;  /* 循环会自动加 1 */
+        }
+      }
+      return true;
+    }
+  #+END_SRC

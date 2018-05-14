@@ -16,3 +16,5 @@
   + https://leetcode-cn.com/problems/isomorphic-strings/description/
 * 反转链表
   + https://leetcode-cn.com/problems/reverse-linked-list/description/
+* 2 的幂
+  + https://leetcode-cn.com/problems/power-of-two/description/

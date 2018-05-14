@@ -1,14 +1,17 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      树结构笔记
+#+TITLE:      数据结构笔记
 
-* 二叉查找树(Binary Search Tree)
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]
+  - [[#leetcode-题][LeetCode 题:]]
+
+* 二叉查找树 (Binary Search Tree)
   定义: 是指一棵空树或者具有下列性质的 [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91][二叉树]]:
   1. 若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值；
   2. 若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值；
   3. 任意节点的左、右子树也分别为二叉查找树；
   4. 没有键值相等的节点。
 
-  维基百科: [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9][二叉查找树]]
+  + [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9][维基百科 - 二叉查找树]]
 
 ** LeetCode 题:
    #+BEGIN_EXAMPLE
@@ -39,3 +42,4 @@
        }
      }
    #+END_SRC
+

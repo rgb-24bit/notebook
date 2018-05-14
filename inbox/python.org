@@ -164,3 +164,6 @@
 
 * __dict__
   + https://blog.csdn.net/lis_12/article/details/53521554
+
+* 设计模式
+  + http://python-web-guide.readthedocs.io/zh/latest/design/design.html
