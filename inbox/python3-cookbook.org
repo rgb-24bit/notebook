@@ -48,3 +48,55 @@
    #+END_SRC
 
    *PS:* 可以通过调用 ~heapq.heapify()~ 对一个序列进行 *堆排序*
+   
+   堆中， ~heap[0]~ 永远是最小的元素， 而 ~heapq.heappop()~ 会将第一个元素弹出，
+   后面的元素补上。
+
+** 实现一个优先级队列
+   利用 ~heapq~ 模块实现一个简单的优先级队列:
+   #+BEGIN_SRC python
+     import heapq
+
+     class PriorityQueue:
+         def __init__(self):
+             self._queue = []
+             self._index = 0
+
+         def push(self, item, priority):
+             heapq.heappush(self._queue, (-priority, self._index, item))
+             self._index += 1
+
+         def pop(self):
+             return heapq.heappop(self._queue)[-1]
+
+
+     # use
+
+     >>> class Item:
+     ...     def __init__(self, name):
+     ...         self.name = name
+     ...     def __repr__(self):
+     ...         return 'Item({!r})'.format(self.name)
+     ...
+     >>> q = PriorityQueue()
+     >>> q.push(Item('foo'), 1)
+     >>> q.push(Item('bar'), 5)
+     >>> q.push(Item('spam'), 4)
+     >>> q.push(Item('grok'), 1)
+     >>> q.pop()
+     Item('bar')
+     >>> q.pop()
+     Item('spam')
+     >>> q.pop()
+     Item('foo')
+     >>> q.pop()
+     Item('grok')
+   #+END_SRC
+
+   核心 ~(-priority, self._index, item)~: ~-priority~ 保证排序为优先级 高 ==> 低,
+   因为 ~priority~ 越大, ~-priority~ 越小， 而堆中越小的元素越靠前。
+
+   递增的 ~_index~ 保证同一优先级的情况下按插入元素的顺序排序。
+
+   ~item~ 是要储存或获取的元素。
+
