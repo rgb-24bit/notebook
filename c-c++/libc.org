@@ -1,0 +1,36 @@
+#+TITLE:      C 标准库笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#错误处理][错误处理]]
+- [[#标准输入输出][标准输入输出]]
+
+* 错误处理
+  + <assert.h> :: 函数 ~assert(int express)~, 当参数为 0 时， 输出错误信息
+
+  + <errno.h> :: 宏 ~int ~errno~, 展开后是可以修改的 ~int~ 类型的左值。
+                 当 ~error~ 不为 0 时说明程序运行过程中出现了错误， 应在使用前设置为 0.
+
+  + <stdio.h> :: 函数 ~perror(const char* s)~, 输出程序运行过程中的错误信息， 会自动在字符串
+                 ~s~ 后添加一个 ~:~ 和一个 *空格*.
+
+* 标准输入输出
+  ~<stdio.h>~ 中定义了：
+  + 标准输入 *stdin*
+  + 标准输出 *stdout*
+  + 标准错误 *stderr*
+
+  #+BEGIN_SRC C
+    #include <stdio.h>
+
+    int main(int argc, char* argv[]) {
+      fprintf(stdout, "%s\n", "stdout");
+      fprintf(stderr, "%s\n", "stderr");
+
+      char str[10] = {0};
+      fscanf(stdin, "%s", str);
+      printf("%s", str);
+
+      return 0;
+    }
+  #+END_SRC
+

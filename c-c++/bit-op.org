@@ -1,9 +1,12 @@
-#+SETUPFILE:  ./_style/style.setup
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
-#+TITLE:      位运算
-#+AUTHOR:     rgb_24bit
-#+EMAIL:      rgb_24bit@foxmail.com
-#+DATE:       <2018-02-05 周一>
+#+TITLE:      位运算笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#字符][字符]]
+- [[#移位][移位]]
+- [[#掩码运算][掩码运算]]
+- [[#进制转化][进制转化]]
+- [[#简单的技巧][简单的技巧]]
+- [[#加减乘除][加减乘除]]
 
 * 字符
   ASCII 码：
@@ -17,7 +20,7 @@
 
 * 掩码运算
   掩码 ~0xFF~ 获取一个二进制数据的最低 8 位数据， 其他位置为 0
-
+  
 * 进制转化
   当 ~x = 2ⁿ~, ~n = i + 4j(0 ≤ i ≤ 3)~.
   

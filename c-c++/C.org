@@ -1,48 +1,53 @@
-#+SETUPFILE:  ./_style/style.setup
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
 #+TITLE:      C 语言笔记
-#+AUTHOR:     rgb_24bit
-#+EMAIL:      rgb_24bit@foxmail.com
-#+DATE:       <2018-02-05 周一>
 
-* 整数
-  默认为有符号数
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#有符号数--无符号数][有符号数 & 无符号数]]
+- [[#内存分区][内存分区]]
+- [[#预处理器][预处理器]]
+- [[#柔性数组][柔性数组]]
+- [[#内存对齐][内存对齐]]
+- [[#类型转化][类型转化]]
+- [[#指针][指针]]
+  - [[#指针与数组][指针与数组]]
+  - [[#指针与字符串][指针与字符串]]
+  - [[#二级指针与二维数组][二级指针与二维数组]]
+  - [[#函数指针][函数指针]]
+  - [[#传递指针参数][传递指针参数]]
+  - [[#细节问题][细节问题]]
+- [[#static][static]]
+  - [[#使用][使用]]
+- [[#struct][struct]]
 
-  定义无符号数后缀： ~u~ 或 ~U~
-  
-  如果一个运算同时存在有符号数和无符号数， 那么会隐式的将有符号数转换为无符号树。
- 
-  #+BEGIN_EXAMPLE
-    2147483647U > -2147483647 - 1, False
+* 有符号数 & 无符号数
+  整数字面值默认为 *有符号数*, 定义无符号数可以使用后缀 ~u~ 或 ~U~.
 
-    运算1: -2147483647 - 1
+  如果一个运算同时存在有符号数和无符号数， 那么会隐式的将有符号数转换为无符号数：
+  #+BEGIN_SRC C
+    // 1st. -2147483647 - 1 = -2147483648
+    // 2st. -2147483648 ==> 2147483648U
+    // 3st. 2147483647 > 2147483648U
 
-    运算2: 2147483647U > -2147483648
-  #+END_EXAMPLE
- 
-* 错误处理
-  + 头文件: <assert.h> <error.h> <stdio.h>
-    - <assert.h>
-      + 定义函数: assert(int express) 当括号内判断表达式为 0 时, 输出错误信息
-        程序可能异常终止, 不知道 linux 是不是这样的.
-    - <error.h>
-      + 定义宏: error, 当 error 不为零时, 说明程序运行过程中出现了错误, 应该在使用前
-        设置为 0
-    - <stdio.h>
-      + 定义函数: perror(const char* s) 输出程序运行过程中的错误信息, 会自动在字符串 s 
-        后添加一个 : 和一个空格
+    2147483647U > -2147483647 - 1;  // false
+  #+END_SRC
 
 * 内存分区
-  在C++中, 内存分成5个区，他们分别是堆、栈、自由存储区、全局/静态存储区和常量存储区.
-  + 栈 :: 就是那些由编译器在需要的时候分配，在不需要的时候自动清楚的变量的存储区。里面的变量通常是局部变量、函数参数等。
-  + 堆 :: 就是那些由new分配的内存块，他们的释放编译器不去管，由我们的应用程序去控制，一般一个new就要对应一个delete。如果程序员没有释放掉，那么在程序结束后，操作系统会自动回收。
-  + 自由存储区 :: 就是那些由malloc等分配的内存块，他和堆是十分相似的，不过它是用free来结束自己的生命的。
-  + 全局/静态存储区 :: 局变量和静态变量被分配到同一块内存中，在以前的C语言中，全局变量又分为初始化的和未初始化的，在C++里面没有这个区分了，他们共同占用同一块内存区。
-  + 常量存储区 :: 这是一块比较特殊的存储区，他们里面存放的是常量，不允许修改（当然，你要通过非正当手段也可以修改，而且方法很多）
+  + 栈 :: 由编译器在需要的时候分配， 在不需要的时候自动清处的变量的存储区。里面的变量通常是局部变量、函数参数等。
 
+  + 堆 :: ~new(c++)~ 分配的内存块， 它们的释放编译器不去管， 由应用程序去控制，
+         一般一个 ~new~ 就要对应一个 ~delete~. 如果程序没有释放掉， 那么在程序结束后， 操作系统会自动回收。
+
+  + 自由存储区 :: 由 ~malloc~ 等分配的内存块，它和堆十分相似，不过它是用 ~free~ 来结束自己的生命的。
+
+  + 全局/静态存储区 :: 局部变量和静态变量被分配到同一块内存中，在 ~C~ 语言中，全局变量又分为初始化的和未初始化的，
+                在 ~C++~ 里面没有这个区分， 它们共同占用同一块内存区。
+
+  + 常量存储区 :: 这是一块比较特殊的存储区，他们里面存放的是常量，不允许修改。（可通过特殊的方式进行修改）
+  
 * 预处理器
-  + 处理仅用空格(或其他空白字符) 分隔的字符串常量序列时， 就把它们串联起来
-    : "1234"   "4567"  ==> "12344567"
+  1. 预处理器会将仅用 *kbzf* 分隔的字符串常量序列串联起来：
+     #+BEGIN_EXAMPLE
+       "123"  "456" ==> "123456"
+     #+END_EXAMPLE
 
 * 柔性数组
   在结构体最后一个成员定义为长度为 0 的数组。
@@ -72,49 +77,218 @@
                                                              |
                                                              float
             #+END_EXAMPLE
-* stdin, stdout, stderr
-  + 标准输入 *stdin*
-  + 标准输出 *stdout*
-  + 标准错误 *stderr*
+* 指针
+  - [[http://home.netcom.com/~tjensen/ptr/pointers.htm][完整教程]]
+  - [[http://www.runoob.com/w3cnote/c-pointer-detail.html][C 指针详解]]
 
-  #+BEGIN_SRC C
-    #include <stdio.h>
+** 指针与数组
+   : An object is a named region of storage; an lvalue is an expression referring to an object.
+   译: 一个 ~对象~ 是一个 ~命名~ 的 ~储存区域~, 左值是指对象的表达式.
 
-    int main(int argc, char* argv[]) {
-      fprintf(stdout, "%s\n", "stdout");
-      fprintf(stderr, "%s\n", "stderr");
+   值类型(如 ~int~) 的每一个变量都对应一个单独的对象.
+   而引用类型(如 ~指针~ 传递) 的是对一个对象的 ~引用~, 不创建新的对象.
 
-      char str[10] = {0};
-      fscanf(stdin, "%s", str);
-      printf("%s", str);
+   指针类型的变量储存的是一个 ~内存对象~.
 
-      return 0;
-    }
-  #+END_SRC
+    #+BEGIN_SRC C :results output :exports both
+      int my_array[] = {1,23,17,4,-5,100};
+      int *ptr;
+
+      int main(void)
+      {
+          int i;
+          ptr = &my_array[0];     /* point our pointer to the first
+                                     element of the array */
+          printf("\n\n");
+          for (i = 0; i < 6; i++)
+          {
+              printf("my_array[%d] = %d   ",i,my_array[i]);   /*<-- A */
+              printf("ptr + %d = %d\n",i, *(ptr + i));        /*<-- B */
+          }
+          return 0;
+      }
+    #+END_SRC
+
+    #+RESULTS:
+    : my_array[0] = 1   ptr + 0 = 1
+    : my_array[1] = 23   ptr + 1 = 23
+    : my_array[2] = 17   ptr + 2 = 17
+    : my_array[3] = 4   ptr + 3 = 4
+    : my_array[4] = -5   ptr + 4 = -5
+    : my_array[5] = 100   ptr + 5 = 100
+
+    在 ~C~ 标准中, 凡是我们可以使用 ~&var_name[0]~ 的地方, 我们都可以用 ~var_name~ 代替.
+   
+    而, ~a[5]~ 可以转化为 ~5[a]~, 等价于: ~*(a + 5)~.
+   
+** 指针与字符串
+    #+BEGIN_SRC C :results output :exports both
+
+      #include <stdio.h>
+
+      char strA[80] = "A string to be used for demonstration purposes";
+      char strB[80];
+
+      int main(void)
+      {
+
+          char *pA;     /* a pointer to type character */
+          char *pB;     /* another pointer to type character */
+          puts(strA);   /* show string A */
+          pA = strA;    /* point pA at string A */
+          puts(pA);     /* show what pA is pointing to */
+          pB = strB;    /* point pB at string B */
+          putchar('\n');       /* move down one line on the screen */
+          while(*pA != '\0')   /* line A (see text) */
+          {
+              *pB++ = *pA++;   /* line B (see text) */
+          }
+          *pB = '\0';          /* line C (see text) */
+          puts(strB);          /* show strB on screen */
+          return 0;
+      }
+    #+END_SRC
+
+    #+RESULTS:
+    : A string to be used for demonstration purposes
+    : A string to be used for demonstration purposes
+    : 
+    : A string to be used for demonstration purposes
+   
+    字符串, 相当于字符数组.
+
+** 二级指针与二维数组
+    #+BEGIN_SRC C
+      #include<stdio.h>
+
+      int **returnNum()
+      {
+        int **a,i,j;
+        a = (int**)malloc(5*sizeof(int*));
+        for(i=0;i<5;++i)
+        {
+          a[i] = (int*)malloc(5*sizeof(int));
+          for(j=0;j<5;++j)
+          {
+            a[i][j]=i;
+          }
+        }
+        return a;//error: cannot convert `int (*)[5]' to `int**' in return
+      }
+
+      int main()
+      {
+        //int cpy[5][5]=returnNum; // error: invalid initializer
+        int **cpy=returnNum();
+        int i,j;
+        for(i=0;i<5;++i)
+        {
+          for(j=0;j<5;++j)
+          {
+            printf("%d ", cpy[i][j]);
+          }
+          printf("\n");
+          free(cpy[i]);
+        }
+        free(cpy);
+
+        return 0;
+      }
+    #+END_SRC
+   
+    二级指针, 指向指针的指针.
+
+** 函数指针
+   #+BEGIN_SRC c
+     /* 定义一个函数指针 */
+     int (*func)(int num);
+
+     /* 假定存在函数 int fib(int n) */
+     func = fib;  /* 赋值 */
+
+     /* 定义一个函数指针类型 */
+     typedef int(*Func)(int num);  /* 定义了名为 Func 的函数指针类型 */
+
+     /* 定义 Func 类型函数指针变量 */
+     Func func = fib;
+   #+END_SRC
+
+** 传递指针参数
+   指针也是 ~按值~ 传参的：
+   #+BEGIN_SRC c
+     #include <stdio.h>
+
+     void test_point(int* point) {
+       int num = 10;
+       point = &num;
+       printf("%p\n", point);
+     }
+
+     int main(void) {
+       int num = 10;
+       int* point = &num;
+
+       printf("%p\n", point);
+       test_point(point);
+       printf("%p\n", point);
+
+       return 0;
+     }
+   #+END_SRC
+
+   输出结果：
+   #+BEGIN_EXAMPLE
+     000000000022FE44
+     000000000022FE0C
+     000000000022FE44
+   #+END_EXAMPLE
+
+   所以， 如果要在递归中对指针进行 ~realloc~, 可能在递归中将指针原来指向的内存清理了。
+
+** 细节问题
+   1. 运算符优先级
+      
+      ~*p++~, 先 ~*p~, 后 ~p++~.
+      
+      ~*++p~, 先 ~++p~, 后 ~*p~.
+
+   2. 数组初始化
+      
+      数组如果未初始化, 那么数组元素的值是不确定的.
+
+      如果进行初始化时， 初始化的元素小于数组的长度， 那么剩下的值默认为 0.
+   
+      可变长对象数组不能初始化.
+
+   3. 值类型理解
+      
+      ~结构体~ 是值类型.
+
+      函数返回结构体时, 返回的是结构体的值, 因此函数内部创建的结构体返回
+      值依然存在.
+
+      ~数组~ 是引用类型.
+
+      函数返回数组的时候, 返回的是数组所在那片内存区域的地址
+      而那片地址在函数执行完成后便消毁了.
+
+   4. 指针的值
+
+      指针操作时可以操作的值有两种：
+      + 指针指向内存区域的值
+      + 指针变量本身的值 - 指向的内存区域的地址
+
+      这两个值在使用时需要分清楚。
 
 * static
-** C语言中static关键字的作用
-   1. 在修饰变量的时候，static修饰的静态局部变量只执行一次，而且延长了局部变量的生命周期，直到程序运行结束以后才释放
-   2. static修饰全局变量的时候，这个全局变量只能在本文件中访问，不能在其它文件中访问，即便是extern外部声明也不可以
-   3. static修饰一个函数，则这个函数的只能在本文件中调用，不能被其他文件调用
-   4. tatic修饰的局部变量存放在全局数据区的静态变量区, 初始化的时候自动初始化为0
+  1. 在修饰变量的时候，static 修饰的静态局部变量只执行一次，而且延长了局部变量的生命周期，直到程序运行结束以后才释放
+  2. static 修饰全局变量的时候，这个全局变量只能在本文件中访问，不能在其它文件中访问，即便是 extern 外部声明也不可以
+  3. static 修饰一个函数，则这个函数的只能在本文件中调用，不能被其他文件调用
+  4. static 修饰的局部变量存放在全局数据区的静态变量区, 初始化的时候自动初始化为0
 
-*** 使用
-    1. 不想被释放的时候，可以使用static修饰。比如修饰函数中存放在栈空间的数组。如果不想让这个数组在函数调用结束释放可以使用static修饰
-    2. 考虑到数据安全性(当程想要使用全局变量的时候应该先考虑使用static)
-
-** 在C++中static关键字除了具有C中的作用还有在类中的使用 
-*** 修饰静态数据成员
-    1. 静态数据成员可以实现多个对象之间的数据共享，它是类的所有对象的共享成员，它在内存中只占一份空间，如果改变它的值，则各对象中这个数据成员的值都被改变
-    2. 静态数据成员是在程序开始运行时被分配空间，到程序结束之后才释放，只要类中指定了静态数据成员，即使不定义对象，也会为静态数据成员分配空间
-    3. 静态数据成员可以被初始化，但是只能在类体外进行初始化，若为对静态数据成员赋初值，则编译器会自动为其初始化为0
-    4. 静态数据成员既可以通过对象名引用，也可以通过类名引用
-
-*** 修饰静态成员方法
-    1. 静态成员函数和静态数据成员一样，他们都属于类的静态成员，而不是对象成员
-    2. 非静态成员函数有this指针，而静态成员函数没有this指针
-    3. 静态成员函数主要用来方位静态数据成员而不能访问非静态成员
-
+** 使用
+   1. 不想被释放的时候，可以使用 static 修饰。比如修饰函数中存放在栈空间的数组。如果不想让这个数组在函数调用结束释放可以使用 static 修饰
+   2. 考虑到数据安全性(当程序想要使用全局变量的时候应该先考虑使用 static)
 * struct
   嵌套的结构体只能在结构体内部定义变量, 在结构体外不能使用.
   #+BEGIN_SRC C
@@ -130,4 +304,3 @@
     out.val = 0;
     out._insiade.val = 0;
   #+END_SRC
-
