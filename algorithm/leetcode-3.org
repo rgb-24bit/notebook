@@ -1,4 +1,4 @@
-#+TITLE:      LeetCode[601-800]
+#+TITLE:      LeetCode 601-800
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#重复叠加字符串匹配---题-686][重复叠加字符串匹配 - 题 686]]

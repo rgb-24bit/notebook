@@ -1,4 +1,4 @@
-#+TITLE:      LeetCode[1-200]
+#+TITLE:      LeetCode 1-200
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#回文数---题-9][回文数 - 题 9]]
