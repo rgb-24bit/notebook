@@ -1,6 +1,0 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      计算机启动
-
-* 教程链接
-  [[http://www.ruanyifeng.com/blog/2013/02/booting.html][阮一峰-计算机是如何启动的？]]
-

@@ -31,17 +31,16 @@
 - *math*
   - *discrete*
     - [[file:math\discrete\1-逻辑和证明.org][逻辑和证明]]
-    - [[file:math\discrete\2-基本结构.org][集合、函数、序列、求和与矩阵]]
+    - [[file:math\discrete\2-基本结构.org][基本结构]]
   - *linear*
     - [[file:math\linear\1-矩阵和方程组.org][矩阵和方程组]]
   - *probability*
-    - [[file:math\probability\lea.org][Python Lea]]
+    - [[file:math\probability\lea.org][概率编程]]
 - *network*
 - *os*
   - [[file:os\base.org][基础内容]]
   - [[file:os\express.org][程序的机器级表示]]
   - [[file:os\info.org][信息的表示和处理]]
-  - [[file:os\start_up.org][计算机启动]]
 - *python*
   - [[file:python\flask.org][flask 笔记]]
   - [[file:python\log.org][Python 日志]]

@@ -1,5 +1,14 @@
 #+TITLE:      程序的机器级表示
 
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#条件码寄存器][条件码寄存器]]
+- [[#att-与-intel-汇编代码格式][ATT 与 Intel 汇编代码格式]]
+- [[#数据格式][数据格式]]
+  - [[#寄存器][寄存器]]
+  - [[#操作数指示符][操作数指示符]]
+- [[#mov-指令][MOV 指令]]
+- [[#pop-和-push-指令][POP 和 PUSH 指令]]
+
 * 条件码寄存器
   + [[https://en.wikipedia.org/wiki/FLAGS_register][维基百科]]
 
