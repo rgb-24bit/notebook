@@ -1,0 +1,151 @@
+#+TITLE:      MSSQL 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#使用-c-操作-mssql][使用 C# 操作 MSSQL]]
+  - [[#五大核心组件][五大核心组件]]
+  - [[#connection-类][Connection 类]]
+  - [[#command-类][Command 类]]
+  - [[#dataadaper-类][DataAdaper 类]]
+  - [[#datareader-类][DataReader 类]]
+  - [[#dataset-类][DataSet 类]]
+  - [[#简单使用总结][简单使用总结]]
+
+* 使用 C# 操作 MSSQL
+  + [[http://www.cnblogs.com/rainman/archive/2012/03/13/2393975.html][C# 操作 SQL Server 数据库]]
+
+** 五大核心组件
+   + Connection :: 数据库连接
+   + Command :: 数据库的命令
+   + DataSet :: 数据集
+   + DataReader :: 数据库的读取器
+   + DataAdaper :: 数据库的适配器
+** Connection 类
+   和数据库交互, 必须连接它.
+
+   连接帮助指明数据库服务器, 数据库名字, 用户名, 密码, 和连接数据库所需要的其它参数.
+
+   Connection 对象会被 Command 对象使用, 这样就能够知道是在哪个数据源上面执行命令.
+
+   与数据库交互的过程意味着必须指明想要执行的操作, 这是依靠 Command 对象执行的.
+
+   开发人员使用 Command 对象来发送 SQL 语句给数据库.
+
+   Command 对象使用 Connection 对象来指出与哪个数据源进行连接.
+
+   开发人员能够单独使用 Command 对象来直接执行命令,
+   或者将一个 Command 对象的引用传递给 DataAdapter, 它保存了一组能够操作下面描述的一组数据的命令.
+
+   *属性:*
+    + ConnectionString :: 打开或连接数据库的字符串
+    + ConnectionTimeOut :: 尝试建立连接时终止尝试并生成错误之前所等待的时间
+    + Database :: 获取当前打开的数据库
+    + State :: 连接到当前状态
+    + DataSourse :: 获取打开数据库的连接实例
+
+    *方法:*
+    + open :: 打开数据库连接
+    + close :: 关闭数据库连接
+    + CreateCommand :: 创建并返回一个与该链接相关联的Command对象
+    + BeginTransation :: 开始数据库事物
+    + ChangeDatabase :: 更改当前打开的数据库
+
+** Command 类
+   成功与数据建立连接后, 就可以用 Command 对象来执行查询, 修改, 插入, 删除等命令
+
+   Command 对象常用的方法有 ExecuteReader() 方法, ExecuteScalar() 方法和 ExecuteNonQuery() 方法
+
+   插入数据可用 ExecuteNonQuery() 方法来执行插入命令
+
+   *属性:*
+    + Connection :: 设置或获取Command对象使用的Connection对象实例
+    + ConnectionType :: (设置或获取执行语句的类型)
+      - StoredProceduce :: 储存过程
+      - TableDirectText :: 标准的SQL语句
+      - Text :: 默认
+    + CommandText :: 设置或获取需要执行的sql语句或储存过程名
+    + Parameter :: 取得参数值集合
+
+    *方法:*
+    + ExecuteReader :: 执行CommandText指定的SQL语句或储存过程名, 返回值类型为DataReader
+    + ExecuteNonQuery :: 执行后不返回任何行, 对于update, insert, delete语句, 返回影响的行数对于其他类型的语句, 返回值为-1
+    + ExecuteScalar :: 返回第一个结果集中的第一行中的第一列数据
+    + ExecuteXMLReader :: 将CommandText发送到Connection并生成一个XmlReader
+
+** DataAdaper 类
+   某些时候开发人员使用的数据主要是只读的, 并且开发人员很少需要将其改变至底层的数据源
+
+   同样一些情况要求在内存中缓存数据, 以此来减少并不改变的数据被数据库调用的次数
+
+   DataAdapter 通过断开模型来帮助开发人员方便的完成对以上情况的处理
+
+   当在一单批次的对数据库的读写操作的持续的改变返回至数据库的时候,  DataAdapter 填充(fill) DataSet 对象
+
+   DataAadapter 包含对连接对象以及当对数据库进行读取或者写入的时候自动的打开或者关闭连接的引用
+
+   另外, DataAdapter 包含对数据的 SELECT, INSERT, UPDATE 和 DELETE 操作的 Command 对象引用
+
+   开发人员将为 DataSet 中的每一个 Table 都定义 DataAadapter, 它将为开发人员照顾所有与数据库的连接
+   
+   所以开发人员将做的工作是告诉 DataAdapter 什么时候装载或者写入到数据库
+
+   *属性:*
+    + SelectCommand :: 用于设置从记录集中选择记录的命令
+    + InsertCommand :: 用于设置从记录集中添加记录的命令
+    + UpdateCommand :: 用于设置从记录集中更新记录的命令
+    + DeleteCommand :: 用于设置从记录集中删除记录的命令
+
+    *方法:*
+    + Fill :: 用于在DataSet中添加或者刷新行
+    + FillSchema :: 用于将DataTable添加到DataSet中, 并匹配与数据源匹配的框架
+    + GetFillParameters :: 获取当前执行SQL的SELECT语句时用户设置参数
+    + Update :: 用于对DataSet记录集进行操作
+    + Dispose :: 用于销毁SQLDataAdaper对象
+
+** DataReader 类
+   许多数据操作要求开发人员只是读取一串数据
+
+   DataReader 对象允许开发人员获得从 Command 对象的 SELECT 语句得到的结果
+
+   考虑性能的因素, 从 DataReader 返回的数据都是快速的且只是"向前"的数据流
+
+   这意味着开发人员只能按照一定的顺序从数据流中取出数据
+
+   这对于速度来说是有好处的, 但是如果开发人员需要操作数据, 更好的办法是使用 DataSet
+
+   *属性:*
+    + FiledCount :: 显示当前数据记录的字段总和
+    + IsClosed :: 判断 DataReader对象是否已经关闭
+
+    *方法:*
+    + Close :: 关闭DataReader对象
+    + GetString :: 以String类型返回指定列中的对象
+    + Getvalue :: 以自身的类型返回指定列中值
+    + Getvalues :: 返回当前记录所有字段的集合
+    + Read :: 将光标指向DataReader对象的下一记录
+** DataSet 类
+   DataSet 对象是数据在内存中的表示形式
+
+   它包括多个DataTable对象, 而DataTable包含列和行, 就象一个普通的数据库中的表。
+
+   开发人员甚至能够定义表之间的关系来创建主从关系
+
+   DataSet是在特定的场景下使用――帮助管理内存中的数据并支持对数据的断开操作的
+
+   DataSet是被所有Data Providers使用的对象, 因此它并不像Data Provider一样需要特别的前缀
+
+   DataSet 这个对象可以视为一个暂存区(Cache), 可以把从数据库中所查询到的数据保留起来, 甚至可以将整个数据库显示出来
+
+   DataSet 的能力不只是可以储存多个Table 而已, 还可以透过DataSetCommand 对象取得一些例如主键等的数据表结构, 并可以记录数据表间的关联
+
+   DataSet 对象可以说是ADO.NET 中重量级的对象, 这个对象架构在DataSetCommand 对象上, 本身不具备和数据源沟通的能力
+
+   也就是说我们是将DataSetCommand 对象当做DataSet 对象以及数据源间传输数据的桥梁
+
+** 简单使用总结
+   + Connection 类建立连接, 连接字符串用于声明连接对象
+   + Command 类, 建立命令对象类, 用于执行SQL指令, 可以用初始命令和数据库链接对象实例化
+   + DataAdapter类, 数据库适配器, 用于在必要时对数据库建立连接, 内置命令对象, 可以用 sqlcmd 对象实例化
+   + DataReader 类, 保存读取到的数据库数据, 若为读取到数据, Read() 方法返回值为false
+   + DataSet类, 数据集, 保存从数据库中的数据, 结构类似数据库, 可以用 适配器的 Fill 方法进行填充
+   + 命令构建类, 通过适配器对象实例化, 用适配器对象的更新方法更新数据库中的数据, 更新方法参数为数据集对象
+

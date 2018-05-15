@@ -19,10 +19,9 @@
   - [[file:c-c++\gcc.org][GCC 笔记]]
   - [[file:c-c++\libc.org][C 标准库笔记]]
 - *database*
-  - *sql-server*
-    - [[file:database\sql-server\mssql.org][sql server 笔记]]
-    - [[file:database\sql-server\t-sql.org][t-sql 使用总结]]
+  - [[file:database\mssql.org][MSSQL 笔记]]
   - [[file:database\sql.org][SQL 笔记]]
+  - [[file:database\t-sql.org][T-SQL 笔记]]
 - *front-end*
   - [[file:front-end\javascript.org][JavaScript 基础笔记]]
 - *jvm*

@@ -1,10 +1,12 @@
-#+SETUPFILE:  ./_style/style.setup
 #+TITLE:      SQL 笔记
 
-* Sql 风格指南
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#风格指南][风格指南]]
+- [[#查询语句执行顺序][查询语句执行顺序]]
+
+* 风格指南
   完整文档: [[http://www.sqlstyle.guide/zh/][SQL样式指南 · SQL Style Guide]]
   
-  示例:
   #+BEGIN_SRC sql
   (SELECT f.species_name,
           AVG(f.height) AS average_height, AVG(f.diameter) AS average_diameter
@@ -25,12 +27,12 @@
     GROUP BY b.species_name, b.observation_date)
 #+END_SRC
 
-* Sql 语句 
-** 顺序
-#+BEGIN_SRC sql
-  SELECT    -- 最后执行
+* 查询语句执行顺序 
+  #+BEGIN_SRC sql
+    SELECT    -- 最后执行
     FROM    -- 指定表
-   WHERE    -- 筛选条件, 先执行 WHERE, 后执行 GROUP BY
-   GROUP BY -- 分组
-   ORDER BY -- 排序, 最后执行
-#+END_SRC
+    WHERE    -- 筛选条件, 先执行 WHERE, 后执行 GROUP BY
+    GROUP BY -- 分组
+    ORDER BY -- 排序, 最后执行
+  #+END_SRC
+
