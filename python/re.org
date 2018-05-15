@@ -1,7 +1,13 @@
-#+SETUPFILE: ./_style/style.setup
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:nil -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
 #+TITLE:      Python 正则表达式
-#+AUTHOR:     rgb_24bit
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#模式字符串][模式字符串]]
+- [[#正则表达式语法][正则表达式语法]]
+- [[#re-模块方法][re 模块方法]]
+- [[#正则表达式对象][正则表达式对象]]
+- [[#match-object][Match Object]]
+  - [[#方法和属性][方法和属性]]
+- [[#相关链接][相关链接]]
 
 * 模式字符串
   正则表达式中的 ~'\'~ 和 Python 的 ~'\'~ 相冲突， 因此， 正则表达式中的 ~'\'~

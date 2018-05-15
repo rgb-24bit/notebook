@@ -1,5 +1,4 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      Python Tkinter
+#+TITLE:      Tkinter 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#tkpy][tk.py]]

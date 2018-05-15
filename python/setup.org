@@ -1,5 +1,9 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      setup.py
+#+TITLE:      Python 打包
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#a-humans-ultimate-guide-to-setuppy][A Human's Ultimate Guide to setup.py]]
+- [[#list_classifiers][list_classifiers]]
+- [[#python-packaging][python-packaging]]
 
 * A Human's Ultimate Guide to setup.py
   + [[https://github.com/kennethreitz/setup.py][kennethreitz/setup.py]]

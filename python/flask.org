@@ -1,4 +1,0 @@
-#+TITLE:      flask 笔记
-
-* 部署
-  + [[https://segmentfault.com/a/1190000008909201][部署到 IIS]]

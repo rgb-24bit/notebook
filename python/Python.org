@@ -1,53 +1,30 @@
-#+SETUPFILE:  ./_style/style.setup
 #+TITLE:      Python 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#pip][pip]]
-- [[#调试][调试]]
-- [[#兼容][兼容]]
-- [[#乘方][乘方]]
-- [[#元类][元类]]
-- [[#作用域][作用域]]
-- [[#__slots__][*__slots__*]]
 - [[#super][super]]
-- [[#正负无穷][正负无穷]]
-- [[#全局变量][全局变量]]
-- [[#变量保护][变量保护]]
-- [[#命令行参数][命令行参数]]
-- [[#python-的实现][Python 的实现]]
-- [[#类模块包][类、模块、包]]
+- [[#元类][元类]]
+- [[#数值运算相关][数值运算相关]]
+- [[#作用域问题][作用域问题]]
+  - [[#修改全局变量][修改全局变量]]
+- [[#限制实例属性][限制实例属性]]
+- [[#模块和包][模块和包]]
   - [[#模块][模块]]
   - [[#包][包]]
-  - [[#__main__py-和-__init__py][*__main__.py* 和 *__init__.py*]]
-- [[#类属性和实例属性][类属性和实例属性]]
+  - [[#执行包与包内模块][执行包与包内模块]]
+- [[#兼容-python2--python3][兼容 Python2 & Python3]]
+- [[#包管理工具---pip][包管理工具 - PIP]]
+- [[#python-的常见实现][Python 的常见实现]]
 
-* pip
-  + python -m ensurepip, 安装 Pip
-  + [[https://docs.python.org/3/library/ensurepip.html][ensurepip — Bootstrapping the pip installer]]
+* super
+  ~super~ 的一般使用方式为： ~super(class, self).xxx~.
 
-* 调试
-  + 启动： ~Python -m pdb script.py~
-  + 指令：
-    - p print
-    - n 单步跳过(跳过函数)
-    - s 单步(不跳过函数)
-
-* 兼容
-  + [[https://segmentfault.com/a/1190000000637180][编写兼容 Python 2 和 Python 3 的代码]]
-
-* 乘方
-  #+BEGIN_SRC python
-    >>> 2 ** 2
-    4
-    >>> 2 ** 0.5
-    1.4142135623730951
-    >>> 2 ** .5
-    1.4142135623730951
-  #+END_SRC
+  + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]].
 
 * 元类
-  + *创建元类* --> *创建类* --> *创建实例*
+  ~Python~ 中， 类是 ~type~ 的实例， 通过继承 ~type~ 创建的 *元类* 也可用来创建 *类*.
 
+  通过这种方式创建的类会受到 *元类* 的影响， 即： 在不同的条件下， 创建出来的类可能不一样。
+  
   #+BEGIN_SRC python
     # metaclass 是创建类，所以必须从`type`类型派生：
     class ListMetaclass(type):
@@ -56,7 +33,10 @@
             return type.__new__(cls, name, bases, attrs)
 
     class MyList(list):
-        __metaclass__ = ListMetaclass # 指示使用ListMetaclass来定制类
+        __metaclass__ = ListMetaclass # python2
+
+    class MyList(list, metaclass=ListMetaclass):  # python3
+        pass
   #+END_SRC
 
   ~__metaclass__ = ListMetaclass~ 表名在创建 ~MyList~ 时， 要通过 ~ListMetaclass.__new__()~ 来创建。
@@ -66,11 +46,89 @@
   2. 类的名字
   3. 类继承的父类集合
   4. 类的方法集合
+ 
+  教程： [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014319106919344c4ef8b1e04c48778bb45796e0335839000][廖雪峰 - 使用元类]].
 
-* 作用域
-  ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量, 外部也是可以访问的。
+* 数值运算相关
+  + 乘方
+    #+BEGIN_SRC python
+      >>> 2 ** 2
+      4
+      >>> 2 ** 0.5
+      1.4142135623730951
+      >>> 2 ** .5
+      1.4142135623730951
+    #+END_SRC
 
-* *__slots__*
+  + 正负无穷
+    #+BEGIN_SRC python
+      >>> float('inf')  # 正无穷
+      inf
+      >>> float('-inf')  # 负无穷
+      -inf
+      >>> 1 + float('inf')
+      inf
+      >>> 1 - float('inf')
+      -inf
+      >>> 0 * float('inf')
+      nan  #  not a number
+    #+END_SRC
+
+* 作用域问题
+  ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量, 
+  外部也是可以访问的。局部作用域还是有的。
+
+  #+BEGIN_SRC python
+    In [1]: for i in range(10):
+       ...:     pass
+       ...:
+
+    In [2]: i
+    Out[2]: 9
+  #+END_SRC
+  
+** 修改全局变量
+   1. 内部函数， *不修改* 全局变量可以访问全局变量
+   2. 内部函数， *修改* 同名全局变量，则 python 会认为它是一个局部变量
+   3. 在内部函数修改同名全局变量之前引用变量名称(example: print sum),
+      则引发 ~Unbound-LocalError~.
+
+   即： 如果在函数中引用的全局变量后在对全局变量进行赋值修改， 就会出现
+   ~Unbound-LocalError~.
+
+   *注*: 不仅是对于 *全局变量* 是这样， 对于所有 *父* 作用域的 *子* 作用域都是如此， 如嵌套函数等。
+
+   #+BEGIN_SRC python
+     In [1]: def test():        
+        ...:     name = 10      
+        ...:     def in_test(): 
+        ...:         print(name)
+        ...:         name = 100 
+        ...:     in_test()      
+        ...:                    
+     In [2]: test()
+     ---------------------------------------------------------------------------
+     UnboundLocalError                         Traceback (most recent call last)
+     <ipython-input-4-ea594c21b25d> in <module>()
+     ----> 1 test()
+
+     <ipython-input-3-9edf775478c7> in test()
+           4         print(name)
+           5         name = 100
+     ----> 6     in_test()
+           7
+
+     <ipython-input-3-9edf775478c7> in in_test()
+           2     name = 10
+           3     def in_test():
+     ----> 4         print(name)
+           5         name = 100
+           6     in_test()
+
+     UnboundLocalError: local variable 'name' referenced before assignment
+   #+END_SRC
+
+* 限制实例属性
   在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*
 
   然而，对于有着已知属性的小类来说，它可能是个瓶颈。这个字典浪费了很多内存。 ~Python~ 不能在对象创建时直接分配一个固定量的内存来保存所有的属性。
@@ -103,45 +161,13 @@
 
 
   文档： [[https://docs.python.org/2/reference/datamodel.html?highlight=__slots__#slots][ __slots__]]
-* super
-  + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]]
 
-* 正负无穷
-  #+BEGIN_SRC python
-    >>> float('inf')  # 正无穷
-    inf
-    >>> float('-inf')  # 负无穷
-    -inf
-    >>> 1 + float('inf')
-    inf
-    >>> 1 - float('inf')
-    -inf
-    >>> 0 * float('inf')
-    nan  #  not a number
-  #+END_SRC
+* 模块和包
+  导入 *模块* 或 *包* 时， ~Python~ 会动态执行一遍 *模块* 中的内容。
 
-* 全局变量
-  1. 内部函数，不修改全局变量可以访问全局变量
-  2. 内部函数，修改同名全局变量，则 python 会认为它是一个局部变量
-  3. 在内部函数修改同名全局变量之前调用变量名称(example: print sum), 则引发Unbound-LocalError
+  函数或类的定义的执行就只是定义了函数或类， 而其他语句会直接执行， 
+  如果有输出还会直接进行输出。
 
-* 变量保护
-  + ~__xxx__~ 系统定义名字
-  + ~_xxx~ 保护变量， 只有类对象和子类对象自己能访问到这些变量
-  + ~__xxx~ 私有成员， 只有类对象自己能访问，连子类对象也不能访问到这个数据
- 
-* 命令行参数
-  + [[http://blog.xiayf.cn/2013/03/30/argparse/][argparse 教程]]
-
-* Python 的实现
-  + CPython
-  + Jython
-  + PyPy
-  + IronPython
-  + cython
-  + numba
-
-* 类、模块、包
 ** 模块
    模块，在 ~Python~ 可理解为对应于一个文件。在创建了一个脚本文件后，定义了某些函数和变量。你在其他需要这些功能的文件中，导入这模块，就可重用这些函数和变量。
 
@@ -183,33 +209,24 @@
 
    通俗一点：包是一个包含 ~__init__.py~ 文件的目录，该目录下一定得有这个 ~__init__.py~ 文件和其它模块或子包
 
-** *__main__.py* 和 *__init__.py*
-
+** 执行包与包内模块
    如果你希望 ~python~ 将一个文件夹作为 ~package~ 对待，那么这个文件夹中必须包含一个名为 ~__init__.py~ 的文件，即使它是空的
 
    如果你需要 ~python~ 讲一个文件夹作为 ~package~ 执行，那么这个文件夹中必须包含一个名为 ~__main__.py~ 的文件，
    当执行 ~python -m pkg~ 或者 ~python pkg~ 的时候，这个文件中的代码都会被执行
-* 类属性和实例属性
-  #+BEGIN_SRC python :results output
-    class OneClass(object):
-        num = 10
 
+   特别的， 对于包内的 *模块*, 如果使用了 *相对导入*, 那么可以使用 ~python -m pkg.module~ 指令执行模块.
+* 兼容 Python2 & Python3
+  + [[https://segmentfault.com/a/1190000000637180][编写兼容 Python 2 和 Python 3 的代码]].
 
-    A = OneClass()
-    B = OneClass()
-    print(A.num, B.num, OneClass.num)
+* 包管理工具 - PIP
+  + 使用 ~python -m ensurepip~ 安装 ~pip~
+  + [[https://docs.python.org/3/library/ensurepip.html][ensurepip — Bootstrapping the pip installer]]
 
-    A.num += 2
-    print(A.num, B.num, OneClass.num)
-
-    OneClass.num += 2
-    print(A.num, B.num, OneClass.num)
-  #+END_SRC
-
-  + *RESULTS:*
-    : 10 10 10
-    : 12 10 10
-    : 12 12 12
-
-  [[https://segmentfault.com/a/1190000002671941][关于Python类属性与实例属性的讨论]]
+* Python 的常见实现
+  + CPython :: Python 的标准实现
+  + Jython :: Python 的 Java 实现
+  + PyPy :: Python 的 Python 实现
+  + IronPython :: Python 的 C# 实现
+  + Cython :: 包含 C 数据类型的 Python
 

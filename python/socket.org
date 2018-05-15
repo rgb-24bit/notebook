@@ -1,5 +1,11 @@
-#+SETUPFILE:  ./_style/style.setup
 #+TITLE:      Python socket
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#server--client][server & client]]
+- [[#socket][socket]]
+- [[#socket-module][socket module]]
+- [[#udp][UDP]]
+- [[#socketserver][socketserver]]
 
 * server & client
   #+BEGIN_SRC plantuml :file img/socket.png :cmdline -charset utf-8

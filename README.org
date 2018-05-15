@@ -42,17 +42,13 @@
   - [[file:os\express.org][程序的机器级表示]]
   - [[file:os\info.org][信息的表示和处理]]
 - *python*
-  - [[file:python\flask.org][flask 笔记]]
-  - [[file:python\log.org][Python 日志]]
-  - [[file:python\module.org][Python 模块]]
-  - [[file:python\opfile.org][Python 文件操作]]
-  - [[file:python\Python.org][Python 笔记]]
+  - [[file:python\python.org][Python 笔记]]
   - [[file:python\re.org][Python 正则表达式]]
-  - [[file:python\setup.org][setup.py]]
+  - [[file:python\setup.org][Python 打包]]
   - [[file:python\socket.org][Python socket]]
-  - [[file:python\text_process.org][Python 文本处理]]
-  - [[file:python\tk.org][Python Tkinter]]
-  - [[file:python\todo.org][TODO]]
+  - [[file:python\stdlib.org][Python 标准库笔记]]
+  - [[file:python\text-process.org][Python 文本处理]]
+  - [[file:python\tkinter.org][Tkinter 笔记]]
 - *related*
   - *edit*
     - [[file:related\edit\emacs.org][emacs 笔记]]

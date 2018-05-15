@@ -1,4 +1,3 @@
-#+SETUPFILE:  ./_style/style.setup
 #+TITLE:      Python 文本处理
 
 * 目录                                                    :TOC_4_gh:noexport:
