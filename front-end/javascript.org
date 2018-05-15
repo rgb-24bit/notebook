@@ -1,7 +1,6 @@
-#+TITLE:      JavaScript 基础笔记
+#+TITLE:      JavaScript 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#javascript-指南][JavaScript 指南]]
 - [[#bom---browser-object-model][BOM - Browser Object Model]]
   - [[#window][Window]]
   - [[#window-screen][Window Screen]]
@@ -16,9 +15,6 @@
   - [[#dom-属性][DOM 属性]]
   - [[#dom-访问][DOM 访问]]
   - [[#dom-修改][DOM 修改]]
-
-* JavaScript 指南
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
 
 * BOM - Browser Object Model
 ** Window
