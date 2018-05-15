@@ -38,7 +38,7 @@ def generate(file_name='README.org'):
         fp.write('#+TITLE: Note\n\n')
 
         sep = '\\' if os.name == 'nt' else '/'  # 不同系统下的分隔符
-        ignore_dir = ('trash', 'inbox')  # 忽略的文件夹
+        ignore_dir = ('archive', 'inbox')  # 忽略的文件夹
 
         # 分类子文件夹
         for sub_dir in get_sub_dir('.'):

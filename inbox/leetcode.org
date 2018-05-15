@@ -18,3 +18,10 @@
   + https://leetcode-cn.com/problems/reverse-linked-list/description/
 * 2 的幂
   + https://leetcode-cn.com/problems/power-of-two/description/
+
+* 用栈实现队列
+  + https://leetcode-cn.com/problems/implement-queue-using-stacks/description/
+
+* 回文链表
+  + https://leetcode.com/problems/palindrome-linked-list/discuss/64501/Java-easy-to-understand
+  + https://leetcode-cn.com/problems/palindrome-linked-list/description/
