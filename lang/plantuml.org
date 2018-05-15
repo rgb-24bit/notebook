@@ -1,0 +1,29 @@
+#+TITLE:      plantuml 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#emacs-环境配置][Emacs 环境配置]]
+- [[#命令行选项][命令行选项]]
+
+* Emacs 环境配置
+  1. 下载 *plantuml.jar* ([[http://plantuml.com/download][官网下载页面]])
+
+  2. 安装生成图片用软件 *Graphviz*, 使用默认安装位置
+
+  3. 在 *.emacs.d* 里添加配置，将 *plantuml* 添加到 *org-babel-load-languages* 加载语言列表里
+     #+BEGIN_SRC emacs-lisp
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '(;; other Babel languages
+          (plantuml . t)))
+     #+END_SRC
+
+  4. 设置 *plantuml.jar* 文件的存放路径
+     #+BEGIN_SRC emacs-lisp
+       (setq org-plantuml-jar-path
+             (expand-file-name "~/path/to/plantuml.jar"))
+     #+END_SRC
+
+* 命令行选项
+  + 基本使用： ~java -jar plantuml.jar filename~
+  + 设置编码： ~java -jar plantuml.jar -charset utf-8 filename~
+

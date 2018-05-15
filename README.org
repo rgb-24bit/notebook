@@ -26,12 +26,8 @@
   - [[file:front-end\javascript.org][JavaScript 笔记]]
 - *jvm*
 - *lang*
-  - *emacs-lisp*
-    - [[file:lang\emacs-lisp\note.org][emacs-lisp note]]
-    - [[file:lang\emacs-lisp\tutorial.org][emacs-lisp 教程代码]]
-  - *plantuml*
-    - [[file:lang\plantuml\PlantUML.org][PlantUML 笔记]]
   - [[file:lang\graphviz.org][graphviz 笔记]]
+  - [[file:lang\plantuml.org][plantuml 笔记]]
 - *math*
   - *discrete*
     - [[file:math\discrete\1-逻辑和证明.org][逻辑和证明]]

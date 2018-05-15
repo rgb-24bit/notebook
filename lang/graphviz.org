@@ -1,12 +1,16 @@
-#+SETUPFILE:  ./_style/style.setup
 #+TITLE:      graphviz 笔记
 
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#dot][dot]]
+
 * dot
-  教程: [[https://github.com/uolcano/blog/issues/13][dot教程]]
-  问题: 中文乱码解决:
+  教程: [[https://github.com/uolcano/blog/issues/13][dot 教程]]
+
+  解决中文乱码问题:
   #+BEGIN_SRC dot
     /* 添加这些代码即可(保证文件编码为utf-8) */
     edge [fontname="FangSong"];    /*set the edge's font*/
     node [shape=box, fontname="FangSong"];    /*set the node's font and shape*/
     graph[fontname="FangSong"];    /*set the subgraph's font*/
   #+END_SRC
+
