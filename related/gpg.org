@@ -1,6 +1,0 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      gpg 使用
-
-* 教程
-  + [[http://www.ruanyifeng.com/blog/2013/07/gpg.html][阮一峰博客]]
-

@@ -1,6 +1,4 @@
-#+SETUPFILE:  ../_style/style.setup
-#+TITLE:      Git-Book 阅读笔记
-#+AUTHOR:     rgb_24bit
+#+TITLE:      Git-Book 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#起步][起步]]

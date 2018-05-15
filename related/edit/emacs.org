@@ -1,5 +1,16 @@
-#+SETUPFILE:  ../_style/style.setup
-#+TITLE:      emacs 笔记
+#+TITLE:      Emacs 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#使用技巧][使用技巧]]
+- [[#替换文件后缀名][替换文件后缀名]]
+- [[#ediff][ediff]]
+- [[#evil][evil]]
+- [[#文件管理器][文件管理器]]
+- [[#profiler][profiler]]
+- [[#窗口操作][窗口操作]]
+- [[#使用模板][使用模板]]
+- [[#文件变量][文件变量]]
+- [[#字符转义][字符转义]]
 
 * 使用技巧
   + 触手可及的文档 ::
@@ -51,11 +62,14 @@
 
 * evil
   + 匹配对应的括号： ~%~
+
 * 文件管理器
   + [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
+
 * profiler
   + profiler-start 启动监控
   + profiler-report 显示信息
+
 * 窗口操作
   + C-x 1 保留一个窗口
   + C-x 2 上下分割窗口

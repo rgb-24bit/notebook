@@ -1,4 +1,10 @@
-#+TITLE:      spacemacs 笔记
+#+TITLE:      Spacemacs 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#快捷键][快捷键]]
+- [[#字体设置][字体设置]]
+- [[#保留的-emacs-快捷键][保留的 emacs 快捷键]]
+- [[#c-c-反汇编][C-C++ 反汇编]]
 
 * 快捷键
   #+CAPTION: Python-mode 快捷键
@@ -67,3 +73,22 @@
 
   C-x     字符扩展。  C-x 之后输入另一个字符或者组合键。
   M-x     命令名扩展。M-x 之后输入一个命令名。
+
+* C-C++ 反汇编
+  spacemacs disaster: 首先设置 ~Makefile~ 的优先级：
+  #+BEGIN_EXAMPLE
+    M-x customize
+
+    disaster-project-root-files
+  #+END_EXAMPLE
+
+  ~Makefile~:
+  #+BEGIN_EXAMPLE
+    CC = gcc
+    CC_FLAG = -Og -g
+
+    .c.o:
+      $(CC) $(CC_FLAG) -c $<
+  #+END_EXAMPLE
+
+  优化是大写的 ~O~.

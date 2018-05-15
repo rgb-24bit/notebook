@@ -1,5 +1,8 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      命令行笔记
+#+TITLE:      命令行指令
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#cmd][CMD]]
+- [[#bash][Bash]]
 
 * CMD
    + Copy 指令 :: /copy b xxx.jpg + xxx.rar xxx.jpg/  --  合成图片和压缩包

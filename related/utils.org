@@ -1,0 +1,14 @@
+#+TITLE:      实用工具
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#x64dbg][x64dbg]]
+- [[#gnupg][Gnupg]]
+
+* x64dbg
+  Windows的开源 x64 / x32调试器, 用来学习汇编很可以
+
+  + [[https://github.com/x64dbg/x64dbg][x64dbg]]
+
+* Gnupg
+  + [[http://www.ruanyifeng.com/blog/2013/07/gpg.html][阮一峰博客]]
+

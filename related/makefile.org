@@ -1,11 +1,15 @@
-#+SETUPFILE:  ./_style/style.setup
-#+TITLE:      Make 使用笔记
+#+TITLE:      Makefile 笔记
 
-: Makefile 内可直接调用Shell命令, 这为他提供了无限的可能
-
-- [[http://wiki.ubuntu.org.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile:MakeFile%E4%BB%8B%E7%BB%8D][教程]]
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#makefile][Makefile]]
+  - [[#自动化变量][自动化变量]]
+  - [[#make][$(MAKE)]]
+  - [[#函数][函数]]
+  - [[#自动构建][自动构建]]
 
 * Makefile
+  [[http://wiki.ubuntu.org.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile:MakeFile%E4%BB%8B%E7%BB%8D][跟我一起写Makefile]]
+
 ** 自动化变量
    - $@ :: 表示规则中的目标文件集
    - $% :: 仅当目标是函数库文件中，表示规则中的目标成员名

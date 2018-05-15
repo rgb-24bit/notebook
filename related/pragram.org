@@ -1,6 +1,0 @@
-* 概率编程
-  + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][维基百科]]
-  + [[http://www.apptranz.com/wk/probabilistic-programming-webppl/][博客]]
-
-* 插件
-  + [[https://en.wikipedia.org/wiki/Plug-in_(computing)][维基百科]]

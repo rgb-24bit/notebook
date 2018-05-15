@@ -27,6 +27,7 @@
 - *jvm*
 - *lang*
   - [[file:lang\graphviz.org][graphviz 笔记]]
+  - [[file:lang\markup.org][标记语言及其他文本格式]]
   - [[file:lang\plantuml.org][plantuml 笔记]]
 - *math*
   - *discrete*
@@ -51,22 +52,14 @@
   - [[file:python\tkinter.org][Tkinter 笔记]]
 - *related*
   - *edit*
-    - [[file:related\edit\emacs.org][emacs 笔记]]
-    - [[file:related\edit\org-mode.org][org-mode 笔记]]
-    - [[file:related\edit\spacemacs.org][spacemacs 笔记]]
-    - [[file:related\edit\vim.org][vim 笔记]]
-  - *linux*
-    - [[file:related\linux\debian.org][Debian 笔记]]
-  - *project*
-    - [[file:related\project\project.org][项目相关]]
+    - [[file:related\edit\emacs.org][Emacs 笔记]]
+    - [[file:related\edit\org-mode.org][Org-mode 笔记]]
+    - [[file:related\edit\spacemacs.org][Spacemacs 笔记]]
+    - [[file:related\edit\vim.org][Vim 笔记]]
   - *version-control*
-    - [[file:related\version-control\git-book.org][Git-Book 阅读笔记]]
+    - [[file:related\version-control\git-book.org][Git-Book 笔记]]
     - [[file:related\version-control\git.org][Git 笔记]]
-  - [[file:related\cmd.org][命令行笔记]]
+  - [[file:related\command.org][命令行指令]]
   - [[file:related\doxygen.org][Doxygen 笔记]]
-  - [[file:related\gpg.org][gpg 使用]]
-  - [[file:related\Make.org][Make 使用笔记]]
-  - [[file:related\markup.org][标记语言及其他文本格式]]
-  - [[file:related\pdf.org][pdf 文档格式]]
-  - [[file:related\pragram.org][pragram.org]]
-  - [[file:related\tool.org][Tool 使用]]
+  - [[file:related\makefile.org][Makefile 笔记]]
+  - [[file:related\utils.org][实用工具]]

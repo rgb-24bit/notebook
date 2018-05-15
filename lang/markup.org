@@ -1,5 +1,13 @@
-#+SETUPFILE:  ./_style/style.setup
 #+TITLE:      标记语言及其他文本格式
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#restructuredtext][reStructuredText]]
+- [[#markdown][Markdown]]
+- [[#yaml][YAML]]
+- [[#json][Json]]
+- [[#csv][CSV]]
+- [[#xml][XML]]
+- [[#pdf][PDF]]
 
 * reStructuredText
   + [[http://docutils.sourceforge.net/rst.html][官方文档]]
@@ -7,7 +15,7 @@
 
 * Markdown
   + [[https://zh.wikipedia.org/wiki/Markdown][维基百科]]
-
+    
 * YAML
   + [[https://zh.wikipedia.org/wiki/YAML][维基百科]]
   + [[http://www.ruanyifeng.com/blog/2016/07/yaml.html][教程]]
@@ -21,4 +29,7 @@
 
 * XML
   + [[https://zh.wikipedia.org/wiki/XML][维基百科]]
+
+* PDF
+  + [[https://zh.wikipedia.org/wiki/%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%96%87%E6%A1%A3%E6%A0%BC%E5%BC%8F][维基百科]]
 
