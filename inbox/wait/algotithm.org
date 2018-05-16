@@ -1,3 +1,0 @@
-#+TITLE:      算法
-
-+ [[http://www.voidcn.com/article/p-qdcbzzhz-bam.html][图像重采样算法]]

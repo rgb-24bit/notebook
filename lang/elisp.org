@@ -1,0 +1,25 @@
+#+TITLE:      Emacs Lisp 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#interactive][interactive]]
+
+* interactive
+  ~Emacs~ 中存在 *两种函数*:
+  1. 可以作为命令执行的函数
+  2. 不能作为命令执行的普通函数
+
+  如果要让定义的函数可以作为命令执行， 需要在函数中添加 ~interactive~:
+  #+BEGIN_SRC emacs-lisp
+    (defun hello-world ()
+      (interactive)
+      (insert "hello, world"))
+  #+END_SRC
+
+  同时可以在 ~interactive~ 中获取函数调用时需要的参数：
+  #+BEGIN_SRC emacs-lisp
+    (defun c-malloc (name value)
+      (interactive
+       (list (read-string "name")
+             (read-string "value"))
+       (insert (format "%s = %s" name value)))
+  #+END_SRC

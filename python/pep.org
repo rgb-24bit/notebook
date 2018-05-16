@@ -1,0 +1,8 @@
+#+TITLE:      PEP 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#pep-8---python-风格规范][PEP 8 - Python 风格规范]]
+- [[#pep-249---数据库接口规范][PEP 249 - 数据库接口规范]]
+
+* PEP 8 - Python 风格规范
+* PEP 249 - 数据库接口规范

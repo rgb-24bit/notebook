@@ -1,25 +1,0 @@
-* 协议
-  + http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html
-
-* ip 地址分配
-  + http://blog.51cto.com/shawnpingchen/508189
-
-* 特殊的ip地址
-  + 0.0.0.0
-  + 255.255.255.255
-  + 127.0.0.1
-  + ........
-
-
-
-* websocket
-  + https://juejin.im/entry/5a337d9df265da4322414094
-
-
-
-* cgi...
-  + https://www.biaodianfu.com/cgi-fastcgi-wsgi.html
-  + https://www.python.org/dev/peps/pep-3333/
-  + http://www.runoob.com/python/python-cgi.html
-  + https://en.wikipedia.org/wiki/Common_Gateway_Interface
-  + https://docs.python.org/2.7/howto/webservers.html

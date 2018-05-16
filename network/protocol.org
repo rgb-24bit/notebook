@@ -1,0 +1,64 @@
+#+TITLE:      互联网协议笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#五层模型][五层模型]]
+- [[#tcp连接的建立和释放][TCP连接的建立和释放]]
+- [[#ip-协议][IP 协议]]
+  - [[#ip-地址][IP 地址]]
+- [[#网关接口][网关接口]]
+- [[#websocket][WebSocket]]
+
+* 五层模型
+  五层模型包括： *应用层*, *传输层*, *网络层*, *链接层*, *物理层*.
+
+  各层的数据包的基本格式都是： ~head + data~, 分层嵌套。
+
+  [[file:img/net.png]]
+
+  详细教程： [[http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html][阮一峰 - 互联网协议入门]].
+
+* TCP连接的建立和释放
+  + [[https://blog.csdn.net/honeybees/article/details/6755335][TCP连接的建立（三次握手）和释放（四次握手）]]
+
+  [[file:http://hi.csdn.net/attachment/201109/6/0_1315329418j553.gif]]
+
+* IP 协议
+  ~Internet Protocol - IP~ 协议是用于分组交换数据网络的一种协议。
+
+  + [[https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%9A%9B%E5%8D%94%E8%AD%B0][维基百科 - 网际协议]]
+
+** IP 地址
+   ~IPv4~ 地址由 32 位二进制数组成， 为便于使用， 常以 ~XXX.XXX.XXX.XXX~ 形式表现，
+   每组 ~XXX~ 代表小于或等于 255 的 10 进制数.
+
+   + [[https://zh.wikipedia.org/wiki/IP%E5%9C%B0%E5%9D%80][维基百科 - IP 地址]]
+
+   一些特殊的 IP 地址：
+   + 0.0.0.0 :: 代表当前主机或本地网络, 监听这个地址可以获取所有指向本机的链接请求
+
+   + 127.XXX.XXX.XXX :: 此地址块中的任何地址都将环回到本地主机中
+
+   + 127.0.0.1 :: 代表本机， 常用于测试
+
+   + XXX.XXX.XXX.255 :: 广播地址
+                
+   + 255.255.255.255 :: 受限广播地址, 不能被任何一台独立主机拥有（监听）， 
+        只能作为目标 IP 地址来表示一个本地网络的广播地址。
+
+* 网关接口
+  + 通用网关接口 - CGI
+  + 服务器网关接口 - WSGI
+    
+  两者都是 *协议*, 规定了 *服务器* 和 *应用程序(脚本)* 之间的通信规范.
+
+  + [[https://www.biaodianfu.com/cgi-fastcgi-wsgi.html][网关协议学习：CGI、FastCGI、WSGI]]
+  + [[https://en.wikipedia.org/wiki/Common_Gateway_Interface][Wiki - Common Gateway Interface]]
+  + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
+
+* WebSocket
+  ~WebSocket~ 和 ~Socket~, 它是一个完整的应用层 *协议*, 包含一套标准的 API.
+
+  *PS:* ~Socket~ 并不是一个协议， 而是为了方便直接使用更底层协议(etc. TCP/UDP) 而存在的一个抽象层.
+  
+  + [[https://juejin.im/entry/5a337d9df265da4322414094][WebSocket详解]]
+

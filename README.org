@@ -26,6 +26,7 @@
   - [[file:front-end\javascript.org][JavaScript 笔记]]
 - *jvm*
 - *lang*
+  - [[file:lang\elisp.org][Emacs Lisp 笔记]]
   - [[file:lang\graphviz.org][graphviz 笔记]]
   - [[file:lang\markup.org][标记语言及其他文本格式]]
   - [[file:lang\plantuml.org][plantuml 笔记]]
@@ -38,17 +39,21 @@
   - *probability*
     - [[file:math\probability\lea.org][概率编程]]
 - *network*
+  - [[file:network\protocol.org][互联网协议笔记]]
 - *os*
   - [[file:os\base.org][基础内容]]
   - [[file:os\express.org][程序的机器级表示]]
   - [[file:os\info.org][信息的表示和处理]]
 - *python*
+  - [[file:python\pep.org][PEP 笔记]]
   - [[file:python\python.org][Python 笔记]]
+  - [[file:python\python3-cookbook.org][Python3-cookbook 阅读笔记]]
   - [[file:python\re.org][Python 正则表达式]]
   - [[file:python\setup.org][Python 打包]]
   - [[file:python\socket.org][Python socket]]
   - [[file:python\stdlib.org][Python 标准库笔记]]
   - [[file:python\text-process.org][Python 文本处理]]
+  - [[file:python\thread.org][Python 并发编程]]
   - [[file:python\tkinter.org][Tkinter 笔记]]
 - *related*
   - *edit*
@@ -56,9 +61,12 @@
     - [[file:related\edit\org-mode.org][Org-mode 笔记]]
     - [[file:related\edit\spacemacs.org][Spacemacs 笔记]]
     - [[file:related\edit\vim.org][Vim 笔记]]
+  - *vc*
+    - [[file:related\vc\git-book.org][Git-Book 笔记]]
+    - [[file:related\vc\git.org][Git 笔记]]
   - *version-control*
-    - [[file:related\version-control\git-book.org][Git-Book 笔记]]
     - [[file:related\version-control\git.org][Git 笔记]]
+  - [[file:related\coding.org][编程技巧]]
   - [[file:related\command.org][命令行指令]]
   - [[file:related\doxygen.org][Doxygen 笔记]]
   - [[file:related\makefile.org][Makefile 笔记]]

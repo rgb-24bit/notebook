@@ -1,0 +1,50 @@
+#+TITLE:      Python 并发编程
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#锁对象][锁对象]]
+- [[#守护线程][守护线程]]
+- [[#threadlocal][ThreadLocal]]
+
+* 锁对象
+  *锁对象* 的方法 ~acquire~ 无参调用会阻塞等待占用的锁被释放。 并返回 ~True~
+
+  参数为 ~False~ 时， 不会阻塞等待锁被释放， 如果调用时锁被占用便直接返回 ~False~, 反之
+  返回 ~True~.
+
+  参数为 ~True~ 时的行为和无参一样。
+
+* 守护线程
+  当一个线程为 *守护线程* 时， 说明这个线程是不重要的， 在进程退出的时候，不用等待这个线程退出。
+
+  *守护线程* 的设置通过线程对象的 ~setDaemon~ 方法完成。
+
+* ThreadLocal
+  通过 ~ThreadLocal~ 对象创建的对象会自动与对应的 *线程* 相绑定， 多个线程之间互不干扰。
+
+  #+BEGIN_SRC python
+    import threading
+
+    # 创建全局ThreadLocal对象:
+    local_school = threading.local()
+
+    def process_student():
+        print 'Hello, %s (in %s)' % (local_school.student, threading.current_thread().name)
+
+    def process_thread(name):
+        # 绑定ThreadLocal的student:
+        local_school.student = name
+        process_student()
+
+    t1 = threading.Thread(target= process_thread, args=('Alice',), name='Thread-A')
+    t2 = threading.Thread(target= process_thread, args=('Bob',), name='Thread-B')
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
+  #+END_SRC
+
+  执行结果：
+  #+BEGIN_EXAMPLE
+    Hello, Alice (in Thread-A)
+    Hello, Bob (in Thread-B)
+  #+END_EXAMPLE

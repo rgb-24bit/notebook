@@ -1,26 +1,27 @@
 #+TITLE:      LeetCode 1-200
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#回文数---题-9][回文数 - 题 9]]
-- [[#罗马数字转整数---题-13][罗马数字转整数 - 题 13]]
-- [[#最大子序和---题-53][最大子序和 - 题 53]]
-- [[#x-的平方根---题-69][x 的平方根 - 题 69]]
-- [[#爬楼梯---题-70][爬楼梯 - 题 70]]
-- [[#合并两个有序数组---题-88][合并两个有序数组 - 题 88]]
-- [[#对称二叉树---题-101][对称二叉树 - 题 101]]
-- [[#将有序数组转换为二叉搜索树---题-108][将有序数组转换为二叉搜索树 - 题 108]]
+- [[#回文数][回文数]]
+- [[#罗马数字转整数][罗马数字转整数]]
+- [[#最大子序和][最大子序和]]
+- [[#x-的平方根][x 的平方根]]
+- [[#爬楼梯][爬楼梯]]
+- [[#合并两个有序数组][合并两个有序数组]]
+- [[#对称二叉树][对称二叉树]]
+- [[#将有序数组转换为二叉搜索树][将有序数组转换为二叉搜索树]]
 - [[#平衡二叉树][平衡二叉树]]
-- [[#杨辉三角---题-118][杨辉三角 - 题 118]]
-- [[#买卖股票的最佳时机---题-121][买卖股票的最佳时机 - 题 121]]
-- [[#只出现一次的数字---题-136][只出现一次的数字 - 题 136]]
+- [[#杨辉三角][杨辉三角]]
+- [[#买卖股票的最佳时机][买卖股票的最佳时机]]
+- [[#只出现一次的数字][只出现一次的数字]]
 - [[#excel表列名称][Excel表列名称]]
 - [[#求众数][求众数]]
 - [[#阶乘后的零][阶乘后的零]]
 - [[#旋转数组][旋转数组]]
 - [[#颠倒二进制串][颠倒二进制串]]
 - [[#位-1-的个数][位 1 的个数]]
+- [[#打家劫舍][打家劫舍]]
 
-* 回文数 - 题 9
+* 回文数
   + [[https://leetcode-cn.com/problems/palindrome-number/description/][Question]]
 
   Python:
@@ -42,7 +43,7 @@
             return revertedNumber == x or x == revertedNumber // 10
   #+END_SRC
 
-* 罗马数字转整数 - 题 13
+* 罗马数字转整数
   + [[https://leetcode-cn.com/problems/roman-to-integer/description/][Question]]
 
   *思路:* 从前向后遍历罗马数字，如果某个数比前一个数小，则加上该数。
@@ -67,7 +68,7 @@
             return res
   #+END_SRC
 
-* 最大子序和 - 题 53
+* 最大子序和
   + [[https://leetcode-cn.com/problems/maximum-subarray/description/][Question]]
 
   Python:
@@ -85,7 +86,7 @@
             return maxSub
     #+END_SRC
     
-* x 的平方根 - 题 69
+* x 的平方根
   + [[https://leetcode-cn.com/problems/sqrtx/description/][Question]]
     
   Python:
@@ -130,7 +131,7 @@
     }
   #+END_SRC
 
-* 爬楼梯 - 题 70
+* 爬楼梯
   + [[https://leetcode-cn.com/problems/climbing-stairs/description/][Question]] - 其实就是斐波那契数列
 
   Python:
@@ -157,7 +158,7 @@
     }
   #+END_SRC
 
-* 合并两个有序数组 - 题 88
+* 合并两个有序数组
   + [[https://leetcode-cn.com/problems/merge-sorted-array/description/][Question]]
 
   Python:
@@ -204,7 +205,7 @@
     }
   #+END_SRC
 
-* 对称二叉树 - 题 101
+* 对称二叉树
   + [[https://leetcode-cn.com/problems/symmetric-tree/description/][Question]]
 
   C:
@@ -234,7 +235,7 @@
     }
   #+END_SRC
 
-* 将有序数组转换为二叉搜索树 - 题 108
+* 将有序数组转换为二叉搜索树
   + [[https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/description/][Question]]
 
   C:
@@ -290,7 +291,7 @@
             return dfsHeight(root) != -1
   #+END_SRC
 
-* 杨辉三角 - 题 118
+* 杨辉三角
   + [[https://leetcode-cn.com/problems/pascals-triangle/description/][Question]]
 
   Python:
@@ -303,7 +304,7 @@
             return ans[:numRows]
   #+END_SRC
 
-* 买卖股票的最佳时机 - 题 121
+* 买卖股票的最佳时机
   + [[https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/description/][Question]]
 
   C:
@@ -326,7 +327,7 @@
     }
   #+END_SRC
 
-* 只出现一次的数字 - 题 136
+* 只出现一次的数字
   + [[https://leetcode-cn.com/problems/single-number/description/][Question]]
   + [[https://leetcode.com/problems/single-number/solution/][解决方案]]
     
@@ -467,5 +468,23 @@
                 count += 1
                 n = n & (n - 1)
             return count
+  #+END_SRC
+
+* 打家劫舍
+  + [[https://leetcode-cn.com/problems/house-robber/description/][Quesion]]
+
+  C:
+  #+BEGIN_SRC C
+    int rob(int* nums, int numsSize) {
+      int pre = 0, cur = 0;
+    
+      for (int i = 0; i < numsSize; ++i) {
+        int tmp = cur;
+        cur = (pre + nums[i]) > cur ? pre + nums[i] : cur;
+        pre = tmp;
+      }
+    
+      return cur;
+    }
   #+END_SRC
 

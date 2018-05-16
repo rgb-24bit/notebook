@@ -1,9 +1,17 @@
 #+TITLE:      LeetCode 201-400
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#1-比特与-2-比特字符---题-317][1 比特与 2 比特字符 - 题 317]]
+- [[#1-比特与-2-比特字符][1 比特与 2 比特字符]]
+- [[#快乐数][快乐数]]
+- [[#删除链表中的节点][删除链表中的节点]]
+- [[#计数质数][计数质数]]
+- [[#同构字符串][同构字符串]]
+- [[#反转链表][反转链表]]
+- [[#2-的幂][2 的幂]]
+- [[#二叉搜索树的最近公共祖先][二叉搜索树的最近公共祖先]]
+- [[#删除链表中的节点-1][删除链表中的节点]]
 
-* 1 比特与 2 比特字符 - 题 317
+* 1 比特与 2 比特字符
   + [[https://leetcode-cn.com/problems/1-bit-and-2-bit-characters/description/][Question]]
 
   Python:
@@ -33,3 +41,235 @@
       return true;
     }
   #+END_SRC
+
+* 快乐数
+  + [[https://leetcode-cn.com/problems/happy-number/description/][Question]]
+    
+  C:
+  #+BEGIN_SRC C
+    bool isHappy(int n) {
+      while (n != 1 && n != 4) {
+        int sum = 0;
+        
+        while (n > 0) {
+          sum += pow((n % 10), 2);
+          n /= 10;
+        }
+        
+        n = sum;
+      }
+      return n == 1;
+    }
+  #+END_SRC
+
+* 删除链表中的节点
+  + [[https://leetcode-cn.com/problems/remove-linked-list-elements/description/][Question]]
+
+  C:
+  #+BEGIN_SRC C
+    struct ListNode* removeElements(struct ListNode* head, int val) {
+      while (head && head->val == val) {
+        head = head->next;
+      }
+    
+      struct ListNode* cur = head;
+      while (cur && cur->next) {
+        if (cur->next->val == val) {
+          cur->next = cur->next->next;
+        }
+        else {
+          cur = cur->next;
+        }
+      }
+    
+      return head;
+    }
+  #+END_SRC
+
+* 计数质数
+  + [[https://leetcode-cn.com/problems/count-primes/description/][Question]]
+
+  使用 [[https://zh.wikipedia.org/wiki/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95][埃拉托斯特尼筛法]] 解决问题：
+  #+BEGIN_SRC python
+    class Solution:
+        def countPrimes(self, n):
+            """
+            :type n: int
+            :rtype: int
+            """
+            flags = [True for i in range(n)]
+        
+            count = 0
+            for i in range(2, n):
+                if not flags[i]:
+                    continue
+                
+                count += 1
+                for j in range(i * i, n, i):
+                    flags[j] = False
+                
+            return count
+  #+END_SRC
+
+  [[file:http://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif]]
+
+* 同构字符串
+  + [[https://leetcode-cn.com/problems/isomorphic-strings/description/][Question]]
+
+  使用 ~hash~ 表解决问题：
+  #+BEGIN_SRC python
+    class Solution:
+        def isIsomorphic(self, s, t):
+            """
+            :type s: str
+            :type t: str
+            :rtype: bool
+            """
+            char_dt = dict()
+        
+            for char_s, char_t in zip(s, t):
+                if char_s not in char_dt:
+                    if char_t not in char_dt.values():
+                        char_dt[char_s] = char_t
+                    else:
+                        return False
+                elif char_dt[char_s] != char_t:
+                    return False
+            
+            return True
+  #+END_SRC
+
+  C 语言可以用二维数组替代：
+  #+BEGIN_SRC C
+    bool isIsomorphic(char* s, char* t) {
+      int len = strlen(s);
+    
+      char** map = (char**)malloc(len * sizeof(char));
+    
+      for (int i = 0; i < len; ++i) {
+        map[i] = (char*)malloc(2 * sizeof(char));
+      }
+    
+      int cur_size = 0;
+      for (int i = 0; i < len; ++i) {
+        bool is_exist = false;
+        
+        for (int j = 0; j < cur_size; ++j) {
+          if (s[i] == map[j][0] && t[i] != map[j][1]) {
+            return false;  // s[i] in map and t[i] != map[s[i]]
+          }
+          else if (s[i] != map[j][0] && t[i] == map[j][1]) {
+            return false;   // s[i] not in map but t[i] im map
+          }
+          else if (s[i] == map[j][0] && t[i] == map[j][1]) {
+            is_exist = true;        
+          }
+        }
+        
+        if (!is_exist) {
+          map[cur_size][0] = s[i];
+          map[cur_size][1] = t[i];
+          cur_size++;
+        }
+      }
+    
+      return true;
+    }
+  #+END_SRC
+
+* 反转链表
+  + [[https://leetcode-cn.com/problems/reverse-linked-list/description/][Question]]
+
+  迭代解法：
+  #+BEGIN_SRC python
+    class Solution:
+        def reverseList(self, head):
+            """
+            :type head: ListNode
+            :rtype: ListNode
+            """
+            pre = None
+        
+            while head and head.next:
+                tmp = head
+                head = head.next
+                tmp.next = pre
+                pre = tmp
+        
+            if head:
+                head.next = pre
+        
+            return head
+  #+END_SRC
+
+  递归解法：
+  #+BEGIN_SRC C
+    struct ListNode* reverseList(struct ListNode* head) {
+      if (head == NULL) {
+        return NULL;
+      }
+    
+      struct ListNode* next = reverseList(head);
+      next->next = head;
+    }
+  #+END_SRC
+
+* 2 的幂
+  + [[https://leetcode-cn.com/problems/power-of-two/description/][Question]]
+
+  采用位运算解决：
+  #+BEGIN_SRC python
+    class Solution:
+        def isPowerOfTwo(self, n):
+            """
+            :type n: int
+            :rtype: bool
+            """
+            fn = 1
+        
+            while fn < n:
+                fn = fn << 1
+            
+            return fn == n
+  #+END_SRC
+
+  C:
+  #+BEGIN_SRC C
+    bool isPowerOfTwo(int n) {
+      return n > 0 && (n & (n - 1)) == 0;
+    }
+  #+END_SRC
+
+* 二叉搜索树的最近公共祖先
+  + [[https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/][Question]]
+
+  C:
+  #+BEGIN_SRC C
+    struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p, struct TreeNode* q) {
+      while (root) {
+        if (root->val > p->val && root->val > q->val) {
+          root = root->left;
+        }
+        else if (root->val < p->val && root->val < q->val) {
+          root = root->right;
+        }
+        else {
+          return root;
+        }
+      }
+      return root;
+    }
+  #+END_SRC
+
+* 删除链表中的节点
+  + [[https://leetcode-cn.com/problems/delete-node-in-a-linked-list/description/][Question]]
+
+  #+BEGIN_SRC C
+    void deleteNode(struct ListNode* node) {
+      node->val = node->next->val;
+      node->next = node->next->next;
+    }
+  #+END_SRC
+
+  使用时注意释放内存。
+
