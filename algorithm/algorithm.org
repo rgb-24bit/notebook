@@ -45,7 +45,9 @@
   图像的 size 修改其实就是一个图像重新采样的过程，
   放大图像称为上采样/插值（upsamping），缩小图像称为小采样（downsampling）。
 
-  + [[http://www.voidcn.com/article/p-qdcbzzhz-bam.html][常见的图像重采样算法]]
+  + [[http://entropymine.com/imageworsener/resample/][Basics of Image Resampling]]
+  + [[https://clouard.users.greyc.fr/Pantheon/experiments/rescaling/index-en.html][TUTORIAL: IMAGE RESCALING]]
+  + [[https://www.cnblogs.com/wjgaas/p/3597095.html][关于图像重采样插值算法]]
 
 * 快速傅里叶变换
   *快速傅里叶变换(Fast Fourier Transform, FFT)*, 是快速计算序列的离散傅里叶变换或其逆变换的方法。
