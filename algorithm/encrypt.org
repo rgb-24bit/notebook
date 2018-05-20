@@ -2,6 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#rsa-算法][RSA 算法]]
+- [[#base64-编码][Base64 编码]]
+- [[#aes-算法][AES 算法]]
 
 * RSA 算法
   *RSA 加密算法* 是一种 _非对称加密算法_.
@@ -10,4 +12,13 @@
   + [[http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html][阮一峰 - RSA 算法原理二]]
   + [[https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95][维基百科 - RSA加密算法]]
 
+* Base64 编码
+  *Base64* 是一种基于 64 个可打印字符来表示二进制数据的表示方法.
+
+  + [[https://zh.wikipedia.org/wiki/Base64][维基百科 - Base64]]
+
+* AES 算法
+  *高级加密标准* (Advanced Encryption Standard, AES).
+
+  + [[https://www.cnblogs.com/luop/p/4334160.html][密码算法详解——AES]]
 

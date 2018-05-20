@@ -4,6 +4,7 @@
 - [[#伪代码][伪代码]]
 - [[#事件驱动程序设计][事件驱动程序设计]]
 - [[#函数式编程][函数式编程]]
+- [[#单字节字符集][单字节字符集]]
 
 * 伪代码
   + [[https://en.wikipedia.org/wiki/Pseudocode][Pseudocode]]
@@ -13,3 +14,28 @@
 
 * 函数式编程
   + [[https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000][函数式编程]]
+* 单字节字符集
+  单字节字符集如 ~latin-1~ 的一种使用：
+  #+BEGIN_SRC python
+    def convert_single(data, encoding='utf-8'):
+        return data.encode(encoding).decode('latin-1')
+
+
+    def convert_multi(data, encoding='utf-8'):
+        return data.encode('latin-1').decode(encoding)
+  #+END_SRC
+
+  实际例子：
+
+  #+BEGIN_SRC python
+    In [1]: from charset import *
+
+    In [2]: s = convert_single('单字节字符集abcdef')
+
+    In [3]: s
+    Out[3]: 'å\x8d\x95å\xad\x97è\x8a\x82å\xad\x97ç¬¦é\x9b\x86abcdef'
+
+    In [4]: convert_multi(s)
+    Out[4]: '单字节字符集abcdef'
+  #+END_SRC
+

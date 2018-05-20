@@ -5,4 +5,6 @@
 - [[#pep-249---数据库接口规范][PEP 249 - 数据库接口规范]]
 
 * PEP 8 - Python 风格规范
+  + 绝对导入和相对导入 :: [[https://www.python.org/dev/peps/pep-0008/#imports][Imports]]
+
 * PEP 249 - 数据库接口规范

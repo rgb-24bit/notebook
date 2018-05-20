@@ -12,9 +12,3 @@
     + [[https://cito.github.io/blog/f-strings/][f-strings]]
     + [[https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5][await/async]]
 
-
-* 同名对象
-  连续定义同名对象， 后定义的回覆盖先定义的对象
-
-* LEGBB
-  + https://segmentfault.com/a/1190000000640834

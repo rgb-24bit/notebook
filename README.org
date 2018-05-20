@@ -2,6 +2,7 @@
 
 - *algorithm*
   - [[file:algorithm\algorithm.org][部分算法笔记]]
+  - [[file:algorithm\contest.org][LeetCode 竞赛题]]
   - [[file:algorithm\encrypt.org][加密算法笔记]]
   - [[file:algorithm\hash.org][Hash 算法笔记]]
   - [[file:algorithm\leetcode-0.org][LeetCode 1-200]]

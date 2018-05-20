@@ -9,6 +9,7 @@
 - [[#抽象类][抽象类]]
 - [[#函数参数][函数参数]]
 - [[#函数属性][函数属性]]
+- [[#语法相关][语法相关]]
 - [[#数值运算相关][数值运算相关]]
 - [[#作用域问题][作用域问题]]
   - [[#修改全局变量][修改全局变量]]
@@ -162,6 +163,25 @@
   
   这一特性的使用： [[https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses][Python function attributes - uses and abuses]].
 
+* 语法相关
+  和 [[file:../c-c++/c.org::语法相关][C - 语法相关]] 的对比。
+
+  + 赋值语句 :: 不能像 ~if x = func()~ 这样使用
+  + 连续赋值 :: 只要最右端的变量或字面值已定义即可
+  + 括号 :: 元组
+  + 逗号 :: 不能那样使用
+
+  作为动态语言， 如果像：
+  #+BEGIN_SRC python
+    def func():
+        pass
+
+    def func():
+        pass
+  #+END_SRC
+
+  定义同名的对象， 最后的对象以 *最后一次* 定义为准
+
 * 数值运算相关
   + 乘方
     #+BEGIN_SRC python
@@ -199,7 +219,11 @@
     In [2]: i
     Out[2]: 9
   #+END_SRC
-  
+ 
+  + LEGB :: ~locals -> enclosing function -> globals -> __builtins__~
+
+            参考： [[https://segmentfault.com/a/1190000000640834][理解 Python 的 LEGB]]
+
 ** 修改全局变量
    1. 内部函数， *不修改* 全局变量可以访问全局变量
    2. 内部函数， *修改* 同名全局变量，则 ~python~ 会认为它是一个局部变量
