@@ -12,3 +12,5 @@
     + [[https://cito.github.io/blog/f-strings/][f-strings]]
     + [[https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5][await/async]]
 
+* 日志
+  https://www.cnblogs.com/yyds/p/6901864.html

@@ -1,3 +1,6 @@
 * Nim游戏
   道理很简单
   + https://leetcode-cn.com/problems/nim-game/description/
+* 3 的幂
+  + https://leetcode-cn.com/problems/power-of-three/description/
+  + https://leetcode.com/problems/power-of-three/solution/

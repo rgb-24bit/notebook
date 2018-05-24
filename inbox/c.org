@@ -8,3 +8,45 @@
   取值操作。
 
   即： 如果是 ~int* arr[size]~, 那么 ~arr[i]~ 是取值后的 ~int~, 而不是 ~int*~.
+
+* 指针和数组
+  #+BEGIN_SRC C
+    #include <stdio.h>
+
+    int main(void) {
+      int num[10] = {0};
+      int* ptr = num;
+
+      printf("%p, %p, %p, %p", num, &num[0], ptr, &ptr);
+
+      return 0;
+    }
+  #+END_SRC
+
+  数组名的 *值* 和 *地址* 相同。
+
+  指针的 *值* 和 *地址* 不同。
+
+  数组名可以理解为 *值* 和 *地址* 相同的 *指针*.
+
+* 结构体
+  结构体的内存对齐只要能满足对齐规则， 就尽量少补。
+
+  结构体内部的字段补内存时只有靠近需要对齐内存的字段的字段需要：
+  #+BEGIN_SRC C
+    struct P {
+      int i;
+      char c;  // 不补， 下一个字段对齐的
+      char d;  // 补， 下一个字段内存不对齐
+      long j;  // x86-64
+    }
+  #+END_SRC
+
+* 标准输入
+  #+BEGIN_SRC C
+    char* p = fgets(buf, BUF_SIZE, stdin);
+  #+END_SRC
+
+* 符号表
+  + http://blog.wuxu92.com/csapp-linking/
+  + http://www.voidcn.com/article/p-xkzfegsq-dw.html
