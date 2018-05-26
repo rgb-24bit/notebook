@@ -1,2 +1,6 @@
 * webassembly
   + https://developer.mozilla.org/zh-CN/docs/WebAssembly
+  + http://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html
+
+* Web Components
+  + https://developer.mozilla.org/en-US/docs/Web/Web_Components

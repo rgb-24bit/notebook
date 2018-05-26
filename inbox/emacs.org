@@ -1,0 +1,9 @@
+* artist-mode
+  + http://emacser.com/artist-mode.htm
+
+* org-mode
+  + https://orgmode.org/manual/Special-symbols.html
+  + http://www.zmonster.me/2016/06/03/org-mode-table.html
+
+* 高级文本操作
+  + https://www.ibm.com/developerworks/cn/education/aix/au-emacs3/index.html

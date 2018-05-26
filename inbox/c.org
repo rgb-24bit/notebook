@@ -47,6 +47,3 @@
     char* p = fgets(buf, BUF_SIZE, stdin);
   #+END_SRC
 
-* 符号表
-  + http://blog.wuxu92.com/csapp-linking/
-  + http://www.voidcn.com/article/p-xkzfegsq-dw.html
