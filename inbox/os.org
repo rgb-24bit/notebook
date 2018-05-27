@@ -1,3 +1,6 @@
+* 跳转指令
+  + http://www.penguin.cz/~literakl/intel/j.html
+
 * 补码乘法
   + http://pages.cs.wisc.edu/~smoler/cs354/beyond354/int.mult.html
 
