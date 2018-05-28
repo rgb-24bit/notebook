@@ -69,6 +69,18 @@
 
   乘除: [[http://www.cnblogs.com/kiven-code/archive/2012/09/15/2686922.html][博客园]]
   
+  两数之和：
+  #+BEGIN_SRC C
+    int getSum(int a, int b) {
+      while (b != 0) {
+        int c = a ^ b;
+        b = (a & b) << 1;
+        a = c;
+      }
+      return a;
+    }
+  #+END_SRC
+
 * 字节对齐
   + 4 字节对齐
     #+BEGIN_SRC C

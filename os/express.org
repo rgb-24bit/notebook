@@ -8,6 +8,7 @@
   - [[#操作数指示符][操作数指示符]]
 - [[#mov-指令][MOV 指令]]
 - [[#pop-和-push-指令][POP 和 PUSH 指令]]
+- [[#栈帧][栈帧]]
 
 * 条件码寄存器
   + [[https://en.wikipedia.org/wiki/FLAGS_register][维基百科]]
@@ -89,4 +90,7 @@
       return 0;
     }
   #+END_SRC
+
+* 栈帧
+  + [[http://www.cnblogs.com/xkfz007/archive/2012/03/27/2420158.html][C语言中函数参数入栈的顺序]]
 

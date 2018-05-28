@@ -5,12 +5,8 @@
     + [[http://blog.csdn.net/feitianxuxue/article/details/41129677][C调用Python]]
   + 数据库
     + [[http://python.jobbole.com/88954/][伯乐在线]]
-  + 设计模式
-    + [[http://www.cnblogs.com/wuyuegb2312/archive/2013/04/09/3008320.html][《大话设计模式》Python版代码实现]]
   + 3.x 特性
     + [[https://mozillazg.com/2016/01/python-function-argument-type-check-base-on-function-annotations.html][函数注解]]
     + [[https://cito.github.io/blog/f-strings/][f-strings]]
     + [[https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5][await/async]]
 
-* 日志
-  https://www.cnblogs.com/yyds/p/6901864.html

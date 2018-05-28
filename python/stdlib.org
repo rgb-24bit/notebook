@@ -22,6 +22,7 @@
   + logging :: 日志记录
     + [[http://python.jobbole.com/81666/][每个 Python 程序员都要知道的日志实践]]
     + [[http://blog.jobbole.com/113413/][日志的艺术（The art of logging）]]
+    + [[https://www.cnblogs.com/yyds/p/6901864.html][Python之日志处理（logging模块）]]
     + [[http://python.jobbole.com/86887/][Python 中的 logging 模块]]
   
   + io :: 包含 ~StringIO~ 和 ~BytesIO~

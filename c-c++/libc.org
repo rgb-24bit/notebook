@@ -34,3 +34,6 @@
     }
   #+END_SRC
 
+  #+BEGIN_SRC C
+    char* p = fgets(buf, BUF_SIZE, stdin);
+  #+END_SRC

@@ -75,8 +75,17 @@
   + [[https://blog.csdn.net/gatieme/article/details/64131322][柔性数组]]
 
 * 内存对齐
-  + [[https://www.cnblogs.com/clover-toeic/p/3853132.html][C语言字节对齐问题详解]]
-  + CSAPP-189
+  结构体的内存对齐只要能满足对齐规则， 就尽量少补。
+
+  结构体内部的字段补内存时只有靠近需要对齐内存的字段的字段需要：
+  #+BEGIN_SRC C
+    struct P {
+      int i;
+      char c;  // 不补， 下一个字段对齐的
+      char d;  // 补， 下一个字段内存不对齐
+      long j;  // x86-64
+    }
+  #+END_SRC
 
 * 类型转化
   链接： [[http://zh.cppreference.com/w/c/language/conversion][隐式转换]]

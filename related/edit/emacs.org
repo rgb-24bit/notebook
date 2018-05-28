@@ -1,41 +1,17 @@
 #+TITLE:      Emacs 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#使用技巧][使用技巧]]
-- [[#替换文件后缀名][替换文件后缀名]]
 - [[#ediff][ediff]]
-- [[#evil][evil]]
-- [[#文件管理器][文件管理器]]
 - [[#profiler][profiler]]
+- [[#使用技巧][使用技巧]]
 - [[#窗口操作][窗口操作]]
 - [[#使用模板][使用模板]]
 - [[#文件变量][文件变量]]
 - [[#字符相关][字符相关]]
+- [[#文件管理器][文件管理器]]
 - [[#文件头修改][文件头修改]]
-
-* 使用技巧
-  + 触手可及的文档 ::
-    + C-h C-h: 关于帮助的帮助
-    + C-h k/f/v: 查看 快捷键/函数/变量 的帮助
-    + C-h r: 在 Emacs 内阅读 Emacs manual
-
-  + 录制键盘操作的宏 ::
-    F3 开始录制宏, F4 结束录制, F4 使用宏
-
-  + VC(版本控制) ::
-    + C-x v =: 查看改动
-    + C-x v v: 准备提交
-    + C-c C-c: 确认提交
-    + M-x vc-version-diff: 版本对比
-
-  + 输入特殊字符 ::
-   + 快捷键： ~C-x RET C-\ TeX RET~
-
-* 替换文件后缀名
-  1. 进入 dir-mode
-  2. C-x C-q 进入编辑模式
-  3. 使用 query-replace 替换后缀名
-  4. C-c C-c 保存修改
+- [[#高级文本操作][高级文本操作]]
+- [[#替换文件后缀名][替换文件后缀名]]
 
 * ediff
   + 可比较项目:
@@ -61,15 +37,27 @@
      | ...     | ...                       | ...                                                          |
      |---------+---------------------------+--------------------------------------------------------------|
 
-* evil
-  + 匹配对应的括号： ~%~
-
-* 文件管理器
-  + [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
-
 * profiler
   + profiler-start 启动监控
   + profiler-report 显示信息
+
+* 使用技巧
+  + 触手可及的文档 ::
+    + C-h C-h: 关于帮助的帮助
+    + C-h k/f/v: 查看 快捷键/函数/变量 的帮助
+    + C-h r: 在 Emacs 内阅读 Emacs manual
+
+  + 录制键盘操作的宏 ::
+    F3 开始录制宏, F4 结束录制, F4 使用宏
+
+  + VC(版本控制) ::
+    + C-x v =: 查看改动
+    + C-x v v: 准备提交
+    + C-c C-c: 确认提交
+    + M-x vc-version-diff: 版本对比
+
+  + 输入特殊字符 ::
+   + 快捷键： ~C-x RET C-\ TeX RET~
 
 * 窗口操作
   + C-x 1 保留一个窗口
@@ -90,6 +78,19 @@
   + C-q C-l 分页符
   + C-x 8 RET 输入特殊字符
   + C-x 8 <key> 选择特殊字符输入
+
+* 文件管理器
+  + [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
+
 * 文件头修改
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动更新文件头]]
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动添加文件头]]
+
+* 高级文本操作
+  + [[https://www.ibm.com/developerworks/cn/education/aix/au-emacs3/index.html][高级 Emacs 文本操作]]
+
+* 替换文件后缀名
+  1. 进入 dir-mode
+  2. C-x C-q 进入编辑模式
+  3. 使用 query-replace 替换后缀名
+  4. C-c C-c 保存修改

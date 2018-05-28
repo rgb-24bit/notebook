@@ -9,6 +9,7 @@
 - [[#表格][表格]]
 - [[#特殊日常表][特殊日常表]]
 - [[#链接][链接]]
+- [[#特殊符号][特殊符号]]
 
 * 快捷键
   #+CAPTION: org-mode 快捷键
@@ -123,6 +124,8 @@
   + #+CAPTION: 用于显示
   + #+NAME: 用于引用
 
+  教程： [[http://www.zmonster.me/2016/06/03/org-mode-table.html][表格的基本操作及公式、绘图]]
+    
 * 特殊日常表
   将类似以下的内容保存为一个单独的org文件, 然后加入日程表文件列表
 
@@ -133,3 +136,8 @@
 * 链接
   + link::tag 确定页面内链接
 
+* 特殊符号
+  + [[https://orgmode.org/manual/Special-symbols.html][Special symbols]] 
+  + 竖线 \vert
+  + 下划线 \under{}
+   
