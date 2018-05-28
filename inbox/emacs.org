@@ -1,0 +1,2 @@
+* dired-mode
+  + https://wolfsonliu.github.io/archive/emacs-xue-xi-bi-ji-dired-mode-he-wen-jian-guan-li.html
