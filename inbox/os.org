@@ -1,12 +1,3 @@
-* 跳转指令
-  + http://www.penguin.cz/~literakl/intel/j.html
-
-* 补码乘法
-  + http://pages.cs.wisc.edu/~smoler/cs354/beyond354/int.mult.html
-
-* 浮点数加法
-  + https://www.cs.uaf.edu/2000/fall/cs301/notes/Chapter6/node3.html
-
 * 符号表
   + http://blog.wuxu92.com/csapp-linking/
   + http://www.voidcn.com/article/p-xkzfegsq-dw.html

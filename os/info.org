@@ -7,6 +7,7 @@
 - [[#浮点数表示][浮点数表示]]
   - [[#ieee-754][IEEE 754]]
   - [[#舍入][舍入]]
+  - [[#加法][加法]]
 
 * 大小端问题
   + 计算机内存地址分配： *由小到大*
@@ -115,6 +116,8 @@
 
   + 除以 2 的幂 :: 结果向下取整 ~x >> k~, 结果向上取整 ~(x + (1 << k) - 1) >> k~ (P71)
 
+  补码乘法： [[http://pages.cs.wisc.edu/~smoler/cs354/beyond354/int.mult.html][Two's Complement Multiplication]] 
+
 * 浮点数表示
   二进制小数点后表示的值 = 原本代表的值 / 2^(-小数点后的位数) --(类比十进制)
 
@@ -221,3 +224,5 @@
 
    对于第四个舍入， 最低有效位是 ~0~, 向下舍入使得最低有效位保持不变为 ~0~.
 
+** 加法
+   + [[https://www.cs.uaf.edu/2000/fall/cs301/notes/Chapter6/node3.html][Addition and Subtraction]]
