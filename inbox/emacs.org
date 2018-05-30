@@ -1,2 +1,6 @@
 * dired-mode
   + https://wolfsonliu.github.io/archive/emacs-xue-xi-bi-ji-dired-mode-he-wen-jian-guan-li.html
+
+* spacemacs 配置
+  + post-init 是在 init 之后执行， 如果没有 init 定义， 那么 package 就不会加载
+  + user-package 中， init 是在 package 加载前执行， config 是在 package 加载后
