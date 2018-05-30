@@ -47,6 +47,7 @@
   - [[file:os\base.org][基础内容]]
   - [[file:os\express.org][程序的机器级表示]]
   - [[file:os\info.org][信息的表示和处理]]
+  - [[file:os\link.org][链接]]
 - *python*
   - [[file:python\pep.org][PEP 笔记]]
   - [[file:python\python.org][Python 笔记]]

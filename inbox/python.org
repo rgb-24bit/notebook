@@ -19,3 +19,7 @@
   + https://stackoverflow.com/questions/34777773/typeerror-object-takes-no-parameters-after-defining-new
   + https://segmentfault.com/q/1010000015086320
   + https://www.jianshu.com/p/f63ad9d550f1
+
+* flask
+  + http://codingpy.com/article/customizing-the-flask-response-class/
+  + http://www.letiantian.me/2014-06-28-flask-cookie/
