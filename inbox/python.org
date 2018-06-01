@@ -23,3 +23,7 @@
 * flask
   + http://codingpy.com/article/customizing-the-flask-response-class/
   + http://www.letiantian.me/2014-06-28-flask-cookie/
+* 描述器
+  + http://pyzh.readthedocs.io/en/latest/Descriptor-HOW-TO-Guide.html
+  + https://www.zhihu.com/question/25391709/answer/30715222
+  + https://docs.python.org/3.6/howto/descriptor.html
