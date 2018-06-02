@@ -27,3 +27,14 @@
   + http://pyzh.readthedocs.io/en/latest/Descriptor-HOW-TO-Guide.html
   + https://www.zhihu.com/question/25391709/answer/30715222
   + https://docs.python.org/3.6/howto/descriptor.html
+
+* 小整数对象池
+  + https://foofish.net/python-int-mystery.html
+
+* @staticmethod 的作用
+  使用 @staticmethod 修饰的方法， 除了类以外实例也可以调用。
+
+  不用 @staticmethod 修饰， 就只能类调用
+
+  + http://www.runoob.com/python/python-func-staticmethod.html
+
