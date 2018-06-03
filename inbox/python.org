@@ -25,3 +25,4 @@
   + https://www.zhihu.com/question/25391709/answer/30715222
   + https://docs.python.org/3.6/howto/descriptor.html
 
+* 循环引用问题
