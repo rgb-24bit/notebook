@@ -15,26 +15,13 @@
   + https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
   + https://segmentfault.com/a/1190000004618621
   + http://www.pythondoc.com/flask-sqlalchemy/index.html
-* __new__
-  + https://stackoverflow.com/questions/34777773/typeerror-object-takes-no-parameters-after-defining-new
-  + https://segmentfault.com/q/1010000015086320
-  + https://www.jianshu.com/p/f63ad9d550f1
 
 * flask
   + http://codingpy.com/article/customizing-the-flask-response-class/
   + http://www.letiantian.me/2014-06-28-flask-cookie/
+
 * 描述器
   + http://pyzh.readthedocs.io/en/latest/Descriptor-HOW-TO-Guide.html
   + https://www.zhihu.com/question/25391709/answer/30715222
   + https://docs.python.org/3.6/howto/descriptor.html
-
-* 小整数对象池
-  + https://foofish.net/python-int-mystery.html
-
-* @staticmethod 的作用
-  使用 @staticmethod 修饰的方法， 除了类以外实例也可以调用。
-
-  不用 @staticmethod 修饰， 就只能类调用
-
-  + http://www.runoob.com/python/python-func-staticmethod.html
 

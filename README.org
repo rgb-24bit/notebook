@@ -28,6 +28,7 @@
   - [[file:front-end\javascript.org][JavaScript 笔记]]
   - [[file:front-end\technology.org][前端相关技术]]
 - *jvm*
+  - [[file:jvm\java.org][Java 笔记]]
 - *lang*
   - [[file:lang\elisp.org][Emacs Lisp 笔记]]
   - [[file:lang\graphviz.org][graphviz 笔记]]
@@ -74,4 +75,5 @@
   - [[file:related\command.org][命令行指令]]
   - [[file:related\doxygen.org][Doxygen 笔记]]
   - [[file:related\makefile.org][Makefile 笔记]]
+  - [[file:related\rest-api.org][REST API]]
   - [[file:related\utils.org][实用工具]]

@@ -1,0 +1,117 @@
+#+TITLE:      Java 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#版本][版本]]
+- [[#jdk--jre--jvm][JDK & JRE & JVM]]
+- [[#程序结构与文件名][程序结构与文件名]]
+- [[#布尔判断][布尔判断]]
+- [[#数据类型][数据类型]]
+- [[#标识符][标识符]]
+
+* 版本
+  + Java: 1.02 - 1.1
+  + Java2: 1.2, 1.3, 1.4
+  + Java5.0: 1.5+
+
+* JDK & JRE & JVM
+  Java SE - Java Platform, Standard Edition. Including JRE and JDK.
+
+  + JVM(Java Virtual Machine), Java 虚拟机的缩写.
+  + JRE(Java Runtime Environment), Java 运行环境的缩写. 运行 JAVA 程序所必须的环境的集合，
+    包括 Java 虚拟机和 Java 程序所需的核心类库等， 如果想要运行一个开发好的 Java 程序，计算机中只需要安装 JRE 即可。
+  + JDK(Java Development Kit), Java 开发工具包的缩写. JDK是提供给 Java 开发人员使用的，其中包含了 java 的开发工具，
+    也包括了 JRE。所以安装了 JDK，就不用在单独安装 JRE 了。其中的开发工具： 编译工具(javac.exe)  打包工具(jar.exe)等。
+  
+  参考： [[https://blog.csdn.net/z15732621736/article/details/50603819][JDK、JRE、JVM 简介]]
+
+* 程序结构与文件名
+  程序结构：
+  + 一个程序最少有一个类
+  + 只有一个 main() 函数
+  + 所有东西都需要包含在 class, interface, enum 中
+
+  文件名：
+  + Java 保存的文件名必须与类名一致
+  + 如果文件中只有一个类，文件名必须与类名一致
+  + 一个 Java 文件中只能有一个 public 类
+  + 如果文件中不止一个类，文件名必须与 public 类名一致
+  + 如果文件中不止一个类，而且没有 public 类，文件名可与任一类名一致
+
+  参考： [[https://blog.csdn.net/shaoxiaoning/article/details/40424087][Java的类名与文件名必须一致]]
+
+* 布尔判断
+  Java 中 integer 和 boolean 是两种类型， 因此不能像这样：
+  #+BEGIN_SRC java
+      int x = 1;
+
+      while (x) {}
+  #+END_SRC
+
+* 数据类型
+  下表为： primitive 主数据类型
+  |---------+-----------------+--------------------------|
+  | 类型    |            位数 | 值域                     |
+  |---------+-----------------+--------------------------|
+  | boolean | Java 虚拟机决定 | true or false            |
+  | char    |              16 | 0 ~ 65535                |
+  | byte    |               8 | -128 ~ 127               |
+  | short   |              16 | -32768 ~ 32767           |
+  | int     |              32 | -2147483648 ~ 2147483647 |
+  | long    |              64 | -很大 ~ +很大            |
+  | float   |              32 | 范围规模可变             |
+  | double  |              64 | 范围规模可变             |
+  |---------+-----------------+--------------------------|
+
+  + 没有无符号数
+   
+  + 定义 ~float~ 的数值需要加 ~f~ 后缀， 如： ~float f = 32.45f~, 否则小数会
+    默认当做 ~double~ 处理
+
+  + 和 ~C~ 不同， 类似下面的行为在 ~Java~ 中不被允许， 编译器会报错：
+    #+BEGIN_SRC java
+    int x = 24;
+    byte b = x;
+    #+END_SRC
+    
+    隐式类型转换只允许在不会有数据丢失的情况下进行， 即: ~int~ 不能和
+    ~float~ 直接转换。
+   
+    也不能使用类似 ~byte x = 128~ 的语句
+   
+  + 除此之外的类型的变量都是对一个对象的 *引用*, *对象* 实例保存在可回收垃圾的堆上
+
+  + 所有引用变量的大小都一样， 不一样的是内存中的实例大小
+
+  + 引用变量的空值为 ~null~
+   
+  + 和 ~Python~ 一样， 当一个实例对象的引用数为 0 时， 这个对象就可以被回收。
+
+  + 实例对象通常通过 ~new~ 创建， 这会在内存中创建唯一的对象实例
+
+  + 数组也是对象
+   
+  + 注意引用类型数组的初始化：
+    #+BEGIN_SRC java
+    Dog[] dog;  // 声明数组 dog
+    dog = new Dog[7];  // 为 dog 分配内存
+
+    for (int i = 0; i < 7; ++i) {
+      dog[i] = new Dog();  // 为数组元素分配内存
+    }
+    #+END_SRC
+   
+  + String 不是 Java 关键字
+   
+  + 没有初始化的数值类型（包括 char） 默认为 0, 布尔类型默认为 false, 引用默认为 null.
+   
+  + 局部变量没有默认值， 使用前必须初始化
+
+  + 可以使用 == 来判断两个主数据类型是否相对， 会判断两个引用是否引用同一个对象
+ 
+* 标识符
+  和 ~C~ 与 ~Python~ 不同， ~Java~ 的标识符包含 ~$~, 即可以用 ~$~ 开头。
+
+  ~C~ 和 ~Python~ 只能是字母或下划线。
+
+  这一点和 ~JavaScript~ 是相同的。
+

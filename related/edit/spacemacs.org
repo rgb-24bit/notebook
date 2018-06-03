@@ -2,9 +2,11 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#快捷键][快捷键]]
+- [[#窗口移动][窗口移动]]
 - [[#字体设置][字体设置]]
 - [[#保留的-emacs-快捷键][保留的 emacs 快捷键]]
 - [[#c-c-反汇编][C-C++ 反汇编]]
+- [[#layer-编写][layer 编写]]
 
 * 快捷键
   #+CAPTION: Python-mode 快捷键
@@ -35,6 +37,12 @@
   |-----------+-----------------------------+------|
 
   + [[https://scarletsky.github.io/2016/01/22/spacemacs-usage/][Spacemacs 使用总结]]
+
+* 窗口移动
+  + SPC w H: 将窗口移动到左边， 不是光标
+  + SPC w L: 将窗口移动到右边， 不是光标
+  + SPC w K: 将窗口移动到上边， 不是光标
+  + SPC w J: 将窗口移动到下边， 不是光标
 
 * 字体设置
   spacemacs 默认字体设置为 nil
@@ -92,3 +100,6 @@
   #+END_EXAMPLE
 
   优化是大写的 ~O~.
+* layer 编写
+  + post-init 是在 init 之后执行， 如果没有 init 定义， 那么 package 就不会加载
+  + user-package 中， init 是在 package 加载前执行， config 是在 package 加载后

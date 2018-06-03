@@ -1,9 +1,0 @@
-* dired-mode
-  + http://ergoemacs.org/emacs/file_management.html
-
-* windows
-  + http://ergoemacs.org/emacs/emacs_split_windows.html
-
-* spacemacs 配置
-  + post-init 是在 init 之后执行， 如果没有 init 定义， 那么 package 就不会加载
-  + user-package 中， init 是在 package 加载前执行， config 是在 package 加载后

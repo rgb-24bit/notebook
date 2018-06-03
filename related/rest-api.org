@@ -1,0 +1,32 @@
+#+TITLE:      REST API
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#教程--例子][教程 & 例子]]
+- [[#一般规则][一般规则]]
+
+* 教程 & 例子
+  + [[http://www.ruanyifeng.com/blog/2014/05/restful_api.html][RESTful API 设计指南]]
+  + [[https://developer.github.com/v3/][Github REST API v3]]
+
+* 一般规则
+  1. 使用 HTTPS 协议
+  2. 应该尽量将 API 部署在专用域名
+     #+BEGIN_EXAMPLE
+       https://api.example.com
+     #+END_EXAMPLE
+
+     简单的可以放在：
+     #+BEGIN_EXAMPLE
+       https://example.org/api/
+     #+END_EXAMPLE
+  3. 应该将 API 的版本号放入 URL
+  4. endpoint 应该总是一个名词而不是动词
+  5. 使用 HTTP 动词来表示对资源的具体操作类型：
+     #+BEGIN_EXAMPLE
+       GET（SELECT）：从服务器取出资源（一项或多项）。
+       POST（CREATE）：在服务器新建一个资源。
+       PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。
+       PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。
+       DELETE（DELETE）：从服务器删除资源。
+     #+END_EXAMPLE
+

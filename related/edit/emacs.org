@@ -57,13 +57,24 @@
     + M-x vc-version-diff: 版本对比
 
   + 输入特殊字符 ::
-   + 快捷键： ~C-x RET C-\ TeX RET~
+    + 快捷键： ~C-x RET C-\ TeX RET~
+
+  + *最小化*:
+    + 快捷键： ~C-x C-z~
 
 * 窗口操作
+  + C-x 0 关闭当前窗口
   + C-x 1 保留一个窗口
   + C-x 2 上下分割窗口
   + C-x 3 左右分割窗口
-  + C-x C-z 隐藏窗口
+  + C-x o 移动到另一个窗口
+
+  窗口大小：
+  + C-x ^: 增高
+  + C-x }: 增宽
+  + C-x {: 减宽
+  + C-x -: 缩小窗口以适应内容
+  + C-x +: 所有窗口等宽等高
     
 * 使用模板
   + [[http://www.fidding.me/article/18][emacs yasnippet自定义模版配置与使用]]
@@ -80,8 +91,30 @@
   + C-x 8 <key> 选择特殊字符输入
 
 * 文件管理器
-  + [[http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html][Emacs -- 强大的文件管理器]]
+  实用的快捷键和命令：
+  + Enter: 打开文件或目录
+  + q: 退出当前 dired
+  + C: 复制文件
+  + R: 重命名或移动文件
+  + D: 删除文件
+  + +: 新建文件夹
+  + Z: 压缩/解压缩文件
 
+  标记：
+  + m: 标记一个文件
+  + u: 撤销标记
+  + U: 撤销所有标记
+  + % m: 通过正则表达式标记
+
+  导航：
+  + g: 刷新
+  + ^: 跳转到父目录
+  + >: 下一个子目录
+  + <: 上一个子目录
+
+  其他：
+  + x: 删除所有 D 标记的文件， 使用 d 标记为 D
+  
 * 文件头修改
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动更新文件头]]
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动添加文件头]]

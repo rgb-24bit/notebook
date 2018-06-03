@@ -1,6 +1,7 @@
 #+TITLE:      标记语言及其他文本格式
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#各种标记语言的对比][各种标记语言的对比]]
 - [[#restructuredtext][reStructuredText]]
 - [[#markdown][Markdown]]
 - [[#yaml][YAML]]
@@ -8,6 +9,9 @@
 - [[#csv][CSV]]
 - [[#xml][XML]]
 - [[#pdf][PDF]]
+
+* 各种标记语言的对比
+  + [[https://en.wikipedia.org/wiki/Lightweight_markup_language#Comparison_of_lightweight_markup_language_syntax][Comparison of lightweight markup language syntax]]
 
 * reStructuredText
   + [[http://docutils.sourceforge.net/rst.html][官方文档]]
