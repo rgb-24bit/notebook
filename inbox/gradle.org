@@ -1,0 +1,284 @@
+* Task
+  使用关键字 ~task~ 定义任务：
+  #+BEGIN_SRC groovy
+    task hello {
+      doLast {
+        println 'tutorialspoint'
+      }
+    }
+
+    task hello << {
+      println 'tutorialspoint'
+    }
+
+    task('hello') << {
+      println "tutorialspoint"
+    }
+
+    tasks.create(name: 'hello') << {
+      println "tutorialspoint"
+    }
+  #+END_SRC
+
+  查看任务属性：
+  #+BEGIN_SRC groovy
+    task hello
+
+    println hello.name
+    println project.hello.name
+
+    // -----------------------
+
+    task hello
+
+    println tasks.hello.name
+    println tasks['hello'].name
+
+    // ------------------------
+
+    project(':projectA') {
+      task hello
+    }
+    task hello
+
+    println tasks.getByPath('hello').path
+    println tasks.getByPath(':hello').path
+    println tasks.getByPath('projectA:hello').path
+    println tasks.getByPath(':projectA:hello').path
+  #+END_SRC
+
+  添加任务依赖：
+  #+BEGIN_SRC groovy
+    task taskX << {
+      println 'taskX'
+    }
+
+    task taskY(dependsOn: 'taskX') << {
+      println "taskY"
+    }
+
+    // --------------------------------
+
+    task taskY << {
+      println 'taskY'
+    }
+
+    task taskX << {
+      println 'taskX'
+    }
+
+    taskY.dependsOn taskX
+
+    // ------------------
+
+    task taskX << {
+      println 'taskX'
+    }
+
+    taskX.dependsOn {
+      tasks.findAll {
+        task -> task.name.startsWith('lib')
+      }
+    }
+
+    task lib1 << {
+      println 'lib1'
+    }
+
+    task lib2 << {
+      println 'lib2'
+    }
+
+    task notALib << {
+      println 'notALib'
+    }
+  #+END_SRC
+  
+  添加任务描述：
+  #+BEGIN_SRC groovy
+    task copy(type: Copy) {
+      description 'Copies the resource directory to the target directory.'
+      from 'resources'
+      into 'target'
+      include('**/*.txt', '**/*.xml', '**/*.properties')
+      println("description applied")
+    }
+  #+END_SRC
+
+  跳过任务：
+  #+BEGIN_SRC groovy
+    task eclipse << {
+       println 'Hello Eclipse'
+    }
+
+    // #1st approach - closure returning true, if the task should be executed, false if not.
+    eclipse.onlyIf {
+       project.hasProperty('usingEclipse')
+    }
+
+    // #2nd approach - alternatively throw an StopExecutionException() like this
+    eclipse.doFirst {
+       if(!usingEclipse) {
+          throw new StopExecutionException()
+       }
+    }
+  #+END_SRC
+
+* 依赖管理
+  #+BEGIN_SRC groovy
+    apply plugin: 'java'
+
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+      testCompile group: 'junit', name: 'junit', version: '4.+'
+    }
+  #+END_SRC
+
+  选项说明：
+  + Complie :: 项目编译需要的依赖项
+  + Runtime :: 项目运行需要的依赖项， 默认也包含 ~Complie~ 项
+  + Test Complie :: 项目测试源编译需要的依赖项， 默认也包含 ~Complie~ 和编译生成的项
+  + Test Runtime :: 项目测试运行时需要的依赖项， 包含 ~Runtime~ 和 ~Test Complie~ 项
+                    
+  存储库至少需要一个， 用于外部依赖项， 通过以下方式声明 ~maven~ 存储库：
+  #+BEGIN_SRC groovy
+    repositories {
+       mavenCentral()
+    }
+  #+END_SRC
+
+  定义远程库：
+  #+BEGIN_SRC groovy
+    repositories {
+      maven {
+        url "http://repo.mycompany.com/maven2"
+      }
+    }
+  #+END_SRC
+
+  *Publish*:
+  #+BEGIN_SRC groovy
+    apply plugin: 'maven'
+
+    uploadArchives {
+      repositories {
+        mavenDeployer {
+          repository(url: "file://localhost/tmp/myRepo/")
+        }
+      }
+    }
+  #+END_SRC
+
+* 插件
+  + https://www.tutorialspoint.com/gradle/gradle_plugins.htm
+
+* 构建
+  存在以下四个任务：
+  #+BEGIN_SRC groovy
+    task task1 << {
+      println 'compiling source'
+    }
+
+    task task2(dependsOn: task1) << {
+      println 'compiling unit tests'
+    }
+
+    task task3(dependsOn: [task1, task2]) << {
+      println 'running unit tests'
+    }
+
+    task task4(dependsOn: [task1, task3]) << {
+      println 'building the distribution'
+    }
+  #+END_SRC
+
+  编译执行上述任务：
+  #+BEGIN_SRC bash
+    C:\> gradle task4
+  #+END_SRC
+
+  输出应该为：
+  #+BEGIN_EXAMPLE
+    > Task :task1                    
+    compiling source                 
+                                 
+    > Task :task2                    
+    compiling unit tests             
+                                 
+    > Task :task3                    
+    running unit tests               
+                                 
+    > Task :task4                    
+    building the distribution        
+  #+END_EXAMPLE
+
+  排除任务一：
+  #+BEGIN_SRC bash
+    gradle task4 -x task1
+  #+END_SRC
+
+  输出为：
+  #+BEGIN_EXAMPLE
+    > Task :task2
+    compiling unit tests
+
+    > Task :task3
+    running unit tests
+
+    > Task :task4
+    building the distribution
+  #+END_EXAMPLE
+
+* Java 项目构建
+  使用插件 ~java~:
+  #+BEGIN_SRC groovy
+    apply plugin: 'java'
+  #+END_SRC
+
+  默认项目结构：
+  + src/main/java - 源代码
+  + src/test/java - 测试
+
+  执行构建：
+  #+BEGIN_SRC bash
+    C:\> gradle build
+  #+END_SRC
+
+  使用 ~SourceSets~ 设置项目结构：
+  #+BEGIN_SRC groovy
+    apply plugin: 'java'
+
+    sourceSets {
+      main {
+        java {
+          srcDir 'src'
+        }
+      }
+
+      test {
+        java {
+          srcDir 'test'
+        }
+      }
+    }
+  #+END_SRC
+
+* Wrapper
+  + https://blog.csdn.net/u011054333/article/details/53999590
+  + http://www.importnew.com/15881.html
+
+* 多项目
+  + http://www.cnblogs.com/davenkin/p/gradle-learning-8.html
+
+* bulidscript
+  + http://www.cnblogs.com/huang0925/p/3940528.html
+
+* groupid
+  + https://blog.csdn.net/snowin1994/article/details/53024871
+
+* 目录设置
+  + https://blog.csdn.net/lbcab/article/details/72771729

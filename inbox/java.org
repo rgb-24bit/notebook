@@ -2,8 +2,27 @@
   + ant, maven, gradle
 
 * gradle
-  + http://wiki.jikexueyuan.com/project/GradleUserGuide-Wiki/build_script_basics/README.html
+  + https://www.tutorialspoint.com/gradle/index.htm
 
-* 字符串
+* 字符
   + 字符串可以和整型直接拼加
+  + https://stackoverflow.com/questions/5527114/char-cannot-be-dereferenced-error
 
+
+* 数组
+  + http://www.runoob.com/java/java-array.html
+
+* 判断
+  使用 ~==~ 判断两个引用是否为同一个对象。
+
+  使用 ~equals~ 判断两个对象的值是否相同。
+
+* 名称
+  + import 导入命名空间
+  + 全名 - 包名.类名
+
+  *NOTE:* java.lang 下的类不需要
+
+* javax
+  javax 开头的函数库曾经是扩展， 后来虽然并入标准库， 但是为了兼容程序没有修改名称。
+  

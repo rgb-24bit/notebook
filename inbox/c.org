@@ -1,0 +1,61 @@
+* 自增运算
+  + 一般情况：
+    #+BEGIN_SRC C
+      #include <stdio.h>
+
+      int main(void) {
+        int num = 0, count = 0;
+
+        for (int i = 0; i < 10; ++i) {
+          num = count++;  // 7
+        }
+
+        return 0;
+      }
+    #+END_SRC
+
+    第七行对应汇编代码：
+    #+BEGIN_SRC asm
+      // count in -4(rbb), num in -8(rbp)
+      0x0000000000401594 <+36>:    mov    -0x4(%rbp),%eax
+      0x0000000000401597 <+39>:    lea    0x1(%rax),%edx
+      0x000000000040159a <+42>:    mov    %edx,-0x4(%rbp)
+      0x000000000040159d <+45>:    mov    %eax,-0x8(%rbp)
+    #+END_SRC
+
+  + 特殊情况：
+    #+BEGIN_SRC C
+      #include <stdio.h>
+
+      int main(void) {
+        int count = 0;
+
+        for (int i = 0; i < 10; ++i) {
+          count = count++;  // 7
+        }
+
+        return 0;
+      }
+    #+END_SRC
+
+    第七行对应汇编代码：
+    #+BEGIN_SRC asm
+      // count in -4(rbp)
+      0x000000000040158d <+29>:    mov    -0x4(%rbp),%eax
+      0x0000000000401590 <+32>:    lea    0x1(%rax),%edx
+      0x0000000000401593 <+35>:    mov    %edx,-0x4(%rbp)
+      0x0000000000401596 <+38>:    mov    %eax,-0x4(%rbp)
+    #+END_SRC
+
+  + 执行过程：
+    1. 取有右操作数的值放入寄存器 eax
+    2. eax + 1 放入寄存器 edx
+    3. edx 的值放入右操作数地址
+    4. eax 的值放入左操作数地址
+
+  + 理解：
+    会现将右操作数的值存入内存在进行复制操作
+
+    count++ 了
+
+    但是 count = count++ 时赋值为 0
