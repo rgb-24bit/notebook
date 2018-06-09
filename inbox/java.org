@@ -5,7 +5,7 @@
   + https://www.tutorialspoint.com/gradle/index.htm
 
 * 字符
-  + 字符串可以和整型直接拼加
+  + 字符串可以和整型。字符直接拼加
   + https://stackoverflow.com/questions/5527114/char-cannot-be-dereferenced-error
 
 
@@ -26,3 +26,75 @@
 * javax
   javax 开头的函数库曾经是扩展， 后来虽然并入标准库， 但是为了兼容程序没有修改名称。
   
+* 原始数据类型
+  + 原始数据类型没有方法
+
+* 关键字
+  |-----------+----------+------------+--------+------------+-----------+--------------+-----------+----------+---------|
+  | boolean   | byte     | char       | double | float      | int       | long         | short     | public   | private |
+  | protected | abstract | final      | native | static     | strictfp  | synchronized | transient | volatile | if      |
+  | else      | do       | while      | switch | case       | default   | for          | break     | continue | assert  |
+  | class     | extends  | implements | import | instanceof | interface | new          | package   | super    | this    |
+  | catch     | finally  | try        | throw  | throws     | return    | void         | const     | goto     | enum    |
+  |-----------+----------+------------+--------+------------+-----------+--------------+-----------+----------+---------|
+
+  对于一个 final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；
+  
+  如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象
+  
+  + [[https://www.cnblogs.com/dolphin0520/p/3736238.html][浅析Java中的final关键字]]
+
+* 引用于对象
+  + 类型 引用变量名 = new 类型();
+
+  左值为引用类型变量， 固定大小， 右值为 *对象*.
+
+* 继承
+  子类自动继承父类的 *实例变量* 与 *方法*, 可以在子类中覆盖父类的方法， 但不能覆盖 *实例变量*,
+  因为不需要， 实例变量并没有什么特殊的行为。
+
+  方法调用会调用与该对象最接近的方法， 即在继承层次最下方。
+
+  执行时 java 虚拟机不关心方法来自那个类。
+
+  继承： IS-A 测试
+  不继承： HAS-A 测试
+
+  父类不能调用子类的方法。
+
+  使用关键字 ~super~ 调用父类的方法。
+
+  覆盖父类方法： 重写那个方法即可。 ~@Override~ 的作用： [[https://blog.csdn.net/zht666/article/details/7869383][Java中@Override的作用]]
+
+  继承使用关键字 ~extends~: ~class son extends father~.
+
+  继承会继承 ~public~ 类型的方法和实例变量， 但不会继承 ~private~ 的。
+
+  *引用类型可以是实际对象类型的父类*. 定义变量， 函数传参， 返回值时都可以如此。 即： *多态*.
+
+  除了 *内部类* 以外， 没有 *私有类* 的说法。
+
+  防止类被继承：
+  1. 非公有类只能被同一个包的类继承
+  2. 使用 final 修饰符修饰的类无法被继承
+  3. 让类拥有 private 的构造函数
+
+  使用 final 修饰的方法不会被覆盖。
+
+  同时， 类的 private 方法会隐式地被指定为 final 方法。
+  
+  覆盖的基本原则：
+  1. 参数和返回值类型必须要一样
+  2. 不能降低方法的存取权限， 只能保持一样或更加开放
+
+  否则就是重载了。
+
+* 重载
+  重载的意义是两个方法的 *名称相同*, 但参数不同， 因此 *重载与多态毫无关系*.
+
+  重载的基本原则：
+  1. 返回类型可以不同
+  2. 不能只改变返回类型
+  3. 可以更改存取权限
+
+  *NOTE:* 重载和覆盖不一样
