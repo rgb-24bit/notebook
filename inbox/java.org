@@ -1,0 +1,103 @@
+* 语法相关
+  声明抽象方法必须省略方法主体：
+  #+BEGIN_SRC java
+    public abstract void method();
+  #+END_SRC
+
+  声明类和其他方法不能省略主体， 即使主体为空：
+  #+BEGIN_SRC java
+    public abstract class AbstractClass {
+      public void method() {}
+    }
+  #+END_SRC
+
+* 多态相关
+  1. 使用父类类型的引用指向子类的对象
+  2. 该引用只能调用父类中定义的方法和变量
+
+  编译器根据 *引用类型* 来判断有哪些 ~method~ 可以调用， 而不是 ~Object~ 确实的类型。
+
+* 抽象类与抽象方法
+  1. 抽象类与抽象方法使用关键字 abstract 修饰
+  2. 抽象类不能被实例化
+  3. 抽象方法在具体类中必须被实现， 但可以在抽象类中传递
+  4. 抽象方法只能在抽象类中定义
+     
+  *AbstractClass.java*:
+  #+BEGIN_SRC java
+    public abstract class AbstractClass {
+      public abstract void method();
+    }
+  #+END_SRC
+
+  *AbstractSubClass.java*:
+  #+BEGIN_SRC java
+    public abstract class AbstractSubClass extends AbstractClass {}
+  #+END_SRC
+
+  *NotAbstractClass.java*:
+  #+BEGIN_SRC java
+    public class NotAbstractClass extends AbstractSubClass{
+      public void method() {}
+    }
+  #+END_SRC
+
+* Object
+  ~Object~ 是所有类的基类， 没有继承其他类的类会隐式继承这个类。
+
+  ~Object~ 的方法：
+  + equals(Object o) :: 判断两个对象的值是否相等
+  + getClass() :: 获取对象的类型
+  + hashCode() :: 列出对象的哈希代码， 这是对象的唯一 id
+  + toString() :: 列出类的名字和一个我们不关心的数字
+
+  方法 ~getClass~ 是被 ~final~ 修饰的， 不能被覆盖。
+
+  ~Object~ 不是抽象类， 因此可以实例化。
+
+* 类型转换
+  由与所有的非 ~Object~ 对象都继承了 ~Object~, 因此这些对象在 *堆* 上的实例上， 内部
+  也包括了一个 ~Object~ 实例。
+
+  即： 后代的实例内部包含父类的实例。
+
+  因此父类类型的引用相当于只能操作子类实例内部的父类实例。
+
+  通过强制类型转换可以将父类引用转换为子类引用， 转换前可以使用关键字 ~instanceof~ 来判断该对象是否是对应类型的实例。
+
+  #+BEGIN_SRC java
+    if (obj instanceof Dog) {
+      Dog d = (Dog)obj;
+    }
+  #+END_SRC
+
+  如果类型转换失败会抛出 ~ClassCastException~ 异常。
+
+* 接口
+  1. Java 不允许多重继承
+  2. 替代方案是使用接口 ~Interface~
+
+  接口的特点：
+  1. 接口不能被实例化， 但是可以被实现
+  2. 接口没有构造方法
+  3. 接口中所有的方法默认(必须)为 ~public abstract~
+  4. 允许一个类同时实现多个接口， 因为所有的接口方法都是抽象的
+
+  #+BEGIN_SRC java
+    interface Actor {
+      void methodA();
+      void methodB();
+    }
+  #+END_SRC
+
+  接口的继承使用关键字： ~implements~.
+
+  #+BEGIN_SRC java
+    public class Dog implements ...
+  #+END_SRC
+
+  如果继承接口的类是抽象类， 那么可以不实现接口的方法， 留待子类实现。
+  
+  需要某些类的特殊化版本时继承它们。
+
+  需要某些类扮演一个角色时， 定义一个接口

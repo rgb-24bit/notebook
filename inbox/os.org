@@ -1,0 +1,25 @@
+* 动态链接共享库
+  共享库的特点：
+  + 在给定的文件系统中一个库只有一个文件，所有引用该库的可执行目标文件都共享这个文件，它不会被复制到引用它的可执行文件中；
+  + 在内存中，一个共享库的 .text 节（已编译程序的机器代码）的一个副本可以被不同的正在运行的进程共享。
+
+  动态库的编译使用 ~-shared -fpic~ 选项：
+  #+BEGIN_SRC bash
+    $ gcc -shared -fpic -o libxxx.so xxx.c xxx.c
+  #+END_SRC
+
+  加载执行前加载链接共享库：
+  #+BEGIN_SRC bash
+    $ gcc -o prog prog.c libxxx.so
+  #+END_SRC
+
+  运行时加载链接共享库：
+  #+BEGIN_SRC C
+    #include <dlfcn.h>
+
+    void* dlopen(const char* filename, int flag);  // 成功返回指向句柄的指针， 失败返回 NULL
+    void* dlsym(void* handle, cha* symbol);  // 成功返回中指向符号的指针， 失败返回 NULL
+    int dlclose(void* handle);  // 成功返回 0, 出错返回 -1
+    const char* dlerror(void);  // 如果前面三个函数调用失败， 则返回错误信息， 否则返回 NULL
+  #+END_SRC
+  
