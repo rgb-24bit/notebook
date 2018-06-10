@@ -13,6 +13,7 @@
 - [[#退出插入模式到正常模式][退出插入模式到正常模式]]
 - [[#mark-标记][mark 标记]]
 - [[#匹配括号][匹配括号]]
+- [[#合并行][合并行]]
 
 * 启动参数
   * 无配置启动 :: /Vim -u NONE/
@@ -58,3 +59,16 @@
 
 * 匹配括号
   + ~%~
+* 合并行
+  快捷键： J
+
+  效果：
+  #+BEGIN_EXAMPLE
+    abcsfsg
+      dfgsdg
+         gadfgdf
+    asdfdg
+
+    abcsfsg dfgsdg gadfgdf asdfdg
+  #+END_EXAMPLE
+

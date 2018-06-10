@@ -1,2 +1,0 @@
-* 可能的选择
-  https://docs.gitlab.com/ee/user/project/import/github.html

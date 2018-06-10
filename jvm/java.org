@@ -3,10 +3,17 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#版本][版本]]
 - [[#jdk--jre--jvm][JDK & JRE & JVM]]
+- [[#常用构建工具][常用构建工具]]
 - [[#程序结构与文件名][程序结构与文件名]]
 - [[#布尔判断][布尔判断]]
 - [[#数据类型][数据类型]]
-- [[#标识符][标识符]]
+  - [[#字符与字符串][字符与字符串]]
+  - [[#引用和对象][引用和对象]]
+- [[#数组][数组]]
+- [[#名称][名称]]
+- [[#标识符和关键字][标识符和关键字]]
+- [[#继承和多态][继承和多态]]
+- [[#重载][重载]]
 
 * 版本
   + Java: 1.02 - 1.1
@@ -23,6 +30,9 @@
     也包括了 JRE。所以安装了 JDK，就不用在单独安装 JRE 了。其中的开发工具： 编译工具(javac.exe)  打包工具(jar.exe)等。
   
   参考： [[https://blog.csdn.net/z15732621736/article/details/50603819][JDK、JRE、JVM 简介]]
+
+* 常用构建工具
+  + Ant, Maven, gradle
 
 * 程序结构与文件名
   程序结构：
@@ -46,6 +56,10 @@
 
       while (x) {}
   #+END_SRC
+
+  使用 ~==~ 判断两个引用是否为同一个对象。
+
+  使用 ~equals~ 判断两个对象的值是否相同。  
 
 * 数据类型
   下表为： primitive 主数据类型
@@ -108,10 +122,111 @@
 
   + 可以使用 == 来判断两个主数据类型是否相对， 会判断两个引用是否引用同一个对象
  
-* 标识符
+** 字符与字符串
+   Java 中 字符串可以直接与 *整数* 和 *字符* 拼接。
+
+   另外， 原始数据类型的变量没有方法， 需要通过对应的 *对象类型* 来调用方法， 如：
+   + ~int~ 对应 ~Integer~
+   + ~char~ 对应 ~Character~
+
+** 引用和对象
+   + 类型 引用变量名 = new 类型();
+
+   左值为引用类型变量， 固定大小， 右值为 *对象*.
+
+* 数组
+  数组的声明和初始化方式：
+  #+BEGIN_SRC java
+    // 声明数组
+    dataType[] arrayRefVar;   // 首选的方法
+
+    dataType arrayRefVar[];  // 效果相同，但不是首选方法
+
+    // 创建数组
+    dataType[] arrayRefVar = new dataType[arraySize];
+
+    dataType[] arrayRefVar = {value0, value1, ..., valuek};  // 只能在声明的同时使用
+
+    dataType[] arrayRefVar = new dataType[arraySize]{value0, value1, ..., valuek};
+  #+END_SRC
+
+* 名称
+  使用外部类的两种方式：
+  + import 导入命名空间， 然后直接使用类名
+  + 全名 - 包名.类名
+
+  *NOTE:* java.lang 会自动导入， 因此可以直接使用类名
+
+  *PS:* javax 开头的函数库曾经是扩展， 后来虽然并入标准库， 但是为了兼容程序没有修改名称。
+  
+* 标识符和关键字
   和 ~C~ 与 ~Python~ 不同， ~Java~ 的标识符包含 ~$~, 即可以用 ~$~ 开头。
 
   ~C~ 和 ~Python~ 只能是字母或下划线。
 
   这一点和 ~JavaScript~ 是相同的。
+
+  关键字表格：
+  |-----------+----------+------------+--------+------------+-----------+--------------+-----------+----------+---------|
+  | boolean   | byte     | char       | double | float      | int       | long         | short     | public   | private |
+  | protected | abstract | final      | native | static     | strictfp  | synchronized | transient | volatile | if      |
+  | else      | do       | while      | switch | case       | default   | for          | break     | continue | assert  |
+  | class     | extends  | implements | import | instanceof | interface | new          | package   | super    | this    |
+  | catch     | finally  | try        | throw  | throws     | return    | void         | const     | goto     | enum    |
+  |-----------+----------+------------+--------+------------+-----------+--------------+-----------+----------+---------|
+
+  对于一个 final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；
+  
+  如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象
+  
+  + [[https://www.cnblogs.com/dolphin0520/p/3736238.html][浅析Java中的final关键字]]
+
+  关键字 ~super~ 可以用来调用父类的方法。
+
+* 继承和多态
+  子类会自动继承父类的 *实例变量* 与 *方法*, 可以在子类中覆盖父类的方法， 但不能覆盖 *实例变量*,
+  因为不需要， 实例变量并没有什么特殊的行为。
+
+  方法调用会调用与该对象最接近的方法， 即在继承层次最下方。
+
+  执行时 java 虚拟机不关心方法来自那个类。
+
+  父类不能调用子类的方法。
+
+  使用关键字 ~super~ 调用父类的方法。
+
+  覆盖父类方法： 重写那个方法即可。 ~@Override~ 的作用： [[https://blog.csdn.net/zht666/article/details/7869383][Java中@Override的作用]]
+
+  继承使用关键字 ~extends~: ~class son extends father~.
+
+  继承会继承 ~public~ 类型的方法和实例变量， 但不会继承 ~private~ 的。
+
+  *引用类型可以是实际对象类型的父类*. 定义变量， 函数传参， 返回值时都可以如此。 即： *多态*.
+
+  除了 *内部类* 以外， 没有 *私有类* 的说法。
+
+  防止类被继承：
+  1. 非公有类只能被同一个包的类继承
+  2. 使用 final 修饰符修饰的类无法被继承
+  3. 让类拥有 private 的构造函数
+
+  使用 final 修饰的方法不会被覆盖。
+
+  同时， 类的 private 方法会隐式地被指定为 final 方法。
+  
+  覆盖的基本原则：
+  1. 参数和返回值类型必须要一样
+  2. 不能降低方法的存取权限， 只能保持一样或更加开放
+
+  否则就是重载了。
+
+* 重载
+  重载的意义是两个方法的 *名称相同*, 但参数不同， 因此 *重载与多态毫无关系*.
+
+  重载的基本原则：
+  1. 返回类型可以不同
+  2. 不能只改变返回类型
+  3. 可以更改存取权限
+
+  *NOTE:* 重载和覆盖不一样
 

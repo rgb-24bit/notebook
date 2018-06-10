@@ -1,2 +1,0 @@
-* 汇编代码
-  + https://wizardforcel.gitbooks.io/100-gdb-tips/map-source-code-and-assembly.html

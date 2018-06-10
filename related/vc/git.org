@@ -9,6 +9,8 @@
 - [[#本地分支提交][本地分支提交]]
 - [[#远程操作][远程操作]]
 - [[#diff][diff]]
+- [[#空提交][空提交]]
+- [[#分支重命名][分支重命名]]
 
 * github fork 的更新
 ** 给 fork 配置一个 remote
@@ -57,3 +59,12 @@
 * diff
   ~git diff 低版本 高版本~, 高版本相对低版本做出的修改
 
+* 空提交
+  #+BEGIN_SRC bash
+    $ git commit --allow-empty -m "Empty"
+  #+END_SRC
+
+* 分支重命名
+  #+BEGIN_SRC bash
+    $ git branch -m <oldname> <newname>
+  #+END_SRC
