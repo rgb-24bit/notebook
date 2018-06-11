@@ -20,4 +20,43 @@
   + http://codingpy.com/article/customizing-the-flask-response-class/
   + http://www.letiantian.me/2014-06-28-flask-cookie/
 
-* 循环引用问题
+* 问题
+  + 循环引用
+
+* __new__
+  仔细看一下：
+  + https://www.cnblogs.com/ifantastic/p/3175735.html
+
+  元类的参数向 ~type~ 靠齐
+  
+  __new__ 构造类的实例， __init__ 构造实例的属性
+
+  #+BEGIN_SRC python
+    # -*- coding: utf-8 -*-
+
+    class MyMetaClass(type):
+        def __new__(cls, name, bases, attrs):
+            return super(MyMetaClass, cls).__new__(cls, name, bases, attrs)
+
+        @staticmethod
+        def metaclass_method():
+            print('metaclass_method')
+
+
+    class MyClass(metaclass=MyMetaClass):
+        pass
+
+
+    MyClass.metaclass_method()
+  #+END_SRC
+
+  元类构造的类会继承元类的方法。
+
+  类是元类的实例。
+  
+* 内置属性
+  + __class__, 当前对象的类型
+
+* weakref
+  + [[https://blog.louie.lu/2017/07/29/%E4%BD%A0%E6%89%80%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-python-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%94%A8%E6%B3%95-04-weakref/][weakref - 标准库]]
+  + [[https://www.jianshu.com/p/0cecea85ae3b][Python 弱引用的使用]]
