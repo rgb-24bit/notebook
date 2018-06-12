@@ -1,0 +1,57 @@
+* 用例图
+  + [[http://plantuml.com/use-case-diagram][use-case-diagram]]
+
+  用例图主要用来描述 用户、需求、系统功能单元之间的关系。它展示了一个外部用户能够观察到的系统功能模型图。
+
+  用例图的基本对象为： 参与者 - Actor 和 用例 - Use Case.
+
+  + Actor :: 指系统以外的、 需要使用系统或与系统交互的外部实体， 包括人、 设备、 外部系统等。
+  + Use Case :: 指外部可见的系统功能， 对系统提供的服务进行描述
+
+  用例图涉及有四个关系：
+  |----------+----------------------------+--------------------------------------------------------------|
+  | 关系类型 | 说明                       | 表示符号                                                     |
+  |----------+----------------------------+--------------------------------------------------------------|
+  | 关联     | 参与者与用例间的关系       | [[http://hi.csdn.net/attachment/201104/28/0_13039758665KY7.gif]] |
+  | 泛化     | 参与者之间或用例之间的关系 | [[http://hi.csdn.net/attachment/201104/28/0_13039758712wU5.gif]] |
+  | 包含     | 用例之间的关系             | [[http://hi.csdn.net/attachment/201104/28/0_1303975880lTR8.gif]] |
+  | 扩展     | 用例之间的关系             | [[http://hi.csdn.net/attachment/201104/28/0_1303975885JDRi.gif]] |
+  |----------+----------------------------+--------------------------------------------------------------|
+
+  + 关联 :: 表名参与者与用例的通信
+  + 泛化 :: 即继承关系， 子参与者/用例指向父参与者/用例
+  + 包含 :: 一个用例包含另一个用例
+  + 扩展 :: 一个用例扩展另一个用例
+
+  例图：
+  #+BEGIN_SRC plantuml :file img/use-case.png :cmdline -charset utf-8
+    @startuml
+
+    left to right direction
+    skinparam packageStyle rectangle
+
+    actor user
+    actor customer
+    actor clerk
+
+    customer --|> user
+
+    rectangle checkout {
+              customer --> (checkout)
+              (checkout) -> (payment) : <<include>>
+              (help) -> (checkout) : <<extends>>
+              (checkout) --> clerk
+    }
+
+    @enduml
+  #+END_SRC
+
+  #+RESULTS:
+  [[file:img/use-case.png]]
+
+* 活动图
+  + [[http://plantuml.com/activity-diagram-beta][activity-diagram]]
+
+  活动图是用于对系统的动态行为建模的另一种常用工具，它描述活动的顺序，展现从一个活动到另一个活动的控制流。
+  活动图在本质上是一种流程图。着重表现从一个活动到另一个活动的控制流，是内部处理驱动的流程。
+
