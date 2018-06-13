@@ -68,4 +68,58 @@
    
    + CSAPP-P625
 
-        
+** 读取文件元数据
+   #+BEGIN_SRC C
+     #include <unistd.h>
+     #include <sys/stat.h>
+
+     int stat(const char* filename, struct stat* buf);  // 根据文件名
+     int fstat(int fd, struct stat* buf);  // 根据文件描述符
+   #+END_SRC
+
+** 读取目录内容
+   #+BEGIN_SRC C
+     #include <sys/types.h>
+     #include <dirent.h>
+
+     DIR* opendir(const char* name);  // 成功返回处理的指针， 失败返回 NULL
+     struct dirent* readdir(DIR* dirp); // 返回指向下一个目录项的指针， 没有更多项或出错返回 NULL
+
+     struct dirent {
+       int_t d_ino;  // 文件位置
+       char d_name[256];  // 文件名
+     };
+
+     int closedir(DIR* dirp);
+   #+END_SRC
+
+** 共享文件
+   内核使用三个相关的数据结构来表示 *打开* 的文件：
+   + 描述符表 :: 每个进程都有它独立的描述符表， 表项由进程打开的文件描述符来索引。
+   + 文件表 :: 打开的文件集合有一张文件表来表示， 所有进程共享这张表。 表项包含： *当前的文件位置 k*, *引用计数*,
+            *指向 v-node 表的指针*.
+
+            当引用计数为 0 时， 会删除这个表项。
+   + v-node 表 :: 所有进程共享一张 v-node 表， 包含 stat 结构中的大多数信息。
+
+   
+   多个描述符可以通过不同的文件表项来引用同一个文件， 这就是共享文件。
+
+   此时， 存在多个文件描述符， 每个文件描述符关联一个文件表项， 这些文件表项指向同一个 v-node 表项。
+
+   子进程具有和父进程相同的描述符表， 共享这些文件集合。
+
+** I/O 重定向
+   类似 shell 中 ~>~ 操作符的操作叫做 *I/O* 重定向， 一种简单的方式是使用 ~dup2~ 函数实现：
+   #+BEGIN_SRC C
+     #include <unistd.h>
+
+     int dup2(int oldfd, int newfd);
+   #+END_SRC
+
+   dup2 函数 *复制* 描述符表表项 ~oldfd~ 到描述符表表项 ~newfd~, *覆盖* 描述符表表项 ~newfd~ 的内容。
+
+   如果 ~newfd~ 已经打开了， dup2 在复制前会关闭 ~newfd~.
+
+   此时， ~oldfd~ 和 ~newfd~ 指向同一个 *描述符表项*, 这个描述符表项的内容为 ~oldfd~ 之前指向的表项的内容。
+
