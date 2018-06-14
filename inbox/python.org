@@ -60,3 +60,11 @@
 * weakref
   + [[https://blog.louie.lu/2017/07/29/%E4%BD%A0%E6%89%80%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-python-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%94%A8%E6%B3%95-04-weakref/][weakref - 标准库]]
   + [[https://www.jianshu.com/p/0cecea85ae3b][Python 弱引用的使用]]
+* 异常
+  可以像这样直接抛出上下文中的异常：
+  #+BEGIN_SRC python
+    try:
+        ...
+    except Exception:
+        raise
+  #+END_SRC

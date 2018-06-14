@@ -240,3 +240,90 @@
 
   ~final~ 修饰的类不能被继承。
   
+* autoboxing
+  ~primitive~ 主数据类型都有对应的 *包装类*.
+
+  |----------------------+--------------|
+  | primitive 主数据类型 | 对应的包装类 |
+  |----------------------+--------------|
+  | boolean              | Boolean      |
+  | char                 | Character    |
+  | byte                 | Byte         |
+  | short                | Short        |
+  | int                  | Integer      |
+  | long                 | Long         |
+  | float                | Float        |
+  | double               | Double       |
+  |----------------------+--------------|
+
+  在 ~java 5.0~ 之后的 ~java~ 中， 添加了 ~autoboxing~ 的功能， 允许在一些
+  地方自动的完成 primitive 主数据类型和包装的对象的转换。
+
+  这也叫做装箱和拆箱：
+  + 装箱 -> primitive 主数据类型转换为对应的包装对象
+  + 拆箱 -> 将包装对象转换为对应的 primitive 主数据类型
+
+  可以使用 autoboxing 的地方包括：
+  1. 方法的参数
+  2. 返回值
+  3. boolean 表达式， 任何预期 boolean 值的地方都可以用求 boolean 的表达式代替
+  4. 数值运算
+  5. 赋值
+
+  #+BEGIN_SRC java
+    public class Autoboxing {
+      public Integer auto(Integer num) {  // 参数可以为 int 或 Integer
+        int n = num;  // int 和 Integer 间可以直接赋值
+        num += n;  // int 和 Integer 间可以直接加减
+        return n;  // 返回值类型可以为 int 或 Integer
+      }
+    }
+  #+END_SRC
+
+  通过包装类可以调用有用的静态方法。
+
+* 唯一重载过的操作符
+  Java 中唯一重载过的操作符是 加号 '+', 允许字符串和数字， 字符直接相加。
+
+* 格式化字符串
+  格式化说明的格式：
+  #+BEGIN_EXAMPLE
+    %[argument number][flags][width][.precision]type
+  #+END_EXAMPLE
+
+  使用方法： ~String.format~.
+
+* 日期和时间
+  日期格式化：
+  #+BEGIN_SRC java
+    // 完整日期和时间
+    String.format("%tc", new Date());
+
+    // 只有时间
+    String.format("%tr", new Date());
+
+    // 周， 月， 日 - %tA, %tB, %td
+    String.format("%tA %<tB %<td", new Date());
+  #+END_SRC
+
+  取得当前日期和时间使用 ~Date~.
+
+  其余功能可以使用 ~Calendar~.
+
+* static import
+  使用 static import 的作用是 *少打一些字*.
+
+  如：
+  #+BEGIN_SRC java
+    import static java.lang.System.out;
+    import static java.lang.Math.*;
+
+    class WithStatic {
+      public static void main(String[] args) {
+        out.println("sqrt" + sqrt(2.0));
+      }
+    }
+  #+END_SRC
+
+  可以看到， 省略了前面的 *名称空间.类*, 直接使用导入的 *静态成员*.
+
