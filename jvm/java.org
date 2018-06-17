@@ -14,6 +14,21 @@
 - [[#标识符和关键字][标识符和关键字]]
 - [[#继承和多态][继承和多态]]
 - [[#重载][重载]]
+- [[#语法相关][语法相关]]
+- [[#多态相关][多态相关]]
+- [[#抽象类与抽象方法][抽象类与抽象方法]]
+- [[#object][Object]]
+- [[#类型转换][类型转换]]
+- [[#接口][接口]]
+- [[#栈与堆][栈与堆]]
+- [[#创建对象][创建对象]]
+- [[#生命周期][生命周期]]
+- [[#static--final][static & final]]
+- [[#autoboxing][autoboxing]]
+- [[#唯一重载过的操作符][唯一重载过的操作符]]
+- [[#格式化字符串][格式化字符串]]
+- [[#日期和时间][日期和时间]]
+- [[#static-import][static import]]
 
 * 版本
   + Java: 1.02 - 1.1
@@ -175,14 +190,6 @@
   | catch     | finally  | try        | throw  | throws     | return    | void         | const     | goto     | enum    |
   |-----------+----------+------------+--------+------------+-----------+--------------+-----------+----------+---------|
 
-  对于一个 final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；
-  
-  如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象
-  
-  + [[https://www.cnblogs.com/dolphin0520/p/3736238.html][浅析Java中的final关键字]]
-
-  关键字 ~super~ 可以用来调用父类的方法。
-
 * 继承和多态
   子类会自动继承父类的 *实例变量* 与 *方法*, 可以在子类中覆盖父类的方法， 但不能覆盖 *实例变量*,
   因为不需要， 实例变量并没有什么特殊的行为。
@@ -230,3 +237,330 @@
 
   *NOTE:* 重载和覆盖不一样
 
+  重载需要改变参数的类型或顺序， 而不是参数的名字。
+
+  编译器只关注类型与顺序， 而不是参数的名字。
+
+* 语法相关
+  声明抽象方法必须省略方法主体：
+  #+BEGIN_SRC java
+    public abstract void method();
+  #+END_SRC
+
+  声明类和其他方法不能省略主体， 即使主体为空：
+  #+BEGIN_SRC java
+    public abstract class AbstractClass {
+      public void method() {}
+    }
+  #+END_SRC
+
+* 多态相关
+  1. 使用父类类型的引用指向子类的对象
+  2. 该引用只能调用父类中定义的方法和变量
+
+  编译器根据 *引用类型* 来判断有哪些 ~method~ 可以调用， 而不是 ~Object~ 确实的类型。
+
+* 抽象类与抽象方法
+  1. 抽象类与抽象方法使用关键字 abstract 修饰
+  2. 抽象类不能被实例化
+  3. 抽象方法在具体类中必须被实现， 但可以在抽象类中传递
+  4. 抽象方法只能在抽象类中定义
+     
+  *AbstractClass.java*:
+  #+BEGIN_SRC java
+    public abstract class AbstractClass {
+      public abstract void method();
+    }
+  #+END_SRC
+
+  *AbstractSubClass.java*:
+  #+BEGIN_SRC java
+    public abstract class AbstractSubClass extends AbstractClass {}
+  #+END_SRC
+
+  *NotAbstractClass.java*:
+  #+BEGIN_SRC java
+    public class NotAbstractClass extends AbstractSubClass{
+      public void method() {}
+    }
+  #+END_SRC
+
+* Object
+  ~Object~ 是所有类的基类， 没有继承其他类的类会隐式继承这个类。
+
+  ~Object~ 的方法：
+  + equals(Object o) :: 判断两个对象的值是否相等
+  + getClass() :: 获取对象的类型
+  + hashCode() :: 列出对象的哈希代码， 这是对象的唯一 id
+  + toString() :: 列出类的名字和一个我们不关心的数字
+
+  方法 ~getClass~ 是被 ~final~ 修饰的， 不能被覆盖。
+
+  ~Object~ 不是抽象类， 因此可以实例化。
+
+* 类型转换
+  由与所有的非 ~Object~ 对象都继承了 ~Object~, 因此这些对象在 *堆* 上的实例上， 内部
+  也包括了一个 ~Object~ 实例。
+
+  即： 后代的实例内部包含父类的实例。
+
+  因此父类类型的引用相当于只能操作子类实例内部的父类实例。
+
+  通过强制类型转换可以将父类引用转换为子类引用， 转换前可以使用关键字 ~instanceof~ 来判断该对象是否是对应类型的实例。
+
+  #+BEGIN_SRC java
+    if (obj instanceof Dog) {
+      Dog d = (Dog)obj;
+    }
+  #+END_SRC
+
+  如果类型转换失败会抛出 ~ClassCastException~ 异常。
+
+* 接口
+  1. Java 不允许多重继承
+  2. 替代方案是使用接口 ~Interface~
+
+  接口的特点：
+  1. 接口不能被实例化， 但是可以被实现
+  2. 接口没有构造方法
+  3. 接口中所有的方法默认(必须)为 ~public abstract~
+  4. 允许一个类同时实现多个接口， 因为所有的接口方法都是抽象的
+
+  #+BEGIN_SRC java
+    interface Actor {
+      void methodA();
+      void methodB();
+    }
+  #+END_SRC
+
+  接口的继承使用关键字： ~implements~.
+
+  #+BEGIN_SRC java
+    public class Dog implements ...
+  #+END_SRC
+
+  如果继承接口的类是抽象类， 那么可以不实现接口的方法， 留待子类实现。
+  
+  需要某些类的特殊化版本时继承它们。
+
+  需要某些类扮演一个角色时， 定义一个接口
+
+* 栈与堆
+  + 栈空间中保存： 方法调用与局部变量
+
+  + 堆空间中保存： 对象与实例变量
+
+  + 实例变量是被声明在类而不是方法里面的变量
+
+  + 实例变量可以在声明时赋初值， 否则会被设置为默认值（局部变量没有默认值）
+
+  + 实例变量的默认值为： 0/0.0/false/null
+
+* 创建对象
+  创建对象的过程： 声明引用变量、 创建对象、 连接对象与引用
+
+  创建对象是会调用对象的 *构造函数*.
+
+  默认构造函数为(编译器创建)：
+  #+BEGIN_SRC java
+    public className {
+ 
+    }
+  #+END_SRC
+
+  *注*: 构造函数没有返回值， 且与类名同名。 如果存在与类名相同但是存在返回值类型的方法， 那么不是构造函数。
+
+  构造函数不会被继承 ！
+
+  定义构造函数时， 可以的话就编写一个 *没有参数* 的构造函数
+
+  如果自己定义了构造函数， 那么编译器不会在创建默认的无参的构造函数。
+
+  如果不存在无参的构造函数， 那么 new 操作时就必须有参数。
+
+  构造函数可以为公有， 私有或不指定的。
+
+  如果构造函数是私有的， 那么这个类不能创建实例
+
+  在创建新对象时， 所有继承下来的构造函数都会执行。
+
+  抽象类也有构造函数， 会在创建子类实例时执行。
+
+  先执行父类的构造函数， 在执行自身的构造函数。
+
+  在构造函数中使用 ~super()~ 调用父类构造函数（唯一方法）。
+
+  如果没有手动调用 ~super()~, 编译器会默认进行调用（包括每一个构造函数）：
+  #+BEGIN_SRC java
+    // 默认构造函数
+    public ClassName() {
+      super();
+    }
+
+
+    // 自定义构造函数
+    public ClassName() {
+      super();
+      // your code
+    }
+  #+END_SRC
+
+  默认调用的是父类的无参构造函数。
+
+  ~super()~ 的调用必须是在构造函数的 *第一个语句*.
+
+  如果不能向父类的带参构造函数传参， 那么就不能继承没有无参构造函数的类。
+
+  传参：
+  #+BEGIN_SRC java
+    super(args...)
+  #+END_SRC
+
+  使用 ~this()~ 来从某个构造函数调用同一个类的另外一个构造函数。
+
+  ~this()~ 只能用在 *构造函数*, 且必须是 *第一个语句*.
+
+  ~super()~ 和 ~this()~ 不能兼得。
+
+  #+BEGIN_SRC java
+    public ClassName() {
+      this(num);
+    }
+  #+END_SRC
+
+* 生命周期
+  + 局部变量存活在声明该变量的方法中
+  + 实例变量与对象的生命周期相同
+  + Life 与 Scope 的区别： P259, 很形象
+  + 对象的声明周期受引用计数的影响， 当引用计数为 0 时该对象就可以被回收
+  + 释放对象引用的三种方式：
+    1. 引用变量永久性离开它的返回（死了）
+    2. 引用被赋值到其他对象身上（NTR）
+    3. 直接将引用设定为 null (byebye)
+  
+* static & final
+  可以使用 ~static~ 修饰 实例变量 和 方法， 修饰的实例变量作为静态变量， 所有实例共享。
+  修饰的方法为静态方法。
+
+  不能使用 ~static~ 修饰类和局部变量。
+
+  静态方法不能访问非静态成员， 包括实例变量与非静态方法。
+
+  静态成员可以使用实例的引用来访问， 但是不推荐使用这种方式。
+
+  静态变量的初始化是指类被加载时完成的， 会在任何类的对象创建之前完成初始化。也会在任何类的
+  静态方法执行之前完成初始化。
+
+  如果没有为静态变量赋初值， 那么静态变量会被设定为对应类型的默认值。
+
+  ~static final~ 修饰的变量作为 *常量*. 常量的初始化只能在 *声明时* 或 *静态初始化程序* 中：
+  #+BEGIN_SRC java
+    public class ClassName {
+      public static final int num;
+
+      // 静态初始化程序
+      static {
+        num = 10;
+      }
+    }
+  #+END_SRC
+
+  不能同时在声明与静态初始化程序中赋值。
+
+  常量必须初始化， 否则会出错。
+
+  静态初始化程序可以为静态变量赋值， 不能访问非静态成员。
+
+  单独使用 ~final~ 修饰的变量是常量， 不能被改动。 可以在声明或构造函数中初始化。不能
+  同时进行。
+
+  ~final~ 修饰的方法不能被覆盖。
+
+  ~final~ 修饰的类不能被继承。
+  
+* autoboxing
+  ~primitive~ 主数据类型都有对应的 *包装类*.
+
+  |----------------------+--------------|
+  | primitive 主数据类型 | 对应的包装类 |
+  |----------------------+--------------|
+  | boolean              | Boolean      |
+  | char                 | Character    |
+  | byte                 | Byte         |
+  | short                | Short        |
+  | int                  | Integer      |
+  | long                 | Long         |
+  | float                | Float        |
+  | double               | Double       |
+  |----------------------+--------------|
+
+  在 ~java 5.0~ 之后的 ~java~ 中， 添加了 ~autoboxing~ 的功能， 允许在一些
+  地方自动的完成 primitive 主数据类型和包装的对象的转换。
+
+  这也叫做装箱和拆箱：
+  + 装箱 -> primitive 主数据类型转换为对应的包装对象
+  + 拆箱 -> 将包装对象转换为对应的 primitive 主数据类型
+
+  可以使用 autoboxing 的地方包括：
+  1. 方法的参数
+  2. 返回值
+  3. boolean 表达式， 任何预期 boolean 值的地方都可以用求 boolean 的表达式代替
+  4. 数值运算
+  5. 赋值
+
+  #+BEGIN_SRC java
+    public class Autoboxing {
+      public Integer auto(Integer num) {  // 参数可以为 int 或 Integer
+        int n = num;  // int 和 Integer 间可以直接赋值
+        num += n;  // int 和 Integer 间可以直接加减
+        return n;  // 返回值类型可以为 int 或 Integer
+      }
+    }
+  #+END_SRC
+
+  通过包装类可以调用有用的静态方法。
+
+* 唯一重载过的操作符
+  Java 中唯一重载过的操作符是 加号 '+', 允许字符串和数字， 字符直接相加。
+
+* 格式化字符串
+  格式化说明的格式：
+  #+BEGIN_EXAMPLE
+    %[argument number][flags][width][.precision]type
+  #+END_EXAMPLE
+
+  使用方法： ~String.format~.
+
+* 日期和时间
+  日期格式化：
+  #+BEGIN_SRC java
+    // 完整日期和时间
+    String.format("%tc", new Date());
+
+    // 只有时间
+    String.format("%tr", new Date());
+
+    // 周， 月， 日 - %tA, %tB, %td
+    String.format("%tA %<tB %<td", new Date());
+  #+END_SRC
+
+  取得当前日期和时间使用 ~Date~.
+
+  其余功能可以使用 ~Calendar~.
+
+* static import
+  使用 static import 的作用是 *少打一些字*.
+
+  如：
+  #+BEGIN_SRC java
+    import static java.lang.System.out;
+    import static java.lang.Math.*;
+
+    class WithStatic {
+      public static void main(String[] args) {
+        out.println("sqrt" + sqrt(2.0));
+      }
+    }
+  #+END_SRC
+
+  可以看到， 省略了前面的 *名称空间.类*, 直接使用导入的 *静态成员*.

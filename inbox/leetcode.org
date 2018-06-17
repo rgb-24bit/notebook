@@ -1,6 +1,0 @@
-* Add Strings
-  + https://leetcode-cn.com/problems/add-strings/description/
-
-* Minimum Moves to Equal Array Elements
-  + https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/description/
-  + https://leetcode.com/problems/minimum-moves-to-equal-array-elements/discuss/93817/It-is-a-math-question

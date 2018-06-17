@@ -1,0 +1,110 @@
+#+TITLE:      系统级 I/O
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#系统级-io][系统级 I/O]]
+- [[#文件操作接口][文件操作接口]]
+- [[#读取文件元数据][读取文件元数据]]
+- [[#读取目录内容][读取目录内容]]
+- [[#共享文件][共享文件]]
+- [[#io-重定向][I/O 重定向]]
+
+* 系统级 I/O
+  ~Unix/Linux~ 系统中， 将所有的 ~I/O~ 设备都当做是 *文件*, 使用统一输入输出接口来操作这些对象。
+
+  文件操作有：
+  + 打开文件： 通过内核打开文件时， 内核会返回一个小的非负整数， 称为 *描述符*. 用于在后续的操作中标识打开的文件。
+    由内核记录有关这个文件的所有信息， 应用程序只需要记住这个描述符。
+    
+    每个进程开始时都有三个打开的文件： 标准输入 - 0、 标准输出 - 1、 标准错误 - 2.
+  + 改变当前的文件位置： 对于每个打开的文件， 内核保持着一个文件位置 *k*, 初始为 0。 表示从文件开头起始的 *字节偏移量*.
+
+    应用程序通过 seek 操作显示的设置文件当前位置为 k.
+  + 读写文件： 读操作是从当前文件复制 n > 0 个字节到内存， 然后 k += n. 当 k 的大小超出文件大小是， 会除法 EOF 条件， 应用程序
+    能够检测到这个条件。
+
+    写操作是从内存复制 n > 0 个字节到文件， k += n.
+  + 关闭文件： 关闭文件时内核释放打开文件时创建的数据结构， 并将描述符恢复到可用的 *描述符池*.
+
+  文件类型包括： 普通文件（文本与二进制文件）、 目录文件、 套接字、 命名通道、 符号链接、 字符和块设备
+
+* 文件操作接口
+  #+BEGIN_SRC C
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+
+    // 打开文件并返回文件描述符， 出错返回 -1
+    int open(char* filename, int flags, mode_t mode);
+
+
+    #include <unistd.h>
+
+    // 关闭文件， 成功返回 0, 错误返回 -1, 关闭已关闭文件描述符会出错
+    int close(int fd);
+
+
+    #include <unistd.h>
+
+    // 读 & 写
+    size_t read(int fd, void* buf, size_t n);
+
+    ssize_t write(int fd, const void* buf, size_t n);
+  #+END_SRC
+   
+  + CSAPP-P625
+
+* 读取文件元数据
+  #+BEGIN_SRC C
+    #include <unistd.h>
+    #include <sys/stat.h>
+
+    int stat(const char* filename, struct stat* buf);  // 根据文件名
+    int fstat(int fd, struct stat* buf);  // 根据文件描述符
+  #+END_SRC
+
+* 读取目录内容
+  #+BEGIN_SRC C
+    #include <sys/types.h>
+    #include <dirent.h>
+
+    DIR* opendir(const char* name);  // 成功返回处理的指针， 失败返回 NULL
+    struct dirent* readdir(DIR* dirp); // 返回指向下一个目录项的指针， 没有更多项或出错返回 NULL
+
+    struct dirent {
+      int_t d_ino;  // 文件位置
+      char d_name[256];  // 文件名
+    };
+
+    int closedir(DIR* dirp);
+  #+END_SRC
+
+* 共享文件
+  内核使用三个相关的数据结构来表示 *打开* 的文件：
+  + 描述符表 :: 每个进程都有它独立的描述符表， 表项由进程打开的文件描述符来索引。
+  + 文件表 :: 打开的文件集合有一张文件表来表示， 所有进程共享这张表。 表项包含： *当前的文件位置 k*, *引用计数*,
+           *指向 v-node 表的指针*.
+
+           当引用计数为 0 时， 会删除这个表项。
+  + v-node 表 :: 所有进程共享一张 v-node 表， 包含 stat 结构中的大多数信息。
+
+   
+  多个描述符可以通过不同的文件表项来引用同一个文件， 这就是共享文件。
+
+  此时， 存在多个文件描述符， 每个文件描述符关联一个文件表项， 这些文件表项指向同一个 v-node 表项。
+
+  子进程具有和父进程相同的描述符表， 共享这些文件集合。
+
+* I/O 重定向
+  类似 shell 中 ~>~ 操作符的操作叫做 *I/O* 重定向， 一种简单的方式是使用 ~dup2~ 函数实现：
+  #+BEGIN_SRC C
+    #include <unistd.h>
+
+    int dup2(int oldfd, int newfd);
+  #+END_SRC
+
+  dup2 函数 *复制* 描述符表表项 ~oldfd~ 到描述符表表项 ~newfd~, *覆盖* 描述符表表项 ~newfd~ 的内容。
+
+  如果 ~newfd~ 已经打开了， dup2 在复制前会关闭 ~newfd~.
+
+  此时， ~oldfd~ 和 ~newfd~ 指向同一个 *描述符表项*, 这个描述符表项的内容为 ~oldfd~ 之前指向的表项的内容。
+
