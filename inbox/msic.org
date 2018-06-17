@@ -1,5 +1,6 @@
 * 自动集成
   + http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
-
-* 代码托管
   + https://travis-ci.org/
+
+* MIDI
+  + https://zh.wikipedia.org/wiki/MIDI

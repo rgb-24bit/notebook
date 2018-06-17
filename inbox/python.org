@@ -68,6 +68,9 @@
     except Exception:
         raise
   #+END_SRC
+  
+  ~finally~ 代码块必然会执行， 哪怕 ~try/catch~ 中存在 ~return~.
+
 * 导入
   导入的一种方式：
   #+BEGIN_SRC python
