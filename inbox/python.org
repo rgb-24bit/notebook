@@ -91,3 +91,18 @@
 * 属性
   + https://juejin.im/post/5a3de02af265da432653098d
     
+* 协程
+  + [[https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000][协程]]
+  + [[http://www.cnblogs.com/geeklove01/p/8542868.html][werkzeug（flask）中的local，localstack，localproxy探究]]
+  + [[https://windard.com/blog/2017/10/17/Flask-Session][flask 中的 cookie 和 session]]
+
+* 堆
+  + [[https://blog.csdn.net/u013206202/article/details/78968438][python3入门之堆 - heapq]]
+
+  使用元组作为堆元素的时候， 如果存在不支持原始比较的对象， 则必须
+  保证前面的元素能够完成排序比较。
+
+* 标准库
+  + [[https://www.cnblogs.com/ccorz/p/6089322.html][Python3 中codecs进行文件的读取]]
+  + [[https://www.cnblogs.com/dkblog/archive/2011/10/10/2205200.html][Python使用UUID库生成唯一ID]]
+    

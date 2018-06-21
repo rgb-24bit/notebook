@@ -1,3 +1,7 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://rgb-24bit.github.io/org-html-theme-list/org-note/style/main.css"/>
+
+#+TITLE: UML
+
 * 用例图
   + [[http://plantuml.com/use-case-diagram][use-case-diagram]]
 
@@ -23,31 +27,8 @@
   + 包含 :: 一个用例包含另一个用例
   + 扩展 :: 一个用例扩展另一个用例
 
-  例图：
-  #+BEGIN_SRC plantuml :file img/use-case.png :cmdline -charset utf-8
-    @startuml
-
-    left to right direction
-    skinparam packageStyle rectangle
-
-    actor user
-    actor customer
-    actor clerk
-
-    customer --|> user
-
-    rectangle checkout {
-              customer --> (checkout)
-              (checkout) -> (payment) : <<include>>
-              (help) -> (checkout) : <<extends>>
-              (checkout) --> clerk
-    }
-
-    @enduml
-  #+END_SRC
-
-  #+RESULTS:
-  [[file:img/use-case.png]]
+  例图： [[http://s.plantuml.com/imgw/use-case-diagram-rnljywb6.png]]
+  
 
 * 活动图
   + [[http://plantuml.com/activity-diagram-beta][activity-diagram]]
@@ -77,6 +58,25 @@
   + [[http://plantuml.com/class-diagram][class-diagram]]
 
   类图用于描述类和类之间的静态关系， 可以包括接口， 包， 关系等建模元素。
+
+  类之间的关系：
+  |----------+----------+-----------------------------------------|
+  | 名称     | 符号     | 图形                                    |
+  |----------+----------+-----------------------------------------|
+  | 泛化关系 | <\vert-- | [[http://s.plantuml.com/img/extends01.png]] |
+  | 聚合关系 | o--      | [[http://s.plantuml.com/img/sym01.png]]     |
+  | 组成关系 | *--      | [[http://s.plantuml.com/img/sym03.png]]     |
+  |----------+----------+-----------------------------------------|
+
+  类成员可见性：
+  |------+-------------------------------------------------+--------------------------------------------------+-----------------|
+  | 符号 | 字段图形                                        | 方法图形                                         | 可见性          |
+  |------+-------------------------------------------------+--------------------------------------------------+-----------------|
+  | -    | [[http://s.plantuml.com/PRIVATE_FIELD.png]]         | [[http://s.plantuml.com/PRIVATE_METHOD.png]]         | private         |
+  | #    | [[http://s.plantuml.com/PROTECTED_FIELD.png]]       | [[http://s.plantuml.com/PROTECTED_METHOD.png]]       | protected       |
+  | ~    | [[http://s.plantuml.com/PACKAGE_PRIVATE_FIELD.png]] | [[http://s.plantuml.com/PACKAGE_PRIVATE_METHOD.png]] | package private |
+  | +    | [[http://s.plantuml.com/PUBLIC_FIELD.png]]          | [[http://s.plantuml.com/PUBLIC_METHOD.png]]          | public          |
+  |------+-------------------------------------------------+--------------------------------------------------+-----------------|
 
   + [[http://www.uml.org.cn/oobject/201104212.asp][UML类图与类的关系详解]]
 

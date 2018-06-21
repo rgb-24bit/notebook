@@ -1,0 +1,115 @@
+#+TITLE:      Python3-cookbook 阅读笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#第一章-数据结构和算法][第一章: 数据结构和算法]]
+  - [[#删除序列相同元素并保存顺序][删除序列相同元素并保存顺序]]
+  - [[#命名切片][命名切片]]
+  - [[#序列中出现次数最多的元素][序列中出现次数最多的元素]]
+  - [[#通过某个关键字排序一个字典列表][通过某个关键字排序一个字典列表]]
+  - [[#排序不支持原生比较的对象][排序不支持原生比较的对象]]
+
+* 第一章: 数据结构和算法
+** 删除序列相同元素并保存顺序
+   在看 ~webpy~ 源码的时候看到的一种方式：
+   #+BEGIN_SRC python
+     def uniq(seq, key=None):
+         key = key or (lambda x: x)
+         seen, result = set(), list()
+
+         for item in seq:
+             item = key(item)
+             if item in seen:
+                 continue
+             seen.add(item)
+             result.append(item)
+
+         return result
+   #+END_SRC
+
+   利用了 *集合* 内部元素不重复的特性。
+
+** 命名切片
+   通过内置函数 ~slice~ 将硬编码的 *切片* 转换为具名的切片， 含义更加清晰。
+
+   #+BEGIN_SRC python
+     >>> s = 'HelloWorld'
+     >>> reverse = slice(None, None, -1)
+     >>> s[reverse]  # s[::-1]
+     'dlroWolleH'
+   #+END_SRC
+
+** 序列中出现次数最多的元素
+   使用 ~collections.Counter~ 可以很容易的完成这个目标：
+
+   #+BEGIN_SRC python
+     words = [
+         'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
+         'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
+         'eyes', "don't", 'look', 'around', 'the', 'eyes', 'look', 'into',
+         'my', 'eyes', "you're", 'under'
+     ]
+
+     from collections import Counter
+
+     word_counts = Counter(words)
+
+     # 出现频率最高的3个单词
+     top_three = word_counts.most_common(3)
+     print(top_three)
+
+     # Outputs [('eyes', 8), ('the', 5), ('look', 4)]
+   #+END_SRC
+
+   ~Counter~ 还可以跟数学运算操作相结合：
+   #+BEGIN_SRC python
+     >>> a = Counter(words)
+     >>> b = Counter(morewords)
+     >>> c = a + b
+   #+END_SRC
+
+** 通过某个关键字排序一个字典列表
+   对于简单的 *字典列表*, 可以使用 ~lambda~ 表达式来实现， 但是很明显， ~Python~ 为我们准备好了更好的工具：
+   #+BEGIN_SRC python
+     rows = [
+         {'fname': 'Brian', 'lname': 'Jones', 'uid': 1003},
+         {'fname': 'David', 'lname': 'Beazley', 'uid': 1002},
+         {'fname': 'John', 'lname': 'Cleese', 'uid': 1001},
+         {'fname': 'Big', 'lname': 'Jones', 'uid': 1004}
+     ]
+
+     from operator import itemgetter
+
+     rows_by_fname = sorted(rows, key=itemgetter('fname'))
+     rows_by_uid = sorted(rows, key=itemgetter('uid'))
+
+     print(rows_by_fname)
+     print(rows_by_uid)
+   #+END_SRC
+
+   ~operator~ 模块的 ~itemgetter~ 函数充当 ~sorted~ 这类和排序相关的函数的 ~callable~ 参数。
+
+   同时， ~itemgetter~ 支持多个参数：
+   #+BEGIN_SRC python
+     rows_by_lfname = sorted(rows, key=itemgetter('lname','fname'))
+   #+END_SRC
+
+** 排序不支持原生比较的对象
+   某些对象不支持原生的比较操作， 一般情况下可以使用 ~lambda~ 表达式来完成比较操作。
+
+   但也可以使用 ~operator.attrgetter~ 函数来完成这一工作， 和 ~itemgetter~ 一样， 也支持多个参数：
+   #+BEGIN_SRC python
+     class User:
+         def __init__(self, user_id):
+             self.user_id = user_id
+
+         def __repr__(self):
+             return 'User({})'.format(self.user_id)
+
+
+     from operator import attrgetter
+     sorted(users, key=attrgetter('user_id'))
+
+     by_name = sorted(users, key=attrgetter('last_name', 'first_name'))
+
+     min(users, key=attrgetter('user_id'))
+   #+END_SRC

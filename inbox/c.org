@@ -1,0 +1,46 @@
+* 位运算技巧
+  #+BEGIN_SRC python
+    class ByteData(object):
+        """Used to save a single byte of data and know the number of bits used.
+
+        Args:
+            data: The data to be saved, the default is 0.
+            size: The number of bits in the data, the default is 0.
+        """
+        def __init__(self, data=0, size=0):
+            self.data = data
+            self.size = size
+
+        def save(self, data, size):
+            need_size = self.size + size
+            lack_size = need_size - 8 if need_size > 8 else 0
+            saved_size = need_size - lack_size - self.size
+
+            self.data = (self.data << saved_size) | (data >> lack_size)
+            self.size += saved_size
+
+            data = data & (0xFF >> (8 - size + saved_size))
+
+            return (data, lack_size)
+  #+END_SRC
+
+  size 最大为 8
+
+  + need_size: 保存 self.data 和 data 需要的位数
+  + lack_size: 保存 self.data 和 data 缺少的位数
+  + saved_size: 保存了的 data 的位数
+  
+  #+BEGIN_SRC python
+    self.data = (self.data << saved_size) | (data >> lack_size)
+  #+END_SRC
+
+  保存 data 的高几位的数据到 self.data, 其中， data 的原有位数为 size, 移除低 lack_size
+  后剩下的就是 saved_size 位数据
+
+  #+BEGIN_SRC python
+    data = data & (0xFF >> (8 - size + saved_size))
+  #+END_SRC
+
+  截取 data 低 lack_size 位的数据， 8 - size 为无效高位的大小， saved_size 为保存的位数的大小。
+
+  

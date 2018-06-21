@@ -6,3 +6,6 @@
   + https://zh.wikipedia.org/wiki/MIDI
 * Unicode
   + [[https://blog.csdn.net/xuhuan_wh/article/details/8533675][勾号、叉号、圈号的收集]]
+
+* UUID
+  + [[https://zh.wikipedia.org/wiki/%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81][通用唯一识别码]]
