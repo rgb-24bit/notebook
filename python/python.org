@@ -2,7 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#super][super]]
-- [[#-staticmethod][@ staticmethod]]
+- [[#staticmethod][@staticmethod]]
+- [[#异常][异常]]
 - [[#元类][元类]]
 - [[#闭包][闭包]]
 - [[#关键字][关键字]]
@@ -33,12 +34,22 @@
 
   + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]].
 
-* @ staticmethod
+* @staticmethod
   如果类中定义的函数没有绑定 ~self~ 变量， 那么这个函数可以用类名访问， 但是不能用
   实例访问。
 
   使用 ~@staticmethod~ 来装饰这个函数， 那么这个函数既可以使用类名访问， 也可以使用实例
   访问。
+
+* 异常
+  #+BEGIN_SRC python
+    try:
+        ...
+    except Exception:
+        raise
+  #+END_SRC
+
+  ~finally~ 代码块必然会执行， 哪怕 ~try/catch~ 中存在 ~return~.
 
 * 元类
   ~Python~ 中， 类是 ~type~ 的实例， 通过继承 ~type~ 创建的 *元类* 也可用来创建 *类*.
@@ -68,6 +79,15 @@
   4. 类的方法集合
  
   教程： [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014319106919344c4ef8b1e04c48778bb45796e0335839000][廖雪峰 - 使用元类]].
+  教程： [[https://www.cnblogs.com/ifantastic/p/3175735.html][Python 之 __new__() 方法与实例化]]
+
+  ~__new__~ 用于创造实例， 而 ~__init__~ 用于初始化实例的属性。
+
+  由于 *类* 是 *元类* 的实例， 因此这里的 ~__new__~ 的参数需要按照一定的格式。
+
+  一般使用的参数为： ~__new__(csl, *args, **kwargs)~.
+  
+  同时， 是使用元类构造的类可以使用元类定义的方法， 和 *类* 与 *实例* 的行为差不多。
 
 * 闭包
   闭包是由函数和与其相关的引用环境组合而成的实体, 闭包在运行时可以有多个实例，

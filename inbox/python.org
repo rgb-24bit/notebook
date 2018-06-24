@@ -11,65 +11,12 @@
     + [[https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5][await/async]]
 
 
-* SQLArchemy
-  + https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
-  + https://segmentfault.com/a/1190000004618621
-  + http://www.pythondoc.com/flask-sqlalchemy/index.html
-
-* flask
-  + http://codingpy.com/article/customizing-the-flask-response-class/
-  + http://www.letiantian.me/2014-06-28-flask-cookie/
-
 * 问题
   + 循环引用
-
-* __new__
-  仔细看一下：
-  + https://www.cnblogs.com/ifantastic/p/3175735.html
-
-  元类的参数向 ~type~ 靠齐
-  
-  __new__ 构造类的实例， __init__ 构造实例的属性
-
-  #+BEGIN_SRC python
-    # -*- coding: utf-8 -*-
-
-    class MyMetaClass(type):
-        def __new__(cls, name, bases, attrs):
-            return super(MyMetaClass, cls).__new__(cls, name, bases, attrs)
-
-        @staticmethod
-        def metaclass_method():
-            print('metaclass_method')
-
-
-    class MyClass(metaclass=MyMetaClass):
-        pass
-
-
-    MyClass.metaclass_method()
-  #+END_SRC
-
-  元类构造的类会继承元类的方法。
-
-  类是元类的实例。
-  
-* 内置属性
-  + __class__, 当前对象的类型
 
 * weakref
   + [[https://blog.louie.lu/2017/07/29/%E4%BD%A0%E6%89%80%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-python-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%94%A8%E6%B3%95-04-weakref/][weakref - 标准库]]
   + [[https://www.jianshu.com/p/0cecea85ae3b][Python 弱引用的使用]]
-* 异常
-  可以像这样直接抛出上下文中的异常：
-  #+BEGIN_SRC python
-    try:
-        ...
-    except Exception:
-        raise
-  #+END_SRC
-  
-  ~finally~ 代码块必然会执行， 哪怕 ~try/catch~ 中存在 ~return~.
 
 * 导入
   导入的一种方式：
@@ -88,8 +35,9 @@
         BadParameter,
     )
   #+END_SRC
+
 * 属性
-  + https://juejin.im/post/5a3de02af265da432653098d
+  + [[https://juejin.im/post/5a3de02af265da432653098d][Python魔术方法 __getattr__、__getattribute__使用详解]]
     
 * 协程
   + [[https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000][协程]]
@@ -105,4 +53,5 @@
 * 标准库
   + [[https://www.cnblogs.com/ccorz/p/6089322.html][Python3 中codecs进行文件的读取]]
   + [[https://www.cnblogs.com/dkblog/archive/2011/10/10/2205200.html][Python使用UUID库生成唯一ID]]
+  + io 模块源码可以考虑看一下
     

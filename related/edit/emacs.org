@@ -58,7 +58,9 @@
     + C-k 删除行
     + C-x h 选中所有文本
   + 文本对齐 ::
-    + [[https://www.emacswiki.org/emacs/AlignCommands][AlignCommands]] 
+    + [[https://www.emacswiki.org/emacs/AlignCommands][AlignCommands]]
+  + 自动补全 ::
+    + M-/
  
 * 查看帮助
   + C-h C-h 关于帮助的帮助

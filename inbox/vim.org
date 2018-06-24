@@ -1,2 +1,0 @@
-* 多行编辑
-  + [[https://github.com/wsdjeg/vim-galore-zh_cn#%E5%A4%9A%E8%A1%8C%E7%BC%96%E8%BE%91][多行编辑]]

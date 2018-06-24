@@ -1,3 +1,0 @@
-* 自动补全
-  + evil insert state C-p
-  + emacs M-/

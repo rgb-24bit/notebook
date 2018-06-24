@@ -9,3 +9,9 @@
 
 * UUID
   + [[https://zh.wikipedia.org/wiki/%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81][通用唯一识别码]]
+
+* CDN
+  [[https://www.zhihu.com/question/36514327?rf=37353035][CDN是什么？使用CDN有什么优势？]]
+
+* 同名标识符优先级
+  + [[http://www.cnblogs.com/snandy/archive/2011/03/11/1980399.html][JavaScript中同名标识符优先级]]
