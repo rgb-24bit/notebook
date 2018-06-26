@@ -48,8 +48,10 @@
   - [[file:network\protocol.org][互联网协议笔记]]
 - *os*
   - [[file:os\base.org][基础内容]]
+  - [[file:os\ecf.org][异常控制流]]
   - [[file:os\express.org][程序的机器级表示]]
   - [[file:os\info.org][信息的表示和处理]]
+  - [[file:os\io.org][系统级 I/O]]
   - [[file:os\link.org][链接]]
 - *python*
   - [[file:python\pep.org][PEP 笔记]]

@@ -12,6 +12,8 @@
 
 * CDN
   [[https://www.zhihu.com/question/36514327?rf=37353035][CDN是什么？使用CDN有什么优势？]]
+* 编程范式
+  + [[https://zh.wikipedia.org/wiki/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%9E%8B][编程范式]]
 
 * 同名标识符优先级
   + [[http://www.cnblogs.com/snandy/archive/2011/03/11/1980399.html][JavaScript中同名标识符优先级]]

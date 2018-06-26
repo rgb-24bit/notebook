@@ -1,3 +1,16 @@
+* 数组
+  + [[http://www.importnew.com/7127.html][Java数组]]
+
+* 内部类
+  嵌套在类内部的类为内部类， 内部类可以访问所有外部类的成员， 包括私有的。
+
+  内部类的其他行为和一般类相同， 可以继承类， 也可以实现接口。
+  
+  内部类内部的 ~this~ 代表该内部类的实例， 而不是外部类。
+
+* 文档注释
+  + [[https://blog.csdn.net/chszs/article/details/45727249][package-info.java文件详解]]
+
 * 继承相关
   + [[https://www.polarxiong.com/archives/JAVA-%E5%AD%90%E7%B1%BB-%E8%A6%86%E7%9B%96-%E7%88%B6%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.html][JAVA: 子类覆盖父类的成员变量]]
 
@@ -54,4 +67,5 @@
    + [[http://www.runoob.com/manual/jdk1.6/javax/sound/midi/MidiEvent.html][MidiEvent]]
 * 关键字相关
   + [[http://www.hollischuang.com/archives/1191][Java中的this关键字]]
-    
+  + 使用同一个包内的类， 可以省略包名， 及可以不用 ~import~.
+  + 包的定义中， 需要目录结构和 ~package xxx.xxx~ 的结构相同

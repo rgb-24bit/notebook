@@ -28,3 +28,17 @@
 
   ~actionPerformed~ 这个方法会在事件发生时自动调用。
   
+  监听者接口及事件类型：
+  + [[http://www.runoob.com/manual/jdk1.6/java/awt/event/package-summary.html][java.awt.event]]
+
+* 图形
+  ~JFrame~ 对象的 ~ContentPane~ 成员的方法 ~paintComponent~ 会在 *重绘时* 自动调用。
+
+  可以通过继承 ~JPanel~ 并覆盖 ~paintComponent~ 方法来定义重绘时的行为。
+
+  通过调用 ~reapint~ 方法来要求系统进行重绘。
+
+  ~paintComponent~ 的参数是一个 ~Grahphics2D~ 对象， 但是使用的是 ~Grahphics~ 进行引用。
+
+  这个对象不能直接获取， 而是由系统分配。
+  

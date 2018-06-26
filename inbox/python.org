@@ -11,8 +11,8 @@
     + [[https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5][await/async]]
 
 
-* 问题
-  + 循环引用
+* 循环引用
+  + [[https://www.cnblogs.com/xybaby/p/7491656.html][使用gc、objgraph干掉python内存泄露与循环引用！]]
 
 * weakref
   + [[https://blog.louie.lu/2017/07/29/%E4%BD%A0%E6%89%80%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-python-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%94%A8%E6%B3%95-04-weakref/][weakref - 标准库]]
@@ -54,4 +54,7 @@
   + [[https://www.cnblogs.com/ccorz/p/6089322.html][Python3 中codecs进行文件的读取]]
   + [[https://www.cnblogs.com/dkblog/archive/2011/10/10/2205200.html][Python使用UUID库生成唯一ID]]
   + io 模块源码可以考虑看一下
+    
+* I/O 结构
+  I/O 的层次与缓冲区
     

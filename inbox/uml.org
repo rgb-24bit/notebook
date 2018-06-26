@@ -1,82 +1,240 @@
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://rgb-24bit.github.io/org-html-theme-list/org-note/style/main.css"/>
-
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://rgb-24bit.github.io/org-html-theme-list/org-readthedocs/theme/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://rgb-24bit.github.io/org-html-theme-list/org-readthedocs/theme/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://rgb-24bit.github.io/org-html-theme-list/org-readthedocs/theme/js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://rgb-24bit.github.io/org-html-theme-list/org-readthedocs/theme/js/readtheorg.js"></script>
 #+TITLE: UML
 
-* 用例图
-  + [[http://plantuml.com/use-case-diagram][use-case-diagram]]
+* UML 基本概念
+  ~UML~ 是统一建模语言(Unified Modeling Language) 的简称。
 
-  用例图主要用来描述 用户、需求、系统功能单元之间的关系。它展示了一个外部用户能够观察到的系统功能模型图。
+  主要特点有： 统一的标准、 面向对象、 可视化、 独立于过程、 概念明确
 
-  用例图的基本对象为： 参与者 - Actor 和 用例 - Use Case.
-
-  + Actor :: 指系统以外的、 需要使用系统或与系统交互的外部实体， 包括人、 设备、 外部系统等。
-  + Use Case :: 指外部可见的系统功能， 对系统提供的服务进行描述
-
-  用例图涉及有四个关系：
-  |----------+----------------------------+--------------------------------------------------------------|
-  | 关系类型 | 说明                       | 表示符号                                                     |
-  |----------+----------------------------+--------------------------------------------------------------|
-  | 关联     | 参与者与用例间的关系       | [[http://hi.csdn.net/attachment/201104/28/0_13039758665KY7.gif]] |
-  | 泛化     | 参与者之间或用例之间的关系 | [[http://hi.csdn.net/attachment/201104/28/0_13039758712wU5.gif]] |
-  | 包含     | 用例之间的关系             | [[http://hi.csdn.net/attachment/201104/28/0_1303975880lTR8.gif]] |
-  | 扩展     | 用例之间的关系             | [[http://hi.csdn.net/attachment/201104/28/0_1303975885JDRi.gif]] |
-  |----------+----------------------------+--------------------------------------------------------------|
-
-  + 关联 :: 表名参与者与用例的通信
-  + 泛化 :: 即继承关系， 子参与者/用例指向父参与者/用例
-  + 包含 :: 一个用例包含另一个用例
-  + 扩展 :: 一个用例扩展另一个用例
-
-  例图： [[http://s.plantuml.com/imgw/use-case-diagram-rnljywb6.png]]
+  *UML 的构成：*
   
+  #+HTML: <img src="https://img-blog.csdn.net/20140111154841625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDkyNjk2NA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="">
 
-* 活动图
-  + [[http://plantuml.com/activity-diagram-beta][activity-diagram]]
+  + *依赖关系* 是一种使用关系， 说明一个事物使用另一个事物
+  + *关联关系* 是一种结构关系， 说明一个事物的实例与另一个事物的实例间的联系
+  + *泛化关系* 是一般事物与该事物的较为特殊的种类之间的关系。 如子类继承父类的特性， 也可以定义自己的特性。
+  + *实现关系* 是类目之间的语义关系， 在该关系中一个类目描述了另一个类目保证执行的合约。如类实现接口， 必须实现接口定义的方法。
 
-  活动图是用于对系统的动态行为建模的另一种常用工具，它描述活动的顺序，展现从一个活动到另一个活动的控制流。
-  活动图在本质上是一种流程图。着重表现从一个活动到另一个活动的控制流，是内部处理驱动的流程。
+  *UML 中的视图：*
 
-  活动图中包括的建模元素有：
-  + 活动 :: 表示某流程中的任务的执行， 可以分为动作状态（不可分）和活动状态（可分）
-  + 分支 :: 根据不同的警戒条件转向不同的活动， 每个可能的活动是一个分支
-  + 分叉和汇和 :: 表示系统或对象中的并发行为（fork & join） 
-  + 泳道 :: 根据每个活动的职责对所有活动进行的区域划分， 每个泳道代表一个责任区
-  + *more...*
+  所有 UML 图可以归属于以下 4 中建模技术：
+  1. 需求建模 - 用例图
+  2. 静态建模 - 类图、 对象图
+  3. 动态建模 - 协作图、 顺序图、 活动图、 状态图
+  4. 构架建模 - 组件图、 部署图
 
-* 状态图
-  + [[http://plantuml.com/state-diagram][state-diagram]]
+  UML 中的五大视图为： 用例视图、 逻辑视图、 进程视图、 实现视图、 部署视图
+  
+* 用例图
+  *参与者* 是指系统以外的， 需要使用系统或与系统交互的外部实体， 包括人、 设备、 外部系统等。
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/ithQt_HaHz-BXbOh0000">
+
+  用例图的参与者之间有时会出现 *泛化关系*, 表示一个一般性的参与者与另一个更为特殊的参与者之间的联系。
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/ithUkVFPkgwd_KrFTlIzQ6YrKj2jiLEmUhAZuKN76eGe0000">
+
+  参与者和用例之间存在着一定的关系， 这种关系称为 *关联关系*, 又称为通信关联。
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/ithQt_HaHz-BXbOh1Lqx1OtdKrOysTUj2G00">
+
+  用例的两个代表性的定义：
+  + 用例是对一个参与者使用系统的一项功能时所进行的交互过程的一个文件描述序列
+  + 用例是系统、 子系统或类和外部的参与者交互的动作序列的说明， 包括可选的动作序列和会出现异常的动作序列
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/qtW-PSMJVTsQ0000">
+
+  用例之间存在 *泛化关系*, *包含关系*, *扩展关系*.
+
+  + 泛化代表一般与特殊的关系
+  + 包含指一个用例的行为包含了另一个用例的行为， 属于依赖关系。
+  + 扩展指一个用例的行为包含了另一个用例的行为， 扩展用例只能在基本用例声明的 *扩展点* 上增加新的行为和含义， 属于依赖关系。
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/qtZUkVFPkgxdKrOysTUjgQ1ROwUWyMH7mukEDL0X0000">
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/qtW-PSMJVTsEcWfwTWeQ48wJffM2ZKrcNd9EQKggdHq0">
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/qtW-PSMJVTsEcWfwTWeQ48wJffM2ZKrgHKbgNegT7G00">
+
+  用例是与实现无关的关于系统功能的描述， 也就是说用例之间 *不存在* 实现关系。
+
+  系统边界是指系统与系统之间的界限。 系统可以认为是由一些列的相互作用的元素形成的具有特点功能的有机整体。 
+  不属于这个有机整体的部分可以认为是外部系统。
+  
+  #+HTML: <img src="http://s.plantuml.com/imgw/use-case-diagram-dkehmkcx.png">
+  
+* 类图与对象图 
+  *对象* 是构成世界的一个独立单位， 具有自己的 *静态特征* 和 *动态特征*. 静态特征是可以用某种数据来描述的属性，
+  动态特征是对象所表现的行为或对象所具有的功能。
+
+  *类* 是具有相似结构、 行为和关系的一组对象的描述符。 即： 类是对一组具有相同实现、 操作、 关系和语义的对象的描述。
+
+  *对象* 是一个 *类* 的 *实例*, 而 *类* 是 *对象* 的 *模板*.
+
+  类图和对象图例：
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/Iyv9B2vMUBvnzzC9lGhLN436yrajJpVEUzQm7CfvDctdiyrJDJIvQW40">
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/oq_AIaqkKL2oARLxkdxdYuqBdqxejNg-SJUGij4ljLDII2nMo0S0">
+
+  类的属性包含： 属性名、 类型、 可见性、 多重性、 初始值、 约束特性、 作用域。 
+
+  *可见性* 包括公有、 私有和受保护属性。
+
+  #+CAPTION: 属性的可见性含义和表示方法
+  |------+------------|
+  | 符号 | 意义       |
+  |------+------------|
+  | +    | 公有属性   |
+  | -    | 私有属性   |
+  | #    | 受保护属性 |
+  |------+------------|
+
+  如果类中没有显示可见性， 就认为是未定义的。
+  
+  *多重性* 表名一个属性的值的可能性， 比如 ~1..*~ 表示该属性有一个或多个， 同时这些值之间可以是有序的。
+
+  *约束特性* 描述属性的可变性， 即对属性取值的修改的限制。 UML 包含的三种预定义的属性可变性：
+  1. 可变的： 表示此属性的取值没有限制
+  2. 只可加： 属性的有效值集合可加不可减， 加入后不可更改
+  3. 冻结的： 一旦初始化就不能再改变
+
+  类的操作包含： 操作名、 参数列表、 返回类型、 可见性、 约束特性、 操作接口、 操作的实现、 作用域
+
+  *类之间的关系* 有：
+  + *关联关系* 是对具有共同的结构特性、 行为特征、 关系和语义的链的描述。 不带箭头的直线表示 *双向关联*,
+    单箭头直线表示 *单向关联*.
+
+    比如类 A 中有类 B 类型的属性， 而类 B 中有类 A 类型的属性， 这两个类就 *双向关联*.
+
+    #+HTML: <img src="http://www.plantuml.com/plantuml/png/SrJGBSfCpoZHLN020000">
+    #+HTML: <img src="http://www.plantuml.com/plantuml/png/SrJGBSfCpoZHjLDm0W00">
+
+  + *聚合关系* 可以分为 *共享聚合* 和 *组成*. 聚合和组成的区别有：
+    1. 聚合关系是 ~has-a~ 关系， 而组成关系是 ~contains-a~ 关系
+
+    2. 聚合关系表示事物的整体/部分关系较弱的情况， 组成相反
+
+    3. ~P136~
+
+    #+HTML: <img src="http://www.plantuml.com/plantuml/png/SrJGqYtAJCyeqLLmib9uqJZhwOGEBYuk0000">
+    #+HTML: <img src="http://www.plantuml.com/plantuml/png/SrJ8rotAJCyeqLLmib9ulhlbMSS4BYuk0000">
+
+  + *泛化关系* 定义一般元素和特殊元素之间的分类关系。 是一种 ~a-kind-of~ 关系。
+
+    #+HTML: <img src="http://www.plantuml.com/plantuml/png/SrImgT4joapFAD5LSB9IUBPvzjEUQLnSN000">
+
+  + *依赖关系* 定义了两个模型元素之间的语义连接， 其中一个是独立的模型元素， 另一个是依赖的模型元素。
+    
+    如果两个类之间存在关联关系， 那么这两个类也就存在依赖关系。
+
+    #+HTML: <img src="http://www.plantuml.com/plantuml/png/SrImqIlAJCyeqLDmib9mKdYoR-wBhTCK7Bcuk000">
+
+  类图可以分为三个层次： 概念层、 说明层、 实现层
+  
+  对象图表示一组对象及他们之间的联系
+
+* 顺序图与协作图
+  顺序图是显示对象之间交互的图， 这些对象是按时间顺序排列的。
+
+  顺序图中显示的是参与交互的对象与对象之间消息交互的顺序。
+
+  顺序图的建模对象包括： 对象、 生命线、 控制焦点、 消息等。
+
+  对象的命名方式有三种， 第一种包含对象名和类名， 第二种只显示类名， 第三种只显示对象名。
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/KyfFoafDBl5Bp4srIiv9B2u6iPGKTEqKb11yAoKk9NHPX3ub0000">
+
+  生命线是对象下方的虚线， 而控制焦点是顺序图中表示时间段的小矩形， 消息时一次对象间的一次通信。
+
+  顺序图中的消息可以分为： 调用消息、 异步消息、 返回消息、 阻止消息、 超时消息。
+
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/SrJGjLDmib9uiQ7v-PGLpxPrF6jSp-K850IBFjtJz6pjKhYeZOskBaZj_YbFPy-3Y080">
+  
+  顺序图例：
+  #+HTML: <img src="http://s.plantuml.com/imgw/sequence-diagram-tdp5jd2x.png">
  
-  状态图主要用于描述一个对象在其生存期间的动态行为，表现为一个对象所经历的状态序列，
-  引起状态转移的事件， 以及因状态转移而伴随的动作。
+* 状态图和活动图
+  ~UML~ 中行为模型包括：
+  + *状态模型* 关注一个独享的生命周期类的状态及状态变迁， 以及引起状态变迁的时间和对象在状态中的动作等
+  + *交互模型* 强调对象间的合作关系与时间顺序， 通过对象间的消息传递来完成系统的交互
+  + *活动模型* 用于描述对象的一个活动到另一个活动的控制流、 活动的序列、 工作的流程和并发的处理行为等
 
-  状态图中包括的建模元素有：
-  + 状态 :: 对象的生命周期中的某个条件或状况
-  + 转移 :: 两个状态之间的一种关系
-  + *more...* 
- 
-* 类图 
-  + [[http://plantuml.com/class-diagram][class-diagram]]
+  *状态图* 中的状态有以下几个部分： 状态名、 状态变量、 进入/退出动作、 内部转移、 子状态、 延迟时间
 
-  类图用于描述类和类之间的静态关系， 可以包括接口， 包， 关系等建模元素。
+  而状态可以分为几种不同的类型， 包括： 初态、 终态、 中间状态、 组合状态、 历史状态等。
 
-  类之间的关系：
-  |----------+----------+-----------------------------------------|
-  | 名称     | 符号     | 图形                                    |
-  |----------+----------+-----------------------------------------|
-  | 泛化关系 | <\vert-- | [[http://s.plantuml.com/img/extends01.png]] |
-  | 聚合关系 | o--      | [[http://s.plantuml.com/img/sym01.png]]     |
-  | 组成关系 | *--      | [[http://s.plantuml.com/img/sym03.png]]     |
-  |----------+----------+-----------------------------------------|
+  一个状态图只能有一个初态， 但终态可以有一个或多个， 也可以没有状态。
 
-  类成员可见性：
-  |------+-------------------------------------------------+--------------------------------------------------+-----------------|
-  | 符号 | 字段图形                                        | 方法图形                                         | 可见性          |
-  |------+-------------------------------------------------+--------------------------------------------------+-----------------|
-  | -    | [[http://s.plantuml.com/PRIVATE_FIELD.png]]         | [[http://s.plantuml.com/PRIVATE_METHOD.png]]         | private         |
-  | #    | [[http://s.plantuml.com/PROTECTED_FIELD.png]]       | [[http://s.plantuml.com/PROTECTED_METHOD.png]]       | protected       |
-  | ~    | [[http://s.plantuml.com/PACKAGE_PRIVATE_FIELD.png]] | [[http://s.plantuml.com/PACKAGE_PRIVATE_METHOD.png]] | package private |
-  | +    | [[http://s.plantuml.com/PUBLIC_FIELD.png]]          | [[http://s.plantuml.com/PUBLIC_METHOD.png]]          | public          |
-  |------+-------------------------------------------------+--------------------------------------------------+-----------------|
+  #+HTML: <img src="http://www.plantuml.com/plantuml/png/YzQALT3LjLC8BaaiIJNaueBGOA5ehLW47wh222fY15C10000">
 
-  + [[http://www.uml.org.cn/oobject/201104212.asp][UML类图与类的关系详解]]
+  *活动图* 可以用于描述系统的工作流程和并发行为。
 
+  活动表示的是某流程中的任务的执行， 它可以表示某算法过程中语句的执行。
+
+  活动图中需要区分 *动作状态* 和 *活动状态* 这两种类型的活动， 其中， 动作状态是原子不可分的， 而活动状态是可分解的。
+
+  活动图的建模元素包括：
+  + *分支* 根据不同条件转向不同的活动
+    
+    #+HTML: <img src="http://s.plantuml.com/imgw/activity-diagram-beta-bymvjaf7.png">
+
+  + *分叉与会和* 表示系统会对象中的并发行为
+
+    #+HTML: <img src="http://s.plantuml.com/imgw/activity-diagram-beta-3x4jwghn.png">
+
+  + *泳道* 划分活动图的区域， 根据每个活动的职责对所有活动进行划分， 每个泳道表示一个责任区。
+
+    #+HTML: <img src="http://s.plantuml.com/imgw/activity-diagram-beta-1ywig9an.png">
+
+  + 对象流、 信号、 活动、 等
+
+* 组件图与部署图
+  *组件* 可以有以下三种类型：
+  + 部署组件， 运行系统需要配置的组件， 如 Java 虚拟机
+  + 工作产品组件， 如源代码文件， 数据文件等
+  + 执行组件， 系统执行后的得到的组件， 如 exe 文件
+
+  一个组件实例用于表示运行时存在的实现物理单元和在实例节点中的定位。
+
+  组件之间的关系主要是依赖关系， 包括编译、 链接或执行部件之间的依赖关系。 也包含泛化、 关联、 聚合、 实现
+  等关系。 这些关系主要依赖于不同组件中包含的实现元素之间的联系。
+
+  组件图的用途有：
+  1. 对源代码文件之间的关系建模
+  2. 对可执行文件之间的关系建模
+  3. 对物理数据库中各个具体对象之间的关系建模
+  4. 对自适应系统建模
+
+  #+HTML: <img src="http://s.plantuml.com/imgw/component-diagram-je2jge2a.png">
+
+  *部署图* 每个系统只有一个， 包括的建模元素有：
+  + *结点* 表示存在与运行时的代表计算资源的物理元素， 分为 *处理机* 和 *设备*.
+  + *连接* 表示两个硬件之间的关联关系， 指出结点之间的通信路径。
+
+  #+HTML: <img src="https://support.content.office.net/zh-cn/media/f9d3a34e-c414-41f5-9686-deb0f7bc0779.gif">
+
+* 包图
+  在一个包中， 同种元素必须有不同的名字， 不同种类的元素可以有相同的名字。
+
+  包的命名方式有两种： 简单包名和路径包名， 路径包名包含外围包的名字。
+
+  包中元素的可见性也分为公有房屋、 保护访问和私有访问。
+
+  包可以将子包作为自己的内部元素， 因此包可以嵌套。
+
+  子包能够看见父包中的所有公共元素，但是父包不能看见子包中的任何元素， 除非父包到子包有依赖关系。
+
+  包之间的关系有： 依赖关系和泛化关系。
+
+  设计包的原则为：
+  1. 重用等价原则
+  2. 共同闭包原则
+  3. 共同重用原则
+  4. 非循环依赖原则
+  5. 高内聚和低耦合原则
+
+  #+HTML: <img src="http://s.plantuml.com/imgp/3u0-class-diagram-021.png">
+  
