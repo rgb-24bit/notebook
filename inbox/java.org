@@ -1,68 +1,6 @@
 * 数组
   + [[http://www.importnew.com/7127.html][Java数组]]
 
-* 内部类
-  嵌套在类内部的类为内部类， 内部类可以访问所有外部类的成员， 包括私有的。
-
-  内部类的其他行为和一般类相同， 可以继承类， 也可以实现接口。
-  
-  内部类内部的 ~this~ 代表该内部类的实例， 而不是外部类。
-
-* 序列化
-  实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
-
-  如果引用的对象中存在不能序列化的对象， 那么序列化会失败。 一种解决方法是用关键字 ~transient~ 修饰不被
-  序列化的对象， 序列化时会跳过这些被 ~transient~ 修饰的实例变量。
-
-  如果对象内部存在两个引用同一对象的实例变量， 那么别引用的独享只会保存一次。
-
-  序列化：
-  #+BEGIN_SRC java
-    import java.io.*;
-
-    FileOutputStream fileStream = new FileOutputStream("object.ser");
-    ObjectOutputStream os = new ObjectOutputStream(fileStream);
-
-    os.writeObject(object);
-    os.close();
-  #+END_SRC
-
-  解序列化时， 对象重流中读取出来， 通过存储的信息判断出对象的类， 如果 java 虚拟机找不到
-  或无法加载该类， 则虚拟机会抛出异常。
-
-  新的对象会二笔直接配置在堆上， 构造函数不会被执行。
-
-  如果对象的继承树上有个不可序列化的祖先类， 那么重该类开始及其以上的类的构造函数都会被执行。
-
-  对象的实例变量会被还原为序列化时的状态， transient 变量被还原为对应类型的 *默认值*.
-
-  *静态变量* 不会被序列化。 解序列化时也不会影响静态变量的值。
-
-  解序列化：
-  #+BEGIN_SRC java
-    import java.io.*;
-
-    FileInputStream fileStream = new FileInputStream("object.ser");
-    ObjectInputStream os = new ObjectInputStream(fileStream);
-
-    Object obj = os.readObject();  // 通过强制类型转换转换为其他类型
-    os.close()
-  #+END_SRC
-
-* 输入输出  
-  ~java.io~ 的输入输出分为 *字节流* 和 *字符流*, 字节流的类通常为 ~xxxxStream~, 字符流的类通常为 ~xxxxer~.
-
-  ~java.io.File~ 独享可以用于替代 *文件名*, 任何使用 *文件名字符串* 打开文件的地方都可以用 ~File~ 对象代替。
-
-  ~File~ 对象不能读取文件内容， 但可以完成其他一些操作， 如 *创建文件夹*, *获取目录内容*.
-
-  通过 ~Bufferxxxx~ 对象来通过 *缓冲区* 进行输入输出操作。
-  
-  这也是直接的文件操作没有 ~readLine~ 的一个原因， 因为他们是直接的读取操作， 读取多少就是多少， 不存在行的说法。
-
-  通过缓冲区可以更加高效的操作文件。
-  
-
 * 文档注释
   + [[https://blog.csdn.net/chszs/article/details/45727249][package-info.java文件详解]]
 
@@ -71,7 +9,7 @@
 
 * 实践相关
   + [[https://segmentfault.com/a/1190000003091577][使用java进行http通信]]
-
+    
 ** JavaSound MIDI
    #+BEGIN_SRC java
      import javax.sound.midi.*;
@@ -120,7 +58,3 @@
    + [[http://www.runoob.com/manual/jdk1.6/javax/sound/midi/package-summary.html][javax.sound.midi]]
    + [[http://www.runoob.com/manual/jdk1.6/javax/sound/midi/ShortMessage.html][ShortMessage]]
    + [[http://www.runoob.com/manual/jdk1.6/javax/sound/midi/MidiEvent.html][MidiEvent]]
-* 关键字相关
-  + [[http://www.hollischuang.com/archives/1191][Java中的this关键字]]
-  + 使用同一个包内的类， 可以省略包名， 及可以不用 ~import~.
-  + 包的定义中， 需要目录结构和 ~package xxx.xxx~ 的结构相同

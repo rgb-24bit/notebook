@@ -1,4 +1,0 @@
-* lbgit2 status
-  + [[http://ftxtool.org/2016/03/25/113/][git status]]
-  + [[https://github.com/avetisk/zsh-git-prompt/blob/master/zsh-git-prompt][zsh-git-prompt]]
-  + [[https://github.com/libgit2/libgit2/blob/master/include/git2/status.h][status.h]]

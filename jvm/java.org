@@ -30,6 +30,9 @@
 - [[#日期和时间][日期和时间]]
 - [[#static-import][static import]]
 - [[#异常相关][异常相关]]
+- [[#内部类][内部类]]
+- [[#序列化][序列化]]
+- [[#输入输出][输入输出]]
 
 * 版本
   + Java: 1.02 - 1.1
@@ -183,13 +186,15 @@
   这一点和 ~JavaScript~ 是相同的。
 
   关键字表格：
-  |-----------+----------+------------+--------+------------+-----------+--------------+-----------+----------+---------|
   | boolean   | byte     | char       | double | float      | int       | long         | short     | public   | private |
   | protected | abstract | final      | native | static     | strictfp  | synchronized | transient | volatile | if      |
   | else      | do       | while      | switch | case       | default   | for          | break     | continue | assert  |
   | class     | extends  | implements | import | instanceof | interface | new          | package   | super    | this    |
   | catch     | finally  | try        | throw  | throws     | return    | void         | const     | goto     | enum    |
-  |-----------+----------+------------+--------+------------+-----------+--------------+-----------+----------+---------|
+
+  + [[http://www.hollischuang.com/archives/1191][Java中的this关键字]]
+  + 使用同一个包内的类， 可以省略包名， 及可以不用 ~import~.
+  + 包的定义中， 需要目录结构和 ~package xxx.xxx~ 的结构相同
 
 * 继承和多态
   子类会自动继承父类的 *实例变量* 与 *方法*, 可以在子类中覆盖父类的方法， 但不能覆盖 *实例变量*,
@@ -636,4 +641,65 @@
   2. try 与 catch 之间不能有程序
   3. try 一定要有 catch 或 finally
   4. 只带有 finally 的 try 必须声明异常 - duck
+  
+* 内部类
+  嵌套在类内部的类为内部类， 内部类可以访问所有外部类的成员， 包括私有的。
+
+  内部类的其他行为和一般类相同， 可以继承类， 也可以实现接口。
+  
+  内部类内部的 ~this~ 代表该内部类的实例， 而不是外部类。
+
+* 序列化
+  实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
+
+  如果引用的对象中存在不能序列化的对象， 那么序列化会失败。 一种解决方法是用关键字 ~transient~ 修饰不被
+  序列化的对象， 序列化时会跳过这些被 ~transient~ 修饰的实例变量。
+
+  如果对象内部存在两个引用同一对象的实例变量， 那么别引用的独享只会保存一次。
+
+  序列化：
+  #+BEGIN_SRC java
+    import java.io.*;
+
+    FileOutputStream fileStream = new FileOutputStream("object.ser");
+    ObjectOutputStream os = new ObjectOutputStream(fileStream);
+
+    os.writeObject(object);
+    os.close();
+  #+END_SRC
+
+  解序列化时， 对象重流中读取出来， 通过存储的信息判断出对象的类， 如果 java 虚拟机找不到
+  或无法加载该类， 则虚拟机会抛出异常。
+
+  新的对象会二笔直接配置在堆上， 构造函数不会被执行。
+
+  如果对象的继承树上有个不可序列化的祖先类， 那么重该类开始及其以上的类的构造函数都会被执行。
+
+  对象的实例变量会被还原为序列化时的状态， transient 变量被还原为对应类型的 *默认值*.
+
+  *静态变量* 不会被序列化。 解序列化时也不会影响静态变量的值。
+
+  解序列化：
+  #+BEGIN_SRC java
+    import java.io.*;
+
+    FileInputStream fileStream = new FileInputStream("object.ser");
+    ObjectInputStream os = new ObjectInputStream(fileStream);
+
+    Object obj = os.readObject();  // 通过强制类型转换转换为其他类型
+    os.close()
+  #+END_SRC
+
+* 输入输出  
+  ~java.io~ 的输入输出分为 *字节流* 和 *字符流*, 字节流的类通常为 ~xxxxStream~, 字符流的类通常为 ~xxxxer~.
+
+  ~java.io.File~ 独享可以用于替代 *文件名*, 任何使用 *文件名字符串* 打开文件的地方都可以用 ~File~ 对象代替。
+
+  ~File~ 对象不能读取文件内容， 但可以完成其他一些操作， 如 *创建文件夹*, *获取目录内容*.
+
+  通过 ~Bufferxxxx~ 对象来通过 *缓冲区* 进行输入输出操作。
+  
+  这也是直接的文件操作没有 ~readLine~ 的一个原因， 因为他们是直接的读取操作， 读取多少就是多少， 不存在行的说法。
+
+  通过缓冲区可以更加高效的操作文件。
   

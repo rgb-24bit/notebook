@@ -12,6 +12,8 @@
 - [[#空提交][空提交]]
 - [[#分支重命名][分支重命名]]
 - [[#使用子模块][使用子模块]]
+- [[#提交到所有远程仓库][提交到所有远程仓库]]
+- [[#libgit2-的使用][libgit2 的使用]]
 
 * github fork 的更新
 ** 给 fork 配置一个 remote
@@ -75,3 +77,11 @@
   子模块的添加会产生一个特殊文件： ~.gitmodules~.
 
   + [[https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97][Git 工具 - 子模块]]
+* 提交到所有远程仓库
+  + git push --all
+  + git push all --all
+
+* libgit2 的使用
+  + [[http://ftxtool.org/2016/03/25/113/][git status]]
+  + [[https://github.com/avetisk/zsh-git-prompt/blob/master/zsh-git-prompt][zsh-git-prompt]]
+  + [[https://github.com/libgit2/libgit2/blob/master/include/git2/status.h][status.h]]

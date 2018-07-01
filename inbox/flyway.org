@@ -1,0 +1,6 @@
+* 教程
+  + [[https://flywaydb.org/documentation/migrations][Migrations]]
+  + [[https://flywaydb.org/getstarted/firststeps/gradle][First Steps: Gradle]]
+
+* SQL 脚本命名规则
+  + [[https://flywaydb.org/documentation/migrations#sql-based-migrations][SQL-based migrations]]
