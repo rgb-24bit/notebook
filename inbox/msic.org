@@ -28,3 +28,5 @@
 
 * 点对点网络
   + [[https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%AD%89%E7%B6%B2%E8%B7%AF][点对点网络]]
+* HMAC
+  + [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0015108777177966ef0f4f8510a41b3b8c48cdcf7047b2d000][hmac]]

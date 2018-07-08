@@ -1,5 +1,22 @@
 * 数组
   + [[http://www.importnew.com/7127.html][Java数组]]
+  + [[https://blog.csdn.net/zhangjg_blog/article/details/16116613][Java中数组的特性]]
+  + [[http://wiki.jikexueyuan.com/project/java-enhancement/java-thirtysix.html][asList 的缺陷]]
+
+* 泛型
+  + 创建泛型类的实例：
+    #+BEGIN_SRC java
+      new ArrayList<Song>();
+    #+END_SRC
+  + 声明与指定泛型类型的变量：
+    #+BEGIN_SRC java
+      List<Song> songList = new ArrayList<Song>();
+    #+END_SRC
+  + 声明与调用泛型类型的方法：
+    #+BEGIN_SRC java
+      void foo(List<Song> list);
+      x.foo(songList);
+    #+END_SRC
 
 * 文档注释
   + [[https://blog.csdn.net/chszs/article/details/45727249][package-info.java文件详解]]
