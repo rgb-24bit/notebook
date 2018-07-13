@@ -62,3 +62,7 @@
   + __slots__定义的属性仅对当前类起作用，对继承的子类是不起作用的
 * 字节到字符串
   + 不在意编码可以用 ~bytes.hex~
+
+* 文件路径
+  + [[https://docs.python.org/3/library/pathlib.html][pathlib — Object-oriented filesystem paths]]
+  + [[https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob][glob **]]

@@ -14,21 +14,21 @@ from pathlib import Path
 
 
 TITLE = """Note"""
-NOTE_DIR = (
-    Path('algorithm'),
-    Path('c-c++'),
-    Path('database'),
-    Path('front-end'),
-    Path('jvm'),
-    Path('lang'),
-    Path('math'),
-    Path('.NET'),
-    Path('network'),
-    Path('os'),
-    Path('python'),
-    Path('related')
-)
 
+NOTE_DIR = {
+    Path('algorithm'): '数据结构与算法笔记',
+    Path('c-c++'): 'C & C++ 笔记',
+    Path('database'): '数据库笔记',
+    Path('front-end'): '前端笔记',
+    Path('jvm'): 'Java 笔记',
+    Path('lang'): '编程语言笔记',
+    Path('math'): '数学笔记',
+    Path('.NET'): '.NET 笔记',
+    Path('network'): '网络相关笔记',
+    Path('os'): '操作系统笔记',
+    Path('python'): 'Python 笔记',
+    Path('related'): '相关笔记'
+}
 
 class OrgWrite(object):
     @staticmethod
@@ -44,7 +44,7 @@ class OrgWrite(object):
         stream.write('  ' * deep + '- [[file:%s][%s]]\n' % (path, name))
 
 
-def get_name(note):
+def get_note_name(note):
     with open(note, encoding='utf-8') as fp:
         match = re.search(r'#\+TITLE:\s*(.+)', fp.read())
         if match:
@@ -57,10 +57,10 @@ def generate_readme(filename):
         OrgWrite.write_title(stream, TITLE)
 
         for directory in NOTE_DIR:
-            OrgWrite.write_list(stream, directory)
+            OrgWrite.write_list(stream, NOTE_DIR.get(directory))
 
             for note in directory.glob('**/*.org'):
-                OrgWrite.write_link(stream, get_name(note), note.as_posix(), 1)
+                OrgWrite.write_link(stream, get_note_name(note), note.as_posix(), 1)
 
 
 if __name__ == '__main__':
