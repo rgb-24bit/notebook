@@ -1,6 +1,6 @@
 #+TITLE: Note
 
-- *数据结构与算法笔记*
+- 数据结构与算法笔记
   - [[file:algorithm/algorithm.org][部分算法笔记]]
   - [[file:algorithm/contest.org][LeetCode 竞赛题]]
   - [[file:algorithm/encrypt.org][加密算法笔记]]
@@ -8,7 +8,7 @@
   - [[file:algorithm/random.org][随机相关算法]]
   - [[file:algorithm/search_sort.org][查找和排序算法笔记]]
   - [[file:algorithm/struct.org][数据结构笔记]]
-- *C & C++ 笔记*
+- C & C++ 笔记
   - [[file:c-c++/bit-op.org][位运算笔记]]
   - [[file:c-c++/c-standard.org][C 语言标准笔记]]
   - [[file:c-c++/c.org][C 语言笔记]]
@@ -16,41 +16,41 @@
   - [[file:c-c++/gcc.org][GCC 笔记]]
   - [[file:c-c++/gdb.org][GDB 笔记]]
   - [[file:c-c++/libc.org][C 标准库笔记]]
-- *数据库笔记*
+- 数据库笔记
   - [[file:database/mssql.org][MSSQL 笔记]]
   - [[file:database/sql.org][SQL 笔记]]
   - [[file:database/t-sql.org][T-SQL 笔记]]
-- *前端笔记*
+- 前端笔记
   - [[file:front-end/html-css.org][HTML-CSS 笔记]]
   - [[file:front-end/javascript.org][JavaScript 笔记]]
   - [[file:front-end/technology.org][前端相关技术]]
-- *Java 笔记*
+- Java 笔记
   - [[file:jvm/gradle.org][gradle 笔记]]
   - [[file:jvm/java.org][Java 笔记]]
-- *编程语言笔记*
+- 编程语言笔记
   - [[file:lang/elisp.org][Emacs Lisp 笔记]]
   - [[file:lang/graphviz.org][graphviz 笔记]]
   - [[file:lang/markup.org][标记语言及其他文本格式]]
   - [[file:lang/plantuml.org][plantuml 笔记]]
   - [[file:lang/uml.org][UML 笔记]]
-- *数学笔记*
+- 数学笔记
   - [[file:math/discrete/1-逻辑和证明.org][逻辑和证明]]
   - [[file:math/discrete/2-基本结构.org][基本结构]]
   - [[file:math/linear/1-矩阵和方程组.org][矩阵和方程组]]
   - [[file:math/probability/lea.org][概率编程]]
-- *.NET 笔记*
+- .NET 笔记
   - [[file:.NET/clr-csharp/csharp_base.org][C# 基础笔记]]
   - [[file:.NET/clr-csharp/csharp_note.org][C# 笔记]]
-- *网络相关笔记*
+- 网络相关笔记
   - [[file:network/protocol.org][互联网协议笔记]]
-- *操作系统笔记*
+- 操作系统笔记
   - [[file:os/base.org][基础内容]]
   - [[file:os/ecf.org][ECF: 异常控制流]]
   - [[file:os/express.org][程序的机器级表示]]
   - [[file:os/info.org][信息的表示和处理]]
   - [[file:os/io.org][系统级 I/O]]
   - [[file:os/link.org][链接]]
-- *Python 笔记*
+- Python 笔记
   - [[file:python/pep.org][PEP 笔记]]
   - [[file:python/python.org][Python 笔记]]
   - [[file:python/python3-cookbook.org][Python3-cookbook 阅读笔记]]
@@ -61,7 +61,7 @@
   - [[file:python/text-process.org][Python 文本处理]]
   - [[file:python/thread.org][Python 并发编程]]
   - [[file:python/tkinter.org][Tkinter 笔记]]
-- *相关笔记*
+- 相关笔记
   - [[file:related/coding.org][编程技巧]]
   - [[file:related/command.org][命令行指令]]
   - [[file:related/doxygen.org][Doxygen 笔记]]

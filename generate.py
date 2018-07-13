@@ -37,7 +37,7 @@ class OrgWrite(object):
 
     @staticmethod
     def write_list(stream, name, deep=0):
-        stream.write('  ' * deep + '- *%s*\n' % name)
+        stream.write('  ' * deep + '- %s\n' % name)
 
     @staticmethod
     def write_link(stream, name, path, deep=0):
