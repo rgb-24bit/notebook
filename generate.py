@@ -5,71 +5,63 @@ Generate README.org
 ~~~~~~~~~~~~~~~~~~~
 
 1. Only .org files required.
-2. Depth does not exceed 2.
+2. Depth does not exceed 1.
 """
 
-from __future__ import unicode_literals
+import re
 
-import re, io, os, glob
-
-
-def get_sub_dir(path):
-    for sub_dir in glob.glob(os.path.join(path, '*/')):
-        yield os.path.normpath(sub_dir)
+from pathlib import Path
 
 
-def get_sub_file(path):
-    for sub_file in glob.glob(os.path.join(path, '*.org')):
-        yield os.path.normpath(sub_file)
+TITLE = """Note"""
+NOTE_DIR = (
+    Path('algorithm'),
+    Path('c-c++'),
+    Path('database'),
+    Path('front-end'),
+    Path('jvm'),
+    Path('lang'),
+    Path('math'),
+    Path('.NET'),
+    Path('network'),
+    Path('os'),
+    Path('python'),
+    Path('related')
+)
 
 
-def get_file_title(path):
-    with io.open(path, 'r', encoding='utf-8') as fp:
-        match = re.search(r'#\+TITLE:.+', fp.read())
+class OrgWrite(object):
+    @staticmethod
+    def write_title(stream, title):
+        stream.write('#+TITLE: %s\n\n' % title)
+
+    @staticmethod
+    def write_list(stream, name, deep=0):
+        stream.write('  ' * deep + '- *%s*\n' % name)
+
+    @staticmethod
+    def write_link(stream, name, path, deep=0):
+        stream.write('  ' * deep + '- [[file:%s][%s]]\n' % (path, name))
+
+
+def get_name(note):
+    with open(note, encoding='utf-8') as fp:
+        match = re.search(r'#\+TITLE:\s*(.+)', fp.read())
         if match:
-            title = match.group(0).split(':')[-1]
-            return title.strip()
-    return os.path.split(path)[-1]
+            return match.group(1)
+    return Path(note).stem
 
 
-def generate(file_name='README.org'):
-    link_format = '- [[file:{path}][{name}]]\n'
-    with io.open(file_name, 'w', encoding='utf-8') as fp:
-        fp.write('#+TITLE: Note\n\n')
+def generate_readme(filename):
+    with open(filename, 'w+', encoding='utf-8') as stream:
+        OrgWrite.write_title(stream, TITLE)
 
-        sep = '\\' if os.name == 'nt' else '/'  # 不同系统下的分隔符
-        ignore_dir = ('archive', 'inbox', '_style')  # 忽略的文件夹
+        for directory in NOTE_DIR:
+            OrgWrite.write_list(stream, directory)
 
-        # 分类子文件夹
-        for sub_dir in get_sub_dir('.'):
-            if sub_dir in ignore_dir:
-                continue
-
-            fp.write('- *{name}*\n'.format(name=sub_dir))
-
-            # 分类子文件夹的子文件夹
-            for sub_sub_dir in get_sub_dir(sub_dir):
-                # 剔除无意义的子文件夹
-                if len(list(get_sub_file(sub_sub_dir))) == 0:
-                    continue
-
-                name = sub_sub_dir.split(sep)[-1]
-                fp.write('  - *{name}*\n'.format(name=name))
-
-                # 分类子文件夹的子文件夹的子文件
-                for sub_sub_file in get_sub_file(sub_sub_dir):
-                    link = link_format.format(
-                        path=sub_sub_file,
-                        name=get_file_title(sub_sub_file))
-                    fp.write('    ' + link)
-
-            # 分类子文件夹的子文件
-            for sub_file in get_sub_file(sub_dir):
-                link = link_format.format(
-                    path=sub_file,
-                    name=get_file_title(sub_file))
-                fp.write('  ' + link)
+            for note in directory.glob('**/*.org'):
+                OrgWrite.write_link(stream, get_name(note), note.as_posix(), 1)
 
 
 if __name__ == '__main__':
-    generate()
+    generate_readme('README.org')
