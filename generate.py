@@ -16,17 +16,15 @@ from pathlib import Path
 TITLE = """Note"""
 
 NOTE_DIR = {
-    Path('algorithm'): '数据结构与算法笔记',
-    Path('c-c++'): 'C & C++ 笔记',
-    Path('database'): '数据库笔记',
-    Path('front-end'): '前端笔记',
-    Path('jvm'): 'Java 笔记',
-    Path('lang'): '编程语言笔记',
-    Path('math'): '数学笔记',
-    Path('.NET'): '.NET 笔记',
-    Path('network'): '网络相关笔记',
-    Path('os'): '操作系统笔记',
-    Path('python'): 'Python 笔记',
+    Path('algorithm'): '数据结构与算法',
+    Path('c-c++'): 'C & C++',
+    Path('python'): 'Python',
+    Path('java'): 'Java',
+    Path('database'): '数据库',
+    Path('front-end'): '前端',
+    Path('lang'): '编程语言',
+    Path('network'): '网络',
+    Path('os'): '操作系统',
     Path('related'): '相关笔记'
 }
 
@@ -37,7 +35,7 @@ class OrgWrite(object):
 
     @staticmethod
     def write_list(stream, name, deep=0):
-        stream.write('  ' * deep + '- %s\n' % name)
+        stream.write('  ' * deep + '- %s ::\n' % name)
 
     @staticmethod
     def write_link(stream, name, path, deep=0):
