@@ -1,14 +1,19 @@
-#+TITLE:      实用工具
+#+TITLE:      实用开源工具收集
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#x64dbg][x64dbg]]
 - [[#gnupg][Gnupg]]
+- [[#licecap][LICEcap]]
 
 * x64dbg
   Windows的开源 x64 / x32调试器, 用来学习汇编很可以
 
   + [[https://github.com/x64dbg/x64dbg][x64dbg]]
-
+    
 * Gnupg
   + [[http://www.ruanyifeng.com/blog/2013/07/gpg.html][阮一峰博客]]
 
+* LICEcap
+  gif 图片录制
+
+  + [[https://github.com/justinfrankel/licecap][LICEcap]]

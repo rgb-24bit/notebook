@@ -17,7 +17,7 @@ TITLE = """Note"""
 
 NOTE_DIR = {
     Path('algorithm'): '数据结构与算法',
-    Path('c-c++'): 'C & C++',
+    Path('c-lang'): 'C Language',
     Path('python'): 'Python',
     Path('java'): 'Java',
     Path('database'): '数据库',
@@ -25,7 +25,8 @@ NOTE_DIR = {
     Path('lang'): '编程语言',
     Path('network'): '网络',
     Path('os'): '操作系统',
-    Path('related'): '相关笔记'
+    Path('tool'): '编程工具',
+    Path('misc'): 'Misc'
 }
 
 class OrgWrite(object):

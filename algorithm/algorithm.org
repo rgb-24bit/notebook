@@ -1,4 +1,4 @@
-#+TITLE:      部分算法笔记
+#+TITLE:      算法笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#nonce][Nonce]]
