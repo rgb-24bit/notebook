@@ -1,0 +1,63 @@
+#+TITLE:      curl 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#语法][语法]]
+- [[#常用选项][常用选项]]
+- [[#使用实例][使用实例]]
+
+* 语法
+  #+BEGIN_EXAMPLE
+    curl <链接>
+    curl [选项]... <链接>
+  #+END_EXAMPLE
+
+* 常用选项
+  #+BEGIN_EXAMPLE
+    -o,             保存网页内容到文件
+    -L,             自动跳转
+    -i,             显示响应头信息及网页代码
+    -I,             只显示响应头信息
+    -v,             显示整个 http 通信过程
+    --trace,        显示比 -v 选项更详细的通信过程
+    --trace-ascii,  将 --trace 的输出保存到文件
+    -X,             指定使用的请求方法
+    -d, --data,     指定要发送的数据
+    --user-agent,   指定 User Agent
+    --cookie,       发送 cookie
+    -H, --header，  增加头信息
+  #+END_EXAMPLE
+
+* 使用实例
+  + 查看网页源码
+    #+BEGIN_SRC bash
+      $ curl www.sina.com
+    #+END_SRC
+  + 自动跳转
+    #+BEGIN_SRC bash
+      $ curl -L www.sina.com
+    #+END_SRC
+  + 显示头信息
+    #+BEGIN_SRC bash
+      $ curl -i www.sina.com
+    #+END_SRC
+  + 显示通信过程
+    #+BEGIN_SRC bash
+      $ curl -v www.sina.com
+    #+END_SRC
+  + HTTP动词
+    #+BEGIN_SRC bash
+      $ curl -X POST www.example.com
+    #+END_SRC
+  + User Agent字段
+    #+BEGIN_SRC bash
+      $ curl --user-agent "[User Agent]" [URL]
+    #+END_SRC
+  + cookie
+    #+BEGIN_SRC bash
+      $ curl --cookie "name=xxx" www.example.com
+    #+END_SRC
+  + 增加头信息
+    #+BEGIN_SRC bash
+      $ curl -H "Content-Type:application/json" http://example.com
+    #+END_SRC
+

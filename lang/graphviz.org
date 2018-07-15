@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#dot][dot]]
+- [[#绘制-erd-图][绘制 ERD 图]]
 
 * dot
   教程: [[https://github.com/uolcano/blog/issues/13][dot 教程]]
@@ -14,3 +15,30 @@
     graph[fontname="FangSong"];    /*set the subgraph's font*/
   #+END_SRC
 
+* 绘制 ERD 图
+  #+BEGIN_SRC dot
+    digraph erd {
+      graph[rankdir=LR, overlap=false, splines=true];
+      node [shape=record, fontsize=9, fontname="Verdana"];
+      edge [style=dashed];
+
+      labelloc=t;
+      label="Example";
+
+      tbl0 [shape=none, margin=0, label=<
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+        <tr><td bgcolor="#66CCFF">Table 0</td></tr>
+        <tr><td port="0" align="left">uid: integer</td></tr>
+        <tr><td port="1" align="left">name: char(12)</td></tr>
+        </table>>];
+
+      tbl1 [shape=none, margin=0, label=<
+        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+        <tr><td bgcolor="#66CCFF">Table 1</td></tr>
+        <tr><td port="0" align="left">email: char(10)</td></tr>
+        <tr><td port="1" align="left">uid: integer</td></tr>
+        </table>>];
+
+      tbl0:0 -> tbl1: 1;
+    }
+  #+END_SRC

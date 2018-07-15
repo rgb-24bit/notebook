@@ -1,0 +1,12 @@
+#+TITLE:      JavaDoc 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#package-infojava][package-info.java]]
+
+* package-info.java
+  pacakge-info.java 的目标是提供一个包级的文档说明或者是包级的注释。
+
+  pacakge-info.java 文件中，唯一要求包含的内容是包的声明语句：
+  #+BEGIN_SRC java
+    package pkg;
+  #+END_SRC

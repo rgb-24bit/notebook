@@ -1,3 +1,9 @@
+#+TITLE:      Flyway 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#教程][教程]]
+- [[#sql-脚本命名规则][SQL 脚本命名规则]]
+
 * 教程
   + [[https://flywaydb.org/documentation/migrations][Migrations]]
   + [[https://flywaydb.org/getstarted/firststeps/gradle][First Steps: Gradle]]

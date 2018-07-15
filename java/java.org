@@ -33,6 +33,7 @@
 - [[#内部类][内部类]]
 - [[#序列化][序列化]]
 - [[#输入输出][输入输出]]
+- [[#泛型][泛型]]
 
 * 版本
   + Java: 1.02 - 1.1
@@ -166,8 +167,12 @@
 
     dataType[] arrayRefVar = {value0, value1, ..., valuek};  // 只能在声明的同时使用
 
-    dataType[] arrayRefVar = new dataType[arraySize]{value0, value1, ..., valuek};
+    dataType[] arrayRefVar = new dataType[]{value0, value1, ..., valuek};
   #+END_SRC
+
+  + [[http://www.importnew.com/7127.html][Java数组]]
+  + [[https://blog.csdn.net/zhangjg_blog/article/details/16116613][Java中数组的特性]]
+  + [[http://wiki.jikexueyuan.com/project/java-enhancement/java-thirtysix.html][asList 的缺陷]]
 
 * 名称
   使用外部类的两种方式：
@@ -232,6 +237,8 @@
   2. 不能降低方法的存取权限， 只能保持一样或更加开放
 
   否则就是重载了。
+
+  + [[https://www.polarxiong.com/archives/JAVA-%E5%AD%90%E7%B1%BB-%E8%A6%86%E7%9B%96-%E7%88%B6%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.html][JAVA: 子类覆盖父类的成员变量]]
 
 * 重载
   重载的意义是两个方法的 *名称相同*, 但参数不同， 因此 *重载与多态毫无关系*.
@@ -703,3 +710,17 @@
 
   通过缓冲区可以更加高效的操作文件。
   
+* 泛型
+  + 创建泛型类的实例：
+    #+BEGIN_SRC java
+      new ArrayList<Song>();
+    #+END_SRC
+  + 声明与指定泛型类型的变量：
+    #+BEGIN_SRC java
+      List<Song> songList = new ArrayList<Song>();
+    #+END_SRC
+  + 声明与调用泛型类型的方法：
+    #+BEGIN_SRC java
+      void foo(List<Song> list);
+      x.foo(songList);
+    #+END_SRC

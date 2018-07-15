@@ -1,5 +1,0 @@
-* 自定义响应类
-  + [[http://codingpy.com/article/customizing-the-flask-response-class/][如何自定义Flask中的响应类]]
-
-* cookie
-  + [[https://www.letiantian.me/2014-06-28-flask-cookie/][浅入浅出Flask框架：Cookie]]

@@ -14,6 +14,7 @@
 - [[#使用子模块][使用子模块]]
 - [[#提交到所有远程仓库][提交到所有远程仓库]]
 - [[#libgit2-的使用][libgit2 的使用]]
+- [[#创建空白分支][创建空白分支]]
 
 * github fork 的更新
 ** 给 fork 配置一个 remote
@@ -85,3 +86,16 @@
   + [[http://ftxtool.org/2016/03/25/113/][git status]]
   + [[https://github.com/avetisk/zsh-git-prompt/blob/master/zsh-git-prompt][zsh-git-prompt]]
   + [[https://github.com/libgit2/libgit2/blob/master/include/git2/status.h][status.h]]
+* 创建空白分支
+  1. 创建无提交历史的分支
+     #+BEGIN_EXAMPLE
+       $ git checkout --orphan <branch>
+     #+END_EXAMPLE
+  2. 删除工作目录中的内容
+     #+BEGIN_EXAMPLE
+       $ git rm -rf .
+     #+END_EXAMPLE
+  3. 创建提交
+     #+BEGIN_EXAMPLE
+       $ git commit -am "comment"
+     #+END_EXAMPLE

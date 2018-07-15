@@ -1,0 +1,11 @@
+#+TITLE:      自动集成
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#教程][教程]]
+- [[#提供服务的网站][提供服务的网站]]
+
+* 教程
+  + [[http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html][持续集成服务 Travis CI 教程 - 阮一峰]]
+
+* 提供服务的网站
+  + https://travis-ci.org/
