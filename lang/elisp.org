@@ -2,9 +2,27 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#interactive][interactive]]
-- [[#emacs-中的快捷键][Emacs 中的快捷键]]
-- [[#输出][输出]]
-- [[#算术][算术]]
+- [[#基础知识][基础知识]]
+  - [[#输出][输出]]
+  - [[#算术][算术]]
+  - [[#转换浮点数和整数][转换浮点数和整数]]
+  - [[#转换字符串和数字][转换字符串和数字]]
+  - [[#布尔值][布尔值]]
+  - [[#布尔函数][布尔函数]]
+  - [[#判断奇偶][判断奇偶]]
+  - [[#变量][变量]]
+  - [[#条件判断][条件判断]]
+  - [[#块表达式][块表达式]]
+  - [[#循环][循环]]
+  - [[#定义函数][定义函数]]
+  - [[#定义一个命令][定义一个命令]]
+- [[#文本处理][文本处理]]
+  - [[#光标位置][光标位置]]
+  - [[#移动光标与搜索文本][移动光标与搜索文本]]
+  - [[#删除插入修改文本][删除插入修改文本]]
+  - [[#字符串][字符串]]
+  - [[#缓冲区][缓冲区]]
+  - [[#文件][文件]]
 
 * interactive
   ~Emacs~ 中存在 *两种函数*:
@@ -27,50 +45,390 @@
        (insert (format "%s = %s" name value)))
   #+END_SRC
 
-* Emacs 中的快捷键
-  + C-x C-e 在任何地方运行 elisp 语句并将结果插入光标后
-  + M-x eval-region 选择 elisp 语句执行
-  + M-x ielm 打开 elisp shell
-  + M-x describe-function / C-h h 查看函数帮助信息
-  + M-: 执行一条 elisp 语句
-  + M-x view-echo-area-messages / C-h e 查看 *Message*
+* 基础知识
+** 输出
+   #+BEGIN_SRC elisp
+     ;; printing
+     (message "hi")
 
-* 输出
-  #+BEGIN_SRC elisp
-    ;; printing
-    (message "hi")
+     ;; printing variable values
+     (message "Her age is: %d" 16)            ; %d is for number
+     (message "Her name is: %s" "Vicky")      ; %s is for string
+     (message "My list is: %S" (list 8 2 3))  ; %S is for any lisp expression
+   #+END_SRC
 
-    ;; printing variable values
-    (message "Her age is: %d" 16)        ; %d is for number
-    (message "Her name is: %s" "Vicky")  ; %s is for string
-    (message "My list is: %S" (list 8 2 3))  ; %S is for any lisp expression
-  #+END_SRC
+** 算术
+   #+BEGIN_SRC elisp
+     (+ 4 5 1)  ; 10
+     (- 9 2)    ; 7
+     (- 9 2 3)  ; 4
+     (* 2 3)    ; 6
+     (* 2 3 2)  ; 12
 
-* 算术
-  #+BEGIN_SRC elisp
-    (+ 4 5 1)  ; 10
-    (- 9 2)    ; 7
-    (- 9 2 3)  ; 4
-    (* 2 3)    ; 6
-    (* 2 3 2)  ; 12
+     ;; integer part of quotient
+     (/ 7 2)    ; 3
 
-    ;; integer part of quotient
-    (/ 7 2)    ; 3
+     ;; division
+     (/ 7 2.0)  ; 3.5
 
-    ;; division
-    (/ 7 2.0)  ; 3.5
+     ;; mod, remainder
+     (% 7 4)    ; 3
 
-    ;; mod, remainder
-    (% 7 4)    ; 3
+     ;; power; exponential
+     (expt 2 3) ; 8
+   #+END_SRC
 
-    ;; power; exponential
-    (expt 2 3) ; 8
+   *Note:* ~3.~ is a integer, ~3.0~ is a float
+   #+BEGIN_SRC elisp
+     (integerp 3.)  ; t
+     (floatp 3.)    ; nil
+     (floatp 3.0)   ; t
+   #+END_SRC
 
-    ;; 3. is a integer, 3.0 is a float
-    (integerp 3.) ;  t
-    (floatp 3.) ;  nil
-    (floatp 3.0) ;  t
-  #+END_SRC
+** 转换浮点数和整数
+   #+BEGIN_SRC elisp
+     ;; int to float
+     (float 3)       ; 3.0
 
-  *NOTE:* ~3.~ 是整数而 ~3.0~ 才是浮点数
-  
+     ;; float to int
+     (truncate 3.3)  ; 3 - 取整
+
+     (floor 3.3)     ; 3 - 向下取整
+
+     (ceiling 3.3)   ; 4 - 向上取整
+
+     (round 3.4)     ; 3 - 四舍五入
+   #+END_SRC
+
+** 转换字符串和数字
+   #+BEGIN_SRC elisp
+     (string-to-number "3")  ; 3
+     (number-to-string 3)    ; "3"
+   #+END_SRC
+
+** 布尔值
+   在 ~Emacs Lisp~ 中， 所有的 ~nil~ 被判断为 ~false~, 其他的都为 ~true~.
+
+   以下表达式的结果都为 ~nil~:
+   #+BEGIN_SRC elisp
+     nil     ; nil
+     ()      ; nil
+     '()     ; nil
+     (list)  ; nil
+   #+END_SRC
+
+   以下表达式的结果都不是 ~nil~, 在布尔判断中的结果为 ~true(t)~:
+   #+BEGIN_SRC elisp
+     t   ; t
+     0   ; 0 ~ t
+     ""  ; "" ~ t
+     []  ; [] ~ t ~ 0 个元素的向量
+   #+END_SRC
+
+   ~Emacs Lisp~ 中没有布尔数据类型， 只有 ~nil~ 和 *空列表* 为 ~false~, 其他的都是 ~true~.
+
+** 布尔函数
+   #+BEGIN_SRC elisp
+     (and t nil)  ; nil
+     (or t nil)   ; t
+
+     ;; 可以同时处理多个参数
+     (and t nil t t t t)  ; nil
+   #+END_SRC
+
+   数值比较的布尔函数：
+   #+BEGIN_SRC elisp
+     (< 3 4)  ; less than => t
+     (> 3 4)  ; greater than => nil
+
+     (<= 3 4)  ; less or equal to => t
+     (>= 3 4)  ; greater or equal to => nil
+
+     (= 3 3)                    ; equal => t
+     (= 3 3.00000000000000001)  ; equal => t
+
+     (/= 3 4)  ; not equal => t
+   #+END_SRC
+
+   字符串比较的布尔函数：
+   #+BEGIN_SRC elisp
+     ;; 比较字符串的专用函数
+     (string-equal "abc" "abc")  ; t
+
+     (string-equal "abc" "Abc")  ; nil
+
+     ;; 用于比较字符串和符号
+     (string-equal "abc" 'abc) ;  t
+   #+END_SRC
+
+   通用的等值比较函数 ~equal~, 比较两者的 *数据类型* 和 *值* 是否相等：
+   #+BEGIN_SRC elisp
+     (equal 3 3)      ; t
+     (equal 3.0 3.0)  ; t
+
+     (equal 3 3.0)  ; nil. Because datatype doesn't match.
+
+     ;; test equality of lists
+     (equal '(3 4 5) '(3 4 5))    ; t
+     (equal '(3 4 5) '(3 4 "5"))  ; nil
+
+     ;; test equality of strings
+     (equal "e" "e")  ; t
+
+     ;; test equality of symbols
+     (equal 'abc 'abc)  ; t
+   #+END_SRC
+
+   函数 ~eq~ 用于比较两个对象是否是同一个对象， 如 ~(eq "e" "e")~ 的返回值为 ~nil~.
+
+   不等式 ~/=~ 只使用与数字， 更通用的需要使用 ~not~:
+   #+BEGIN_SRC elisp
+     (not (equal 3 4))  ; t
+   #+END_SRC
+
+** 判断奇偶
+   #+BEGIN_SRC elisp
+     (= (% n 2) 0)  ; 是否为偶数
+
+     (= (% n 2) 1)  ; 是否为奇数
+   #+END_SRC
+
+** 变量
+   ~setq~ 用于设置变量， 变量不需要声明， 并且是 *全局变量*.
+   #+BEGIN_SRC elisp
+     (setq x 1)          ; assign 1 to x
+     (setq a 3 b 2 c 7)  ; assign 3 to a, 2 to b, 7 to c
+   #+END_SRC
+
+   可以使用 ~let~ 来定义局部变量， 有两种方式：
+   #+BEGIN_SRC elisp
+     ;; (let (var1 var2 …) body)
+     (let (a b)
+       (setq a 3)  ; body
+       (setq b 4)  ; body
+       (+ a b)     ; body
+       )  ; 7
+
+     ;; (let ((var1 val1) (var2 val2) …) body)
+     (let ((a 3) (b 4))
+       (+ a b)  ; body
+       )  ; 7
+   #+END_SRC
+
+   ~let~ 会返回主体 ~body~ 的最后一个表达式的值。
+
+** 条件判断
+   条件判断表达式的两种形式：
+   #+BEGIN_SRC elisp
+     ;; (if test body)
+     (if (< 3 2) (message "yes"))  ; nil
+     (if (< 2 3) (message "yes"))  ; "yes"
+
+     ;; (if test true_body false_body)
+     (if (< 2 3) (message "yes") (message "no"))  ; "yes"
+   #+END_SRC
+
+   比 ~(if test body)~ 更好的表达方式是：
+   #+BEGIN_SRC elisp
+     ;; (when test expr1 expr2 ...)
+     (when (< 2 3)
+       (let ((a 2) (b 3))
+         (message "%d < %d" a b))
+       )  ; "2 < 3"
+
+     ;; equal
+     (if (< 2 3)
+         (progn
+           (let ((a 2) (b 3))
+             (message "%d < %d" a b))))  ; "2 < 3"
+   #+END_SRC
+
+** 块表达式
+   类似于 ~C~ 语言中由 ~{...}~ 括起来的表达式块， ~Emacs Lisp~ 使用 ~progn~ 来实现：
+   #+BEGIN_SRC elisp
+     ;; (progn expr1 expr2 ...)
+     (progn 3 4 (< 2 3))  ; t
+
+     (if (< 2 3)
+         (progn  ; true
+           )
+       (progn  ; else
+         )
+       )
+   #+END_SRC
+
+   ~progn~ 会返回它主体中最后一个表达式的值。
+
+** 循环
+   最基本的循环是 ~while~ 循环：
+   #+BEGIN_SRC elisp
+     ;; (while test body)
+     (let ((x 0))
+       (while (< x 4)
+         (print (format "number is %d" x))
+         (setq x (1+ x))))
+   #+END_SRC
+
+** 定义函数
+   基本的定义函数方式如下：
+   #+BEGIN_SRC elisp
+     ;; (defun function_name (param1 param2 …) "doc_string" body)
+     (defun my-function()
+       "my function"
+       (message "@_@"))
+   #+END_SRC
+
+   函数调用会返回最后一个表达式的值。
+
+** 定义一个命令
+   命令和函数的区别是： 命令可以用 ~M-x~ 调用， 即可交互的。
+
+   让函数可交互式使用，可以在 ~doc-string~ 后面添加 ~(interactive)~.
+
+   #+BEGIN_SRC elisp
+     (defun yay())
+       "Insert “Yay!” at cursor position."
+       (interactive)
+       (insert "Yay!"))
+   #+END_SRC
+
+* 文本处理
+** 光标位置
+   当前光标的位置为 ~point~, 缓冲区第一个字符左边的光标位置是 ~1~.
+   #+BEGIN_SRC elisp
+     ;; This returns the current cursor position
+     (point)
+   #+END_SRC
+
+   更多操作：
+   #+BEGIN_SRC elisp
+     ;; returns the position of the beginning/end of region (selection)
+     (region-beginning)
+     (region-end)
+
+     ;; position for beginning/ending of current line
+     (line-beginning-position)
+     (line-end-position)
+
+     ;; returns the position for the beginning/end of buffer, taking account of narrow-to-region
+     (point-min)
+     (point-max)
+   #+END_SRC
+
+** 移动光标与搜索文本
+   #+BEGIN_SRC elisp
+     ;; move cursor to position 39
+     (goto-char 39)
+
+     ;; move cursor by 4 chars
+     (forward-char 4)
+     (backward-char 4)
+
+     ;; move cursor to the location of a string
+     ;; returns the new position
+     (search-forward "some") ; to end of “some”
+     (search-backward "some") ; to beginning of “some”
+
+     ;; move cursor to the location matched by a regex
+     ;; returns the new position
+     (re-search-forward "[0-9]") ; digit
+     (re-search-backward "[0-9]")
+
+     ;; move cursor to the first char that's not “a to z”
+     ;; Returns the distance traveled.
+     (skip-chars-forward "a-z")
+     (skip-chars-backward "a-z")
+   #+END_SRC
+
+** 删除插入修改文本
+   #+BEGIN_SRC elisp
+     ;; delete 9 chars starting at current cursor pos
+     (delete-char 9)
+
+     ;; deleting text from pos 3 to 10
+     (delete-region 3 10)
+
+     ;; insert string at current cursor position
+     (insert "i ♥ cats")
+
+     ;; get the string from pos 71 to 300
+     (setq x (buffer-substring 71 300))
+
+     ;; the first letter capitalized words
+     (capitalize-region 71 300)
+   #+END_SRC
+
+** 字符串
+   #+BEGIN_SRC elisp
+     ;; length
+     (length "abc") ; 3
+
+     ;; substring
+     (substring "abcdefg" 3 4) ; d
+
+     ;; change a given string using regex
+     (replace-regexp-in-string "[0-9]" "X" "abc123") ; "abcXXX"
+   #+END_SRC
+
+** 缓冲区
+   #+BEGIN_SRC elisp
+     ;; return the name of current buffer
+     (buffer-name)
+
+     ;; return the full path of current file
+     (buffer-file-name)
+
+     ;; switch to the buffer named xyz
+     (set-buffer "xyz")
+
+     ;; save current buffer
+     (save-buffer)
+
+     ;; close a buffer named xyz
+     (kill-buffer "xyz")
+
+     ;; temporarily sets a buffer as current to work with
+     (with-current-buffer "elisp.org"
+       ;; do something here. delete/insert text, etc.
+     )
+   #+END_SRC
+
+   ~(with-current-buffer BUFFER-OR-NAME &rest BODY)~ 在当前缓冲区中操作 ~BUFFER-OR-NAME~ 指定的缓冲区，
+   如果缓冲区不存在会报错。
+
+** 文件
+   #+BEGIN_SRC elisp
+     ;; open a file (in a buffer)
+     (find-file "~/")
+
+     ;; same as “Save As”.
+     (write-file path)
+
+     ;; insert file into current position
+     (insert-file-contents path)
+
+     ;; append a text block to file
+     (append-to-file start-pos end-pos path)
+
+     ;; renaming file
+     (rename-file file-name new-name)
+
+     ;; copying file
+     (copy-file old-name new-name)
+
+     ;; deleting file
+     (delete-file file-name)
+
+     ;; get dir path
+     (file-name-directory full-path)
+
+     ;; get filename part
+     (file-name-nondirectory full-path)
+
+     ;; get filename's suffix
+     (file-name-extension file-name)
+
+     ;; get filename sans suffix
+     (file-name-sans-extension file-name)
+   #+END_SRC
+   

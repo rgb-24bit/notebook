@@ -34,6 +34,7 @@
 - [[#序列化][序列化]]
 - [[#输入输出][输入输出]]
 - [[#泛型][泛型]]
+- [[#枚举][枚举]]
 
 * 版本
   + Java: 1.02 - 1.1
@@ -235,8 +236,6 @@
   覆盖的基本原则：
   1. 参数和返回值类型必须要一样
   2. 不能降低方法的存取权限， 只能保持一样或更加开放
-
-  否则就是重载了。
 
   + [[https://www.polarxiong.com/archives/JAVA-%E5%AD%90%E7%B1%BB-%E8%A6%86%E7%9B%96-%E7%88%B6%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F.html][JAVA: 子类覆盖父类的成员变量]]
 
@@ -724,3 +723,31 @@
       void foo(List<Song> list);
       x.foo(songList);
     #+END_SRC
+* 枚举
+  #+BEGIN_SRC java
+    public class Example {
+      public enum Names {
+        JERRY("lead guitar") {
+          public String sings() {
+            return "123";
+          }
+        },
+        BOBBY("14"),
+        PHLL("2423");  // Names 枚举类型的是三个值（实例）
+
+        private String ins;
+
+        Names(String ins) {  // 每个枚举变量都会调用一次
+          this.ins = ins;
+        }
+
+        public String getIns {
+          return this.ins;
+        }
+
+        public Stirng sings() {
+          return "123";
+        }
+      }
+    }
+  #+END_SRC

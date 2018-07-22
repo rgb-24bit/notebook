@@ -1,7 +1,9 @@
 #+TITLE:      Python 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#del][del]]
 - [[#super][super]]
+- [[#import][import]]
 - [[#staticmethod][@staticmethod]]
 - [[#异常][异常]]
 - [[#元类][元类]]
@@ -13,6 +15,7 @@
 - [[#函数参数][函数参数]]
 - [[#函数属性][函数属性]]
 - [[#语法相关][语法相关]]
+- [[#获取对象属性][获取对象属性]]
 - [[#数值运算相关][数值运算相关]]
 - [[#小整数对象池][小整数对象池]]
 - [[#作用域问题][作用域问题]]
@@ -29,10 +32,31 @@
 - [[#python-垃圾回收机制][Python 垃圾回收机制]]
 - [[#python-的常见实现][Python 的常见实现]]
 
+* del
+  ~del~ 删除的是一个对象的引用， 而不是对象本身
+
 * super
   ~super~ 的一般使用方式为： ~super(class, self).xxx~.
 
   + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]].
+
+* import
+  导入的一种方式：
+  #+BEGIN_SRC python
+    from click import (
+        argument,
+        command,
+        echo,
+        edit,
+        group,
+        Group,
+        option,
+        pass_context,
+        Option,
+        version_option,
+        BadParameter,
+    )
+  #+END_SRC
 
 * @staticmethod
   如果类中定义的函数没有绑定 ~self~ 变量， 那么这个函数可以用类名访问， 但是不能用
@@ -228,6 +252,17 @@
 
   定义同名的对象， 最后的对象以 *最后一次* 定义为准
 
+* 获取对象属性  
+  方法 ~__getattr__~ 和 ~__getattribute__~ 的使用：
+  + __getattr__(self, attr)
+    - 触发时机： 获取不存在的对象成员时触发
+    - 作用： 为访问不存在的属性设置值
+    - 注意：__getattribute__() 无论何时都会在 __getattr__() 之前触发， 
+      触发了 __getattribute__() *有返回值* 就不会在触发 __getattr__() 了
+
+  + __getattribute__(self, attr)
+    - 触发时机： 使用对象成员时触发， 无论成员是否存在
+
 * 数值运算相关
   + 乘方
     #+BEGIN_SRC python
@@ -348,6 +383,8 @@
             obj.__init__(*args, **kwargs)
         return obj
   #+END_SRC
+  
+  如果 ~__new__~ 返回的是 ~None~ 或其他类型的对象， 那么当前类的 ~__init__~ 不会执行 
 
 * 限制实例属性
   在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*

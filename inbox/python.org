@@ -11,44 +11,15 @@
     + [[https://www.oschina.net/translate/playing-around-with-await-async-in-python-3-5][await/async]]
 
 
-* 循环引用
-  + [[https://www.cnblogs.com/xybaby/p/7491656.html][使用gc、objgraph干掉python内存泄露与循环引用！]]
-
 * weakref
   + [[https://blog.louie.lu/2017/07/29/%E4%BD%A0%E6%89%80%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-python-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%94%A8%E6%B3%95-04-weakref/][weakref - 标准库]]
-  + [[https://www.jianshu.com/p/0cecea85ae3b][Python 弱引用的使用]]
+  + [[https://blog.csdn.net/IamaIearner/article/details/9371315][python weakref模块]]
+  + [[https://www.rddoc.com/doc/Python/3.6.0/zh/library/weakref/][weakref —弱参考]]
 
-* 导入
-  导入的一种方式：
-  #+BEGIN_SRC python
-    from click import (
-        argument,
-        command,
-        echo,
-        edit,
-        group,
-        Group,
-        option,
-        pass_context,
-        Option,
-        version_option,
-        BadParameter,
-    )
-  #+END_SRC
-
-* 属性
-  + [[https://juejin.im/post/5a3de02af265da432653098d][Python魔术方法 __getattr__、__getattribute__使用详解]]
-    
 * 协程
   + [[https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000][协程]]
   + [[http://www.cnblogs.com/geeklove01/p/8542868.html][werkzeug（flask）中的local，localstack，localproxy探究]]
   + [[https://windard.com/blog/2017/10/17/Flask-Session][flask 中的 cookie 和 session]]
-
-* 堆
-  + [[https://blog.csdn.net/u013206202/article/details/78968438][python3入门之堆 - heapq]]
-
-  使用元组作为堆元素的时候， 如果存在不支持原始比较的对象， 则必须
-  保证前面的元素能够完成排序比较。
 
 * 标准库
   + [[https://www.cnblogs.com/ccorz/p/6089322.html][Python3 中codecs进行文件的读取]]
@@ -58,11 +29,22 @@
 * I/O 结构
   I/O 的层次与缓冲区
     
-* 属性限制
-  + __slots__定义的属性仅对当前类起作用，对继承的子类是不起作用的
 * 字节到字符串
   + 不在意编码可以用 ~bytes.hex~
 
 * 文件路径
   + [[https://docs.python.org/3/library/pathlib.html][pathlib — Object-oriented filesystem paths]]
   + [[https://docs.python.org/3/library/pathlib.html#pathlib.Path.glob][glob **]]
+
+* 打包
+  + [[http://wsfdl.com/python/2015/09/06/Python%E5%BA%94%E7%94%A8%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E4%B8%8A.html][Python application 的打包和发布]]
+
+* 单元测试
+  + [[http://wsfdl.com/python/2015/02/01/Python%E7%9A%84%E6%B5%8B%E8%AF%95%E4%B9%8BTox.html][Python 的单元测试之 tox]]
+
+* 特殊属性
+  + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性（收藏专用）]]
+  + [[https://segmentfault.com/a/1190000005701971][Python （类）实例方法的特殊属性
+]]
+* 魔法方法
+  + [[http://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html][p11. (译)Python魔法方法指南]]

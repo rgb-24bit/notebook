@@ -15,6 +15,7 @@
 - [[#提交到所有远程仓库][提交到所有远程仓库]]
 - [[#libgit2-的使用][libgit2 的使用]]
 - [[#创建空白分支][创建空白分支]]
+- [[#git-clean][git clean]]
 
 * github fork 的更新
 ** 给 fork 配置一个 remote
@@ -99,3 +100,21 @@
      #+BEGIN_EXAMPLE
        $ git commit -am "comment"
      #+END_EXAMPLE
+* git clean
+  #+BEGIN_SRC bash
+    # 获取要删除的文件列表但不会删除
+    git clean -n
+
+    # 删除当前目录下所有没有 track 过的文件. 但不会删除 .gitignore 文件里面指定的文件夹和文件
+    git clean -f
+
+    # 删除指定路径下的没有被 track 过的文件
+    git clean -f <path>
+
+    # 删除当前目录下没有被 track 过的文件和文件夹
+    git clean -df
+
+    # 删除当前目录下所有没有 track 过的文件. 不管他是否是 .gitignore 文件里面指定的文件夹和文件
+    git clean -xf
+  #+END_SRC
+
