@@ -1,4 +1,4 @@
-#+TITLE:      Java 笔记
+#+TITLE:      Java 基础笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#版本][版本]]
@@ -723,6 +723,7 @@
       void foo(List<Song> list);
       x.foo(songList);
     #+END_SRC
+
 * 枚举
   #+BEGIN_SRC java
     public class Example {

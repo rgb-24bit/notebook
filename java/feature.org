@@ -1,0 +1,128 @@
+#+TITLE:      Java feature 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#annotations][annotations]]
+- [[#lambda-表达式][Lambda 表达式]]
+- [[#方法引用][方法引用]]
+- [[#object-方法][Object 方法]]
+- [[#数组][数组]]
+- [[#匿名内部类][匿名内部类]]
+
+* annotations
+  + [[https://docs.oracle.com/javase/tutorial/java/annotations/index.html][官方教程]]
+
+  #+BEGIN_SRC java
+    @Author(
+        name = "Benjamin Franklin",
+        date = "3/27/2003"
+            )
+    class MyClass() { ... }
+  #+END_SRC
+
+  ~name~ 和 ~date~ 设置注解的 *元数据*.
+
+  #+BEGIN_SRC java
+    @interface ClassPreamble {
+      String author();
+      String date();
+      int currentRevision() default 1;
+      String lastModified() default "N/A";
+      String lastModifiedBy() default "N/A";
+      // Note use of array
+      String[] reviewers();
+    }
+  #+END_SRC
+
+  定义自己的注解类， 同时在内部定义元数据。 使用：
+  #+BEGIN_SRC java
+    @ClassPreamble (
+        author = "John Doe",
+        date = "3/17/2002",
+        currentRevision = 6,
+        lastModified = "4/12/2004",
+        lastModifiedBy = "Jane Doe",
+        // Note array notation
+        reviewers = {"Alice", "Bob", "Cindy"}
+                    )
+    public class Generation3List extends Generation2List {
+      // class code goes here
+    }
+  #+END_SRC
+
+* Lambda 表达式
+  + [[http://blog.oneapm.com/apm-tech/226.html][深入浅出 Java 8 Lambda 表达式]]
+
+  ~Lambda~ 的一般语法为：
+  #+BEGIN_SRC java
+    (argument) -> (body)
+  #+END_SRC
+
+  比如：
+  #+BEGIN_SRC java
+    (int a, int b) -> {  return a + b; }
+
+    () -> System.out.println("Hello World");
+
+    (String s) -> { System.out.println(s); }
+
+    () -> 42
+
+    () -> { return 3.1415 };
+  #+END_SRC
+
+  + 一个 ~Lambda~ 表达式可以有一个或多个参数， 也可以没有参数
+  + 参数的类型既可以明确声明，也可以根据上下文来推断。例如： ~(int a)~ 与 ~(a)~ 效果相同
+  + 所有参数需包含在圆括号内，参数之间用逗号相隔
+  + 空圆括号代表参数集为空
+  + 当只有一个参数，且其类型可推导时，圆括号 ~()~ 可省略， 如： ~a -> return a + a~
+  + Lambda 表达式的主体可包含零条或多条语句
+  + 如果 Lambda 表达式的主体只有一条语句，花括号{}可省略。
+    匿名函数的返回类型与该主体表达式一致
+  + 如果 Lambda 表达式的主体包含一条以上语句，则表达式必须包含在花括号{}中（形成代码块）
+
+* 方法引用
+  + [[https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html][官方教程]]
+
+  |------------------------------+--------------------------------------|
+  | 方法类型                     | 方法引用例子                         |
+  |------------------------------+--------------------------------------|
+  | 静态方法                     | ContainingClass::staticMethodName    |
+  | 特定对象的实例方法           | containingObject::instanceMethodName |
+  | 特定类型的任意对象的实例方法 | ContainingType::methodName           |
+  | 构造方法                     | ClassName::new                       |
+  |------------------------------+--------------------------------------|
+
+* Object 方法
+  #+BEGIN_SRC java
+    protected void	finalize();  // 析构函数
+    Class<?>	getClass();  // 获取类
+  #+END_SRC
+
+* 数组
+  数组的 *成员* 包括：
+  1. ~public final length~
+  2. ~public T[] clone()~
+  3. ~Object method~
+
+* 匿名内部类 
+  + [[https://www.cnblogs.com/nerxious/archive/2013/01/25/2876489.html][java 中的匿名内部类总结]]
+
+  #+BEGIN_SRC java
+    abstract class Person {
+      public abstract void eat();
+    }
+
+    public class Demo {
+      public static void main(String[] args) {
+        Person p = new Person() {
+            public void eat() {
+              System.out.println("eat something");
+            }
+          };
+        p.eat();
+      }
+    }
+  #+END_SRC
+
+  这种特殊语法同时还可以用在 ~Interface~ 上。
+

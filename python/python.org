@@ -29,6 +29,7 @@
   - [[#执行包与包内模块][执行包与包内模块]]
 - [[#兼容-python2--python3][兼容 Python2 & Python3]]
 - [[#包管理工具---pip][包管理工具 - PIP]]
+- [[#列表推导式和生成器表达式][列表推导式和生成器表达式]]
 - [[#python-垃圾回收机制][Python 垃圾回收机制]]
 - [[#python-的常见实现][Python 的常见实现]]
 
@@ -481,6 +482,16 @@
   + 使用 ~python -m ensurepip~ 安装 ~pip~
   + [[https://docs.python.org/3/library/ensurepip.html][ensurepip — Bootstrapping the pip installer]]
   + [[https://packaging.python.org/tutorials/installing-packages/][Installing Packages]]
+
+* 列表推导式和生成器表达式
+  #+BEGIN_SRC python
+    In [1]: (i for i in range(10))
+    Out[1]: <generator object <genexpr> at 0x03A7E7B0>
+
+    In [2]: [i for i in range(10)]
+    Out[2]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  #+END_SRC
+
 * Python 垃圾回收机制
   ~Python~ 的垃圾回收是根据 *引用计数* 来判断的， 当一个对象的 *引用* 为 0 是，
   该对象便会被回收。

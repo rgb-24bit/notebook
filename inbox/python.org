@@ -25,6 +25,7 @@
   + [[https://www.cnblogs.com/ccorz/p/6089322.html][Python3 中codecs进行文件的读取]]
   + [[https://www.cnblogs.com/dkblog/archive/2011/10/10/2205200.html][Python使用UUID库生成唯一ID]]
   + io 模块源码可以考虑看一下
+  + [[http://www.cnblogs.com/nowgood/p/turtle.html][Python turtle 绘图]]
     
 * I/O 结构
   I/O 的层次与缓冲区
@@ -44,7 +45,63 @@
 
 * 特殊属性
   + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性（收藏专用）]]
-  + [[https://segmentfault.com/a/1190000005701971][Python （类）实例方法的特殊属性
-]]
+  + [[https://segmentfault.com/a/1190000005701971][Python （类）实例方法的特殊属性]]
+
 * 魔法方法
   + [[http://pyzh.readthedocs.io/en/latest/python-magic-methods-guide.html][p11. (译)Python魔法方法指南]]
+  #+BEGIN_SRC python
+    In [2]: dir(object)
+    Out[2]:
+    ['__class__',
+     '__delattr__',
+     '__dir__',
+     '__doc__',
+     '__eq__',
+     '__format__',
+     '__ge__',
+     '__getattribute__',
+     '__gt__',
+     '__hash__',
+     '__init__',
+     '__init_subclass__',
+     '__le__',
+     '__lt__',
+     '__ne__',
+     '__new__',
+     '__reduce__',
+     '__reduce_ex__',
+     '__repr__',
+     '__setattr__',
+     '__sizeof__',
+     '__str__',
+     '__subclasshook__']
+
+
+    In [5]: dir(o)
+    Out[5]:
+    ['__class__',
+     '__delattr__',
+     '__dir__',
+     '__doc__',
+     '__eq__',
+     '__format__',
+     '__ge__',
+     '__getattribute__',
+     '__gt__',
+     '__hash__',
+     '__init__',
+     '__init_subclass__',
+     '__le__',
+     '__lt__',
+     '__ne__',
+     '__new__',
+     '__reduce__',
+     '__reduce_ex__',
+     '__repr__',
+     '__setattr__',
+     '__sizeof__',
+     '__str__',
+     '__subclasshook__']
+  #+END_SRC
+* __import__
+  + [[https://docs.python.org/3.3/library/functions.html#__import__][__import__]]

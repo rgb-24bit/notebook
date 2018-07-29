@@ -8,3 +8,4 @@
   + [[https://www.letiantian.me/2014-06-28-flask-cookie/][浅入浅出 Flask 框架：Cookie]] - 设置客户端 Cookie
   + [[https://segmentfault.com/a/1190000004618621][Flask-SQLAlchemy 学习总结]]
   + [[http://www.pythondoc.com/flask-sqlalchemy/index.html][Flask-SQLAlchemy 中文文档]]
+  + [[https://segmentfault.com/a/1190000002454953][Flask信号机制(signals)]] - 使用信号

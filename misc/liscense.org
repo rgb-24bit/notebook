@@ -1,0 +1,12 @@
+#+TITLE:      开源协议
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#chose][Chose]]
+- [[#apache20][Apache2.0]]
+
+* Chose
+  [[file:http://www.ruanyifeng.com/blogimg/asset/201105/bg2011050101.png]]
+
+* Apache2.0
+  + [[https://opensource.org/licenses/Apache-2.0][Apache License, Version 2.0]]
+

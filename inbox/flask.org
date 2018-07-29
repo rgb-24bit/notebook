@@ -1,2 +1,0 @@
-* 信号机制
-  + [[https://segmentfault.com/a/1190000002454953][Flask信号机制(signals)]]
