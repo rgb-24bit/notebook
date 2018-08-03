@@ -1,7 +1,7 @@
 #+TITLE:      指针笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#教程][教程]]
+- [[#教程链接][教程链接]]
 - [[#指针与数组][指针与数组]]
 - [[#指针与字符串][指针与字符串]]
 - [[#二级指针与二维数组][二级指针与二维数组]]
@@ -10,7 +10,7 @@
 - [[#细节问题][细节问题]]
 - [[#const--pointer][const & pointer]]
 
-* 教程
+* 教程链接
  - [[http://home.netcom.com/~tjensen/ptr/pointers.htm][完整教程]]
  - [[http://www.runoob.com/w3cnote/c-pointer-detail.html][C 指针详解]]
 
