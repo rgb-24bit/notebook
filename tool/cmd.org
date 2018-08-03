@@ -4,6 +4,8 @@
 - [[#相关链接][相关链接]]
 - [[#nslookup][nslookup]]
 - [[#traceroute][traceroute]]
+- [[#copy][copy]]
+- [[#for][for]]
 
 * 相关链接
   + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands][Windows Commands]]
@@ -75,3 +77,8 @@
     > tracert yourdomain.com
     > tracert -6 yourdomain.com
   #+END_EXAMPLE
+* copy
+  /copy b xxx.jpg + xxx.rar xxx.jpg/  --  合成图片和压缩包
+
+* for
+  /for /L %i in (1, 1, 10) do mkdir Chapter_%i/  -- 创建10个文件夹

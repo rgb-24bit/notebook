@@ -112,9 +112,10 @@
   |-------------+---------------------+--------------------------------------------------------|
   | #+TAGS      | 设置标签            | 例:#+TAGS: { @Urgent(u) @Import(i) }                   |
   |-------------+---------------------+--------------------------------------------------------|
+
 * 归档
   + [[https://orgmode.org/manual/Archiving.html][Archiving]]
-
+    
 * 表格
   + 水平切分 cell: C-c C-c |
   + 垂直切分 cell: C-c C-c -
@@ -133,6 +134,7 @@
   #+CATEGORY: Ann
   %%(org-anniversary year month day) 事件 %d 意义
   #+END_EXAMPLE
+
 * 链接
   + link::tag 确定页面内链接
 
