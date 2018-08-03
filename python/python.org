@@ -1,37 +1,63 @@
 #+TITLE:      Python 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#小整数对象池][小整数对象池]]
+- [[#函数参数][函数参数]]
 - [[#del][del]]
 - [[#super][super]]
-- [[#import][import]]
-- [[#staticmethod][@staticmethod]]
-- [[#异常][异常]]
-- [[#元类][元类]]
-- [[#闭包][闭包]]
-- [[#关键字][关键字]]
-- [[#装饰器][装饰器]]
-- [[#描述器][描述器]]
-- [[#抽象类][抽象类]]
-- [[#函数参数][函数参数]]
-- [[#函数属性][函数属性]]
 - [[#语法相关][语法相关]]
-- [[#获取对象属性][获取对象属性]]
-- [[#数值运算相关][数值运算相关]]
-- [[#小整数对象池][小整数对象池]]
-- [[#作用域问题][作用域问题]]
-  - [[#修改全局变量][修改全局变量]]
-- [[#赋值和引用][赋值和引用]]
-- [[#对象初始化][对象初始化]]
-- [[#限制实例属性][限制实例属性]]
+- [[#函数属性][函数属性]]
+- [[#import][import]]
 - [[#模块和包][模块和包]]
   - [[#模块][模块]]
   - [[#包][包]]
   - [[#执行包与包内模块][执行包与包内模块]]
+- [[#staticmethod][@staticmethod]]
+- [[#异常][异常]]
+- [[#元类][元类]]
+- [[#闭包][闭包]]
+- [[#对象初始化][对象初始化]]
+- [[#赋值和引用][赋值和引用]]
+- [[#关键字][关键字]]
+- [[#装饰器][装饰器]]
+- [[#描述器][描述器]]
+- [[#限制实例属性][限制实例属性]]
+- [[#抽象类][抽象类]]
+- [[#获取对象属性][获取对象属性]]
+- [[#数值运算相关][数值运算相关]]
+- [[#作用域问题][作用域问题]]
+  - [[#修改全局变量][修改全局变量]]
 - [[#兼容-python2--python3][兼容 Python2 & Python3]]
 - [[#包管理工具---pip][包管理工具 - PIP]]
 - [[#列表推导式和生成器表达式][列表推导式和生成器表达式]]
 - [[#python-垃圾回收机制][Python 垃圾回收机制]]
 - [[#python-的常见实现][Python 的常见实现]]
+
+* 小整数对象池
+  Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例。
+
+  参考： [[https://foofish.net/python-int-mystery.html][Python解惑：整数比较]]
+
+* 函数参数
+  当函数的关键字参数为 *引用类型* 时需要注意不要在函数体内部对参数直接修改：
+  #+BEGIN_SRC python
+    In [1]: def func(lst=[]):
+       ...:     lst.append(10)
+       ...:     print(lst)
+       ...:
+
+    In [2]: func
+    Out[2]: <function __main__.func>
+
+    In [3]: func()
+    [10]
+
+    In [4]: func()
+    [10, 10]
+
+    In [5]: func()
+    [10, 10, 10]
+  #+END_SRC
 
 * del
   ~del~ 删除的是一个对象的引用， 而不是对象本身
@@ -40,6 +66,43 @@
   ~super~ 的一般使用方式为： ~super(class, self).xxx~.
 
   + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]].
+
+* 语法相关
+  和 [[file:../c-c++/c.org::语法相关][C - 语法相关]] 的对比。
+
+  + 赋值语句 :: 不能像 ~if x = func()~ 这样使用, 但是可以 ~func(x = 2)~, 最后传入的参数就是 ~2~.
+  + 连续赋值 :: 只要最右端的变量或字面值已定义即可
+  + 括号 :: 元组
+  + 逗号 :: 不能那样使用
+
+  作为动态语言， 如果像：
+  #+BEGIN_SRC python
+    def func():
+        pass
+
+    def func():
+        pass
+  #+END_SRC
+
+  定义同名的对象， 最后的对象以 *最后一次* 定义为准
+
+* 函数属性
+  *函数* 作为 ~Python~ 对象自然也可以有函数：
+  #+BEGIN_SRC python
+    In [1]: def func():
+       ...:     pass
+       ...:
+
+    In [2]: func
+    Out[2]: <function __main__.func>
+
+    In [3]: func.name = 'func'
+
+    In [4]: func.name
+    Out[4]: 'func'
+  #+END_SRC
+  
+  这一特性的使用： [[https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses][Python function attributes - uses and abuses]].
 
 * import
   导入的一种方式：
@@ -58,6 +121,61 @@
         BadParameter,
     )
   #+END_SRC
+
+* 模块和包
+  导入 *模块* 或 *包* 时， ~Python~ 会动态执行一遍 *模块* 中的内容。
+
+  函数或类的定义的执行就只是定义了函数或类， 而其他语句会直接执行， 
+  如果有输出还会直接进行输出。
+
+** 模块
+   模块，在 ~Python~ 可理解为对应于一个文件。在创建了一个脚本文件后，定义了某些函数和变量。你在其他需要这些功能的文件中，导入这模块，就可重用这些函数和变量。
+
+   一般用 ~module_name.fun_name~, 和 ~module_name.var_name~ 进行使用。这样的语义用法使模块看起来很像类或者名字空间，可将 ~module_name~ 理解为名字限定符。模块名就是文件名去掉 ~.py~ 后缀。
+
+   模块属性 ~__name__~, 它的值由 ~Python~ 解释器设定。如果脚本文件是作为主程序调用，其值就设为 ~__main__~, 如果是作为模块被其他文件导入，它的值就是其文件名。
+
+   模块能像包含函数定义一样，可包含一些可执行语句。这些可执行语句通常用来进行模块的初始化工作。这些语句 *只在模块第一次被导入时* 被执行。
+   这非常重要，有些人以为这些语句会多次导入多次执行，其实不然。
+
+   模块在被导入执行时, ~python~ 解释器为加快程序的启动速度，会在与模块文件同一目录下生成 ~.pyc~ 文件。
+   我们知道 ~python~ 是解释性的脚本语言，而 ~.pyc~ 是经过编译后的字节码，这一工作会自动完成，而无需程序员手动执行。
+
+** 包
+   通常包总是一个目录，可以使用 ~import~ 导入包，或者 ~from + import~ 来导入包中的部分模块。包目录下为首的一个文件便是 ~__init__.py~.
+   然后是一些模块文件和子目录，假如子目录中也有 ~__init__.py~ 那么它就是这个包的子包了。
+
+   创建许许多多模块后，我们可能希望将某些功能相近的文件组织在同一文件夹下，这里就需要运用包的概念了。
+   包对应于文件夹，使用包的方式跟模块也类似，唯一需要注意的是，当文件夹当作包使用时，文件夹需要包含 ~__init__.py~ 文件，主要是为了避免将文件夹名当作普通的字符串。
+   ~__init__.py~ 的内容可以为空，一般用来进行包的某些初始化工作或者设置 ~__all__~ 值， ~__all__~ 是在 ~from package-name import *~ 这语句使用的，全部导出定义过的模块。
+
+   可以从包中导入单独的模块:
+   1). ~import PackageA.SubPackageA.ModuleA~, 使用时必须用全路径名
+   2). 变种: ~from PackageA.SubPackageA import ModuleA~, 可以直接使用模块名而不用加上包前缀。
+   3). 也可以直接导入模块中的函数或变量： ~from PackageA.SubPackageA.ModuleA import functionA~
+
+   ~import~ 语句语法：
+   1. 当使用 ~from package import item~ 时, ~item~ 可以是 ~package~ 的子模块或子包，或是其他的定义在包中的名字（比如一个函数、类或变量）。
+      首先检查 ~item~ 是否定义在包中，不过没找到，就认为 ~item~ 是一个模块并尝试加载它，失败时会抛出一个 ~ImportError~ 异常。
+
+   2. 当使用 ~import item.subitem.subsubitem~ 语法时，最后一个 ~item~ 之前的 ~item~ 必须是包，最后一个 ~item~ 可以是一个模块或包，但不能是类、函数和变量
+
+   3. ~from pacakge import *~
+
+      如果包的 ~__init__.py~ 定义了一个名为 ~__all__~ 的列表变量，它包含的模块名字的列表将作为被导入的模块列表。
+      如果没有定义 ~__all__~, 这条语句不会导入所有的 ~package~ 的子模块，它只保证包 ~package~ 被导入，然后导入定义在包中的所有名字。
+
+   包是一个有层次的文件目录结构，它定义了由 n 个模块或 n 个子包组成的 python 应用程序执行环境。
+
+   通俗一点：包是一个包含 ~__init__.py~ 文件的目录，该目录下一定得有这个 ~__init__.py~ 文件和其它模块或子包
+
+** 执行包与包内模块
+   如果你希望 ~python~ 将一个文件夹作为 ~package~ 对待，那么这个文件夹中必须包含一个名为 ~__init__.py~ 的文件，即使它是空的
+
+   如果你需要 ~python~ 讲一个文件夹作为 ~package~ 执行，那么这个文件夹中必须包含一个名为 ~__main__.py~ 的文件，
+   当执行 ~python -m pkg~ 或者 ~python pkg~ 的时候，这个文件中的代码都会被执行
+
+   特别的， 对于包内的 *模块*, 如果使用了 *相对导入*, 那么可以使用 ~python -m pkg.module~ 指令执行模块.
 
 * @staticmethod
   如果类中定义的函数没有绑定 ~self~ 变量， 那么这个函数可以用类名访问， 但是不能用
@@ -135,6 +253,42 @@
     In [4]: joy(22)
     joy 22
   #+END_SRC
+* 对象初始化
+  既是定义了 ~__new__~, 构造函数 ~__init__~ 也是必然会执行的：
+  
+  参考：
+  + [[https://segmentfault.com/q/1010000015086320][Python 中， __init__ 方法是必然调用的吗？]]
+  + [[https://www.jianshu.com/p/f63ad9d550f1][理解python的类实例化]]
+
+  #+BEGIN_SRC python
+    def __call__(obj_type, *args, **kwargs):
+        obj = obj_type.__new__(*args, **kwargs)
+        if obj is not None and issubclass(obj, obj_type):
+            obj.__init__(*args, **kwargs)
+        return obj
+  #+END_SRC
+  
+  如果 ~__new__~ 返回的是 ~None~ 或其他类型的对象， 那么当前类的 ~__init__~ 不会执行 
+* 赋值和引用
+  ~Python~ 中除了 *数值* 以外的对象都是 *引用* 类型。
+
+  引用类型在内存中只会存在 *唯一* 一个内存映像。
+
+  对一个 *引用对象* 的操作都会反馈到所有引用了这一对象的别名上。
+
+  *模块* 也是引用对象， 在引用了一个 *模块* 后， 除非进行 ~reload~, 否则所有
+  ~import~ 的 *模块* 都是同一 *模块* 对象。
+
+  对 *模块* 内的引用对象进行修改会反馈到同样引用这一模块成员的地方。
+
+  通过 *模块名.对象* 的方式对 *数值* 进行修改也会反馈到所有以同样方式 *引用* 数值的地方。
+
+  通过 *from 模块 import 对象* 的方式 *引用* 数值会重新创建一个 *新的* 数值对象， 同 *数值* 的赋值操作。
+
+  + [[https://segmentfault.com/q/1010000014740115][实际操作的结果]]
+
+  有关于深拷贝和浅拷贝：
+  + [[http://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html][Python 直接赋值、浅拷贝和深度拷贝解析]]
 
 * 关键字
   + with :: with 语句后不一定需要 as, 不过没有 as 会无法捕获上下文对象
@@ -171,6 +325,39 @@
   + http://pyzh.readthedocs.io/en/latest/Descriptor-HOW-TO-Guide.html
   + https://www.zhihu.com/question/25391709/answer/30715222
   + https://docs.python.org/3.6/howto/descriptor.html
+* 限制实例属性
+  在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*
+
+  然而，对于有着已知属性的小类来说，它可能是个瓶颈。这个字典浪费了很多内存。 ~Python~ 不能在对象创建时直接分配一个固定量的内存来保存所有的属性。
+  因此如果你创建许多对象（我指的是成千上万个），它会消耗掉很多内存。
+
+  不过还是有一个方法来规避这个问题。这个方法需要使用 ~__slots__~ 来告诉 ~Python~ 不要使用字典，而且只给一个固定集合的属性分配空间。
+
+  此时， ~__slots__~ 将为已声明的变量保留空间并阻止为每个实例自动创建 ~__dict__~ 和 ~__weakref__~
+
+  简单来说， ~__slots__~ 的一个直接的作用便是减少内存消耗。
+
+  使用方式：
+  #+BEGIN_SRC python
+    class MyClass(object):
+        __slots__ = ['name', 'identifier']
+        def __init__(self, name, identifier):
+            self.name = name
+            self.identifier = identifier
+            self.set_up()
+            # ...
+  #+END_SRC
+
+  注意事项：
+  + 当从没有 ~__slots__~ 的类继承时， 该类的 ~__dict__~ 属性将始终可访问，因此子类中的 ~__slots__~ 定义没有意义
+  + 没有 ~__dict__~ 变量时， 实例不能被分配 ~__slots__~ 定义中未列出的新变量。 即不能随意设置变量
+  + 没有 ~__weakref__~ 变量， 定义 ~__slots__~ 的类不支持对其实例的弱引用。 如果需要弱引用支持， 则将 ~__weakref__~
+    添加到 ~__slots__~ 声明的字符串序列中
+  + 类属性不能用于为由 ~__slots__~ 定义的实例变量设置默认值
+  + ~__slots__~ 声明的操作仅限于定义它的类， 子类将由一个 ~__dict__~, 除非定义 ~__slots__~
+
+
+  文档： [[https://docs.python.org/2/reference/datamodel.html?highlight=__slots__#slots][ __slots__]]
 
 * 抽象类
   使用 ~abc~ 模块定义一个接口或抽象类，
@@ -194,64 +381,6 @@
   *抽象类* 的 *子类* 必须实现特定的 *抽象* 方法.
 
   + [[http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p12_define_interface_or_abstract_base_class.html][定义接口或者抽象基类]].
-
-* 函数参数
-  当函数的关键字参数为 *引用类型* 时需要注意不要在函数体内部对参数直接修改：
-  #+BEGIN_SRC python
-    In [1]: def func(lst=[]):
-       ...:     lst.append(10)
-       ...:     print(lst)
-       ...:
-
-    In [2]: func
-    Out[2]: <function __main__.func>
-
-    In [3]: func()
-    [10]
-
-    In [4]: func()
-    [10, 10]
-
-    In [5]: func()
-    [10, 10, 10]
-  #+END_SRC
-
-* 函数属性
-  *函数* 作为 ~Python~ 对象自然也可以有函数：
-  #+BEGIN_SRC python
-    In [1]: def func():
-       ...:     pass
-       ...:
-
-    In [2]: func
-    Out[2]: <function __main__.func>
-
-    In [3]: func.name = 'func'
-
-    In [4]: func.name
-    Out[4]: 'func'
-  #+END_SRC
-  
-  这一特性的使用： [[https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses][Python function attributes - uses and abuses]].
-
-* 语法相关
-  和 [[file:../c-c++/c.org::语法相关][C - 语法相关]] 的对比。
-
-  + 赋值语句 :: 不能像 ~if x = func()~ 这样使用, 但是可以 ~func(x = 2)~, 最后传入的参数就是 ~2~.
-  + 连续赋值 :: 只要最右端的变量或字面值已定义即可
-  + 括号 :: 元组
-  + 逗号 :: 不能那样使用
-
-  作为动态语言， 如果像：
-  #+BEGIN_SRC python
-    def func():
-        pass
-
-    def func():
-        pass
-  #+END_SRC
-
-  定义同名的对象， 最后的对象以 *最后一次* 定义为准
 
 * 获取对象属性  
   方法 ~__getattr__~ 和 ~__getattribute__~ 的使用：
@@ -288,11 +417,6 @@
       >>> 0 * float('inf')
       nan  #  not a number
     #+END_SRC
-
-* 小整数对象池
-  Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例。
-
-  参考： [[https://foofish.net/python-int-mystery.html][Python解惑：整数比较]]
 
 * 作用域问题
   ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量, 
@@ -348,133 +472,6 @@
 
      UnboundLocalError: local variable 'name' referenced before assignment
    #+END_SRC
-
-* 赋值和引用
-  ~Python~ 中除了 *数值* 以外的对象都是 *引用* 类型。
-
-  引用类型在内存中只会存在 *唯一* 一个内存映像。
-
-  对一个 *引用对象* 的操作都会反馈到所有引用了这一对象的别名上。
-
-  *模块* 也是引用对象， 在引用了一个 *模块* 后， 除非进行 ~reload~, 否则所有
-  ~import~ 的 *模块* 都是同一 *模块* 对象。
-
-  对 *模块* 内的引用对象进行修改会反馈到同样引用这一模块成员的地方。
-
-  通过 *模块名.对象* 的方式对 *数值* 进行修改也会反馈到所有以同样方式 *引用* 数值的地方。
-
-  通过 *from 模块 import 对象* 的方式 *引用* 数值会重新创建一个 *新的* 数值对象， 同 *数值* 的赋值操作。
-
-  + [[https://segmentfault.com/q/1010000014740115][实际操作的结果]]
-
-  有关于深拷贝和浅拷贝：
-  + [[http://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html][Python 直接赋值、浅拷贝和深度拷贝解析]]
-
-* 对象初始化
-  既是定义了 ~__new__~, 构造函数 ~__init__~ 也是必然会执行的：
-  
-  参考：
-  + [[https://segmentfault.com/q/1010000015086320][Python 中， __init__ 方法是必然调用的吗？]]
-  + [[https://www.jianshu.com/p/f63ad9d550f1][理解python的类实例化]]
-
-  #+BEGIN_SRC python
-    def __call__(obj_type, *args, **kwargs):
-        obj = obj_type.__new__(*args, **kwargs)
-        if obj is not None and issubclass(obj, obj_type):
-            obj.__init__(*args, **kwargs)
-        return obj
-  #+END_SRC
-  
-  如果 ~__new__~ 返回的是 ~None~ 或其他类型的对象， 那么当前类的 ~__init__~ 不会执行 
-
-* 限制实例属性
-  在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*
-
-  然而，对于有着已知属性的小类来说，它可能是个瓶颈。这个字典浪费了很多内存。 ~Python~ 不能在对象创建时直接分配一个固定量的内存来保存所有的属性。
-  因此如果你创建许多对象（我指的是成千上万个），它会消耗掉很多内存。
-
-  不过还是有一个方法来规避这个问题。这个方法需要使用 ~__slots__~ 来告诉 ~Python~ 不要使用字典，而且只给一个固定集合的属性分配空间。
-
-  此时， ~__slots__~ 将为已声明的变量保留空间并阻止为每个实例自动创建 ~__dict__~ 和 ~__weakref__~
-
-  简单来说， ~__slots__~ 的一个直接的作用便是减少内存消耗。
-
-  使用方式：
-  #+BEGIN_SRC python
-    class MyClass(object):
-        __slots__ = ['name', 'identifier']
-        def __init__(self, name, identifier):
-            self.name = name
-            self.identifier = identifier
-            self.set_up()
-            # ...
-  #+END_SRC
-
-  注意事项：
-  + 当从没有 ~__slots__~ 的类继承时， 该类的 ~__dict__~ 属性将始终可访问，因此子类中的 ~__slots__~ 定义没有意义
-  + 没有 ~__dict__~ 变量时， 实例不能被分配 ~__slots__~ 定义中未列出的新变量。 即不能随意设置变量
-  + 没有 ~__weakref__~ 变量， 定义 ~__slots__~ 的类不支持对其实例的弱引用。 如果需要弱引用支持， 则将 ~__weakref__~
-    添加到 ~__slots__~ 声明的字符串序列中
-  + 类属性不能用于为由 ~__slots__~ 定义的实例变量设置默认值
-  + ~__slots__~ 声明的操作仅限于定义它的类， 子类将由一个 ~__dict__~, 除非定义 ~__slots__~
-
-
-  文档： [[https://docs.python.org/2/reference/datamodel.html?highlight=__slots__#slots][ __slots__]]
-
-* 模块和包
-  导入 *模块* 或 *包* 时， ~Python~ 会动态执行一遍 *模块* 中的内容。
-
-  函数或类的定义的执行就只是定义了函数或类， 而其他语句会直接执行， 
-  如果有输出还会直接进行输出。
-
-** 模块
-   模块，在 ~Python~ 可理解为对应于一个文件。在创建了一个脚本文件后，定义了某些函数和变量。你在其他需要这些功能的文件中，导入这模块，就可重用这些函数和变量。
-
-   一般用 ~module_name.fun_name~, 和 ~module_name.var_name~ 进行使用。这样的语义用法使模块看起来很像类或者名字空间，可将 ~module_name~ 理解为名字限定符。模块名就是文件名去掉 ~.py~ 后缀。
-
-   模块属性 ~__name__~, 它的值由 ~Python~ 解释器设定。如果脚本文件是作为主程序调用，其值就设为 ~__main__~, 如果是作为模块被其他文件导入，它的值就是其文件名。
-
-   模块能像包含函数定义一样，可包含一些可执行语句。这些可执行语句通常用来进行模块的初始化工作。这些语句 *只在模块第一次被导入时* 被执行。
-   这非常重要，有些人以为这些语句会多次导入多次执行，其实不然。
-
-   模块在被导入执行时, ~python~ 解释器为加快程序的启动速度，会在与模块文件同一目录下生成 ~.pyc~ 文件。
-   我们知道 ~python~ 是解释性的脚本语言，而 ~.pyc~ 是经过编译后的字节码，这一工作会自动完成，而无需程序员手动执行。
-
-** 包
-   通常包总是一个目录，可以使用 ~import~ 导入包，或者 ~from + import~ 来导入包中的部分模块。包目录下为首的一个文件便是 ~__init__.py~.
-   然后是一些模块文件和子目录，假如子目录中也有 ~__init__.py~ 那么它就是这个包的子包了。
-
-   创建许许多多模块后，我们可能希望将某些功能相近的文件组织在同一文件夹下，这里就需要运用包的概念了。
-   包对应于文件夹，使用包的方式跟模块也类似，唯一需要注意的是，当文件夹当作包使用时，文件夹需要包含 ~__init__.py~ 文件，主要是为了避免将文件夹名当作普通的字符串。
-   ~__init__.py~ 的内容可以为空，一般用来进行包的某些初始化工作或者设置 ~__all__~ 值， ~__all__~ 是在 ~from package-name import *~ 这语句使用的，全部导出定义过的模块。
-
-   可以从包中导入单独的模块:
-   1). ~import PackageA.SubPackageA.ModuleA~, 使用时必须用全路径名
-   2). 变种: ~from PackageA.SubPackageA import ModuleA~, 可以直接使用模块名而不用加上包前缀。
-   3). 也可以直接导入模块中的函数或变量： ~from PackageA.SubPackageA.ModuleA import functionA~
-
-   ~import~ 语句语法：
-   1. 当使用 ~from package import item~ 时, ~item~ 可以是 ~package~ 的子模块或子包，或是其他的定义在包中的名字（比如一个函数、类或变量）。
-      首先检查 ~item~ 是否定义在包中，不过没找到，就认为 ~item~ 是一个模块并尝试加载它，失败时会抛出一个 ~ImportError~ 异常。
-
-   2. 当使用 ~import item.subitem.subsubitem~ 语法时，最后一个 ~item~ 之前的 ~item~ 必须是包，最后一个 ~item~ 可以是一个模块或包，但不能是类、函数和变量
-
-   3. ~from pacakge import *~
-
-      如果包的 ~__init__.py~ 定义了一个名为 ~__all__~ 的列表变量，它包含的模块名字的列表将作为被导入的模块列表。
-      如果没有定义 ~__all__~, 这条语句不会导入所有的 ~package~ 的子模块，它只保证包 ~package~ 被导入，然后导入定义在包中的所有名字。
-
-   包是一个有层次的文件目录结构，它定义了由 n 个模块或 n 个子包组成的 python 应用程序执行环境。
-
-   通俗一点：包是一个包含 ~__init__.py~ 文件的目录，该目录下一定得有这个 ~__init__.py~ 文件和其它模块或子包
-
-** 执行包与包内模块
-   如果你希望 ~python~ 将一个文件夹作为 ~package~ 对待，那么这个文件夹中必须包含一个名为 ~__init__.py~ 的文件，即使它是空的
-
-   如果你需要 ~python~ 讲一个文件夹作为 ~package~ 执行，那么这个文件夹中必须包含一个名为 ~__main__.py~ 的文件，
-   当执行 ~python -m pkg~ 或者 ~python pkg~ 的时候，这个文件中的代码都会被执行
-
-   特别的， 对于包内的 *模块*, 如果使用了 *相对导入*, 那么可以使用 ~python -m pkg.module~ 指令执行模块.
 * 兼容 Python2 & Python3
   + [[https://segmentfault.com/a/1190000000637180][编写兼容 Python 2 和 Python 3 的代码]].
 

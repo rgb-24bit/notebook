@@ -65,7 +65,6 @@
   - [[file:lang/plantuml.org][plantuml 笔记]]
   - [[file:lang/uml.org][UML 笔记]]
 - 网络 ::
-  - [[file:network/curl.org][curl 笔记]]
   - [[file:network/protocol.org][互联网协议笔记]]
 - 操作系统 ::
   - [[file:os/base.org][基础内容]]
@@ -78,6 +77,7 @@
 - 编程工具 ::
   - [[file:tool/ci.org][自动集成]]
   - [[file:tool/cmd.org][CMD 命令]]
+  - [[file:tool/curl.org][curl 笔记]]
   - [[file:tool/emacs.org][Emacs 笔记]]
   - [[file:tool/git-book.org][Git-Book 笔记]]
   - [[file:tool/git.org][Git 笔记]]
@@ -88,7 +88,6 @@
   - [[file:tool/vim.org][Vim 笔记]]
 - Misc ::
   - [[file:misc/coding.org][编程技巧]]
-  - [[file:misc/command.org][命令行]]
   - [[file:misc/identifier.org][同名标识符优先级问题]]
   - [[file:misc/liscense.org][开源协议]]
   - [[file:misc/misc.org][各种各样的东西]]
