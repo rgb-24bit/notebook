@@ -1,0 +1,274 @@
+#+TITLE:      Java 类和对象
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#object][Object]]
+- [[#重载][重载]]
+- [[#匿名内部类][匿名内部类]]
+- [[#创建对象][创建对象]]
+- [[#生命周期][生命周期]]
+- [[#栈与堆][栈与堆]]
+- [[#lambda-表达式][Lambda 表达式]]
+- [[#方法引用][方法引用]]
+- [[#枚举][枚举]]
+- [[#static--final][static & final]]
+
+* Object
+  ~Object~ 是所有类的基类， 没有继承其他类的类会隐式继承这个类。
+
+  ~Object~ 的方法：
+  + equals(Object o) :: 判断两个对象的值是否相等
+  + getClass() :: 获取对象的类型
+  + hashCode() :: 列出对象的哈希代码， 这是对象的唯一 id
+  + toString() :: 列出类的名字和一个我们不关心的数字
+  + finalize() :: 析构函数
+  + getClass() :: 获取类
+
+  ~Object~ 不是抽象类， 因此可以实例化。
+
+* 重载
+  重载的意义是两个方法的 *名称相同*, 但参数不同， 因此 *重载与多态毫无关系*.
+
+  重载的基本原则：
+  1. 返回类型可以不同
+  2. 不能只改变返回类型
+  3. 可以更改存取权限
+
+  *NOTE:* 重载和覆盖不一样
+
+  重载需要改变参数的类型或顺序， 而不是参数的名字。
+
+  编译器只关注类型与顺序， 而不是参数的名字。
+
+* 匿名内部类
+  嵌套在类内部的类为内部类， 内部类可以访问所有外部类的成员， 包括私有的。
+
+  内部类的其他行为和一般类相同， 可以继承类， 也可以实现接口。
+  
+  内部类内部的 ~this~ 代表该内部类的实例， 而不是外部类。
+
+  + [[https://www.cnblogs.com/nerxious/archive/2013/01/25/2876489.html][java 中的匿名内部类总结]]
+
+  #+BEGIN_SRC java
+    abstract class Person {
+      public abstract void eat();
+    }
+
+    public class Demo {
+      public static void main(String[] args) {
+        Person p = new Person() {
+            public void eat() {
+              System.out.println("eat something");
+            }
+          };
+        p.eat();
+      }
+    }
+  #+END_SRC
+
+  这种特殊语法同时还可以用在 ~Interface~ 上。
+
+* 创建对象
+  创建对象的过程： 声明引用变量、 创建对象、 连接对象与引用
+
+  创建对象是会调用对象的 *构造函数*.
+
+  默认构造函数为(编译器创建)：
+  #+BEGIN_SRC java
+    public className {
+ 
+    }
+  #+END_SRC
+
+  *注*: 构造函数没有返回值， 且与类名同名。 如果存在与类名相同但是存在返回值类型的方法， 那么不是构造函数。
+
+  构造函数不会被继承 ！
+
+  定义构造函数时， 可以的话就编写一个 *没有参数* 的构造函数
+
+  如果自己定义了构造函数， 那么编译器不会在创建默认的无参的构造函数。
+
+  如果不存在无参的构造函数， 那么 new 操作时就必须有参数。
+
+  构造函数可以为公有， 私有或不指定的。
+
+  如果构造函数是私有的， 那么这个类不能创建实例
+
+  在创建新对象时， 所有继承下来的构造函数都会执行。
+
+  抽象类也有构造函数， 会在创建子类实例时执行。
+
+  先执行父类的构造函数， 在执行自身的构造函数。
+
+  在构造函数中使用 ~super()~ 调用父类构造函数（唯一方法）。
+
+  如果没有手动调用 ~super()~, 编译器会默认进行调用（包括每一个构造函数）：
+  #+BEGIN_SRC java
+    // 默认构造函数
+    public ClassName() {
+      super();
+    }
+
+
+    // 自定义构造函数
+    public ClassName() {
+      super();
+      // your code
+    }
+  #+END_SRC
+
+  默认调用的是父类的无参构造函数。
+
+  ~super()~ 的调用必须是在构造函数的 *第一个语句*.
+
+  如果不能向父类的带参构造函数传参， 那么就不能继承没有无参构造函数的类。
+
+  传参：
+  #+BEGIN_SRC java
+    super(args...)
+  #+END_SRC
+
+  使用 ~this()~ 来从某个构造函数调用同一个类的另外一个构造函数。
+
+  ~this()~ 只能用在 *构造函数*, 且必须是 *第一个语句*.
+
+  ~super()~ 和 ~this()~ 不能兼得。
+
+  #+BEGIN_SRC java
+    public ClassName() {
+      this(num);
+    }
+  #+END_SRC
+
+* 生命周期
+  + 局部变量存活在声明该变量的方法中
+  + 实例变量与对象的生命周期相同
+  + Life 与 Scope 的区别： P259, 很形象
+  + 对象的声明周期受引用计数的影响， 当引用计数为 0 时该对象就可以被回收
+  + 释放对象引用的三种方式：
+    1. 引用变量永久性离开它的返回（死了）
+    2. 引用被赋值到其他对象身上（NTR）
+    3. 直接将引用设定为 null (byebye)
+  
+* 栈与堆
+  + 栈空间中保存： 方法调用与局部变量
+
+  + 堆空间中保存： 对象与实例变量
+
+  + 实例变量是被声明在类而不是方法里面的变量
+
+  + 实例变量可以在声明时赋初值， 否则会被设置为默认值（局部变量没有默认值）
+
+  + 实例变量的默认值为： 0/0.0/false/null
+
+* Lambda 表达式
+  + [[http://blog.oneapm.com/apm-tech/226.html][深入浅出 Java 8 Lambda 表达式]]
+
+  ~Lambda~ 的一般语法为：
+  #+BEGIN_SRC java
+    (argument) -> (body)
+  #+END_SRC
+
+  比如：
+  #+BEGIN_SRC java
+    (int a, int b) -> {  return a + b; }
+
+    () -> System.out.println("Hello World");
+
+    (String s) -> { System.out.println(s); }
+
+    () -> 42
+
+    () -> { return 3.1415 };
+  #+END_SRC
+
+  + 一个 ~Lambda~ 表达式可以有一个或多个参数， 也可以没有参数
+  + 参数的类型既可以明确声明，也可以根据上下文来推断。例如： ~(int a)~ 与 ~(a)~ 效果相同
+  + 所有参数需包含在圆括号内，参数之间用逗号相隔
+  + 空圆括号代表参数集为空
+  + 当只有一个参数，且其类型可推导时，圆括号 ~()~ 可省略， 如： ~a -> return a + a~
+  + Lambda 表达式的主体可包含零条或多条语句
+  + 如果 Lambda 表达式的主体只有一条语句，花括号{}可省略。
+    匿名函数的返回类型与该主体表达式一致
+  + 如果 Lambda 表达式的主体包含一条以上语句，则表达式必须包含在花括号{}中（形成代码块）
+
+* 方法引用
+  + [[https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html][官方教程]]
+
+  |------------------------------+--------------------------------------|
+  | 方法类型                     | 方法引用例子                         |
+  |------------------------------+--------------------------------------|
+  | 静态方法                     | ContainingClass::staticMethodName    |
+  | 特定对象的实例方法           | containingObject::instanceMethodName |
+  | 特定类型的任意对象的实例方法 | ContainingType::methodName           |
+  | 构造方法                     | ClassName::new                       |
+  |------------------------------+--------------------------------------|
+
+* 枚举
+  #+BEGIN_SRC java
+    public class Example {
+      public enum Names {
+        JERRY("lead guitar") {
+          public String sings() {
+            return "123";
+          }
+        },
+        BOBBY("14"),
+        PHLL("2423");  // Names 枚举类型的是三个值（实例）
+
+        private String ins;
+
+        Names(String ins) {  // 每个枚举变量都会调用一次
+          this.ins = ins;
+        }
+
+        public String getIns {
+          return this.ins;
+        }
+
+        public Stirng sings() {
+          return "123";
+        }
+      }
+    }
+  #+END_SRC
+
+* static & final
+  可以使用 ~static~ 修饰 实例变量 和 方法， 修饰的实例变量作为静态变量， 所有实例共享。
+  修饰的方法为静态方法。
+
+  不能使用 ~static~ 修饰类和局部变量。
+
+  静态方法不能访问非静态成员， 包括实例变量与非静态方法。
+
+  静态成员可以使用实例的引用来访问， 但是不推荐使用这种方式。
+
+  静态变量的初始化是指类被加载时完成的， 会在任何类的对象创建之前完成初始化。也会在任何类的
+  静态方法执行之前完成初始化。
+
+  如果没有为静态变量赋初值， 那么静态变量会被设定为对应类型的默认值。
+
+  ~static final~ 修饰的变量作为 *常量*. 常量的初始化只能在 *声明时* 或 *静态初始化程序* 中：
+  #+BEGIN_SRC java
+    public class ClassName {
+      public static final int num;
+
+      // 静态初始化程序
+      static {
+        num = 10;
+      }
+    }
+  #+END_SRC
+
+  不能同时在声明与静态初始化程序中赋值。
+
+  常量必须初始化， 否则会出错。
+
+  静态初始化程序可以为静态变量赋值， 不能访问非静态成员。
+
+  单独使用 ~final~ 修饰的变量是常量， 不能被改动。 可以在声明或构造函数中初始化。不能
+  同时进行。
+
+  ~final~ 修饰的方法不能被覆盖。
+
+  ~final~ 修饰的类不能被继承。
+  

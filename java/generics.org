@@ -1,0 +1,19 @@
+#+TITLE:      Java 泛型
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#泛型][泛型]]
+
+* 泛型
+  + 创建泛型类的实例：
+    #+BEGIN_SRC java
+      new ArrayList<Song>();
+    #+END_SRC
+  + 声明与指定泛型类型的变量：
+    #+BEGIN_SRC java
+      List<Song> songList = new ArrayList<Song>();
+    #+END_SRC
+  + 声明与调用泛型类型的方法：
+    #+BEGIN_SRC java
+      void foo(List<Song> list);
+      x.foo(songList);
+    #+END_SRC

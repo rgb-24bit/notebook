@@ -10,6 +10,9 @@
 - [[#多项目构建][多项目构建]]
 - [[#buildscript][buildscript]]
 - [[#特殊值][特殊值]]
+- [[#flyway][Flyway]]
+  - [[#教程][教程]]
+  - [[#sql-脚本命名规则][SQL 脚本命名规则]]
 
 * 任务相关
   使用关键字 ~task~ 定义任务：
@@ -352,3 +355,10 @@
 * 特殊值
   + [[https://blog.csdn.net/snowin1994/article/details/53024871][maven中的groupId和artifactId到底指的是什么]]
 
+* Flyway
+** 教程
+   + [[https://flywaydb.org/documentation/migrations][Migrations]]
+   + [[https://flywaydb.org/getstarted/firststeps/gradle][First Steps: Gradle]]
+
+** SQL 脚本命名规则
+   + [[https://flywaydb.org/documentation/migrations#sql-based-migrations][SQL-based migrations]]

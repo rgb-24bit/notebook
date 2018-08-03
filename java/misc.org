@@ -1,0 +1,124 @@
+#+TITLE:      Java Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#java-版本号][Java 版本号]]
+- [[#jdk--jre--jvm][JDK & JRE & JVM]]
+- [[#常用构建工具][常用构建工具]]
+- [[#程序结构与文件名][程序结构与文件名]]
+- [[#序列化][序列化]]
+- [[#输入输出][输入输出]]
+- [[#格式化字符串][格式化字符串]]
+- [[#日期和时间][日期和时间]]
+
+* Java 版本号
+  + Java: 1.02 - 1.1
+  + Java2: 1.2, 1.3, 1.4
+  + Java5.0: 1.5+
+    
+* JDK & JRE & JVM
+  Java SE - Java Platform, Standard Edition. Including JRE and JDK.
+
+  + JVM(Java Virtual Machine), Java 虚拟机的缩写.
+  + JRE(Java Runtime Environment), Java 运行环境的缩写. 运行 JAVA 程序所必须的环境的集合，
+    包括 Java 虚拟机和 Java 程序所需的核心类库等， 如果想要运行一个开发好的 Java 程序，计算机中只需要安装 JRE 即可。
+  + JDK(Java Development Kit), Java 开发工具包的缩写. JDK是提供给 Java 开发人员使用的，其中包含了 java 的开发工具，
+    也包括了 JRE。所以安装了 JDK，就不用在单独安装 JRE 了。其中的开发工具： 编译工具(javac.exe)  打包工具(jar.exe)等。
+  
+  参考： [[https://blog.csdn.net/z15732621736/article/details/50603819][JDK、JRE、JVM 简介]]
+
+* 常用构建工具
+  + Ant, Maven, gradle
+
+* 程序结构与文件名
+  程序结构：
+  + 一个程序最少有一个类
+  + 只有一个 main() 函数
+  + 所有东西都需要包含在 class, interface, enum 中
+
+  文件名：
+  + Java 保存的文件名必须与类名一致
+  + 如果文件中只有一个类，文件名必须与类名一致
+  + 一个 Java 文件中只能有一个 public 类
+  + 如果文件中不止一个类，文件名必须与 public 类名一致
+  + 如果文件中不止一个类，而且没有 public 类，文件名可与任一类名一致
+
+  参考： [[https://blog.csdn.net/shaoxiaoning/article/details/40424087][Java的类名与文件名必须一致]]
+
+* 序列化
+  实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
+
+  如果引用的对象中存在不能序列化的对象， 那么序列化会失败。 一种解决方法是用关键字 ~transient~ 修饰不被
+  序列化的对象， 序列化时会跳过这些被 ~transient~ 修饰的实例变量。
+
+  如果对象内部存在两个引用同一对象的实例变量， 那么别引用的独享只会保存一次。
+
+  序列化：
+  #+BEGIN_SRC java
+    import java.io.*;
+
+    FileOutputStream fileStream = new FileOutputStream("object.ser");
+    ObjectOutputStream os = new ObjectOutputStream(fileStream);
+
+    os.writeObject(object);
+    os.close();
+  #+END_SRC
+
+  解序列化时， 对象重流中读取出来， 通过存储的信息判断出对象的类， 如果 java 虚拟机找不到
+  或无法加载该类， 则虚拟机会抛出异常。
+
+  新的对象会二笔直接配置在堆上， 构造函数不会被执行。
+
+  如果对象的继承树上有个不可序列化的祖先类， 那么重该类开始及其以上的类的构造函数都会被执行。
+
+  对象的实例变量会被还原为序列化时的状态， transient 变量被还原为对应类型的 *默认值*.
+
+  *静态变量* 不会被序列化。 解序列化时也不会影响静态变量的值。
+
+  解序列化：
+  #+BEGIN_SRC java
+    import java.io.*;
+
+    FileInputStream fileStream = new FileInputStream("object.ser");
+    ObjectInputStream os = new ObjectInputStream(fileStream);
+
+    Object obj = os.readObject();  // 通过强制类型转换转换为其他类型
+    os.close()
+  #+END_SRC
+
+* 输入输出  
+  ~java.io~ 的输入输出分为 *字节流* 和 *字符流*, 字节流的类通常为 ~xxxxStream~, 字符流的类通常为 ~xxxxer~.
+
+  ~java.io.File~ 独享可以用于替代 *文件名*, 任何使用 *文件名字符串* 打开文件的地方都可以用 ~File~ 对象代替。
+
+  ~File~ 对象不能读取文件内容， 但可以完成其他一些操作， 如 *创建文件夹*, *获取目录内容*.
+
+  通过 ~Bufferxxxx~ 对象来通过 *缓冲区* 进行输入输出操作。
+  
+  这也是直接的文件操作没有 ~readLine~ 的一个原因， 因为他们是直接的读取操作， 读取多少就是多少， 不存在行的说法。
+
+  通过缓冲区可以更加高效的操作文件。
+
+* 格式化字符串
+  格式化说明的格式：
+  #+BEGIN_EXAMPLE
+    %[argument number][flags][width][.precision]type
+  #+END_EXAMPLE
+
+  使用方法： ~String.format~.
+
+* 日期和时间
+  日期格式化：
+  #+BEGIN_SRC java
+    // 完整日期和时间
+    String.format("%tc", new Date());
+
+    // 只有时间
+    String.format("%tr", new Date());
+
+    // 周， 月， 日 - %tA, %tB, %td
+    String.format("%tA %<tB %<td", new Date());
+  #+END_SRC
+
+  取得当前日期和时间使用 ~Date~.
+
+  其余功能可以使用 ~Calendar~.

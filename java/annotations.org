@@ -1,0 +1,41 @@
+#+TITLE:      Java 注解类
+
+☞ [[https://docs.oracle.com/javase/tutorial/java/annotations/index.html][官方教程]]
+
+#+BEGIN_SRC java
+  @Author(
+      name = "Benjamin Franklin",
+      date = "3/27/2003"
+          )
+      class MyClass() { ... }
+#+END_SRC
+
+~name~ 和 ~date~ 设置注解的 *元数据*.
+
+#+BEGIN_SRC java
+  @interface ClassPreamble {
+    String author();
+    String date();
+    int currentRevision() default 1;
+    String lastModified() default "N/A";
+    String lastModifiedBy() default "N/A";
+    // Note use of array
+    String[] reviewers();
+  }
+#+END_SRC
+
+定义自己的注解类， 同时在内部定义元数据。 使用：
+#+BEGIN_SRC java
+  @ClassPreamble (
+      author = "John Doe",
+      date = "3/17/2002",
+      currentRevision = 6,
+      lastModified = "4/12/2004",
+      lastModifiedBy = "Jane Doe",
+      // Note array notation
+      reviewers = {"Alice", "Bob", "Cindy"}
+                  )
+      public class Generation3List extends Generation2List {
+        // class code goes here
+      }
+#+END_SRC
