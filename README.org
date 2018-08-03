@@ -1,22 +1,21 @@
 #+TITLE: Note
 
 - 数据结构与算法 ::
-  - [[file:algorithm/algorithm.org][算法笔记]]
-  - [[file:algorithm/bit-op.org][位运算笔记]]
-  - [[file:algorithm/encrypt.org][加密算法笔记]]
-  - [[file:algorithm/hash.org][Hash 算法笔记]]
+  - [[file:algorithm/bit-op.org][位运算]]
+  - [[file:algorithm/concept.org][概念了解]]
+  - [[file:algorithm/encrypt.org][加密算法]]
+  - [[file:algorithm/hash.org][Hash 算法]]
   - [[file:algorithm/leetcode.org][LeetCode]]
-  - [[file:algorithm/random.org][随机算法相关笔记]]
-  - [[file:algorithm/search_sort.org][查找与排序算法笔记]]
-  - [[file:algorithm/struct.org][数据结构笔记]]
+  - [[file:algorithm/random.org][随机算法]]
+  - [[file:algorithm/search_sort.org][查找与排序算法]]
+  - [[file:algorithm/struct.org][数据结构]]
 - C Language ::
-  - [[file:c-lang/c-standard.org][C 语言标准笔记]]
   - [[file:c-lang/c.org][C 语言笔记]]
   - [[file:c-lang/doxygen.org][Doxygen 笔记]]
   - [[file:c-lang/gcc.org][GCC 笔记]]
   - [[file:c-lang/gdb.org][GDB 笔记]]
   - [[file:c-lang/libc.org][C 标准库笔记]]
-  - [[file:c-lang/makefile.org][Makefile 笔记]]
+  - [[file:c-lang/makefile.org][Makefile]]
   - [[file:c-lang/pointer.org][指针笔记]]
 - Python ::
   - [[file:python/flask.org][Flask 笔记]]
@@ -32,11 +31,15 @@
   - [[file:python/thread.org][Python 并发编程]]
   - [[file:python/tkinter.org][Tkinter 笔记]]
 - Java ::
-  - [[file:java/basic.org][Java 基础笔记]]
-  - [[file:java/feature.org][Java feature 笔记]]
-  - [[file:java/flyway.org][Flyway 笔记]]
+  - [[file:java/annotations.org][Java 注解类]]
+  - [[file:java/basic.org][Java 语言基础知识]]
+  - [[file:java/class-object.org][Java 类和对象]]
+  - [[file:java/generics.org][Java 泛型]]
   - [[file:java/gradle.org][gradle 笔记]]
+  - [[file:java/interface-inheritance.org][Java 接口和继承]]
   - [[file:java/javadoc.org][JavaDoc 笔记]]
+  - [[file:java/misc.org][Java Misc]]
+  - [[file:java/package.org][Java 包]]
   - [[file:java/swing.org][Swing 笔记]]
 - 数据库 ::
   - [[file:database/mssql.org][SQL Server 笔记]]
@@ -55,7 +58,6 @@
 - 编程语言 ::
   - [[file:lang/bash.org][Bash 笔记]]
   - [[file:lang/cpp.org][C++ 笔记]]
-  - [[file:lang/csharp_base.org][C# 基础笔记]]
   - [[file:lang/csharp_note.org][C# 笔记]]
   - [[file:lang/elisp.org][Emacs Lisp 笔记]]
   - [[file:lang/graphviz.org][graphviz 笔记]]
