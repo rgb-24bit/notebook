@@ -1,4 +1,4 @@
-#+TITLE:      Hash 算法笔记
+#+TITLE:      Hash 算法
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概念][概念]]
@@ -10,7 +10,7 @@
   ~Hash~ 算法又称为摘要算法， 它可以将任意数据通过一个函数转换成长度固定的数据串，
   函数与数据串之间形成 一一 映射的关系。
 
-  + [[https://www.zhihu.com/question/20820286/answer/333248794][知乎 - 什么是哈希算法？]]
+  + [[https://www.zhihu.com/question/20820286/answer/333248794][知乎 - 什么是哈希算法]]
   + [[https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B8][维基百科 - 散列函数]]
 
 * MD5
