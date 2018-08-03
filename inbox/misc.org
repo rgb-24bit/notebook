@@ -1,0 +1,2 @@
+* 符号链接
+  + [[https://zh.wikipedia.org/wiki/%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5][符号链接]]
