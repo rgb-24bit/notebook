@@ -1,42 +1,39 @@
 #+TITLE:      T-SQL 笔记
 
-* 目录                                                    :TOC_4_gh:noexport:
+- 创建数据库的默认保存位置为用户目录
 
-* COMMENT Note
-  - 创建数据库的默认保存位置为用户目录
+- 获取当前连接的数据库名: Print DB_NAME()
 
-  - 获取当前连接的数据库名: Print DB_NAME()
+- 默认连接数据库为 master
 
-  - 默认连接数据库为 master
-
-  - 查询当前数据库中所有表名
-    #+BEGIN_SRC sql
-      // xtype='U': 表示所有用户表, xtype='S': 表示所有系统表
+- 查询当前数据库中所有表名
+  #+BEGIN_SRC sql
+    // xtype='U': 表示所有用户表, xtype='S': 表示所有系统表
       select * from sysobjects where xtype='U'
-    #+END_SRC
+  #+END_SRC
 
-  - 获取所有数据库名
-    #+BEGIN_SRC sql
-      select name from master.dbo.sysdatabases;
-    #+END_SRC
+- 获取所有数据库名
+  #+BEGIN_SRC sql
+    select name from master.dbo.sysdatabases;
+  #+END_SRC
 
-  - 查询指定表中的所有字段名
-    #+BEGIN_SRC sql
-      select name from syscolumns where id=Object_Id('table_name')
-    #+END_SRC
+- 查询指定表中的所有字段名
+  #+BEGIN_SRC sql
+    select name from syscolumns where id=Object_Id('table_name')
+  #+END_SRC
 
-  - T-SQL 变量不能直接当做命令使用, 要看其值, 用 Print
+- T-SQL 变量不能直接当做命令使用, 要看其值, 用 Print
 
-  - :r 指令 :: 执行指定路径的 sql 脚本, Sqlcmd 指令
+- :r 指令 :: 执行指定路径的 sql 脚本, Sqlcmd 指令
 
-  - 密码修改
-    #+BEGIN_SRC sql
-      exec sp_password NULL, 'newpas', 'login_name';
+- 密码修改
+  #+BEGIN_SRC sql
+    exec sp_password NULL, 'newpas', 'login_name';
 
-      ALTER LOGIN sa WITH PASSWORD = 'newpas';
-    #+END_SRC
+    ALTER LOGIN sa WITH PASSWORD = 'newpas';
+  #+END_SRC
 
-  - 赋予登录权限
-    #+BEGIN_SRC sql
-      ALTER LOGIN sa ENABLE;
-    #+END_SRC
+- 赋予登录权限
+  #+BEGIN_SRC sql
+    ALTER LOGIN sa ENABLE;
+  #+END_SRC
