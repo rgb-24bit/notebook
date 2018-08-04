@@ -7,7 +7,6 @@
 - [[#super][super]]
 - [[#语法相关][语法相关]]
 - [[#函数属性][函数属性]]
-- [[#import][import]]
 - [[#模块和包][模块和包]]
   - [[#模块][模块]]
   - [[#包][包]]
@@ -15,12 +14,8 @@
 - [[#staticmethod][@staticmethod]]
 - [[#异常][异常]]
 - [[#元类][元类]]
-- [[#闭包][闭包]]
-- [[#对象初始化][对象初始化]]
 - [[#赋值和引用][赋值和引用]]
 - [[#关键字][关键字]]
-- [[#装饰器][装饰器]]
-- [[#描述器][描述器]]
 - [[#限制实例属性][限制实例属性]]
 - [[#抽象类][抽象类]]
 - [[#获取对象属性][获取对象属性]]
@@ -107,24 +102,6 @@
   #+END_SRC
   
   这一特性的使用： [[https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses][Python function attributes - uses and abuses]].
-
-* import
-  导入的一种方式：
-  #+BEGIN_SRC python
-    from click import (
-        argument,
-        command,
-        echo,
-        edit,
-        group,
-        Group,
-        option,
-        pass_context,
-        Option,
-        version_option,
-        BadParameter,
-    )
-  #+END_SRC
 
 * 模块和包
   导入 *模块* 或 *包* 时， ~Python~ 会动态执行一遍 *模块* 中的内容。
@@ -236,43 +213,6 @@
   
   同时， 是使用元类构造的类可以使用元类定义的方法， 和 *类* 与 *实例* 的行为差不多。
 
-* 闭包
-  闭包是由函数和与其相关的引用环境组合而成的实体, 闭包在运行时可以有多个实例，
-  不同的引用环境和相同的函数组合可以产生不同的实例.
-
-  + [[https://segmentfault.com/a/1190000004461404][Python 的闭包和装饰器]]
-
-  #+BEGIN_SRC python
-    In [1]: def func(name):
-       ...:     def inner_func(age):
-       ...:         print(name, age)
-       ...:     return inner_func
-       ...:
-
-    In [2]: joy = func('joy')
-
-    In [3]: joy(20)
-    joy 20
-
-    In [4]: joy(22)
-    joy 22
-  #+END_SRC
-* 对象初始化
-  既是定义了 ~__new__~, 构造函数 ~__init__~ 也是必然会执行的：
-  
-  参考：
-  + [[https://segmentfault.com/q/1010000015086320][Python 中， __init__ 方法是必然调用的吗？]]
-  + [[https://www.jianshu.com/p/f63ad9d550f1][理解python的类实例化]]
-
-  #+BEGIN_SRC python
-    def __call__(obj_type, *args, **kwargs):
-        obj = obj_type.__new__(*args, **kwargs)
-        if obj is not None and issubclass(obj, obj_type):
-            obj.__init__(*args, **kwargs)
-        return obj
-  #+END_SRC
-  
-  如果 ~__new__~ 返回的是 ~None~ 或其他类型的对象， 那么当前类的 ~__init__~ 不会执行 
 * 赋值和引用
   ~Python~ 中除了 *数值* 以外的对象都是 *引用* 类型。
 
@@ -300,35 +240,6 @@
   + global :: 说明当前变量为全局变量
   + nonlocal :: 说明当前变量不是局部变量， 会根据作用域逐层寻找变量（Python3）
 
-* 装饰器
-  ~Python~ 的装饰器可以简单的归为两类：
-  1. 调用时无参的装饰器
-  2. 调用时有参的装饰器
-
-  *无参* 的装饰器调用时会将装饰的对象作为 *第一个* 参数传入装饰器， 并返回一个可调用对象.
-
-  等价于： ~decorate(func)~.
-
-  *有参* 的装饰器调用时会先传入给定的参数， 然后返回一个可调用对象。 再把装饰的对象
-  作为参数传入返回的对象.
-
-  等价于： ~decorate(args)(func)~.
-
-* 描述器
-  对于描述器的理解十分关键的一段代码：
-  #+BEGIN_SRC python
-    def __getattribute__(self, key):
-        "Emulate type_getattro() in Objects/typeobject.c"
-        v = object.__getattribute__(self, key)
-        if hasattr(v, '__get__'):
-            return v.__get__(None, self)
-        return v
-  #+END_SRC
-
-  教程链接：
-  + http://pyzh.readthedocs.io/en/latest/Descriptor-HOW-TO-Guide.html
-  + https://www.zhihu.com/question/25391709/answer/30715222
-  + https://docs.python.org/3.6/howto/descriptor.html
 * 限制实例属性
   在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*
 
