@@ -92,6 +92,12 @@
 
   + shutil :: 高级文件操作
 
+  + pathlib :: 面向对象的文件系统路径
+    + [[https://docs.python.org/3/library/pathlib.html][pathlib — Object-oriented filesystem paths]]
+
+  + glob :: Unix 样式路径名模式扩展
+    + [[https://docs.python.org/3/library/glob.html][glob — Unix style pathname pattern expansion]]
+
 * 数据压缩和存档
   + gzip :: 支持 ~gzip~ 文件
     + [[https://docs.python.org/3/library/gzip.html][gzip — Support for gzip files]]

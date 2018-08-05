@@ -13,7 +13,6 @@
   - [[#执行包与包内模块][执行包与包内模块]]
 - [[#staticmethod][@staticmethod]]
 - [[#异常][异常]]
-- [[#元类][元类]]
 - [[#赋值和引用][赋值和引用]]
 - [[#关键字][关键字]]
 - [[#限制实例属性][限制实例属性]]
@@ -30,7 +29,9 @@
 - [[#成员相关][成员相关]]
   - [[#保护成员和私有成员][保护成员和私有成员]]
   - [[#内置成员][内置成员]]
-- [[#类属性和实例属性的理解][类属性和实例属性的理解]]
+- [[#导入机制][导入机制]]
+- [[#特殊属性][特殊属性]]
+- [[#字节转字符串][字节转字符串]]
 
 * 小整数对象池
   Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例。
@@ -174,44 +175,6 @@
   #+END_SRC
 
   ~finally~ 代码块必然会执行， 哪怕 ~try/catch~ 中存在 ~return~.
-
-* 元类
-  ~Python~ 中， 类是 ~type~ 的实例， 通过继承 ~type~ 创建的 *元类* 也可用来创建 *类*.
-
-  通过这种方式创建的类会受到 *元类* 的影响， 即： 在不同的条件下， 创建出来的类可能不一样。
-  
-  #+BEGIN_SRC python
-    # metaclass 是创建类，所以必须从`type`类型派生：
-    class ListMetaclass(type):
-        def __new__(cls, name, bases, attrs):
-            attrs['add'] = lambda self, value: self.append(value)
-            return type.__new__(cls, name, bases, attrs)
-
-    class MyList(list):
-        __metaclass__ = ListMetaclass # python2
-
-    class MyList(list, metaclass=ListMetaclass):  # python3
-        pass
-  #+END_SRC
-
-  ~__metaclass__ = ListMetaclass~ 表名在创建 ~MyList~ 时， 要通过 ~ListMetaclass.__new__()~ 来创建。
-
-  ~__new__()~ 方法接受到的参数依次为：
-  1. 当前准备创建的类的对象
-  2. 类的名字
-  3. 类继承的父类集合
-  4. 类的方法集合
- 
-  教程： [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014319106919344c4ef8b1e04c48778bb45796e0335839000][廖雪峰 - 使用元类]].
-  教程： [[https://www.cnblogs.com/ifantastic/p/3175735.html][Python 之 __new__() 方法与实例化]]
-
-  ~__new__~ 用于创造实例， 而 ~__init__~ 用于初始化实例的属性。
-
-  由于 *类* 是 *元类* 的实例， 因此这里的 ~__new__~ 的参数需要按照一定的格式。
-
-  一般使用的参数为： ~__new__(csl, *args, **kwargs)~.
-  
-  同时， 是使用元类构造的类可以使用元类定义的方法， 和 *类* 与 *实例* 的行为差不多。
 
 * 赋值和引用
   ~Python~ 中除了 *数值* 以外的对象都是 *引用* 类型。
@@ -478,41 +441,20 @@
    + ~__path__~ 包含这个属性的 *模块* 会被当做一个 *包*.
 
    + ~__class__~ 当前对象的类
-* 类属性和实例属性的理解
-  搞清楚 *类属性* 和 *实例属性* 的关系之前， 需要明确的几点是：
-  1. ~Python~ 之中， 一切皆是对象
-  2. ~class~ 是 ~type~ 的实例
-  3. ~instance~ 是 ~class~ 的实例
-  4. *获取属性* 和 *设置属性* 的行为不同
-
+* 导入机制
   #+BEGIN_SRC python
-    class OneClass(object):
-        num = 10
-
-
-    A = OneClass()
-    B = OneClass()
-    print(A.num, B.num, OneClass.num)
-
-    A.num += 2
-    print(A.num, B.num, OneClass.num)
-
-    OneClass.num += 2
-    print(A.num, B.num, OneClass.num)
+    import spam
+    spam = __import__('spam', globals(), locals(), [], 0)
   #+END_SRC
-  
-  以上代码的执行结果为：
-  #+BEGIN_EXAMPLE
-    10 10 10
-    12 10 10
-    12 12 12
-  #+END_EXAMPLE
 
-  *理解*:
-  1. *类* 是一个对象， *实例* 也是一个对象
-  2. 通过 ~self.xxx = xxx~ 的方式设置的属性直接 *绑定* 到 *实例对象*
-  3. 直接在 *类* 内部定义的属性 *没有绑定* 到 *实例*, 而是 *绑定* 到 *类* 对象
-  4. 访问一个 *实例对象* 不存在的 *属性* 的时候会尝试从 *类对象* 获去那个属性
-  5. 设置 一个 *实例对象* 不存在的 *属性* 的值的时候， 会尝试从 *类对象* 获取属性的值，
-     然后将运算后的结果 *绑定* 到 *实例* 上， 使之成为 *实例属性*
-  
+  以上两行代码等价
+
+* 特殊属性
+  + [[https://segmentfault.com/a/1190000005701971][Python （类）实例方法的特殊属性]]
+  + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性]]
+
+* 字节转字符串
+  #+BEGIN_SRC python
+    bytes.hex()
+  #+END_SRC
+
