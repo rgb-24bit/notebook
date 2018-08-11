@@ -1,0 +1,5 @@
+* 数据挖掘和数据分析
+  + [[https://www.zhihu.com/question/20127962/answer/23794384][数据挖掘与数据分析的主要区别是什么]]
+
+* Windows 服务
+  + [[https://docs.microsoft.com/zh-cn/dotnet/framework/windows-services/introduction-to-windows-service-applications][Windows 服务应用程序介绍]]

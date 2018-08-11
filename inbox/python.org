@@ -21,7 +21,14 @@
   + [[https://www.cnblogs.com/dkblog/archive/2011/10/10/2205200.html][Python使用UUID库生成唯一ID]]
   + io 模块源码可以考虑看一下
   + [[http://www.cnblogs.com/nowgood/p/turtle.html][Python turtle 绘图]]
-    
+  + ~socketserver~ 网络服务器框架
+  + ~shutil~ 文件操作
+  + ~_thread_local~ *ThreadLocal*
+  + ~random~ 随机操作
+  + itertools.accumulate
+  + bisect
+  + operator
+
 * I/O 结构
   I/O 的层次与缓冲区
     
@@ -31,3 +38,7 @@
 * 单元测试
   + [[http://wsfdl.com/python/2015/02/01/Python%E7%9A%84%E6%B5%8B%E8%AF%95%E4%B9%8BTox.html][Python 的单元测试之 tox]]
 
+* 序列化
+  + pickle
+* 爬虫
+  + [[https://my.oschina.net/jhao104/blog/647308][Python爬虫：一些常用的爬虫技巧总结]]

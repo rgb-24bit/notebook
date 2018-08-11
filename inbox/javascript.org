@@ -1,0 +1,250 @@
+* JavaScript 教程链接
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
+
+* 语法和数据类型
+  *JavaScript* 的标识符必须以字母、下划线（_）或者美元符号（$）开头， 其后的字符可以
+  为大部分 ISO 8859-1 或 Unicode 编码的字符。
+
+  代码示例：
+  #+BEGIN_SRC javascript
+    var Früh = "foobar";
+  #+END_SRC
+
+  *JavaScript* 有三种声明变量的方式：
+  + var :: 声明一个变量，可赋一个初始化值
+  + let :: 声明一个块作用域的局部变量，可赋一个初始化值
+  + const :: 声明一个块作用域的只读的命名常量
+
+  变量声明未赋值为 *undefined*, 变量声明可赋值 *null*, *null != undefined*.
+
+  *变量提升* 后的值为 *undefined*, *let* 变量不会提升， *函数提升* 只提升 *声明*, 但是可以直接用。
+
+  *JavaScript* 语言可以识别下面 7 种不同类型的值：
+  + 六种 *原型* 数据类型： *Boolean*, *null*, *undefined*, *Number*, *String*, *Symbol*
+  + *Object* 对象
+
+  *对象字面量形式*:
+  #+BEGIN_SRC javascript
+    var car = { manyCars: {a: "Saab", "b": "Jeep"}, 7: "Mazda" };
+
+    console.log(car.manyCars.b); // Jeep
+    console.log(car[7]); // Mazda
+  #+END_SRC
+
+  对象属性名如果不合法便可以用符号 *[]* 进行访问：
+  #+BEGIN_SRC javascript
+    var unusualPropertyNames = {
+        "": "An empty string",
+        "!": "Bang!"
+    }
+    console.log(unusualPropertyNames."");   // 语法错误: Unexpected string
+    console.log(unusualPropertyNames[""]);  // An empty string
+    console.log(unusualPropertyNames.!);    // 语法错误: Unexpected token !
+    console.log(unusualPropertyNames["!"]); // Bang!
+  #+END_SRC
+
+  *正则表达式字面量形式*:
+  #+BEGIN_SRC javascript
+    var re = /ab+c/;
+  #+END_SRC
+
+  *多行字符串*:
+  #+BEGIN_SRC javascript
+    // Basic literal string creation
+    `In JavaScript '\n' is a line-feed.`
+
+    // Multiline strings
+    `In JavaScript this is
+     not legal.`
+
+    // String interpolation
+    var name = "Bob", time = "today";
+    `Hello ${name}, how are you ${time}?`
+  #+END_SRC
+
+* 循环和迭代 
+  #+BEGIN_SRC javascript
+    // for 循环
+    for (var i = 0; i < 10; ++i) {
+        console.log(i);
+    }
+
+    // do...while 循环
+    do {
+        i += 1;
+        console.log(i);
+    } while(i < 5);
+
+    // while 循环
+    while (i < 5) {
+        console.log(i);
+        i++;
+    }
+
+    // for...in 循环(不适合迭代数组)
+    function dump_props(obj, obj_name) {
+        var result = "";
+        for (var i in obj) {
+            result += obj_name + "." + i + " = " + obj[i] + "<br>";
+        }
+        result += "<hr>";
+        return result;
+    }
+
+
+    // for...of 循环
+    let arr = [3, 5, 7];
+    arr.foo = "hello";
+
+    for (let i in arr) {
+        console.log(i); // logs "0", "1", "2", "foo"
+    }
+
+    for (let i of arr) {
+        console.log(i); // logs "3", "5", "7" // 注意这里没有 hello
+    }
+  #+END_SRC
+
+* 函数
+  *定义函数的两种方式*:
+  #+BEGIN_SRC javascript
+    // 函数声明
+    function square(number) {
+        return number * number;
+    }
+
+    // 函数表达式(匿名)
+    var square = function(number) {
+        return number * number;
+    };
+
+    // 函数表达式(具名)
+    var factorial = function fac(n) {
+        return n < 2 ? 1 : n * fac(n-1);
+    };
+  #+END_SRC
+
+  三种递归调用方式：
+  1. 函数名
+  2. arguments.callee
+  3. 作用域下的一个指向该函数的变量名
+
+  对于如下函数定义：
+  #+BEGIN_SRC javascript
+    var foo = function bar() {
+        // statements go here
+    };
+  #+END_SRC
+
+  在这个函数体内，以下的语句是等价的：
+  #+BEGIN_SRC javascript
+    bar()
+    arguments.callee()
+    foo()
+  #+END_SRC
+
+  函数参数 *arguments* 对象：
+  #+BEGIN_SRC javascript
+    function myConcat(separator) {
+        var result = ''; // 把值初始化成一个字符串，这样就可以用来保存字符串了！！
+        var i;
+        // iterate through arguments
+        for (i = 1; i < arguments.length; i++) {
+            result += arguments[i] + separator;
+        }
+        return result;
+    }
+
+    // returns "red, orange, blue, "
+    myConcat(", ", "red", "orange", "blue");
+  #+END_SRC
+
+* 等值判断
+  #+BEGIN_SRC javascript
+    // == 两边操作数相等时返回 true
+    3 == val
+
+    // != 两边操作数不相等时返回 true
+    val != 4
+
+    // === 两边操作数相等且类型相同时返回 true
+    3 === val
+
+    // !== 两边操作数不相等或类型不同时返回 true
+    val !== 3
+  #+END_SRC
+
+* 使用对象
+  *访问对象属性*:
+  #+BEGIN_SRC javascript
+    objectName.propertyName
+    objectName[propertyName]
+  #+END_SRC
+
+  对象中为赋值的属性的值为 *undefined*.
+
+  *枚举一个对象的所有属性*:
+  #+BEGIN_SRC javascript
+    var obj = {name: "job", age: 18};
+
+    for (attr in obj) {
+      console.log(attr);
+    }  // => job, 18
+
+    Object.keys(obj)  // => ["name", "age"]
+    Object.getOwnPropertyNames(obj)  // => ["name", "age"]
+  #+END_SRC
+
+  *创造新对象*:
+  #+BEGIN_SRC javascript
+    // 使用字面量
+    var obj = {name: "job", age: 18};
+
+    // 使用构造函数 & new
+    function Car(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    var mycar = new Car("Eagle", "Talon TSi", 1993);
+
+    // 使用 Object.create 方法
+    // Animal properties and method encapsulation
+    var Animal = {
+        type: "Invertebrates", // Default value of properties
+        displayType : function() {  // Method which will display type of Animal
+            console.log(this.type);
+        }
+    }
+
+    // Create new animal type called animal1 
+    var animal1 = Object.create(Animal);
+    animal1.displayType(); // Output:Invertebrates
+
+    // Create new animal type called Fishes
+    var fish = Object.create(Animal);
+    fish.type = "Fishes";
+    fish.displayType(); // Output:Fishes
+  #+END_SRC
+
+* JavaScript 细节
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Details_of_the_Object_Model][对象模型的细节]]
+
+  *继承*:
+  #+BEGIN_SRC javascript
+    function Employee () {
+        this.name = "";
+        this.dept = "general";
+    }
+
+    function Manager() {
+        Employee.call(this);
+        this.reports = [];
+    }
+    Manager.prototype = Object.create(Employee.prototype);
+  #+END_SRC
+
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain][继承与原型链]]
+
+  #+HTML: <img src="https://wx4.sinaimg.cn/large/7ed42f5cly1fqguw4y1zej20ge0e8wes.jpg">
