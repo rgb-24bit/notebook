@@ -8,6 +8,7 @@
 - [[#html5-多媒体][HTML5 多媒体]]
 - [[#html5-应用][HTML5 应用]]
 - [[#字符实体][字符实体]]
+- [[#html---head][HTML - head]]
 - [[#相关链接][相关链接]]
 
 * 通用声明
@@ -118,6 +119,12 @@
   | "    | &quot; | 	&#34;  |
   | '    | &apos; | &#39;    |
   |------+--------+----------|
+
+* HTML - head
+  #+BEGIN_SRC html
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script src="myScript.js"></script>
+  #+END_SRC
 
 * 相关链接
   + [[http://www.runoob.com/html/html-quicklist.html][HTML 速查列表]]

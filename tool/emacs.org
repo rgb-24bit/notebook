@@ -61,7 +61,16 @@
     + [[https://www.emacswiki.org/emacs/AlignCommands][AlignCommands]]
   + 自动补全 ::
     + M-/
- 
+  + 光标移动 ::
+    + M-g M-g 跳转到指定行
+  + 页面滚动 ::
+    + M-Page Down 隔壁窗口向下滚动一页
+    + M-Page Up 隔壁窗口向上滚动一页
+  + 英文大小写 ::
+    + M-l 单词全部小写
+    + M-u 单词全部大写
+    + M-c 单词首字母大写
+
 * 查看帮助
   + C-h C-h 关于帮助的帮助
   + C-h k/f/v 查看 快捷键/函数/变量 的帮助

@@ -1,19 +1,141 @@
 #+TITLE:      Java 泛型
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#泛型][泛型]]
+- [[#泛型类][泛型类]]
+- [[#原始类型][原始类型]]
+- [[#泛型方法][泛型方法]]
+- [[#有界类型参数][有界类型参数]]
+- [[#泛型类的继承关系][泛型类的继承关系]]
+- [[#通配符][通配符]]
+- [[#限制][限制]]
 
-* 泛型
-  + 创建泛型类的实例：
-    #+BEGIN_SRC java
-      new ArrayList<Song>();
-    #+END_SRC
-  + 声明与指定泛型类型的变量：
-    #+BEGIN_SRC java
-      List<Song> songList = new ArrayList<Song>();
-    #+END_SRC
-  + 声明与调用泛型类型的方法：
-    #+BEGIN_SRC java
-      void foo(List<Song> list);
-      x.foo(songList);
-    #+END_SRC
+* 泛型类
+  #+BEGIN_SRC java
+    class name<T1, T2, ..., Tn> { /* ... */ }
+  #+END_SRC
+
+  常用的 *类型参数* 命名：
+  + E - Element
+  + K - Key
+  + N - Number
+  + T - Type
+  + V - Value
+  + S, U, V etc. - 2nd, 3rd, 4th types
+
+  *类型参数列表* 中的类型可以在 *类内部* 直接使用， 用于 *属性* 或 *方法*.
+
+  #+BEGIN_SRC java
+    public class Pair<K, V> {
+
+      private K key;
+      private V value;
+
+      public Pair(K key, V value) {
+        this.key = key;
+        this.value = value;
+      }
+
+      public void setKey(K key) { this.key = key; }
+      public void setValue(V value) { this.value = value; }
+      public K getKey()   { return key; }
+      public V getValue() { return value; }
+    }
+  #+END_SRC
+
+* 原始类型
+  #+BEGIN_SRC java
+    public class Box<T> {
+      public void set(T t) { /* ... */ }
+      // ...
+    }
+  #+END_SRC
+
+  对于如上定义， 类型 *Box* 是 *Box<T>* 的 *原始类型*.
+
+  因此， 可以这样操作：
+  #+BEGIN_SRC java
+    Box<String> stringBox = new Box<>();
+    Box rawBox = stringBox;               // OK
+  #+END_SRC
+
+  以下两种行为会得到警告：
+  #+BEGIN_SRC java
+    Box rawBox = new Box();           // rawBox is a raw type of Box<T>
+    Box<Integer> intBox = rawBox;     // warning: unchecked conversion
+
+    Box<String> stringBox = new Box<>();
+    Box rawBox = stringBox;
+    rawBox.set(8);  // warning: unchecked invocation to set(T)
+  #+END_SRC
+
+  知道就行， 就不用了。
+
+* 泛型方法
+  泛型方法的定义包括位于 *返回类型之前* 的 *类型参数列表*:
+  #+BEGIN_SRC java
+    public class Util {
+      public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2) {
+        return p1.getKey().equals(p2.getKey()) &&
+            p1.getValue().equals(p2.getValue());
+      }
+    }
+  #+END_SRC
+
+  使用时需要指定类型：
+  #+BEGIN_SRC java
+    boolean same = Util.<Integer, String>compare(p1, p2);
+  #+END_SRC
+
+* 有界类型参数 
+  指定子型：
+  #+BEGIN_SRC java
+    <T extends B1 & B2 & B3>
+  #+END_SRC
+
+  如果边界中存在 *类*, 那么 *类* 必须放在前面：
+  #+BEGIN_SRC java
+    Class A { /* ... */ }
+    interface B { /* ... */ }
+    interface C { /* ... */ }
+
+
+    class D <T extends A & B & C> { /* ... */ }
+    class D <T extends B & A & C> { /* ... */ }  // compile-time error
+  #+END_SRC
+
+* 泛型类的继承关系
+  *Integer* 属于 *Number* 的子类， 但是 *Box<Integer>* 不是 *Box<Number>* 的子类。
+
+  因此， 以下行为是合法的：
+  #+BEGIN_SRC java
+    public void someMethod(Number n) { /* ... */ }
+
+    someMethod(new Integer(10));   // OK
+    someMethod(new Double(10.1));   // OK
+
+    Box<Number> box = new Box<Number>();
+    box.add(new Integer(10));   // OK
+    box.add(new Double(10.1));  // OK
+  #+END_SRC
+
+  而以下行为是不合法的：
+  #+BEGIN_SRC java
+    public void boxTest(Box<Number> n) { /* ... */ }
+    boxTest(new Box<Integer> n);  // error
+  #+END_SRC
+
+  当然， 泛型类也有子类， 泛型类的子类可以传入。
+
+  + [[https://docs.oracle.com/javase/tutorial/java/generics/inheritance.html][Generics, Inheritance, and Subtypes]]
+
+* 通配符
+  #+BEGIN_SRC java
+    public static void process(List<? extends Foo> list) { /* ... */ }
+    public static void printList(List<?> list) { /* ... */ }
+    public static void addNumbers(List<? super Integer> list) { /* ... */ }
+  #+END_SRC
+
+  #+HTML: <img src="https://docs.oracle.com/javase/tutorial/figures/java/generics-listParent.gif">
+
+* 限制
+  + [[https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html][Restrictions on Generics]]

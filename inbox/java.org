@@ -5,11 +5,6 @@
   + [[https://www.cnblogs.com/rollenholt/archive/2011/09/02/2163758.html][java 反射详解]]
   + [[https://www.sczyh30.com/posts/Java/java-reflection-1/][深入解析Java反射（1） - 基础]]
 
-* 泛型
-  + ~Optional.<T>absent~
-  + Class<?>
-  + [[https://docs.oracle.com/javase/tutorial/java/generics/types.html][官网教程]]
-    
 * 时间
   + [[https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TimeUnit.html][Enum TimeUnit]]
   + [[https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html][Class Duration]]

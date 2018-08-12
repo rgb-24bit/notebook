@@ -1,5 +1,0 @@
-* Head
-  #+BEGIN_SRC html
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-    <script src="myScript.js"></script>
-  #+END_SRC

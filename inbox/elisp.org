@@ -1,2 +1,0 @@
-* 教程
-  + [[http://www.woola.net/detail/2016-08-18-elisp.html][Emacs Lisp 教程]]
