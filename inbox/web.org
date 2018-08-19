@@ -1,2 +1,11 @@
 * 网页设计
   + [[http://blog-en.tilda.cc/articles-website-design-mistakes][网页设计常见问题]]
+
+* 无头浏览器
+  + [[https://juejin.im/post/59e5a86c51882578bf185dba][无头浏览器 Puppeteer 初探]]
+
+* HTTP 认证
+  + [[https://zxc0328.github.io/2015/11/04/http-basic-auth/][Http Basic Authorization的使用]]
+
+* 短网址
+  + [[https://segmentfault.com/a/1190000012088345][短网址(short URL)系统的原理及其实现]]

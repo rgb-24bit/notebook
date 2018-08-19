@@ -54,6 +54,7 @@
   + [[https://www.biaodianfu.com/cgi-fastcgi-wsgi.html][网关协议学习：CGI、FastCGI、WSGI]]
   + [[https://en.wikipedia.org/wiki/Common_Gateway_Interface][Wiki - Common Gateway Interface]]
   + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
+  + [[http://www.cnblogs.com/liuzhang/p/3929198.html][我所了解的 cgi - 博客园]]
 
 * WebSocket
   ~WebSocket~ 和 ~Socket~, 它是一个完整的应用层 *协议*, 包含一套标准的 API.

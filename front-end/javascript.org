@@ -8,6 +8,8 @@
 - [[#等值判断][等值判断]]
 - [[#使用对象][使用对象]]
 - [[#javascript-细节][JavaScript 细节]]
+- [[#入口函数][入口函数]]
+- [[#相关链接][相关链接]]
 
 * JavaScript 教程链接
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
@@ -259,3 +261,20 @@
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain][继承与原型链]]
 
   #+HTML: <img src="https://wx4.sinaimg.cn/large/7ed42f5cly1fqguw4y1zej20ge0e8wes.jpg">
+* 入口函数
+  #+BEGIN_SRC javascript
+    window.onload = function () {
+      // 执行代码
+    }
+  #+END_SRC
+
+  等到所有内容，包括外部图片之类的文件加载完后，才会执行。
+  
+* 相关链接
+  + [[http://www.w3school.com.cn/jsref/index.asp][JavaScript 参考手册]]
+  + [[http://www.runoob.com/json/json-parse.html][JSON.parse()]]
+  + [[http://www.runoob.com/json/json-stringify.html][JSON.stringify()]]
+  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-create.html][AJAX - 创建 XMLHttpRequest 对象]]
+  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-send.html][AJAX - 向服务器发送请求请求]]
+  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-response.html][AJAX - 服务器 响应]]
+  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-onreadystatechange.html][AJAX - onreadystatechange 事件]]

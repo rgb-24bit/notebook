@@ -1,3 +1,2 @@
-* use-package
-  + [[https://phenix3443.github.io/notebook/emacs/use-package-manual.html][use-package manual]]
-
+* Games and Other Amusements
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]

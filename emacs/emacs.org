@@ -12,6 +12,7 @@
 - [[#文件变量][文件变量]]
 - [[#文件头修改][文件头修改]]
 - [[#高级文本操作][高级文本操作]]
+- [[#宏操作][宏操作]]
 
 * Ediff
   + 可比较项目:
@@ -154,4 +155,8 @@
     
 * 高级文本操作
   + [[https://www.ibm.com/developerworks/cn/education/aix/au-emacs3/index.html][高级 Emacs 文本操作]]
+
+* 宏操作
+  使用快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
+
 

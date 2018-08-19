@@ -28,6 +28,8 @@
   + itertools.accumulate
   + bisect
   + operator
+  + 考虑考虑 cgi
+  + collection 各种数据类型的原型
 
 * I/O 结构
   I/O 的层次与缓冲区
@@ -42,3 +44,28 @@
   + pickle
 * 爬虫
   + [[https://my.oschina.net/jhao104/blog/647308][Python爬虫：一些常用的爬虫技巧总结]]
+* PEP8
+  + [[https://www.python.org/dev/peps/pep-0008/#whitespace-in-expressions-and-statements][Whitespace in Expressions and Statements]]
+  #+BEGIN_SRC python
+    Yes:
+
+    ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+    ham[lower:upper], ham[lower:upper:], ham[lower::step]
+    ham[lower+offset : upper+offset]
+    ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+    ham[lower + offset : upper + offset]
+    No:
+
+    ham[lower + offset:upper + offset]
+    ham[1: 9], ham[1 :9], ham[1:9 :3]
+    ham[lower : : upper]
+    ham[ : upper]
+  #+END_SRC
+
+* 执行文件
+  + [[https://stackoverflow.com/questions/7974849/how-can-i-make-one-python-file-run-another][How can I make one python file run another?]]
+
+  + __import__
+
+* flask-migrate
+  使用 flask-migrate, 如果切换分支， 需要删除原有数据库在迁移更新，否则可能使得版本不一致

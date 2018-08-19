@@ -12,6 +12,7 @@
 - [[#static][static]]
   - [[#使用][使用]]
 - [[#struct][struct]]
+- [[#位域][位域]]
 
 * 语法相关
   + 赋值语句 :: 类似 ~if (x = func())~ 的语句, ~if~ 判断的值为执行 ~x = func()~ 后 ~x~ 的值,
@@ -186,3 +187,12 @@
     out._insiade.val = 0;
   #+END_SRC
 
+* 位域
+  #+BEGIN_SRC C
+    typedef {
+      unsigned int readable : 1;
+      unsigned int writable : 1;
+    } Mode;
+  #+END_SRC
+
+  + [[http://www.cnblogs.com/bigrabbit/archive/2012/09/20/2695543.html][C 结构体之位域（位段）]]
