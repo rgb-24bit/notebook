@@ -8,32 +8,22 @@ Generate README.org
 2. Depth does not exceed 1.
 """
 
+import json
 import re
 
 from pathlib import Path
 
+IGNORE = ('.git', 'inbox', 'math', '_style', '__pycache__')
 
-TITLE = """Note"""
 
-NOTE_DIR = {
-    Path('algorithm'): '数据结构与算法',
-    Path('c-lang'): 'C Language',
-    Path('python'): 'Python',
-    Path('java'): 'Java',
-    Path('database'): '数据库',
-    Path('front-end'): '前端',
-    Path('lang'): '编程语言',
-    Path('network'): '网络',
-    Path('os'): '操作系统',
-    Path('tool'): '编程工具',
-    Path('misc'): 'Misc'
-}
+def get_note_dir():
+    for fn in Path().iterdir():
+        if fn.name in IGNORE or not fn.is_dir():
+            continue
+        yield fn
+
 
 class OrgWrite(object):
-    @staticmethod
-    def write_title(stream, title):
-        stream.write('#+TITLE: %s\n\n' % title)
-
     @staticmethod
     def write_list(stream, name, deep=0):
         stream.write('  ' * deep + '- %s ::\n' % name)
@@ -53,12 +43,10 @@ def get_note_name(note):
 
 def generate_readme(filename):
     with open(filename, 'w+', encoding='utf-8') as stream:
-        OrgWrite.write_title(stream, TITLE)
+        for note_dir in get_note_dir():
+            OrgWrite.write_list(stream, note_dir.name)
 
-        for directory in NOTE_DIR:
-            OrgWrite.write_list(stream, NOTE_DIR.get(directory))
-
-            for note in directory.glob('**/*.org'):
+            for note in note_dir.glob('**/*.org'):
                 OrgWrite.write_link(stream, get_note_name(note), note.as_posix(), 1)
 
 
