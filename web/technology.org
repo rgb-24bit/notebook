@@ -1,0 +1,51 @@
+#+TITLE:      Web 相关技术
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#application][Application]]
+- [[#webassembly][WebAssembly]]
+- [[#web-components][Web Components]]
+- [[#网关接口][网关接口]]
+- [[#websocket][WebSocket]]
+- [[#短网址][短网址]]
+
+* Application
+  移动端三种类型的应用程序：
+  + Native App
+  + Hybrid App
+  + Web App
+
+  其中， ~Web App~ 的进化型： [[https://juejin.im/post/5a6c86e451882573505174e7][PWA]].
+
+  ~PWA~ 需要 ~HTTPS~ 支持.
+
+* WebAssembly
+  WebAssembly 提供了一条途径， 以使得以各种语言编写的代码都可以以接近原生的速度在
+  Web 中运行.
+
+  + [[https://developer.mozilla.org/zh-CN/docs/WebAssembly][MDN - WebAssembly]]
+  + [[http://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html][阮一峰 - asm.js 和 Emscripten 入门教程]]
+
+* Web Components
+  Web Components 允许创建可重用的定制元素。
+
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/Web_Components][MDN - Web Components]]
+
+* 网关接口
+  + 通用网关接口 - CGI
+  + 服务器网关接口 - WSGI
+    
+  两者都是 *协议*, 规定了 *服务器* 和 *应用程序(脚本)* 之间的通信规范.
+
+  + [[https://www.biaodianfu.com/cgi-fastcgi-wsgi.html][网关协议学习：CGI、FastCGI、WSGI]]
+  + [[https://en.wikipedia.org/wiki/Common_Gateway_Interface][Wiki - Common Gateway Interface]]
+  + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
+  + [[http://www.cnblogs.com/liuzhang/p/3929198.html][我所了解的 cgi - 博客园]]
+
+* WebSocket
+  ~WebSocket~ 和 ~Socket~, 它是一个完整的应用层 *协议*, 包含一套标准的 API.
+
+  *PS:* ~Socket~ 并不是一个协议， 而是为了方便直接使用更底层协议(etc. TCP/UDP) 而存在的一个抽象层.
+  
+  + [[https://juejin.im/entry/5a337d9df265da4322414094][WebSocket详解]]
+* 短网址
+  + [[https://segmentfault.com/a/1190000012088345][短网址 (short URL) 系统的原理及其实现]]

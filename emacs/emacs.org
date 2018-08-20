@@ -13,6 +13,7 @@
 - [[#文件头修改][文件头修改]]
 - [[#高级文本操作][高级文本操作]]
 - [[#宏操作][宏操作]]
+- [[#games-and-other-amusements][Games and Other Amusements]]
 
 * Ediff
   + 可比较项目:
@@ -159,4 +160,6 @@
 * 宏操作
   使用快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
 
+* Games and Other Amusements
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]
 

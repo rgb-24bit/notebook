@@ -30,15 +30,10 @@
   - [[file:emacs/spacemacs.org][Spacemacs 笔记]]
 - flask ::
   - [[file:flask/flask.org][Flask 笔记]]
-- front-end ::
-  - [[file:front-end/css.org][CSS 笔记]]
-  - [[file:front-end/html.org][HTML 笔记]]
-  - [[file:front-end/javascript.org][JavaScript 笔记]]
-  - [[file:front-end/jquery.org][jQuery 笔记]]
-  - [[file:front-end/technology.org][前端相关技术]]
 - git ::
   - [[file:git/git-book.org][Git-Book 笔记]]
   - [[file:git/git.org][Git 笔记]]
+  - [[file:git/style.org][Git 相关使用规范]]
 - java ::
   - [[file:java/annotations.org][Java 注解类]]
   - [[file:java/basic.org][Java 语言基础知识]]
@@ -77,7 +72,6 @@
 - python ::
   - [[file:python/pep.org][PEP 笔记]]
   - [[file:python/python.org][Python 笔记]]
-  - [[file:python/python3-cookbook.org][Python3-cookbook 阅读笔记]]
   - [[file:python/re.org][Python 正则表达式]]
   - [[file:python/setup.org][Python 打包]]
   - [[file:python/socket.org][Python socket]]
@@ -87,6 +81,7 @@
   - [[file:python/thread.org][Python 并发编程]]
   - [[file:python/tkinter.org][Tkinter 笔记]]
 - tool ::
+  - [[file:tool/chrome.org][Chrome 使用]]
   - [[file:tool/ci.org][自动集成]]
   - [[file:tool/cmd.org][CMD 命令]]
   - [[file:tool/curl.org][curl 笔记]]
@@ -94,3 +89,9 @@
   - [[file:tool/utils.org][实用开源工具收集]]
 - vim ::
   - [[file:vim/vim.org][Vim 笔记]]
+- web ::
+  - [[file:web/css.org][CSS 笔记]]
+  - [[file:web/html.org][HTML 笔记]]
+  - [[file:web/javascript.org][JavaScript 笔记]]
+  - [[file:web/jquery.org][jQuery 笔记]]
+  - [[file:web/technology.org][Web 相关技术]]

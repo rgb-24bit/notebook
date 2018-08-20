@@ -1,4 +1,0 @@
-* 分支命名
-  + [[http://www.ruanyifeng.com/blog/2012/07/git.html][Git分支管理策略]]
-  + [[https://gist.github.com/hit1024/71f04d1b477046166165][git 分支规范]]
-  + [[http://cheenwe.cn/2016-08-02/git-branch-and-usage/][Git 分支命名规范]]
