@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#jquery-语法][jQuery 语法]]
 - [[#jquery-方法链接][jQuery 方法链接]]
+- [[#发送-ajax-请求][发送 AJAX 请求]]
 
 * jQuery 语法
   + 基础语法： ~$(selector).action()~
@@ -32,4 +33,20 @@
     $("#p1").css("color","red")
       .slideUp(2000)
       .slideDown(2000);
+  #+END_SRC
+* 发送 AJAX 请求
+  #+BEGIN_SRC javascript
+    // for get & post
+    $.get()
+    $.post()
+
+    // for all
+    $.ajax({
+      url: 'url', // your api url
+      // jQuery < 1.9.0 -> use type
+      // jQuery >= 1.9.0 -> use method
+      method: 'PUT', // method is any HTTP method
+      data: {}, // data as js object
+      success: function() {}
+    });
   #+END_SRC

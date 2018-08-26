@@ -1,18 +1,13 @@
-#+TITLE:      gradle 笔记
+#+TITLE:      Gradle 基础使用
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#任务相关][任务相关]]
+- [[#构建][构建]]
 - [[#依赖管理][依赖管理]]
 - [[#插件使用][插件使用]]
-- [[#构建][构建]]
-- [[#java-项目构建][Java 项目构建]]
 - [[#gradle-wrapper][Gradle Wrapper]]
 - [[#多项目构建][多项目构建]]
 - [[#buildscript][buildscript]]
-- [[#特殊值][特殊值]]
-- [[#flyway][Flyway]]
-  - [[#教程][教程]]
-  - [[#sql-脚本命名规则][SQL 脚本命名规则]]
 
 * 任务相关
   使用关键字 ~task~ 定义任务：
@@ -139,6 +134,62 @@
        }
     }
   #+END_SRC
+* 构建
+  存在以下四个任务：
+  #+BEGIN_SRC groovy
+    task task1 << {
+      println 'compiling source'
+    }
+
+    task task2(dependsOn: task1) << {
+      println 'compiling unit tests'
+    }
+
+    task task3(dependsOn: [task1, task2]) << {
+      println 'running unit tests'
+    }
+
+    task task4(dependsOn: [task1, task3]) << {
+      println 'building the distribution'
+    }
+  #+END_SRC
+
+  编译执行上述任务：
+  #+BEGIN_SRC bash
+    C:\> gradle task4
+  #+END_SRC
+
+  输出应该为：
+  #+BEGIN_EXAMPLE
+    > Task :task1                    
+    compiling source                 
+                                 
+    > Task :task2                    
+    compiling unit tests             
+                                 
+    > Task :task3                    
+    running unit tests               
+                                 
+    > Task :task4                    
+    building the distribution        
+  #+END_EXAMPLE
+
+  排除任务一：
+  #+BEGIN_SRC bash
+    gradle task4 -x task1
+  #+END_SRC
+
+  输出为：
+  #+BEGIN_EXAMPLE
+    > Task :task2
+    compiling unit tests
+
+    > Task :task3
+    running unit tests
+
+    > Task :task4
+    building the distribution
+  #+END_EXAMPLE
 
 * 依赖管理
   #+BEGIN_SRC groovy
@@ -212,98 +263,6 @@
        id 'java'
     }
   #+END_SRC
-
-* 构建
-  存在以下四个任务：
-  #+BEGIN_SRC groovy
-    task task1 << {
-      println 'compiling source'
-    }
-
-    task task2(dependsOn: task1) << {
-      println 'compiling unit tests'
-    }
-
-    task task3(dependsOn: [task1, task2]) << {
-      println 'running unit tests'
-    }
-
-    task task4(dependsOn: [task1, task3]) << {
-      println 'building the distribution'
-    }
-  #+END_SRC
-
-  编译执行上述任务：
-  #+BEGIN_SRC bash
-    C:\> gradle task4
-  #+END_SRC
-
-  输出应该为：
-  #+BEGIN_EXAMPLE
-    > Task :task1                    
-    compiling source                 
-                                 
-    > Task :task2                    
-    compiling unit tests             
-                                 
-    > Task :task3                    
-    running unit tests               
-                                 
-    > Task :task4                    
-    building the distribution        
-  #+END_EXAMPLE
-
-  排除任务一：
-  #+BEGIN_SRC bash
-    gradle task4 -x task1
-  #+END_SRC
-
-  输出为：
-  #+BEGIN_EXAMPLE
-    > Task :task2
-    compiling unit tests
-
-    > Task :task3
-    running unit tests
-
-    > Task :task4
-    building the distribution
-  #+END_EXAMPLE
-
-* Java 项目构建
-  使用插件 ~java~:
-  #+BEGIN_SRC groovy
-    apply plugin: 'java'
-  #+END_SRC
-
-  默认项目结构：
-  + src/main/java - 源代码
-  + src/test/java - 测试
-
-  执行构建：
-  #+BEGIN_SRC bash
-    C:\> gradle build
-  #+END_SRC
-
-  使用 ~SourceSets~ 设置项目结构：
-  #+BEGIN_SRC groovy
-    apply plugin: 'java'
-
-    sourceSets {
-      main {
-        java {
-          srcDir 'src'
-        }
-      }
-
-      test {
-        java {
-          srcDir 'test'
-        }
-      }
-    }
-  #+END_SRC
-
 * Gradle Wrapper
   Gradle Wrapper是开始一个Gradle构建的首选方式。 它包含了windows批处理以及OS X和Linux的Shell脚本。
   这些脚本允许我们在没有安装Gradle的系统上执行Gradle构建。
@@ -311,7 +270,6 @@
   使用指令 ~Gradle wrapper~ 初始化 ~Wrapper~ 环境。
 
   使用 ~gradlew~ 来代替 ~gradle~ 指令。
-
 * 多项目构建
   在 ~root-project~ 所在目录添加 ~build.gradle~ 和 ~settings.gradle~.
 
@@ -336,7 +294,6 @@
   #+END_SRC
 
   构建时， ~gradle~ 会自动寻找子项目中的 ~build.gradle~ 并执行构建。
-
 * buildscript
   ~build.gradle~ 类似下面代码中的 ~buildscript~ 的作用是声明是 ~gradle~ 脚本自身需要使用的资源。
 
@@ -352,13 +309,3 @@
     }
   #+END_SRC
 
-* 特殊值
-  + [[https://blog.csdn.net/snowin1994/article/details/53024871][maven中的groupId和artifactId到底指的是什么]]
-
-* Flyway
-** 教程
-   + [[https://flywaydb.org/documentation/migrations][Migrations]]
-   + [[https://flywaydb.org/getstarted/firststeps/gradle][First Steps: Gradle]]
-
-** SQL 脚本命名规则
-   + [[https://flywaydb.org/documentation/migrations#sql-based-migrations][SQL-based migrations]]

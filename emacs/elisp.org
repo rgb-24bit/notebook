@@ -24,6 +24,7 @@
   - [[#缓冲区][缓冲区]]
   - [[#文件][文件]]
 - [[#use-package][use-package]]
+- [[#获取启动时长][获取启动时长]]
 
 * interactive
   ~Emacs~ 中存在 *两种函数*:
@@ -435,3 +436,7 @@
    
 * use-package
   + [[https://phenix3443.github.io/notebook/emacs/use-package-manual.html][use-package manual]]
+* 获取启动时长
+  #+BEGIN_SRC elisp
+    (emacs-uptime)
+  #+END_SRC

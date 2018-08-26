@@ -30,9 +30,6 @@
   + operator
   + 考虑考虑 cgi
   + collection 各种数据类型的原型
-
-* I/O 结构
-  I/O 的层次与缓冲区
     
 * 打包
   + [[http://wsfdl.com/python/2015/09/06/Python%E5%BA%94%E7%94%A8%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E4%B8%8A.html][Python application 的打包和发布]]
@@ -69,3 +66,27 @@
 
 * flask-migrate
   使用 flask-migrate, 如果切换分支， 需要删除原有数据库在迁移更新，否则可能使得版本不一致
+
+* 生成器
+  + 生成器表达式
+    #+BEGIN_SRC python
+      (i for i in range(10))
+    #+END_SRC
+  + 生成器方法
+    #+BEGIN_SRC python
+       |  close(...)
+       |      close() -> raise GeneratorExit inside generator.
+       |
+       |  send(...)
+       |      send(arg) -> send 'arg' into generator,
+       |      return next yielded value or raise StopIteration.
+       |
+       |  throw(...)
+       |      throw(typ[,val[,tb]]) -> raise exception in generator,
+       |      return next yielded value or raise StopIteration.
+    #+END_SRC
+  + 返回值
+    + [[https://stackoverflow.com/questions/10695456/what-is-the-result-of-a-yield-expression-in-python][What is the result of a yield expression in Python?]]
+
+* 协程
+  + [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432090171191d05dae6e129940518d1d6cf6eeaaa969000][廖雪峰]]

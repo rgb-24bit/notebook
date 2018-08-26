@@ -1,4 +1,4 @@
-- algorithm ::
+* algorithm
   - [[file:algorithm/bit-op.org][位运算]]
   - [[file:algorithm/concept.org][概念了解]]
   - [[file:algorithm/encrypt.org][加密算法]]
@@ -8,7 +8,7 @@
   - [[file:algorithm/resource.org][网络资源]]
   - [[file:algorithm/search_sort.org][查找与排序算法]]
   - [[file:algorithm/struct.org][数据结构]]
-- c-c++ ::
+* c-c++
   - [[file:c-c++/c.org][C 语言笔记]]
   - [[file:c-c++/cpp.org][C++ 笔记]]
   - [[file:c-c++/doxygen.org][Doxygen 笔记]]
@@ -17,51 +17,54 @@
   - [[file:c-c++/libc.org][C 标准库笔记]]
   - [[file:c-c++/makefile.org][Makefile]]
   - [[file:c-c++/pointer.org][指针笔记]]
-- database ::
+* database
   - [[file:database/mssql.org][SQL Server 笔记]]
   - [[file:database/mysql.org][MySQL 笔记]]
   - [[file:database/sql.org][SQL 笔记]]
   - [[file:database/t-sql.org][T-SQL 笔记]]
   - [[file:database/vc.org][数据库版本控制]]
-- emacs ::
+* emacs
   - [[file:emacs/elisp.org][Emacs Lisp 笔记]]
   - [[file:emacs/emacs.org][Emacs 笔记]]
   - [[file:emacs/org-mode.org][Org-mode 笔记]]
   - [[file:emacs/spacemacs.org][Spacemacs 笔记]]
-- flask ::
+* flask
   - [[file:flask/flask.org][Flask 笔记]]
-- git ::
+* git
   - [[file:git/git-book.org][Git-Book 笔记]]
   - [[file:git/git.org][Git 笔记]]
   - [[file:git/style.org][Git 相关使用规范]]
-- java ::
+* gradle
+  - [[file:gradle/basic.org][Gradle 基础使用]]
+  - [[file:gradle/flyway.org][Flyway - 数据库版本控制系统]]
+  - [[file:gradle/java.org][Java 项目构建]]
+* java
   - [[file:java/annotations.org][Java 注解类]]
   - [[file:java/basic.org][Java 语言基础知识]]
   - [[file:java/class-object.org][Java 类和对象]]
   - [[file:java/generics.org][Java 泛型]]
-  - [[file:java/gradle.org][gradle 笔记]]
   - [[file:java/interface-inheritance.org][Java 接口和继承]]
   - [[file:java/javadoc.org][JavaDoc 笔记]]
   - [[file:java/misc.org][Java Misc]]
   - [[file:java/package.org][Java 包]]
   - [[file:java/swing.org][Swing 笔记]]
-- lang ::
+* lang
   - [[file:lang/bash.org][Bash 笔记]]
   - [[file:lang/csharp_note.org][C# 笔记]]
   - [[file:lang/graphviz.org][graphviz 笔记]]
   - [[file:lang/markup.org][标记语言及其他文本格式]]
   - [[file:lang/plantuml.org][plantuml 笔记]]
   - [[file:lang/uml.org][UML 笔记]]
-- misc ::
+* misc
   - [[file:misc/coding.org][编程技巧]]
   - [[file:misc/identifier.org][同名标识符优先级问题]]
   - [[file:misc/liscense.org][开源协议]]
   - [[file:misc/misc.org][各种各样的东西]]
   - [[file:misc/rest-api.org][REST API]]
   - [[file:misc/se.org][结构化编程]]
-- network ::
+* network
   - [[file:network/protocol.org][互联网协议笔记]]
-- os ::
+* os
   - [[file:os/base.org][基础内容]]
   - [[file:os/concurrency.org][并发编程]]
   - [[file:os/ecf.org][ECF: 异常控制流]]
@@ -69,7 +72,7 @@
   - [[file:os/info.org][信息的表示和处理]]
   - [[file:os/io.org][系统级 I/O]]
   - [[file:os/link.org][链接]]
-- python ::
+* python
   - [[file:python/pep.org][PEP 笔记]]
   - [[file:python/python.org][Python 笔记]]
   - [[file:python/re.org][Python 正则表达式]]
@@ -80,16 +83,16 @@
   - [[file:python/text-process.org][Python 文本处理]]
   - [[file:python/thread.org][Python 并发编程]]
   - [[file:python/tkinter.org][Tkinter 笔记]]
-- tool ::
+* tool
   - [[file:tool/chrome.org][Chrome 使用]]
   - [[file:tool/ci.org][自动集成]]
   - [[file:tool/cmd.org][CMD 命令]]
   - [[file:tool/curl.org][curl 笔记]]
   - [[file:tool/shell.org][Shell 命令]]
   - [[file:tool/utils.org][实用开源工具收集]]
-- vim ::
+* vim
   - [[file:vim/vim.org][Vim 笔记]]
-- web ::
+* web
   - [[file:web/css.org][CSS 笔记]]
   - [[file:web/html.org][HTML 笔记]]
   - [[file:web/javascript.org][JavaScript 笔记]]

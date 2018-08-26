@@ -13,6 +13,16 @@
 * 图片处理
   + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][java 图片处理 (文字水印、图片水印、缩放、补白)]]
   + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
+
 * 网络编程
   + [[https://docs.oracle.com/javase/tutorial/networking/overview/index.html][官方教程]]
   + [[https://www.baeldung.com/java-http-request][Do a Simple HTTP Request in Java]]
+
+* 打包
+  + [[https://www.cnblogs.com/EasonJim/p/6485677.html][JAR包中的MANIFEST.MF文件详解以及编写规范]]
+
+* XML
+  + [[https://www.tutorialspoint.com/java_xml/java_dom_parse_document.htm][Java DOM Parser - Parse XML Document]]
+
+* 文件树
+  + [[https://docs.oracle.com/javase/tutorial/essential/io/walk.html][Walking the File Tree]]

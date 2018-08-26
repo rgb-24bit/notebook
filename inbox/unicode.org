@@ -1,0 +1,7 @@
+* unicode
+  + [[https://stackoverflow.com/questions/7291120/python-and-unicode-code-point-extraction][Python and unicode code point extraction]]
+  + [[https://segmentfault.com/q/1010000016120251?_ea=4234545][为什么字符串中的和音符去掉后变成了对应的ASCII字符？]]
+
+* 不可见 unicode 字符
+  + \u2061
+  + 8289

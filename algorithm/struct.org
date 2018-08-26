@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]
   - [[#leetcode-题][LeetCode 题:]]
+- [[#删除当前链表节点][删除当前链表节点]]
 
 * 二叉查找树 (Binary Search Tree)
   定义: 是指一棵空树或者具有下列性质的 [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91][二叉树]]:
@@ -42,4 +43,14 @@
        }
      }
    #+END_SRC
+
+* 删除当前链表节点
+  #+BEGIN_SRC java
+    class Solution {
+      public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+      }
+    }
+  #+END_SRC
 
