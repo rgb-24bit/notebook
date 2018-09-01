@@ -90,3 +90,8 @@
 
 * 协程
   + [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432090171191d05dae6e129940518d1d6cf6eeaaa969000][廖雪峰]]
+* 实用函数
+  + [[https://www.cnblogs.com/funsion/p/4017989.html][Python默认模块 os和shutil 实用函数]]
+
+* LRU
+  + [[https://blog.theerrorlog.com/simple-lru-cache-in-python-3.html][Python3中的傻瓜式LRU缓存实现]]

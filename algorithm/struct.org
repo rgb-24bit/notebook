@@ -4,6 +4,7 @@
 - [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]
   - [[#leetcode-题][LeetCode 题:]]
 - [[#删除当前链表节点][删除当前链表节点]]
+- [[#合并有序链表][合并有序链表]]
 
 * 二叉查找树 (Binary Search Tree)
   定义: 是指一棵空树或者具有下列性质的 [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91][二叉树]]:
@@ -54,3 +55,71 @@
     }
   #+END_SRC
 
+* 合并有序链表
+  + 递归合并
+    #+BEGIN_SRC C
+      Node* Merge(Node* head1, Node* head2) {
+        if (head1 == NULL) return head2;
+        if (head2 == NULL) return head1;
+
+        Node* res = NULL;
+
+        if (head1->value < head2->value) {
+          res = head1;
+          res->next = Merge(head1->next, head2);
+        } else {
+          res = head2;
+          res->next = Merge(head1, head2->next);
+        }
+
+        return res;
+      }
+    #+END_SRC
+
+  + 循环迭代合并
+    #+BEGIN_SRC C
+      Node* Merge(Node* head1, Node* head2) {
+        if (head1 == NULL) return head2;
+        if (head2 == NULL) return head1;
+
+        Node* res;
+        Node* ret;
+        Node* p = head1;
+        Node* q = head2;
+
+        if (p->value < q->value) {
+          res = p;
+          p = p->next;
+        } else {
+          res = q;
+          q = q->next;
+        }
+
+        ret = res;
+        while (p && q) {
+          if (p->value < q->value) {
+            res->next = p;
+            res = p;
+            p = p->next;
+          } else {
+            res->next = q;
+            res = q;
+            q = q->next;
+          }
+        }
+
+        while (p) {
+          res->next = p;
+          res = p;
+          p = p->next;
+        }
+
+        while (q) {
+          res->next = q;
+          res = q;
+          q = q->next;
+        }
+
+        return ret;
+      }
+    #+END_SRC

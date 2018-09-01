@@ -26,3 +26,5 @@
 
 * 文件树
   + [[https://docs.oracle.com/javase/tutorial/essential/io/walk.html][Walking the File Tree]]
+* 执行包中的类
+  + [[https://stackoverflow.com/questions/18139756/how-to-run-a-class-file-that-is-part-of-a-package-from-cmd][How to run a .class file that is part of a package from cmd?]]
