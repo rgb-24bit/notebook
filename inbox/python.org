@@ -95,3 +95,6 @@
 
 * LRU
   + [[https://blog.theerrorlog.com/simple-lru-cache-in-python-3.html][Python3中的傻瓜式LRU缓存实现]]
+
+* pip
+  + [[https://pip.pypa.io/en/stable/installing/][下载]]

@@ -1,0 +1,11 @@
+* 教程
+  + [[http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html][SSH原理与运用（一）：远程登录]]
+
+* 使用私钥
+  + ssh -i 私钥文件 user@host 
+
+* 上传下载文件
+  + [[http://www.cnblogs.com/jiangyao/archive/2011/01/26/1945570.html][利用ssh传输文件]]
+
+* 睡眠
+  + [[https://askubuntu.com/questions/127369/how-to-prevent-write-failed-broken-pipe-on-ssh-connection][How to prevent “Write Failed: broken pipe” on SSH connection?]]

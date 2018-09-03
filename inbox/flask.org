@@ -1,0 +1,14 @@
+* 缓存
+  + [[http://www.bjhee.com/flask-ext6.html][Flask扩展系列(六)–缓存]]
+
+* 部署
+  + [[https://segmentfault.com/a/1190000008909201][在Windows平台使用IIS部署Flask网站]]
+  + [[https://www.cnblogs.com/Ray-liang/p/4173923.html][阿里云部署 Flask + WSGI + Nginx 详解]]
+  + [[https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html][Quickstart for Python/WSGI applications]]
+  + [[https://stackoverflow.com/questions/44037637/error-installing-uwsgi-in-virtualenv][Error installing uwsgi in virtualenv]]
+  + usgi 配置目录
+    #+BEGIN_EXAMPLE
+      ~/viwp - X
+      /root/viwp - √
+    #+END_EXAMPLE
+  + 使用 ~supervisor~ 引导服务，记得要打开
