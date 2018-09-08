@@ -1,4 +1,4 @@
-#+TITLE:      Flyway - 数据库版本控制系统
+#+TITLE:      Flyway
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#教程][教程]]

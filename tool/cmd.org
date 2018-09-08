@@ -1,14 +1,11 @@
 #+TITLE:      CMD 命令
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#相关链接][相关链接]]
 - [[#nslookup][nslookup]]
 - [[#traceroute][traceroute]]
 - [[#copy][copy]]
 - [[#for][for]]
-
-* 相关链接
-  + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands][Windows Commands]]
+- [[#相关链接][相关链接]]
 
 * nslookup
   nslookup 命令用于查询 DNS 的记录， 查看域名解析是否正常， 
@@ -82,3 +79,6 @@
 
 * for
   /for /L %i in (1, 1, 10) do mkdir Chapter_%i/  -- 创建10个文件夹
+
+* 相关链接
+  + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands][Windows Commands]]

@@ -1,4 +1,4 @@
-#+TITLE:      编程技巧
+#+TITLE:      编程相关
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#伪代码][伪代码]]
@@ -15,7 +15,7 @@
 
 * 函数式编程
   + [[https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000][函数式编程]]
-
+    
 * 可扩展编程
   + [[https://en.wikipedia.org/wiki/Extensible_programming][可扩展编程]]
 

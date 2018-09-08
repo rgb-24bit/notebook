@@ -1,7 +1,7 @@
-#+TITLE:      SQLArchemy 笔记
+#+TITLE:      Python ORM
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#教程资源][教程资源]]
 
 * 教程资源
-  + [[https://docs.sqlalchemy.org/en/latest/orm/tutorial.html][Object Relational Tutorial]]
+  + [[https://docs.sqlalchemy.org/en/latest/orm/tutorial.html][SQLAlchemy -  Object Relational Tutorial]]

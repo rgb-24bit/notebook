@@ -1,4 +1,4 @@
-#+TITLE:      Java 语言基础知识
+#+TITLE:      Java 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#原始数据类型取值范围][原始数据类型取值范围]]

@@ -2,28 +2,23 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#小整数对象池][小整数对象池]]
-- [[#函数参数][函数参数]]
-- [[#del][del]]
-- [[#super][super]]
-- [[#语法相关][语法相关]]
-- [[#函数属性][函数属性]]
-- [[#模块和包][模块和包]]
-  - [[#模块][模块]]
-  - [[#包][包]]
+- [[#函数默认参数的问题][函数默认参数的问题]]
+- [[#内置函数相关][内置函数相关]]
+- [[#语法上的问题][语法上的问题]]
+- [[#函数对象的属性][函数对象的属性]]
+- [[#模块和包的导入与执行][模块和包的导入与执行]]
+  - [[#模块相关概念][模块相关概念]]
+  - [[#包相关概念][包相关概念]]
   - [[#执行包与包内模块][执行包与包内模块]]
-- [[#staticmethod][@staticmethod]]
-- [[#异常][异常]]
-- [[#赋值和引用][赋值和引用]]
-- [[#关键字][关键字]]
+- [[#异常执行顺序问题][异常执行顺序问题]]
+- [[#关键字相关][关键字相关]]
 - [[#限制实例属性][限制实例属性]]
 - [[#抽象类][抽象类]]
 - [[#获取对象属性][获取对象属性]]
 - [[#数值运算相关][数值运算相关]]
 - [[#作用域问题][作用域问题]]
   - [[#修改全局变量][修改全局变量]]
-- [[#兼容-python2--python3][兼容 Python2 & Python3]]
 - [[#包管理工具---pip][包管理工具 - PIP]]
-- [[#列表推导式和生成器表达式][列表推导式和生成器表达式]]
 - [[#python-垃圾回收机制][Python 垃圾回收机制]]
 - [[#python-的常见实现][Python 的常见实现]]
 - [[#成员相关][成员相关]]
@@ -36,9 +31,9 @@
 * 小整数对象池
   Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例。
 
-  参考： [[https://foofish.net/python-int-mystery.html][Python解惑：整数比较]]
+  参考： [[https://foofish.net/python-int-mystery.html][Python 解惑：整数比较]]
 
-* 函数参数
+* 函数默认参数的问题
   当函数的关键字参数为 *引用类型* 时需要注意不要在函数体内部对参数直接修改：
   #+BEGIN_SRC python
     In [1]: def func(lst=[]):
@@ -59,15 +54,17 @@
     [10, 10, 10]
   #+END_SRC
 
-* del
-  ~del~ 删除的是一个对象的引用， 而不是对象本身
+* 内置函数相关
+  + super :: ~super~ 的一般使用方式为： ~super(class, self).xxx~.
 
-* super
-  ~super~ 的一般使用方式为： ~super(class, self).xxx~.
+    + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]].
 
-  + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]].
+  + staticmethod :: 通常作为装饰器使用，未被 ~staticmethod~ 装饰的方法， 如果没有绑定 ~self~ 变量，
+                    那么这个方法可以用类名访问， 但是不能用实例访问。
 
-* 语法相关
+                    使用 ~staticmethod~ 来装饰方法， 那么这个方法既可以使用类名访问， 
+                    也可以使用实例访问。
+* 语法上的问题
   和 [[file:../c-c++/c.org::语法相关][C - 语法相关]] 的对比。
 
   + 赋值语句 :: 不能像 ~if x = func()~ 这样使用, 但是可以 ~func(x = 2)~, 最后传入的参数就是 ~2~.
@@ -86,8 +83,8 @@
 
   定义同名的对象， 最后的对象以 *最后一次* 定义为准
 
-* 函数属性
-  *函数* 作为 ~Python~ 对象自然也可以有函数：
+* 函数对象的属性
+  *函数* 作为 ~Python~ 对象自然也可以有属性：
   #+BEGIN_SRC python
     In [1]: def func():
        ...:     pass
@@ -104,13 +101,13 @@
   
   这一特性的使用： [[https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses][Python function attributes - uses and abuses]].
 
-* 模块和包
+* 模块和包的导入与执行
   导入 *模块* 或 *包* 时， ~Python~ 会动态执行一遍 *模块* 中的内容。
 
   函数或类的定义的执行就只是定义了函数或类， 而其他语句会直接执行， 
   如果有输出还会直接进行输出。
 
-** 模块
+** 模块相关概念
    模块，在 ~Python~ 可理解为对应于一个文件。在创建了一个脚本文件后，定义了某些函数和变量。你在其他需要这些功能的文件中，导入这模块，就可重用这些函数和变量。
 
    一般用 ~module_name.fun_name~, 和 ~module_name.var_name~ 进行使用。这样的语义用法使模块看起来很像类或者名字空间，可将 ~module_name~ 理解为名字限定符。模块名就是文件名去掉 ~.py~ 后缀。
@@ -123,7 +120,7 @@
    模块在被导入执行时, ~python~ 解释器为加快程序的启动速度，会在与模块文件同一目录下生成 ~.pyc~ 文件。
    我们知道 ~python~ 是解释性的脚本语言，而 ~.pyc~ 是经过编译后的字节码，这一工作会自动完成，而无需程序员手动执行。
 
-** 包
+** 包相关概念
    通常包总是一个目录，可以使用 ~import~ 导入包，或者 ~from + import~ 来导入包中的部分模块。包目录下为首的一个文件便是 ~__init__.py~.
    然后是一些模块文件和子目录，假如子目录中也有 ~__init__.py~ 那么它就是这个包的子包了。
 
@@ -159,14 +156,7 @@
 
    特别的， 对于包内的 *模块*, 如果使用了 *相对导入*, 那么可以使用 ~python -m pkg.module~ 指令执行模块.
 
-* @staticmethod
-  如果类中定义的函数没有绑定 ~self~ 变量， 那么这个函数可以用类名访问， 但是不能用
-  实例访问。
-
-  使用 ~@staticmethod~ 来装饰这个函数， 那么这个函数既可以使用类名访问， 也可以使用实例
-  访问。
-
-* 异常
+* 异常执行顺序问题
   #+BEGIN_SRC python
     try:
         ...
@@ -176,28 +166,7 @@
 
   ~finally~ 代码块必然会执行， 哪怕 ~try/catch~ 中存在 ~return~.
 
-* 赋值和引用
-  ~Python~ 中除了 *数值* 以外的对象都是 *引用* 类型。
-
-  引用类型在内存中只会存在 *唯一* 一个内存映像。
-
-  对一个 *引用对象* 的操作都会反馈到所有引用了这一对象的别名上。
-
-  *模块* 也是引用对象， 在引用了一个 *模块* 后， 除非进行 ~reload~, 否则所有
-  ~import~ 的 *模块* 都是同一 *模块* 对象。
-
-  对 *模块* 内的引用对象进行修改会反馈到同样引用这一模块成员的地方。
-
-  通过 *模块名.对象* 的方式对 *数值* 进行修改也会反馈到所有以同样方式 *引用* 数值的地方。
-
-  通过 *from 模块 import 对象* 的方式 *引用* 数值会重新创建一个 *新的* 数值对象， 同 *数值* 的赋值操作。
-
-  + [[https://segmentfault.com/q/1010000014740115][实际操作的结果]]
-
-  有关于深拷贝和浅拷贝：
-  + [[http://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html][Python 直接赋值、浅拷贝和深度拷贝解析]]
-
-* 关键字
+* 关键字相关
   + with :: with 语句后不一定需要 as, 不过没有 as 会无法捕获上下文对象
   + as :: as 可以在 import, except, with 语句后使用
   + global :: 说明当前变量为全局变量
@@ -350,22 +319,11 @@
 
      UnboundLocalError: local variable 'name' referenced before assignment
    #+END_SRC
-* 兼容 Python2 & Python3
-  + [[https://segmentfault.com/a/1190000000637180][编写兼容 Python 2 和 Python 3 的代码]].
 
 * 包管理工具 - PIP
   + 使用 ~python -m ensurepip~ 安装 ~pip~
   + [[https://docs.python.org/3/library/ensurepip.html][ensurepip — Bootstrapping the pip installer]]
   + [[https://packaging.python.org/tutorials/installing-packages/][Installing Packages]]
-
-* 列表推导式和生成器表达式
-  #+BEGIN_SRC python
-    In [1]: (i for i in range(10))
-    Out[1]: <generator object <genexpr> at 0x03A7E7B0>
-
-    In [2]: [i for i in range(10)]
-    Out[2]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  #+END_SRC
 
 * Python 垃圾回收机制
   ~Python~ 的垃圾回收是根据 *引用计数* 来判断的， 当一个对象的 *引用* 为 0 是，
@@ -377,6 +335,7 @@
   + PyPy :: Python 的 Python 实现
   + IronPython :: Python 的 C# 实现
   + Cython :: 包含 C 数据类型的 Python
+
 * 成员相关
 ** 保护成员和私有成员
    + *单下划线* 开头的对象为 *保护成员*, 如 ~_obj~.
@@ -441,6 +400,7 @@
    + ~__path__~ 包含这个属性的 *模块* 会被当做一个 *包*.
 
    + ~__class__~ 当前对象的类
+
 * 导入机制
   #+BEGIN_SRC python
     import spam
