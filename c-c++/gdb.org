@@ -6,7 +6,7 @@
 - [[#汇编代码][汇编代码]]
 
 * 教程
-  + [[https://github.com/hellogcc/100-gdb-tips][100个gdb小技巧]]
+  + [[https://github.com/hellogcc/100-gdb-tips][100 个 gdb 小技巧]]
 
 * 简单指令
   + 单步调试： n

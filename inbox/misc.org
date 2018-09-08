@@ -6,3 +6,5 @@
   + [[https://zh.wikipedia.org/zh-hans/%E6%89%A9%E5%B1%95%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F][扩展巴科斯范式]]
 * 网站统计中的数据收集原理及实现
   + [[http://blog.codinglabs.org/articles/how-web-analytics-data-collection-system-work.html][网站统计中的数据收集原理及实现]]
+* 哈希碰撞与生日攻击
+  + [[http://www.ruanyifeng.com/blog/2018/09/hash-collision-and-birthday-attack.html][哈希碰撞与生日攻击]]

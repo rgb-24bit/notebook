@@ -3,23 +3,19 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#教程资源][教程资源]]
 - [[#资源访问][资源访问]]
-- [[#程序架构][程序架构]]
-  - [[#mvc][MVC]]
-  - [[#rest][REST]]
+- [[#mvc--rest][MVC & REST]]
 
 * 教程资源
-  + [[http://codingpy.com/article/customizing-the-flask-response-class/][如何自定义 Flask 中的响应类]] - 自定义响应类
-  + [[https://www.letiantian.me/2014-06-28-flask-cookie/][浅入浅出 Flask 框架：Cookie]] - 设置客户端 Cookie
+  + [[http://codingpy.com/article/customizing-the-flask-response-class/][如何自定义 Flask 中的响应类]]
+  + [[https://www.letiantian.me/2014-06-28-flask-cookie/][浅入浅出 Flask 框架：Cookie]]
   + [[https://segmentfault.com/a/1190000004618621][Flask-SQLAlchemy 学习总结]]
   + [[http://www.pythondoc.com/flask-sqlalchemy/index.html][Flask-SQLAlchemy 中文文档]]
-  + [[https://segmentfault.com/a/1190000002454953][Flask信号机制(signals)]] - 使用信号
+  + [[https://segmentfault.com/a/1190000002454953][Flask信号机制(signals)]]
 
 * 资源访问
-  ~static~ 目录中的资源科直接获取，而 ~template~ 中的资源需要设置路由。
+  ~flask~ 中的资源目录主要有 *静态资源目录* 和  *模板目录*, 其中， 静态资源目录中的资源可以直接获取，
+  而模板目录中的资源需要设置路由。
 
-* 程序架构
-** MVC
-   [[https://github.com/miguelgrinberg/flasky][flasky]].
+* MVC & REST
+  ~flask~ 默认的开发模式为 ~MVC~, 如果要使用 ~REST~, 可以将 *静态资源目录* 和 *模板目录* 分出，单独编写。
 
-** REST
-  通过设置 ~static_floder~ 和 ~template_floder~ 将前后端分离，单独开发。

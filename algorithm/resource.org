@@ -1,7 +1,0 @@
-#+TITLE:      网络资源
-
-* 目录                                                    :TOC_4_gh:noexport:
-- [[#github][Github]]
-
-* Github
-  + [[https://github.com/TheAlgorithms][The Algorithms]] - 多种语言的算法及数据结构实现

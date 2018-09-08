@@ -4,8 +4,7 @@
 - [[#问题][问题]]
 
 * 问题
-  + 时区陷阱问题
-
+  + 时区陷阱问题 ::
     ~mysql~ 6.0 以上的版本需要在链接字符串中假设参数 ~serverTimezone~ 指定时区：
     #+BEGIN_SRC xml
       <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=UTC"/>
@@ -15,4 +14,4 @@
     #+BEGIN_SRC xml
       <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=Asia/Shanghai"/>
     #+END_SRC
-
+    

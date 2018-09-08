@@ -98,3 +98,15 @@
 
 * pip
   + [[https://pip.pypa.io/en/stable/installing/][下载]]
+* iter
+  #+BEGIN_EXAMPLE
+    iter(callable, sentinel) -> iterator
+  #+END_EXAMPLE
+
+* open
+  + [[https://docs.python.org/3/library/functions.html#open][open]]
+  + 参数 ~x~
+
+* 爬虫
+  + lxml + cssselect
+  + puppetter + waitPageNavigation

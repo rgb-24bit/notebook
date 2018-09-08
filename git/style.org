@@ -1,4 +1,4 @@
-#+TITLE: Git 相关使用规范
+#+TITLE:      Git 相关使用规范
 
 
 * 目录                                                    :TOC_4_gh:noexport:

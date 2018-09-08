@@ -6,7 +6,7 @@
 
 * 教程
   + [[http://www.infoq.com/cn/articles/Database-Version-Control][数据库版本控制完全指南]]
-
+    
 * 工具
   + [[https://github.com/flyway/flyway][flyway]] - java
   + [[https://github.com/miguelgrinberg/Flask-Migrate][Flask-Migrate]] - python flask

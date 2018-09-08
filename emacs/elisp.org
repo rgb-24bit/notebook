@@ -23,8 +23,8 @@
   - [[#字符串][字符串]]
   - [[#缓冲区][缓冲区]]
   - [[#文件][文件]]
-- [[#use-package][use-package]]
-- [[#获取启动时长][获取启动时长]]
+- [[#概念相关][概念相关]]
+- [[#实用函数][实用函数]]
 
 * interactive
   ~Emacs~ 中存在 *两种函数*:
@@ -434,9 +434,12 @@
      (file-name-sans-extension file-name)
    #+END_SRC
    
-* use-package
-  + [[https://phenix3443.github.io/notebook/emacs/use-package-manual.html][use-package manual]]
-* 获取启动时长
-  #+BEGIN_SRC elisp
-    (emacs-uptime)
-  #+END_SRC
+* 概念相关
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Indenting-Macros.html][Indenting Macros]]  
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Quoting.html][Quoting]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html#Backquote][Backquote]]
+  + [[https://stackoverflow.com/questions/4970111/what-does-rest-mean-in-elisp][what does &rest mean in elisp?]]
+
+* 实用函数
+  + emacs-uptime 获取启动时长
+

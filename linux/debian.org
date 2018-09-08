@@ -1,0 +1,41 @@
+#+TITLE:      Debian 使用
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#python36-安装][Python3.6 安装]]
+- [[#emacs26-安装][Emacs26 安装]]
+- [[#source-code-pro-安装][source code pro 安装]]
+
+* Python3.6 安装
+  + [[https://www.rosehosting.com/blog/how-to-install-python-3-6-4-on-debian-9/][How to Install Python 3.6.4 on Debian 9]]
+
+  手动编译：
+  #+BEGIN_SRC bash
+    # build tools
+    apt-get install -y make build-essential libssl-dev zlib1g-dev
+    apt-get install -y libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm
+    apt-get install -y libncurses5-dev  libncursesw5-dev xz-utils tk-dev
+
+    # Download the Python
+    wget https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz
+
+    # Unpack
+    tar xvf Python-3.6.4.tgz
+
+    # build
+    cd Python-3.6.4
+    ./configure --enable-optimizations
+
+    make -j8
+    make altinstall
+  #+END_SRC
+
+* Emacs26 安装
+  + [[https://www.emacswiki.org/emacs/EmacsSnapshotAndDebian][EmacsSnapshotAndDebian]]
+
+* source code pro 安装
+  #+BEGIN_SRC bash
+    mkdir /usr/share/fonts/opentype
+    git clone https://github.com/adobe-fonts/source-code-pro.git /usr/share/fonts/opentype/scp
+    fc-cache -f -v
+  #+END_SRC
+

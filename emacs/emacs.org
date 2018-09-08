@@ -1,113 +1,77 @@
 #+TITLE:      Emacs 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#ediff][Ediff]]
-- [[#profiler][profiler]]
 - [[#文本编辑][文本编辑]]
-- [[#查看帮助][查看帮助]]
-- [[#文件和缓冲区操作][文件和缓冲区操作]]
 - [[#窗口操作][窗口操作]]
+- [[#查看帮助][查看帮助]]
 - [[#使用技巧][使用技巧]]
-- [[#使用模板][使用模板]]
-- [[#文件变量][文件变量]]
-- [[#文件头修改][文件头修改]]
-- [[#高级文本操作][高级文本操作]]
-- [[#宏操作][宏操作]]
-- [[#games-and-other-amusements][Games and Other Amusements]]
-
-* Ediff
-  + 可比较项目:
-    |---------------+--------------------------------------|
-    | 比较项目      | 说明                                 |
-    |---------------+--------------------------------------|
-    | ediff-buffers | 询问两个缓冲区的名字，然后比较       |
-    | ediff-files   | 询问两个文件的名字，加载之，然后比较 |
-    | ....          | ....                                 |
-    |---------------+--------------------------------------|
-
-  + 快捷键
-     |---------+---------------------------+--------------------------------------------------------------|
-     | 快捷键  | 命令                      | 说明                                                         |
-     |---------+---------------------------+--------------------------------------------------------------|
-     | space/n | ediff-next-difference     | 下一个差异处                                                 |
-     | del/p   | ediff-previous-difference | 上一个差异处                                                 |
-     | [n]j    | ediff-jump-to-difference  | 有数字前缀 [n] 修饰，第n个差异处,n可为负数                   |
-     | a       | ediff-copy-A-to-B         | 把Buffer-A的内容复制到Buffer-B                               |
-     | b       | ediff-copy-B-to-A         | 把Buffer-B的内容复制到Buffer-A                               |
-     | z       | ediff-suspend             | 关闭 ediff control buffer, 只是挂起，可在以后恢复 ediff 状态 |
-     | q       | ediff-quit                | 关闭 ediff control buffer， 并退出 ediff                     |
-     | ...     | ...                       | ...                                                          |
-     |---------+---------------------------+--------------------------------------------------------------|
-
-* profiler
-  + profiler-start 启动监控
-  + profiler-report 显示信息
+- [[#文件操作][文件操作]]
+- [[#实用函数][实用函数]]
+- [[#编码相关][编码相关]]
+- [[#休闲娱乐][休闲娱乐]]
 
 * 文本编辑
-  + 输入特殊字符 ::
-    + C-q 转义
-    + C-q C-l 分页符
-    + C-x 8 RET 输入特殊字符
-    + C-x 8 <key> 选择特殊字符输入
-    + C-x RET C-\ Tex RET 输入 tex 字符
-  + 复制粘贴 ::
-    + M-w 拷贝
-    + C-w 剪切
-    + C-y 粘贴
-  + 基本操作 ::
-    + M-d 删除光标好单词
-    + M-Backspace 删除光标前单词
-    + C-k 删除行
-    + C-x h 选中所有文本
-  + 文本对齐 ::
-    + [[https://www.emacswiki.org/emacs/AlignCommands][AlignCommands]]
-  + 自动补全 ::
-    + M-/
-  + 光标移动 ::
-    + M-g M-g 跳转到指定行
-  + 页面滚动 ::
-    + M-Page Down 隔壁窗口向下滚动一页
-    + M-Page Up 隔壁窗口向上滚动一页
-  + 英文大小写 ::
-    + M-l 单词全部小写
-    + M-u 单词全部大写
-    + M-c 单词首字母大写
+  + 字符输入相关快捷键：
+    |---------------------+----------------------|
+    | 快捷键              | 作用                 |
+    |---------------------+----------------------|
+    | C-q                 | 输入的下一个字符转义 |
+    | C-q C-l             | 输入分页符           |
+    | C-x 8 RET           | 输入特殊字符         |
+    | C-x 8 <key>         | 选择特殊字符输入     |
+    | C-x RET C-\ Tex RET | 输入 Tex 字符        |
+    |---------------------+----------------------|
 
-* 查看帮助
-  + C-h C-h 关于帮助的帮助
-  + C-h k/f/v 查看 快捷键/函数/变量 的帮助
-  + C-h r 在 Emacs 类阅读 Emacs manual
-  + C-h l 查看最近输入了什么按键以及对应的命令
+  + 复制粘贴相关快捷键
+    |--------+-------------------------|
+    | 快捷键 | 作用                    |
+    |--------+-------------------------|
+    | C-w    | 剪切                    |
+    | M-w    | 复制                    |
+    | C-y    | 粘贴                    |
+    | M-y    | 上一次 剪切/复制 的内容 |
+    |--------+-------------------------|
 
-* 文件和缓冲区操作
-  + 基本操作 ::
-    + C-x C-f 查找或新建文件
-    + C-x C-w 另存为
-    + C-x k 关闭当前 buffer
-  + 文件管理器 ::
-    + 实用的快捷键和命令：
-      + Enter: 打开文件或目录
-      + q: 退出当前 dired
-      + C: 复制文件
-      + R: 重命名或移动文件
-      + D: 删除文件
-      + +: 新建文件夹
-      + Z: 压缩/解压缩文件
+  + 基本操作快捷键
+    |-------------+----------------------|
+    | 快捷键      | 作用                 |
+    |-------------+----------------------|
+    | C-d         | 删除光标后单个字符   |
+    | M-d         | 删除光标后单词       |
+    | M-Backspace | 删除光标前单词       |
+    | C-k         | 删除行               |
+    | C-x h       | 选中整个缓冲区的文本 |
+    | C-a         | 移动到行首           |
+    | C-e         | 移动到行尾           |
+    | M-g M-g     | 跳转到指定行         |
+    | C-v         | 前跳一页             |
+    | M-v         | 后跳一页             |
+    | C-l         | 当前行居中           |
+    |-------------+----------------------|
 
-    + 标记：
-      + m: 标记一个文件
-      + u: 撤销标记
-      + U: 撤销所有标记
-      + % m: 通过正则表达式标记
+  + 自动补全
+    |--------+----------|
+    | 快捷键 | 作用     |
+    |--------+----------|
+    | M-/    | 自动补全 |
+    |--------+----------|
 
-    + 导航：
-      + g: 刷新
-      + ^: 跳转到父目录
-      + >: 下一个子目录
-      + <: 上一个子目录
+  + 页面滚动
+    |-------------+----------------------|
+    | 快捷键      | 作用                 |
+    |-------------+----------------------|
+    | M-Page Down | 隔壁窗口向下滚动一页 |
+    | M-Page Up   | 隔壁窗口向上滚动一页 |
+    |-------------+----------------------|
 
-    + 其他：
-      + x: 删除所有 D 标记的文件， 使用 d 标记为 D
+  + 单词操作快捷键
+    |--------+----------------|
+    | 快捷键 | 作用           |
+    |--------+----------------|
+    | M-l    | 单词小写       |
+    | M-u    | 单词大写       |
+    | M-c    | 单词首字母大写 |
+    |--------+----------------|
 
 * 窗口操作
   + C-x 0 关闭当前窗口
@@ -126,6 +90,12 @@
   Emacs:
   + C-x C-z 最小化 Emacs
 
+* 查看帮助
+  + C-h C-h 关于帮助的帮助
+  + C-h k/f/v 查看 快捷键/函数/变量 的帮助
+  + C-h r 在 Emacs 类阅读 Emacs manual
+  + C-h l 查看最近输入了什么按键以及对应的命令
+
 * 使用技巧
   + 替换文件后缀名 ::
     + 进入 dir-mode
@@ -135,31 +105,26 @@
 
   + 录制键盘操作的宏 ::
     + F3 开始录制宏, F4 结束录制, F4 使用宏
-
-  + VC(版本控制) ::
+    +  使用快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
+ 
+ + VC(版本控制) ::
     + C-x v =: 查看改动
     + C-x v v: 准备提交
     + C-c C-c: 确认提交
     + M-x vc-version-diff: 版本对比
 
-* 使用模板
-  + [[http://www.fidding.me/article/18][emacs yasnippet自定义模版配置与使用]]
-
-* 文件变量
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables][Specifying File Variables]]
-
-  :   -*- mode: modename; var: value; ... -*-
-
-* 文件头修改
+* 文件操作
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动更新文件头]]
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动添加文件头]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables][Specifying File Variables]] 
+
+* 实用函数
+  + erase-buffer 清空缓冲区内容
+  + profiler-start 启动监控
+  + profiler-report 显示信息
+
+* 编码相关
+  + [[http://ergoemacs.org/emacs/emacs_line_ending_char.html][Emacs: Newline Representation ^M ^J ^L]]
     
-* 高级文本操作
-  + [[https://www.ibm.com/developerworks/cn/education/aix/au-emacs3/index.html][高级 Emacs 文本操作]]
-
-* 宏操作
-  使用快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
-
-* Games and Other Amusements
+* 休闲娱乐
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]
-

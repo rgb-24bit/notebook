@@ -1,12 +1,11 @@
 * algorithm
-  - [[file:algorithm/bit-op.org][位运算]]
-  - [[file:algorithm/concept.org][概念了解]]
+  - [[file:algorithm/bit-operation.org][位运算]]
   - [[file:algorithm/encrypt.org][加密算法]]
   - [[file:algorithm/hash.org][Hash 算法]]
   - [[file:algorithm/leetcode.org][LeetCode]]
+  - [[file:algorithm/noun.org][名词了解]]
   - [[file:algorithm/random.org][随机算法]]
-  - [[file:algorithm/resource.org][网络资源]]
-  - [[file:algorithm/search_sort.org][查找与排序算法]]
+  - [[file:algorithm/search-sort.org][查找与排序算法]]
   - [[file:algorithm/struct.org][数据结构]]
 * c-c++
   - [[file:c-c++/c.org][C 语言笔记]]
@@ -22,7 +21,10 @@
   - [[file:database/mysql.org][MySQL 笔记]]
   - [[file:database/sql.org][SQL 笔记]]
   - [[file:database/t-sql.org][T-SQL 笔记]]
-  - [[file:database/vc.org][数据库版本控制]]
+  - [[file:database/version-control.org][数据库版本控制]]
+* dotnet
+  - [[file:dotnet/csharp-note.org][C# 笔记]]
+  - [[file:dotnet/nuget.org][NuGet 使用]]
 * emacs
   - [[file:emacs/elisp.org][Emacs Lisp 笔记]]
   - [[file:emacs/emacs.org][Emacs 笔记]]
@@ -50,11 +52,13 @@
   - [[file:java/swing.org][Swing 笔记]]
 * lang
   - [[file:lang/bash.org][Bash 笔记]]
-  - [[file:lang/csharp_note.org][C# 笔记]]
   - [[file:lang/graphviz.org][graphviz 笔记]]
   - [[file:lang/markup.org][标记语言及其他文本格式]]
   - [[file:lang/plantuml.org][plantuml 笔记]]
   - [[file:lang/uml.org][UML 笔记]]
+* linux
+  - [[file:linux/debian.org][Debian 使用]]
+  - [[file:linux/linux.org][Linux 笔记]]
 * misc
   - [[file:misc/coding.org][编程技巧]]
   - [[file:misc/identifier.org][同名标识符优先级问题]]

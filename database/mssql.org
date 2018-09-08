@@ -1,15 +1,5 @@
 #+TITLE:      SQL Server 笔记
 
-* 目录                                                    :TOC_4_gh:noexport:
-- [[#使用-c-操作-sql-server][使用 C# 操作 SQL Server]]
-  - [[#五大核心组件][五大核心组件]]
-  - [[#connection-类][Connection 类]]
-  - [[#command-类][Command 类]]
-  - [[#dataadaper-类][DataAdaper 类]]
-  - [[#datareader-类][DataReader 类]]
-  - [[#dataset-类][DataSet 类]]
-  - [[#简单使用总结][简单使用总结]]
-
 * 使用 C# 操作 SQL Server
   + [[http://www.cnblogs.com/rainman/archive/2012/03/13/2393975.html][C# 操作 SQL Server 数据库]]
 

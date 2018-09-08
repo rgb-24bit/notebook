@@ -1,5 +1,0 @@
-* 清空缓冲区内容
-  + ~erase-buffer~
-
-* 字符
-  + [[http://ergoemacs.org/emacs/emacs_line_ending_char.html][Emacs: Newline Representation ^M ^J ^L]]

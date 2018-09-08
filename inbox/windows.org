@@ -1,0 +1,2 @@
+* 休眠功能
+  + [[https://blog.csdn.net/JiLuoXingRen/article/details/6555272][打开Win7休眠模式和离开模式的方法]]

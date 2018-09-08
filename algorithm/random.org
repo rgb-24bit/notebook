@@ -1,12 +1,36 @@
 #+TITLE:      随机算法
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#c-语言随机数生成器源码][C 语言随机数生成器源码]]
 - [[#蒙特卡洛方法][蒙特卡洛方法]]
   - [[#求-π][求 π]]
 - [[#随机数生成算法][随机数生成算法]]
   - [[#随机数的分类][随机数的分类]]
   - [[#线性同余方法][线性同余方法]]
-- [[#c-语言随机数生成器源码][C 语言随机数生成器源码]]
+
+* C 语言随机数生成器源码
+  #+BEGIN_SRC c
+    /* rand */
+    unsigned long _Randseed = 1;
+
+    int (rand) (void) {
+      _Randseed = _Randseed * 1103515245 + 12345;
+      return ((unsigned int)(_Randseed >> 16) & RAND_MAX)
+    }
+
+
+    /* srand */
+    void (srand) (unsigned int seed) {
+      _Randseed = seed;
+    }
+  #+END_SRC
+
+  其中， ~RAND_MAX~ 是由头文件 ~<stdlib.h>~ 定义的宏， 值为 ~rand~ 函数返回的最大值。
+
+  *PS:* 如果要获得 ~0-1.0~ 之间的随机数， 可以：
+  #+BEGIN_SRC c
+    double rand_num = (double)rand() / RADN_MAX;
+  #+END_SRC
 
 * 蒙特卡洛方法
   *蒙特卡罗方法(Monte Carlo method)* 是一种以概率统计理论为指导的数值计算方法。
@@ -42,7 +66,6 @@
        return 0;
      }
    #+END_SRC
-
 * 随机数生成算法
 ** 随机数的分类
    随机数的随机性检验的三个标准：
@@ -83,28 +106,4 @@
    5. *A*, *B* 是正整数
 
    *PS:* 如果要获得 ~(0, 1)~ 之间的随机数， 可以用获取的随机数 *除 M*
-
-* C 语言随机数生成器源码
-  #+BEGIN_SRC c
-    /* rand */
-    unsigned long _Randseed = 1;
-
-    int (rand) (void) {
-      _Randseed = _Randseed * 1103515245 + 12345;
-      return ((unsigned int)(_Randseed >> 16) & RAND_MAX)
-    }
-
-
-    /* srand */
-    void (srand) (unsigned int seed) {
-      _Randseed = seed;
-    }
-  #+END_SRC
-
-  其中， ~RAND_MAX~ 是由头文件 ~<stdlib.h>~ 定义的宏， 值为 ~rand~ 函数返回的最大值。
-
-  *PS:* 如果要获得 ~0-1.0~ 之间的随机数， 可以：
-  #+BEGIN_SRC c
-    double rand_num = (double)rand() / RADN_MAX;
-  #+END_SRC
 

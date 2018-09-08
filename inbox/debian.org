@@ -1,2 +1,0 @@
-* 安装 Python3.6
-  + https://unix.stackexchange.com/questions/332641/how-to-install-python-3-6
