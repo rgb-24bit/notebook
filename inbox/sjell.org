@@ -1,8 +1,0 @@
-* cat & find
-  + [[https://unix.stackexchange.com/questions/292253/how-to-use-cat-command-on-find-commands-output][How to use “cat” command on “find” command's output?]]
-
-* cmd & mklink
-  符号链接
-
-* bash & ln
-  符号链接

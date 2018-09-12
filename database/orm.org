@@ -1,0 +1,13 @@
+#+TITLE:      ORM - 对象关系映射
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#sqlalchemy][SQLAlchemy]]
+- [[#flask-sqlalchemy][Flask-SQLAlchemy]]
+
+* SQLAlchemy
+  + [[http://docs.sqlalchemy.org/en/latest/orm/query.html][Query API]]
+  + [[https://docs.sqlalchemy.org/en/latest/orm/tutorial.html][SQLAlchemy -  Object Relational Tutorial]]
+
+* Flask-SQLAlchemy
+  + [[http://www.pythondoc.com/flask-sqlalchemy/index.html][Flask-SQLAlchemy 中文文档]]
+  + [[https://segmentfault.com/a/1190000004618621][Flask-SQLAlchemy 学习总结]]

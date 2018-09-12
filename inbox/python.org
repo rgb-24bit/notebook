@@ -98,6 +98,8 @@
 
 * pip
   + [[https://pip.pypa.io/en/stable/installing/][下载]]
+  + pip freeze > requirements.txt
+
 * iter
   #+BEGIN_EXAMPLE
     iter(callable, sentinel) -> iterator

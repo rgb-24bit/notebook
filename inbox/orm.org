@@ -1,3 +1,0 @@
-* SQLAlchemy
-  + [[http://docs.sqlalchemy.org/en/latest/orm/query.html][Query API]]
-  + [[http://www.pythondoc.com/flask-sqlalchemy/queries.html][选择(Select),插入(Insert), 删除(Delete)]]

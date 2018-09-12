@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网络面板过滤请求][网络面板过滤请求]]
+- [[#puppeteer][puppeteer]]
 
 * 网络面板过滤请求
   过滤请求的关键字：
@@ -19,3 +20,5 @@
   + ~set-cookie-value~. 显示具有 Set-Cookie 标头并且值与指定值匹配的资源
   + ~status-code~. 仅显示 HTTP 状态代码与指定代码匹配的资源
   
+* puppeteer
+  中国区使用需要换源： ~PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors~

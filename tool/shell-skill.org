@@ -1,0 +1,24 @@
+#+TITLE:      Shell 技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#组合使用-find-与-cat-命令][组合使用 find 与 cat 命令]]
+
+* 组合使用 find 与 cat 命令
+  使用 ~find~ 指令的 ~-exec~ 选项，如：
+  #+BEGIN_SRC bash
+    find /location -size 1033c -exec cat {} +
+  #+END_SRC
+
+  符号 ~{}~ 扩展为文件名， ~+~ 使得 ~cat~ 尽可能多的读取文件。
+
+  逐个读取文件：
+  #+BEGIN_SRC bash
+    find /location -size 1033c -exec cat {} \;
+  #+END_SRC
+
+  使用 ~cat~ 的选项：
+  #+BEGIN_SRC bash
+    find /location -size 1033c -exec cat -n {} +
+    find /location -size 1033c -exec cat -n {} \;
+  #+END_SRC
+

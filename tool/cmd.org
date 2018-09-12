@@ -5,6 +5,7 @@
 - [[#traceroute][traceroute]]
 - [[#copy][copy]]
 - [[#for][for]]
+- [[#mklink][mklink]]
 - [[#相关链接][相关链接]]
 
 * nslookup
@@ -79,6 +80,9 @@
 
 * for
   /for /L %i in (1, 1, 10) do mkdir Chapter_%i/  -- 创建10个文件夹
+
+* mklink
+  创建符号链接。
 
 * 相关链接
   + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands][Windows Commands]]

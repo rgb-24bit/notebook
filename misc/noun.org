@@ -1,0 +1,33 @@
+#+TITLE:      技术了解
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#repl][REPL]]
+- [[#tokenization][Tokenization]]
+- [[#扩展巴科斯范式][扩展巴科斯范式]]
+- [[#哈希碰撞与生日攻击][哈希碰撞与生日攻击]]
+- [[#网站统计中的数据收集原理及实现][网站统计中的数据收集原理及实现]]
+
+* REPL
+  ~Read-Eval-Print Loop~ - *读取-求值-输出循环*.
+
+  + [[https://zh.wikipedia.org/wiki/%25E8%25AF%25BB%25E5%258F%2596%25EF%25B9%25A3%25E6%25B1%2582%25E5%2580%25BC%25EF%25B9%25A3%25E8%25BE%2593%25E5%2587%25BA%25E5%25BE%25AA%25E7%258E%25AF][读取﹣求值﹣输出循环]]
+
+* Tokenization
+  + [[https://en.wikipedia.org/wiki/Tokenization_(data_security)][Tokenization]]
+
+* 扩展巴科斯范式
+  + [[https://zh.wikipedia.org/zh-hans/%25E6%2589%25A9%25E5%25B1%2595%25E5%25B7%25B4%25E7%25A7%2591%25E6%2596%25AF%25E8%258C%2583%25E5%25BC%258F][扩展巴科斯范式]]
+
+  #+BEGIN_EXAMPLE
+    twelve                          = "1" , "2" ;
+    two hundred one                 = "2" , "0" , "1" ;
+    three hundred twelve            = "3" , twelve ;
+    twelve thousand two hundred one = twelve , two hundred one ;
+  #+END_EXAMPLE
+
+* 哈希碰撞与生日攻击
+  + [[http://www.ruanyifeng.com/blog/2018/09/hash-collision-and-birthday-attack.html][哈希碰撞与生日攻击 - 阮一峰]]
+
+
+* 网站统计中的数据收集原理及实现
+  + [[http://blog.codinglabs.org/articles/how-web-analytics-data-collection-system-work.html][网站统计中的数据收集原理及实现]]

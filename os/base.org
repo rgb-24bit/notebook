@@ -70,4 +70,11 @@
 
    + 文件 :: 对I\O设备的抽象表示, 就是字节序列, 仅此而已
 * 计算机的启动
-  + [[http://www.ruanyifeng.com/blog/2013/02/booting.html][阮一峰 - 计算机是如何启动的？]]
+  + [[http://www.ruanyifeng.com/blog/2013/02/booting.html][计算机是如何启动的？ - 阮一峰]]
+  + [[http://www.ruanyifeng.com/blog/2015/09/0x7c00.html][为什么主引导记录的内存地址是0x7C00？ - 阮一峰]]
+
+  问题： 移动到 0x90000 的原因
+  解决： 防止加载其他内容的时候被覆盖
+
+  问题： 移动到 0x00000 的原因
+  解决： 方便后面的程序编写调用

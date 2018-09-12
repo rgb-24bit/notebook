@@ -4,13 +4,14 @@
 - [[#教程资源][教程资源]]
 - [[#资源访问][资源访问]]
 - [[#mvc--rest][MVC & REST]]
+- [[#缓存机制][缓存机制]]
+  - [[#自定义缓存装饰器][自定义缓存装饰器]]
+  - [[#使用扩展-flask-cache][使用扩展 Flask-Cache]]
 
 * 教程资源
   + [[http://codingpy.com/article/customizing-the-flask-response-class/][如何自定义 Flask 中的响应类]]
   + [[https://www.letiantian.me/2014-06-28-flask-cookie/][浅入浅出 Flask 框架：Cookie]]
-  + [[https://segmentfault.com/a/1190000004618621][Flask-SQLAlchemy 学习总结]]
-  + [[http://www.pythondoc.com/flask-sqlalchemy/index.html][Flask-SQLAlchemy 中文文档]]
-  + [[https://segmentfault.com/a/1190000002454953][Flask信号机制(signals)]]
+  + [[https://segmentfault.com/a/1190000002454953][Flask 信号机制 (signals)]]
 
 * 资源访问
   ~flask~ 中的资源目录主要有 *静态资源目录* 和  *模板目录*, 其中， 静态资源目录中的资源可以直接获取，
@@ -18,4 +19,32 @@
 
 * MVC & REST
   ~flask~ 默认的开发模式为 ~MVC~, 如果要使用 ~REST~, 可以将 *静态资源目录* 和 *模板目录* 分出，单独编写。
+
+* 缓存机制
+** 自定义缓存装饰器
+   #+BEGIN_SRC python
+     from werkzeug.contrib.cache import SimpleCache
+
+
+     cache = SimpleCache()
+
+
+     def cached(timeout=300):
+         def decorator(func):
+             @wraps(func)
+             def decorated_function(*args, **kwargs):
+                 cache_key = (id(func), args, tuple(kwargs.items()))
+                 value = cache.get(cache_key)
+                 if value is None:
+                     value = func(*args, **kwargs)
+                     cache.set(cache_key, value, timeout=timeout)
+                 return value
+             return decorated_function
+         return decorator
+   #+END_SRC
+
+   [[http://www.bjhee.com/flask-ext6.html][自定义缓存装饰器]]
+
+** 使用扩展 Flask-Cache
+   + [[https://github.com/thadeusb/flask-cache][hadeusb/flask-cache]]
 
