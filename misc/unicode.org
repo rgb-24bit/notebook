@@ -1,0 +1,51 @@
+#+TITLE:      Unicode 相关
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#码点][码点]]
+- [[#可结合字符][可结合字符]]
+- [[#不可见字符-u2061][不可见字符 \u2061]]
+
+* 码点
+  在 ~Python3~ 中可以用如下几个方式获取码点：
+  #+BEGIN_SRC python
+    In [1]: ascii('字符串')
+    Out[1]: "'\\u5b57\\u7b26\\u4e32'"
+
+    In [2]: ord('字')
+    Out[2]: 23383
+
+    In [3]: '字符串'.encode('unicode_escape')
+    Out[3]: b'\\u5b57\\u7b26\\u4e32'
+  #+END_SRC
+
+* 可结合字符
+  一些 ~Unicode~ 字符会和紧挨着的字符结合在一起显示，这样一来，一个显示一样的字符就可能存在两种编码：
+  1. 本身的编码
+  2. 于可结合字符结合得到的字符编码
+
+ 使用 ~Python~ 可以将第一种情况转换为第二种：
+ #+BEGIN_SRC python
+   >>> import unicodedata
+   >>> import sys
+   >>> cmb_chrs = dict.fromkeys(c for c in range(sys.maxunicode)
+   ...                         if unicodedata.combining(chr(c)))
+   >>> a = 'pýtĥöñ is awesome\n'
+   >>> b = unicodedata.normalize('NFD', a)
+   >>> b
+   'pýtĥöñ is awesome\n'
+   >>> b.translate(cmb_chrs)
+   'python is awesome\n'
+
+   >>> list(a)
+   ['p', 'ý', 't', 'ĥ', 'ö', 'ñ', ' ', 'i', 's', ' ', 'a', 'w', 'e', 's', 'o', 'm', 'e', '\n']
+   >>> list(b)
+   ['p', 'y', '́', 't', 'h', '̂', 'o', '̈', 'n', '̃', ' ', 'i', 's', ' ', 'a', 'w', 'e', 's', 'o', 'm', 'e', '\n']
+ #+END_SRC
+
+* 不可见字符 \u2061
+  可以利用这个字符来防止敏感词被屏蔽，可以写个 ~JavaScript~ 的函数：
+  #+BEGIN_SRC javascript
+    f = (s) => Array.from(s).join('\u2061')
+  #+END_SRC
+
+  

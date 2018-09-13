@@ -69,6 +69,7 @@
   - [[file:misc/noun.org][技术了解]]
   - [[file:misc/rest-api.org][REST API]]
   - [[file:misc/se.org][结构化编程]]
+  - [[file:misc/unicode.org][Unicode 相关]]
 * network
   - [[file:network/protocol.org][互联网协议笔记]]
 * os
