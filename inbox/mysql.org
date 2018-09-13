@@ -1,0 +1,3 @@
+* run script
+  + [[https://stackoverflow.com/questions/8940230/how-to-run-sql-script-in-mysql][How to run SQL script in MySQL?]]
+

@@ -1,0 +1,67 @@
+* 官方教程链接
+  + [[https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html][Lesson: JDBC Introduction]]
+
+  JDBC 帮助管理以下三种编程活动：
+  1. 连接数据库
+  2. 将查询和更新语句发送到数据库
+  3. 检索并处理从数据库接收的结果
+
+  包含的四个组件：
+  1. *The JDBC API*
+  2. *JDBC Driver Manager*
+  3. *JDBC Test Suite*
+  4. *JDBC-ODBC Bridge*
+
+  使用时，需要先通过 ~Class.forName()~ 加载驱动，然后在通过 ~DriverManager.getConnection~ 获取连接。
+
+* 关系数据库概述
+  1. *Integrity Rules* - 实体完整性
+  2. SELECT *Statements* - 语句
+  3. WHERE *Clauses* - 条件
+  4. *Joins* - 连接
+  5. *Result Sets and Cursors* - 结果集和游标
+  6. *Transactions* - 事物
+  7. *Stored Procedures* - 存储过程
+  8. *Metadata* - 元数据
+
+* 执行 SQL 语句
+  一般步骤：
+  1. 建立连接
+  2. 创建语句
+  3. 执行查询
+  4. 处理结果集 ~ResultSet~ 对象
+  5. 关闭连接
+
+  获取连接对象：
+  #+BEGIN_SRC java
+    DriverManager.getConnection(...)
+  #+END_SRC
+
+  语句对象通过 ~Connection~ 对象创建：
+  #+BEGIN_SRC java
+    Statement stmt = conn.createStatement();
+  #+END_SRC
+
+  语句对象有三类：
+  + ~Statement~ - 用于实现没有参数的简单 SQL 语句
+  + ~PreparedStatement~ - 用于预编译可能包含输入参数的 SQL 语句
+  + ~CallableStatement~ - 用于执行可能包含输入和输出参数的存储过程
+
+  执行 SQL 语句的三个方法：
+  + ~execute~ - 如果执行的语句返回 ~ResultSet~ 对象就返回 ~true~, 执行的语句可以返回多个结果集。
+    使用 ~Statement.getResultSet~ 方法获取结果集。
+  + ~executeQuery~ - 执行查询并返回结果集。
+  + ~executeUpdate~ - 返回一个整数，表示受 SQL 语句影响的行数。常用于 ~INSERT~, ~DELETE~ 和 ~UPDATE~ 语句的执行。
+
+  结果集对象的处理： [[https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html][Retrieving and Modifying Values from Result Sets]]
+
+  关闭连接：
+  #+BEGIN_SRC java
+    } finally {
+        if (stmt != null) { stmt.close(); }
+      }
+  #+END_SRC
+
+* 相关
+  ~PreparedStatement~ 的参数起始索引为 ~1~, 不是 ~0~.
+

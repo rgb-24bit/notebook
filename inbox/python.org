@@ -112,3 +112,11 @@
 * 爬虫
   + lxml + cssselect
   + puppetter + waitPageNavigation
+
+* why slow
+  + [[https://stackoverflow.com/questions/3033329/why-are-python-programs-often-slower-than-the-equivalent-program-written-in-c-or][Why are Python Programs often slower than the Equivalent Program Written in C or C++?]]
+
+  Python 在运行时被解释而不是被编译为本机代码， Java 和 C# 拥有 [[https://en.wikipedia.org/wiki/Just-in-time_compilation][JIT]], 使得字节码会被编译为本机代码。
+
+  但是 Python 的动态特性使得 JIT 难以实现。
+

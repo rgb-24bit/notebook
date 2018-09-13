@@ -1,0 +1,138 @@
+* I/O Streams
+  输入输出流代表对应的 *输入源* 或 *输出目标*.
+
+** Byte Streams
+   程序使用字节流来执行 8 位字节的输入和输出，所有字节流类都来自 ~InputStream~ 和 ~OutputStream~.
+
+   提供文件字节流的类为： ~FileInputStream~ 和 ~FileOutputStream~.
+
+** Character Streams
+   Java 内部使用 Unicode 来存储字符值，在输入输出时会自动和本地字符集进行转换。
+
+   所有字符流都来自 ~Reader~ 和 ~Writer~.
+
+   同样，提供文件字符流的类为： ~FileReader~ 和 ~FileWriter~.
+
+   字符流通常是对字节流的 *封装*. 使用字节流来执行物理 I/O，而字符流处理字符和字节之间的转换。
+
+   对于 *字符流*, 可以使用缓冲区进行封装，即使用 ~BufferedReader~ 和 ~PrintWriter~.
+
+   *NOTE:* ~PrintWriter~ 比 ~BufferedWriter~ 好用些。
+
+   通过缓冲区，可以判断 *行* 这一单位。
+
+** Buffered Streams
+   通过缓冲区来更加高效的进行输入输出，毕竟，频繁的 I/O 操作是很费时的。
+
+   使用 ~BufferedInputStream~ 和 ~BufferedOutputStream~ 来为 *字节流* 添加缓冲区。
+
+   使用 ~BufferedReader~ 和 ~BufferedWriter~ 来为 *字符流* 添加缓冲区。
+
+   必要时，应该 ~flush~ 缓冲区，部分缓冲区输出流支持自动 ~flush~.
+
+** Scanning
+   #+BEGIN_SRC java
+     import java.io.FileReader;
+     import java.io.BufferedReader;
+     import java.io.IOException;
+     import java.util.Scanner;
+
+     public class ScanSum {
+       public static void main(String[] args) throws IOException {
+
+         Scanner s = null;
+         double sum = 0;
+
+         try {
+           s = new Scanner(new BufferedReader(new FileReader("usnumbers.txt")));
+
+           while (s.hasNext()) {
+             if (s.hasNextDouble()) {
+               sum += s.nextDouble();
+             } else {
+               s.next();
+             }
+           }
+         } finally {
+           s.close();
+         }
+
+         System.out.println(sum);
+       }
+     }
+   #+END_SRC
+
+   + [[https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html][Class Scanner]]
+
+** Formatting
+   #+BEGIN_SRC java
+     public class Root {
+       public static void main(String[] args) {
+         int i = 2;
+         double r = Math.sqrt(i);
+
+         System.out.format("The square root of %d is %f.%n", i, r);
+       }
+     }
+   #+END_SRC
+   
+   支持格式化的输出流有： ~PrintWriter~ 和 ~PrintStream~.
+
+   通常情况下， ~PrintStream~ 是 ~System.out~ 和 ~System.err~, 其他地方一般用 ~PrintWriter~.
+
+** I/O from the Command Line
+   最直接的方式是用标准输入流 ~System.in~, 但更好的选择为 ~Console~ 对象。
+
+   + [[https://docs.oracle.com/javase/8/docs/api/java/io/Console.html][Class Console]]
+
+   如果读取的数据不只是 *字符串* 的话，用 ~Scanner~ 是一个更好的选择。
+
+** Data Streams
+   数据流支持原始数据类型和字符串的 *字节流* I/O 操作，所有数据流都实现 ~DataInput~ 和 ~DataOutput~.
+
+   使用的最广泛的实现为： ~DataInputStream~ 和 ~DataOutputStream~.
+
+   #+BEGIN_SRC java
+     // data
+     static final String dataFile = "invoicedata";
+
+     static final double[] prices = { 19.99, 9.99, 15.99, 3.99, 4.99 };
+     static final int[] units = { 12, 8, 13, 29, 50 };
+     static final String[] descs = {
+       "Java T-shirt",
+       "Java Mug",
+       "Duke Juggling Dolls",
+       "Java Pin",
+       "Java Key Chain"
+     };
+
+     // output
+     out = new DataOutputStream(new BufferedOutputStream(
+         new FileOutputStream(dataFile)));
+     for (int i = 0; i < prices.length; i ++) {
+       out.writeDouble(prices[i]);
+       out.writeInt(units[i]);
+       out.writeUTF(descs[i]);
+     }
+
+     // input
+     in = new DataInputStream(new
+                              BufferedInputStream(new FileInputStream(dataFile)));
+     try {
+       while (true) {
+         price = in.readDouble();
+         unit = in.readInt();
+         desc = in.readUTF();
+         System.out.format("You ordered %d" + " units of %s at $%.2f%n",
+                           unit, desc, price);
+         total += unit * price;
+       }
+     } catch (EOFException e) {
+     }
+   #+END_SRC
+
+** Object Streams
+   对象输入输出流 - *序列化*
+
+* File I/O
+
