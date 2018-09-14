@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网络面板过滤请求][网络面板过滤请求]]
 - [[#puppeteer][puppeteer]]
+- [[#user-agent][User-Agent]]
 
 * 网络面板过滤请求
   过滤请求的关键字：
@@ -22,3 +23,11 @@
   
 * puppeteer
   中国区使用需要换源： ~PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors~
+* User-Agent
+  早期的 ~User-Agent~ 字符串格式为 ~Mozilla/Version [Language] (Platform; Encryption)~.
+
+  后来出现的浏览器为了兼容最初的格式，在原始的 ~User-Agent~ 进行修改，比如 ~IE~ 的：
+  #+BEGIN_EXAMPLE
+    Mozilla/2.0 (compatible; MSIE Version; Operating System)
+  #+END_EXAMPLE
+

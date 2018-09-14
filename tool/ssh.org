@@ -1,0 +1,73 @@
+#+TITLE:      SSH 使用
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#简单使用][简单使用]]
+- [[#文件传输][文件传输]]
+- [[#git-ssh-私钥][git ssh 私钥]]
+- [[#避免-ssh-连接因超时闲置断开][避免 SSH 连接因超时闲置断开]]
+
+* 简单使用
+  使用用户名和密码登录：
+  #+BEGIN_SRC bash
+    $ ssh user@host
+  #+END_SRC
+
+  指定端口号，默认为 22:
+  #+BEGIN_SRC bash
+    $ ssh -p 2222 user@host
+  #+END_SRC
+
+  第一次登录时会出现如下提示：
+  #+BEGIN_EXAMPLE
+    The authenticity of host 'host (12.18.429.21)' can't be established.
+
+    RSA key fingerprint is 98:2e:d7:e0:de:9f:ac:67:28:c2:42:2d:37:16:58:4d.
+
+    Are you sure you want to continue connecting (yes/no)?
+  #+END_EXAMPLE
+
+  使用公钥登录，其中公钥放在服务器，自己用私钥文件：
+  #+BEGIN_SRC bash
+    $ ssh -i file user@host
+  #+END_SRC
+
+* 文件传输
+  1. 从服务器上下载文件
+     #+BEGIN_EXAMPLE
+       scp user@host:/path/filename /path/local
+     #+END_EXAMPLE
+
+  2. 上传本地文件到服务器
+     #+BEGIN_EXAMPLE
+       scp /path/filename user@host:/path/remote
+     #+END_EXAMPLE
+
+  3. 从服务器下载整个目录
+     #+BEGIN_EXAMPLE
+       scp -r user@host:/path/remote_dir/ /path/local_dir
+     #+END_EXAMPLE
+
+  4. 上传目录到服务器
+     #+BEGIN_EXAMPLE
+       scp -r local_dir user@host:/path/remote_dir
+     #+END_EXAMPLE
+
+  可以使用 ~-i~ 参数指定 *私钥文件*.
+
+* git ssh 私钥
+  git ssh 私钥不能像除自己以外的用户共享，因此需要执行：
+  #+BEGIN_EXAMPLE
+    $ chome go=---
+  #+END_EXAMPLE
+
+* 避免 SSH 连接因超时闲置断开
+  在客户端设置：
+  #+BEGIN_QUOTE
+  ServerAliveInterval 60
+  #+END_QUOTE
+
+  或者在服务器端设置：
+  #+BEGIN_QUOTE
+  ClientAliveInterval 60
+  #+END_QUOTE
+

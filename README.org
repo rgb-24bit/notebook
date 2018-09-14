@@ -17,6 +17,7 @@
   - [[file:c-c++/makefile.org][Makefile]]
   - [[file:c-c++/pointer.org][指针笔记]]
 * database
+  - [[file:database/design.org][数据库设计]]
   - [[file:database/mssql.org][SQL Server 笔记]]
   - [[file:database/mysql.org][MySQL 笔记]]
   - [[file:database/orm.org][ORM - 对象关系映射]]
@@ -42,6 +43,7 @@
   - [[file:gradle/flyway.org][Flyway]]
   - [[file:gradle/gradle.org][Gradle 基础使用]]
   - [[file:gradle/java-build.org][Java 项目构建]]
+  - [[file:gradle/plugin.org][Gradle 插件]]
 * java
   - [[file:java/annotations.org][Java 注解类]]
   - [[file:java/class-object.org][Java 类和对象]]
@@ -72,6 +74,7 @@
   - [[file:misc/unicode.org][Unicode 相关]]
 * network
   - [[file:network/protocol.org][互联网协议笔记]]
+  - [[file:network/url.org][统一资源定位符 URL]]
 * os
   - [[file:os/base.org][基础内容]]
   - [[file:os/concurrency.org][并发编程]]
@@ -96,6 +99,7 @@
   - [[file:tool/curl.org][curl 笔记]]
   - [[file:tool/shell-skill.org][Shell 技巧]]
   - [[file:tool/shell.org][Shell 命令]]
+  - [[file:tool/ssh.org][SSH 使用]]
   - [[file:tool/utils.org][实用开源工具收集]]
 * vim
   - [[file:vim/vim.org][Vim 笔记]]

@@ -14,4 +14,9 @@
     #+BEGIN_SRC xml
       <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=Asia/Shanghai"/>
     #+END_SRC
-    
+
+  + 执行 SQL 脚本 :: 
+    #+BEGIN_SRC bash
+      mysql> source /path/to/script
+    #+END_SRC
+

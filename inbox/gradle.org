@@ -1,3 +1,0 @@
-* Idea 插件
-  + [[https://www.cnblogs.com/huang0925/p/3458507.html][Gradle 中使用 idea 插件的一些实践]]
-

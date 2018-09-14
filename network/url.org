@@ -1,0 +1,35 @@
+#+TITLE:      统一资源定位符 URL
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相对与绝对][相对与绝对]]
+
+* 相对与绝对
+  + 绝对 URL 示例：
+    
+    完整的网址：
+    #+BEGIN_EXAMPLE
+      https://developer.mozilla.org/en-US/docs/Learn
+    #+END_EXAMPLE
+
+    双斜线开始隐去协议，使用与用于加载该 URL 的文档相同的协议：
+    #+BEGIN_EXAMPLE
+      //developer.mozilla.org/en-US/docs/Learn
+    #+END_EXAMPLE
+
+    单斜线开始隐去域名，浏览器从根目录获取资源：
+    #+BEGIN_EXAMPLE
+      /en-US/docs/Learn
+    #+END_EXAMPLE
+
+  + 相对 URL 示例：
+
+    子资源：
+    #+BEGIN_EXAMPLE
+      Skills/Infrastructure/Understanding_URLs
+    #+END_EXAMPLE
+    
+    回到目录树中：
+    #+BEGIN_EXAMPLE
+      ../CSS/display
+    #+END_EXAMPLE
+
