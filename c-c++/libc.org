@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#错误处理][错误处理]]
 - [[#标准输入输出][标准输入输出]]
+- [[#sprintf][sprintf]]
 
 * 错误处理
   + <assert.h> :: 函数 ~assert(int express)~, 当参数为 0 时， 输出错误信息
@@ -37,3 +38,17 @@
   #+BEGIN_SRC C
     char* p = fgets(buf, BUF_SIZE, stdin);
   #+END_SRC
+
+* sprintf
+  ~sprintf~ 的函数原型为：
+  #+BEGIN_SRC C
+    sprintf(char* s, char* format, ...);
+  #+END_SRC
+
+  如果 ~s~ 和 ~format~ 是同一个字符串的话，可能导致错误发生。
+
+  通过这样的方式在 ~s~ 的末尾添加字符串，前提是 ~s~ 的内存空间足够：
+  #+BEGIN_SRC C
+    sprintf(s + len(s), format, ...);
+  #+END_SRC
+

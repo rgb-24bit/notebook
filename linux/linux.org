@@ -7,6 +7,9 @@
 - [[#文件权限][文件权限]]
 - [[#工作管理][工作管理]]
 - [[#常见问题][常见问题]]
+  - [[#忘记-root-密码][忘记 root 密码]]
+  - [[#强制用户下线][强制用户下线]]
+  - [[#开源程序的编译][开源程序的编译]]
 
 * 通过 man 获取帮助信息
   ~Date(1)~ 括号中的代号的含义：
@@ -167,9 +170,59 @@
   + 群组和其他人具有可读与执行的权限
 
 * 工作管理
-  + [[http://cn.linux.vbird.org/linux_basic/0440processcontrol_2.php][工作管理 (job control)]]
+  ~shell~ 中运行的程序可以分为 *前景运行* 和 *背景运行*.
+
+  *前景* 中运行的程序可以通过 ~Ctrl-C~ 停止运行，而 *背景* 中的不行。
+
+  *背景* 中运行的程序可以分为 『暂停 (stop)』与『运行中 (running)』 两种状态。
+
+  让程序在背景中运行的方式：
+  1. 在命令尾部添加字符 ~&~:
+     #+BEGIN_EXAMPLE
+       tar -zpcf /tmp/etc.tar.gz /etc &
+     #+END_EXAMPLE
+
+  2. 将目前的工作丢到背景暂停 ~Ctrl-Z~:
+
+  命令 ~jobs~ 可以查看目前的背景工作状态。
+
+  命令 ~fg~ 可以将背景中的工作拿到前景中来运行，可以指定工作号。
+
+  命令 ~bg~ 可以让在背景中暂停的工作运行。
+
+  命令 ~kill~ 可以用在终止程序的运行，信号 ~-9~ 强制终止，信号 ~-15~ 正常结束。
+
+  ~kill~ 的参数可以是 ~PID~ 或者 ~%jobnumber~.
+
+  命令 ~nohub~ 让程序可以离线运行。
 
 * 常见问题
-  + [[http://cn.linux.vbird.org/linux_basic/0160startlinux_6.php][忘记 root 密码]]
-  + [[https://my.oschina.net/wzwitblog/blog/103228][linux强制用户下线命令]]
+** 忘记 root 密码
+   1. 系统启动时按任意键进入如下界面：
+      #+BEGIN_EXAMPLE
+        root (hd0,0) 
+        kernel /vmlinuz-2.6.18-128.el5 ro root=LABEL=/ rhgb quiet 
+        initrd /initrd-2.6.18-128.el5.img 
+      #+END_EXAMPLE
+
+   2. 将光标移动到 kernel 那一行，按 e 进行编辑，在最后键入 ~single~:
+      #+BEGIN_EXAMPLE
+        kernel /vmlinuz-2.6.18-128.el5 ro root=LABEL=/ rhgb quiet single 
+      #+END_EXAMPLE
+
+   3. 按下 Enter 确定，按 b 进入单人维护模式。然后使用命令 ~passwd~ 修改密码
+
+** 强制用户下线
+   1. 命令 who 查看哪些用户在线
+   2. 使用 ~pkill -kill -t pts/n~ 踢出用户
+
+** 开源程序的编译
+   通常的步骤：
+   #+BEGIN_EXAMPLE
+     ./configure - 生成 Makefile
+     make - 编译
+     make intsall - 安装
+   #+END_EXAMPLE
+
+   在第一步前也可能存在 ~./autogen.sh~ 这一步骤。
 

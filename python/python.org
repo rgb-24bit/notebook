@@ -18,9 +18,7 @@
 - [[#数值运算相关][数值运算相关]]
 - [[#作用域问题][作用域问题]]
   - [[#修改全局变量][修改全局变量]]
-- [[#包管理工具---pip][包管理工具 - PIP]]
 - [[#python-垃圾回收机制][Python 垃圾回收机制]]
-- [[#python-的常见实现][Python 的常见实现]]
 - [[#成员相关][成员相关]]
   - [[#保护成员和私有成员][保护成员和私有成员]]
   - [[#内置成员][内置成员]]
@@ -64,6 +62,14 @@
 
                     使用 ~staticmethod~ 来装饰方法， 那么这个方法既可以使用类名访问， 
                     也可以使用实例访问。
+
+  + iter :: 函数 iter 可以接受一个可调用对象和一个终止条件，当可调用对象的返回值等于终止条件
+            时就结束迭代。
+
+            #+BEGIN_SRC python
+              iter(callable, sentinel) -> iterator
+            #+END_SRC
+
 * 语法上的问题
   和 [[file:../c-c++/c.org::语法相关][C - 语法相关]] 的对比。
 
@@ -320,21 +326,9 @@
      UnboundLocalError: local variable 'name' referenced before assignment
    #+END_SRC
 
-* 包管理工具 - PIP
-  + 使用 ~python -m ensurepip~ 安装 ~pip~
-  + [[https://docs.python.org/3/library/ensurepip.html][ensurepip — Bootstrapping the pip installer]]
-  + [[https://packaging.python.org/tutorials/installing-packages/][Installing Packages]]
-
 * Python 垃圾回收机制
   ~Python~ 的垃圾回收是根据 *引用计数* 来判断的， 当一个对象的 *引用* 为 0 是，
   该对象便会被回收。
-
-* Python 的常见实现
-  + CPython :: Python 的标准实现
-  + Jython :: Python 的 Java 实现
-  + PyPy :: Python 的 Python 实现
-  + IronPython :: Python 的 C# 实现
-  + Cython :: 包含 C 数据类型的 Python
 
 * 成员相关
 ** 保护成员和私有成员
@@ -418,3 +412,4 @@
     bytes.hex()
   #+END_SRC
 
+  

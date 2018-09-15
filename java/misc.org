@@ -1,48 +1,10 @@
 #+TITLE:      Java Misc
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#java-版本号][Java 版本号]]
-- [[#jdk--jre--jvm][JDK & JRE & JVM]]
-- [[#常用构建工具][常用构建工具]]
-- [[#程序结构与文件名][程序结构与文件名]]
 - [[#序列化][序列化]]
 - [[#输入输出][输入输出]]
 - [[#格式化字符串][格式化字符串]]
 - [[#日期和时间][日期和时间]]
-
-* Java 版本号
-  + Java: 1.02 - 1.1
-  + Java2: 1.2, 1.3, 1.4
-  + Java5.0: 1.5+
-    
-* JDK & JRE & JVM
-  Java SE - Java Platform, Standard Edition. Including JRE and JDK.
-
-  + JVM(Java Virtual Machine), Java 虚拟机的缩写.
-  + JRE(Java Runtime Environment), Java 运行环境的缩写. 运行 JAVA 程序所必须的环境的集合，
-    包括 Java 虚拟机和 Java 程序所需的核心类库等， 如果想要运行一个开发好的 Java 程序，计算机中只需要安装 JRE 即可。
-  + JDK(Java Development Kit), Java 开发工具包的缩写. JDK是提供给 Java 开发人员使用的，其中包含了 java 的开发工具，
-    也包括了 JRE。所以安装了 JDK，就不用在单独安装 JRE 了。其中的开发工具： 编译工具(javac.exe)  打包工具(jar.exe)等。
-  
-  参考： [[https://blog.csdn.net/z15732621736/article/details/50603819][JDK、JRE、JVM 简介]]
-
-* 常用构建工具
-  + Ant, Maven, gradle
-
-* 程序结构与文件名
-  程序结构：
-  + 一个程序最少有一个类
-  + 只有一个 main() 函数
-  + 所有东西都需要包含在 class, interface, enum 中
-
-  文件名：
-  + Java 保存的文件名必须与类名一致
-  + 如果文件中只有一个类，文件名必须与类名一致
-  + 一个 Java 文件中只能有一个 public 类
-  + 如果文件中不止一个类，文件名必须与 public 类名一致
-  + 如果文件中不止一个类，而且没有 public 类，文件名可与任一类名一致
-
-  参考： [[https://blog.csdn.net/shaoxiaoning/article/details/40424087][Java的类名与文件名必须一致]]
 
 * 序列化
   实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。

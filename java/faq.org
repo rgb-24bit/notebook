@@ -1,0 +1,48 @@
+#+TITLE:      Java 常见问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#怎样执行包中的类][怎样执行包中的类]]
+- [[#jdk--jre--jvm-各自的含义是什么][JDK & JRE & JVM 各自的含义是什么]]
+- [[#java-的版本号是怎么回事][Java 的版本号是怎么回事]]
+- [[#java-常用的构建工具有哪些][Java 常用的构建工具有哪些]]
+- [[#java-程序的文件名有什么限制][Java 程序的文件名有什么限制]]
+
+* 怎样执行包中的类
+  #+BEGIN_EXAMPLE
+    $ java package.class
+  #+END_EXAMPLE
+
+* JDK & JRE & JVM 各自的含义是什么
+  Java SE - Java Platform, Standard Edition. Including JRE and JDK.
+
+  + JVM(Java Virtual Machine), Java 虚拟机的缩写.
+  + JRE(Java Runtime Environment), Java 运行环境的缩写. 运行 JAVA 程序所必须的环境的集合，
+    包括 Java 虚拟机和 Java 程序所需的核心类库等， 如果想要运行一个开发好的 Java 程序，计算机中只需要安装 JRE 即可。
+  + JDK(Java Development Kit), Java 开发工具包的缩写. JDK是提供给 Java 开发人员使用的，其中包含了 java 的开发工具，
+    也包括了 JRE。所以安装了 JDK，就不用在单独安装 JRE 了。其中的开发工具： 编译工具(javac.exe)  打包工具(jar.exe)等。
+  
+  参考： [[https://blog.csdn.net/z15732621736/article/details/50603819][JDK、JRE、JVM 简介]]
+
+* Java 的版本号是怎么回事
+  |-------------+---------------|
+  | Java 版本号 | JDK 版本号    |
+  |-------------+---------------|
+  | Java        | 1.02 - 1.4    |
+  | Java2       | 1.2, 1.3, 1.4 |
+  | Java5       | 1.5+          |
+  |-------------+---------------|
+
+* Java 常用的构建工具有哪些
+  1. Gradle, Android 默认
+  2. Maven, 使用者仍然很多
+  3. Ant, 要凉
+
+* Java 程序的文件名有什么限制
+  + Java 保存的文件名必须与类名一致
+  + 如果文件中只有一个类，文件名必须与类名一致
+  + 一个 Java 文件中只能有一个 public 类
+  + 如果文件中不止一个类，文件名必须与 public 类名一致
+  + 如果文件中不止一个类，而且没有 public 类，文件名可与任一类名一致
+
+  参考： [[https://blog.csdn.net/shaoxiaoning/article/details/40424087][Java 的类名与文件名必须一致]]
+

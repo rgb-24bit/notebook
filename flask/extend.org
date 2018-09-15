@@ -1,0 +1,10 @@
+#+TITLE:      Flask 扩展
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#flask-migrate][flask-migrate]]
+
+* flask-migrate
+  如果使用的数据库是 ~sqlite~, 如果切换分支后迁移更新数据库失败，尝试删除原有
+  数据库文件后在进行迁移更新。
+
+

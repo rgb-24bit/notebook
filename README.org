@@ -34,6 +34,7 @@
   - [[file:emacs/spacemacs.org][Spacemacs 笔记]]
 * flask
   - [[file:flask/deploy.org][Flask 部署]]
+  - [[file:flask/extend.org][Flask 扩展]]
   - [[file:flask/flask.org][Flask 笔记]]
 * git
   - [[file:git/git-book.org][Git-Book 笔记]]
@@ -47,10 +48,12 @@
 * java
   - [[file:java/annotations.org][Java 注解类]]
   - [[file:java/class-object.org][Java 类和对象]]
+  - [[file:java/faq.org][Java 常见问题]]
   - [[file:java/generics.org][Java 泛型]]
   - [[file:java/interface-inheritance.org][Java 接口和继承]]
   - [[file:java/java.org][Java 笔记]]
   - [[file:java/javadoc.org][JavaDoc 笔记]]
+  - [[file:java/jdbc.org][Java JDBC]]
   - [[file:java/misc.org][Java Misc]]
   - [[file:java/package.org][Java 导入对象]]
   - [[file:java/swing.org][Swing 笔记]]
@@ -84,7 +87,7 @@
   - [[file:os/io.org][系统级 I/O]]
   - [[file:os/link.org][链接]]
 * python
-  - [[file:python/pep.org][PEP 笔记]]
+  - [[file:python/faq.org][Python 常见问题]]
   - [[file:python/python.org][Python 笔记]]
   - [[file:python/setup.org][Python 打包]]
   - [[file:python/socket.org][Python socket]]

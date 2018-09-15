@@ -1,0 +1,38 @@
+#+TITLE:      Python 常见问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#python-运行速度为什么那么慢][Python 运行速度为什么那么慢]]
+- [[#python-的常见实现有哪些][Python 的常见实现有哪些]]
+- [[#怎样安装-pip][怎样安装 PIP]]
+- [[#怎样使用-pip-导出依赖][怎样使用 PIP 导出依赖]]
+- [[#怎样在程序中执行一个-python-文件][怎样在程序中执行一个 Python 文件]]
+
+* Python 运行速度为什么那么慢
+  对于 ~C~ 和 ~C++~ 来说，它们会被编译为 *本机代码*, 因此执行速度很快。
+
+  而 ~Java~ 和 ~C#~ 虽然被编译为 *字节码*, 但是它们有 [[https://en.wikipedia.org/wiki/Just-in-time_compilation][JIT]], 可以将字节码编译为本机代码，运行速度也不差。
+
+  但是由于 ~Python~ 的动态特性，使得它的 ~JIT~ 难以实现，所以运行速度不快。
+
+* Python 的常见实现有哪些
+  + CPython :: Python 的标准实现
+  + Jython :: Python 的 Java 实现
+  + PyPy :: Python 的 Python 实现
+  + IronPython :: Python 的 C# 实现
+  + Cython :: 包含 C 数据类型的 Python
+
+* 怎样安装 PIP
+  ~Python3~ 可以通过 ~Python -m ensurepip~ 来安装 ~pip~, 如果不信的话，可以通过以下指令：
+  #+BEGIN_SRC bash
+    $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    $ python get-pip.py
+  #+END_SRC
+
+* 怎样使用 PIP 导出依赖
+  #+BEGIN_EXAMPLE
+    $ pip freeze > requirements.txt
+  #+END_EXAMPLE
+* 怎样在程序中执行一个 Python 文件
+  1. *Treat it like a module:* ~import file~
+  2. *The infamous (and unsafe) exec command:* ~execfile('file.py')~
+  3. *Spawn a shell process:* ~os.system('python file.py')~
