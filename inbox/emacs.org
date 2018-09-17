@@ -1,0 +1,3 @@
+* undo& redo
+  + [[https://stackoverflow.com/questions/3527142/how-do-you-redo-changes-after-undo-with-emacs][How do you 'redo' changes after 'undo' with Emacs?]]
+  + [[  + Use emacs default%0A    #+BEGIN_EXAMPLE%0A%0A    #+END_EXAMPLE%0A][undo-tree.el]]

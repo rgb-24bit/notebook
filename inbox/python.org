@@ -50,3 +50,7 @@
   1. 使用 lxml 和 cssselect 来筛选 HTML 文档中的元素
   2. 使用 puppetter 跳转网页时记得用 waitPageNavigation 等待跳转完成
 
+* dir
+  dir(object) 调用的是元类的 ~__dir__~.
+* 美化输出
+  + [[https://stackoverflow.com/questions/9535954/printing-lists-as-tabular-data][Printing Lists as Tabular Data]]
