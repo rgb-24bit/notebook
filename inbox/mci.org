@@ -1,0 +1,7 @@
+* MCI 播放 MP3
+  + [[https://lawlessguy.wordpress.com/2016/02/10/play-mp3-files-with-python-windows/][Play MP3 Files with Python ( Windows )]]
+  + [[https://stackoverflow.com/questions/3174349/how-to-eject-cd-using-wmi-and-python][How to eject CD using WMI and Python?]]
+
+* Refrence
+  + [[https://docs.microsoft.com/zh-cn/windows/desktop/Multimedia/multimedia-command-strings][Multimedia Command Strings]]
+  + [[https://docs.microsoft.com/zh-cn/windows/desktop/Multimedia/multimedia-functions][Multimedia Functions]] - ~MCI~ 开头的 

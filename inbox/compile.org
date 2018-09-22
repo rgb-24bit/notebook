@@ -1,0 +1,2 @@
+* lispy
+  + [[http://norvig.com/lispy.html][(How to Write a (Lisp) Interpreter (in Python))]]

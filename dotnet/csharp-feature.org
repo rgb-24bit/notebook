@@ -1,0 +1,22 @@
+#+TITLE:      C# 高级特性
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#lambda--func--action][Lambda & Func & Action]]
+- [[#引用-com-组件][引用 COM 组件]]
+
+* Lambda & Func & Action
+  + [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions][Lambda 表达式]]
+  + [[https://docs.microsoft.com/zh-cn/dotnet/api/system.func-1?view=netframework-4.7.2][Func<TResult> Delegate]]
+  + [[https://docs.microsoft.com/zh-cn/dotnet/api/system.action-1?redirectedfrom=MSDN&view=netframework-4.7.2][Action<T> Delegate]]
+
+  ~Func~ 和 ~Action~ 属于委托类型，因此可以将 ~Lambda~ 表达式作为值赋给 ~Func~ 或 ~Action~ 类型的变量。
+
+  特别的， ~Func~ 必然有一个参数为返回值，而 ~Action~ 必然没有返回值。
+
+* 引用 COM 组件
+  应用程序 ~aximp.exe~ 可以将 ~COM~ 组件转换为 ~.NET~ 可以用的 ~DLL~ 库。
+
+  简单的使用方式为： ~aximp xxx.dll~.
+
+  参考： [[https://docs.microsoft.com/en-us/dotnet/framework/tools/aximp-exe-windows-forms-activex-control-importer][Aximp.exe (Windows Forms ActiveX Control Importer)]]
+  

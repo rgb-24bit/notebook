@@ -54,3 +54,7 @@
   dir(object) 调用的是元类的 ~__dir__~.
 * 美化输出
   + [[https://stackoverflow.com/questions/9535954/printing-lists-as-tabular-data][Printing Lists as Tabular Data]]
+* Asynchronous I/O
+  + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O]]
+
+  据说重写了文档。

@@ -105,13 +105,24 @@
 
   + 录制键盘操作的宏 ::
     + F3 开始录制宏, F4 结束录制, F4 使用宏
-    +  使用快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
+    + 使用快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
  
- + VC(版本控制) ::
+  + VC(版本控制) ::
     + C-x v =: 查看改动
     + C-x v v: 准备提交
     + C-c C-c: 确认提交
     + M-x vc-version-diff: 版本对比
+
+  + undo & redo ::
+    + [[https://stackoverflow.com/questions/3527142/how-do-you-redo-changes-after-undo-with-emacs][How do you 'redo' changes after 'undo' with Emacs?]]
+    + [[  + Use emacs default%0A    #+BEGIN_EXAMPLE%0A%0A    #+END_EXAMPLE%0A][undo-tree.el]]
+
+    ~Emacs~ 默认的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-g C-/~.
+
+    但是很多的配置中都使用了 ~undo-tree.el~ 这个扩展，修改了撤销的快捷键。
+
+    ~undo-tree.el~ 定义的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-?~.
+    
 
 * 文件操作
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动更新文件头]]
