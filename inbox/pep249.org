@@ -1,0 +1,127 @@
+* Introduction
+  ~PEP249~ 的主要目的是促进不同数据库模块提供的接口的一致性。
+
+* Module Interface
+** Constructors
+   使用函数 ~connect~ 来连接数据库并返回一个 ~Connection~ 对象。
+
+** Globals
+   + ~apilevel~ - 表示支持的数据库接口版本，可选值为 ~1.0(PEP248)~ 和 ~2.0(PEP249)~.
+
+   + ~threadsafety~ - 整数常量表示接口支持的线程安全级别。可能的值为：
+     |--------+----------------------------------|
+     | 整数值 | 含义                             |
+     |--------+----------------------------------|
+     | ~0~      | 线程可能不共享模块               |
+     | ~1~      | 线程可以共享模块，但不能共享连接 |
+     | ~2~      | 线程可以共享模块和连接           |
+     | ~3~      | 线程可以共享模块，连接和游标     |
+     |--------+----------------------------------|
+
+     共享意味着两个线程可以不使用互斥锁来管理资源的访问。
+
+   + ~paramstyle~ - 字符串常量，说明接口所需的参数标记格式的类型。可能的值为：
+     |------------+---------------------|
+     | 字符串常量 | 例子                |
+     |------------+---------------------|
+     | ~qmark~      | ~WHERE name=?~        |
+     | ~numeric~    | ~WHERE name=:1~       |
+     | ~named~      | ~WHERE name=:name~    |
+     | ~format~     | ~WHERE name=%s~       |
+     | ~pyformat~   | ~WHERE name=%(name)s~ |
+     |------------+---------------------|
+
+** Exceptions
+   + ~Warning~ - 插入等数据截断等重要警告引发的异常等
+
+   + ~Error~ - 所有其他错误异常的基类
+
+   + ~InterfaceError~ - 针对与数据库接口而非数据库本身相关的错误引发的异常
+
+   + ~DatabaseError~ - 针对与数据库相关的错误引发的异常
+
+   + ~DataError~ - 由于处理数据出现问题（如除零，数值超出范围等）导致的错误引发的异常
+
+   + ~OperationalError~ - 针对与数据库操作相关的错误引发的异常，并且不一定受程序员的控制
+
+   + ~IntegrityError~ - 当数据库的关系完整性受到影响时引发的异常
+
+   + ~InternalError~ - 数据库遇到内部错误时引发异常
+
+   + ~ProgrammingError~ - 针对编程错误引发的异常
+
+   + ~NotSupportedError~ - 如果使用数据库不支持的方法或数据库 API 引发的异常
+
+   这些异常之间的继承关系：
+   #+BEGIN_EXAMPLE
+     StandardError
+     |__Warning
+     |__Error
+        |__InterfaceError
+        |__DatabaseError
+           |__DataError
+           |__OperationalError
+           |__IntegrityError
+           |__InternalError
+           |__ProgrammingError
+           |__NotSupportedError
+   #+END_EXAMPLE
+
+* Connection Objects
+** Connection methods
+   + ~close~ - 关闭连接。关闭连接后再次使用这个连接对象或连接对象的游标对象进行操作会产生异常
+
+   + ~commit~ - 将任何挂起的事务提交到数据库，如果数据库支持自动提交则应该关闭自动提交的功能
+
+   + ~rollback~ - 可选实现，使数据库回滚到任何挂起事务的开头。关闭连接会隐式进行回滚
+
+   + ~cursor~ - 返回一个新的 ~Cursor~ 对象。如果数据库未提供直接游标概念，则模块必须使用此规范所需的其他方式模拟游标
+
+* Cursor Objects
+  从同一连接创建的游标不是孤立的，即游标对数据库所做的任何更改都会被其他游标立即看到。
+
+** Cursor attributes
+   + ~description~ - 只读的序列，序列内部成员为包含七个元素的子序列。七个元素分别为：
+
+     + name
+
+     + type_code
+
+     + display_size
+
+     + internal_size
+
+     + precision
+
+     + scale
+
+     + null_ok
+
+     其中， ~name~ 和 ~type_code~ 是必需的，其他的可以为 ~None~
+
+   + ~rowcount~ - 只读的整数值，结果集或受影响的行数
+
+** Cursor methods
+   + ~callproc~ - 可选，使用给定名称调用存储的数据库过程
+
+   + ~close~ - 关闭当前游标
+
+   + ~execute~ - 准备并执行数据库操作，参数可以作为序列或映射提供，并且将绑定到操作中的变量
+
+   + ~executemany~ - 准备数据库操作，然后针对序列 ~seq_of_parameters~ 中找到的所有参数序列或映射执行它
+
+     可以将 ~executemany~ 想象为： ~[execute() for param in seq_of_parameters]~
+
+   + ~fetchone~ - 获取查询结果集的下一行,或者在没有更多数据可用时返回 None
+
+   + ~fetchmany~ - 获取查询结果的下一组行，当没有更多行可用时，返回空序列
+
+   + ~fetchall~ - 获取查询结果的所有（剩余）行
+
+   + ~nextset~ - 可选，使光标跳到下一个可用集，从当前集中丢弃任何剩余行
+
+   + ~arraysize~  - 指定每次使用 ~fetchmany~ 获取的行数，默认为 1
+
+   + ~setinputsizes~ & ~setoutputsize~ - Implementations are free to have this method do nothing 
+     and users are free to not use it.
+

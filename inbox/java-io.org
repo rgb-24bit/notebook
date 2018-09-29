@@ -1,3 +1,6 @@
+* 教程链接
+  + [[https://docs.oracle.com/javase/tutorial/essential/io/index.html][Lesson: Basic I/O]]
+
 * I/O Streams
   输入输出流代表对应的 *输入源* 或 *输出目标*.
 
@@ -135,6 +138,96 @@
    对象输入输出流 - *序列化*
 
 * File I/O
+  高版本的 Java 提供了一些更加高效的接口来操作文件。
 
-* scanner
-  + [[https://cubicpill.me/2018/04/17/java-scanner-traps.html][巨坑]]
+** Path Object
+   Path 是一个接口，可以通过类 ~Paths~ 来获取 ~Path~ 实例：
+   #+BEGIN_SRC java
+     Paths.get(String first, String... more)
+     Paths.get(URI uri)
+   #+END_SRC
+
+   Path 提供的方法： [[https://docs.oracle.com/javase/8/docs/api/java/nio/file/Path.html][Interface Path]]
+
+** File Operations
+   ~Files~ 是包 ~java.nio.file~ 提供的另一个高级的文件操作对象。
+
+   这一节提供的 API 都实现了 ~CloseAble~ 接口，意味着都应该显示调用 ~close~ 方法以释放系统资源。
+
+   同时，操作出现异常会抛出 ~java.io.IOException~.
+
+   ~Files~ 提供了文件复制，移动，删除等高级操作方法，更多的方法： [[https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html][Class Files]]
+
+   *NOTE:* 方法 ~deleteIfExists(Path)~ 删除文件更安全。
+
+   方法如 ~newDirectoryStream~ 存在支持 ~Glob~ 语法的重载，返回的对象可以用于遍历目录下的对象。
+
+** Checking a File or Directory
+   验证文件或目录是否存在：
+   #+BEGIN_SRC java
+     Files.exists(Path path);
+     Files.notExists(Path path);
+   #+END_SRC
+
+   检查文件的可访问性：
+   #+BEGIN_SRC java
+     Path file = ...;
+     boolean isRegularExecutableFile = Files.isRegularFile(file) &
+         Files.isReadable(file) & Files.isExecutable(file);
+   #+END_SRC
+
+   检查两个路径是否代表同一对象：
+   #+BEGIN_SRC java
+     Files.isSameFile(Path p1, Path p2);
+   #+END_SRC
+
+** Managing Metadata
+   ~Files~ 提供了一些基本的方法来获取操作文件元数据，也提供了两个方法来批量操作属性。
+
+   |-----------------------------------------------+----------------------------------|
+   | 方法                                          | 作用                             |
+   |-----------------------------------------------+----------------------------------|
+   | ~readAttributes(Path, String, LinkOption...)~   | 读取 ~String~ 指定的属性           |
+   | ~readAttributes(Path, Class<A>, LinkOption...)~ | 属性保存到 ~Class<A>~ 对象中并返回 |
+   |-----------------------------------------------+----------------------------------|
+
+   *NOTE:* Class<A> 是一个 [[https://docs.oracle.com/javase/8/docs/api/java/nio/file/attribute/BasicFileAttributes.html][BasicFileAttributes]].
+
+   #+BEGIN_SRC java
+     BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
+   #+END_SRC
+
+** Reading, Writing, and Creating Files
+   枚举 ~StandardOpenOptions~ 定义了 ~OpenOptions~.
+
+   小文件常用的方法：
+   #+BEGIN_SRC java
+     // 从一个文件读取所有字节或者行
+     readAllBytes(Path);
+     readAllLines(Path, Charset);
+
+     // 将所有字节或者行写入文件
+     write(Path, byte[], OpenOption...);
+     write(Path, Iterable< extends CharSequence>, Charset, OpenOption...);
+   #+END_SRC
+
+   文本文件的缓冲 I/O方法：
+   #+BEGIN_SRC java
+     // 获取对应文件的 BufferedReader
+     Files.newBufferedReader(Path, Charset);
+
+     // 获取对应文件的 BufferedWriter
+     Files.newBufferedWriter(Path, Charset, OpenOption...);
+   #+END_SRC
+
+   无缓冲流的方法：
+   #+BEGIN_SRC java
+     // 输入流
+     Files.newInputStream(Path, OpenOption...);
+
+     // 输出流
+     Files.newOutputStream(Path, OpenOption...);
+   #+END_SRC
+
+   [[https://docs.oracle.com/javase/tutorial/essential/io/file.html][Reading, Writing, and Creating Files]]
+

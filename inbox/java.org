@@ -27,3 +27,25 @@
 * 文件树
   + [[https://docs.oracle.com/javase/tutorial/essential/io/walk.html][Walking the File Tree]]
 
+* 加个括号
+  #+BEGIN_SRC java
+    public String getArticleContents() {
+
+      return (new StringBuilder())
+          .append(article.getTitle())
+          .append(article.getCategory())
+          .append(dateToString(article.getPubDate())
+                  .append(article.getBody())
+                  .toString();
+                  }
+  #+END_SRC
+* 环境变量
+  约定俗成的问题
+
+  CLASSPATH 默认为当前目录
+
+  [[https://www.jianshu.com/p/d63b099cf283][PATH & CLASSPATH]]
+
+  [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html][Setting the Class Path]]
+
+  mmp

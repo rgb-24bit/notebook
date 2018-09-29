@@ -58,3 +58,6 @@
   + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O]]
 
   据说重写了文档。
+  
+* os.walk
+  + [[http://www.runoob.com/python/os-walk.html][Python os.walk() 方法]]
