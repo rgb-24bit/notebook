@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#lambda--func--action][Lambda & Func & Action]]
 - [[#引用-com-组件][引用 COM 组件]]
+- [[#关键字-as-和-is][关键字 as 和 is]]
+- [[#文档注释标记][文档注释标记]]
 
 * Lambda & Func & Action
   + [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions][Lambda 表达式]]
@@ -20,3 +22,22 @@
 
   参考： [[https://docs.microsoft.com/en-us/dotnet/framework/tools/aximp-exe-windows-forms-activex-control-importer][Aximp.exe (Windows Forms ActiveX Control Importer)]]
   
+* 关键字 as 和 is
+  使用 ~as~ 进行类型转换。转换失败返回 ~null~ 而不是抛出异常。使用 ~is~ 判断类型。
+
+  以下两个表达式等价：
+  #+BEGIN_SRC csharp
+    expression as type
+    expression is type ? (type) expression : (type) null
+  #+END_SRC
+
+* 文档注释标记
+  | <c>         | <para>       | <see>          |
+  | <code>      | <param>      | <seealso>      |
+  | <example>   | <paramref>   | <summary>      |
+  | <exception> | <permission> | <typeparam>    |
+  | <include>   | <remarks>    | <typeparamref> |
+  | <list>      | <returns>    | <value>        |
+
+  Refrence [[https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/recommended-tags-for-documentation-comments][Recommended Tags for Documentation Comments]]
+

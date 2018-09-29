@@ -1,2 +1,0 @@
-* img & base64
-  + [[https://stackoverflow.com/questions/8499633/how-to-display-base64-images-in-html][How to display Base64 images in HTML?]]

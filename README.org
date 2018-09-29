@@ -25,6 +25,7 @@
   - [[file:database/t-sql.org][T-SQL 笔记]]
   - [[file:database/version-control.org][数据库版本控制]]
 * dotnet
+  - [[file:dotnet/csharp-feature.org][C# 高级特性]]
   - [[file:dotnet/csharp-note.org][C# 笔记]]
   - [[file:dotnet/nuget.org][NuGet 使用]]
 * emacs
@@ -51,6 +52,7 @@
   - [[file:java/faq.org][Java 常见问题]]
   - [[file:java/generics.org][Java 泛型]]
   - [[file:java/interface-inheritance.org][Java 接口和继承]]
+  - [[file:java/java-io.org][Java I/O 笔记]]
   - [[file:java/java.org][Java 笔记]]
   - [[file:java/javadoc.org][JavaDoc 笔记]]
   - [[file:java/jdbc.org][Java JDBC]]
@@ -88,6 +90,7 @@
   - [[file:os/link.org][链接]]
 * python
   - [[file:python/faq.org][Python 常见问题]]
+  - [[file:python/pep249.org][PEP249 笔记]]
   - [[file:python/python.org][Python 笔记]]
   - [[file:python/setup.org][Python 打包]]
   - [[file:python/socket.org][Python socket]]

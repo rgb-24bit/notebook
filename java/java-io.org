@@ -1,4 +1,24 @@
-* 教程链接
+#+TITLE:      Java I/O 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#refrence][Refrence]]
+- [[#io-streams][I/O Streams]]
+  - [[#byte-streams][Byte Streams]]
+  - [[#character-streams][Character Streams]]
+  - [[#buffered-streams][Buffered Streams]]
+  - [[#scanning][Scanning]]
+  - [[#formatting][Formatting]]
+  - [[#io-from-the-command-line][I/O from the Command Line]]
+  - [[#data-streams][Data Streams]]
+  - [[#object-streams][Object Streams]]
+- [[#file-io][File I/O]]
+  - [[#path-object][Path Object]]
+  - [[#file-operations][File Operations]]
+  - [[#checking-a-file-or-directory][Checking a File or Directory]]
+  - [[#managing-metadata][Managing Metadata]]
+  - [[#reading-writing-and-creating-files][Reading, Writing, and Creating Files]]
+
+* Refrence
   + [[https://docs.oracle.com/javase/tutorial/essential/io/index.html][Lesson: Basic I/O]]
 
 * I/O Streams

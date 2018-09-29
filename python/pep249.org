@@ -1,3 +1,17 @@
+#+TITLE:      PEP249 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#introduction][Introduction]]
+- [[#module-interface][Module Interface]]
+  - [[#constructors][Constructors]]
+  - [[#globals][Globals]]
+  - [[#exceptions][Exceptions]]
+- [[#connection-objects][Connection Objects]]
+  - [[#connection-methods][Connection methods]]
+- [[#cursor-objects][Cursor Objects]]
+  - [[#cursor-attributes][Cursor attributes]]
+  - [[#cursor-methods][Cursor methods]]
+
 * Introduction
   ~PEP249~ 的主要目的是促进不同数据库模块提供的接口的一致性。
 

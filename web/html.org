@@ -9,6 +9,7 @@
 - [[#html5-应用][HTML5 应用]]
 - [[#字符实体][字符实体]]
 - [[#html---head][HTML - head]]
+- [[#问题][问题]]
 - [[#相关链接][相关链接]]
 
 * 通用声明
@@ -125,6 +126,14 @@
     <link rel="stylesheet" type="text/css" href="mystyle.css">
     <script src="myScript.js"></script>
   #+END_SRC
+
+* 问题
+  + ~img~ 标签显示 ~base64~ 编码格式的图片：
+    #+BEGIN_SRC html
+      <img src="data:image/png;base64,编码值">
+    #+END_SRC
+
+    参考 [[https://en.wikipedia.org/wiki/Data_URI_scheme#Syntax][Data URI scheme]]
 
 * 相关链接
   + [[http://www.runoob.com/html/html-quicklist.html][HTML 速查列表]]
