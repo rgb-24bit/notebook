@@ -4,7 +4,6 @@
 - [[#官方教程链接][官方教程链接]]
 - [[#关系数据库概述][关系数据库概述]]
 - [[#执行-sql-语句][执行 SQL 语句]]
-- [[#相关][相关]]
 
 * 官方教程链接
   + [[https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html][Lesson: JDBC Introduction]]
@@ -45,15 +44,23 @@
     DriverManager.getConnection(...)
   #+END_SRC
 
-  语句对象通过 ~Connection~ 对象创建：
+  语句对象类型及创建它们的方法：
+  |-------------------+-----------------------------+------------------------------------------|
+  | 语句对象类型      | 创建方法                    | 描述                                     |
+  |-------------------+-----------------------------+------------------------------------------|
+  | ~Statement~         | ~Connection.createStatement~  | 用于实现没有参数的简单 SQL 语句          |
+  | ~CallableStatement~ | ~Connection.prepareCall~      | 用于执行可能包含输入和输出参数的存储过程 |
+  | ~PreparedStatement~ | ~Connection.prepareStatement~ | 用于预编译可能包含输入参数的 SQL 语句    |
+  |-------------------+-----------------------------+------------------------------------------|
+
+  ~PrepareStatement~ 的简单使用：
   #+BEGIN_SRC java
-    Statement stmt = conn.createStatement();
+    PrepareStatement stmt = Connection.prepareStatement("SELECT * FROM table WHERE id=? AND name=?");  // 创建 PrepareStatement 语句对象
+    stmt.setInt(1, 1001);  // 设置 id 的值为 1001
+    stmt.setString(2, "job");  // 设置 name 的值为 job
   #+END_SRC
 
-  语句对象有三类：
-  + ~Statement~ - 用于实现没有参数的简单 SQL 语句
-  + ~PreparedStatement~ - 用于预编译可能包含输入参数的 SQL 语句
-  + ~CallableStatement~ - 用于执行可能包含输入和输出参数的存储过程
+  ~PrepareStatement~ 的使用还是比较简单的，需要注意的是 ~SQL~ 语句中的参数的起始索引为 ~1~ 而不是 ~0~.
 
   执行 SQL 语句的三个方法：
   + ~execute~ - 如果执行的语句返回 ~ResultSet~ 对象就返回 ~true~, 执行的语句可以返回多个结果集。
@@ -69,7 +76,4 @@
         if (stmt != null) { stmt.close(); }
       }
   #+END_SRC
-
-* 相关
-  ~PreparedStatement~ 的参数起始索引为 ~1~, 不是 ~0~.
 

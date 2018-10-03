@@ -49,3 +49,5 @@
   [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html][Setting the Class Path]]
 
   mmp
+* Java Vector & Stack
+  + [[https://www.cnblogs.com/wanlipeng/archive/2010/10/21/1857791.html][Java 中 Vector 和 ArrayList 的区别]]
