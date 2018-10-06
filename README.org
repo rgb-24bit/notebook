@@ -27,18 +27,21 @@
 * dotnet
   - [[file:dotnet/csharp-feature.org][C# 高级特性]]
   - [[file:dotnet/csharp-note.org][C# 笔记]]
+  - [[file:dotnet/dll.org][动态链接库]]
   - [[file:dotnet/nuget.org][NuGet 使用]]
 * emacs
   - [[file:emacs/elisp.org][Emacs Lisp 笔记]]
   - [[file:emacs/emacs.org][Emacs 笔记]]
   - [[file:emacs/org-mode.org][Org-mode 笔记]]
   - [[file:emacs/spacemacs.org][Spacemacs 笔记]]
+  - [[file:emacs/style.org][Elisp 规范]]
 * flask
   - [[file:flask/deploy.org][Flask 部署]]
   - [[file:flask/extend.org][Flask 扩展]]
   - [[file:flask/flask.org][Flask 笔记]]
 * git
   - [[file:git/git-book.org][Git-Book 笔记]]
+  - [[file:git/git-hook.org][Git Hook]]
   - [[file:git/git.org][Git 笔记]]
   - [[file:git/style.org][Git 相关使用规范]]
 * gradle

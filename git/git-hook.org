@@ -1,5 +1,10 @@
-* hook
-  + post-commit
+#+TITLE:      Git Hook
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#commit-hook][commit-hook]]
+
+* commit-hook
+  + ~post-commit~ - Automatically push to remote repository after commit.
     #+BEGIN_SRC bash
       #!bin/sh
       #
@@ -13,3 +18,4 @@
       # Refrence https://stackoverflow.com/questions/5785549/able-to-push-to-all-git-remotes-with-the-one-command
       git remote | xargs -L1 -I R git push R $BRANCH
     #+END_SRC
+

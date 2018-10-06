@@ -13,7 +13,9 @@
   - [[#使用][使用]]
 - [[#struct][struct]]
 - [[#位域][位域]]
-- [[#字符相关][字符相关]]
+- [[#字符串字面量][字符串字面量]]
+- [[#声明和定义][声明和定义]]
+- [[#枚举类型][枚举类型]]
 
 * 语法相关
   + 赋值语句 :: 类似 ~if (x = func())~ 的语句, ~if~ 判断的值为执行 ~x = func()~ 后 ~x~ 的值,
@@ -197,8 +199,41 @@
   #+END_SRC
 
   + [[http://www.cnblogs.com/bigrabbit/archive/2012/09/20/2695543.html][C 结构体之位域（位段）]]
-* 字符相关
-  转义字符以 ~\~  或者 ~\x~ 开头， ~\~ 开头后更字符的八进制编码， ~\x~ 开头后更字符的十六进制编码。
+* 字符串字面量
+  #+BEGIN_SRC C
+    char* str = "Test string";
+    char* str = u8"Test string";  // C11
+    char16_t* str = u"Test string";  // C11
+    char32_t* str = U"Test string";  // C11
+    wchar_t* str = L"Test string";
+  #+END_SRC
 
-  诸如 ~\n~ 的字符是提供的简写形式。
+  若在字符串字面量中合法十六进制数位后随十六进制转义，则这会作为非法的转义序列导致编译失败，但能以字符串连接为变通方式：
+  #+BEGIN_SRC C
+    //char* p = "\xfff"; // 错误：十六进制转义在范围外
+    char* p = "\xff""f"; // OK ：字面量为 char[3] ，保有 {'\xff', 'f', '\0'}
+  #+END_SRC
+
+  + [[https://zh.cppreference.com/w/c/language/string_literal][字符串字面量]]
+
+* 声明和定义
+  1. 声明可以出现在任意作用域，包括在函数体内部
+  2. 函数定义不能嵌套，但结构体可以
+  3. 枚举声明的同时必须定义
+  4. 枚举定义后期成员在定义它的作用域全局有效
+
+  + [[https://zh.cppreference.com/w/c/language/declarations][声明和定义]]
+
+* 枚举类型
+  枚举值在其作用域中可直接使用，不需要使用枚举类型名访问。
+
+  #+BEGIN_SRC C
+    enum DAY {
+      MON=1, TUE, WED, THU, FRI, SAT, SUN
+    };
+
+    enum DAY yesterday = MON;
+  #+END_SRC
+
+  + [[https://www.cnblogs.com/JCSU/articles/1299051.html][C语言详解 - 枚举类型]]
 

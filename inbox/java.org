@@ -51,3 +51,15 @@
   mmp
 * Java Vector & Stack
   + [[https://www.cnblogs.com/wanlipeng/archive/2010/10/21/1857791.html][Java 中 Vector 和 ArrayList 的区别]]
+
+* 数组的美化输出
+  + Arrays.toString(T[])
+
+* 泛型教程
+  + [[https://docs.oracle.com/javase/tutorial/extra/generics/index.html][Lesson: Generics]]
+
+* 异常
+  + [[https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html][方法参数错误时抛出的异常]]
+
+* hash
+  + [[https://docs.oracle.com/javase/8/docs/api/java/security/MessageDigest.html][Class MessageDigest]]

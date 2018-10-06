@@ -52,6 +52,8 @@
 
   比如： ~cn.job.proj~, ~groupId~ 就是 ~cn.job~, ~artifactId~ 是 ~proj~.
 
+  + [[https://maven.apache.org/guides/mini/guide-naming-conventions.html][Guide to naming conventions on groupId, artifactId, and version]]
+
 * application
   #+BEGIN_SRC groovy
     apply plugin: 'application'

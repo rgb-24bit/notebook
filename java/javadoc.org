@@ -1,7 +1,93 @@
 #+TITLE:      JavaDoc 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#概要][概要]]
+- [[#javadoc-tags][Javadoc Tags]]
 - [[#package-infojava][package-info.java]]
+- [[#gradle][gradle]]
+- [[#maven][maven]]
+
+* 概要
+  #+BEGIN_QUOTE
+  javadoc {packages|source-files} [options] [@argfiles]
+  #+END_QUOTE
+
+  + packages :: 指定要生成文档的包的名称，不同的包之间使用空格分开。
+
+                如果要生成 *子包* 中的内容需要使用选项 ~-subpackages~.
+  
+                默认情况下载当前目录和子目录中寻找指定的包，通过选项 ~-sourcepath~ 指定路径。
+
+  + source-files :: 指定要生成文档的文件的名称，不同的文件使用空格分开。
+
+                    默认在当前目录中寻找文件，也可以使用通配符指定文件名，支持相对绝对路径。
+
+* Javadoc Tags
+  + ~@author name-text~ 作者标记
+
+  + ~{@code text}~ 以代码字体显示文本，而不将文本解释为 HTML 标记或嵌套的 Javadoc 标记，等价于 ~<code>{@literal}</code~
+
+  + ~@deprecated deprecated-text~ 添加注释，指示不再使用此 ~API~
+
+  + ~{@docRoot}~ 表示从任何生成的页面生成的文档根目录的相对路径
+
+    #+BEGIN_SRC java
+      /**
+       * See the <a href="{@docRoot}/copyright.html">Copyright</a>.
+       */
+    #+END_SRC
+
+  + ~@exception class-name description~ 等价于 ~@throws~ 标签
+
+  + ~{@link package.class#member label}~ 插入带有可见文本标签的内联链接，该标签指向引用类的指定包，类或成员名称的文档
+
+    #+BEGIN_SRC java
+      /**
+       * Use the {@link #getComponentAt(int, int) getComponentAt} method.
+       */
+    #+END_SRC
+
+  + ~{@literal text}~ 显示文本而不将文本解释为 HTML 标记或嵌套的 Javadoc 标记
+
+  + ~@param parameter-name description~ 使用指定的参数名称后跟指定的描述添加参数到参数部分
+
+    #+BEGIN_SRC java
+      /**
+       * @param string  the string to be converted
+       * @param type    the type to convert the string to
+       * @param <T>     the type of the element
+       * @param <V>     the value of the element
+       */
+      <T, V extends T> V convert(String string, Class<T> type) {
+      }
+    #+END_SRC
+
+  + ~@return description~ 添加带有描述文本的返回部分
+
+  + ~@see reference~ 添加 See Also 标题，其中包含指向引用的链接或文本条目
+
+    #+BEGIN_EXAMPLE
+                                                  See also:
+      @see java.lang.String                   //  String                           
+      @see java.lang.String The String class  //  The String class                 
+      @see String                             //  String                           
+      @see String#equals(Object)              //  String.equals(Object)            
+      @see String#equals                      //  String.equals(java.lang.Object)   
+      @see java.lang.Object#wait(long)        //  java.lang.Object.wait(long)      
+      @see Character#MAX_RADIX                //  Character.MAX_RADIX              
+      @see <a href="spec.html">Java Spec</a>  //  Java Spec            
+      @see "The Java Programming Language"    //  "The Java Programming Language" 
+    #+END_EXAMPLE
+
+  + ~@since since-text~ 将具有指定的自文本值的 Since 标题添加到生成的文档中
+
+  + ~@throws class-name description~ 使用类名和描述文本向生成的文档添加一个 Throws 子标题
+
+  + ~{@value package.class#member}~ 指定某个值
+
+  + ~@version version-text~ 将带有指定版本文本值的版本子标题添加到生成的文档中
+
+  + [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html#CHDJGIJB][Javadoc Tags]]
 
 * package-info.java
   pacakge-info.java 的目标是提供一个包级的文档说明或者是包级的注释。
@@ -10,3 +96,21 @@
   #+BEGIN_SRC java
     package pkg;
   #+END_SRC
+
+* gradle
+  #+BEGIN_SRC groovy
+    apply plugin: 'java'
+
+    javadoc {
+        source = sourceSets.main.allJava
+        classpath = configurations.compile
+    }
+  #+END_SRC
+
+  + [[https://stackoverflow.com/questions/45997976/how-generate-javadoc-with-gradle][How generate javadoc with Gradle ?]]
+
+* maven
+  #+BEGIN_EXAMPLE
+    mvn javadoc:javadoc
+  #+END_EXAMPLE
+

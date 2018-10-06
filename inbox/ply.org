@@ -1,7 +1,0 @@
-* lex & yacc
-  + [[https://github.com/dabeaz/ply/blob/master/ply/yacc.py#L3234][yacc module]]
-  + [[https://github.com/dabeaz/ply/blob/master/ply/lex.py#L884][lex object]]
-  + [[http://www.pchou.info/open-source/2014/01/18/52da47204d4cb.html][翻译]]
-
-* lexer
-  lexer 的正则表达式匹配优先级和它解析函数的定义顺序相同
