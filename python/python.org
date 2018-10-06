@@ -70,6 +70,8 @@
               iter(callable, sentinel) -> iterator
             #+END_SRC
 
+  + dir :: 函数 dir 调用的是 *元类* 的 ~__dir__~, 因此 ~object.__dir__~ 和 ~dir~ 得到的结果不一样
+
 * 语法上的问题
   和 [[file:../c-c++/c.org::语法相关][C - 语法相关]] 的对比。
 

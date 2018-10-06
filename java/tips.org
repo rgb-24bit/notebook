@@ -1,0 +1,15 @@
+#+TITLE:      Java Tips
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#使用异常][使用异常]]
+- [[#格式化输出][格式化输出]]
+- [[#语法特性][语法特性]]
+
+* 使用异常
+  + ~IllegalArgumentException~ - 方法参数错误抛出的异常
+
+* 格式化输出
+  + ~Arrays.toString(T[])~ - 更好的输出数组
+
+* 语法特性
+  + ~(new Object())~ - 加个括号调用方法

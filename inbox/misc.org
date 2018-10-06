@@ -1,3 +1,0 @@
-* 了解了解
-  + [[https://www.ibm.com/developerworks/cn/web/wa-lo-webassembly-status-and-reality/index.html][WebAssembly 现状与实战]]
-

@@ -62,6 +62,7 @@
   - [[file:java/misc.org][Java Misc]]
   - [[file:java/package.org][Java 导入对象]]
   - [[file:java/swing.org][Swing 笔记]]
+  - [[file:java/tips.org][Java Tips]]
 * lang
   - [[file:lang/bash.org][Bash 笔记]]
   - [[file:lang/graphviz.org][graphviz 笔记]]
@@ -118,3 +119,4 @@
   - [[file:web/javascript.org][JavaScript 笔记]]
   - [[file:web/jquery.org][jQuery 笔记]]
   - [[file:web/technology.org][Web 相关技术]]
+  - [[file:web/webassembly.org][WebAssembly 相关]]

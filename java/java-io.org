@@ -17,6 +17,7 @@
   - [[#checking-a-file-or-directory][Checking a File or Directory]]
   - [[#managing-metadata][Managing Metadata]]
   - [[#reading-writing-and-creating-files][Reading, Writing, and Creating Files]]
+  - [[#walking-the-file-tree][Walking the File Tree]]
 
 * Refrence
   + [[https://docs.oracle.com/javase/tutorial/essential/io/index.html][Lesson: Basic I/O]]
@@ -250,4 +251,67 @@
    #+END_SRC
 
    [[https://docs.oracle.com/javase/tutorial/essential/io/file.html][Reading, Writing, and Creating Files]]
+
+** Walking the File Tree
+   遍历文件树的高级方式，使用 ~walkFileTree(Path, FileVisitor)~.
+
+   首先实现 ~FileVisitor~ 接口，接口方法：
+   + ~preVisitDirectory~ - 访问目录前调用
+   + ~postVisitDirectory~ - 访问目录后调用
+   + ~visitFile~ - 访问文件时调用
+   + ~visitFileFailed~ - 访问文件出错后调用
+
+   Example:
+   #+BEGIN_SRC java
+     import static java.nio.file.FileVisitResult.*;
+
+     public static class PrintFiles
+         extends SimpleFileVisitor<Path> {
+
+         // Print information about
+         // each type of file.
+         @Override
+         public FileVisitResult visitFile(Path file,
+                                        BasicFileAttributes attr) {
+             if (attr.isSymbolicLink()) {
+                 System.out.format("Symbolic link: %s ", file);
+             } else if (attr.isRegularFile()) {
+                 System.out.format("Regular file: %s ", file);
+             } else {
+                 System.out.format("Other: %s ", file);
+             }
+             System.out.println("(" + attr.size() + "bytes)");
+             return CONTINUE;
+         }
+
+         // Print each directory visited.
+         @Override
+         public FileVisitResult postVisitDirectory(Path dir,
+                                               IOException exc) {
+             System.out.format("Directory: %s%n", dir);
+             return CONTINUE;
+         }
+
+         // If there is some error accessing
+         // the file, let the user know.
+         // If you don't override this method
+         // and an error occurs, an IOException 
+         // is thrown.
+         @Override
+         public FileVisitResult visitFileFailed(Path file,
+                                            IOException exc) {
+             System.err.println(exc);
+             return CONTINUE;
+         }
+     }
+   #+END_SRC
+
+   使用：
+   #+BEGIN_SRC java
+     Path startingDir = ...;
+     PrintFiles pf = new PrintFiles();
+     Files.walkFileTree(startingDir, pf);
+   #+END_SRC
+
+   + [[https://docs.oracle.com/javase/tutorial/essential/io/walk.html][Walking the File Tree]]
 

@@ -2,9 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#序列化][序列化]]
-- [[#输入输出][输入输出]]
-- [[#格式化字符串][格式化字符串]]
 - [[#日期和时间][日期和时间]]
+- [[#vector--stack][Vector & Stack]]
 
 * 序列化
   实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
@@ -47,27 +46,6 @@
     os.close()
   #+END_SRC
 
-* 输入输出  
-  ~java.io~ 的输入输出分为 *字节流* 和 *字符流*, 字节流的类通常为 ~xxxxStream~, 字符流的类通常为 ~xxxxer~.
-
-  ~java.io.File~ 独享可以用于替代 *文件名*, 任何使用 *文件名字符串* 打开文件的地方都可以用 ~File~ 对象代替。
-
-  ~File~ 对象不能读取文件内容， 但可以完成其他一些操作， 如 *创建文件夹*, *获取目录内容*.
-
-  通过 ~Bufferxxxx~ 对象来通过 *缓冲区* 进行输入输出操作。
-  
-  这也是直接的文件操作没有 ~readLine~ 的一个原因， 因为他们是直接的读取操作， 读取多少就是多少， 不存在行的说法。
-
-  通过缓冲区可以更加高效的操作文件。
-
-* 格式化字符串
-  格式化说明的格式：
-  #+BEGIN_EXAMPLE
-    %[argument number][flags][width][.precision]type
-  #+END_EXAMPLE
-
-  使用方法： ~String.format~.
-
 * 日期和时间
   日期格式化：
   #+BEGIN_SRC java
@@ -84,3 +62,18 @@
   取得当前日期和时间使用 ~Date~.
 
   其余功能可以使用 ~Calendar~.
+* Vector & Stack
+  ~Vector~ 和 ~ArrayList~ 两者都实现 ~List~ 接口，但 ~Vector~ 支持线程同步，即某一时刻只有一个线程能够写 ~Vector~.
+
+  因此 ~Vector~ 较 ~ArrayList~ 慢一些。
+
+  而 ~Vector~ 的子类 ~Stack~ 实现了一个标准的后进先出的栈，一般使用还是使用 ~Deque~ 比较好。
+  
+  |--------------+-------------------------|
+  | Stack Method | Equivalent Deque Method |
+  |--------------+-------------------------|
+  | push(e)      | addFirst(e)             |
+  | pop()        | removeFirst()           |
+  | peek()       | peekFirst()             |
+  |--------------+-------------------------|
+

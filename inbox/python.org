@@ -1,63 +1,11 @@
-* Wait Wait Wait
-  + 混合编程
-    + [[https://www.ibm.com/developerworks/cn/linux/l-cn-pythonandc/][Python 调用 C]]
-    + [[http://blog.csdn.net/forever_jc/article/details/7743106][C调用Python]]
-    + [[http://blog.csdn.net/feitianxuxue/article/details/41129677][C调用Python]]
-  + 数据库
-    + [[http://python.jobbole.com/88954/][伯乐在线]]
+* Asynchronous I/O
+  + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O]]
 
 * weakref
   + [[https://blog.louie.lu/2017/07/29/%E4%BD%A0%E6%89%80%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-python-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%94%A8%E6%B3%95-04-weakref/][weakref - 标准库]]
   + [[https://blog.csdn.net/IamaIearner/article/details/9371315][python weakref模块]]
   + [[https://www.rddoc.com/doc/Python/3.6.0/zh/library/weakref/][weakref —弱参考]]
 
-* 协程
-  + [[https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013868328689835ecd883d910145dfa8227b539725e5ed000][协程]]
-  + [[http://www.cnblogs.com/geeklove01/p/8542868.html][werkzeug（flask）中的local，localstack，localproxy探究]]
-  + [[https://windard.com/blog/2017/10/17/Flask-Session][flask 中的 cookie 和 session]]
+* pickle
+  + [[https://docs.python.org/3/library/pickle.html][pickle — Python object serialization]]
 
-* 标准库
-  + [[https://www.cnblogs.com/ccorz/p/6089322.html][Python3 中codecs进行文件的读取]]
-  + [[https://www.cnblogs.com/dkblog/archive/2011/10/10/2205200.html][Python使用UUID库生成唯一ID]]
-  + io 模块源码可以考虑看一下
-  + [[http://www.cnblogs.com/nowgood/p/turtle.html][Python turtle 绘图]]
-  + ~socketserver~ 网络服务器框架
-  + ~shutil~ 文件操作
-  + ~_thread_local~ *ThreadLocal*
-  + ~random~ 随机操作
-  + itertools.accumulate
-  + bisect
-  + operator
-  + 考虑考虑 cgi
-  + collection 各种数据类型的原型
-    
-* 打包
-  + [[http://wsfdl.com/python/2015/09/06/Python%E5%BA%94%E7%94%A8%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E4%B8%8A.html][Python application 的打包和发布]]
-
-* 单元测试
-  + [[http://wsfdl.com/python/2015/02/01/Python%E7%9A%84%E6%B5%8B%E8%AF%95%E4%B9%8BTox.html][Python 的单元测试之 tox]]
-
-* 序列化
-  + pickle
-
-* 协程
-  + [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432090171191d05dae6e129940518d1d6cf6eeaaa969000][廖雪峰]]
-
-* LRU
-  + [[https://blog.theerrorlog.com/simple-lru-cache-in-python-3.html][Python3 中的傻瓜式 LRU 缓存实现]]
-
-* 爬虫相关
-  1. 使用 lxml 和 cssselect 来筛选 HTML 文档中的元素
-  2. 使用 puppetter 跳转网页时记得用 waitPageNavigation 等待跳转完成
-
-* dir
-  dir(object) 调用的是元类的 ~__dir__~.
-* 美化输出
-  + [[https://stackoverflow.com/questions/9535954/printing-lists-as-tabular-data][Printing Lists as Tabular Data]]
-* Asynchronous I/O
-  + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O]]
-
-  据说重写了文档。
-  
-* os.walk
-  + [[http://www.runoob.com/python/os-walk.html][Python os.walk() 方法]]
