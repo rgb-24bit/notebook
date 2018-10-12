@@ -1,0 +1,67 @@
+* Regular Expression Syntax
+  #+BEGIN_EXAMPLE
+    .        any character (but newline)
+    ,*        previous character or group, repeated 0 or more time
+    +        previous character or group, repeated 1 or more time
+    ?        previous character or group, repeated 0 or 1 time
+    ^        start of line
+    $        end of line
+    [...]    any character between brackets
+    [^..]    any character not in the brackets
+    [a-z]    any character between a and z
+    \        prevents interpretation of following special char
+    \|       or
+    \w       word constituent
+    \W       match any character that does not match \w
+    \b       word boundary
+    \B       match any character that does not match \b
+    \sc      character with c syntax (e.g. \s- for whitespace char)
+    \Sc      match any character that does not match \sc
+    \( \)    start/end of group
+    \&lt; \&gt;    start/end of word (faulty rendering: backslash + less-than and backslash + greater-than)
+    \_< \_>  start/end of symbol
+    \` \'    start/end of buffer/string
+    \1       string matched by the first group
+    \n       string matched by the nth group
+    \{3\}    previous character or group, repeated 3 times
+    \{3,\}   previous character or group, repeated 3 or more times
+    \{3,6\}  previous character or group, repeated 3 to 6 times
+    \=       match succeeds if it is located at point
+  #+END_EXAMPLE
+  
+  *NOTE:* Square brackets and curly braces need to be escaped.
+
+  Characters are organized by category:
+  #+BEGIN_EXAMPLE
+      \ca      ascii character
+      \Ca      non-ascii character (newline included)
+      \cl      latin character
+      \cg      greek character
+  #+END_EXAMPLE
+
+  #+HTML: <p>Use <kbd>C-u C-x =</kbd>to display the category of the character under the cursor.</p>
+
+  Syntax classes:
+  #+BEGIN_EXAMPLE
+      \s-   whitespace character        \s/   character quote character
+      \sw   word constituent            \s$   paired delimiter         
+      \s_   symbol constituent          \s'   expression prefix        
+      \s.   punctuation character       \s<   comment starter          
+      \s(   open delimiter character    \s>   comment ender            
+      \s)   close delimiter character   \s!   generic comment delimiter
+      \s"   string quote character      \s|   generic string delimiter 
+      \s\   escape character            
+  #+END_EXAMPLE
+
+  #+HTML: You can see the current syntax table by typing <kbd>C-h s<kbd>.
+
+* Idiosyncrasies of Emacs Regular Expressions
+  + 在交互式搜索环境中，空格字符可以选择是否代表任意数量的空白，默认为是，通过快捷键 ~M-s SPC~ 切换。
+
+    交互式搜索可以用快捷键 ~C-M-s~ 进入。
+
+  + 可以使用 ~C-o~, ~C-q C-j~, ~\n~ 表示换行符
+
+  + 在 ~Lisp~ 代码中，反斜杠 ~\~ 必须转义，即使用 ~\\~. 没有原始字符串真操蛋。
+
+  + 不支持 ~\d~, 请使用 ~[0-9]~ 或 ~[:digit:]~ 代替，真坑。

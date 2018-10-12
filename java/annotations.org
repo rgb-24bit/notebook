@@ -39,3 +39,5 @@
         // class code goes here
       }
 #+END_SRC
+
+对定义自己的注解类很有帮助的包： [[https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/package-summary.html][java.lang.annotation]]

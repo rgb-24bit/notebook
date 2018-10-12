@@ -235,5 +235,7 @@
     enum DAY yesterday = MON;
   #+END_SRC
 
+  枚举声明可以在函数体内部，也可以在函数体外，结构体，联合体一样。
+
   + [[https://www.cnblogs.com/JCSU/articles/1299051.html][C语言详解 - 枚举类型]]
 
