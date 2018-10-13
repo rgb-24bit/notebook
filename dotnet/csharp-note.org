@@ -53,7 +53,6 @@
   - [[#泛型概述][泛型概述]]
   - [[#示例代码-1][示例代码]]
 - [[#枚举类型][枚举类型]]
-  - [[#使用-systemenum-方法来发现和操作枚举值][使用 System.Enum 方法来发现和操作枚举值]]
 - [[#委托][委托]]
 - [[#事件-1][事件]]
 - [[#相关链接][相关链接]]
@@ -1063,45 +1062,33 @@
      }
    #+END_SRC
 * 枚举类型
-  枚举类型（也称为枚举）提供了一种有效的方式来定义可能分配给变量的一组已命名整数常量
+  枚举类型使用关键字 ~enum~ 定义，默认为 ~int~ 类型，通过冒号 ~:~ 指定其他 *整数类型*.
 
   #+BEGIN_SRC csharp
     enum Day { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
-    enum Month : byte { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec };
+    enum Month : byte { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec }; 
   #+END_SRC
 
-  默认情况下，枚举中每个元素的基础类型都为 int. 可以使用冒号指定另一种整数类型，如上例所示
-
-  如果未为枚举器列表中的元素指定值，则值将自动按 1 递增
-
-  可以为枚举类型的枚举器列表中的元素分配任何值，也可以使用计算值
-
+  枚举类型变量的定义：
   #+BEGIN_SRC csharp
-    enum MachineState
-    {
-      PowerOff = 0,
-      Running = 5,
-      Sleeping = 10,
-      Hibernating = Sleeping + 5
-    }
+    Day today = Day.Monday;
   #+END_SRC
 
-** 使用 System.Enum 方法来发现和操作枚举值
-   所有枚举都是 System.Enum 类型的实例.
-   不能从 System.Enum 中派生新类，但可以使用它的方法来发现有关枚举实例中操作值的信息
+  枚举类型变量可以强转为整型变量：
+  #+BEGIN_SRC csharp
+    int dayNumber =(int)today;
+    Console.WriteLine("{0} is day number #{1}.", today, dayNumber);
+  #+END_SRC
 
-   #+BEGIN_SRC csharp
-     string s = Enum.GetName(typeof(Day), 4);
-     Console.WriteLine(s);
+  可以直接使用枚举类型变量进行位运算：
+  #+BEGIN_SRC csharp
+    meetingDays = Days.Tuesday | Days.Thursday;
+  #+END_SRC
 
-     Console.WriteLine("The values of the Day Enum are:");
-     foreach (int i in Enum.GetValues(typeof(Day)))
-       Console.WriteLine(i);
+  *Note:* 枚举类型的定义可以在 *名称空间* 或 *类* 中，不能定义在 *方法* 内部。
 
-     Console.WriteLine("The names of the Day Enum are:");
-     foreach (string str in Enum.GetNames(typeof(Day)))
-       Console.WriteLine(str);
-   #+END_SRC
+  + [[https://docs.microsoft.com/zh-cn/dotnet/api/system.enum][Enum Class]] - 枚举方法
+
 * 委托
   #+BEGIN_SRC csharp
     public delegate void Del(string message);  // 声明委托

@@ -29,10 +29,12 @@
   - [[file:dotnet/csharp-note.org][C# 笔记]]
   - [[file:dotnet/dll.org][动态链接库]]
   - [[file:dotnet/nuget.org][NuGet 使用]]
+  - [[file:dotnet/winforms.org][WinForms 笔记]]
 * emacs
   - [[file:emacs/elisp.org][Emacs Lisp 笔记]]
   - [[file:emacs/emacs.org][Emacs 笔记]]
   - [[file:emacs/org-mode.org][Org-mode 笔记]]
+  - [[file:emacs/regex.org][Emacs 正则表达式]]
   - [[file:emacs/spacemacs.org][Spacemacs 笔记]]
   - [[file:emacs/style.org][Elisp 规范]]
 * flask

@@ -1,0 +1,9 @@
+#+TITLE:      WinForms 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#mouseeventargs][MouseEventArgs]]
+
+* MouseEventArgs
+  ~MouseEventArgs~ 的属性 ~X, Y~ 得到的坐标是相对于 *控件* 而言的，而不是屏幕或窗口。
+  
+  + [[https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.mouseeventargs?view=netframework-4.7.2][MouseEventArgs Class]]

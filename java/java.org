@@ -9,6 +9,7 @@
 - [[#异常相关][异常相关]]
 - [[#标识符和关键字][标识符和关键字]]
 - [[#autoboxing][autoboxing]]
+- [[#枚举类型][枚举类型]]
 - [[#注意事项][注意事项]]
 
 * 原始数据类型取值范围
@@ -218,6 +219,65 @@
   #+END_SRC
 
   通过包装类可以调用有用的静态方法。
+
+* 枚举类型
+  枚举类型的声明可以在 *类外部* 或 *类内部*, 但是不能再 *方法内部*.
+
+  枚举类型的简单声明和使用：
+  #+BEGIN_SRC java
+    public enum Members {JOB, ALICE, PHIL}
+
+    Members member = Members.ALICE;  // default is null
+  #+END_SRC
+
+  枚举类型自动继承 ~java.lang.Enum~, 即： 所有枚举类型都是 ~Enum~ 的子类。
+
+  不同枚举变量之间的比较可以用 ~==~ 或 ~equals~, 但 ~==~ 是一个更好的方式。
+
+  枚举类型中定义的的每个值都是该枚举类型的 *实例*, 可以为这些实例定义属性和方法。
+
+  #+BEGIN_SRC java
+    public enum Names {
+      JERRY("lead guitar") {
+        public String sings() {
+          return "JERRY";
+        }
+      },
+
+      BOBBY("bass");
+
+      private String instrument;
+
+      Names(String instrument) {
+        this.instrument = instrument;
+      }
+
+      public String getInstrument() {
+        return this.instrument;
+      }
+
+      public String sings() {
+        return "Default";
+      }
+    }
+  #+END_SRC
+    
+  ~BOBBY("bass")~ 调用构造函数 ~Names~.
+
+  如下代码定义之自己的 ~sings~ 方法。
+  #+BEGIN_SRC java
+    JERRY("lead guitar") {
+      public String sings() {
+        return "JERRY";
+      }
+    }
+  #+END_SRC
+
+  #+BEGIN_SRC java
+    for (Names name : Names.value()) {  // Enum.value()
+      System.out.println(name.sing());
+    }
+  #+END_SRC
 
 * 注意事项
   + Java 没有无符号数
