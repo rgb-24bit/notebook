@@ -8,4 +8,3 @@
 
 * pickle
   + [[https://docs.python.org/3/library/pickle.html][pickle — Python object serialization]]
-

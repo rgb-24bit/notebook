@@ -16,3 +16,7 @@
   + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][java 图片处理 (文字水印、图片水印、缩放、补白)]]
   + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
 
+* synchronized
+  + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
+
+
