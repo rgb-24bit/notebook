@@ -8,3 +8,14 @@
 
 * pickle
   + [[https://docs.python.org/3/library/pickle.html][pickle — Python object serialization]]
+
+* 多线程效率问题
+  + [[https://zhuanlan.zhihu.com/p/20953544][谈谈python的GIL、多线程、多进程]]
+
+* logging
+  + [[https://docs.python.org/3.7/howto/logging-cookbook.html][Logging Cookbook]]
+  + [[https://docs.python.org/3.7/howto/logging.html][Logging HOWTO]]
+  + [[https://realpython.com/python-logging/][Logging in Python]]
+
+* 文档
+  + [[https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/][Beautiful Soup 4.4.0 文档]]
