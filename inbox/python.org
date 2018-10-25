@@ -19,3 +19,6 @@
 
 * 文档
   + [[https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/][Beautiful Soup 4.4.0 文档]]
+* 模板字符串
+  + [[https://docs.python.org/3.4/library/string.html#template-strings][Template strings]]
+
