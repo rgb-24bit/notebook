@@ -1,7 +1,0 @@
-* git upstream
-  + [[https://juejin.im/post/5b86b686e51d4571c5137465][如何保持 GitHub Fork 项目同步]]
-  + [[https://git-scm.com/docs/git-remote][git-remote]]
-  + [[https://git-scm.com/docs/gitrevisions][gitrevisions]]
-
-* git pull
-  + [[https://git-scm.com/docs/git-pull][git-pull]] - 可以直接 pull url

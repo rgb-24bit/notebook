@@ -5,8 +5,8 @@
 - [[#引用-com-组件][引用 COM 组件]]
 - [[#关键字-as-和-is][关键字 as 和 is]]
 - [[#文档注释标记][文档注释标记]]
-- [[#初始化字典][初始化字典]]
-- [[#创建和引发异常][创建和引发异常]]
+- [[#集合字面量][集合字面量]]
+- [[#运算符重载][运算符重载]]
 
 * Lambda & Func & Action
   + [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions][Lambda 表达式]]
@@ -43,7 +43,7 @@
 
   Refrence [[https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/recommended-tags-for-documentation-comments][Recommended Tags for Documentation Comments]]
 
-* 初始化字典
+* 集合字面量
   #+BEGIN_SRC csharp
     class StudentName
     {
@@ -60,50 +60,35 @@
     };
   #+END_SRC
 
-* 创建和引发异常 
-  + 方法无法完成其定义的功能
-    #+BEGIN_SRC csharp
-      static void CopyObject(SampleClass original)
-      {
-        if (original == null)
+* 运算符重载
+  #+BEGIN_SRC csharp
+    class Fraction
+    {
+      int num, den;
+      public Fraction(int num, int den)
         {
-          throw new System.ArgumentException("Parameter cannot be null", "original");
+          this.num = num;
+          this.den = den;
         }
 
-      }
-    #+END_SRC
-
-  + 对某个对象进行不适当的调用
-    #+BEGIN_SRC csharp
-      class ProgramLog
-      {
-        System.IO.FileStream logFile = null;
-        void OpenLog(System.IO.FileInfo fileName, System.IO.FileMode mode) {}
-
-        void WriteLog()
-          {
-            if (!this.logFile.CanWrite)
-            {
-              throw new System.InvalidOperationException("Logfile cannot be read-only");
-            }
-            // Else write data to the log and return.
-          }
-      }
-    #+END_SRC
-
-  + 方法的参数引发了异常
-    #+BEGIN_SRC csharp
-      static int GetValueFromArray(int[] array, int index)
-      {
-        try
+      // overload operator +
+      public static Fraction operator +(Fraction a, Fraction b)
         {
-          return array[index];
+          return new Fraction(a.num * b.den + b.num * a.den,
+                              a.den * b.den);
         }
-        catch (System.IndexOutOfRangeException ex)
+
+      // overload operator *
+      public static Fraction operator *(Fraction a, Fraction b)
         {
-          System.ArgumentException argEx = new System.ArgumentException("Index is out of range", "index", ex);
-          throw argEx;
+          return new Fraction(a.num * b.num, a.den * b.den);
         }
-      }
-    #+END_SRC
+
+      // user-defined conversion from Fraction to double
+      public static implicit operator double(Fraction f)
+        {
+          return (double)f.num / f.den;
+        }
+    }
+  #+END_SRC
 

@@ -7,6 +7,7 @@
 - [[#git-branch][git branch]]
 - [[#git-push][git push]]
 - [[#git-submodule][git submodule]]
+- [[#git-pull][git pull]]
 - [[#一些问题][一些问题]]
   - [[#大小写敏感设置][大小写敏感设置]]
   - [[#diff-参数顺序][diff 参数顺序]]
@@ -75,6 +76,9 @@
   子模块的添加会产生一个特殊文件： ~.gitmodules~.
 
   + [[https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97][Git 工具 - 子模块]]
+
+* git pull
+  ~git pull~ 的参数可以为 *存储库链接*.
 
 * 一些问题
 ** 大小写敏感设置

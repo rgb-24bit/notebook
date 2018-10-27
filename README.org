@@ -16,6 +16,9 @@
   - [[file:c-c++/libc.org][C 标准库笔记]]
   - [[file:c-c++/makefile.org][Makefile]]
   - [[file:c-c++/pointer.org][指针笔记]]
+* compile
+  - [[file:compile/lex.org][编译原理 - 词法分析]]
+  - [[file:compile/simple-compile.org][编译原理 - 简单的语法制导翻译器]]
 * database
   - [[file:database/design.org][数据库设计]]
   - [[file:database/mssql.org][SQL Server 笔记]]
@@ -98,6 +101,7 @@
   - [[file:python/faq.org][Python 常见问题]]
   - [[file:python/pep249.org][PEP249 笔记]]
   - [[file:python/python.org][Python 笔记]]
+  - [[file:python/pythondoc.org][Python 文档字符串]]
   - [[file:python/setup.org][Python 打包]]
   - [[file:python/socket.org][Python socket]]
   - [[file:python/stdlib.org][Python 标准库笔记]]

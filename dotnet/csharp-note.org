@@ -55,6 +55,7 @@
 - [[#枚举类型][枚举类型]]
 - [[#委托][委托]]
 - [[#事件-1][事件]]
+- [[#创建和引发异常][创建和引发异常]]
 - [[#相关链接][相关链接]]
 
 * 程序部分
@@ -1126,6 +1127,53 @@
   可以将事件理解为封装了委托的数据结构，添加事件处理程序的时候就是在添加委托的引用。
 
   而触发事件就是将调用委托引用的方法，并自动传递参数。
+
+* 创建和引发异常 
+  + 方法无法完成其定义的功能
+    #+BEGIN_SRC csharp
+      static void CopyObject(SampleClass original)
+      {
+        if (original == null)
+        {
+          throw new System.ArgumentException("Parameter cannot be null", "original");
+        }
+
+      }
+    #+END_SRC
+
+  + 对某个对象进行不适当的调用
+    #+BEGIN_SRC csharp
+      class ProgramLog
+      {
+        System.IO.FileStream logFile = null;
+        void OpenLog(System.IO.FileInfo fileName, System.IO.FileMode mode) {}
+
+        void WriteLog()
+          {
+            if (!this.logFile.CanWrite)
+            {
+              throw new System.InvalidOperationException("Logfile cannot be read-only");
+            }
+            // Else write data to the log and return.
+          }
+      }
+    #+END_SRC
+
+  + 方法的参数引发了异常
+    #+BEGIN_SRC csharp
+      static int GetValueFromArray(int[] array, int index)
+      {
+        try
+        {
+          return array[index];
+        }
+        catch (System.IndexOutOfRangeException ex)
+        {
+          System.ArgumentException argEx = new System.ArgumentException("Index is out of range", "index", ex);
+          throw argEx;
+        }
+      }
+    #+END_SRC
 
 * 相关链接
   + [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/index][C#编程指南]]
