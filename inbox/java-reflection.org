@@ -1,0 +1,290 @@
+* Classes
+  对于每种类型对象，Java 虚拟机都实例化 ~java.lang.Class~ 的不可变实例，该实例提供了检查对象的运行时属性的方法，包括其成员和类型信息。
+
+** 获取类对象
+   所有反射操作的入口点是 ~java.lang.Class~. 除了 ~java.lang.reflect.ReflectPermission~ 之外， ~java.lang.reflect~ 中的所有类都没有公共构造函数。
+
+   因此，要获得这些类，都需要在 ~Class~ 上调用适当的方法。
+
+   + *Object.getClass()*
+
+     对于任意一个对象实例，都可以通过 ~Object.getClass()~ 方法获取其类对象。
+
+     *NOTE:* 每个枚举值都是该枚举类的唯一实例。
+
+     #+BEGIN_SRC java
+       // string
+       Class c = "foo".getClass();
+
+       // enum
+       enum E { A, B }
+       Class c = A.getClass();
+
+       // array
+       byte[] bytes = new byte[1024];
+       Class c = bytes.getClass();
+
+       // collection
+       Set<String> s = new HashSet<String>();
+       Class c = s.getClass();
+     #+END_SRC
+
+   + *The .class Syntax*
+
+     这是一个语法特性，并不是在说每个类对象都存在 ~class~ 这个字段。
+
+     #+BEGIN_SRC java
+       boolean b;
+       Class c = b.getClass();   // compile-time error
+
+       Class c = boolean.class;  // correct
+
+       Class c = java.io.PrintStream.class;
+       Class c = int[][][].class;
+     #+END_SRC
+
+     没有引用到实例的引用是无法使用 ~Object.getClass()~ 的吗？
+
+   + *Class.forName()*
+     
+     这种方式给我一种 ~eval()~ 的感觉......
+
+     #+BEGIN_SRC java
+       Class c = Class.forName("com.duke.MyLocaleServiceProvider");
+     #+END_SRC
+
+     而且，用在数组上才是最骚的：
+     #+BEGIN_SRC java
+       Class cDoubleArray = Class.forName("[D");
+
+       Class cStringArray = Class.forName("[[Ljava.lang.String;");
+     #+END_SRC
+
+   + *TYPE Field for Primitive Type Wrappers*
+     
+     原始数据类型的包装类型可以通过 ~TYPE~ 这个 *字段* 来获取对应的类对象。
+
+     #+BEGIN_SRC java
+       Class c = Double.TYPE;
+       Class c = Void.TYPE;
+     #+END_SRC
+
+     emmm, void 是类型吗？
+
+   + *Methods that Return Classes*
+
+     有一堆方法可以返回一个类对象，而且是看名字就知道用法的那种：
+     #+BEGIN_SRC java
+       Class.getSuperclass();
+       Class.getClasses();
+       Class.getDeclaredClasses();
+       Class.getDeclaringClass();
+       java.lang.reflect.Field.getDeclaringClass();
+       java.lang.reflect.Method.getDeclaringClass();
+       java.lang.reflect.Constructor.getDeclaringClass();
+       Class.getEnclosingClass();
+     #+END_SRC
+
+     无限反射，最为致命。
+
+** 获取类修饰符和类型
+   #+BEGIN_QUOTE
+   Access modifiers: ~public~, ~protected~, and ~private~
+   Modifier requiring override: ~abstract~
+   Modifier restricting to one instance: ~static~
+   Modifier prohibiting value modification: ~final~
+   Modifier forcing strict floating point behavior: ~strictfp~
+   *Annotations*
+   #+END_QUOTE
+
+   实现这一操作的关键类是： [[https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Modifier.html][java.lang.reflect.Modifier]].
+
+   官网教程的一个例子：
+   #+BEGIN_SRC java
+     import java.lang.annotation.Annotation;
+     import java.lang.reflect.Modifier;
+     import java.lang.reflect.Type;
+     import java.lang.reflect.TypeVariable;
+     import java.util.Arrays;
+     import java.util.ArrayList;
+     import java.util.List;
+
+     public class ClassDeclarationSpy {
+       public static void main(String... args) {
+         try {
+           Class<?> c = Class.forName(args[0]);
+           System.out.format("Class:%n  %s%n%n", c.getCanonicalName());  // 获取完整类名，包括包名
+           System.out.format("Modifiers:%n  %s%n%n",
+                             Modifier.toString(c.getModifiers()));  // 获取修饰符
+
+           System.out.format("Type Parameters:%n");
+           TypeVariable[] tv = c.getTypeParameters();  // 获取类型参数
+           if (tv.length != 0) {
+             System.out.format("  ");
+             for (TypeVariable t : tv)
+               System.out.format("%s ", t.getName());  // 获取类型参数的名称
+             System.out.format("%n%n");
+           } else {
+             System.out.format("  -- No Type Parameters --%n%n");
+           }
+
+           System.out.format("Implemented Interfaces:%n");
+           Type[] intfs = c.getGenericInterfaces();  // 获取实现的接口
+           if (intfs.length != 0) {
+             for (Type intf : intfs)
+               System.out.format("  %s%n", intf.toString());  // 接口名称
+             System.out.format("%n");
+           } else {
+             System.out.format("  -- No Implemented Interfaces --%n%n");
+           }
+
+           System.out.format("Inheritance Path:%n");
+           List<Class> l = new ArrayList<Class>();
+           printAncestor(c, l);  // 获取所有父类
+           if (l.size() != 0) {
+             for (Class<?> cl : l)
+               System.out.format("  %s%n", cl.getCanonicalName());  // 父类名称
+             System.out.format("%n");
+           } else {
+             System.out.format("  -- No Super Classes --%n%n");
+           }
+
+           System.out.format("Annotations:%n");
+           Annotation[] ann = c.getAnnotations();  // 获取注解类
+           if (ann.length != 0) {
+             for (Annotation a : ann)
+               System.out.format("  %s%n", a.toString());
+             System.out.format("%n");
+           } else {
+             System.out.format("  -- No Annotations --%n%n");
+           }
+
+           // production code should handle this exception more gracefully
+         } catch (ClassNotFoundException x) {
+           x.printStackTrace();
+         }
+       }
+
+       private static void printAncestor(Class<?> c, List<Class> l) {
+         Class<?> ancestor = c.getSuperclass();
+         if (ancestor != null) {
+           l.add(ancestor);
+           printAncestor(ancestor, l);
+         }
+       }
+     }
+   #+END_SRC
+
+** 获取类成员
+   官方教程贴心的列出了表格：
+
+   #+CAPTION: 获取字段
+   |---------------------+------------+--------------+------------|
+   | Class API           | 成员列表？ | 继承的成员？ | 私有成员？ |
+   |---------------------+------------+--------------+------------|
+   | getDeclaredField()  | no         | no           | yes        |
+   | getField()          | no         | yes          | no         |
+   | getDeclaredFields() | yes        | no           | yes        |
+   | getFields()         | yes        | yes          | no         |
+   |---------------------+------------+--------------+------------|
+
+   #+CAPTION: 获取方法
+   |----------------------+------------+--------------+------------|
+   | Class API            | 成员列表？ | 继承的成员？ | 私有成员？ |
+   |----------------------+------------+--------------+------------|
+   | getDeclaredMethod()  | no         | no           | yes        |
+   | getMethod()          | no         | yes          | no         |
+   | getDeclaredMethods() | yes        | no           | yes        |
+   | getMethods()         | yes        | yes          | no         |
+   |----------------------+------------+--------------+------------|
+
+   #+CAPTION: 构造函数
+   |---------------------------+------------+--------------+------------|
+   | Class API                 | 成员列表？ | 继承的成员？ | 私有成员？ |
+   |---------------------------+------------+--------------+------------|
+   | getDeclaredConstructor()  | no         | N/A1         | yes        |
+   | getConstructor()          | no         | N/A1         | no         |
+   | getDeclaredConstructors() | yes        | N/A1         | yes        |
+   | getConstructors()         | yes        | N/A1         | no         |
+   |---------------------------+------------+--------------+------------|
+
+   *NOTE:* 构造函数不是继承的
+
+   官网的例子：
+   #+BEGIN_SRC java
+     import java.lang.reflect.Constructor;
+     import java.lang.reflect.Field;
+     import java.lang.reflect.Method;
+     import java.lang.reflect.Member;
+     import static java.lang.System.out;
+
+     enum ClassMember { CONSTRUCTOR, FIELD, METHOD, CLASS, ALL }
+
+     public class ClassSpy {
+       public static void main(String... args) {
+         try {
+           Class<?> c = Class.forName(args[0]);
+           out.format("Class:%n  %s%n%n", c.getCanonicalName());
+
+           Package p = c.getPackage();  // 获取所在的包
+           out.format("Package:%n  %s%n%n",
+                      (p != null ? p.getName() : "-- No Package --"));
+
+           for (int i = 1; i < args.length; i++) {
+             switch (ClassMember.valueOf(args[i])) {
+               case CONSTRUCTOR:
+                 printMembers(c.getConstructors(), "Constructor");
+                 break;
+               case FIELD:
+                 printMembers(c.getFields(), "Fields");
+                 break;
+               case METHOD:
+                 printMembers(c.getMethods(), "Methods");
+                 break;
+               case CLASS:
+                 printClasses(c);
+                 break;
+               case ALL:
+                 printMembers(c.getConstructors(), "Constuctors");
+                 printMembers(c.getFields(), "Fields");
+                 printMembers(c.getMethods(), "Methods");
+                 printClasses(c);
+                 break;
+               default:
+                 assert false;
+             }
+           }
+
+           // production code should handle these exceptions more gracefully
+         } catch (ClassNotFoundException x) {
+           x.printStackTrace();
+         }
+       }
+
+       private static void printMembers(Member[] mbrs, String s) {
+         out.format("%s:%n", s);
+         for (Member mbr : mbrs) {
+           if (mbr instanceof Field)
+             out.format("  %s%n", ((Field)mbr).toGenericString());
+           else if (mbr instanceof Constructor)
+             out.format("  %s%n", ((Constructor)mbr).toGenericString());
+           else if (mbr instanceof Method)
+             out.format("  %s%n", ((Method)mbr).toGenericString());
+         }
+         if (mbrs.length == 0)
+           out.format("  -- No %s --%n", s);
+         out.format("%n");
+       }
+
+       private static void printClasses(Class<?> c) {
+         out.format("Classes:%n");
+         Class<?>[] clss = c.getClasses();
+         for (Class<?> cls : clss)
+           out.format("  %s%n", cls.getCanonicalName());
+         if (clss.length == 0)
+           out.format("  -- No member interfaces, classes, or enums --%n");
+         out.format("%n");
+       }
+     }
+   #+END_SRC
+

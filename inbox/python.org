@@ -20,3 +20,5 @@
 * 模板字符串
   + [[https://docs.python.org/3.4/library/string.html#template-strings][Template strings]]
 
+* enum
+  + [[https://docs.python.org/3/library/enum.html][enum — Support for enumerations]]

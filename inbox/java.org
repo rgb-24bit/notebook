@@ -1,10 +1,6 @@
 * Optional
   + [[https://lw900925.github.io/java/java8-optional.html][Java 8新特性（三）：Optional类]]
 
-* 反射
-  + [[https://www.cnblogs.com/rollenholt/archive/2011/09/02/2163758.html][java 反射详解]]
-  + [[https://www.sczyh30.com/posts/Java/java-reflection-1/][深入解析Java反射（1） - 基础]]
-
 * 泛型教程
   + [[https://docs.oracle.com/javase/tutorial/extra/generics/index.html][Lesson: Generics]]
 
