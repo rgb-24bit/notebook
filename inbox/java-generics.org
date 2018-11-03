@@ -1,0 +1,111 @@
+* 泛型类型
+  + *类型参数命名约定*
+
+    #+BEGIN_EXAMPLE
+      E - Element (used extensively by the Java Collections Framework)
+      K - Key
+      N - Number
+      T - Type
+      V - Value
+      S,U,V etc. - 2nd, 3rd, 4th types
+    #+END_EXAMPLE
+
+  + *原始类型*
+
+    原始类型是没有任何类型参数的泛型类或接口的名称，如果将原始类型分配给参数化类型，
+    或者使用原始类型调用相应泛型类型中定义的泛型方法，会得到警告。
+
+    #+BEGIN_SRC java
+      public class Box<T> {
+        public void set(T t) { /* ... */ }
+        // ...
+      }
+
+      Box<String> stringBox = new Box<>();
+      Box rawBox = stringBox;               // OK
+
+      Box rawBox = new Box();           // rawBox is a raw type of Box<T>
+      Box<Integer> intBox = rawBox;     // warning: unchecked conversion
+
+      Box<String> stringBox = new Box<>();
+      Box rawBox = stringBox;
+      rawBox.set(8);  // warning: unchecked invocation to set(T)
+    #+END_SRC
+
+* 泛型方法
+  单独的泛型方法声明需要声明 *类型参数列表*, 这个列表位于返回值之前。
+
+  #+BEGIN_SRC java
+    public class Util {
+      public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2) {
+        return p1.getKey().equals(p2.getKey()) &&
+            p1.getValue().equals(p2.getValue());
+      }
+    }
+  #+END_SRC
+
+  当类型推断无法完成的时候，调用泛型方法需要指定类型：
+  #+BEGIN_SRC java
+    Util.<String, Integer>compare();
+  #+END_SRC
+
+* 有界类型参数
+  声明类型参数可以使用关键字 ~extends~ 指定上限。
+
+  #+BEGIN_SRC java
+    public <T extends Number> void inspect(T t){
+      System.out.println("T: " + t.getClass().getName());
+    }
+  #+END_SRC
+
+  有界类型参数还允许调用边界中定义的方法：
+  #+BEGIN_SRC java
+    public class NaturalNumber<T extends Integer> {
+
+      private T n;
+
+      public NaturalNumber(T n)  { this.n = n; }
+
+      public boolean isEven() {
+        return n.intValue() % 2 == 0;
+      }
+
+      // ...
+    }
+  #+END_SRC
+  
+  可以同时指定多个边界：
+  #+BEGIN_SRC java
+    <T extends B1 & B2 & B3>
+  #+END_SRC
+
+* 泛型类的子类
+  ~Box<Integer>~ 不是 ~Box<Number>~ 的子类型，即使 ~Integer~ 是 ~Number~ 的子类型
+  
+  #+HTML: <img src="https://docs.oracle.com/javase/tutorial/figures/java/generics-subtypeRelationship.gif">
+
+  继承泛型类的杀死后可以添加类型参数：
+  #+BEGIN_SRC java
+    interface PayloadList<E,P> extends List<E> {
+      void setPayload(int index, P val);
+      ...
+    }
+  #+END_SRC
+
+  #+HTML: <img src="https://docs.oracle.com/javase/tutorial/figures/java/generics-payloadListHierarchy.gif">
+
+
+* 类型推断
+  Java 编译器利用 *目标类型* 来推断泛型方法调用的类型参数，比如：
+
+  #+BEGIN_SRC java
+    // static <T> List<T> emptyList();
+    List<String> listOne = Collections.emptyList();
+  #+END_SRC
+
+  目标类型为 ~List<String>~, 因此可以推断出类型 ~T~ 为 ~String~.
+
+  *NOTE:* JDK 8 开始支持这一特性
+
+* Wildcards
+  + [[https://docs.oracle.com/javase/tutorial/java/generics/wildcards.html]]

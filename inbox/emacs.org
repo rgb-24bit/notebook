@@ -1,2 +1,0 @@
-* orgmacro
-  + [[https://orgmode.org/manual/Macro-replacement.html][Macro replacement]]

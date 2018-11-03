@@ -5,6 +5,7 @@
   - [[#leetcode-题][LeetCode 题:]]
 - [[#删除当前链表节点][删除当前链表节点]]
 - [[#合并有序链表][合并有序链表]]
+- [[#二叉树的遍历][二叉树的遍历]]
 
 * 二叉查找树 (Binary Search Tree)
   定义: 是指一棵空树或者具有下列性质的 [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8F%89%E6%A0%91][二叉树]]:
@@ -123,3 +124,24 @@
         return ret;
       }
     #+END_SRC
+* 二叉树的遍历
+  + 非递归形式的中序遍历：
+    #+BEGIN_SRC C
+      struct TreeNode *Stack[1000] = {0};
+      struct TreeNode *tmp = root, **stack = Stack;
+
+      /* 非递归进行中序遍历 */
+      while (stack >= Stack)
+      {
+        /* 所有左子树（包括叶子）入栈 */
+        while (tmp)
+        {
+          ,*stack++ = tmp;
+          tmp = tmp->left;
+        }
+
+        tmp = *(--stack);
+        tmp = tmp->right;
+      }
+    #+END_SRC
+
