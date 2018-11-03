@@ -12,9 +12,6 @@ import pathlib
 import re
 
 
-IGNORE_DIR = ('.git', 'inbox', 'math', '_style', '__pycache__')
-
-
 class DetailsWriter(object):
     def __init__(self, fileobj, summary):
         self._fileobj = fileobj
@@ -32,11 +29,9 @@ class DetailsWriter(object):
         self._fileobj.write('- [[file:%s][%s]]\n' % (path, name))
 
 
-def get_note_dir():
+def get_note_dir(notebook):
     """Get the directory containing the notes."""
-    for fn in pathlib.Path().iterdir():
-        if fn.name in IGNORE_DIR or not fn.is_dir():
-            continue
+    for fn in pathlib.Path(notebook).iterdir():
         yield fn
 
 
@@ -52,7 +47,7 @@ def get_note_name(note):
 def generate(fn):
     """Generate a README document."""
     with open(fn, 'w', encoding='utf-8') as stream:
-        for note_dir in get_note_dir():
+        for note_dir in get_note_dir('notebook'):
             with DetailsWriter(stream, note_dir.name) as writer:
                 for note in note_dir.glob('**/*.org'):
                     writer.write(note.as_posix(), get_note_name(note))
