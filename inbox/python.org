@@ -22,3 +22,5 @@
 
 * enum
   + [[https://docs.python.org/3/library/enum.html][enum — Support for enumerations]]
+* missing
+  + [[https://docs.python.org/3/library/stdtypes.html#dict][Dict __missing__]]

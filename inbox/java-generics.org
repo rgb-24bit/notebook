@@ -79,6 +79,8 @@
     <T extends B1 & B2 & B3>
   #+END_SRC
 
+  类似的，可以通过关键字 ~super~ 指定下限。
+
 * 泛型类的子类
   ~Box<Integer>~ 不是 ~Box<Number>~ 的子类型，即使 ~Integer~ 是 ~Number~ 的子类型
   
@@ -94,7 +96,6 @@
 
   #+HTML: <img src="https://docs.oracle.com/javase/tutorial/figures/java/generics-payloadListHierarchy.gif">
 
-
 * 类型推断
   Java 编译器利用 *目标类型* 来推断泛型方法调用的类型参数，比如：
 
@@ -107,5 +108,183 @@
 
   *NOTE:* JDK 8 开始支持这一特性
 
-* Wildcards
-  + [[https://docs.oracle.com/javase/tutorial/java/generics/wildcards.html]]
+* 通配符
+  通配符 ~?~ 的使用场景：
+  #+BEGIN_SRC java
+    // 声明泛型类
+    public class Box<T> {}  // OK
+    public class Box<?> {}  // ERROR
+
+    // 声明泛型方法
+    public class Box {
+      public <T> void method(T val);  // OK
+      public <?> void method(? val);  // ERROR
+    }
+
+    // 泛型类的类型参数
+    public List<?> list;  // 作为泛型类引用的类型参数 - OK
+    public List<?> list = new ArrayList<?>();  // 实例化泛型类 - ERROR
+  #+END_SRC
+
+  + *指定上下限*
+
+    指定上下限的方式依然是使用关键字 ~extends~ 和 ~super~:
+    #+BEGIN_SRC java
+      public static double sumOfList(List<? extends Number> list) {
+        double s = 0.0;
+        for (Number n : list)
+          s += n.doubleValue();
+        return s;
+      }
+
+      public static void addNumbers(List<? super Integer> list) {
+        for (int i = 1; i <= 10; i++) {
+          list.add(i);
+        }
+      }
+    #+END_SRC
+
+  + *无边界通配符*
+
+    无边界通配符的适用场景：
+    1. 编写通过 Object 类提供的方法就可以完成所有工作的方法
+    2. 只使用泛型类中不依赖于类型参数的方法时。比如，经常使用的 ~Class<?>~, 
+       因为 ~Class<T>~ 中的大多数方法都不依赖于类型参数 ~T~.
+
+  + *通配符和子类型*
+
+    ~Class<?>~ 是其他 ~Class<T>~ 的公共父类，即：
+    #+BEGIN_SRC java
+      List<?> list = new ArrayList<Integer>();  // OK
+      List<Number> list = new ArrayList<Integer>();  // ERROR
+    #+END_SRC
+
+    #+HTML: <img src="https://docs.oracle.com/javase/tutorial/figures/java/generics-wildcardSubtyping.gif">
+
+  + *通配符捕获*
+
+    在某些情况下，编译器会推断出通配符的类型：
+    #+BEGIN_SRC java
+      public class WildcardError {
+        void foo(List<?> i) {
+          i.set(0, i.get(0));  // ERROR
+        }
+      }
+
+      // 运用通配符捕获
+      public class WildcardFixed {
+        void foo(List<?> i) {
+          fooHelper(i);
+        }
+
+        // Helper method created so that the wildcard can be captured
+        // through type inference.
+        private <T> void fooHelper(List<T> l) {
+          l.set(0, l.get(0));
+        }
+      }
+    #+END_SRC
+
+  + *使用指南*
+    
+    1. 使用 ~extends~ 关键字定义带有上限通配符的 ~in~ 变量
+    2. 使用 ~super~ 关键字定义带有下限通配符的 ~out~ 变量
+    3. 在可以使用 ~Object~ 类中定义的方法访问 ~in~ 变量的情况下，使用无界通配符
+    4. 在变量即作为 ~in~ 变量也作为 ~out~ 变量的情况下，不使用通配符
+* 类型擦除
+  + [[https://docs.oracle.com/javase/tutorial/java/generics/erasure.html][Type Erasure]]
+
+* 泛型的限制
+  1. 原始数据类型不能作为泛型的类型参数
+     #+BEGIN_SRC java
+       List<int> list;  // ERROR
+     #+END_SRC
+
+  2. 无法创建类型参数的实例
+     #+BEGIN_SRC java
+       public static <E> void append(List<E> list) {
+         E elem = new E();  // compile-time error
+         list.add(elem);
+       }
+     #+END_SRC
+
+     但是可以利用反射创建实例：
+     #+BEGIN_SRC java
+       public static <E> void append(List<E> list, Class<E> cls) throws Exception {
+         E elem = cls.newInstance();   // OK
+         list.add(elem);
+       }
+     #+END_SRC
+
+  3. 无法声明类型为类型参数的静态字段
+     #+BEGIN_SRC java
+       public class MobileDevice<T> {
+         private static T os;  // ERROR
+       }
+     #+END_SRC
+
+  4. 无法使用类型参数进行强制类型转换或用于关键字 ~instanceof~
+     #+BEGIN_SRC java
+       public static <E> void rtti(List<E> list) {
+         if (list instanceof ArrayList<Integer>) {  // compile-time error
+           // ...
+         }
+       }
+     #+END_SRC
+
+     无界通配符可以用在这里判断是否为 List：
+     #+BEGIN_SRC java
+       public static void rtti(List<?> list) {
+         if (list instanceof ArrayList<?>) {  // OK; instanceof requires a reifiable type
+           // ...
+         }
+       }
+     #+END_SRC
+
+  5. 无法创建、捕获或抛出类型参数的对象
+     
+     泛型类不能直接或间接扩展 Throwable 类：
+     #+BEGIN_SRC java
+       // Extends Throwable indirectly
+       class MathException<T> extends Exception { /* ... */ }    // compile-time error
+
+       // Extends Throwable directly
+       class QueueFullException<T> extends Throwable { /* ... */ // compile-time error
+     #+END_SRC
+
+     无法捕获类型参数的实例：
+     #+BEGIN_SRC java
+       public static <T extends Exception, J> void execute(List<J> jobs) {
+         try {
+           for (J job : jobs)
+             // ...
+             } catch (T e) {   // compile-time error
+           // ...
+         }
+       }
+     #+END_SRC
+
+     但是，可以在 throws 子句中使用类型参数：
+     #+BEGIN_SRC java
+       class Parser<T extends Exception> {
+         public void parse(File file) throws T {     // OK
+           // ...
+         }
+       }
+     #+END_SRC
+
+  6. 无法重载每个重载的形式参数类型擦除到相同原始类型的方法
+     #+BEGIN_SRC java
+       public class Example {
+         public void print(Set<String> strSet) { }
+         public void print(Set<Integer> intSet) { }
+       }
+     #+END_SRC
+
+     上面两个方法在类型擦除后具有相同的签名，因此会造成编译出错。
+
+  7. 无法创建类型参数的数组
+     #+BEGIN_SRC java
+       List<Integer>[] arrayOfLists = new List<Integer>[2];  // compile-time error
+     #+END_SRC
+
