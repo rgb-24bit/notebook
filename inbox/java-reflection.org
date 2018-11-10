@@ -289,4 +289,37 @@
    #+END_SRC
 
 * Members
-  + [[https://docs.oracle.com/javase/tutorial/reflect/member/index.html]]
+  + Fields :: 字段包含类型和值，类 ~java.lang.reflect.Field~ 提供了获取类型信息、设置和获取值的方法。
+
+  + Methods :: 方法具有返回值和参数，并可能抛出异常，类 ~java.lang.reflect.Method~ 提供了获取参数和返回值的类型信息的方法，
+               也可以用于调用给定对象的方法。
+
+  + Constructors :: 构造函数的反射接口由类 ~java.lang.reflect.Constructor~ 提供，和方法类似，但是，构造函数没有返回值，
+                    调用构造函数会为给定的类创建一个新实例。
+
+  详细教程链接：
+  + [[https://docs.oracle.com/javase/tutorial/reflect/member/field.html][Fileds]]
+  + [[https://docs.oracle.com/javase/tutorial/reflect/member/method.html][Methods]]
+  + [[https://docs.oracle.com/javase/tutorial/reflect/member/ctor.html][Constructors]]
+
+* Arrays
+  和数组有关的反射接口由类 ~java.lang.reflect.Array~ 提供。
+
+  可以通过方法 ~Class.isArray()~ 来判断该类是否为 *数组类*, 需要注意的是，这个不是静态方法。
+
+  可以通过方法 ~java.lang.reflect.Array.newInstance()~ 创建一个新的数组，这是一个静态方法。
+
+  详细教程链接： [[https://docs.oracle.com/javase/tutorial/reflect/special/array.html][Arrays]]
+
+* Enumerated
+  和枚举有关的反射接口：
+  #+BEGIN_SRC java
+    Class.isEnum();  // 判断一个类是否为枚举类
+    Class.getEnumConstants();  // 按照它们声明的顺序检索枚举定义的枚举常量列表
+    java.lang.reflect.Field.isEnumConstant();  // 判断该字段是否为枚举类型的变量
+  #+END_SRC
+  
+  详细教程链接： [[https://docs.oracle.com/javase/tutorial/reflect/special/enum.html][Enumerated Types]]
+
+  和枚举有关的操作可以通过类 [[https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html][java.lang.Enum]] 完成。
+  

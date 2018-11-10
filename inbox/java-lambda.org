@@ -1,0 +1,104 @@
+* Lambda 表达式语法
+  #+BEGIN_SRC java
+    (parameters) -> expression  // expression 的结果即为返回值
+    (parameters) -> { satements; }  // return 语句返回值，没有返回 void
+  #+END_SRC
+
+  使用时需要注意分清 *表达式* 和 *语句*.
+
+* Lambda 表达式的使用场景
+  Lambda 表达式可以用于 *函数式接口*, 函数式接口的定义如下：
+
+  + *函数式接口* 就是只定义了一个 *抽象方法* 的接口
+
+  哪怕接口内部定义了很多的 *默认方法*, 但只要只定义了一个 *抽象方法*, 那么那个接口就是 *函数式接口*.
+
+  某种程度上，Lambda 表达式就是该 *函数式接口* 的一个具体实现的实例。
+
+  *函数式接口* 中的抽象方法的签名基本上就是 Lambda 表达式的签名，因此把这种抽象方法叫做 *函数描述符*.
+
+  对于 *函数式接口*, 可以用 ~@FunctionalInterface~ 注解类标识，当该接口存在多个抽象方法时，编译时编译器将返回一个错误信息。
+
+  一些预提供的函数式接口： [[https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html][Package java.util.function]].
+
+  类似 ~DoubleConsumer~ 的函数式接口，通过提供确定类型的参数，避免装箱拆箱的消耗。
+
+  同时，借助 *类型推断*, 部分情况下你可以省略显示的类型声明：
+  #+BEGIN_SRC java
+    Comparator<Apple> c = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+    Comparator<Apple> c = (a1, a2) -> a1.getWeight().compareTo(a2.getWeight());
+  #+END_SRC
+
+  只有一个参数的时候还可以去掉参数括号：
+  #+BEGIN_SRC java
+    Predicate<String> p = s -> list.add(s);
+  #+END_SRC
+
+* Lambda 表达式使用局部变量
+  Lambda 表达式内部可以自由的使用 *实例变量* 和 *静态变量*, 但只能使用显示声明为 ~final~ 的局部变量
+  或事实上为的 ~final~ 的局部变量（声明后不再修改）。
+
+* 方法引用
+  |------------------------------+--------------------------------------|
+  | 方法类型                     | 方法引用例子                         |
+  |------------------------------+--------------------------------------|
+  | 静态方法                     | ContainingClass::staticMethodName    |
+  | 特定对象的实例方法           | containingObject::instanceMethodName |
+  | 特定类型的任意对象的实例方法 | ContainingType::methodName           |
+  | 构造方法                     | ClassName::new                       |
+  |------------------------------+--------------------------------------|
+
+  方法引用就是让你根据已有的方法来创建 Lambda 表达式，可以看做仅仅调用特定方法的 Lambda 的一种快捷写法。
+
+* 复合 Lambda 表达式
+  + *比较器复合 - java.util.Comparator<T>*
+
+    接口文档： [[https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html][Interface Comparator<T>]]
+
+    通过静态方法 ~Comparator.comparing~ 提取用于比较的键值的 ~Function~ 来返回一个 ~Comparator~:
+    #+BEGIN_SRC java
+      Comparator<Apple> c = Comparator.comparing(Apple::getWeight);
+    #+END_SRC
+
+    *逆序：*
+    #+BEGIN_SRC java
+      list.sort(Comparator.comparing(Apple::getWeight).reversed())
+    #+END_SRC
+
+    *比较器链：*
+    #+BEGIN_SRC java
+      list.sort(Comparator.comparing(Apple::getWeight)
+                .reversed()
+                .thenComparing(Apple::getCountry));
+
+    #+END_SRC
+
+    如果两个对象用第一个 ~Comparator~ 比较之后是一样的，就提供第二个 ~Comparator~.
+
+  + *谓词复合 - java.util.function.Predicate<T>*
+
+    接口文档： [[https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html][Interface Predicate<T>]]
+    
+    可以通过谓词接口的 negate、and 和 or 方法构建复杂的谓词，比如说：
+    #+BEGIN_SRC java
+      a.negate().or(b).and(c);
+    #+END_SRC
+
+    等价于：
+    #+BEGIN_SRC java
+      (!a || b) && c
+    #+END_SRC
+
+  + *函数复合 - java.util.function.Function<T, R>*
+
+    接口文档： [[https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html][Interface Function<T,R>]]
+
+    ~Function~ 接口提供的默认方法 ~andThen~ 和 ~compose~ 可以组合不同的函数：
+    #+BEGIN_SRC java
+      Function<Integer, Integer> f = x -> x + 1;
+      Function<Integer, Integer> g = x -> x * 2;
+
+      Function<Integer, Integer> gf = f.andThen(g);  // g(f(x))
+      Function<Integer, Integer> fg = f.compose(g);  // f(g(x))
+    #+END_SRC
+

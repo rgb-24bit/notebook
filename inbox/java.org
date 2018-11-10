@@ -1,9 +1,6 @@
 * Optional
   + [[https://lw900925.github.io/java/java8-optional.html][Java 8新特性（三）：Optional类]]
 
-* 泛型教程
-  + [[https://docs.oracle.com/javase/tutorial/extra/generics/index.html][Lesson: Generics]]
-
 * 网络编程
   + [[https://docs.oracle.com/javase/tutorial/networking/overview/index.html][官方教程]]
   + [[https://www.baeldung.com/java-http-request][Do a Simple HTTP Request in Java]]
@@ -16,6 +13,19 @@
   + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
 
 
+* need
+  方法引用和常用异常
+
 * io
   + PushbackInputStream
   + PushbackReader
+* java7 try
+  带资源的 try 语句：
+  #+BEGIN_SRC java
+    try (AutoCloseable a = new xxx();
+         AutoCloseable b = new xxx()) {
+      ...
+    }
+  #+END_SRC
+
+  

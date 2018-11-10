@@ -1,0 +1,59 @@
+* 代表性文法
+  #+BEGIN_EXAMPLE
+    E -> E + T | T
+    T -> T * F | F
+    F -> ( E ) | id
+  #+END_EXAMPLE
+
+  该文法的无左递归版本：
+  #+BEGIN_EXAMPLE
+    E -> TE'
+    E' -> + TE' | ε
+    T -> FT'
+    T' -> * FT' | ε
+    F -> ( E ) | id
+  #+END_EXAMPLE
+
+* 自顶向下语法分析
+  + 对于非终结符号 A, FIRST(A) 被定义为可从 A 推导得到的串首终结符号的集合，
+    如果 A 可以推导得到 ε, 那么 ε 也在 FIRST(A) 中。
+
+  + 对于非终结符号 A, FOLLOW(A) 被定义为可能在某些句型中紧跟在 A 右边的终结符号的集合。
+    如果 A 是某些句型的最右符号，那么 $ 也在 FOLLOW(A) 中。
+    
+    *NOTE:* ε 不会出现在 FOLLOW 集中
+
+  + 产生式 A→β 的可选集是指可以选用该产生式进行推导时对应的输入符号的集合，记为 SELECT(A→β)
+
+    + SELECT(A→aβ) = { a }
+    + SELECT(A→ε) = FOLLOW(A)
+
+    产生式 A→α 的可选集 SELECT:
+    + 如果 ε 不属于 FIRST(α), 那么 SELECT(A→α) = FIRST(α)
+    + 如果 ε 属于 FIRST(α), 那么 SELECT(A→α) = (FIRST(α)-{ε})∪FOLLOW(A)
+
+  代表性文法的 FIRST 集：
+   
+  [[file:img/FIRST.png]]
+
+  代表性文法的 FOLLOW 集：
+
+  [[file:img/FOLLOW.png]]
+
+  代表性文法的 SELECT 集：
+
+  [[file:img/SELECT.png]]
+
+  通过 SELECT 集构造 *预测分析表*, 输入符号和 SELECT 集相对应，单元格和产生式相对应：
+
+  [[file:img/table.png]]
+  
+  预测分析法的实现步骤：
+  1. 构造文法
+  2. 改造文法：消除二义性、消除左递归、消除回溯
+  3. 求每个变量的 FIRST 集和 FOLLOW 集，从而求得每个候选式的 SELECT 集
+  4. 检查是不是 LL(1) 文法。若是，构造预测分析表
+  5. 对于递归的预测分析，根据预测分析表为每一个非终结符编写一个过程；
+     对于非递归的预测分析，实现表驱动的预测分析算法
+
+ 
