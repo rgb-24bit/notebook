@@ -1,3 +1,12 @@
+#+TITLE:      Java lambda 表达式
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#lambda-表达式语法][Lambda 表达式语法]]
+- [[#lambda-表达式的使用场景][Lambda 表达式的使用场景]]
+- [[#lambda-表达式使用局部变量][Lambda 表达式使用局部变量]]
+- [[#方法引用][方法引用]]
+- [[#复合-lambda-表达式][复合 Lambda 表达式]]
+
 * Lambda 表达式语法
   #+BEGIN_SRC java
     (parameters) -> expression  // expression 的结果即为返回值

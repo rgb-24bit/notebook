@@ -18,6 +18,7 @@
 - [[file:notebook/c-c++/pointer.org][指针笔记]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>compile</i></b></summary>
+- [[file:notebook/compile/grammar.org][语法分析]]
 - [[file:notebook/compile/lex.org][编译原理 - 词法分析]]
 - [[file:notebook/compile/simple-compile.org][编译原理 - 简单的语法制导翻译器]]
 #+HTML: </details>
@@ -66,9 +67,11 @@
 - [[file:notebook/java/annotations.org][Java 注解类]]
 - [[file:notebook/java/class-object.org][Java 类和对象]]
 - [[file:notebook/java/faq.org][Java 常见问题]]
-- [[file:notebook/java/generics.org][Java 泛型]]
 - [[file:notebook/java/interface-inheritance.org][Java 接口和继承]]
+- [[file:notebook/java/java-generics.org][Java 泛型]]
 - [[file:notebook/java/java-io.org][Java I/O 笔记]]
+- [[file:notebook/java/java-lambda.org][Java lambda 表达式]]
+- [[file:notebook/java/java-reflection.org][Java 反射]]
 - [[file:notebook/java/java.org][Java 笔记]]
 - [[file:notebook/java/javadoc.org][JavaDoc 笔记]]
 - [[file:notebook/java/jdbc.org][Java JDBC]]

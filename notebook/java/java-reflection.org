@@ -1,3 +1,14 @@
+#+TITLE:      Java 反射
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#classes][Classes]]
+  - [[#获取类对象][获取类对象]]
+  - [[#获取类修饰符和类型][获取类修饰符和类型]]
+  - [[#获取类成员][获取类成员]]
+- [[#members][Members]]
+- [[#arrays][Arrays]]
+- [[#enumerated][Enumerated]]
+
 * Classes
   对于每种类型对象，Java 虚拟机都实例化 ~java.lang.Class~ 的不可变实例，该实例提供了检查对象的运行时属性的方法，包括其成员和类型信息。
 
