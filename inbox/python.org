@@ -9,11 +9,6 @@
 * pickle
   + [[https://docs.python.org/3/library/pickle.html][pickle — Python object serialization]]
 
-* logging
-  + [[https://docs.python.org/3.7/howto/logging-cookbook.html][Logging Cookbook]]
-  + [[https://docs.python.org/3.7/howto/logging.html][Logging HOWTO]]
-  + [[https://realpython.com/python-logging/][Logging in Python]]
-
 * 文档
   + [[https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/][Beautiful Soup 4.4.0 文档]]
 
@@ -22,5 +17,6 @@
 
 * enum
   + [[https://docs.python.org/3/library/enum.html][enum — Support for enumerations]]
+
 * missing
   + [[https://docs.python.org/3/library/stdtypes.html#dict][Dict __missing__]]

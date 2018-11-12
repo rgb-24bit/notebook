@@ -1,0 +1,23 @@
+* 数组与集合之间的桥梁
+  + [[https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html#toArray-T:A-][Collection.toArray]]
+  + [[https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-][Arrays.asList]]
+
+  #+BEGIN_SRC java
+    List<Integer> list = Arrays.asList(new Integer[] {1, 2, 3, 4, 5});
+    List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+
+    Integer[] arr = list.toArray(new Integer[0]);
+    Integer[] arr = (Integer[])list.toArray();
+  #+END_SRC
+
+* 流操作
+  + *中间操作* - 可连接起来的流操作 - 返回流
+  + *终端操作* - 关闭流的操作 - 不返回流
+
+  流使用的一般流程：
+  #+BEGIN_EXAMPLE
+    数据源 --> 中间操作 --> 终端操作
+  #+END_EXAMPLE
+
+* 注意事项
+  + 和 ~Iterator~ 类似，流只能遍历一次。

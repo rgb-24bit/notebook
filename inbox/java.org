@@ -13,12 +13,10 @@
   + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
 
 
-* need
-  方法引用和常用异常
-
 * io
   + PushbackInputStream
   + PushbackReader
+
 * java7 try
   带资源的 try 语句：
   #+BEGIN_SRC java
@@ -28,4 +26,41 @@
     }
   #+END_SRC
 
-  
+  + [[https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html][The try-with-resources Statement]]
+
+* classpath
+  + [[https://docs.oracle.com/javase/tutorial/essential/environment/paths.html][PATH and CLASSPATH]]
+  + [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html][Setting the Class Path]]
+
+* resource
+  + [[https://docs.oracle.com/javase/8/docs/technotes/guides/lang/resources.html][Location-Independent Access to Resources]]
+  + [[https://www.cnblogs.com/yejg1212/p/3270152.html][关于Class.getResource和ClassLoader.getResource的路径问题]]
+    
+  #+BEGIN_SRC java
+    Class.getResource("name");   // current_class_file_path/name
+    Class.getResource("/name");  // current_classpath/name
+  #+END_SRC
+
+  #+BEGIN_EXAMPLE
+    + path
+      + resource
+      + -- Test.class  -- current classpath -- path
+
+    + path
+      + resource
+      + -- com
+           + -- rgbit
+                + -- Test.class  -- current classpath -- path
+
+    + path
+      + -- com.rgbit.jar  -- current classpath -- path/com.rgbit.jar
+
+    + com.rgbit.jar
+      + -- resource
+      + -- ...
+  #+END_EXAMPLE
+
+* 内部类引用外部类实例
+  #+BEGIN_SRC java
+    OuterClassName.this;
+  #+END_SRC

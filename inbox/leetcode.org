@@ -1,0 +1,4 @@
+* 365. Water and Jug Problem
+  + [[https://leetcode-cn.com/problems/water-and-jug-problem/description/][Water and Jug Problem]]
+  + [[http://www.cnblogs.com/grandyang/p/5628836.html][{LeetCode} Water and Jug Problem 水罐问题]]
+

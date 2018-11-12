@@ -57,3 +57,5 @@
   2. 对于未命名包中的类文件，以包含类文件的目录结束
   3. 对于包中的类文件，以包含包目录的目录结束
 
+  + [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html][Setting the Class Path]]
+

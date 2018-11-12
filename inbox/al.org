@@ -1,0 +1,13 @@
+* 求最大公约数
+  #+BEGIN_SRC C
+    int gcd(int x, int y) {
+      return y == 0 ? x : gcd(y, x % y);
+    }
+  #+END_SRC
+
+  #+BEGIN_SRC python
+    def gcd(x, y):
+        while not y == 0:
+            x, y = y, x % y
+        return x
+  #+END_SRC

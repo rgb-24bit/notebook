@@ -1,0 +1,81 @@
+* 常用异常
+  #+CAPTION: 常用的异常
+  |-------------------------------+---------------------------------------|
+  | 异常                          | 使用场合                              |
+  |-------------------------------+---------------------------------------|
+  | IllegalArgumentException      | 非 null 的参数值不正确                |
+  | IllegalStateException         | 对于方法调用而言，对象的状态不合适    |
+  | NullPointerException          | 在禁止使用 null 的情况下参数值为 null |
+  | IndexOutOfBoundsException     | 下标参数值越界                        |
+  | UnsupportedOperationException | 对象不支持用户请求的方法              |
+  |-------------------------------+---------------------------------------|
+
+  #+BEGIN_SRC java
+    Exception(String message)
+  #+END_SRC
+
+* 常用接口
+  可用于 ~try-with-resource~ 语句：
+  #+BEGIN_SRC java
+    public interface AutoCloseable {
+      public void close();
+    }
+
+    public interface Closeable extends AutoCloseable {
+      public void close();
+    }
+  #+END_SRC
+
+  用于比较：
+  #+BEGIN_SRC java
+    public interface Comparable<T> {
+      /**
+       * 返回值小于、等于、大于零，此对象小于、等于、大于指定对象
+       */
+      public int compareTo(T o);
+    }
+  #+END_SRC
+
+  另外可参考： [[https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html][Interface Comparator<T>]]
+
+  可用于 ~for-each~ 语句：
+  #+BEGIN_SRC java
+    public interface Iterable<T> {
+      public default void	forEach(Consumer<? super T> action);
+      public default Spliterator<T>	spliterator();
+
+      public Iterator<T>	iterator();
+    }
+  #+END_SRC
+
+  ~Iterator<T>~ 接口：
+  #+BEGIN_SRC java
+    // java.util.Iterator<E>
+    public interface Iterator<E> {
+      public default void	forEachRemaining(Consumer<? super E> action);
+      public default void remove();
+
+      public boolean hasNext();
+      public E next();
+    }
+  #+END_SRC
+
+  常见的实现方式：
+  #+BEGIN_SRC java
+    public class Test implements Iterable<Integer> {
+      public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+          public boolean hasNext() {}
+          public Integer next() {}
+        };
+      }
+    }
+  #+END_SRC
+
+  用于线程：
+  #+BEGIN_SRC java
+    public interface Runnable {
+      public void	run();
+    }
+  #+END_SRC
+
