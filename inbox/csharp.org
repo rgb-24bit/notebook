@@ -1,0 +1,22 @@
+* 无边框 Form 移动
+  #+BEGIN_SRC csharp
+    bool isMoving = false;
+    Point mouseOffset;
+
+    void MouseDown(object sender, MouseEventArgs e) {
+      mouseOffset = new Point(-e.X, -e.Y);
+      isMoving = true;
+    }
+
+    void MouseMove(object sender, MouseEventArgs e) {
+      if (isMoving) {
+        Point mouseSet = Control.MousePosition;
+        mouseSet.offset(mouseOffset);
+        this.Location = mouseSet;
+      }
+    }
+
+    void MouseUp(object sender, MouseEventArgs e) {
+      isMoving = false;
+    }
+  #+END_SRC

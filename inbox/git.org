@@ -1,0 +1,16 @@
+* git stash
+  + [[https://git-scm.com/book/zh/v1/Git-%25E5%25B7%25A5%25E5%2585%25B7-%25E5%2582%25A8%25E8%2597%258F%25EF%25BC%2588Stashing%25EF%25BC%2589][Git 工具 - 储藏（Stashing）]]
+
+* 常用的十个指令
+  #+BEGIN_EXAMPLE
+    git clone
+    git commit
+    git status
+    git pull
+    git fetch
+    git stash
+    git push
+    git remote
+    git diff
+    git add
+  #+END_EXAMPLE

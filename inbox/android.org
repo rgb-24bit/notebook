@@ -1,0 +1,152 @@
+* 基本概念
+  + *Android 系统架构*
+
+    Android 系统架构自底向上可以分为：Linux 内核层、系统运行库层、应用框架层、应用层。
+
+    #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/The-Android-software-stack.png/300px-The-Android-software-stack.png">
+
+  + *Android 四大组件*
+   
+    Android 系统的四大组件为：活动 Activity、服务 Service、广播接收器 Broadcast Receiver、内容提供器 Content Provider
+
+    广播机制感觉是个好东西！
+    
+* 项目资源
+  + [[https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn][提供资源 | Android Developers]]
+  + [[https://developer.android.com/guide/topics/resources/accessing-resources?hl=zh-cn][访问资源 | Android Developers]]
+
+* 日志工具
+  + [[https://developer.android.com/reference/android/util/Log][Log | Android Developers]]
+
+  #+BEGIN_SRC java
+    import android.util.Log;
+
+    Log.v(String tag, String msg);  // VERBOSE
+    Log.d(String tag, String msg);  // DEBUG
+    Log.i(String tag, String msg);  // INFO
+    Log.w(String tag, String msg);  // WARN
+    Log.e(String tag, String msg);  // ERROR
+  #+END_SRC
+
+  + [[https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/util/Log.java][android.util.Log source code]]
+
+* 活动相关
+  + *主活动配置*
+
+    #+BEGIN_SRC xml
+      <activity android:name="MainActivity">
+        <!-- This activity is the main entry, should appear in app launcher -->
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+    #+END_SRC
+
+  + *应用程序名*
+
+    通过配置 *主活动* 的 ~Label~ 就是应用程序在启动器中显示的名称：
+    #+BEGIN_SRC xml
+      <activity android:name="MainActivity"
+                android:label="Name">
+        <!-- This activity is the main entry, should appear in app launcher -->
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+    #+END_SRC
+
+* 消息传递
+  + [[https://developer.android.com/guide/components/intents-filters?hl=zh-cn][Intent 和 Intent 过滤器 | Android Developers]]
+  + [[https://developer.android.com/reference/android/content/Intent?hl=zh-cn#public-constructors][Intent | Android Developers]]
+
+  显式 ~Intent~ 通过指定上下文和目标来启动相关的 ~Activity~:
+  #+BEGIN_SRC java
+    // Intent(Context, Class)
+    Intent downloadIntent = new Intent(this, DownloadService.class);
+    startService(downloadIntent);
+  #+END_SRC
+
+  隐式 ~Intent~ 通过指定要执行的动作来启动相关的 ~Activity~:
+  #+BEGIN_SRC java
+    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+    startService(sendIntent);
+  #+END_SRC
+
+  可以在活动的 ~intent-filter~ 配置中指定该活动可响应的 ~Intent~:
+  #+BEGIN_SRC xml
+    <activity android:name="ShareActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.SEND"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <data android:mimeType="text/plain"/>
+      </intent-filter>
+    </activity>
+  #+END_SRC
+  
+  通过 ~Intent.setData~ 和 ~Intent.putExtra~ 方法可以传递数据给下一个活动，两者的比较：
+  + [[https://stackoverflow.com/questions/18794504/intent-setdata-vs-intent-putextra][Intent.setData vs Intent.putExtra - Stack Overflow]]
+
+  ~Activity.startActivityForResult~ 可以用于启动活动并希望活动销毁时返回一个结果给上一个活动：
+  #+BEGIN_SRC java
+    Intent downloadIntent = new Intent(this, DownloadService.class);
+    startActivityForResult(downloadIntent, 1);
+  #+END_SRC
+
+  通过方法 ~setResult~ 来设置返回的数据：
+  #+BEGIN_SRC java
+    setResult(RESULT_OK, intent);
+  #+END_SRC
+
+  使用 ~startActivityForResult~ 方法启动的活动销毁后会回调上一个活动的 ~onActivityResult~ 方法：
+  #+BEGIN_SRC java
+    protected void onActivityResult(int requestCode, int resultCode, Intent data);
+  #+END_SRC
+
+  ~resultCode~ 就是 ~startActivityForResult~ 方法的第二个参数，用于过滤不同的请求。
+
+* 活动的生命周期
+  安卓通过 ~Task~ 来管理活动，每个 ~Task~ 就是一组存放在 *栈* 里的活动的集合，这个栈被称为 *返回栈*.
+
+  + [[https://developer.android.com/guide/components/activities?hl=zh-cn][Activity | Android Developers]]
+  + [[https://developer.android.com/guide/components/activities?hl=zh-cn#Lifecycle][活动的生命周期]]
+
+  每当通过 ~Back~ 键或调用 ~finish~ 方法方法销毁一个活动后，该活动就是从返回栈的栈顶移除，对应的，每当启动一个新活动时，
+  该活动会放在返回栈的栈顶。
+
+  通过方法 ~onSaveInstanceState~ 方法来存放活动的数据，避免活动销毁后数据丢失：
+  #+BEGIN_SRC java
+    protected void onSaveInstanceState(Bundle outState) {
+      super.onSaveInstanceState(outState);
+      outState.putString("data", "message");
+    }
+  #+END_SRC
+
+  通过 ~Bundle~ 对象来存放数据，而活动的 ~onCreate~ 方法接受一个 ~Bundle~ 对象：
+  #+BEGIN_SRC java
+    protected void onCreate(Bundle savedInstanceState);
+  #+END_SRC
+
+* 活动的启动模式
+  通过配置活动的 ~android:launchMode~ 来指定活动的启动模式：
+  #+BEGIN_SRC xml
+    <activity android:name="MainActivity"
+              android:launchMode="singleTop">
+    </activity>
+  #+END_SRC
+
+  + [[https://developer.android.com/guide/topics/manifest/activity-element?hl=zh-cn#lmode][<activity> | Android Developers]]
+  
+  启动模式一共有四种，各个模式的特点：
+  + standard :: 每当启动一个新的活动，该活动就会在返回栈中入栈，并处于栈顶位置。每次启动都会创建该活动的一个新实例。
+
+  + singleTop :: 启动活动时如果发现返回栈的栈顶已是该活动，就直接使用它，不会在创建新的活动实例。
+
+  + singleTask :: 返回栈中只存在一个该活动的实例。不同的返回栈中可以存在不同的实例。
+
+  + singleInstance :: 通过一个单独的返回栈来管理该活动，全局只存在一个实例。
+
+* 相关链接
+  + [[https://android.googlesource.com/platform/frameworks/base/][Android framework classes and services]]
+  + [[https://android.googlesource.com/][Git repositories on android]]

@@ -3,3 +3,11 @@
   #+BEGIN_EXAMPLE
     C-c a < a
   #+END_EXAMPLE
+
+  时间戳：
+  #+BEGIN_EXAMPLE
+    C-c !     (org-time-stamp-inactive)
+  #+END_EXAMPLE
+  
+  + [[https://orgmode.org/manual/Creating-timestamps.html#Creating-timestamps][Creating timestamps]]
+  

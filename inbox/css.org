@@ -1,0 +1,22 @@
+* 很有趣的想法
+  #+BEGIN_SRC html
+    <html>
+      <head>
+        <title>...</title>
+        <style>
+          .mirror_ifrom {
+            -webkit-transform: scaleX(-1);
+            animation: mirror forwards 0s;
+            -moz-animation: mirror forwards 0s;
+            -webkit-animation: mirror forwards 0s;
+            -o-animation: mirror forwards 0s;
+          }
+        </style>
+      </head>
+      <body>
+        <iframe src="https://www.bilibili.com/" frameborder="0" width="100%" height="100%" class="mirror_ifrom"></iframe>
+      </body>
+    </html>
+  #+END_SRC
+
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform][transform]]

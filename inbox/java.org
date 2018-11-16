@@ -64,3 +64,7 @@
   #+BEGIN_SRC java
     OuterClassName.this;
   #+END_SRC
+* Essential Classes
+  + [[https://docs.oracle.com/javase/tutorial/essential/index.html][Trail: Essential Classes]]
+* bean class
+  + [[https://dzone.com/articles/the-bean-class-for-java-programming][The Bean Class for Java Programming]]

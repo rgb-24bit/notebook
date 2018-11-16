@@ -11,3 +11,16 @@
             x, y = y, x % y
         return x
   #+END_SRC
+
+* 子序列
+  #+BEGIN_SRC java
+    public boolean isSubsequence(String x, String y) {
+      int j = 0;
+      for (int i = 0; i < x.length() && j < y.length(); i++) {
+        if (x.charAt(i) == y.charAt(j)) {
+          j++;
+        }
+      }
+      return j == y.length();
+    }
+  #+END_SRC
