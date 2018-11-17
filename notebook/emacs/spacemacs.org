@@ -1,4 +1,4 @@
-#+TITLE:      Spacemacs 笔记
+#+TITLE:      Emacs - Spacemacs 使用
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#快捷键][快捷键]]

@@ -1,4 +1,4 @@
-#+TITLE:      Git Hook
+#+TITLE:      Git - Hook 收集
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#commit-hook][commit-hook]]

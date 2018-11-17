@@ -68,3 +68,7 @@
   + [[https://docs.oracle.com/javase/tutorial/essential/index.html][Trail: Essential Classes]]
 * bean class
   + [[https://dzone.com/articles/the-bean-class-for-java-programming][The Bean Class for Java Programming]]
+
+* lambda 表达式
+  引用的变量不能直接修改，需要一层包装。
+

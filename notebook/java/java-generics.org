@@ -1,4 +1,4 @@
-#+TITLE:      Java 泛型
+#+TITLE:      Java - 泛型
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#泛型类型][泛型类型]]

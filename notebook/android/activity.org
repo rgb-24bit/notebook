@@ -1,34 +1,10 @@
-* 基本概念
-  + *Android 系统架构*
+#+TITLE:      Android - Activity
 
-    Android 系统架构自底向上可以分为：Linux 内核层、系统运行库层、应用框架层、应用层。
-
-    #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/The-Android-software-stack.png/300px-The-Android-software-stack.png">
-
-  + *Android 四大组件*
-   
-    Android 系统的四大组件为：活动 Activity、服务 Service、广播接收器 Broadcast Receiver、内容提供器 Content Provider
-
-    广播机制感觉是个好东西！
-    
-* 项目资源
-  + [[https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn][提供资源 | Android Developers]]
-  + [[https://developer.android.com/guide/topics/resources/accessing-resources?hl=zh-cn][访问资源 | Android Developers]]
-
-* 日志工具
-  + [[https://developer.android.com/reference/android/util/Log][Log | Android Developers]]
-
-  #+BEGIN_SRC java
-    import android.util.Log;
-
-    Log.v(String tag, String msg);  // VERBOSE
-    Log.d(String tag, String msg);  // DEBUG
-    Log.i(String tag, String msg);  // INFO
-    Log.w(String tag, String msg);  // WARN
-    Log.e(String tag, String msg);  // ERROR
-  #+END_SRC
-
-  + [[https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/util/Log.java][android.util.Log source code]]
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#活动相关][活动相关]]
+- [[#消息传递][消息传递]]
+- [[#活动的生命周期][活动的生命周期]]
+- [[#活动的启动模式][活动的启动模式]]
 
 * 活动相关
   + *主活动配置*
@@ -147,6 +123,3 @@
 
   + singleInstance :: 通过一个单独的返回栈来管理该活动，全局只存在一个实例。
 
-* 相关链接
-  + [[https://android.googlesource.com/platform/frameworks/base/][Android framework classes and services]]
-  + [[https://android.googlesource.com/][Git repositories on android]]

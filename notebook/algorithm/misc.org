@@ -1,0 +1,33 @@
+#+TITLE:      Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#求最大公约数][求最大公约数]]
+- [[#判断是否为子序列][判断是否为子序列]]
+
+* 求最大公约数
+  #+BEGIN_SRC C
+    int gcd(int x, int y) {
+      return y == 0 ? x : gcd(y, x % y);
+    }
+  #+END_SRC
+
+  #+BEGIN_SRC python
+    def gcd(x, y):
+        while not y == 0:
+            x, y = y, x % y
+        return x
+  #+END_SRC
+
+* 判断是否为子序列
+  #+BEGIN_SRC java
+    public boolean isSubsequence(String x, String y) {
+      int j = 0;
+      for (int i = 0; i < x.length() && j < y.length(); i++) {
+        if (x.charAt(i) == y.charAt(j)) {
+          j++;
+        }
+      }
+      return j == y.length();
+    }
+  #+END_SRC
+

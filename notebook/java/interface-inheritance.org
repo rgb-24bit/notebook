@@ -1,4 +1,4 @@
-#+TITLE:      Java 接口和继承
+#+TITLE:      Java - 接口和继承
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#语法相关][语法相关]]

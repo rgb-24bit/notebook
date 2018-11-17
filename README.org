@@ -2,10 +2,15 @@
 - [[file:notebook/algorithm/bit-operation.org][位运算]]
 - [[file:notebook/algorithm/encrypt.org][加密算法]]
 - [[file:notebook/algorithm/hash.org][Hash 算法]]
+- [[file:notebook/algorithm/misc.org][Misc]]
 - [[file:notebook/algorithm/noun.org][名词了解]]
 - [[file:notebook/algorithm/random.org][随机算法]]
 - [[file:notebook/algorithm/search-sort.org][查找与排序算法]]
 - [[file:notebook/algorithm/struct.org][数据结构]]
+#+HTML: </details>
+#+HTML: <details><summary><b><i>android</i></b></summary>
+- [[file:notebook/android/activity.org][Android - Activity]]
+- [[file:notebook/android/misc.org][Android - Misc]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>c-c++</i></b></summary>
 - [[file:notebook/c-c++/c.org][C 语言笔记]]
@@ -18,7 +23,7 @@
 - [[file:notebook/c-c++/pointer.org][指针笔记]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>compile</i></b></summary>
-- [[file:notebook/compile/grammar.org][语法分析]]
+- [[file:notebook/compile/grammar.org][编译原理 - 语法分析]]
 - [[file:notebook/compile/lex.org][编译原理 - 词法分析]]
 - [[file:notebook/compile/simple-compile.org][编译原理 - 简单的语法制导翻译器]]
 #+HTML: </details>
@@ -32,30 +37,38 @@
 - [[file:notebook/database/version-control.org][数据库版本控制]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>dotnet</i></b></summary>
-- [[file:notebook/dotnet/csharp-feature.org][C# 高级特性]]
-- [[file:notebook/dotnet/csharp-note.org][C# 笔记]]
-- [[file:notebook/dotnet/dll.org][动态链接库]]
-- [[file:notebook/dotnet/nuget.org][NuGet 使用]]
-- [[file:notebook/dotnet/winforms.org][WinForms 笔记]]
+- [[file:notebook/dotnet/csharp-feature.org][.NET - C# 高级特性]]
+- [[file:notebook/dotnet/csharp-note.org][.NET - C# 基础]]
+- [[file:notebook/dotnet/dll.org][.NET - 动态链接库]]
+- [[file:notebook/dotnet/nuget.org][.NET - NuGet 使用]]
+- [[file:notebook/dotnet/winforms.org][.NET - WinForms]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>emacs</i></b></summary>
-- [[file:notebook/emacs/elisp.org][Emacs Lisp 笔记]]
-- [[file:notebook/emacs/emacs.org][Emacs 笔记]]
-- [[file:notebook/emacs/org-mode.org][Org-mode 笔记]]
-- [[file:notebook/emacs/regex.org][Emacs 正则表达式]]
-- [[file:notebook/emacs/spacemacs.org][Spacemacs 笔记]]
-- [[file:notebook/emacs/style.org][Elisp 规范]]
+- [[file:notebook/emacs/elisp.org][Emacs - Emacs Lisp]]
+- [[file:notebook/emacs/emacs.org][Emacs - 操作技巧]]
+- [[file:notebook/emacs/org-mode.org][Emacs - Org-mode]]
+- [[file:notebook/emacs/regex.org][Emacs - 正则表达式]]
+- [[file:notebook/emacs/spacemacs.org][Emacs - Spacemacs 使用]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>flask</i></b></summary>
 - [[file:notebook/flask/deploy.org][Flask 部署]]
 - [[file:notebook/flask/extend.org][Flask 扩展]]
 - [[file:notebook/flask/flask.org][Flask 笔记]]
 #+HTML: </details>
+#+HTML: <details><summary><b><i>front-end</i></b></summary>
+- [[file:notebook/front-end/css.org][前端 - CSS 相关笔记]]
+- [[file:notebook/front-end/html-css-base.org][前端 - HTML - CSS 基础笔记]]
+- [[file:notebook/front-end/html.org][前端 - HTML 相关笔记]]
+- [[file:notebook/front-end/javascript-base.org][前端 - JavaScript 基础笔记]]
+- [[file:notebook/front-end/jquery.org][前端 - jQuery 笔记]]
+- [[file:notebook/front-end/technology.org][前端 - Web 相关技术]]
+- [[file:notebook/front-end/webassembly.org][前端 - WebAssembly 相关]]
+#+HTML: </details>
 #+HTML: <details><summary><b><i>git</i></b></summary>
-- [[file:notebook/git/git-book.org][Git-Book 笔记]]
-- [[file:notebook/git/git-hook.org][Git Hook]]
-- [[file:notebook/git/git.org][Git 笔记]]
-- [[file:notebook/git/style.org][Git 相关使用规范]]
+- [[file:notebook/git/git-book.org][Git - Git-Book 阅读笔记]]
+- [[file:notebook/git/git-hook.org][Git - Hook 收集]]
+- [[file:notebook/git/git.org][Git - 使用笔记]]
+- [[file:notebook/git/style.org][Git - 规范]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>gradle</i></b></summary>
 - [[file:notebook/gradle/flyway.org][Flyway]]
@@ -64,21 +77,21 @@
 - [[file:notebook/gradle/plugin.org][Gradle 插件]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>java</i></b></summary>
-- [[file:notebook/java/annotations.org][Java 注解类]]
-- [[file:notebook/java/class-object.org][Java 类和对象]]
-- [[file:notebook/java/faq.org][Java 常见问题]]
-- [[file:notebook/java/interface-inheritance.org][Java 接口和继承]]
-- [[file:notebook/java/java-generics.org][Java 泛型]]
-- [[file:notebook/java/java-io.org][Java I/O 笔记]]
-- [[file:notebook/java/java-lambda.org][Java lambda 表达式]]
-- [[file:notebook/java/java-reflection.org][Java 反射]]
-- [[file:notebook/java/java.org][Java 笔记]]
-- [[file:notebook/java/javadoc.org][JavaDoc 笔记]]
-- [[file:notebook/java/jdbc.org][Java JDBC]]
-- [[file:notebook/java/misc.org][Java Misc]]
-- [[file:notebook/java/package.org][Java 导入对象]]
-- [[file:notebook/java/swing.org][Swing 笔记]]
-- [[file:notebook/java/tips.org][Java Tips]]
+- [[file:notebook/java/annotations.org][Java - 注解类]]
+- [[file:notebook/java/class-object.org][Java - 类和对象]]
+- [[file:notebook/java/faq.org][Java - 常见问题]]
+- [[file:notebook/java/interface-inheritance.org][Java - 接口和继承]]
+- [[file:notebook/java/java-generics.org][Java - 泛型]]
+- [[file:notebook/java/java-io.org][Java - I/O 操作]]
+- [[file:notebook/java/java-lambda.org][Java - Lambda 表达式]]
+- [[file:notebook/java/java-reflection.org][Java - 反射]]
+- [[file:notebook/java/java.org][Java - 基础笔记]]
+- [[file:notebook/java/javadoc.org][Java - JavaDoc 笔记]]
+- [[file:notebook/java/jdbc.org][Java - JDBC 使用]]
+- [[file:notebook/java/misc.org][Java - Misc]]
+- [[file:notebook/java/package.org][Java - 导入对象]]
+- [[file:notebook/java/swing.org][Java - Swing]]
+- [[file:notebook/java/tips.org][Java - 使用技巧]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>lang</i></b></summary>
 - [[file:notebook/lang/bash.org][Bash 笔记]]
@@ -88,17 +101,19 @@
 - [[file:notebook/lang/uml.org][UML 笔记]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>leetcode</i></b></summary>
-- [[file:notebook/leetcode/109.org][109. 有序链表转换二叉搜索树]]
+- [[file:notebook/leetcode/109.org][LeetCode - 109. 有序链表转换二叉搜索树]]
+- [[file:notebook/leetcode/365.org][LeetCode - 365. 水壶问题]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>linux</i></b></summary>
-- [[file:notebook/linux/debian.org][Debian 使用]]
-- [[file:notebook/linux/linux.org][Linux 笔记]]
+- [[file:notebook/linux/debian.org][Linux - Debian 系统使用]]
+- [[file:notebook/linux/faq.org][Linux - 常见问题]]
+- [[file:notebook/linux/linux.org][Linux - 基础笔记]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>math</i></b></summary>
-- [[file:notebook/math/discrete/1-逻辑和证明.org][逻辑和证明]]
-- [[file:notebook/math/discrete/2-基本结构.org][基本结构]]
-- [[file:notebook/math/linear/1-矩阵和方程组.org][矩阵和方程组]]
-- [[file:notebook/math/probability/lea.org][概率编程]]
+- [[file:notebook/math/discrete/基本结构.org][离散数学 - 基本结构]]
+- [[file:notebook/math/discrete/逻辑和证明.org][离散数学 - 逻辑和证明]]
+- [[file:notebook/math/linear/矩阵和方程组.org][线性代数 - 矩阵和方程组]]
+- [[file:notebook/math/probability/lea.org][概率 - 概率编程框架]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>misc</i></b></summary>
 - [[file:notebook/misc/coding.org][编程相关]]
@@ -147,12 +162,4 @@
 #+HTML: </details>
 #+HTML: <details><summary><b><i>vim</i></b></summary>
 - [[file:notebook/vim/vim.org][Vim 笔记]]
-#+HTML: </details>
-#+HTML: <details><summary><b><i>web</i></b></summary>
-- [[file:notebook/web/css.org][CSS 笔记]]
-- [[file:notebook/web/html.org][HTML 笔记]]
-- [[file:notebook/web/javascript.org][JavaScript 笔记]]
-- [[file:notebook/web/jquery.org][jQuery 笔记]]
-- [[file:notebook/web/technology.org][Web 相关技术]]
-- [[file:notebook/web/webassembly.org][WebAssembly 相关]]
 #+HTML: </details>

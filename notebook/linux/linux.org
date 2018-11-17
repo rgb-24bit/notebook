@@ -1,4 +1,4 @@
-#+TITLE:      Linux 笔记
+#+TITLE:      Linux - 基础笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#通过-man-获取帮助信息][通过 man 获取帮助信息]]

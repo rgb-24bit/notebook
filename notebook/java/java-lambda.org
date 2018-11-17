@@ -1,4 +1,4 @@
-#+TITLE:      Java lambda 表达式
+#+TITLE:      Java - Lambda 表达式
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#lambda-表达式语法][Lambda 表达式语法]]

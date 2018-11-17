@@ -1,2 +1,0 @@
-* 快速删除文件
-  + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]

@@ -1,4 +1,4 @@
-#+TITLE:      Git 笔记
+#+TITLE:      Git - 使用笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#git-clone][git clone]]
@@ -8,6 +8,7 @@
 - [[#git-push][git push]]
 - [[#git-submodule][git submodule]]
 - [[#git-pull][git pull]]
+- [[#git-stash][git stash]]
 - [[#一些问题][一些问题]]
   - [[#大小写敏感设置][大小写敏感设置]]
   - [[#diff-参数顺序][diff 参数顺序]]
@@ -79,6 +80,23 @@
 
 * git pull
   ~git pull~ 的参数可以为 *存储库链接*.
+
+* git stash
+  #+BEGIN_SRC bash
+    # 新建一个储藏
+    git stash
+
+    # 查看现有的储藏
+    git stash list
+
+    # 重新应用储藏
+    git stash apply
+
+    # 指定名称
+    git stash apply stash@{2}
+  #+END_SRC
+
+  + [[https://git-scm.com/book/zh/v1/Git-%25E5%25B7%25A5%25E5%2585%25B7-%25E5%2582%25A8%25E8%2597%258F%25EF%25BC%2588Stashing%25EF%25BC%2589][Git 工具 - 储藏（Stashing）]]
 
 * 一些问题
 ** 大小写敏感设置

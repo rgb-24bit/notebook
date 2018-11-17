@@ -1,4 +1,4 @@
-#+TITLE:      Java Misc
+#+TITLE:      Java - Misc
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#序列化][序列化]]

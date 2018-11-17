@@ -1,4 +1,4 @@
-#+TITLE:      jQuery 笔记
+#+TITLE:      前端 - jQuery 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#jquery-语法][jQuery 语法]]

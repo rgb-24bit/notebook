@@ -1,9 +1,23 @@
-#+TITLE:      Org-mode 笔记
+#+TITLE:      Emacs - Org-mode
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#hyperlinks][hyperlinks]]
+- [[#tables][tables]]
 - [[#org-babel][org-babel]]
-- [[#页内链接][页内链接]]
-- [[#特殊符号][特殊符号]]
+- [[#org-agenda][org-agenda]]
+- [[#timestamps][timestamps]]
+
+* hyperlinks
+  + 页内链接：
+    #+BEGIN_EXAMPLE
+      link::tag
+    #+END_EXAMPLE
+
+* tables
+  + 在表格中插入竖线：
+    #+BEGIN_EXAMPLE
+      \vert
+    #+END_EXAMPLE
 
 * org-babel
   #+BEGIN_EXAMPLE
@@ -38,11 +52,15 @@
     @enduml
   #+END_SRC
 
-* 页内链接
-  + link::tag 确定页面内链接
-    
-* 特殊符号
-  + [[https://orgmode.org/manual/Special-symbols.html][Special symbols]] 
-  + 竖线 \vert
-  + 下划线 \under{}
-   
+* org-agenda   
+  + 让 ~org-agenda-view~ 显示当前文件缓冲区的内容：
+    #+BEGIN_EXAMPLE
+      C-c a < a
+    #+END_EXAMPLE
+
+* timestamps
+  + 插入非活动时间戳：
+    #+BEGIN_EXAMPLE
+      C-c !     (org-time-stamp-inactive)
+    #+END_EXAMPLE
+

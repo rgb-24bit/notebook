@@ -1,9 +1,60 @@
-#+TITLE:      WinForms 笔记
+#+TITLE:      .NET - WinForms
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#mouseeventargs][MouseEventArgs]]
+- [[#实现无边框-form-的移动][实现无边框 Form 的移动]]
 
 * MouseEventArgs
   ~MouseEventArgs~ 的属性 ~X, Y~ 得到的坐标是相对于 *控件* 而言的，而不是屏幕或窗口。
   
   + [[https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.mouseeventargs?view=netframework-4.7.2][MouseEventArgs Class]]
+* 实现无边框 Form 的移动
+  + *方式一*
+    #+BEGIN_SRC csharp
+      bool isMoving = false;
+      Point mouseOffset;
+
+      void MouseDown(object sender, MouseEventArgs e) {
+        mouseOffset = new Point(-e.X, -e.Y);
+        isMoving = true;
+      }
+
+      void MouseMove(object sender, MouseEventArgs e) {
+        if (isMoving) {
+          Point mouseSet = Control.MousePosition;
+          mouseSet.offset(mouseOffset);
+          this.Location = mouseSet;
+        }
+      }
+
+      void MouseUp(object sender, MouseEventArgs e) {
+        isMoving = false;
+      }
+    #+END_SRC
+
+  + *方式二*
+
+    #+BEGIN_SRC csharp
+      /// <summary>
+      /// Utilities for Form.
+      /// </summary>
+      public class FormUtils
+      {
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        /// <summary>
+        /// Practical mouse moves Form without borders.
+        /// </summary>
+        /// <param name="form">The form to be moved.</param>
+        public static void FormMoveWithMouse(Form form) {
+          ReleaseCapture();
+          SendMessage(form.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+        }
+      }
+    #+END_SRC

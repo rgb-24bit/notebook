@@ -1,4 +1,4 @@
-#+TITLE:      Git-Book 笔记
+#+TITLE:      Git - Git-Book 阅读笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#起步][起步]]

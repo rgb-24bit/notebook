@@ -1,0 +1,24 @@
+#+TITLE:      前端 - HTML 相关笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#css--javascript][CSS & JavaScript]]
+- [[#图片][图片]]
+- [[#相关链接][相关链接]]
+
+* CSS & JavaScript
+  #+BEGIN_SRC html
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script src="myScript.js"></script>
+  #+END_SRC
+
+* 图片
+  + ~img~ 标签显示 ~base64~ 编码格式的图片：
+    #+BEGIN_SRC html
+      <img src="data:image/png;base64,编码值">
+    #+END_SRC
+
+    参考 [[https://en.wikipedia.org/wiki/Data_URI_scheme#Syntax][Data URI scheme]]
+    
+* 相关链接
+  + [[http://www.runoob.com/html/html-quicklist.html][HTML 速查列表]]
+  + [[http://entitycode.com/][HTML 字符实体]]

@@ -1,4 +1,4 @@
-#+TITLE:      Java 注解类
+#+TITLE:      Java - 注解类
 
 ☞ [[https://docs.oracle.com/javase/tutorial/java/annotations/index.html][官方教程]]
 

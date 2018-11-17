@@ -1,4 +1,4 @@
-#+TITLE:      WebAssembly 相关
+#+TITLE:      前端 - WebAssembly 相关
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#博客教程][博客教程]]

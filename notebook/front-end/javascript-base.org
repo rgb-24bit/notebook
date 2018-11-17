@@ -1,18 +1,13 @@
-#+TITLE:      JavaScript 笔记
+#+TITLE:      前端 - JavaScript 基础笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#javascript-教程链接][JavaScript 教程链接]]
 - [[#语法和数据类型][语法和数据类型]]
 - [[#循环和迭代][循环和迭代]]
 - [[#函数][函数]]
 - [[#等值判断][等值判断]]
 - [[#使用对象][使用对象]]
-- [[#javascript-细节][JavaScript 细节]]
 - [[#入口函数][入口函数]]
 - [[#相关链接][相关链接]]
-
-* JavaScript 教程链接
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
 
 * 语法和数据类型
   *JavaScript* 的标识符必须以字母、下划线（_）或者美元符号（$）开头， 其后的字符可以
@@ -241,7 +236,6 @@
     fish.displayType(); // Output:Fishes
   #+END_SRC
 
-* JavaScript 细节
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Details_of_the_Object_Model][对象模型的细节]]
 
   *继承*:
@@ -261,6 +255,7 @@
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain][继承与原型链]]
 
   #+HTML: <img src="https://wx4.sinaimg.cn/large/7ed42f5cly1fqguw4y1zej20ge0e8wes.jpg">
+
 * 入口函数
   #+BEGIN_SRC javascript
     window.onload = function () {
@@ -271,6 +266,7 @@
   等到所有内容，包括外部图片之类的文件加载完后，才会执行。
   
 * 相关链接
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
   + [[http://www.w3school.com.cn/jsref/index.asp][JavaScript 参考手册]]
   + [[http://www.runoob.com/json/json-parse.html][JSON.parse()]]
   + [[http://www.runoob.com/json/json-stringify.html][JSON.stringify()]]
