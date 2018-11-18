@@ -1,4 +1,4 @@
-#+TITLE:      Python 文档字符串
+#+TITLE:      Python - 文档字符串
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#模块的文档字符串][模块的文档字符串]]

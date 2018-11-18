@@ -1,4 +1,4 @@
-#+TITLE:      SSH 使用
+#+TITLE:      Tool - SSH
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简单使用][简单使用]]

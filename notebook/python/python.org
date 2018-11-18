@@ -1,4 +1,4 @@
-#+TITLE:      Python 笔记
+#+TITLE:      Python - 基础笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#小整数对象池][小整数对象池]]

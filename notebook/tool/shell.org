@@ -1,4 +1,4 @@
-#+TITLE:      Shell 命令
+#+TITLE:      Tool - Linux Shell 命令
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#traceroute][traceroute]]
@@ -21,6 +21,7 @@
 - [[#less][less]]
 - [[#env][env]]
 - [[#ln][ln]]
+- [[#组合使用-find-与-cat-命令][组合使用 find 与 cat 命令]]
 
 * traceroute
   traceroute 是一种网络诊断工具， 可显示数据包通过网络所采用的路由， 并测量任何传输延迟。
@@ -292,3 +293,21 @@
   #+BEGIN_EXAMPLE
     ln -s target link
   #+END_EXAMPLE
+* 组合使用 find 与 cat 命令
+  使用 ~find~ 指令的 ~-exec~ 选项，如：
+  #+BEGIN_SRC bash
+    find /location -size 1033c -exec cat {} +
+  #+END_SRC
+
+  符号 ~{}~ 扩展为文件名， ~+~ 使得 ~cat~ 尽可能多的读取文件。
+
+  逐个读取文件：
+  #+BEGIN_SRC bash
+    find /location -size 1033c -exec cat {} \;
+  #+END_SRC
+
+  使用 ~cat~ 的选项：
+  #+BEGIN_SRC bash
+    find /location -size 1033c -exec cat -n {} +
+    find /location -size 1033c -exec cat -n {} \;
+  #+END_SRC

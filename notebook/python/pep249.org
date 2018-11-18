@@ -1,4 +1,4 @@
-#+TITLE:      PEP249 笔记
+#+TITLE:      PEP249 - 数据库接口
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#introduction][Introduction]]

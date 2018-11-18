@@ -1,4 +1,4 @@
-#+TITLE:      并发编程
+#+TITLE:      操作系统 - 并发
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#io-多路复用][I/O 多路复用]]

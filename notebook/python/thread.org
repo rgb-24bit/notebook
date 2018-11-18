@@ -1,4 +1,4 @@
-#+TITLE:      Python 并发编程
+#+TITLE:      Python - 并发编程
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#锁对象][锁对象]]
