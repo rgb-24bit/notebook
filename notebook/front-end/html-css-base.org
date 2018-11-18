@@ -1,4 +1,4 @@
-#+TITLE:     前端 - HTML - CSS 基础笔记
+#+TITLE:     前端 - HTML/CSS 基础笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#html-基础][HTML 基础]]

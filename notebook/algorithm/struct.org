@@ -1,4 +1,4 @@
-#+TITLE:      数据结构
+#+TITLE:      数据结构与算法 - 基础数据结构
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]

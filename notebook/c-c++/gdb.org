@@ -1,4 +1,4 @@
-#+TITLE:      GDB 笔记
+#+TITLE:      C-C++ - GDB 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#教程][教程]]

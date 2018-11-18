@@ -1,4 +1,4 @@
-#+TITLE:      技术了解
+#+TITLE:      Misc - 技术了解
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#repl][REPL]]
@@ -27,7 +27,6 @@
 
 * 哈希碰撞与生日攻击
   + [[http://www.ruanyifeng.com/blog/2018/09/hash-collision-and-birthday-attack.html][哈希碰撞与生日攻击 - 阮一峰]]
-
 
 * 网站统计中的数据收集原理及实现
   + [[http://blog.codinglabs.org/articles/how-web-analytics-data-collection-system-work.html][网站统计中的数据收集原理及实现]]

@@ -1,4 +1,4 @@
-#+TITLE:      Java 项目构建
+#+TITLE:      Gradle - Java 项目构建
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#java-项目构建][Java 项目构建]]

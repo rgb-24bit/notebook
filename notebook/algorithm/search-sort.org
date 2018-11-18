@@ -1,4 +1,4 @@
-#+TITLE:      查找与排序算法
+#+TITLE:      数据结构与算法 - 查找与排序
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#二分法查找][二分法查找]]
@@ -23,8 +23,10 @@
     }
   #+END_SRC
 
-  : (low + high) / 2 == low + (high - low) / 2
-  : 这样不会溢出
+  #+BEGIN_SRC C
+    // 不会溢出的方式
+    (low + high) / 2 == low + (high - low) / 2
+  #+END_SRC
 
 * 遗传算法
   *遗传算法(genetic algorithm (GA))* 是计算数学中用于解决最佳化的 *搜索算法*, 

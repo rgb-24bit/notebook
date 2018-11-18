@@ -1,4 +1,4 @@
-#+TITLE:      编程相关
+#+TITLE:      Misc - 编程相关
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#伪代码][伪代码]]
@@ -6,6 +6,12 @@
 - [[#函数式编程][函数式编程]]
 - [[#可扩展编程][可扩展编程]]
 - [[#单字节字符集][单字节字符集]]
+- [[#技术名词][技术名词]]
+- [[#同名标识符优先级问题][同名标识符优先级问题]]
+  - [[#python][Python]]
+  - [[#java][Java]]
+  - [[#c][C]]
+  - [[#javascript][JavaScript]]
 
 * 伪代码
   + [[https://en.wikipedia.org/wiki/Pseudocode][Pseudocode]]
@@ -43,4 +49,105 @@
     In [4]: convert_multi(s)
     Out[4]: '单字节字符集abcdef'
   #+END_SRC
+
+* 技术名词
+  + [[https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%AD%89%E7%B6%B2%E8%B7%AF][P2P]] 
+  + [[https://zh.wikipedia.org/wiki/%E5%85%A7%E5%AE%B9%E5%82%B3%E9%81%9E%E7%B6%B2%E8%B7%AF][CDN]]
+  + [[https://zh.wikipedia.org/wiki/MIDI][MIDI]]
+  + [[https://zh.wikipedia.org/wiki/%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81][UUID]]
+  + [[https://zh.wikipedia.org/wiki/%E5%BA%8F%E5%88%97%E5%8C%96][serialization]]
+  + [[https://zh.wikipedia.org/wiki/%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5][符号链接]]
+  + [[https://zh.wikipedia.org/wiki/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%9E%8B][编程范式]]
+
+* 同名标识符优先级问题
+  同名标识符：
+  1. 形参和函数同名
+  2. 局部变量和函数同名
+
+** Python
+   #+BEGIN_SRC python :results output
+     class Test(object):
+         @staticmethod
+         def func(func):
+             return func
+
+         @staticmethod
+         def func2():
+             func2 = 10
+             return func2
+
+     print(Test.func(10))
+     print(Test.func2())
+   #+END_SRC
+
+   + RESULTS:
+     : 10
+     : 10
+
+** Java
+   #+BEGIN_SRC java
+     class Test {
+       public static int func(int func) {
+         return func;
+       }
+
+       public static int func() {
+         int func = 10;
+         return func;
+       }
+
+       public static void main(String[] args) {
+         System.out.println(Test.func(10));
+         System.out.println(Test.func());
+       }
+     }
+   #+END_SRC
+
+   + RESULTS:
+     : 10
+     : 10
+
+** C
+   #+BEGIN_SRC C :results output
+     #include <stdio.h>
+
+     int func(int func) {
+       return func;
+     }
+
+     /* int func2(int func2) { */
+     /*   int func2 = 10; */
+     /*   return func2; */
+     /* } */
+
+     int main(int argc, char* argv) {
+       printf("%d", func(10)/* , func2() */);
+       return 0;
+     }
+   #+END_SRC
+
+   + RESULTS:
+     : 10
+
+   C 语言中不能定义和函数名相同的局部变量
+
+** JavaScript
+   #+BEGIN_SRC javascript
+     function func(func) {
+         return func;
+     }
+
+     function func2() {
+         func2 = 10;
+         return func2;
+     }
+
+     console.log(func(10));
+     console.log(func2());
+   #+END_SRC
+
+   + RESULTS:
+     : 10
+     : 10
+
 

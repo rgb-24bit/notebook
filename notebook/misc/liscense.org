@@ -1,4 +1,4 @@
-#+TITLE:      开源协议
+#+TITLE:      Misc - 开源协议
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#chose][Chose]]

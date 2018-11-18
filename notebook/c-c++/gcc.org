@@ -1,4 +1,4 @@
-#+TITLE:      GCC 笔记
+#+TITLE:      C-C++ - GCC 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#常用命令行选项---gcc][常用命令行选项 - GCC]]

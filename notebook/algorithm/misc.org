@@ -1,4 +1,4 @@
-#+TITLE:      Misc
+#+TITLE:      数据结构与算法 - 杂项
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#求最大公约数][求最大公约数]]

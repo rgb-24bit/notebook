@@ -1,4 +1,4 @@
-#+TITLE:      Flask 扩展
+#+TITLE:      Flask - 扩展
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#flask-migrate][flask-migrate]]

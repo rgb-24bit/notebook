@@ -1,4 +1,4 @@
-#+TITLE:      Gradle 基础使用
+#+TITLE:      Gradle - 基础使用
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#任务相关][任务相关]]

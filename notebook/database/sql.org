@@ -1,4 +1,4 @@
-#+TITLE:      SQL 笔记
+#+TITLE:      数据库 - SQL 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#风格指南][风格指南]]

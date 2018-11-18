@@ -1,5 +1,0 @@
-#+TITLE:      .NET - NuGet 使用
-
-* for sharpdevelop
-  + [[http://community.sharpdevelop.net/blogs/mattward/archive/2011/01/23/NuGetSupportInSharpDevelop.aspx][NuGet Support in SharpDevelop]]
-    

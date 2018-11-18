@@ -1,4 +1,15 @@
-#+TITLE:      SQL Server 笔记
+#+TITLE:      数据库 - SQL Server 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#使用-c-操作-sql-server][使用 C# 操作 SQL Server]]
+  - [[#五大核心组件][五大核心组件]]
+  - [[#connection-类][Connection 类]]
+  - [[#command-类][Command 类]]
+  - [[#dataadaper-类][DataAdaper 类]]
+  - [[#datareader-类][DataReader 类]]
+  - [[#dataset-类][DataSet 类]]
+  - [[#简单使用总结][简单使用总结]]
+- [[#t-sql-笔记][T-SQL 笔记]]
 
 * 使用 C# 操作 SQL Server
   + [[http://www.cnblogs.com/rainman/archive/2012/03/13/2393975.html][C# 操作 SQL Server 数据库]]
@@ -26,18 +37,18 @@
    或者将一个 Command 对象的引用传递给 DataAdapter, 它保存了一组能够操作下面描述的一组数据的命令.
 
    *属性:*
-    + ConnectionString :: 打开或连接数据库的字符串
-    + ConnectionTimeOut :: 尝试建立连接时终止尝试并生成错误之前所等待的时间
-    + Database :: 获取当前打开的数据库
-    + State :: 连接到当前状态
-    + DataSourse :: 获取打开数据库的连接实例
+                                          + ConnectionString :: 打开或连接数据库的字符串
+                                          + ConnectionTimeOut :: 尝试建立连接时终止尝试并生成错误之前所等待的时间
+                                          + Database :: 获取当前打开的数据库
+                                          + State :: 连接到当前状态
+                                          + DataSourse :: 获取打开数据库的连接实例
 
-    *方法:*
-    + open :: 打开数据库连接
-    + close :: 关闭数据库连接
-    + CreateCommand :: 创建并返回一个与该链接相关联的Command对象
-    + BeginTransation :: 开始数据库事物
-    + ChangeDatabase :: 更改当前打开的数据库
+                                                          *方法:*
+                                                          + open :: 打开数据库连接
+                                                          + close :: 关闭数据库连接
+                                                          + CreateCommand :: 创建并返回一个与该链接相关联的Command对象
+                                                          + BeginTransation :: 开始数据库事物
+                                                          + ChangeDatabase :: 更改当前打开的数据库
 
 ** Command 类
    成功与数据建立连接后, 就可以用 Command 对象来执行查询, 修改, 插入, 删除等命令
@@ -47,19 +58,19 @@
    插入数据可用 ExecuteNonQuery() 方法来执行插入命令
 
    *属性:*
-    + Connection :: 设置或获取Command对象使用的Connection对象实例
-    + ConnectionType :: (设置或获取执行语句的类型)
-      - StoredProceduce :: 储存过程
-      - TableDirectText :: 标准的SQL语句
-      - Text :: 默认
-    + CommandText :: 设置或获取需要执行的sql语句或储存过程名
-    + Parameter :: 取得参数值集合
+                          + Connection :: 设置或获取Command对象使用的Connection对象实例
+                          + ConnectionType :: (设置或获取执行语句的类型)
+                                              - StoredProceduce :: 储存过程
+                                              - TableDirectText :: 标准的SQL语句
+                                              - Text :: 默认
+                          + CommandText :: 设置或获取需要执行的sql语句或储存过程名
+                          + Parameter :: 取得参数值集合
 
-    *方法:*
-    + ExecuteReader :: 执行CommandText指定的SQL语句或储存过程名, 返回值类型为DataReader
-    + ExecuteNonQuery :: 执行后不返回任何行, 对于update, insert, delete语句, 返回影响的行数对于其他类型的语句, 返回值为-1
-    + ExecuteScalar :: 返回第一个结果集中的第一行中的第一列数据
-    + ExecuteXMLReader :: 将CommandText发送到Connection并生成一个XmlReader
+                                         *方法:*
+                                         + ExecuteReader :: 执行CommandText指定的SQL语句或储存过程名, 返回值类型为DataReader
+                                         + ExecuteNonQuery :: 执行后不返回任何行, 对于update, insert, delete语句, 返回影响的行数对于其他类型的语句, 返回值为-1
+                                         + ExecuteScalar :: 返回第一个结果集中的第一行中的第一列数据
+                                         + ExecuteXMLReader :: 将CommandText发送到Connection并生成一个XmlReader
 
 ** DataAdaper 类
    某些时候开发人员使用的数据主要是只读的, 并且开发人员很少需要将其改变至底层的数据源
@@ -75,21 +86,21 @@
    另外, DataAdapter 包含对数据的 SELECT, INSERT, UPDATE 和 DELETE 操作的 Command 对象引用
 
    开发人员将为 DataSet 中的每一个 Table 都定义 DataAadapter, 它将为开发人员照顾所有与数据库的连接
-   
+
    所以开发人员将做的工作是告诉 DataAdapter 什么时候装载或者写入到数据库
 
    *属性:*
-    + SelectCommand :: 用于设置从记录集中选择记录的命令
-    + InsertCommand :: 用于设置从记录集中添加记录的命令
-    + UpdateCommand :: 用于设置从记录集中更新记录的命令
-    + DeleteCommand :: 用于设置从记录集中删除记录的命令
+                                      + SelectCommand :: 用于设置从记录集中选择记录的命令
+                                      + InsertCommand :: 用于设置从记录集中添加记录的命令
+                                      + UpdateCommand :: 用于设置从记录集中更新记录的命令
+                                      + DeleteCommand :: 用于设置从记录集中删除记录的命令
 
-    *方法:*
-    + Fill :: 用于在DataSet中添加或者刷新行
-    + FillSchema :: 用于将DataTable添加到DataSet中, 并匹配与数据源匹配的框架
-    + GetFillParameters :: 获取当前执行SQL的SELECT语句时用户设置参数
-    + Update :: 用于对DataSet记录集进行操作
-    + Dispose :: 用于销毁SQLDataAdaper对象
+                                                         *方法:*
+                                                         + Fill :: 用于在DataSet中添加或者刷新行
+                                                         + FillSchema :: 用于将DataTable添加到DataSet中, 并匹配与数据源匹配的框架
+                                                         + GetFillParameters :: 获取当前执行SQL的SELECT语句时用户设置参数
+                                                         + Update :: 用于对DataSet记录集进行操作
+                                                         + Dispose :: 用于销毁SQLDataAdaper对象
 
 ** DataReader 类
    许多数据操作要求开发人员只是读取一串数据
@@ -103,15 +114,15 @@
    这对于速度来说是有好处的, 但是如果开发人员需要操作数据, 更好的办法是使用 DataSet
 
    *属性:*
-    + FiledCount :: 显示当前数据记录的字段总和
-    + IsClosed :: 判断 DataReader对象是否已经关闭
+   + FiledCount :: 显示当前数据记录的字段总和
+   + IsClosed :: 判断 DataReader对象是否已经关闭
 
-    *方法:*
-    + Close :: 关闭DataReader对象
-    + GetString :: 以String类型返回指定列中的对象
-    + Getvalue :: 以自身的类型返回指定列中值
-    + Getvalues :: 返回当前记录所有字段的集合
-    + Read :: 将光标指向DataReader对象的下一记录
+                 *方法:*
+                 + Close :: 关闭DataReader对象
+                 + GetString :: 以String类型返回指定列中的对象
+                 + Getvalue :: 以自身的类型返回指定列中值
+                 + Getvalues :: 返回当前记录所有字段的集合
+                 + Read :: 将光标指向DataReader对象的下一记录
 ** DataSet 类
    DataSet 对象是数据在内存中的表示形式
 
@@ -139,3 +150,41 @@
    + DataSet类, 数据集, 保存从数据库中的数据, 结构类似数据库, 可以用 适配器的 Fill 方法进行填充
    + 命令构建类, 通过适配器对象实例化, 用适配器对象的更新方法更新数据库中的数据, 更新方法参数为数据集对象
 
+* T-SQL 笔记
+  - 创建数据库的默认保存位置为用户目录
+
+  - 获取当前连接的数据库名: Print DB_NAME()
+
+  - 默认连接数据库为 master
+
+  - 查询当前数据库中所有表名
+    #+BEGIN_SRC sql
+      // xtype='U': 表示所有用户表, xtype='S': 表示所有系统表
+        select * from sysobjects where xtype='U'
+    #+END_SRC
+
+  - 获取所有数据库名
+    #+BEGIN_SRC sql
+      select name from master.dbo.sysdatabases;
+    #+END_SRC
+
+  - 查询指定表中的所有字段名
+    #+BEGIN_SRC sql
+      select name from syscolumns where id=Object_Id('table_name')
+    #+END_SRC
+
+  - T-SQL 变量不能直接当做命令使用, 要看其值, 用 Print
+
+  - :r 指令 :: 执行指定路径的 sql 脚本, Sqlcmd 指令
+
+  - 密码修改
+    #+BEGIN_SRC sql
+      exec sp_password NULL, 'newpas', 'login_name';
+
+      ALTER LOGIN sa WITH PASSWORD = 'newpas';
+    #+END_SRC
+
+  - 赋予登录权限
+    #+BEGIN_SRC sql
+      ALTER LOGIN sa ENABLE;
+    #+END_SRC
