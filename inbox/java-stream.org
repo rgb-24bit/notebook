@@ -10,7 +10,7 @@
     Integer[] arr = (Integer[])list.toArray();
   #+END_SRC
 
-* 流操作
+* 流操作的基本流程
   + *中间操作* - 可连接起来的流操作 - 返回流
   + *终端操作* - 关闭流的操作 - 不返回流
 
@@ -19,5 +19,124 @@
     数据源 --> 中间操作 --> 终端操作
   #+END_EXAMPLE
 
-* 注意事项
-  + 和 ~Iterator~ 类似，流只能遍历一次。
+  *NOTE:* 由于流操作是尽可能 *惰性* 执行的，因此应保证最后存在一个 *终端操作*, 否则，中间操作可能不会执行。
+
+* 常用的流操作类型
+  #+CAPTION: 流操作接口
+  |-----------+------+-------------+------------------------+----------------|
+  | 操作      | 类型 | 返回类型    | 使用的类型/函数式接口  | 函数描述符     |
+  |-----------+------+-------------+------------------------+----------------|
+  | filter    | 中间 | Stream<T>   | Predicate<T>           | T -> boolean   |
+  | distinct  | 中间 | Stream<T>   |                        |                |
+  | skip      | 中间 | Stream<T>   | long                   |                |
+  | limit     | 中间 | Stream<T>   | long                   |                |
+  | map       | 中间 | Stream<R>   | Function<T, R>         | T -> R         |
+  | flatMap   | 中间 | Stream<R>   | Function<T, Stream<R>> | T -> Stream<R> |
+  | sorted    | 中间 | Stream<T>   | Comparator<T>          | (T, T) -> int  |
+  | anyMatch  | 终端 | boolean     | Predicate<T>           | T -> boolean   |
+  | noneMatch | 终端 | boolean     | Predicate<T>           | T -> boolean   |
+  | allMatch  | 终端 | boolean     | Predicate<T>           | T -> boolean   |
+  | findAny   | 终端 | Optional<T> |                        |                |
+  | findFirst | 终端 | Optional<T> |                        |                |
+  | forEach   | 终端 | void        | Consumer<T>            | T -> void      |
+  | collect   | 终端 | R           | Collector<T, A, R>     |                |
+  | reduce    | 终端 | Optional<T> | BinaryOperator<T>      | (T, T) -> T    |
+  | count     | 终端 | long        |                        |                |
+  |-----------+------+-------------+------------------------+----------------|
+
+  如果一个流操作不依赖于其他元素的状态，那么它就是 *无状态* 的，如： ~map~ 和 ~filter~.
+
+  反之，如果一个流操作依赖于其他元素的状态，那么它就是 *有状态* 的，如： ~distinct~ 和 ~sorted~.
+
+** 筛选和切片
+   通过一些流操作 *选择* 流中的元素：
+   + filter :: 接受一个谓词，并返回一个包含所有符合谓词的元素的流
+   + distinct :: 返回一个元素各异的流
+   + limit :: 返回一个不超过给定长度的流
+   + skip :: 返回一个扔掉指定数量的元素后的流，如果流中元素数量没有那么多，就返回一个空的流
+
+** 映射
+   通过一些流操作将每个流元素 *映射* 为一个新的元素：
+   + map :: 对每个流元素执行相应的操作
+   + flatMap :: 用于流的扁平化，可以将多个流连接为一个流
+
+   ~flatMap~ 的操作可以参考：
+   + [[https://www.mkyong.com/java8/java-8-flatmap-example/][Java 8 flatMap example]]
+   + [[https://stackoverflow.com/questions/31992290/how-to-flatmap-a-stream-of-streams-in-java][How to flatmap a stream of streams in Java? {duplicate}]]
+   + [[https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html][java.util.function.Function]]
+   + [[https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#stream-int:A-][Arrays.stream]]
+
+   #+BEGIN_SRC java
+     // StreamA, StreamB, StreamC... -> flatMap -> Stream;
+
+     String[][] data = new String[][] {{"a", "b"}, {"c", "d"}, {"e", "f"}};
+
+     //Stream<String[]>
+     Stream<String[]> temp = Arrays.stream(data);
+
+     //Stream<String>, GOOD!
+     Stream<String> stringStream = temp.flatMap(x -> Arrays.stream(x));
+   #+END_SRC
+
+** 查找和匹配
+   + allMatch :: 判断流中所有元素是否匹配指定的谓词
+   + anyMatch :: 判断流中是否存在元素匹配指定的谓词
+   + noneMatch :: 判断流中所有元素是否都不匹配指定的谓词
+   + findAny :: 返回流中的任意元素，对并行友好
+   + findFirst :: 返回流中第一个元素
+
+   需要注意的是， ~findAny~ 和 ~findFirst~ 返回的是一个 ~Optional<T>~ 对象。
+
+** 规约
+   流操作提供 ~reduce~ 方法来进行规约操作，该方法常用的两个重载：
+   #+BEGIN_SRC java
+     // 需要提供初始值，返回值是确定的
+     T	reduce(T identity, BinaryOperator<T> accumulator);
+
+     // 不提供初始值，可以处理流为空的情况
+     Optional<T>	reduce(BinaryOperator<T> accumulator)
+   #+END_SRC
+
+   整数流操作：
+   #+BEGIN_SRC java
+     numbers.stream().reduce(Integer::sum);  // 求和
+     numbers.stream().reduce(Integer::min);  // 最小值
+     numbers.stream().reduce(Integer::max);  // 最大值
+   #+END_SRC
+   
+   ~map-reduce~ 操作，因 ~Google~ 用它来进行网络搜索而出名：
+   #+BEGIN_SRC java
+     numbers.stream().map(d -> 1).reduce(Integer::sum);  // 统计元素个数
+     numbers.stream().count();  // 预提供的方法
+   #+END_SRC
+
+* 数值流
+  对于元素为 ~int~, ~long~ 和 ~double~ 的流来说，使用 ~Stream~ 不是一个很好的选择，因为这会带来频繁的装箱和拆箱操作。
+
+  因此，Java8 提供了对应的特化的原始类型流： ~IntStream~, ~LongStream~ 和 ~DoubleStream~.
+
+  普通的 ~Stream~ 可以通过方法 ~mapToXXX~ 转化为特化流，特化流也可以通过方法 ~boxed~ 转化为普通流。
+
+  特化流提供方法 ~mapToObj~ 可以通过执行指定的函数将流转化为一个对象流：
+  #+BEGIN_SRC java
+    IntStream.range(1, 100).mapToObj(v -> new int[] {v});
+  #+END_SRC
+
+  特化流提供方便与数值规约的方法： sum, max, min 等
+
+  ~IntStream~ 和 ~LongStream~ 还提供方法 ~range~ 和 ~rangeClosed~ 方法生成指定范围的流。
+
+* 构建流
+  + Stream.of :: 类似于 ~Arrays.asList~, 接受任意数量的参数，返回一个流
+
+  + Arrays.stream :: 根据数组创建流，值得注意的是，数值类型的数组会创建对应类型的特化流
+
+  + Files.lines :: 返回一个由指定文件中的各行构成的字符串流，当然，不止这一个方法可以返回流
+
+  + Stream.iterate :: 用给定的函数按需创建值，可以无穷的计算下去，应该用 limit 方法加以限制，接受的函数描述符： T -> T
+
+  + Stream.generate :: 用给定的函数按需创建值，可以无穷的计算下去，应该用 limit 方法加以限制，接受的函数描述符： () -> T
+
+* 流操作的注意事项
+  + 和 ~Iterator~ 类似，流只能遍历一次
+  + 终端操作 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-][Stream.collect]] 接受的参数为一个 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html][Collector]], 可以通过 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html][Collectors]] 获得

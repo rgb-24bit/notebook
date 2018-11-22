@@ -20,3 +20,19 @@
 
 * missing
   + [[https://docs.python.org/3/library/stdtypes.html#dict][Dict __missing__]]
+* 反射
+  + [[https://docs.python.org/3/library/inspect.html#module-inspect][inspect — Inspect live objects]]
+
+* json
+  + [[https://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object][How to convert JSON data into a Python object]]
+  + [[https://stackoverflow.com/questions/10252010/serializing-class-instance-to-json][Serializing class instance to JSON]]
+
+* pip
+  pip 更新在 linux 和 windows 上存在区别：
+  #+BEGIN_SRC bash
+    # linux
+    pip install -U pip
+
+    # windows
+    python -m pip install -U pip
+  #+END_SRC

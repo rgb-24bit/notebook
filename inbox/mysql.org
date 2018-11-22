@@ -1,0 +1,12 @@
+* 远程主机拒接访问
+  + 更改配置文件中的 ~bind-address~ 为 ~0.0.0.0~, 配置文件在 ~/etc/mysql/~
+
+* 远程主机无法访问
+  + 更改用户 ~host~ 为 ~%~
+
+* 创建用户
+  #+BEGIN_SRC sql
+    CREATE USER 'user'@'%' IDENTIFIED BY 'password';
+    GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+  #+END_SRC

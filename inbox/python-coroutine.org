@@ -1,0 +1,10 @@
+* Python 协程
+  实现协程意味着需要重写底层的 I/O 库，让阻塞 I/O 转为异步 I/O.
+
+* 相关链接
+  + [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143208573480558080fa77514407cb23834c78c6c7309000][异步 IO - 廖雪峰]]
+  + [[http://python.jobbole.com/85117/][Python 黑魔法 之 Generator Coroutines]]
+  + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O]]
+  + [[http://blog.mathieu-leplatre.info/some-python-3-asyncio-snippets.html][Some Python 3 asyncio snippets]]
+  + [[http://www.dabeaz.com/coroutines/Coroutines.pdf][A Curious Course on Coroutines and Concurrency]]
+

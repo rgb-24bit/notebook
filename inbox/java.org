@@ -73,5 +73,7 @@
   引用的变量不能直接修改，需要一层包装。
 
 * null 重载
-
   https://www.geeksforgeeks.org/method-overloading-null-error-java/
+
+* Void
+  + [[https://blog.csdn.net/Revivedsun/article/details/71076463][java.lang.Void 与 void 的比较及使用]]

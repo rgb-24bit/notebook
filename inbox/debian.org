@@ -47,5 +47,38 @@
 
     # Download development kit
     apt-get install -y python3-all-dev
+
+    # pip
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python3.6 get-pip.py
+
+    # pipenv
+    pip3 install pipenv
   #+END_SRC
+
+** 1.4 安装 Database
+   #+BEGIN_SRC bash
+     # Mysql
+     apt-get install mariadb-server
+     mysql_secure_installation
+   #+END_SRC
+
+** 1.4 清理
+   安装程序时在一个临时目录中进行，安装完成后删除该临时目录即可。
+
+* 2. 应用程序配置
+** 2.1 clone & synchronize dotfiles
+   #+BEGIN_SRC bash
+     # clone
+     git clone -b linux https://git.dev.tencent.com/rgb_24bit/dotfiles.git
+
+     # synchronize
+     cd dotfiles
+     bash bootstrap.sh
+   #+END_SRC
+   
+** 2.2 clone emacs-kit
+   #+BEGIN_SRC bash
+     git clone git@github.com:rgb-24bit/emacs-kit.git ~/.emacs.d
+   #+END_SRC
 

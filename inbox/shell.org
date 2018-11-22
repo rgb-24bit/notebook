@@ -1,0 +1,10 @@
+* where 命令
+  + windows - where
+  + linux - whereis
+
+* 合并两个目录
+  + [[https://unix.stackexchange.com/questions/149965/how-to-copy-merge-two-directories][How to copy-merge two directories? {duplicate}]]
+  + [[https://stackoverflow.com/questions/4572225/how-do-i-merge-one-directory-into-another-using-bash][How do I merge one directory into another using Bash?]]
+
+* nc 命令
+  + [[http://www.tutorialspoint.com/unix_commands/nc.htm][nc - Unix, Linux Command]]
