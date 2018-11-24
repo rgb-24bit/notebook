@@ -1,6 +1,0 @@
-* 导出
-  + [[https://orgmode.org/manual/Exporting-agenda-views.html][Exporting agenda views]]
-
-  #+BEGIN_EXAMPLE
-    C-x C-w
-  #+END_EXAMPLE

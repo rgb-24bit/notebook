@@ -1,8 +1,0 @@
-* 线性布局嵌套权重计算问题
-  + [[https://stackoverflow.com/questions/9430764/why-are-nested-weights-bad-for-performance-alternatives][Why are nested weights bad for performance? Alternatives?]]
-
-* Android 代码风格和指南
-  + [[https://source.android.com/source/code-style.html][面向贡献者的 AOSP 代码样式指南]]
-  + [[https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md][项目指南]]
-  + [[https://github.com/ribot/android-guidelines/blob/master/architecture_guidelines/android_architecture.md][架构指南]]
-  + [[https://jeroenmols.com/blog/2016/03/07/resourcenaming/][XML 命名约定]]

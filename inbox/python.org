@@ -1,38 +1,12 @@
-* Asynchronous I/O
-  + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O]]
-
 * weakref
   + [[https://blog.louie.lu/2017/07/29/%E4%BD%A0%E6%89%80%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84-python-%E6%A8%99%E6%BA%96%E5%87%BD%E5%BC%8F%E5%BA%AB%E7%94%A8%E6%B3%95-04-weakref/][weakref - 标准库]]
   + [[https://blog.csdn.net/IamaIearner/article/details/9371315][python weakref模块]]
   + [[https://www.rddoc.com/doc/Python/3.6.0/zh/library/weakref/][weakref —弱参考]]
 
-* pickle
-  + [[https://docs.python.org/3/library/pickle.html][pickle — Python object serialization]]
-
 * 文档
   + [[https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/][Beautiful Soup 4.4.0 文档]]
 
-* 模板字符串
+* string
   + [[https://docs.python.org/3.4/library/string.html#template-strings][Template strings]]
+  + [[https://docs.python.org/3/library/string.html][string — Common string operations]]
 
-* enum
-  + [[https://docs.python.org/3/library/enum.html][enum — Support for enumerations]]
-
-* missing
-  + [[https://docs.python.org/3/library/stdtypes.html#dict][Dict __missing__]]
-* 反射
-  + [[https://docs.python.org/3/library/inspect.html#module-inspect][inspect — Inspect live objects]]
-
-* json
-  + [[https://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object][How to convert JSON data into a Python object]]
-  + [[https://stackoverflow.com/questions/10252010/serializing-class-instance-to-json][Serializing class instance to JSON]]
-
-* pip
-  pip 更新在 linux 和 windows 上存在区别：
-  #+BEGIN_SRC bash
-    # linux
-    pip install -U pip
-
-    # windows
-    python -m pip install -U pip
-  #+END_SRC

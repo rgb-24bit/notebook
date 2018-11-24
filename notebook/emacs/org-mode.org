@@ -58,6 +58,13 @@
       C-c a < a
     #+END_EXAMPLE
 
+  + 导出 ~org-agenda-view~ 的内容
+    #+BEGIN_EXAMPLE
+      C-x C-w
+    #+END_EXAMPLE
+
+    + [[https://orgmode.org/manual/Exporting-agenda-views.html][Exporting agenda views]]
+
 * timestamps
   + 插入非活动时间戳：
     #+BEGIN_EXAMPLE

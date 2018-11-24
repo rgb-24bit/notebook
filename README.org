@@ -10,6 +10,7 @@
 #+HTML: </details>
 #+HTML: <details><summary><b><i>android</i></b></summary>
 - [[file:notebook/android/activity.org][Android - Activity]]
+- [[file:notebook/android/layout.org][Android - Layout]]
 - [[file:notebook/android/misc.org][Android - Misc]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>c-c++</i></b></summary>
@@ -77,8 +78,9 @@
 #+HTML: <details><summary><b><i>java</i></b></summary>
 - [[file:notebook/java/annotations.org][Java - 注解类]]
 - [[file:notebook/java/class-object.org][Java - 类和对象]]
-- [[file:notebook/java/faq.org][Java - 常见问题]]
+- [[file:notebook/java/faq.org][Java - 遇到的问题]]
 - [[file:notebook/java/interface-inheritance.org][Java - 接口和继承]]
+- [[file:notebook/java/java-feature.org][Java - 高级特性]]
 - [[file:notebook/java/java-generics.org][Java - 泛型]]
 - [[file:notebook/java/java-io.org][Java - I/O 操作]]
 - [[file:notebook/java/java-lambda.org][Java - Lambda 表达式]]

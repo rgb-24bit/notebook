@@ -1,3 +1,7 @@
-* 大数
+* 大数相关问题
   + [[https://www.pediy.com/kssd/pediy05/pediy50664.htm][RSA 与大数运算]]
   + [[file:~/Desktop/temp/java/math/BigInteger.java][BigInteger - Java]]
+
+* 精确浮点数运算
+  + [[https://python3-cookbook.readthedocs.io/zh_CN/latest/c03/p02_accurate_decimal_calculations.html][执行精确的浮点数运算 - python3-cookbook]]
+  + IBM - 通用小数运算规范

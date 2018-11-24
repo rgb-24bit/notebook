@@ -1,2 +1,0 @@
-* 文件签名列表
-  + [[https://en.wikipedia.org/wiki/List_of_file_signatures][List of file signatures]]

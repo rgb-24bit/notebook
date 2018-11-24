@@ -1,0 +1,16 @@
+#+TITLE:      Java - 高级特性
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#带资源的-try-语句][带资源的 try 语句]]
+
+* 带资源的 try 语句
+  #+BEGIN_SRC java
+    try (AutoCloseable a = new xxx();
+         AutoCloseable b = new xxx()) {
+      ...
+    }
+  #+END_SRC
+
+  + [[https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html][The try-with-resources Statement]]
+
+  这一特性从 JDK 7 开始支持，实现 ~AutoCloseable~ 和 ~CloseAble~ 接口的对象都可以使用。

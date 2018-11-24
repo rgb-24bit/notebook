@@ -12,6 +12,7 @@
   - [[#java][Java]]
   - [[#c][C]]
   - [[#javascript][JavaScript]]
+- [[#文件签名列表][文件签名列表]]
 
 * 伪代码
   + [[https://en.wikipedia.org/wiki/Pseudocode][Pseudocode]]
@@ -150,4 +151,7 @@
      : 10
      : 10
 
+
+* 文件签名列表
+  + [[https://en.wikipedia.org/wiki/List_of_file_signatures][List of file signatures]]
 

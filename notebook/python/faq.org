@@ -6,6 +6,7 @@
 - [[#怎样安装-pip][怎样安装 PIP]]
 - [[#怎样使用-pip-导出依赖][怎样使用 PIP 导出依赖]]
 - [[#怎样在程序中执行一个-python-文件][怎样在程序中执行一个 Python 文件]]
+- [[#怎样更新-pip][怎样更新 PIP]]
 
 * Python 运行速度为什么那么慢
   对于 ~C~ 和 ~C++~ 来说，它们会被编译为 *本机代码*, 因此执行速度很快。
@@ -36,3 +37,13 @@
   1. *Treat it like a module:* ~import file~
   2. *The infamous (and unsafe) exec command:* ~execfile('file.py')~
   3. *Spawn a shell process:* ~os.system('python file.py')~
+* 怎样更新 PIP
+  pip 更新在 linux 和 windows 上存在区别：
+  #+BEGIN_SRC bash
+    # linux
+    pip install -U pip
+
+    # windows
+    python -m pip install -U pip
+  #+END_SRC
+

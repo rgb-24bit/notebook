@@ -25,6 +25,7 @@
 - [[#导入机制][导入机制]]
 - [[#特殊属性][特殊属性]]
 - [[#字节转字符串][字节转字符串]]
+- [[#dict__missing__][dict.__missing__]]
 
 * 小整数对象池
   Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例。
@@ -414,3 +415,17 @@
     bytes.hex()
   #+END_SRC
   
+* dict.__missing__
+  访问字典不存在的键时会调用这个方法：
+  #+BEGIN_SRC python
+    >>> class Counter(dict):
+    ...     def __missing__(self, key):
+    ...         return 0
+    >>> c = Counter()
+    >>> c['red']
+    0
+    >>> c['red'] += 1
+    >>> c['red']
+    1
+  #+END_SRC
+

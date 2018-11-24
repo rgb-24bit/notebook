@@ -13,67 +13,6 @@
   + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
 
 
-* io
-  + PushbackInputStream
-  + PushbackReader
-
-* java7 try
-  带资源的 try 语句：
-  #+BEGIN_SRC java
-    try (AutoCloseable a = new xxx();
-         AutoCloseable b = new xxx()) {
-      ...
-    }
-  #+END_SRC
-
-  + [[https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html][The try-with-resources Statement]]
-
-* classpath
-  + [[https://docs.oracle.com/javase/tutorial/essential/environment/paths.html][PATH and CLASSPATH]]
-  + [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html][Setting the Class Path]]
-
-* resource
-  + [[https://docs.oracle.com/javase/8/docs/technotes/guides/lang/resources.html][Location-Independent Access to Resources]]
-  + [[https://www.cnblogs.com/yejg1212/p/3270152.html][关于Class.getResource和ClassLoader.getResource的路径问题]]
-    
-  #+BEGIN_SRC java
-    Class.getResource("name");   // current_class_file_path/name
-    Class.getResource("/name");  // current_classpath/name
-  #+END_SRC
-
-  #+BEGIN_EXAMPLE
-    + path
-      + resource
-      + -- Test.class  -- current classpath -- path
-
-    + path
-      + resource
-      + -- com
-           + -- rgbit
-                + -- Test.class  -- current classpath -- path
-
-    + path
-      + -- com.rgbit.jar  -- current classpath -- path/com.rgbit.jar
-
-    + com.rgbit.jar
-      + -- resource
-      + -- ...
-  #+END_EXAMPLE
-
-* 内部类引用外部类实例
-  #+BEGIN_SRC java
-    OuterClassName.this;
-  #+END_SRC
 * Essential Classes
   + [[https://docs.oracle.com/javase/tutorial/essential/index.html][Trail: Essential Classes]]
-* bean class
-  + [[https://dzone.com/articles/the-bean-class-for-java-programming][The Bean Class for Java Programming]]
 
-* lambda 表达式
-  引用的变量不能直接修改，需要一层包装。
-
-* null 重载
-  https://www.geeksforgeeks.org/method-overloading-null-error-java/
-
-* Void
-  + [[https://blog.csdn.net/Revivedsun/article/details/71076463][java.lang.Void 与 void 的比较及使用]]

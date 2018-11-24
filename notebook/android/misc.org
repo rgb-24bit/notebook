@@ -4,6 +4,8 @@
 - [[#基本概念][基本概念]]
 - [[#项目资源][项目资源]]
 - [[#日志工具][日志工具]]
+- [[#android-代码风格和指南][Android 代码风格和指南]]
+- [[#support-库][support 库]]
 - [[#源码链接][源码链接]]
 
 * 基本概念
@@ -38,6 +40,24 @@
 
   + [[https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/util/Log.java][android.util.Log source code]]
 
+* Android 代码风格和指南
+  + [[https://source.android.com/source/code-style.html][面向贡献者的 AOSP 代码样式指南]]
+  + [[https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md][项目指南]]
+  + [[https://github.com/ribot/android-guidelines/blob/master/architecture_guidelines/android_architecture.md][架构指南]]
+  + [[https://jeroenmols.com/blog/2016/03/07/resourcenaming/][XML 命名约定]]
+  + [[https://medium.com/@VeraKern/formatting-xml-layout-files-for-android-47aec62722fc][Formatting xml layout files for Android]]
+
+* support 库
+  + [[https://developer.android.com/topic/libraries/support-library/features?hl=zh-cn][支持库功能 | Android Developers]]
+
+  #+BEGIN_EXAMPLE
+    com.android.support:support-compat:24.2.0
+    com.android.support:support-core-utils:24.2.0
+    com.android.support:support-core-ui:24.2.0
+    com.android.support:support-media-compat:24.2.0
+    com.android.support:support-fragment:24.2.0
+    ...
+  #+END_EXAMPLE
 
 * 源码链接
   + [[https://android.googlesource.com/platform/frameworks/base/][Android framework classes and services]]

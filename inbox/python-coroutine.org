@@ -1,10 +1,37 @@
 * Python 协程
-  实现协程意味着需要重写底层的 I/O 库，让阻塞 I/O 转为异步 I/O.
+  实现协程意味着需要重写底层的 I/O 库，让阻塞 I/O 转为异步 I/O。
+
+** part 1
+   协程通过生成器实现，生成器需要通过 ~next~ 或 ~send(None)~ 启动。
+
+   每次都启动实在太麻烦，因此可以通过装饰器简化这一过程：
+   #+BEGIN_SRC python
+     def coroutine(func):
+         def start(*args,**kwargs):
+             cr = func(*args,**kwargs)
+             cr.send(None)
+             return cr
+         return start
+   #+END_SRC
+
+   生成器生产值，协程消费值。
+
+   协程中的 yield 会生成一个值，但与迭代无关，因此，可以这样写：
+   #+BEGIN_SRC python
+     def gen():
+         val = yield
+   #+END_SRC
+
+** part 2
+   协程模拟管道的方式实在是太棒了：
+   + [[http://www.dabeaz.com/coroutines/cobroadcast2.py][cobroadcast2.py]]
+
+** part 3
+   这一节的内容感觉不是那么好，感觉增加了编码的难度。
 
 * 相关链接
   + [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143208573480558080fa77514407cb23834c78c6c7309000][异步 IO - 廖雪峰]]
   + [[http://python.jobbole.com/85117/][Python 黑魔法 之 Generator Coroutines]]
   + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O]]
   + [[http://blog.mathieu-leplatre.info/some-python-3-asyncio-snippets.html][Some Python 3 asyncio snippets]]
-  + [[http://www.dabeaz.com/coroutines/Coroutines.pdf][A Curious Course on Coroutines and Concurrency]]
-
+  + [[http://www.dabeaz.com/coroutines/][A Curious Course on Coroutines and Concurrency]]

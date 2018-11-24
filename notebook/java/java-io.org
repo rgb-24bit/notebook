@@ -18,6 +18,7 @@
   - [[#managing-metadata][Managing Metadata]]
   - [[#reading-writing-and-creating-files][Reading, Writing, and Creating Files]]
   - [[#walking-the-file-tree][Walking the File Tree]]
+- [[#字符回退][字符回退]]
 
 * Refrence
   + [[https://docs.oracle.com/javase/tutorial/essential/io/index.html][Lesson: Basic I/O]]
@@ -315,3 +316,6 @@
 
    + [[https://docs.oracle.com/javase/tutorial/essential/io/walk.html][Walking the File Tree]]
 
+* 字符回退
+  Java 提供了 [[https://docs.oracle.com/javase/8/docs/api/java/io/PushbackInputStream.html][PushbackInputStream]] 和 [[https://docs.oracle.com/javase/8/docs/api/java/io/PushbackReader.html][PushbackReader]] 以支持读取流的同时回退字符。
+  

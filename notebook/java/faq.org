@@ -1,4 +1,4 @@
-#+TITLE:      Java - 常见问题
+#+TITLE:      Java - 遇到的问题
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#怎样执行包中的类][怎样执行包中的类]]
@@ -7,6 +7,11 @@
 - [[#java-常用的构建工具有哪些][Java 常用的构建工具有哪些]]
 - [[#java-程序的文件名有什么限制][Java 程序的文件名有什么限制]]
 - [[#java-环境变量的配置问题][Java 环境变量的配置问题]]
+- [[#java-资源问题][Java 资源问题]]
+- [[#内部类引用外部类的实例][内部类引用外部类的实例]]
+- [[#java-编程中-bean-类的含义][Java 编程中 Bean 类的含义]]
+- [[#null-重载的问题][null 重载的问题]]
+- [[#void-和-void-的问题][Void 和 void 的问题]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -58,4 +63,88 @@
   3. 对于包中的类文件，以包含包目录的目录结束
 
   + [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html][Setting the Class Path]]
+
+* Java 资源问题
+  + [[https://docs.oracle.com/javase/8/docs/technotes/guides/lang/resources.html][Location-Independent Access to Resources]]
+  + [[https://www.cnblogs.com/yejg1212/p/3270152.html][关于 Class.getResource 和 ClassLoader.getResource 的路径问题]]
+    
+  #+BEGIN_SRC java
+    Class.getResource("name");   // current_class_file_path/name
+    Class.getResource("/name");  // current_classpath/name
+  #+END_SRC
+
+  #+BEGIN_EXAMPLE
+    + path
+      + resource
+      + -- Test.class  -- current classpath -- path
+
+    + path
+      + resource
+      + -- com
+           + -- rgbit
+                + -- Test.class  -- current classpath -- path
+
+    + path
+      + -- com.rgbit.jar  -- current classpath -- path/com.rgbit.jar
+
+    + com.rgbit.jar
+      + -- resource
+      + -- ...
+  #+END_EXAMPLE
+
+  将 ~Resources~ 目录放在顶级包或类的同级目录的原因：该位置就在 ~CLASSPATH~ 下，方便资源的寻找
+
+* 内部类引用外部类的实例
+  #+BEGIN_SRC java
+    OuterClassName.this;
+  #+END_SRC
+
+* Java 编程中 Bean 类的含义
+  + [[https://dzone.com/articles/the-bean-class-for-java-programming][The Bean Class for Java Programming]]
+    
+  Bean 类： 用于聚合或收集原始数据类型的类以及用于在程序中建模数据的类
+
+  多数程序需要定义多个元素或值来描述它们与之交互的数据。这些元素不是单独列出每个元素，
+  而是组合在一起成为一个类。
+
+  一些强制性的规则：
+  + 所有字段只能是私有的
+  + 必须有默认构造函数
+  + 读取或写入实例变量的方法必须以前缀 set 或 get 开头
+  + bean 类应该实现可序列化的 interfaceOptional
+
+ 一些可选的规则：
+ + bean 类应该有一个 toString 方法
+ + bean 类应该有一个 hashCode 和一个 equals 方法
+ + bean 类应该实现 Comparable 接口并具有 compareTo 方法
+
+* null 重载的问题
+  #+BEGIN_SRC java
+    public class Example {
+      public void method(String string) {
+        // ....
+      }
+
+      public void method(Object object) {
+        // ...
+      }
+    }
+  #+END_SRC
+
+  对于上面的代码，如果像这样调用会出现错误：
+  #+BEGIN_SRC java
+    Example.method(null);
+  #+END_SRC
+
+  null 对于两个重载都合适，产生了冲突，解决方案是将 null 赋值给一个引用：
+  #+BEGIN_SRC java
+    String string = null;
+    Example.method(string);
+  #+END_SRC
+
+* Void 和 void 的问题
+  void 关键字表示无返回值，而 Void 表示需要返回 null, 也只能返回 null.
+
+  在 Lambda 表达式中，不需要返回值时可以用 ~Consumer<T>~, 对于 ~Function<T, Void>~ 来说，
+  还是必须要返回 ~null~ 才行。
 

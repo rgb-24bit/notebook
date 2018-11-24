@@ -116,6 +116,24 @@
         Out[4]: [1, 2, 2, 3]
       #+END_SRC
 
+  + enum :: 提供枚举类型的支持
+    + [[https://docs.python.org/3/library/enum.html][enum — Support for enumerations]]
+      #+BEGIN_SRC python
+        >>> class Shake(Enum):
+        ...     VANILLA = 7
+        ...     CHOCOLATE = 4
+        ...     COOKIES = 9
+        ...     MINT = 3
+        ...
+        >>> for shake in Shake:
+        ...     print(shake)
+        ...
+        Shake.VANILLA
+        Shake.CHOCOLATE
+        Shake.COOKIES
+        Shake.MINT
+      #+END_SRC
+
 * 文件和目录访问
   [[http://www.cnblogs.com/funsion/p/4017989.html][Python 默认模块 os 和 shutil 实用函数]].
 
@@ -185,3 +203,14 @@
       #+END_SRC
       
       ~__enter__~ 执行到 ~yield~, ~__exit__~ 执行 ~yield~ 后的部分
+
+  + inspect :: 实时获取一个对象的相关信息
+    + [[https://docs.python.org/3/library/inspect.html][inspect — Inspect live objects]]
+      #+BEGIN_SRC python
+        >>> async def agen():
+        ...     yield 1
+        ...
+        >>> inspect.isasyncgenfunction(agen)
+        True
+      #+END_SRC
+
