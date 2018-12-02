@@ -10,3 +10,25 @@
   + [[https://docs.python.org/3.4/library/string.html#template-strings][Template strings]]
   + [[https://docs.python.org/3/library/string.html][string — Common string operations]]
 
+* 元编程
+  + [[http://www.dabeaz.com/py3meta/index.html][Python 3 Metaprogramming]]
+
+* ast
+  + [[https://eli.thegreenplace.net/2009/11/28/python-internals-working-with-python-asts/][Python internals: Working with Python ASTs]]
+  + [[http://video.tudou.com/v/XMjEzODYwNzA0OA==.html?__fr=oldtd][PyCon 2011: What would you do with an ast?]]
+  + [[https://www.rddoc.com/doc/Python/3.6.0/zh/library/ast/][ast — 抽象语法树]]
+  + [[https://stackoverflow.com/questions/1515357/simple-example-of-how-to-use-ast-nodevisitor][Simple example of how to use ast.NodeVisitor?]]
+  + [[https://stackoverflow.com/questions/4922520/determining-if-a-given-python-module-is-a-built-in-module][Determining if a given Python module is a built-in module - Stack Overflow]]
+  + [[https://docs.python.org/3/library/importlib.html#importlib.machinery.ModuleSpec][importlib — The implementation of import — Python 3.7.1 documentation]]
+
+* gevent
+  + [[http://www.gevent.org/index.html][What is gevent?]]
+
+* 上下文管理器
+  #+BEGIN_SRC python
+    >>> f = open('ttt.ttt', 'w')
+    >>> with f as fp:
+    ...     pass
+    ...
+  #+END_SRC
+

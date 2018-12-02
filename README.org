@@ -99,10 +99,6 @@
 - [[file:notebook/lang/plantuml.org][Language - plantuml]]
 - [[file:notebook/lang/uml.org][Language - UML]]
 #+HTML: </details>
-#+HTML: <details><summary><b><i>leetcode</i></b></summary>
-- [[file:notebook/leetcode/109.org][LeetCode - 109. 有序链表转换二叉搜索树]]
-- [[file:notebook/leetcode/365.org][LeetCode - 365. 水壶问题]]
-#+HTML: </details>
 #+HTML: <details><summary><b><i>linux</i></b></summary>
 - [[file:notebook/linux/debian.org][Linux - Debian 系统使用]]
 - [[file:notebook/linux/faq.org][Linux - 常见问题]]

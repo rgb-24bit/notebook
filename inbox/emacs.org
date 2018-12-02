@@ -1,0 +1,14 @@
+* 月日志浏览
+  #+BEGIN_EXAMPLE
+    C-c a < a  加载当前缓冲区的内容
+    v m        切换到月视图
+    v c        显示时间记录
+  #+END_EXAMPLE
+
+* 正则表达式
+  + [[https://www.emacswiki.org/emacs/ReplaceRegexpWithLispExpressions][EmacsWiki: Replace Regexp With Lisp Expressions]]
+
+* autoload
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Autoload.html][Autoload - GNU Emacs Lisp Reference Manual]]
+
+* org-capture

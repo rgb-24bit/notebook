@@ -1,0 +1,6 @@
+* ID 重复
+  + [[https://blog.csdn.net/ruglcc/article/details/49944777][如何避免android layout.xml 布局文件中重名id的错误]]
+  + [[https://developer.android.com/guide/topics/ui/declaring-layout?hl=zh-cn#id][ID]]
+
+* 相对布局等分空间
+  + [[https://blog.csdn.net/u012572172/article/details/39780055][RelativeLayout 布局下实现控件平分空间]]

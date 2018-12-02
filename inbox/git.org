@@ -1,0 +1,5 @@
+* git checkout
+  + 指定源分支
+    #+BEGIN_EXAMPLE
+      git checkout -b <new_branch> <src_branch>
+    #+END_EXAMPLE
