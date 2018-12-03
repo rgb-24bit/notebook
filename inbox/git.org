@@ -3,3 +3,6 @@
     #+BEGIN_EXAMPLE
       git checkout -b <new_branch> <src_branch>
     #+END_EXAMPLE
+
+* git log
+  + [[https://stackoverflow.com/questions/4649356/how-do-i-run-git-log-to-see-changes-only-for-a-specific-branch][How do I run git log to see changes only for a specific branch? - Stack Overflow]]

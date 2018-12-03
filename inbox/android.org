@@ -4,3 +4,83 @@
 
 * 相对布局等分空间
   + [[https://blog.csdn.net/u012572172/article/details/39780055][RelativeLayout 布局下实现控件平分空间]]
+
+* ListView HashMap Adapter
+  + [[https://stackoverflow.com/questions/5234576/what-adapter-shall-i-use-to-use-hashmap-in-a-listview][android - What adapter shall I use to use HashMap in a ListView - Stack Overflow]]
+    #+BEGIN_SRC java
+      // 无顺序
+      public class HashMapAdapter extends BaseAdapter {
+
+        private HashMap<String, String> mData = new HashMap<String, String>();
+        private String[] mKeys;
+        public HashMapAdapter(HashMap<String, String> data){
+          mData  = data;
+          mKeys = mData.keySet().toArray(new String[data.size()]);
+        }
+
+        @Override
+        public int getCount() {
+          return mData.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+          return mData.get(mKeys[position]);
+        }
+
+        @Override
+        public long getItemId(int arg0) {
+          return arg0;
+        }
+
+        @Override
+        public View getView(int pos, View convertView, ViewGroup parent) {
+          String key = mKeys[pos];
+          String Value = getItem(pos).toString();
+
+          //do your view stuff here
+
+          return convertView;
+        }
+      }
+
+      // 有顺序
+      public class HashMapAdapter extends BaseAdapter {
+        private LinkedHashMap<String, String> mData = new LinkedHashMap<String, String>();
+        private String[] mKeys;
+        public HashMapAdapter(LinkedHashMap<String, String> data){
+          mData  = data;
+          mKeys = mData.keySet().toArray(new String[data.size()]);
+        }
+
+        @Override
+        public int getCount() {
+          return mData.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+          return mData.get(mKeys[position]);
+        }
+
+        @Override
+        public long getItemId(int arg0) {
+          return arg0;
+        }
+
+        @Override
+        public View getView(int pos, View convertView, ViewGroup parent) {
+          String key = mKeys[pos];
+          String Value = getItem(pos).toString();
+
+          //do your view stuff here
+
+          return convertView;
+        }
+      }
+    #+END_SRC
+
+  + [[https://developer.android.com/reference/android/widget/ArrayAdapter][ArrayAdapter  |  Android Developers]]
+
+  + [[https://developer.android.com/reference/android/widget/BaseAdapter][BaseAdapter  |  Android Developers]]
+
