@@ -9,3 +9,14 @@
 * hash
   + [[http://www.nowamagic.net/academy/detail/3008086][Linux 内核中的 hash 与 bucket -- 简明现代魔法]]
 
+* 二分查找
+  #+BEGIN_SRC python
+    def lower_bound(array, left, right, value):  # 返回 [left, right) 内第一个不小于 value 值的位置
+        while left < right:
+            mid = lfet + (right - left) // 2
+            if array[mid] < value:
+                left = mid + 1
+            else:
+                right = mid
+        return left  # right 等效
+  #+END_SRC

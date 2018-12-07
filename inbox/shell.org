@@ -10,3 +10,6 @@
   + [[http://www.tutorialspoint.com/unix_commands/nc.htm][nc - Unix, Linux Command]]
 * windows
   + [[https://jingyan.baidu.com/article/3c48dd34491d47e10be358b8.html][如何查看某个端口被谁占用]]
+
+* bash
+  + C-l 清屏

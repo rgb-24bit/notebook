@@ -140,3 +140,7 @@
 * 流操作的注意事项
   + 和 ~Iterator~ 类似，流只能遍历一次
   + 终端操作 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-][Stream.collect]] 接受的参数为一个 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html][Collector]], 可以通过 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html][Collectors]] 获得
+
+* 引用类型
+  + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
+

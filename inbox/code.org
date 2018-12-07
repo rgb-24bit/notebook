@@ -1,0 +1,2 @@
+* 编辑器配置
+  + [[https://editorconfig.org/][What is EditorConfig?]]
