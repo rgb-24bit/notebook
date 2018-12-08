@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#regular-expression-syntax][Regular Expression Syntax]]
 - [[#idiosyncrasies-of-emacs-regular-expressions][Idiosyncrasies of Emacs Regular Expressions]]
+- [[#replace-regexp-with-lisp-expressions][Replace Regexp With Lisp Expressions]]
 
 * Regular Expression Syntax
   #+BEGIN_EXAMPLE
@@ -71,3 +72,14 @@
   + 在 ~Lisp~ 代码中，反斜杠 ~\~ 必须转义，即使用 ~\\~. 没有原始字符串真操蛋。
 
   + 不支持 ~\d~, 请使用 ~[0-9]~ 或 ~[:digit:]~ 代替，真坑。
+
+* Replace Regexp With Lisp Expressions
+  通过这样的方式调用 elisp 表达式：
+  #+BEGIN_SRC elisp
+    M-x replace-regexp
+    Replace regexp:  \(\w+\)
+    Replace regexp with:  \,(capitalize \1)
+  #+END_SRC
+
+  其中， ~,(capitalize \1)~ 会执行 ~(capitalize)~ 来替换字符串。
+

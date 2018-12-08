@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#布局基础][布局基础]]
 - [[#自定义控件][自定义控件]]
+- [[#相对布局实现等分控件][相对布局实现等分控件]]
 - [[#布局中的一些问题][布局中的一些问题]]
 
 * 布局基础
@@ -28,6 +29,62 @@
 
   重用布局： [[https://developer.android.com/training/improving-layouts/reusing-layouts][Re-using layouts with <include/>]]
 
+* 相对布局实现等分控件
+  通过设置参照物来实现这一点：
+  #+BEGIN_SRC xml
+    <RelativeLayout
+        android:layout_width= "match_parent"
+        android:layout_height= "120dp">
+        <!-- 设置参照物实现垂直平分 -->
+        <View
+            android:id= "@+id/strut"
+            android:layout_width= "0dp"
+            android:layout_height= "0dp"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/strut"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_red"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@id/strut"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_blue"/>
+      </RelativeLayout >
+  #+END_SRC
+  
+  #+BEGIN_SRC xml
+    <RelativeLayout
+        android:layout_width= "match_parent"
+        android:layout_height= "200dp">
+        <!-- 设置参照物实现水平平分 -->
+        <View
+            android:id= "@+id/strut"
+            android:layout_width= "0dp"
+            android:layout_height= "0dp"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignRight="@id/strut"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/hankukko"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/strut"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/chopper"/>
+      </RelativeLayout >
+  #+END_SRC
+
 * 布局中的一些问题
   + 线性布局嵌套权重需要进行多次的计算，影响性能，应该考虑用相对布局替换，参考：
     [[https://stackoverflow.com/questions/9430764/why-are-nested-weights-bad-for-performance-alternatives][Why are nested weights bad for performance? Alternatives?]]
@@ -35,3 +92,5 @@
   + 属性 gravity 指定控件中的文本的对齐方式，而 layout_gravity 指定控件在布局中的对齐方式
 
   + 子布局会继承父布局的属性
+
+  + ID 不需要在整个结构树中具有唯一性，只需要在搜索的结构树部分应具有唯一性

@@ -25,7 +25,7 @@
   - [[#文件][文件]]
 - [[#概念相关][概念相关]]
 - [[#实用函数][实用函数]]
-- [[#代码规范][代码规范]]
+- [[#autoload][autoload]]
 
 * interactive
   ~Emacs~ 中存在 *两种函数*:
@@ -443,30 +443,20 @@
 
 * 实用函数
   + emacs-uptime 获取启动时长
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Checksum_002fHash.html][Checksum/Hash - GNU Emacs Lisp Reference Manual]]
+    #+BEGIN_SRC elisp
+      (md5 "str")
+      (secure-hash 'sha256 "123")
+    #+END_SRC
 
-* 代码规范
+* autoload
+  通过如下格式的注释声明某个函数为自动加载的：
   #+BEGIN_SRC elisp
-    ;;; superfrobnicator.el --- Frobnicate and bifurcate flanges
-
-    ;; Copyright (C) 2011 Free Software Foundation, Inc.
-
-    ;; Author: J. R. Hacker <jrh@example.com>
-    ;; Version: 1.3
-    ;; Package-Requires: ((flange "1.0"))
-    ;; Keywords: multimedia, frobnicate
-    ;; URL: http://example.com/jrhacker/superfrobnicate
-
-    ...
-
-         ;;; Commentary:
-
-    ;; This package provides a minor mode to frobnicate and/or
-    ;; bifurcate any flanges you desire.  To activate it, just type
-    ...
-
-         ;;;###autoload
-    (define-minor-mode superfrobnicator-mode
-      ...
+    ;;;###autoload
+    (defun doctor ()
+      "Switch to *doctor* buffer and start giving psychotherapy."
+      (interactive)
+      (switch-to-buffer "*doctor*")
+      (doctor-mode))
   #+END_SRC
-
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html][Simple Packages]]
+  

@@ -1,1 +1,0 @@
-+ [[https://stackoverflow.com/questions/5352765/creategraphics-method-and-paint-event-args][CreateGraphics() Method and Paint Event Args]]

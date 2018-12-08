@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#mouseeventargs][MouseEventArgs]]
 - [[#实现无边框-form-的移动][实现无边框 Form 的移动]]
+- [[#creategraphics-method-and-paint-event-args][CreateGraphics() Method and Paint Event Args]]
 
 * MouseEventArgs
   ~MouseEventArgs~ 的属性 ~X, Y~ 得到的坐标是相对于 *控件* 而言的，而不是屏幕或窗口。
@@ -58,3 +59,10 @@
         }
       }
     #+END_SRC
+* CreateGraphics() Method and Paint Event Args
+  1. CreateGraphics gives you a graphics object that you should always Dispose() prior to exiting.
+     You should put your statement inside of a using block.
+
+  2. The graphics you draw are only valid until the form gets repainted.
+     In your case, by calling this in Form_Load, it's happening prior to the first render, and getting "thrown away".
+     You should always put this in OnPaint() in order to have it "persistent" on the screen, as that will cause it to get redrawn when the control is redrawn.

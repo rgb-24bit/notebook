@@ -1,22 +1,7 @@
-* 大数相关问题
+* Hash bucket
+  + [[http://www.nowamagic.net/academy/detail/3008086][Linux 内核中的 hash 与 bucket -- 简明现代魔法]]
+
+* 大数的实现
   + [[https://www.pediy.com/kssd/pediy05/pediy50664.htm][RSA 与大数运算]]
   + [[file:~/Desktop/temp/java/math/BigInteger.java][BigInteger - Java]]
 
-* 精确浮点数运算
-  + [[https://python3-cookbook.readthedocs.io/zh_CN/latest/c03/p02_accurate_decimal_calculations.html][执行精确的浮点数运算 - python3-cookbook]]
-  + IBM - 通用小数运算规范
-
-* hash
-  + [[http://www.nowamagic.net/academy/detail/3008086][Linux 内核中的 hash 与 bucket -- 简明现代魔法]]
-
-* 二分查找
-  #+BEGIN_SRC python
-    def lower_bound(array, left, right, value):  # 返回 [left, right) 内第一个不小于 value 值的位置
-        while left < right:
-            mid = lfet + (right - left) // 2
-            if array[mid] < value:
-                left = mid + 1
-            else:
-                right = mid
-        return left  # right 等效
-  #+END_SRC

@@ -58,3 +58,12 @@
         print(new_obj)
 
   #+END_SRC
+  
+  #+BEGIN_SRC python
+    class objectEncoder(json.JSONEncoder):
+        def deafult(self, obj):
+            if hasattr(obj, '__slots__'):
+                ...
+            else:
+                return obj.__dict__
+  #+END_SRC

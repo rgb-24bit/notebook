@@ -1,24 +1,2 @@
-* git checkout
-  + 指定源分支
-    #+BEGIN_EXAMPLE
-      git checkout -b <new_branch> <src_branch>
-    #+END_EXAMPLE
-
-* git log
-  + [[https://stackoverflow.com/questions/4649356/how-do-i-run-git-log-to-see-changes-only-for-a-specific-branch][How do I run git log to see changes only for a specific branch? - Stack Overflow]]
-
-* git track
-  + 指定当前分支的远程分支
-    #+BEGIN_EXAMPLE
-      git branch -u
-      git push -u
-    #+END_EXAMPLE
-
-* git branch
-  + 查看分支的详细信息
-    #+BEGIN_EXAMPLE
-      git branch -vv
-    #+END_EXAMPLE
 * github search
   + [[https://help.github.com/categories/searching-for-information-on-github/][Searching for information on GitHub]]
-

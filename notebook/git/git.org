@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#git-clone][git clone]]
 - [[#git-clean][git clean]]
+- [[#git-checkout][git checkout]]
+- [[#git-log][git log]]
 - [[#github-fork][github fork]]
 - [[#git-branch][git branch]]
 - [[#git-push][git push]]
@@ -15,6 +17,7 @@
   - [[#git-push-冲突][git push 冲突]]
   - [[#空提交][空提交]]
   - [[#创建空白分支][创建空白分支]]
+  - [[#本地分支跟踪远程分支][本地分支跟踪远程分支]]
   - [[#扩展][扩展]]
 
 * git clone
@@ -40,6 +43,18 @@
     git clean -xf
   #+END_SRC
 
+* git checkout
+  + 指定源分支：
+    #+BEGIN_EXAMPLE
+      git checkout -b <new_branch> <src_branch>
+    #+END_EXAMPLE    
+
+* git log
+  + 指定目标分支：
+    #+BEGIN_EXAMPLE
+      git log <branch>
+    #+END_EXAMPLE
+
 * github fork
   添加上游仓库源： ~git remote add upstream source~.
 
@@ -62,7 +77,11 @@
 
     # 重命名分支
     git branch -m <oldname> <newname>
+
+    # 详细的信息
+    git branch -vv
   #+END_SRC
+
   通过命令 ~git branch -r~ 可以查看远程分支， 通过命令 ~git branch -a~ 查看所有分支。
 
 * git push
@@ -145,6 +164,12 @@
       #+BEGIN_EXAMPLE
         $ git commit -am "comment"
       #+END_EXAMPLE
+
+** 本地分支跟踪远程分支
+   #+BEGIN_EXAMPLE
+     git branch -u
+     git push -u
+   #+END_EXAMPLE
 
 ** 扩展
   1. 可执行文件命名为 git-<name>

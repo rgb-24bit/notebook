@@ -35,3 +35,11 @@
 
 * meta
   [[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta][<meta> - HTML（超文本标记语言） | MDN]]
+
+* 网页设计
+  + [[https://jgthms.com/web-design-in-4-minutes/][Web Design in 4 minutes]]
+* 本地化
+  + [[https://www.w3schools.com/jsref/obj_navigator.asp][Navigator Object]]
+  + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/673905/best-way-to-determine-users-locale-within-browser][javascript - Best way to determine user's locale within browser - Stack Overflow]]
+

@@ -6,10 +6,8 @@
 
 * 二分法查找
   #+BEGIN_SRC C
-    int bsearchWithoutRecursion(int array[], int low, int high, int target)
-    {
-      while(low <= high)
-      {
+    int bsearchWithoutRecursion(int array[], int low, int high, int target) {
+      while(low <= high) {
         int mid = (low + high)/2;
         if (array[mid] > target)
           high = mid - 1;
@@ -27,6 +25,19 @@
     // 不会溢出的方式
     (low + high) / 2 == low + (high - low) / 2
   #+END_SRC
+
+  找到序列中第一个不小于某个值的元素的位置：
+  #+BEGIN_SRC python
+    def lower_bound(array, left, right, value):  # 返回 [left, right) 内第一个不小于 value 值的位置
+        while left < right:
+            mid = lfet + (right - left) // 2
+            if array[mid] < value:
+                left = mid + 1
+            else:
+                right = mid
+        return left  # right 等效
+  #+END_SRC
+
 
 * 遗传算法
   *遗传算法(genetic algorithm (GA))* 是计算数学中用于解决最佳化的 *搜索算法*, 

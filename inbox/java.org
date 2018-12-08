@@ -12,7 +12,8 @@
 * synchronized
   + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
 
-
 * Essential Classes
   + [[https://docs.oracle.com/javase/tutorial/essential/index.html][Trail: Essential Classes]]
 
+* 引用类型
+  + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]

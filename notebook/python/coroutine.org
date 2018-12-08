@@ -1,6 +1,12 @@
-* Python 协程
-  实现协程意味着需要重写底层的 I/O 库，让阻塞 I/O 转为异步 I/O。
+#+TITLE:      Python 协程
 
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#协程与生成器][协程与生成器]]
+- [[#async][async]]
+- [[#相关链接][相关链接]]
+
+* 协程与生成器
+  实现协程意味着需要重写底层的 I/O 库，让阻塞 I/O 转为异步 I/O。
 
   协程通过生成器实现，生成器需要通过 ~next~ 或 ~send(None)~ 启动。
 
@@ -22,16 +28,7 @@
         val = yield
   #+END_SRC
 
-  通过协程来模拟管道： [[http://www.dabeaz.com/coroutines/cobroadcast2.py][cobroadcast2.py]]
-
-  编程概念中的 Task 的特点：
-  + 独立的控制流
-  + 内部状态
-  + 可调度
-  + 可以与其他 Task 通信
-    
-  协程完全满足这些条件，so！
-
+* async
   #+BEGIN_SRC python
     async -- @coroutine
     await -- yield from
@@ -45,8 +42,6 @@
     time.sleep
   #+END_SRC
 
-  *I/O 多路复用*
-
 * 相关链接
   + [[https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143208573480558080fa77514407cb23834c78c6c7309000][异步 IO - 廖雪峰]]
   + [[http://python.jobbole.com/85117/][Python 黑魔法 之 Generator Coroutines]]
@@ -54,4 +49,3 @@
   + [[http://blog.mathieu-leplatre.info/some-python-3-asyncio-snippets.html][Some Python 3 asyncio snippets]]
   + [[http://www.dabeaz.com/coroutines/][A Curious Course on Coroutines and Concurrency]]
   + [[https://pymotw.com/3/asyncio/index.html][asyncio — Asynchronous I/O, event loop, and concurrency tools]]
-

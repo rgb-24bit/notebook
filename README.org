@@ -48,6 +48,7 @@
 - [[file:notebook/emacs/org-mode.org][Emacs - Org-mode]]
 - [[file:notebook/emacs/regex.org][Emacs - 正则表达式]]
 - [[file:notebook/emacs/spacemacs.org][Emacs - Spacemacs 使用]]
+- [[file:notebook/emacs/style.org][Elisp - 风格规范]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>flask</i></b></summary>
 - [[file:notebook/flask/deploy.org][Flask - 部署]]
@@ -85,6 +86,7 @@
 - [[file:notebook/java/java-io.org][Java - I/O 操作]]
 - [[file:notebook/java/java-lambda.org][Java - Lambda 表达式]]
 - [[file:notebook/java/java-reflection.org][Java - 反射]]
+- [[file:notebook/java/java-stream.org][Java - 流相关]]
 - [[file:notebook/java/java.org][Java - 基础笔记]]
 - [[file:notebook/java/javadoc.org][Java - JavaDoc 笔记]]
 - [[file:notebook/java/jdbc.org][Java - JDBC 使用]]
@@ -132,6 +134,7 @@
 - [[file:notebook/os/link.org][操作系统 - 链接]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>python</i></b></summary>
+- [[file:notebook/python/coroutine.org][Python 协程]]
 - [[file:notebook/python/faq.org][Python - 常见问题]]
 - [[file:notebook/python/pep249.org][PEP249 - 数据库接口]]
 - [[file:notebook/python/python.org][Python - 基础笔记]]

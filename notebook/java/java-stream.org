@@ -1,3 +1,17 @@
+#+TITLE:      Java - 流相关
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#数组与集合之间的桥梁][数组与集合之间的桥梁]]
+- [[#流操作的基本流程][流操作的基本流程]]
+- [[#常用的流操作类型][常用的流操作类型]]
+  - [[#筛选和切片][筛选和切片]]
+  - [[#映射][映射]]
+  - [[#查找和匹配][查找和匹配]]
+  - [[#规约][规约]]
+- [[#数值流][数值流]]
+- [[#构建流][构建流]]
+- [[#流操作的注意事项][流操作的注意事项]]
+
 * 数组与集合之间的桥梁
   + [[https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html#toArray-T:A-][Collection.toArray]]
   + [[https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-][Arrays.asList]]
@@ -141,6 +155,4 @@
   + 和 ~Iterator~ 类似，流只能遍历一次
   + 终端操作 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html#collect-java.util.stream.Collector-][Stream.collect]] 接受的参数为一个 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collector.html][Collector]], 可以通过 [[https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html][Collectors]] 获得
 
-* 引用类型
-  + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
 

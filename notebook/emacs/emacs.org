@@ -8,6 +8,8 @@
 - [[#文件操作][文件操作]]
 - [[#实用函数][实用函数]]
 - [[#编码相关][编码相关]]
+- [[#bookmark][bookmark]]
+- [[#emacs-server][emacs server]]
 - [[#休闲娱乐][休闲娱乐]]
 
 * 文本编辑
@@ -136,5 +138,26 @@
 * 编码相关
   + [[http://ergoemacs.org/emacs/emacs_line_ending_char.html][Emacs: Newline Representation ^M ^J ^L]]
     
+* bookmark
+  #+BEGIN_EXAMPLE
+    C-x r m - 添加书签
+    C-x r l - 显示书签
+    C-x r b - 转到书签
+  #+END_EXAMPLE
+
+* emacs server
+  #+BEGIN_EXAMPLE
+    ;; 启动服务
+    runemacs --daemon
+
+    ;; 通过 emacsclient 链接服务器
+    emacsclient file
+
+    ;; 关闭服务器
+    emacsclient -e "(kill-emacs)"
+  #+END_EXAMPLE
+
+  + [[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki: Emacs As Daemon]]
+
 * 休闲娱乐
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]

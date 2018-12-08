@@ -5,28 +5,10 @@
     v c        显示时间记录
   #+END_EXAMPLE
 
-* 正则表达式
-  + [[https://www.emacswiki.org/emacs/ReplaceRegexpWithLispExpressions][EmacsWiki: Replace Regexp With Lisp Expressions]]
-
-* autoload
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Autoload.html][Autoload - GNU Emacs Lisp Reference Manual]]
-
 * org-capture
   + [[http://www.zmonster.me/2018/02/28/org-mode-capture.html][强大的 Org mode(4): 使用 capture 功能快速记录 · ZMonster's Blog]]
-
-* bookmark
-  #+BEGIN_EXAMPLE
-    C-x r m - 添加书签
-    C-x r l - 显示书签
-    C-x r b - 转到书签
-  #+END_EXAMPLE
-
-* hash 
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Checksum_002fHash.html][Checksum/Hash - GNU Emacs Lisp Reference Manual]]
-  #+BEGIN_SRC elisp
-    (md5 "str")
-    (secure-hash 'sha256 "123")
-  #+END_SRC
+  + [[https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location][How to Org Capture at current location? - Emacs Stack Exchange]]
+  + [[https://orgmode.org/manual/Capture-templates.html#Capture-templates][The Org Manual: Capture templates]]
 
 * abbrev
   + [[https://www.emacswiki.org/emacs/AbbrevMode][EmacsWiki: Abbrev Mode]]
@@ -38,34 +20,14 @@
 * set-key
   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html][Key Binding Commands - GNU Emacs Lisp Reference Manual]]
 
-* emacs server
-  #+BEGIN_EXAMPLE
-    ;; 启动服务
-    runemacs --daemon
-
-    ;; 通过 emacsclient 链接服务器
-    emacsclient file
-
-    ;; 关闭服务器
-    emacsclient -e "(kill-emacs)"
-  #+END_EXAMPLE
-
-  + [[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki: Emacs As Daemon]]
-
 * 启动 mode
   + [[https://emacs.stackexchange.com/questions/2423/how-to-choose-between-nil-and-0-or-t-and-1-when-setting-variables-or-enabling-m][elisp - How to choose between nil and 0, or t and 1 when setting variables or enabling modes - Emacs Stack Exchange]]
 
 * hooks
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]
 
-* 命名风格
-  #+BEGIN_EXAMPLE
-    #自定义变量可以使用自己的名字作为命名方式（可以是变量名或者函数名）
-    rgb-24bit/XXXX
+* mode-line
+  + [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Mode-Line.html][Mode Line - Programming in Emacs Lisp]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Property-Lists.html][Property Lists - GNU Emacs Lisp Reference Manual]]
 
-    #模式命名规则
-    ModeName-mode
 
-    #模式内的变量则可以使用
-    ModeName-VariableName
-  #+END_EXAMPLE
