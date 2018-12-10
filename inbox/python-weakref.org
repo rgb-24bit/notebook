@@ -1,2 +1,79 @@
-https://www.python.org/dev/peps/pep-0205/
-https://pymotw.com/3/weakref/
+* PEP 205 -- Weak References
+  两种弱引用的基本应用场景：实现更方便的对象缓存，解决循环引用的问题。
+ 
+  [[https://www.python.org/dev/peps/pep-0205/][PEP 205 -- Weak References | Python.org]]
+
+* weakref module
+  通过 ~weakref.ref~ 创建和使用弱引用对象：
+  #+BEGIN_SRC python
+    obj = Example()
+
+    # 创建弱引用对象，回调函数 lambda x: print(x()) 的参数 x 就是弱引用对象 ref 自身
+    ref = weakref.ref(ref, lambda x: print(x()))
+
+    # 获取被引用的对象
+    ref()  # => obj
+
+    # 当 obj 被删除后，ref() 的返回值为 None
+    ref()  # => None
+  #+END_SRC
+
+  通过 ~weakref.finalize~ 在对象被销毁时执行一些动作：
+  #+BEGIN_SRC python
+    def callback(*args):
+        print(args)  # 回调函数的参数为创建 finalize 对象时指定的
+
+    obj = Example()
+
+    # 创建 finalize 对象
+    ref = weakref.finalize(obj, callback, 'del obj')
+
+    # 删除对象调用回调函数
+    del obj  # => del obj
+  #+END_SRC
+
+  可以通过 ~finalize~ 对象的 ~atexit~ 属性决定是否在对象销毁时执行回调函数：
+  #+BEGIN_SRC python
+    finalize_ref.atexit = False  # 不执行
+  #+END_SRC
+
+  假如回调函数的参数包含被引用的对象本身，那么会存在一个强引用保存在 ~finalize~ 内部：
+  #+BEGIN_SRC python
+    f = weakref.finalize(obj, callback, obj)  # 参数 obj 是一个强引用
+  #+END_SRC
+
+  一个解决方案是使用绑定到对象本身的回调函数：
+  #+BEGIN_SRC python
+    f = weakref.finalize(obj, obj.callback)
+  #+END_SRC
+
+  通过 ~weakref.proxy~ 可以实现和强引用类似的调用行为：
+  #+BEGIN_SRC python
+    ref = weakref.ref(obj)
+    proxy = weakref.proxy(obj)
+
+    ref().attr  # 获取对象属性
+    proxy.attr  # 获取对象属性
+
+    # 删除对象后在通过 proxy 调用对象属性会出现异常
+    proxy.attr  # => ReferenceError
+  #+END_SRC
+
+  ~proxy~ 同样支持一个回调函数，传入对象为 ~proxy~ 对象本身，此时，对象已被销毁，
+  因此不能调用该对象，所以，没有多大意义。
+
+  通过 ~weakref.WeakKeyDictionary~ 和 ~weakref.WeakValueDictionary~ 来作为对象缓存，两者的特点：
+  + ~WeakKeyDictionary~ - 弱引用键字典，当 *键* 不存在强引用时，删除该键对应的条目
+  + ~WeakValueDictionary~ - 弱引用值字典，当 *值* 不存在强引用时，删除该值对应的条目
+
+  #+BEGIN_SRC python
+    >>> refdict = weakref.WeakKeyDictionary()
+    >>> obj = Example()
+    >>> refdict[obj] = 1
+    >>> del obj
+    >>> list(refdict.items())
+    []
+  #+END_SRC
+
+  + [[https://pymotw.com/3/weakref/][weakref — Impermanent References to Objects — PyMOTW 3]]
+

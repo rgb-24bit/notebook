@@ -74,7 +74,12 @@
    #+BEGIN_SRC bash
      # Mysql
      apt-get install mariadb-server
+
+     # Security setup wizard
      mysql_secure_installation
+
+     # Redis
+     apt-get install redis-server
    #+END_SRC
 
 ** 1.5 安装 Font

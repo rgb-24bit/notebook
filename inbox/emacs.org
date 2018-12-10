@@ -31,3 +31,27 @@
   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Property-Lists.html][Property Lists - GNU Emacs Lisp Reference Manual]]
 
 
+* 宏和 use-package
+  + [[https://github.com/emacs-china/Spacemacs-rocks#%25E7%25AC%25AC%25E4%25B9%259D%25E5%25A4%25A9macro-%25E4%25B8%258E-use-package][Macro 与 Use-package]]
+
+* 文件通配符
+  + ~M-x find-name-dired~
+
+* 符号
+  #+BEGIN_SRC elisp
+    ;; 符号列表
+    (setq lst '(symbolA symbolB symbolC))
+    (symbolp (car lst)) ;; => t
+
+    ;; 符号根据不同的使用场景，使用其代表的 值、函数、符号
+    (symbol x x x)  ;; => 函数
+    (+ symbolA symbolB)  ;; => 值
+    'symbol  ;; => 符号
+  #+END_SRC
+
+* 寄存器
+  + [[https://www.emacswiki.org/emacs/Registers][EmacsWiki: Registers]]
+
+* web-mode
+  + [[https://emacs.stackexchange.com/questions/23810/getting-proper-indentation-for-python-flask-templates][Getting proper indentation for Python Flask templates - Emacs Stack Exchange]]
+

@@ -1,0 +1,14 @@
+* 异步 I/O 的概念
+  *Future* - 表示尚未完成的工作的数据结构，事件循环可以监视设置为要完成的 Future 对象，
+  允许应用程序的一部分等待另一部分完成某些工作。
+ 
+  *Task* - Task 是 Future 的子类，知道如何包装和管理 *协程* 的执行。可以使用事件循环来安排任务，
+  以便在它们需要的资源可用时运行，并生成可由其他协程使用的结果。
+
+  + [[https://pymotw.com/3/asyncio/concepts.html][Asynchronous Concurrency Concepts — PyMOTW 3]]
+
+* next
+  + https://pymotw.com/3/asyncio/coroutines.html
+
+* 相关链接
+  + [[https://www.cnblogs.com/bigberg/p/8034629.html][I/O 多路复用和异步 I/O]]

@@ -13,3 +13,7 @@
 
 * bash
   + C-l 清屏
+* 查看端口占用情况
+  #+BEGIN_SRC bash
+    netstat -l
+  #+END_SRC
