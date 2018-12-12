@@ -62,6 +62,16 @@
   #+END_SRC
 
   如果类型转换失败会抛出 ~ClassCastException~ 异常。
+  
+  *向上向下转型：*
+
+  #+BEGIN_SRC java
+    // 向上转型
+    SuperClass ref = new SubClass();
+
+    // 向下转型
+    SubClass ref = (SubClass) SuperClassRef;
+  #+END_SRC
 
 * 数组
   数组的声明和初始化方式：

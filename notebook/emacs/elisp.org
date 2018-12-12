@@ -26,6 +26,9 @@
 - [[#概念相关][概念相关]]
 - [[#实用函数][实用函数]]
 - [[#autoload][autoload]]
+- [[#setq--setq-default][setq & setq-default]]
+- [[#mode-related][mode related]]
+- [[#let--let][let & let*]]
 
 * interactive
   ~Emacs~ 中存在 *两种函数*:
@@ -459,4 +462,47 @@
       (switch-to-buffer "*doctor*")
       (doctor-mode))
   #+END_SRC
+
+* setq & setq-default
+  Emacs 中有些变量是 buffer-local 的，通过 setq 设置 buffer-local 变量时，
+  只会影响该缓冲区，而 setq-default 会设置全局的值。
+
+  简单的说，就是：
+  + setq - 设置的值可能只影响当前缓冲区
+  + setq-default - 设置的值是全局的，影响所有的缓冲区
+
+* mode related
+  *概念：* ~Non-nil~ 指的是所有非 ~nil~ 的值，包括 ~0~ 和负数。
+
+  *Minor Modes*:
+  #+BEGIN_SRC elisp
+    (minor-mode &optional ARG)
+  #+END_SRC
+
+  如果参数 ~ARG~ 存在，那么：
+  + 如果 ~ARG~ 为正，就启用 ~minor-mode~
+  + 其他情况就禁用 ~minor-mode~
   
+  如果参数 ~ARG~ 不存在为 ~ARG~ 为 ~nil~, 也启动 ~minor-mode~.
+
+  #+BEGIN_SRC elisp
+    ;; enable
+    (blink-cursor-mode)           ; Omitted argument
+    (blink-cursor-mode 1)         ; Positive argument
+    (blink-cursor-mode t)         ; True argument
+    (blink-cursor-mode nil)       ; nil argument (don't use this)
+
+    ;; disable
+    (blink-cursor-mode 0)         ; Non-positive argument
+    (blink-cursor-mode -1)        ; Negative argument
+  #+END_SRC
+
+* let & let*
+  ~let~ 的参数列表中，后序的参数不能使用前面定义的参数，而 ~let*~ 可以：
+  #+BEGIN_SRC elisp
+    ELISP> (let ((num 10) (n num)))
+    ,*** Eval error ***  Symbol’s value as variable is void: num
+    ELISP> (let* ((num 10) (n num)))
+    nil
+  #+END_SRC  
+

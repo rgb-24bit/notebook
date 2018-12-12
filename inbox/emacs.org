@@ -1,27 +1,30 @@
-* 月日志浏览
-  #+BEGIN_EXAMPLE
-    C-c a < a  加载当前缓冲区的内容
-    v m        切换到月视图
-    v c        显示时间记录
-  #+END_EXAMPLE
+* org-mode
+** org-capture
+   + [[http://www.zmonster.me/2018/02/28/org-mode-capture.html][强大的 Org mode(4): 使用 capture 功能快速记录 · ZMonster's Blog]]
+   + [[https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location][How to Org Capture at current location? - Emacs Stack Exchange]]
+   + [[https://orgmode.org/manual/Capture-templates.html#Capture-templates][The Org Manual: Capture templates]]
 
-* org-capture
-  + [[http://www.zmonster.me/2018/02/28/org-mode-capture.html][强大的 Org mode(4): 使用 capture 功能快速记录 · ZMonster's Blog]]
-  + [[https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location][How to Org Capture at current location? - Emacs Stack Exchange]]
-  + [[https://orgmode.org/manual/Capture-templates.html#Capture-templates][The Org Manual: Capture templates]]
+** org-agenda
+   + [[http://cachestocaches.com/2016/9/my-workflow-org-agenda/][My Workflow with Org-Agenda]]
+   + [[https://github.com/gjstein/emacs.d/blob/master/config/gs-org.el][emacs.d/gs-org.el at master · gjstein/emacs.d]]
+
+** org-table
+   | A | B | C | D | E |
+   |---+---+---+---+---|
+   | 1 | 2 | 3 | 4 | 9 |
+   #+TBLFM: $5=$1 + $2 * $4
+  
+   + [[http://www.zmonster.me/2016/06/03/org-mode-table.html][强大的 Org mode(3): 表格的基本操作及公式、绘图 · ZMonster's Blog]]
+
+** log browsing
+   #+BEGIN_EXAMPLE
+     C-c a < a  加载当前缓冲区的内容
+     v m        切换到月视图
+     v c        显示时间记录
+   #+END_EXAMPLE
 
 * abbrev
   + [[https://www.emacswiki.org/emacs/AbbrevMode][EmacsWiki: Abbrev Mode]]
-
-* setq - setq-default
-  + 当前缓冲区 - setq
-  + 全局 - setq-default
-
-* set-key
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Commands.html][Key Binding Commands - GNU Emacs Lisp Reference Manual]]
-
-* 启动 mode
-  + [[https://emacs.stackexchange.com/questions/2423/how-to-choose-between-nil-and-0-or-t-and-1-when-setting-variables-or-enabling-m][elisp - How to choose between nil and 0, or t and 1 when setting variables or enabling modes - Emacs Stack Exchange]]
 
 * hooks
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]
@@ -29,7 +32,16 @@
 * mode-line
   + [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Mode-Line.html][Mode Line - Programming in Emacs Lisp]]
   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Property-Lists.html][Property Lists - GNU Emacs Lisp Reference Manual]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html#Mode-Line-Format][Mode Line Format]]
 
+  In any construct except ‘%%’, you can add a decimal integer after the ‘%’ to specify a minimum field width.
+
+* quote
+  + [[https://emacs.stackexchange.com/questions/24298/can-i-eval-a-value-in-quote][Can I eval a value in quote? - Emacs Stack Exchange]]
+    
+  #+BEGIN_SRC elisp
+    `(,some-var "some-string")
+  #+END_SRC
 
 * 宏和 use-package
   + [[https://github.com/emacs-china/Spacemacs-rocks#%25E7%25AC%25AC%25E4%25B9%259D%25E5%25A4%25A9macro-%25E4%25B8%258E-use-package][Macro 与 Use-package]]
@@ -54,4 +66,16 @@
 
 * web-mode
   + [[https://emacs.stackexchange.com/questions/23810/getting-proper-indentation-for-python-flask-templates][Getting proper indentation for Python Flask templates - Emacs Stack Exchange]]
+
+* 编码相关
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Coding-Systems.html#Coding-Systems][Coding Systems - GNU Emacs Manual]]
+
+  #+BEGIN_SRC elisp
+    (defun buffer-encoding-abbrev ()
+      "The line ending convention used in the buffer."
+      (let ((buf-coding (format "%s" buffer-file-coding-system)))
+        (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+            (match-string 1 buf-coding)
+          buf-coding)))
+  #+END_SRC
 

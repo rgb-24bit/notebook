@@ -1,3 +1,9 @@
+#+TITLE:      Python - 弱引用
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#pep-205----weak-references][PEP 205 -- Weak References]]
+- [[#weakref-module][weakref module]]
+
 * PEP 205 -- Weak References
   两种弱引用的基本应用场景：实现更方便的对象缓存，解决循环引用的问题。
  

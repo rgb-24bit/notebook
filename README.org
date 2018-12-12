@@ -33,6 +33,7 @@
 - [[file:notebook/database/mssql.org][数据库 - SQL Server 笔记]]
 - [[file:notebook/database/mysql.org][数据库 - MySQL 笔记]]
 - [[file:notebook/database/orm.org][数据库 - 对象关系映射]]
+- [[file:notebook/database/redis.org][数据库 - Redis 笔记]]
 - [[file:notebook/database/sql.org][数据库 - SQL 笔记]]
 - [[file:notebook/database/version-control.org][数据库 - 版本控制]]
 #+HTML: </details>
@@ -54,6 +55,7 @@
 - [[file:notebook/flask/deploy.org][Flask - 部署]]
 - [[file:notebook/flask/extend.org][Flask - 扩展]]
 - [[file:notebook/flask/flask.org][Flask - 笔记]]
+- [[file:notebook/flask/guide.org][Flask - Quick Start]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>front-end</i></b></summary>
 - [[file:notebook/front-end/css.org][前端 - CSS 相关笔记]]
@@ -145,6 +147,7 @@
 - [[file:notebook/python/text-process.org][Python - 文本处理]]
 - [[file:notebook/python/thread.org][Python - 并发编程]]
 - [[file:notebook/python/tkinter.org][Python - Tkinter 使用]]
+- [[file:notebook/python/weakref.org][Python - 弱引用]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>tool</i></b></summary>
 - [[file:notebook/tool/chrome.org][Tool - Chrome]]

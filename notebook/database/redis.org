@@ -1,3 +1,10 @@
+#+TITLE:      数据库 - Redis 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#redis-安装与配置][Redis 安装与配置]]
+- [[#redis-数据类型概览][Redis 数据类型概览]]
+- [[#redis-tips][Redis Tips]]
+
 * Redis 安装与配置
   + 安装指令：
     #+BEGIN_SRC bash

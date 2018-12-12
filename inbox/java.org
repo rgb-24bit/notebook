@@ -17,3 +17,4 @@
 
 * 引用类型
   + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
+
