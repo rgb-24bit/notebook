@@ -1,10 +1,7 @@
 * 动态背景
   + [[https://juejin.im/post/5926ea2b0ce463006bfce337][html5canvas: 教你实现知乎登录动态粒子背景 - 掘金]]
 
-* without jquery
-  + [[http://youmightnotneedjquery.com/][YOU MIGHT NOT NEED JQUERY]]
-
-* javascript url
+* 浏览器地址栏
   #+BEGIN_SRC javascript
     javascript:alert('test');
   #+END_SRC
@@ -12,15 +9,6 @@
 * ES6
   + [[http://es6.ruanyifeng.com/][ECMAScript 6 入门]]
   + [[https://wangdoc.com/javascript/index.html][JavaScript 教程]]
-
-* 定时执行代码
-  + [[https://wangdoc.com/javascript/async/timer.html#setinterval][setInterval()]]
-
-* 油猴脚本
-  + [[https://zh.wikipedia.org/wiki/Greasemonkey][Greasemonkey]]
-
-* meta
-  [[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta][<meta> - HTML（超文本标记语言） | MDN]]
 
 * 本地化
   + [[https://www.w3schools.com/jsref/obj_navigator.asp][Navigator Object]]

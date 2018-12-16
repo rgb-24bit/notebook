@@ -7,8 +7,212 @@
 
   + [[https://pymotw.com/3/asyncio/concepts.html][Asynchronous Concurrency Concepts — PyMOTW 3]]
 
-* next
-  + https://pymotw.com/3/asyncio/coroutines.html
+* 通过协程进行多任务处理
+  协程是为并发操作而设计的 *语言结构*, 允许通过关键字 ~await(yield from)~ 暂停协程的执行。
+  
+  #+BEGIN_SRC python
+    import asyncio
+
+
+    @asyncio.coroutine                       # Python 3.5+
+    def outer():                             # async def outer():
+        print('in outer')
+        print('waiting for result1')
+        # Call another coroutine and get the return value
+        result1 = yield from phase1()        # result1 = await phase1()
+        print('waiting for result2')
+        result2 = yield from phase2(result1) # result2 = await phase2(result1)
+        return (result1, result2)
+
+
+    @asyncio.coroutine
+    def phase1():                            # async def phase1():
+        print('in phase1')
+        return 'result1'
+
+
+    @asyncio.coroutine
+    def phase2(arg):                         # async def phase2(arg):
+        print('in phase2')
+        return 'result2 derived from {}'.format(arg)
+
+
+    # Get event loop
+    event_loop = asyncio.get_event_loop()
+    try:
+        # Get the return value of the coroutine
+        return_value = event_loop.run_until_complete(outer())
+        print('return value: {!r}'.format(return_value))
+    finally:
+        event_loop.close()
+  #+END_SRC
+
+* 常规函数的调度
+  |-------------------------------------------------------+-----------------------------------------------------|
+  | 函数                                                  | 作用                                                |
+  |-------------------------------------------------------+-----------------------------------------------------|
+  | ~loop.call_soon(callback, *args, context=None)~         | 在事件循环的下一次迭代中使用 ~args~ 参数调用 ~callback~ |
+  | ~loop.call_later(delay, callback, *args, context=None)~ | 在给定的延迟秒数之后使用参数 ~args~ 调用 ~callback~     |
+  | ~loop.call_at(when, callback, *args, context=None)~     | 在指定的时间使用参数 ~args~ 调用 ~callback~             |
+  | ~loop.time()~                                           | 获取当前的时间                                      |
+  |-------------------------------------------------------+-----------------------------------------------------|
+
+  #+BEGIN_SRC python :results output
+    import asyncio
+
+
+    def callback(n, loop):
+        print('callback {} invoked at {}'.format(n, loop.time()))
+
+
+    async def main(loop):
+        now = loop.time()
+
+        print('registering callbacks')
+        loop.call_at(now + 0.2, callback, 1, loop)
+        loop.call_later(0.1, callback, 2, loop)
+        loop.call_soon(callback, 3, loop)
+
+        await asyncio.sleep(1)
+
+
+    event_loop = asyncio.get_event_loop()
+    try:
+        print('entering event loop')
+        event_loop.run_until_complete(main(event_loop))
+    finally:
+        print('closing event loop')
+        event_loop.close()
+  #+END_SRC
+
+  #+RESULTS:
+  : entering event loop
+  : registering callbacks
+  : callback 3 invoked at 28565.904
+  : callback 2 invoked at 28566.013
+  : callback 1 invoked at 28566.107
+  : closing event loop
+
+* 异步生成结果
+  ~Feature~ 表示尚未完成工作，事件循环可以监视 ~Feature~ 的状态，并在其完成后调用回调。
+
+  ~Waiting~ 一个 ~feature~ 的两种方式：
+  #+BEGIN_SRC python
+    all_done = asyncio.Future()
+
+    result = event_loop.run_until_complete(all_done)
+    result = await all_done
+  #+END_SRC
+
+
+  通过调用 ~feature~ 的 ~set_result~ 来使其状态变为 ~Done~.
+
+  通过调用 ~add_done_callback~ 来注册回调函数，回调函数会按照注册的顺序进行调用。
+
+  #+BEGIN_SRC python :results output
+    import asyncio
+    import functools
+
+
+    def callback(future, n):
+        print('{}: future done: {}'.format(n, future.result()))
+
+
+    async def register_callbacks(all_done):
+        print('registering callbacks on future')
+        all_done.add_done_callback(functools.partial(callback, n=1))
+        all_done.add_done_callback(functools.partial(callback, n=2))
+
+
+    async def main(all_done):
+        await register_callbacks(all_done)
+        print('setting result of future')
+        all_done.set_result('the result')
+
+
+    event_loop = asyncio.get_event_loop()
+    try:
+        all_done = asyncio.Future()
+        event_loop.run_until_complete(main(all_done))
+    finally:
+        event_loop.close()
+  #+END_SRC
+
+  #+RESULTS:
+  : registering callbacks on future
+  : setting result of future
+  : 1: future done: the result
+  : 2: future done: the result
+
+* 同时执行任务
+  ~Task~ 可以包装协程并在它们完成后进行跟踪，是 ~Feature~ 的子类，所以可以向操作 ~Feature~ 那样操作 ~Task~.
+
+  创建 ~Task~ 的方法：
+  #+BEGIN_SRC python
+    task = asyncio.ensure_future(coroutines())
+  #+END_SRC
+
+  方法 ~ensure_feature~ 接受一个协程作为参数，并返回一个 ~Task~ 实例，对于 ~create_task~ 和 ~ensure_feature~:
+  + [[https://stackoverflow.com/questions/36342899/asyncio-ensure-future-vs-baseeventloop-create-task-vs-simple-coroutine][python - asyncio.ensure_future vs. BaseEventLoop.create_task vs. simple coroutine? - Stack Overflow]]
+
+  可以通过 ~Task~ 的方法 ~cancel~ 来取消一个任务：
+  #+BEGIN_SRC python :results output
+    import asyncio
+
+
+    async def task_func():
+        print('in task_func')
+        return 'the result'
+
+
+    async def main(loop):
+        print('creating task')
+        task = asyncio.ensure_future(task_func())
+
+        print('canceling task')
+        task.cancel()
+
+        print('canceled task {!r}'.format(task))
+        try:
+            await task
+        except asyncio.CancelledError:
+            print('caught error from canceled task')
+        else:
+            print('task result: {!r}'.format(task.result()))
+
+
+    event_loop = asyncio.get_event_loop()
+    try:
+        event_loop.run_until_complete(main(event_loop))
+    finally:
+        event_loop.close()
+  #+END_SRC
+
+  #+RESULTS:
+  : creating task
+  : canceling task
+  : canceled task <Task cancelling coro=<task_func() running at <stdin>:4>>
+  : caught error from canceled task
+
+* 使用控制结构
+  |--------------------------------------------------------------------------+------------------------------------|
+  | 方法                                                                     | 作用                               |
+  |--------------------------------------------------------------------------+------------------------------------|
+  | ~asyncio.wait(aws, *, loop=None, timeout=None, return_when=ALL_COMPLETED)~ | 等待指定的所有协程运行完成或超时   |
+  | ~asyncio.gather(*aws, loop=None, return_exceptions=False)~                 | 收集指定的所有协程的运行结果       |
+  | ~asyncio.as_completed(aws, *, loop=None, timeout=None)~                    | 按即将完成的顺序返回指定的所有协程 |
+  |--------------------------------------------------------------------------+------------------------------------|
+
+  其中：
+  + ~wait~ 返回的结果是一个元组，分为已完成的协程和未完成的协程两部分，不保证返回的顺序
+  + ~gather~ 返回的是结果集，结果顺序和指定的协程的顺序相同
+
+  实际的例子：[[https://pymotw.com/3/asyncio/control.html][Composing Coroutines with Control Structures — PyMOTW 3]]
+
+* Next
+  + [[https://pymotw.com/3/asyncio/synchronization.html][Synchronization Primitives — PyMOTW 3]]
 
 * 相关链接
   + [[https://www.cnblogs.com/bigberg/p/8034629.html][I/O 多路复用和异步 I/O]]
+  + [[https://snarky.ca/how-the-heck-does-async-await-work-in-python-3-5/][How the heck does async/await work in Python 3.5?]]
+

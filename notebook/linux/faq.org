@@ -2,6 +2,9 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#如何快速删除文件][如何快速删除文件]]
+- [[#避免-ssh-连接因超时闲置断开][避免 SSH 连接因超时闲置断开]]
+  - [[#方案一客户端设置][方案一：客户端设置]]
+  - [[#方案二在服务器端设置][方案二：在服务器端设置]]
 
 * 如何快速删除文件
   + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
@@ -9,4 +12,21 @@
   #+BEGIN_EXAMPLE
     $ perl -e 'for(<*>){((stat)[9]<(unlink))}'
   #+END_EXAMPLE
+
+* 避免 SSH 连接因超时闲置断开
+** 方案一：客户端设置
+   编辑文件 ~/etc/ssh/ssh_config~, 添加如下一行：
+   #+BEGIN_EXAMPLE
+     ServerAliveInterval 60
+   #+END_EXAMPLE
+
+   *NOTE:* 是 ~ssh_config~ 不是 ~sshd_config~.
+
+** 方案二：在服务器端设置
+   编辑文件 ~/etc/ssh/sshd_config~ 并添加：
+   #+BEGIN_EXAMPLE
+     ClientAliveInterval 60
+   #+END_EXAMPLE
+
+   重启 SSH 服务后该项设置会生效，这样设置安全性会有一定下降。
 

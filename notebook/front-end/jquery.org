@@ -4,6 +4,7 @@
 - [[#jquery-语法][jQuery 语法]]
 - [[#jquery-方法链接][jQuery 方法链接]]
 - [[#发送-ajax-请求][发送 AJAX 请求]]
+- [[#without-jquery][Without jQuery]]
 
 * jQuery 语法
   + 基础语法： ~$(selector).action()~
@@ -50,3 +51,6 @@
       success: function() {}
     });
   #+END_SRC
+* Without jQuery
+  + [[http://youmightnotneedjquery.com/][YOU MIGHT NOT NEED JQUERY]]
+

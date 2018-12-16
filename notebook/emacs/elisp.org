@@ -29,6 +29,11 @@
 - [[#setq--setq-default][setq & setq-default]]
 - [[#mode-related][mode related]]
 - [[#let--let][let & let*]]
+- [[#type-predicates][Type Predicates]]
+- [[#alist--plist][alist & plist]]
+- [[#keyword][Keyword]]
+- [[#关于符号][关于符号]]
+- [[#寻找文件][寻找文件]]
 
 * interactive
   ~Emacs~ 中存在 *两种函数*:
@@ -505,4 +510,62 @@
     ELISP> (let* ((num 10) (n num)))
     nil
   #+END_SRC  
+
+* Type Predicates
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Type-Predicates.html][Type Predicates - GNU Emacs Lisp Reference Manual]]
+    
+  可以通过函数 ~type-of~ 判断一个对象的类型。
+
+* alist & plist
+  alist 的常见的两种形式：
+  #+BEGIN_SRC elisp
+    '((a . 1) ("b" 2 3))
+    '((rose red) (lily white) (buttercup yellow))
+  #+END_SRC
+
+  plist 常见的形式：
+  #+BEGIN_SRC elisp
+    (plist-get '(foo 4) 'foo)     ;; ⇒ 4
+    (plist-get '(foo 4 bad) 'foo) ;; ⇒ 4
+    (plist-get '(foo 4 bad) 'bad) ;; ⇒ nil
+    (plist-get '(foo 4 bad) 'bar) ;; ⇒ nil
+  #+END_SRC
+
+  不同的列表的本质是相同的：
+  #+BEGIN_SRC elisp
+    ELISP> (type-of '(foo 4))
+    cons
+    ELISP> (type-of '((foo 4)))
+    cons
+  #+END_SRC
+
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Association-Lists.html][Association Lists - GNU Emacs Lisp Reference Manual]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Plist-Access.html#Plist-Access][Plist Access - GNU Emacs Lisp Reference Manual]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Dotted-Pair-Notation.html][Dotted Pair Notation - GNU Emacs Lisp Reference Manual]]
+
+* Keyword
+  Elisp 中以符号 ~:~ 开头的符号属于 *关键字*.
+
+  + [[https://stackoverflow.com/questions/25921643/what-is-the-colon-in-emacs-lisp][elisp - What is the colon (:) in Emacs lisp? - Stack Overflow]]
+ 
+  创建关键字的方式：
+  + [[https://emacs.stackexchange.com/questions/9644/how-to-create-keywords][elisp - How to create :keywords? - Emacs Stack Exchange]]
+
+  关键字参数：
+  + [[https://www.emacswiki.org/emacs/KeywordArguments][EmacsWiki: Keyword Arguments]]  
+
+* 关于符号
+  #+BEGIN_SRC elisp
+    ;; 符号列表
+    (setq lst '(symbolA symbolB symbolC))
+    (symbolp (car lst)) ;; => t
+
+    ;; 符号根据不同的使用场景，使用其代表的 值、函数、符号
+    (symbol x x x)  ;; => 函数
+    (+ symbolA symbolB)  ;; => 值
+    'symbol  ;; => 符号
+  #+END_SRC
+  
+* 寻找文件
+  通过命令 ~find-name-dired~ 和 ~glob~ 语法来寻找文件，内部是通过调用 ~find~ 实现的。
 

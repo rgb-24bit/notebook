@@ -125,7 +125,20 @@
     但是很多的配置中都使用了 ~undo-tree.el~ 这个扩展，修改了撤销的快捷键。
 
     ~undo-tree.el~ 定义的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-?~.
-    
+
+  + 前缀参数 ::
+    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Arguments.html#Arguments][Arguments - GNU Emacs Manual]]
+
+    通过 ~C-u~ 指定或指示需要输入前缀参数
+
+  + 重复操作 ::
+    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Repeating.html#Repeating][Repeating - GNU Emacs Manual]]
+      
+    通过 ~C-x z~ 重复上一次执行的指令，连续重复执行 ~C-x z z z...~ 就可以了
+
+  +  :: 
+
+
 * 文件操作
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动更新文件头]]
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动添加文件头]]
@@ -138,7 +151,18 @@
 
 * 编码相关
   + [[http://ergoemacs.org/emacs/emacs_line_ending_char.html][Emacs: Newline Representation ^M ^J ^L]]
-    
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Coding-Systems.html#Coding-Systems][Coding Systems - GNU Emacs Manual]]
+
+  Spacemacs 中的 mode-line 显示编码的方式：
+  #+BEGIN_SRC elisp
+    (defun buffer-encoding-abbrev ()
+      "The line ending convention used in the buffer."
+      (let ((buf-coding (format "%s" buffer-file-coding-system)))
+        (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+            (match-string 1 buf-coding)
+          buf-coding)))
+  #+END_SRC  
+
 * 快捷键设置
   通过函数 ~global-set-key~ 来设置全局的快捷键：
   #+BEGIN_SRC elisp

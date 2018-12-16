@@ -7,6 +7,7 @@
 - [[#等值判断][等值判断]]
 - [[#使用对象][使用对象]]
 - [[#入口函数][入口函数]]
+- [[#定时器][定时器]]
 - [[#相关链接][相关链接]]
 
 * 语法和数据类型
@@ -264,7 +265,15 @@
   #+END_SRC
 
   等到所有内容，包括外部图片之类的文件加载完后，才会执行。
-  
+
+* 定时器  
+  可以通过函数 ~setInterval()~ 执行需要循环定时执行的代码：
+  #+BEGIN_SRC javascript
+    var timer = setInterval(function() {
+      console.log(2);
+    }, 1000)
+  #+END_SRC
+
 * 相关链接
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
   + [[http://www.w3school.com.cn/jsref/index.asp][JavaScript 参考手册]]

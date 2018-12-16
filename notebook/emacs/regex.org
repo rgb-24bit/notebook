@@ -4,6 +4,7 @@
 - [[#regular-expression-syntax][Regular Expression Syntax]]
 - [[#idiosyncrasies-of-emacs-regular-expressions][Idiosyncrasies of Emacs Regular Expressions]]
 - [[#replace-regexp-with-lisp-expressions][Replace Regexp With Lisp Expressions]]
+- [[#tips][Tips]]
 
 * Regular Expression Syntax
   #+BEGIN_EXAMPLE
@@ -82,4 +83,8 @@
   #+END_SRC
 
   其中， ~,(capitalize \1)~ 会执行 ~(capitalize)~ 来替换字符串。
+
+* Tips
+  + \Cc - 所有非中文字符
+  + \cc - 所有中文字符
 

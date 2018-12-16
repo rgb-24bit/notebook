@@ -2,6 +2,3 @@
   + [[https://www.pediy.com/kssd/pediy05/pediy50664.htm][RSA 与大数运算]]
   + [[file:~/Desktop/temp/java/math/BigInteger.java][BigInteger - Java]]
 
-* 哈希表相关
-  + [[http://www.nowamagic.net/academy/detail/3008086][Linux 内核中的 hash 与 bucket]]
-

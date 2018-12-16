@@ -6,6 +6,7 @@
 - [[#org-babel][org-babel]]
 - [[#org-agenda][org-agenda]]
 - [[#timestamps][timestamps]]
+- [[#footnote][footnote]]
 
 * hyperlinks
   + 页内链接：
@@ -71,3 +72,9 @@
       C-c !     (org-time-stamp-inactive)
     #+END_EXAMPLE
 
+* footnote
+  + 脚注在第 0 列开始, *不允许* 缩进.
+  + 快捷键 C-c C-x f 插入脚注
+  + 快捷键 C-c C-c 在声明和定义之间跳转
+  + 选择前缀 C-u C-c C-x f
+ 

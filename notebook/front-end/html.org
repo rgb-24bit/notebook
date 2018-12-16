@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#css--javascript][CSS & JavaScript]]
 - [[#图片][图片]]
+- [[#meta][meta]]
 - [[#相关链接][相关链接]]
 
 * CSS & JavaScript
@@ -18,6 +19,14 @@
     #+END_SRC
 
     参考 [[https://en.wikipedia.org/wiki/Data_URI_scheme#Syntax][Data URI scheme]]
+
+* meta
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta][<meta> | MDN]]
+
+  通过 content 属性来指定 name 或 http-equiv 的值，http-equiv 的一些值：
+  + *refresh* 
+    - 如果 content 只包含一个正整数,则是重新载入页面的时间间隔
+    - 如果content 包含一个正整数并且跟着一个字符串,则是重定向到指定链接的时间间隔(秒)
     
 * 相关链接
   + [[http://www.runoob.com/html/html-quicklist.html][HTML 速查列表]]
