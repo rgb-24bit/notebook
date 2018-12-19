@@ -19,3 +19,12 @@
   #+BEGIN_SRC bash
     netstat -l
   #+END_SRC
+* at 命令
+  + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/at][at | Microsoft Docs]]
+  + [[https://www.cnblogs.com/hushaojun/p/4522398.html][windows 下 at 命令使用详解]]
+
+* msg 命令
+  [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msg][msg | Microsoft Docs]]
+
+  环境变量 USERNAME 是当前用户名
+

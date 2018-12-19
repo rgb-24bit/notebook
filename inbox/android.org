@@ -1,0 +1,17 @@
+* fragment
+  如果活动继承的是 Activity，那么碎片应该继承原生的 Fragment，否则会出错。
+
+  相应的，如果活动继承的是 AppCompatActivity ，那么碎片应该继承 android.support.v4.app.Fragment。
+
+* 相关链接
+  + [[https://developer.android.google.cn/studio/projects/android-library][创建 Android 库]]
+  + [[https://developer.android.google.cn/studio/intro/][探索 Android Studio]]
+  + [[https://developer.android.google.cn/guide/topics/manifest/uses-sdk-element#ApiLevels][Android API 级别]]
+  + [[https://developer.android.google.cn/guide/components/services][服务]]
+  + [[https://developer.android.com/guide/topics/resources/string-resource#header][设置字符串格式]]
+  + [[https://developer.android.google.cn/reference/android/support/v4/content/FileProvider][FileProvider | Android Developers]]
+  + [[https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn#QualifierRules][提供资源 | Android Developers]]
+  + [[https://developer.android.com/guide/?hl=zh-cn][Android Basics]]
+  + [[https://developer.android.com/studio/build/application-id?hl=zh-cn][设置应用 ID]]
+  + [[https://juejin.im/post/5974ca356fb9a06bba4746bc][我想把 FileProvider 聊的更透彻一些 - 掘金]]
+

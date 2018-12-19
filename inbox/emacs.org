@@ -58,3 +58,7 @@
 * Basic
   + [[https://www.emacswiki.org/emacs/FillParagraph][FillParagraph]]
 
+* 定时任务
+  + [[https://www.jianshu.com/p/8266eb4b135a][Emacs 定时任务 - 简书]]
+  + [[https://github.com/lolownia/org-pomodoro][org-pomodoro]]
+

@@ -1,0 +1,19 @@
+* 服务相关
+  + [[https://docs.microsoft.com/zh-cn/dotnet/framework/windows-services/][开发 Windows 服务应用程序 | Microsoft Docs]]
+  + [[https://stackoverflow.com/questions/421516/how-to-write-c-sharp-service-that-i-can-also-run-as-a-winforms-program][How to write c# service that I can also run as a winforms program? - Stack Overflow]]
+
+* 通知
+  + [[https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.notifyicon?view=netframework-4.7.2][NotifyIcon Class]]
+
+* 系统事件
+  + [[https://docs.microsoft.com/en-us/dotnet/api/microsoft.win32.systemevents?redirectedfrom=MSDN&view=netframework-4.7.2][SystemEvents Class (Microsoft.Win32) | Microsoft Docs]]
+  
+* 开机自启
+  + [[https://stackoverflow.com/questions/7427354/program-start-with-windows-c-sharp][winforms - Program start with windows? c# - Stack Overflow]]
+
+* App.Config
+  + [[https://blog.csdn.net/softimite_zifeng/article/details/60591488][Winform操作App.config（增加、修改、删除、读取等） - 子丰的博客 - CSDN博客]]
+
+* 资源文件
+  + [[https://stackoverflow.com/questions/40628159/how-can-i-add-resources-to-a-c-sharp-project-in-sharpdevelop][image - How can I add resources to a C# project in SharpDevelop? - Stack Overflow]]
+
