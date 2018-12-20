@@ -1,0 +1,40 @@
+#+TITLE:      Git - Github
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#searching-code][Searching code]]
+- [[#github-help][Github Help]]
+
+* Searching code
+  由于搜索代码的复杂性，对搜索的执行方式有一些限制：
+  + 需要登录 Github 账号才能进行搜索
+  + 如果 fork 具有比父存储库更多的收藏，则只能搜索 fork 中的代码。收藏数量少于父存储库的 fork 不会被编入索引以进行代码搜索
+  + 只有默认分支的代码会被搜索
+  + 只能搜索小于 384 KB 的文件
+  + 搜索结果最多可以显示同一文件中的两个片段，但文件中可能会有更多结果
+  + 不能将以下通配符用作搜索查询的一部分： ~. , : ; / \ ` ' " = * ! ? # $ & + ^ | ~ < > ( ) { } [ ].~ 搜索将忽略这些符号
+
+  匹配文件中的内容或匹配路径：
+  #+BEGIN_EXAMPLE
+    code in:file
+    code in:path
+    code in:file,path
+  #+END_EXAMPLE
+  
+  指定语言：
+  #+BEGIN_EXAMPLE
+    language:LANGUAGE
+  #+END_EXAMPLE
+  
+  指定文件名：
+  #+BEGIN_EXAMPLE
+    filename:FILENAME
+  #+END_EXAMPLE
+
+  指定文件扩展名：
+  #+BEGIN_EXAMPLE
+    extension:EXTENSION
+  #+END_EXAMPLE
+
+* Github Help
+  + [[https://help.github.com/categories/searching-for-information-on-github/][Searching for information on GitHub]]
+

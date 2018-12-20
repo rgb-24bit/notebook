@@ -1,0 +1,10 @@
+#+TITLE:      Android - Fragment
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#碎片的使用][碎片的使用]]
+
+* 碎片的使用
+  如果活动继承的是 Activity，那么碎片应该继承原生的 Fragment，否则会出错。
+
+  相应的，如果活动继承的是 AppCompatActivity ，那么碎片应该继承 android.support.v4.app.Fragment。
+

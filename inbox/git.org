@@ -1,2 +1,0 @@
-* github search
-  + [[https://help.github.com/categories/searching-for-information-on-github/][Searching for information on GitHub]]

@@ -1,3 +1,14 @@
+#+TITLE:      Python - 异步 I/O
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#异步-io-的概念][异步 I/O 的概念]]
+- [[#通过协程进行多任务处理][通过协程进行多任务处理]]
+- [[#常规函数的调度][常规函数的调度]]
+- [[#异步生成结果][异步生成结果]]
+- [[#同时执行任务][同时执行任务]]
+- [[#使用控制结构][使用控制结构]]
+- [[#相关链接][相关链接]]
+
 * 异步 I/O 的概念
   *Future* - 表示尚未完成的工作的数据结构，事件循环可以监视设置为要完成的 Future 对象，
   允许应用程序的一部分等待另一部分完成某些工作。
@@ -209,10 +220,10 @@
 
   实际的例子：[[https://pymotw.com/3/asyncio/control.html][Composing Coroutines with Control Structures — PyMOTW 3]]
 
-* Next
-  + [[https://pymotw.com/3/asyncio/synchronization.html][Synchronization Primitives — PyMOTW 3]]
-
 * 相关链接
   + [[https://www.cnblogs.com/bigberg/p/8034629.html][I/O 多路复用和异步 I/O]]
   + [[https://snarky.ca/how-the-heck-does-async-await-work-in-python-3-5/][How the heck does async/await work in Python 3.5?]]
+  + [[https://pymotw.com/3/asyncio/index.html][asyncio — Asynchronous I/O, event loop, and concurrency tools — PyMOTW 3]]
+  + [[https://www.python.org/dev/peps/pep-0492/][PEP 492 -- Coroutines with async and await syntax | Python.org]]
+  + [[https://www.cnblogs.com/animalize/p/4738941.html][Python PEP 492 中文翻译——协程与async/await语法 - animalize - 博客园]]
 

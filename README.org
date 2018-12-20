@@ -10,6 +10,7 @@
 #+HTML: </details>
 #+HTML: <details><summary><b><i>android</i></b></summary>
 - [[file:notebook/android/activity.org][Android - Activity]]
+- [[file:notebook/android/fragment.org][Android - Fragment]]
 - [[file:notebook/android/layout.org][Android - Layout]]
 - [[file:notebook/android/misc.org][Android - Misc]]
 #+HTML: </details>
@@ -70,6 +71,7 @@
 - [[file:notebook/git/git-book.org][Git - Git-Book 阅读笔记]]
 - [[file:notebook/git/git-hook.org][Git - Hook 收集]]
 - [[file:notebook/git/git.org][Git - 使用笔记]]
+- [[file:notebook/git/github.org][Git - Github]]
 - [[file:notebook/git/style.org][Git - 规范]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>gradle</i></b></summary>
@@ -136,6 +138,7 @@
 - [[file:notebook/os/link.org][操作系统 - 链接]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>python</i></b></summary>
+- [[file:notebook/python/async.org][Python - 异步 I/O]]
 - [[file:notebook/python/coroutine.org][Python 协程]]
 - [[file:notebook/python/faq.org][Python - 常见问题]]
 - [[file:notebook/python/pep249.org][PEP249 - 数据库接口]]

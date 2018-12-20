@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#二分法查找][二分法查找]]
 - [[#遗传算法][遗传算法]]
+- [[#归并排序][归并排序]]
 
 * 二分法查找
   #+BEGIN_SRC C
@@ -38,10 +39,41 @@
         return left  # right 等效
   #+END_SRC
 
-
 * 遗传算法
   *遗传算法(genetic algorithm (GA))* 是计算数学中用于解决最佳化的 *搜索算法*, 
   是进化算法的一种.
   
   + [[https://zh.wikipedia.org/wiki/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95][维基百科 - 遗传算法]]
+
+* 归并排序
+  归并排序是一个比较容易理解的排序方式，主要利用了递归的思想实现：
+  #+BEGIN_SRC python :results output
+    def merge_sort(nums, left, right):
+        def merge(na, nb):
+            i, j, nr = 0, 0, []
+            while i < len(na) and j < len(nb):
+                if na[i] < nb[j]:
+                    nr.append(na[i])
+                    i += 1
+                else:
+                    nr.append(nb[j])
+                    j += 1
+            nr.extend(na[i:])
+            nr.extend(nb[j:])
+            return nr
+        if left < right:
+            center = (left + right) // 2
+            na = merge_sort(nums, left, center)
+            nb = merge_sort(nums, center + 1, right)
+            return merge(na, nb)
+        return nums[left:right+1]
+
+    nums = [1,23,4,5,6,2,6,7,3,45,3456,23,546,3,53,634,63,534,3]
+    print(merge_sort(nums, 0, len(nums)))
+  #+END_SRC
+
+  #+RESULTS:
+  : [1, 2, 3, 3, 3, 4, 5, 6, 6, 7, 23, 23, 45, 53, 63, 534, 546, 634, 3456]
+
+  这也许是写的最丑的归并排序 @_@
 
