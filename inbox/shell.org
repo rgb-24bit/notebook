@@ -28,3 +28,6 @@
 
   环境变量 USERNAME 是当前用户名
 
+* 终端的使用
+  + [[https://stackoverflow.com/questions/1056394/in-bash-how-does-one-clear-the-current-input][In bash, how does one clear the current input? - Stack Overflow]]
+

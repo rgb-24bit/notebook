@@ -8,3 +8,13 @@
   #+BEGIN_EXAMPLE
     echo password | od -t oCc
   #+END_EXAMPLE
+
+* 交换分区
+  #+BEGIN_SRC bash
+    $ dd if=/dev/zero of=/root/.swap bs=1M count=128
+    $ chmod 0600 /root/.swap
+    $ mkswap /root/.swap
+    $ swapon /root/.swap
+    $ vim /etc/fstab
+    # /root/.swap swap swap defaults 0 0
+  #+END_SRC

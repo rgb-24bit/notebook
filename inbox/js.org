@@ -15,3 +15,17 @@
   + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
   + [[https://stackoverflow.com/questions/673905/best-way-to-determine-users-locale-within-browser][javascript - Best way to determine user's locale within browser - Stack Overflow]]
 
+* 拷贝到剪切板
+  + [[https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript][How do I copy to the clipboard in JavaScript? - Stack Overflow]]
+
+* void
+  #+BEGIN_SRC javascript
+    javascript:void window.prompt("Copy to clipboard: Ctrl+C, Enter", `[[${window.location.href}][${document.title}]]`)
+  #+END_SRC
+
+* 折叠面板
+  + [[https://alligator.io/css/collapsible/][Implementing A Pure CSS Collapsible ← Alligator.io]]
+
+* innerHTML
+  + [[https://stackoverflow.com/questions/13775519/html-draw-table-using-innerhtml][javascript - HTML : draw table using innerHTML - Stack Overflow]]
+

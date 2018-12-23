@@ -23,3 +23,21 @@
 
 * 收集流中的数据
   + [[https://www.baeldung.com/java-8-collectors][Guide to Java 8 Collectors | Baeldung]]
+* 各版本的功能增强
+  + [[https://docs.oracle.com/javase/8/docs/technotes/guides/language/enhancements.html][Java Programming Language Enhancements]]
+
+* 块作用域
+  #+BEGIN_SRC java
+    public class Temp {
+      public static void main(String[] args) {
+        {
+          int num = 10;
+          System.out.println(num);
+        }
+      }
+    }
+  #+END_SRC
+
+* timer
+  + [[https://juejin.im/post/5a352303f265da43294e1f52][Java 定时器 Timer 源码分析和使用建议 - 掘金]]
+
