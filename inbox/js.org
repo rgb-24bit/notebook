@@ -29,3 +29,6 @@
 * innerHTML
   + [[https://stackoverflow.com/questions/13775519/html-draw-table-using-innerhtml][javascript - HTML : draw table using innerHTML - Stack Overflow]]
 
+* 动态加载脚本
+  + [[https://www.jb51.net/article/17992.htm][JS 动态加载脚本的4种方法_javascript技巧_脚本之家]]
+

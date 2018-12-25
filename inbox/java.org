@@ -41,3 +41,30 @@
 * timer
   + [[https://juejin.im/post/5a352303f265da43294e1f52][Java 定时器 Timer 源码分析和使用建议 - 掘金]]
 
+* collection to array
+  #+BEGIN_SRC java
+    // ArraysList.toArray()
+    public <T> T[] toArray(T[] a) {
+      if (a.length < size)
+        // Make a new array of a's runtime type, but my contents:
+        return (T[]) Arrays.copyOf(elementData, size, a.getClass());
+      System.arraycopy(elementData, 0, a, 0, size);
+      if (a.length > size)
+        a[size] = null;
+      return a;
+    }
+  #+END_SRC
+
+* 数组长度为 0
+  + [[https://stackoverflow.com/questions/4612471/why-does-java-allow-arrays-of-size-0][Why does Java allow arrays of size 0? - Stack Overflow]]
+
+* final
+  + [[http://www.importnew.com/7553.html][深入理解Java中的final关键字 - ImportNew]]
+
+* 名称的相同
+  类名，方法名，实例变量名，函数参数名，局部变量名......
+
+  + [[https://stackoverflow.com/questions/9960560/java-instance-variable-and-method-having-same-name][java instance variable and method having same name - Stack Overflow]]
+
+  通过语法来判断优先级！
+
