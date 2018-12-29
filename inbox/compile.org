@@ -1,0 +1,3 @@
++ [[https://stackoverflow.com/questions/8586722/comparing-unsigned-char-and-eof][c - Comparing unsigned char and EOF - Stack Overflow]]
++ [[https://askubuntu.com/questions/903354/difference-between-systemctl-and-service-commands][Difference between systemctl and service commands - Ask Ubuntu]]
++ [[http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html][Systemd 入门教程：命令篇 - 阮一峰的网络日志]]

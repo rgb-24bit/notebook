@@ -32,3 +32,11 @@
 * 动态加载脚本
   + [[https://www.jb51.net/article/17992.htm][JS 动态加载脚本的4种方法_javascript技巧_脚本之家]]
 
+* outline
+  + 控制台中 $$ 相当于 document.querySelectorAll
+  + 显示元素边框
+    #+BEGIN_SRC js
+      $$("*").forEach(
+        e => e.style.outline = "1px solid #" + (~~(Math.random() * (1<<24))).toString(16)
+      )
+    #+END_SRC

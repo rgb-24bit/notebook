@@ -3,6 +3,8 @@
    + [[http://www.zmonster.me/2018/02/28/org-mode-capture.html][强大的 Org mode(4): 使用 capture 功能快速记录 · ZMonster's Blog]]
    + [[https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location][How to Org Capture at current location? - Emacs Stack Exchange]]
    + [[https://orgmode.org/manual/Capture-templates.html#Capture-templates][The Org Manual: Capture templates]]
+   + [[http://www.cnblogs.com/Open_Source/archive/2011/07/17/2108747.html#sec-7][Org-mode 简明手册 - open source - 博客园]]
+   + [[https://emacs.stackexchange.com/questions/30280/how-to-conveniently-insert-a-clock-entry][org mode - How to conveniently insert a clock entry? - Emacs Stack Exchange]]
 
 ** org-agenda
    + [[http://cachestocaches.com/2016/9/my-workflow-org-agenda/][My Workflow with Org-Agenda]]
@@ -15,6 +17,7 @@
    #+TBLFM: $5=$1 + $2 * $4
   
    + [[http://www.zmonster.me/2016/06/03/org-mode-table.html][强大的 Org mode(3): 表格的基本操作及公式、绘图 · ZMonster's Blog]]
+   + [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]]
 
 ** log browsing
    #+BEGIN_EXAMPLE
@@ -64,3 +67,20 @@
 
 * 矩形编辑
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Rectangles.html][Rectangles - GNU Emacs Manual]]
+* 字体配置
+  + [[https://github.com/rgb-24bit/spacemacs/blob/develop/layers/%2Bintl/chinese/config.el#L27][spacemacs/config.el at develop · rgb-24bit/spacemacs]]
+
+* face
+  [[http://ergoemacs.org/emacs/elisp_define_face.html][Elisp: How to Define Face]]
+
+  #+BEGIN_SRC elisp
+    ELISP> (intern-soft ":key-1")
+    nil
+    ELISP> :key-1
+    :key-1
+    ELISP> (intern-soft ":key-1")
+    :key-1
+    ELISP> (keywordp :key-1)
+    t
+  #+END_SRC
+

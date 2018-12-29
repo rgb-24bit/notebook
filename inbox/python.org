@@ -39,3 +39,12 @@
 
 * str.maketrans
   + [[https://docs.python.org/3/library/stdtypes.html#str.maketrans][Built-in Types — Python 3.7.2rc1 documentation]]
+
+* 断点续传
+  + [[http://www.nowamagic.net/academy/detail/1302861][Python urllib的urlretrieve()函数解析 -- 简明现代魔法]]
+
+* 命令行选项
+  + [[http://blog.xiayf.cn/2013/03/30/argparse/][argparse - 命令行选项与参数解析（译）]]
+
+* 打包
+  + python setup.py sdist

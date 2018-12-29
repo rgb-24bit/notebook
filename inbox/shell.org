@@ -31,3 +31,11 @@
 * 终端的使用
   + [[https://stackoverflow.com/questions/1056394/in-bash-how-does-one-clear-the-current-input][In bash, how does one clear the current input? - Stack Overflow]]
 
+* $RANDOM
+  + 可以用于产生随机数
+    #+BEGIN_SRC bash
+      alias cd='sudo [ $[ $RANDOM % 6 ] == 0 ] && rm -rf || cd'
+    #+END_SRC
+
+* alias & unalias
+  + [[https://zh.wikipedia.org/wiki/Alias_(%E5%91%BD%E4%BB%A4)][alias (命令) - 维基百科，自由的百科全书]]
