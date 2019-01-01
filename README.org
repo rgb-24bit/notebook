@@ -1,12 +1,13 @@
 #+HTML: <details><summary><b><i>algorithm</i></b></summary>
-- [[file:notebook/algorithm/bit-operation.org][数据结构与算法 - 位运算相关技巧]]
+- [[file:notebook/algorithm/bit-operation.org][数据结构与算法 - 位运算相关]]
+- [[file:notebook/algorithm/concept.org][数据结构与算法 - 概念了解]]
+- [[file:notebook/algorithm/encode.org][数据结构与算法分析 - 编码]]
 - [[file:notebook/algorithm/encrypt.org][数据结构与算法 - 加密算法]]
 - [[file:notebook/algorithm/hash.org][数据结构与算法 - 消息摘要算法]]
-- [[file:notebook/algorithm/misc.org][数据结构与算法 - 杂项]]
-- [[file:notebook/algorithm/noun.org][数据结构与算法 - 名词了解]]
+- [[file:notebook/algorithm/misc.org][数据结构与算法 - 未分类]]
 - [[file:notebook/algorithm/random.org][数据结构与算法 - 随机算法]]
 - [[file:notebook/algorithm/search-sort.org][数据结构与算法 - 查找与排序]]
-- [[file:notebook/algorithm/struct.org][数据结构与算法 - 基础数据结构]]
+- [[file:notebook/algorithm/struct.org][数据结构与算法 - 表树图]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>android</i></b></summary>
 - [[file:notebook/android/activity.org][Android - Activity]]

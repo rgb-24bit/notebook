@@ -1,10 +1,10 @@
-#+TITLE:      数据结构与算法 - 位运算相关技巧
+#+TITLE:      数据结构与算法 - 位运算相关
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#基本概念][基本概念]]
 - [[#进制转化][进制转化]]
 - [[#简单的技巧][简单的技巧]]
-- [[#加减乘除][加减乘除]]
+- [[#加减法的实现][加减法的实现]]
 - [[#字节对齐][字节对齐]]
 - [[#截取保存单字节数据][截取保存单字节数据]]
 
@@ -25,7 +25,7 @@
 
 * 简单的技巧
   |----------------+-----------------------------|
-  | 操作           | 解释                        |
+  | 操作           | 作用                        |
   |----------------+-----------------------------|
   | ~num & 1~        | 判断奇偶, 0 为偶, 1 为奇    |
   | ~(1 << 31) - 1~  | 获取 int 型最大值           |
@@ -38,41 +38,22 @@
   | ~num && 5 / num~ | 防止零除                    |
   |----------------+-----------------------------|
 
-* 加减乘除 
+* 加减法的实现
   #+BEGIN_SRC C
     int add(int a, int b) {
-      int sum = a;
-      int carry = n;
+      int sum = a, carry = b;
 
       while (carry) {
-        int tmp = sum;
-        sum = tmp ^ carry;
-        carry = (tmp & carry) << 1;
+        int temp = sum;
+        sum = temp ^ carry;
+        carry = (temp & carry) << 1;
       }
 
       return sum;
     }
 
     int sub(int a, int b) {
-      int diff = add(~b, 1);
-
-      diff = add(a, diff);
-
-      return diff;
-    }
-  #+END_SRC
-
-  乘除: [[http://www.cnblogs.com/kiven-code/archive/2012/09/15/2686922.html][博客园]]
-  
-  两数之和：
-  #+BEGIN_SRC C
-    int getSum(int a, int b) {
-      while (b != 0) {
-        int c = a ^ b;
-        b = (a & b) << 1;
-        a = c;
-      }
-      return a;
+      return add(a, add(~b, 1));
     }
   #+END_SRC
 
@@ -145,3 +126,4 @@
   #+END_SRC
 
   截取 data 低 lack_size 位的数据， 8 - size 为无效高位的大小， saved_size 为保存的位数的大小。
+

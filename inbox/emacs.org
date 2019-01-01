@@ -7,8 +7,7 @@
    + [[https://emacs.stackexchange.com/questions/30280/how-to-conveniently-insert-a-clock-entry][org mode - How to conveniently insert a clock entry? - Emacs Stack Exchange]]
 
 ** org-agenda
-   + [[http://cachestocaches.com/2016/9/my-workflow-org-agenda/][My Workflow with Org-Agenda]]
-   + [[https://github.com/gjstein/emacs.d/blob/master/config/gs-org.el][emacs.d/gs-org.el at master · gjstein/emacs.d]]
+   + Agenda-view 会显示任务的分类属性，该属性可以通过 C-c C-x p 插入
 
 ** org-table
    | A | B | C | D | E |
@@ -18,6 +17,8 @@
   
    + [[http://www.zmonster.me/2016/06/03/org-mode-table.html][强大的 Org mode(3): 表格的基本操作及公式、绘图 · ZMonster's Blog]]
    + [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]]
+   + 插入 colcktable C-c C-x C-r
+   + [[https://orgmode.org/manual/The-clock-table.html][The Org Manual: The clock table]]
 
 ** log browsing
    #+BEGIN_EXAMPLE
@@ -83,4 +84,39 @@
     ELISP> (keywordp :key-1)
     t
   #+END_SRC
+
+  获取光标位置的 face ~C-u C-x =~
+
+* 清空缓冲区
+  (erase-buffer)
+  (beging-of-buffer) 移动光标到缓冲区开始处
+
+* 主模式快捷键
+  + [[http://ergoemacs.org/emacs/emacs_set_keys_for_major_mode.html][Emacs: Change Major Mode Keys]]
+
+* 正则表达式
+  常规方式匹配圆括号：
+  #+BEGIN_EXAMPLE
+    \\(
+  #+END_EXAMPLE
+
+  Elisp 的形式：
+  #+BEGIN_EXAMPLE
+    (
+  #+END_EXAMPLE
+
+  常规方式的元组：
+  #+BEGIN_EXAMPLE
+    (
+  #+END_EXAMPLE
+
+  .
+
+  Elisp 的形式：
+  #+BEGIN_EXAMPLE
+    \(
+  #+END_EXAMPLE
+
+* Python
+  + [[https://stackoverflow.com/questions/2585091/emacs-bulk-indent-for-python][Emacs bulk indent for Python - Stack Overflow]]
 

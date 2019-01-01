@@ -15,3 +15,7 @@
   + [[https://stackoverflow.com/questions/8355632/how-do-you-usually-tag-log-entries-android][logging - How do you usually Tag log entries? (android) - Stack Overflow]]
   + [[https://medium.com/androiddevelopers/no-more-findviewbyid-457457644885][No More findViewById – Android Developers – Medium]]
 
+* 进程保活
+  + [[https://juejin.im/post/5b3ad1576fb9a024ef1c57c7][Android进程保活招数概览 - 掘金]]
+  + [[https://github.com/xingda920813/HelloDaemon][xingda920813/HelloDaemon: Android 服务保活/常驻 (Android service daemon using JobScheduler)]]
+

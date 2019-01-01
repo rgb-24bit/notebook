@@ -39,3 +39,20 @@
 
 * alias & unalias
   + [[https://zh.wikipedia.org/wiki/Alias_(%E5%91%BD%E4%BB%A4)][alias (命令) - 维基百科，自由的百科全书]]
+
+* windows 符号链接
+  #+BEGIN_EXAMPLE
+    MKLINK [[/D] | [/H] | [/J]] Link Target
+
+            /D      创建目录符号链接。默认为文件
+                    符号链接。
+            /H      创建硬链接，而不是符号链接。
+            /J      创建目录联接。
+            Link    指定新的符号链接名称。
+            Target  指定新链接引用的路径
+  #+END_EXAMPLE
+
+  目录联接感觉更好用，参数顺序和 Linux ln 是相反的，同时 Linux 不支持联接！
+
+  Windows 中快捷方式的小箭头可以通过 360 去除！
+  

@@ -48,3 +48,9 @@
 
 * 打包
   + python setup.py sdist
+
+* 日志模块
+  + [[https://stackoverflow.com/questions/19615876/showing-the-right-funcname-when-wrapping-logger-functionality-in-a-custom-class][python - Showing the right funcName when wrapping logger functionality in a custom class - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/1765689/what-is-the-best-practice-for-formatting-logs][standards - What is the best practice for formatting logs? - Stack Overflow]]
+  + [[https://github.com/python/cpython/blob/master/Lib/logging/__init__.py][cpython/__init__.py at master · python/cpython]]
+  

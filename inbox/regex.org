@@ -1,0 +1,54 @@
+* 元字符
+  正则表达式中的元字符包括： ~. * + ? { | ( ) [ \ ^ $~.
+
+  古董级的 Emacs  不包括 ~| ( {~.
+
+  同时需要区分在 *代码* 中和在 *命令* 中使用，代码中使用需要转义 ~\~, ~\(~ 就需要写成 ~\\(~.
+
+  在命令中，写成 ~\(~ 就可以了。
+
+  Java 这些现代语言中，只需要转义 ~\~ 就可以了，而且直接支持 ~(~ 这类元字符，因此只有 ~\\s~ 这样的需要转义。
+
+  也就是说，需要分清：
+  1. 字符串的表现层
+  2. 字符串的概念层
+  3. 正则表达式的表现层
+  4. 正则表达式的概念层
+
+  |--------------------+------------+------------+------|
+  | 层次               | Elisp 代码 | Elisp 命令 | Java |
+  |--------------------+------------+------------+------|
+  | 字符串的表现层     | \\(        | \(         | \(   |
+  | 字符串的概念层     | \(         | \(         | \(   |
+  | 正则表达式的表现层 | \(         | \(         | \(   |
+  | 正则表达式的概念层 | (          | (          | \(   |
+  |--------------------+------------+------------+------|
+
+  |--------------------+----------|
+  | 层次               | Java     |
+  |--------------------+----------|
+  | 字符串的表现层     | \\s      |
+  | 字符串的概念层     | \s       |
+  | 正则表达式的表现层 | \s       |
+  | 正则表达式的概念层 | 空白字符 |
+  |--------------------+----------|
+
+  也就是说，核心冲突在字符串的转义字符到正则表达式的转义字符的转换上，古老的工具还存在特殊构造的问题。
+
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-of-Regexps.html#Syntax-of-Regexps][Syntax of Regexps - GNU Emacs Lisp Reference Manual]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Regexp-Backslash.html#Regexp-Backslash][Regexp Backslash - GNU Emacs Lisp Reference Manual]]
+  + [[https://emacs.stackexchange.com/questions/12132/elisp-regexps-and-vs-and][regular expressions - Elisp regexps ^ and $ vs ` and ' - Emacs Stack Exchange]]
+
+  正则表达式的流派：
+  + [[http://www.4e00.com/blog/linux/2016/01/21/posix-bre-and-ere-regular-expression.html][posix正则表达式规范bre和ere简介]]
+
+  感觉 Emacs 是两边各取一部分？
+
+  sed 命令：
+  + [[https://www.gnu.org/software/sed/manual/html_node/BRE-vs-ERE.html#BRE-vs-ERE][BRE vs ERE (sed, a stream editor)]]
+
+  不同工具的实现还不一样！！！
+
+  可以参考的文档：
+  + [[https://www.gnu.org/software/findutils/manual/html_node/find_html/Regular-Expressions.html#Regular-Expressions][Regular Expressions - Finding Files]]
+

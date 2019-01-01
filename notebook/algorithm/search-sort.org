@@ -4,6 +4,7 @@
 - [[#二分法查找][二分法查找]]
 - [[#遗传算法][遗传算法]]
 - [[#归并排序][归并排序]]
+- [[#埃拉托斯特尼筛法][埃拉托斯特尼筛法]]
 
 * 二分法查找
   #+BEGIN_SRC C
@@ -40,10 +41,9 @@
   #+END_SRC
 
 * 遗传算法
-  *遗传算法(genetic algorithm (GA))* 是计算数学中用于解决最佳化的 *搜索算法*, 
-  是进化算法的一种.
+  *遗传算法(genetic algorithm (GA))* 是计算数学中用于解决最佳化的 *搜索算法*, 是进化算法的一种。
   
-  + [[https://zh.wikipedia.org/wiki/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95][维基百科 - 遗传算法]]
+  + [[https://zh.wikipedia.org/wiki/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95][遗传算法 - 维基百科，自由的百科全书]]
 
 * 归并排序
   归并排序是一个比较容易理解的排序方式，主要利用了递归的思想实现：
@@ -76,4 +76,27 @@
   : [1, 2, 3, 3, 3, 4, 5, 6, 6, 7, 23, 23, 45, 53, 63, 534, 546, 634, 3456]
 
   这也许是写的最丑的归并排序 @_@
+
+* 埃拉托斯特尼筛法
+  *埃拉托斯特尼筛法* 可以用来找出一定范围内所有的素数，是一种简单且历史悠久的筛法。
+
+  代码实现：
+  #+BEGIN_SRC python
+    def eratosthenes(n):
+        IsPrime = [True] * (n + 1)
+        IsPrime[1] = False  #1不为素数
+        for i in range(2, int(n ** 0.5) + 1):
+            if IsPrime[i]:
+                for j in range(i * i, n + 1, i):
+                    IsPrime[j] = False
+        return {x for x in range(2, n + 1) if IsPrime[x]}
+
+    if __name__ == "__main__":
+        print(eratosthenes(120))
+  #+END_SRC
+
+  原理图解：
+  #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Sieve_of_Eratosthenes_animation.gif/350px-Sieve_of_Eratosthenes_animation.gif">
+
+  + [[https://zh.wikipedia.org/wiki/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95][埃拉托斯特尼筛法 - 维基百科，自由的百科全书]]
 
