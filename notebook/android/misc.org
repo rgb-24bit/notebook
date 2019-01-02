@@ -6,7 +6,8 @@
 - [[#日志工具][日志工具]]
 - [[#android-代码风格和指南][Android 代码风格和指南]]
 - [[#support-库][support 库]]
-- [[#源码链接][源码链接]]
+- [[#进程包活][进程包活]]
+- [[#相关链接][相关链接]]
 
 * 基本概念
   + *Android 系统架构*
@@ -59,8 +60,21 @@
     ...
   #+END_EXAMPLE
 
-* 源码链接
-  + [[https://android.googlesource.com/platform/frameworks/base/][Android framework classes and services]]
-  + [[https://android.googlesource.com/][Git repositories on android]]
+* 进程包活
+  保证服务（进程）存活的方法与例子：
+  + [[https://juejin.im/post/5b3ad1576fb9a024ef1c57c7][Android进程保活招数概览 - 掘金]]
+  + [[https://github.com/xingda920813/HelloDaemon][xingda920813/HelloDaemon]]
 
+* 相关链接
+  + Android 的模块化编程 - [[https://developer.android.google.cn/studio/projects/android-library][创建 Android 库 | Android Developers]]
+  + Android Studio 的使用 - [[https://developer.android.google.cn/studio/intro/][探索 Android Studio | Android Developers]]
+  + Android API 级别相关
+    - [[https://developer.android.google.cn/guide/topics/manifest/uses-sdk-element#ApiLevels][API 级别 | Android Developers]]
+    - [[https://developer.android.com/studio/write/java8-support?hl=zh-cn][使用 Java 8 语言功能 | Android Developers]]
+  + 应用程序 ID 相关 - [[https://developer.android.com/studio/build/application-id?hl=zh-cn][设置应用 ID | Android Developers]]
+  + 日志工具的使用 - [[https://developer.android.com/studio/debug/am-logcat?hl=zh-cn][使用 Logcat 写入和查看日志 | Android Developers]]
+  + 高级功能的使用 - [[https://medium.com/androiddevelopers/no-more-findviewbyid-457457644885][No More findViewById – Android Developers – Medium]]
+  + Android SDK 源代码
+    - [[https://android.googlesource.com/platform/frameworks/base/][Android framework classes and services]]
+    - [[https://android.googlesource.com/][Git repositories on android]]
 

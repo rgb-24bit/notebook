@@ -2,9 +2,18 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#碎片的使用][碎片的使用]]
+- [[#动态添加碎片][动态添加碎片]]
 
 * 碎片的使用
   如果活动继承的是 Activity，那么碎片应该继承原生的 Fragment，否则会出错。
 
   相应的，如果活动继承的是 AppCompatActivity ，那么碎片应该继承 android.support.v4.app.Fragment。
+
+* 动态添加碎片
+  #+BEGIN_SRC java
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction transaction = fragmentManager.beginTransaction();
+    transaction.replace(R.id.layout, fragment);  // 添加或替换碎片
+    transaction.commit();
+  #+END_SRC  
 

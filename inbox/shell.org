@@ -55,4 +55,8 @@
   目录联接感觉更好用，参数顺序和 Linux ln 是相反的，同时 Linux 不支持联接！
 
   Windows 中快捷方式的小箭头可以通过 360 去除！
+
+* 访问 ftp 服务器
+  + [[https://www.cnblogs.com/whseay/p/3456038.html][Windows命令行使用FTP - whseay - 博客园]]
+  + [[https://linux.cn/article-6746-1.html][技术|如何在命令行中使用 ftp 命令上传和下载文件]]
   

@@ -1,0 +1,13 @@
+#+TITLE:      C-C++ - 常见问题集
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#eof-与无符号整数的比较][EOF 与无符号整数的比较]]
+
+* EOF 与无符号整数的比较
+  保存读取到的字符的变量类型应该至少为 ~int~:
+  #+BEGIN_SRC C
+    while ((ch = fgetc(stdin)) != EOF)
+  #+END_SRC
+
+  参考：[[https://stackoverflow.com/questions/8586722/comparing-unsigned-char-and-eof][c - Comparing unsigned char and EOF - Stack Overflow]]
+

@@ -11,9 +11,12 @@
 #+HTML: </details>
 #+HTML: <details><summary><b><i>android</i></b></summary>
 - [[file:notebook/android/activity.org][Android - Activity]]
+- [[file:notebook/android/content-provider.org][Android - 内容提供器]]
 - [[file:notebook/android/fragment.org][Android - Fragment]]
 - [[file:notebook/android/layout.org][Android - Layout]]
 - [[file:notebook/android/misc.org][Android - Misc]]
+- [[file:notebook/android/resource.org][Android - Resource]]
+- [[file:notebook/android/service.org][Android - Service]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>c-c++</i></b></summary>
 - [[file:notebook/c-c++/c.org][C-C++ - C 语言笔记]]
@@ -24,6 +27,7 @@
 - [[file:notebook/c-c++/libc.org][C-C++ - C 标准库笔记]]
 - [[file:notebook/c-c++/makefile.org][C-C++ - Makefile]]
 - [[file:notebook/c-c++/pointer.org][C-C++ - 指针]]
+- [[file:notebook/c-c++/question.org][C-C++ - 常见问题集]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>compile</i></b></summary>
 - [[file:notebook/compile/grammar.org][编译原理 - 语法分析]]

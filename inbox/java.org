@@ -70,3 +70,13 @@
 
 * 带标签的 break 和 continue
   
+* parseInt 和 valueOf
+  两者解读字符串的方式相同，区别在于 ~parseInt~ 返回 ~int~, 而 ~valueOf~ 返回 ~Integer~.
+
+  以此类推。
+
+  + [[https://stackoverflow.com/questions/508665/difference-between-parseint-and-valueof-in-java][language features - Difference between parseInt and valueOf in java? - Stack Overflow]]
+
+* TextUtils
+  + [[https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/text/TextUtils.java][core/java/android/text/TextUtils.java - platform/frameworks/base - Git at Google]]
+

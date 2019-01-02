@@ -18,3 +18,23 @@
     $ vim /etc/fstab
     # /root/.swap swap swap defaults 0 0
   #+END_SRC
+* ftp 服务器搭建
+  教程：[[https://www.digitalocean.com/community/tutorials/how-to-set-up-vsftpd-for-a-user-s-directory-on-ubuntu-18-04][How To Set Up vsftpd for a User's Directory on Ubuntu 18.04 | DigitalOcean]]
+
+  问题：
+  1. 由于是云服务器，防火墙就不用管了，但是要添加安全组，开发 21 端口
+  2. 用户的添加，Debian 需要使用 adduser 命令：[[https://askubuntu.com/questions/374870/home-directory-not-being-created][command line - Home directory not being created - Ask Ubuntu]]
+  3. 服务器的配置跟着配就可以了，但是还有一个地方要改：[[https://askubuntu.com/questions/413677/vsftpd-530-login-incorrect][server - vsftpd: 530 Login incorrect - Ask Ubuntu]]
+  4. 被动模式的配置：
+     + [[https://www.cnblogs.com/kuliuheng/p/3209744.html][vsftpd的主动模式与被动模式 - VictoKu - 博客园]]
+     + Debian 系统中 iptables 默认开发所有端口，不需要配置了
+     + 服务器的安全组需要配置，开放需要的端口，例如 TCP:10240-20480
+     + FTP 服务器网页可以查看文件，在资源管理器中打开可以上传文件
+     + 链接格式： ftp://user:passwd@host
+
+* SCP 命令
+  + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html][18. scp 跨机远程拷贝 — Linux Tools Quick Tutorial]]
+
+* 守护进程
+  + [[https://askubuntu.com/questions/903354/difference-between-systemctl-and-service-commands][Difference between systemctl and service commands - Ask Ubuntu]]
+

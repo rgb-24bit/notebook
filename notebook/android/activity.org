@@ -83,6 +83,9 @@
 
   ~resultCode~ 就是 ~startActivityForResult~ 方法的第二个参数，用于过滤不同的请求。
 
+  ~PendingIntent~ 和 ~Intent~ 类似，但是是交付给外部 *程序* 使用的：
+  + [[https://stackoverflow.com/questions/2808796/what-is-an-android-pendingintent][What is an Android PendingIntent? - Stack Overflow]]
+
 * 活动的生命周期
   安卓通过 ~Task~ 来管理活动，每个 ~Task~ 就是一组存放在 *栈* 里的活动的集合，这个栈被称为 *返回栈*.
 
@@ -127,4 +130,5 @@
 * 活动的相关接口
   + activity.findViewById :: 在绑定的 ContextView 中寻找指定的 View
   + view.findViewById :: 在该 View 内部寻找指定的 View
+
 

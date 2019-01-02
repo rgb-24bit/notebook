@@ -1,0 +1,9 @@
+#+TITLE:      Android - Resource
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关链接][相关链接]]
+
+* 相关链接
+  + 字符串资源相关教程 - [[https://developer.android.com/guide/topics/resources/string-resource#header][字符串资源 | Android Developers]]
+  + 官方教程 - [[https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn#QualifierRules][提供资源 | Android Developers]]
+
