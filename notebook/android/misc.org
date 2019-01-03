@@ -6,7 +6,6 @@
 - [[#日志工具][日志工具]]
 - [[#android-代码风格和指南][Android 代码风格和指南]]
 - [[#support-库][support 库]]
-- [[#进程包活][进程包活]]
 - [[#相关链接][相关链接]]
 
 * 基本概念
@@ -59,11 +58,6 @@
     com.android.support:support-fragment:24.2.0
     ...
   #+END_EXAMPLE
-
-* 进程包活
-  保证服务（进程）存活的方法与例子：
-  + [[https://juejin.im/post/5b3ad1576fb9a024ef1c57c7][Android进程保活招数概览 - 掘金]]
-  + [[https://github.com/xingda920813/HelloDaemon][xingda920813/HelloDaemon]]
 
 * 相关链接
   + Android 的模块化编程 - [[https://developer.android.google.cn/studio/projects/android-library][创建 Android 库 | Android Developers]]

@@ -131,4 +131,3 @@
   + activity.findViewById :: 在绑定的 ContextView 中寻找指定的 View
   + view.findViewById :: 在该 View 内部寻找指定的 View
 
-

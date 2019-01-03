@@ -1,9 +1,22 @@
 #+TITLE:      Android - Resource
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#访问资源的方式][访问资源的方式]]
 - [[#相关链接][相关链接]]
 
+* 访问资源的方式
+  + [[https://developer.android.com/guide/topics/resources/accessing-resources][访问资源 | Android Developers]]
+
+  在 XML 文件中访问资源的姿势：
+  #+BEGIN_EXAMPLE
+    @[<package_name>:]<resource_type>/<resource_name>
+  #+END_EXAMPLE
+
+  在代码中访问资源的姿势：
+  #+BEGIN_SRC java
+    Context.getResources();  // Ex. Context.getResources().getString(R.string.hello);
+  #+END_SRC
+
 * 相关链接
-  + 字符串资源相关教程 - [[https://developer.android.com/guide/topics/resources/string-resource#header][字符串资源 | Android Developers]]
-  + 官方教程 - [[https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn#QualifierRules][提供资源 | Android Developers]]
+  + [[https://developer.android.com/guide/topics/resources/providing-resources?hl=zh-cn#QualifierRules][提供资源 | Android Developers]]
 

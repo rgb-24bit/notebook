@@ -10,10 +10,15 @@
   相应的，如果活动继承的是 AppCompatActivity ，那么碎片应该继承 android.support.v4.app.Fragment。
 
 * 动态添加碎片
+  动态添加替换碎片的一般流程：
   #+BEGIN_SRC java
+    // 获取碎片管理器
     FragmentManager fragmentManager = getSupportFragmentManager();
+    // 创建碎片事务
     FragmentTransaction transaction = fragmentManager.beginTransaction();
-    transaction.replace(R.id.layout, fragment);  // 添加或替换碎片
+    // 添加或替换容器中的碎片
+    transaction.replace(R.id.layout, fragment);
+    // 提交修改
     transaction.commit();
   #+END_SRC  
 

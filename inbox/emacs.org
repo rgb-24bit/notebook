@@ -120,3 +120,7 @@
 * Python
   + [[https://stackoverflow.com/questions/2585091/emacs-bulk-indent-for-python][Emacs bulk indent for Python - Stack Overflow]]
 
+* 循环和切换命令的实现
+  + [[http://ergoemacs.org/emacs/elisp_toggle_command.html][Elisp: How to Write a Toggle/Cycle Command]]
+  + [[https://emacs-china.org/t/topic/8095][有没有现成的，可以把一组函数组合成一个函数的包或命令？ - Emacs-general - Emacs China]]
+

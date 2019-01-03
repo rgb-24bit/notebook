@@ -1,8 +1,35 @@
 #+TITLE:      Android - Service
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#进程包活][进程包活]]
+- [[#注意事项][注意事项]]
 - [[#相关链接][相关链接]]
 
+* 进程包活
+  Android 版本越高，进程包活越难，基本方式是通过提高进程的优先级实现，
+  或者通过系统本身的支持实现。
+
+  广大先驱者摸索出来的一些方式：
+  + 提升进程优先级：
+    - 在息屏的时候启动一个只有一个像素的 Activity
+    - 将服务设置为前台服务
+  + 通过广播机制拉活自己
+  + 利用 Service 机制拉活：
+    #+BEGIN_SRC java
+      onStartCommand() {
+        return START_STICKY;
+      }
+    #+END_SRC
+  + ...
+
+  教程与实例：
+  + [[https://juejin.im/post/5b3ad1576fb9a024ef1c57c7][Android进程保活招数概览 - 掘金]]
+  + [[https://github.com/xingda920813/HelloDaemon][xingda920813/HelloDaemon]]
+
+* 注意事项
+  + 非 UI 线程不能修改 UI, 如果要修改 UI, 需要通过一些方法跳转到 UI 线程执行相应的操作
+  + 服务默认运行在主线程中
+
 * 相关链接
-  + 官方的服务教程 - [[https://developer.android.google.cn/guide/components/services][服务 | Android Developers]]
+  + [[https://developer.android.google.cn/guide/components/services][服务 | Android Developers]]
 

@@ -1,9 +1,13 @@
 #+TITLE:      Android - 内容提供器
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#相关链接][相关链接]]
+- [[#fileprovider][FileProvider]]
 
-* 相关链接
-  + Android 7.0 以后常用的 - [[https://developer.android.google.cn/reference/android/support/v4/content/FileProvider][FileProvider | Android Developers]]
-  + 更详细的教程 - [[https://juejin.im/post/5974ca356fb9a06bba4746bc][我想把 FileProvider 聊的更透彻一些 - 掘金]]
+* FileProvider
+  +  [[https://developer.android.google.cn/reference/android/support/v4/content/FileProvider][FileProvider | Android Developers]]
+
+  从 Android 7.0 开始，将不允许 *应用程序之间* 直接使用 ~file://~ 的方式传递文件，而是需要使用 ~FileProvider~,
+  通过 ~content://~ 的方式传递文件。
+
+  否则会抛出 ~FileUriExposedException~ 错误，使得应用程序崩溃。
 

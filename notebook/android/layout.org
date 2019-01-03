@@ -25,9 +25,9 @@
   #+HTML: <img src="https://developer.android.com/images/viewgroup.png">
   
   自定义控件的官方教程：
-  + [[https://developer.android.com/guide/topics/ui/custom-components][Custom View Components]]
+  + [[https://developer.android.com/guide/topics/ui/custom-components][Custom View Components | Android Developers]]
 
-  重用布局： [[https://developer.android.com/training/improving-layouts/reusing-layouts][Re-using layouts with <include/>]]
+  复用布局： [[https://developer.android.com/training/improving-layouts/reusing-layouts][Re-using layouts with <include/> | Android Developers]]
 
 * 相对布局实现等分控件
   通过设置参照物来实现这一点：
@@ -85,6 +85,8 @@
       </RelativeLayout >
   #+END_SRC
 
+  相对布局，关键在于相对这一点，因此，需要选择一个参照物。
+
 * 布局中的一些问题
   + 线性布局嵌套权重需要进行多次的计算，影响性能，应该考虑用相对布局替换，参考：
     [[https://stackoverflow.com/questions/9430764/why-are-nested-weights-bad-for-performance-alternatives][Why are nested weights bad for performance? Alternatives?]]
@@ -94,3 +96,4 @@
   + 子布局会继承父布局的属性
 
   + ID 不需要在整个结构树中具有唯一性，只需要在搜索的结构树部分应具有唯一性
+
