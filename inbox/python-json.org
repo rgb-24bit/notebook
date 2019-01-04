@@ -67,3 +67,6 @@
             else:
                 return obj.__dict__
   #+END_SRC
+* 相关链接
+  + [[https://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object][How to convert JSON data into a Python object - Stack Overflow]]
+

@@ -1,0 +1,3 @@
+* 本地配置
+  + [[https://stackoverflow.com/questions/18329621/storing-git-config-as-part-of-the-repository][Storing git config as part of the repository - Stack Overflow]]
+

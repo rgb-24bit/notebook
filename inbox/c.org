@@ -1,10 +1,8 @@
-* 宏的使用
-
 * 初始化数组
-  #+BEGIN_SRC C
-    bool met[MAXN * 2];
-    // 初始化 met 数组为 0；
-    memset(met, 0, sizeof(met));
-  #+END_SRC
+ #+BEGIN_SRC C
+   bool met[MAXN * 2];
+   // 初始化 met 数组为 0；
+   memset(met, 0, sizeof(met));
+ #+END_SRC
 
   

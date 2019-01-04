@@ -40,3 +40,7 @@
         e => e.style.outline = "1px solid #" + (~~(Math.random() * (1<<24))).toString(16)
       )
     #+END_SRC
+
+* find json string
+  + [[https://stackoverflow.com/questions/21994677/find-json-strings-in-a-string][php - Find JSON strings in a string - Stack Overflow]]
+
