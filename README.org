@@ -20,14 +20,13 @@
 #+HTML: </details>
 #+HTML: <details><summary><b><i>c-c++</i></b></summary>
 - [[file:notebook/c-c++/c.org][C-C++ - C 语言笔记]]
+- [[file:notebook/c-c++/compile.org][C-C++ - 编译器的使用]]
 - [[file:notebook/c-c++/cpp.org][C-C++ - C++ 笔记]]
-- [[file:notebook/c-c++/doxygen.org][C-C++ - Doxygen 笔记]]
-- [[file:notebook/c-c++/gcc.org][C-C++ - GCC 笔记]]
-- [[file:notebook/c-c++/gdb.org][C-C++ - GDB 笔记]]
-- [[file:notebook/c-c++/libc.org][C-C++ - C 标准库笔记]]
+- [[file:notebook/c-c++/gdb.org][C-C++ - GDB 的使用]]
+- [[file:notebook/c-c++/libc.org][C-C++ - C 标准库使用]]
 - [[file:notebook/c-c++/makefile.org][C-C++ - Makefile]]
 - [[file:notebook/c-c++/pointer.org][C-C++ - 指针]]
-- [[file:notebook/c-c++/question.org][C-C++ - 常见问题集]]
+- [[file:notebook/c-c++/question.org][C-C++ - 问题集]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>compile</i></b></summary>
 - [[file:notebook/compile/grammar.org][编译原理 - 语法分析]]

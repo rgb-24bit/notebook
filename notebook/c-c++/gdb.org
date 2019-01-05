@@ -1,18 +1,23 @@
-#+TITLE:      C-C++ - GDB 笔记
+#+TITLE:      C-C++ - GDB 的使用
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#教程][教程]]
 - [[#简单指令][简单指令]]
-- [[#汇编代码][汇编代码]]
-
-* 教程
-  + [[https://github.com/hellogcc/100-gdb-tips][100 个 gdb 小技巧]]
+- [[#使用技巧][使用技巧]]
 
 * 简单指令
-  + 单步调试： n
-  + 单步跟踪： s
-  + 打印变量： p var
+  |-------+--------------------------------------|
+  | 指令  | 作用                                 |
+  |-------+--------------------------------------|
+  | n     | 单步调试，执行下一条语句，不进入函数 |
+  | s     | 单步跟踪，执行下一条语句，进入函数   |
+  | p var | 打印变量的值                         |
+  |-------+--------------------------------------|
 
-* 汇编代码
-  + ~disas /m fun~ 命令将函数代码和汇编指令映射起来
+* 使用技巧
+  + 将函数代码和汇编指令映射起来
+    #+BEGIN_EXAMPLE
+      disas /m fun
+    #+END_EXAMPLE
+
+  + [[https://github.com/hellogcc/100-gdb-tips][hellogcc/100-gdb-tips: A collection of gdb tips. 100 maybe just mean many here.]]
 

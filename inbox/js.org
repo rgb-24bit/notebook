@@ -44,3 +44,9 @@
 * find json string
   + [[https://stackoverflow.com/questions/21994677/find-json-strings-in-a-string][php - Find JSON strings in a string - Stack Overflow]]
 
+* box-sizing
+  [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing][box-sizing | MDN]]
+
+* Normalize.css
+  + [[https://stackoverflow.com/questions/6887336/what-is-the-difference-between-normalize-css-and-reset-css/8357635#8357635][What is the difference between Normalize.css and Reset CSS? - Stack Overflow]]
+

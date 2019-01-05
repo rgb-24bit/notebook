@@ -1,4 +1,4 @@
-#+TITLE:      C-C++ - C 标准库笔记
+#+TITLE:      C-C++ - C 标准库使用
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#错误处理][错误处理]]
@@ -6,13 +6,13 @@
 - [[#sprintf][sprintf]]
 
 * 错误处理
-  + <assert.h> :: 函数 ~assert(int express)~, 当参数为 0 时， 输出错误信息
+  + assert.h：函数 ~assert(int express)~, 当参数为 0 时， 输出错误信息
 
-  + <errno.h> :: 宏 ~int ~errno~, 展开后是可以修改的 ~int~ 类型的左值。
-                 当 ~error~ 不为 0 时说明程序运行过程中出现了错误， 应在使用前设置为 0.
+  + errno.h：宏 ~int ~errno~, 展开后是可以修改的 ~int~ 类型的左值。
+    当 ~error~ 不为 0 时说明程序运行过程中出现了错误， 应在使用前设置为 0.
 
-  + <stdio.h> :: 函数 ~perror(const char* s)~, 输出程序运行过程中的错误信息， 会自动在字符串
-                 ~s~ 后添加一个 ~:~ 和一个 *空格*.
+  + stdio.h： 函数 ~perror(const char* s)~, 输出程序运行过程中的错误信息，
+    会自动在字符串 ~s~ 后添加一个 ~:~ 和一个 *空格*.
 
 * 标准输入输出
   ~<stdio.h>~ 中定义了：

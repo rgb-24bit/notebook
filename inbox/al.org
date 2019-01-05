@@ -13,3 +13,7 @@
   + [[https://www.cnblogs.com/skywang12345/p/3659060.html][斐波那契堆(一)之 图文解析 和 C语言的实现 - 如果天空不死 - 博客园]]
   + [[https://github.com/danielborowski/fibonacci-heap-python/blob/master/fib-heap.py][fibonacci-heap-python/fib-heap.py at master · danielborowski/fibonacci-heap-python]]
 
+* 二分查找
+  + [[https://octman.com/blog/2013-09-27-binary-search-and-variants/][二分查找及其变形 | Tsung's BLOG]]
+  + 查找二叉树
+
