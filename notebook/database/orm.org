@@ -1,13 +1,17 @@
-#+TITLE:      数据库 - 对象关系映射
+#+TITLE:      数据库 - ORM 框架
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#sqlalchemy][SQLAlchemy]]
-- [[#flask-sqlalchemy][Flask-SQLAlchemy]]
+  - [[#flask-sqlalchemy][Flask-SQLAlchemy]]
 
 * SQLAlchemy
-  + [[http://docs.sqlalchemy.org/en/latest/orm/query.html][Query API]]
-  + [[https://docs.sqlalchemy.org/en/latest/orm/tutorial.html][SQLAlchemy -  Object Relational Tutorial]]
+  SQLAlchemy 是适用于 Python 的 ORM 框架，官方文档链接：
+  + [[https://docs.sqlalchemy.org/][SQLAlchemy Documentation]]
 
-* Flask-SQLAlchemy
-  + [[http://www.pythondoc.com/flask-sqlalchemy/index.html][Flask-SQLAlchemy 中文文档]]
-  + [[https://segmentfault.com/a/1190000004618621][Flask-SQLAlchemy 学习总结]]
+** Flask-SQLAlchemy
+   Flask-SQLAlchemy 是针对 Flask 的 SQLAlchemy 扩展，相较于原始的 SQLAlchemy，更加易用。
+
+   教程与文档链接：
+   + [[http://www.pythondoc.com/flask-sqlalchemy/index.html][Flask-SQLAlchemy 中文文档]]
+   + [[https://segmentfault.com/a/1190000004618621][Flask-SQLAlchemy 学习总结]]
+

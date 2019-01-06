@@ -1,0 +1,33 @@
+#+TITLE:      数据库 - 问题集
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#为什么要使用自增的-id-主键][为什么要使用自增的 ID 主键]]
+- [[#怎样在数据存在时更新不存在时插入][怎样在数据存在时更新不存在时插入]]
+
+* 为什么要使用自增的 ID 主键
+  1. 可以节省存储
+  2. 习惯
+  3. 整数字段做主键更加易于分表
+  4. 自增主键比起字符串做索引，效率更高
+  5. 易于扩展
+     
+  参考链接：
+  + [[https://stackoverflow.com/questions/15777142/why-we-should-have-an-id-column-in-the-table-of-users][mysql - Why we should have an ID column in the table of users? - Stack Overflow]]
+  + [[https://softwareengineering.stackexchange.com/questions/328458/is-it-good-practice-to-always-have-an-autoincrement-integer-primary-key][design - Is it good practice to always have an autoincrement integer primary key? - Software Engineering Stack Exchange]]
+
+* 怎样在数据存在时更新不存在时插入
+  Mysql：
+  #+BEGIN_SRC sql
+    IF EXISTS(select * from test where id = 30122)
+      update test set name = 'john' where id = 3012
+    ELSE
+      insert into test(name) values('john');
+  #+END_SRC
+  
+  Sqlite：
+  #+BEGIN_SRC sql
+    INSERT OR replace INTO test(name) VALUES('john');
+  #+END_SRC
+
+  + [[https://stackoverflow.com/questions/3634984/insert-if-not-exists-else-update][sqlite - INSERT IF NOT EXISTS ELSE UPDATE? - Stack Overflow]]
+

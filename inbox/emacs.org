@@ -8,6 +8,7 @@
 
 ** org-agenda
    + Agenda-view 会显示任务的分类属性，该属性可以通过 C-c C-x p 插入
+   + [[http://doc.norang.ca/org-mode.html#GTD][Org Mode - Organize Your Life In Plain Text!]]
 
 ** org-table
    | A | B | C | D | E |

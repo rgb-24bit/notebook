@@ -7,6 +7,7 @@
 - [[#文档注释标记][文档注释标记]]
 - [[#集合字面量][集合字面量]]
 - [[#运算符重载][运算符重载]]
+- [[#using-指令][using 指令]]
 
 * Lambda & Func & Action
   + [[https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions][Lambda 表达式]]
@@ -90,5 +91,13 @@
           return (double)f.num / f.den;
         }
     }
+  #+END_SRC
+
+* using 指令
+  using 在不同的上下文中的含义不一样，在引用名称空间时是作为指令使用的，可能的用法：
+  #+BEGIN_SRC csharp
+    using System.Text;
+    using static System.Math;
+    using Project = PC.MyCompany.Project;
   #+END_SRC
 

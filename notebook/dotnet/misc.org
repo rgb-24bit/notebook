@@ -1,0 +1,25 @@
+#+TITLE:      .NET - 未分类
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#动态链接库][动态链接库]]
+- [[#服务开发][服务开发]]
+- [[#资源文件][资源文件]]
+
+* 动态链接库
+  |--------+-----------------------------------------------------|
+  | 名称   | 作用                                                |
+  |--------+-----------------------------------------------------|
+  | kernel | 操作系统内核相关 - 内存管理、文件输入输出、任务管理 |
+  | user32 | 用户界面相关 - 窗口                                 |
+  | gdi32  | 图形设备接口 - 文本与图形的显示                     |
+  |--------+-----------------------------------------------------|
+
+* 服务开发
+  Windows 服务程序的开发不是很好写，参考如下链接：
+  + [[https://stackoverflow.com/questions/421516/how-to-write-c-sharp-service-that-i-can-also-run-as-a-winforms-program][How to write c# service that I can also run as a winforms program? - Stack Overflow]]
+  + [[https://docs.microsoft.com/zh-cn/dotnet/framework/windows-services/][开发 Windows 服务应用程序 | Microsoft Docs]]
+  
+* 资源文件
+  使用 Visual Studio 就不存在这些麻烦了，因为会自动生成：
+  + [[https://stackoverflow.com/questions/40628159/how-can-i-add-resources-to-a-c-sharp-project-in-sharpdevelop][image - How can I add resources to a C# project in SharpDevelop? - Stack Overflow]]
+

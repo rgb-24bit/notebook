@@ -4,6 +4,10 @@
 - [[#mouseeventargs][MouseEventArgs]]
 - [[#实现无边框-form-的移动][实现无边框 Form 的移动]]
 - [[#creategraphics-method-and-paint-event-args][CreateGraphics() Method and Paint Event Args]]
+- [[#通知的使用][通知的使用]]
+- [[#系统事件的使用][系统事件的使用]]
+- [[#开机自启动的实现][开机自启动的实现]]
+- [[#appconfig][App.Config]]
 
 * MouseEventArgs
   ~MouseEventArgs~ 的属性 ~X, Y~ 得到的坐标是相对于 *控件* 而言的，而不是屏幕或窗口。
@@ -11,7 +15,7 @@
   + [[https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.mouseeventargs?view=netframework-4.7.2][MouseEventArgs Class]]
 
 * 实现无边框 Form 的移动
-  + *方式一*
+  + 通过记录窗口位置和鼠标位置实现
     #+BEGIN_SRC csharp
       bool isMoving = false;
       Point mouseOffset;
@@ -34,7 +38,7 @@
       }
     #+END_SRC
 
-  + *方式二*
+  + 通过调用底层接口实现
     #+BEGIN_SRC csharp
       /// <summary>
       /// Utilities for Form.
@@ -59,6 +63,7 @@
         }
       }
     #+END_SRC
+
 * CreateGraphics() Method and Paint Event Args
   1. CreateGraphics gives you a graphics object that you should always Dispose() prior to exiting.
      You should put your statement inside of a using block.
@@ -66,3 +71,80 @@
   2. The graphics you draw are only valid until the form gets repainted.
      In your case, by calling this in Form_Load, it's happening prior to the first render, and getting "thrown away".
      You should always put this in OnPaint() in order to have it "persistent" on the screen, as that will cause it to get redrawn when the control is redrawn.
+
+* 通知的使用
+  使用通知可以在任务栏显示小图标，并可以通过气泡显示通知消息：
+  + [[https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.notifyicon?view=netframework-4.7.2][NotifyIcon Class (System.Windows.Forms) | Microsoft Docs]]  
+  
+  图标的菜单可以通过 ContextMenu 属性设置。
+
+* 系统事件的使用
+  通过注册系统事件来监听系统状态的变化：
+  + [[https://docs.microsoft.com/en-us/dotnet/api/microsoft.win32.systemevents?redirectedfrom=MSDN&view=netframework-4.7.2][SystemEvents Class (Microsoft.Win32) | Microsoft Docs]]  
+
+* 开机自启动的实现
+  通过编辑注册表实现，相关的注册表项：
+  #+BEGIN_EXAMPLE
+    HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run 
+  #+END_EXAMPLE
+
+  实现的代码：
+  #+BEGIN_SRC csharp
+    var path = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+    RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
+    key.SetValue("MyApplication", Application.ExecutablePath.ToString());
+  #+END_SRC
+
+  + [[https://stackoverflow.com/questions/7427354/program-start-with-windows-c-sharp][winforms - Program start with windows? c# - Stack Overflow]]
+  
+* App.Config
+  + 需要的名称空间
+    #+BEGIN_SRC csharp
+      using System.Configuration
+    #+END_SRC
+
+  + 添加键值对到配置文件
+    #+BEGIN_SRC csharp
+      Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+      config.AppSettings.Settings.Add(key, value);
+      config.Save(ConfigurationSaveMode.Modified);
+      ConfigurationManager.RefreshSection("appSettings");
+    #+END_SRC
+
+  + 判断键是否存在
+    #+BEGIN_SRC csharp
+      public bool exists(string keyName)
+      {
+        foreach (string key in ConfigurationManager.AppSettings)
+        {
+          if (key == keyName)
+          {
+            return true;
+          }
+        }
+        return false;
+      }
+    #+END_SRC
+
+  + 获取键的值
+    #+BEGIN_SRC csharp
+      ConfigurationManager.AppSettings[key];
+    #+END_SRC
+
+  + 修改键的值
+    #+BEGIN_SRC csharp
+      Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+      config.AppSettings.Settings[key].Value = value;
+      config.Save(ConfigurationSaveMode.Modified);
+      ConfigurationManager.RefreshSection("appSettings");
+    #+END_SRC
+
+  + 删除键
+    #+BEGIN_SRC csharp
+      Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+      config.AppSettings.Settings.Remove(key);
+      config.Save(ConfigurationSaveMode.Modified);
+      ConfigurationManager.RefreshSection("appSettings");
+    #+END_SRC
+

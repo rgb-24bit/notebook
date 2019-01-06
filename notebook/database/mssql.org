@@ -1,4 +1,4 @@
-#+TITLE:      数据库 - SQL Server 笔记
+#+TITLE:      数据库 - SQL Server
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#使用-c-操作-sql-server][使用 C# 操作 SQL Server]]
@@ -9,7 +9,7 @@
   - [[#datareader-类][DataReader 类]]
   - [[#dataset-类][DataSet 类]]
   - [[#简单使用总结][简单使用总结]]
-- [[#t-sql-笔记][T-SQL 笔记]]
+- [[#t-sql-使用][T-SQL 使用]]
 
 * 使用 C# 操作 SQL Server
   + [[http://www.cnblogs.com/rainman/archive/2012/03/13/2393975.html][C# 操作 SQL Server 数据库]]
@@ -150,7 +150,7 @@
    + DataSet类, 数据集, 保存从数据库中的数据, 结构类似数据库, 可以用 适配器的 Fill 方法进行填充
    + 命令构建类, 通过适配器对象实例化, 用适配器对象的更新方法更新数据库中的数据, 更新方法参数为数据集对象
 
-* T-SQL 笔记
+* T-SQL 使用
   - 创建数据库的默认保存位置为用户目录
 
   - 获取当前连接的数据库名: Print DB_NAME()
@@ -188,3 +188,4 @@
     #+BEGIN_SRC sql
       ALTER LOGIN sa ENABLE;
     #+END_SRC
+

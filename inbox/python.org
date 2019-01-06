@@ -36,7 +36,6 @@
 * 发行版
   + [[https://zh.wikipedia.org/wiki/Anaconda_(Python%25E5%258F%2591%25E8%25A1%258C%25E7%2589%2588)][Anaconda (Python发行版) - 维基百科，自由的百科全书]]
 
-
 * str.maketrans
   + [[https://docs.python.org/3/library/stdtypes.html#str.maketrans][Built-in Types — Python 3.7.2rc1 documentation]]
 
@@ -54,3 +53,9 @@
   + [[https://stackoverflow.com/questions/1765689/what-is-the-best-practice-for-formatting-logs][standards - What is the best practice for formatting logs? - Stack Overflow]]
   + [[https://github.com/python/cpython/blob/master/Lib/logging/__init__.py][cpython/__init__.py at master · python/cpython]]
   
+* 性能统计
+  + [[https://www.v2ex.com/t/524217#reply11][Python 功能点实现：函数级/代码块级计时器 - V2EX]]
+  + [[https://www.jianshu.com/p/c890d5258ac9][Python功能点实现：函数级/代码块级计时器 - 简书]]
+  + [[https://www.v2ex.com/t/524241#reply0][Python 性能分析 - V2EX]]
+  + [[https://stackoverflow.com/questions/15707056/get-time-of-execution-of-a-block-of-code-in-python-2-7][Get time of execution of a block of code in Python 2.7 - Stack Overflow]]
+

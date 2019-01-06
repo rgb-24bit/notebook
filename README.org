@@ -34,18 +34,18 @@
 - [[file:notebook/compile/simple-compile.org][编译原理 - 简单的语法制导翻译器]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>database</i></b></summary>
-- [[file:notebook/database/design.org][数据库 - 设计]]
-- [[file:notebook/database/mssql.org][数据库 - SQL Server 笔记]]
+- [[file:notebook/database/mssql.org][数据库 - SQL Server]]
 - [[file:notebook/database/mysql.org][数据库 - MySQL 笔记]]
-- [[file:notebook/database/orm.org][数据库 - 对象关系映射]]
+- [[file:notebook/database/orm.org][数据库 - ORM 框架]]
+- [[file:notebook/database/question.org][数据库 - 问题集]]
 - [[file:notebook/database/redis.org][数据库 - Redis 笔记]]
 - [[file:notebook/database/sql.org][数据库 - SQL 笔记]]
-- [[file:notebook/database/version-control.org][数据库 - 版本控制]]
+- [[file:notebook/database/vc.org][数据库 - 版本控制]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>dotnet</i></b></summary>
 - [[file:notebook/dotnet/csharp-feature.org][.NET - C# 高级特性]]
 - [[file:notebook/dotnet/csharp-note.org][.NET - C# 基础]]
-- [[file:notebook/dotnet/dotnet.org][.NET - 杂项]]
+- [[file:notebook/dotnet/misc.org][.NET - 未分类]]
 - [[file:notebook/dotnet/winforms.org][.NET - WinForm 相关笔记]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>emacs</i></b></summary>

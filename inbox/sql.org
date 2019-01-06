@@ -1,7 +1,0 @@
-* 存在更新，不存在插入
-  #+BEGIN_SRC sql
-    IF EXISTS(select * from test where id=30122)
-      update test set name='john' where id=3012
-    ELSE
-      insert into test(name) values('john');
-  #+END_SRC
