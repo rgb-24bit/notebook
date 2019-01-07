@@ -49,12 +49,14 @@
 - [[file:notebook/dotnet/winforms.org][.NET - WinForm 相关笔记]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>emacs</i></b></summary>
+- [[file:notebook/emacs/code-style.org][Elisp - 风格规范]]
 - [[file:notebook/emacs/elisp.org][Emacs - Emacs Lisp]]
 - [[file:notebook/emacs/emacs.org][Emacs - 操作技巧]]
+- [[file:notebook/emacs/minor-mode.org][Emacs - 实用模式]]
 - [[file:notebook/emacs/org-mode.org][Emacs - Org-mode]]
+- [[file:notebook/emacs/question.org][Emacs - 问题集]]
 - [[file:notebook/emacs/regex.org][Emacs - 正则表达式]]
-- [[file:notebook/emacs/spacemacs.org][Emacs - Spacemacs 使用]]
-- [[file:notebook/emacs/style.org][Elisp - 风格规范]]
+- [[file:notebook/emacs/utils.org][Emacs - 实用功能]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>flask</i></b></summary>
 - [[file:notebook/flask/deploy.org][Flask - 部署]]

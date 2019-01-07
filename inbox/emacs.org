@@ -1,58 +1,5 @@
-* org-mode
-** org-capture
-   + [[http://www.zmonster.me/2018/02/28/org-mode-capture.html][强大的 Org mode(4): 使用 capture 功能快速记录 · ZMonster's Blog]]
-   + [[https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location][How to Org Capture at current location? - Emacs Stack Exchange]]
-   + [[https://orgmode.org/manual/Capture-templates.html#Capture-templates][The Org Manual: Capture templates]]
-   + [[http://www.cnblogs.com/Open_Source/archive/2011/07/17/2108747.html#sec-7][Org-mode 简明手册 - open source - 博客园]]
-   + [[https://emacs.stackexchange.com/questions/30280/how-to-conveniently-insert-a-clock-entry][org mode - How to conveniently insert a clock entry? - Emacs Stack Exchange]]
-
-** org-agenda
-   + Agenda-view 会显示任务的分类属性，该属性可以通过 C-c C-x p 插入
-   + [[http://doc.norang.ca/org-mode.html#GTD][Org Mode - Organize Your Life In Plain Text!]]
-
-** org-table
-   | A | B | C | D | E |
-   |---+---+---+---+---|
-   | 1 | 2 | 3 | 4 | 9 |
-   #+TBLFM: $5=$1 + $2 * $4
-  
-   + [[http://www.zmonster.me/2016/06/03/org-mode-table.html][强大的 Org mode(3): 表格的基本操作及公式、绘图 · ZMonster's Blog]]
-   + [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]]
-   + 插入 colcktable C-c C-x C-r
-   + [[https://orgmode.org/manual/The-clock-table.html][The Org Manual: The clock table]]
-
-** log browsing
-   #+BEGIN_EXAMPLE
-     C-c a < a  加载当前缓冲区的内容
-     v m        切换到月视图
-     v c        显示时间记录
-   #+END_EXAMPLE
-
-* abbrev
-  + [[https://www.emacswiki.org/emacs/AbbrevMode][EmacsWiki: Abbrev Mode]]
-
-* hooks
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]
-    
-* mode-line
-  + [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Mode-Line.html][Mode Line - Programming in Emacs Lisp]]
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Property-Lists.html][Property Lists - GNU Emacs Lisp Reference Manual]]
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html#Mode-Line-Format][Mode Line Format]]
-
-  In any construct except ‘%%’, you can add a decimal integer after the ‘%’ to specify a minimum field width.
-
-* quote
-  + [[https://emacs.stackexchange.com/questions/24298/can-i-eval-a-value-in-quote][Can I eval a value in quote? - Emacs Stack Exchange]]
-    
-  #+BEGIN_SRC elisp
-    `(,some-var "some-string")
-  #+END_SRC
-
 * 宏和 use-package
   + [[https://github.com/emacs-china/Spacemacs-rocks#%25E7%25AC%25AC%25E4%25B9%259D%25E5%25A4%25A9macro-%25E4%25B8%258E-use-package][Macro 与 Use-package]]
-
-* 寄存器
-  + [[https://www.emacswiki.org/emacs/Registers][EmacsWiki: Registers]]
 
 * web-mode
   + [[https://emacs.stackexchange.com/questions/23810/getting-proper-indentation-for-python-flask-templates][Getting proper indentation for Python Flask templates - Emacs Stack Exchange]]
@@ -69,57 +16,9 @@
 
 * 矩形编辑
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Rectangles.html][Rectangles - GNU Emacs Manual]]
+
 * 字体配置
   + [[https://github.com/rgb-24bit/spacemacs/blob/develop/layers/%2Bintl/chinese/config.el#L27][spacemacs/config.el at develop · rgb-24bit/spacemacs]]
-
-* face
-  [[http://ergoemacs.org/emacs/elisp_define_face.html][Elisp: How to Define Face]]
-
-  #+BEGIN_SRC elisp
-    ELISP> (intern-soft ":key-1")
-    nil
-    ELISP> :key-1
-    :key-1
-    ELISP> (intern-soft ":key-1")
-    :key-1
-    ELISP> (keywordp :key-1)
-    t
-  #+END_SRC
-
-  获取光标位置的 face ~C-u C-x =~
-
-* 清空缓冲区
-  (erase-buffer)
-  (beging-of-buffer) 移动光标到缓冲区开始处
-
-* 主模式快捷键
-  + [[http://ergoemacs.org/emacs/emacs_set_keys_for_major_mode.html][Emacs: Change Major Mode Keys]]
-
-* 正则表达式
-  常规方式匹配圆括号：
-  #+BEGIN_EXAMPLE
-    \\(
-  #+END_EXAMPLE
-
-  Elisp 的形式：
-  #+BEGIN_EXAMPLE
-    (
-  #+END_EXAMPLE
-
-  常规方式的元组：
-  #+BEGIN_EXAMPLE
-    (
-  #+END_EXAMPLE
-
-  .
-
-  Elisp 的形式：
-  #+BEGIN_EXAMPLE
-    \(
-  #+END_EXAMPLE
-
-* Python
-  + [[https://stackoverflow.com/questions/2585091/emacs-bulk-indent-for-python][Emacs bulk indent for Python - Stack Overflow]]
 
 * 循环和切换命令的实现
   + [[http://ergoemacs.org/emacs/elisp_toggle_command.html][Elisp: How to Write a Toggle/Cycle Command]]

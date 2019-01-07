@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#emacs-环境配置][Emacs 环境配置]]
 - [[#命令行选项][命令行选项]]
+- [[#在-org-mode-中的使用][在 org-mode 中的使用]]
 
 * Emacs 环境配置
   1. 下载 *plantuml.jar* ([[http://plantuml.com/download][官网下载页面]])
@@ -27,3 +28,17 @@
   + 基本使用： ~java -jar plantuml.jar filename~
   + 设置编码： ~java -jar plantuml.jar -charset utf-8 filename~
 
+* 在 org-mode 中的使用
+  避免中文乱码的选项：
+  #+BEGIN_SRC plantuml :file test.png :cmdline -charset utf-8
+    @startuml
+
+    Alice -> Bob : 认证请求
+    Bob --> Alice: 认证请求响应
+
+    Alice -> Bob: 应用请求
+    Alice <-- Bob: 应用响应
+
+    @enduml
+  #+END_SRC
+  

@@ -5,11 +5,9 @@
 - [[#窗口操作][窗口操作]]
 - [[#查看帮助][查看帮助]]
 - [[#使用技巧][使用技巧]]
-- [[#文件操作][文件操作]]
 - [[#实用函数][实用函数]]
 - [[#编码相关][编码相关]]
 - [[#快捷键设置][快捷键设置]]
-- [[#bookmark][bookmark]]
 - [[#emacs-server][emacs server]]
 - [[#休闲娱乐][休闲娱乐]]
 
@@ -138,12 +136,6 @@
 
   +  :: 
 
-
-* 文件操作
-  + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动更新文件头]]
-  + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][emacs 自动添加文件头]]
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html#Specifying-File-Variables][Specifying File Variables]] 
-
 * 实用函数
   + erase-buffer 清空缓冲区内容
   + profiler-start 启动监控
@@ -179,13 +171,6 @@
 
   缓冲区本地快捷键可以参考： [[https://www.emacswiki.org/emacs/BufferLocalKeys][EmacsWiki: Buffer Local Keys]]
 
-* bookmark
-  #+BEGIN_EXAMPLE
-    C-x r m - 添加书签
-    C-x r l - 显示书签
-    C-x r b - 转到书签
-  #+END_EXAMPLE
-
 * emacs server
   #+BEGIN_EXAMPLE
     ;; 启动服务
@@ -202,3 +187,5 @@
 
 * 休闲娱乐
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]
+
+

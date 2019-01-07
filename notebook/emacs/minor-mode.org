@@ -1,0 +1,31 @@
+#+TITLE:      Emacs - 实用模式
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#abbrev-mode][Abbrev Mode]]
+- [[#mode-line][mode-line]]
+- [[#auto-insert-mode][Auto Insert Mode]]
+
+* Abbrev Mode
+  可以通过定义缩写的方式避免一些编码错误，比如：
+  #+BEGIN_SRC elisp
+    (define-abbrev-table 'global-abbrev-table
+      '(("mian" "main" nil 1)
+        ("flase" "false" nil 1)
+        ("rutern" "return" nil t)))
+  #+END_SRC
+
+  + [[https://www.emacswiki.org/emacs/AbbrevMode][EmacsWiki: Abbrev Mode]]
+
+* mode-line
+  通过 mode-line 可以显示一些必要的信息来辅助编辑工作，变量 ~mode-line-format~ 可以用于设置 mode-line 的格式。
+
+  列表项中类似 ~%1~ 的值表明该项至少占据 ~1~ 的宽度，用来分隔不同的部分很合适。
+
+  + [[https://emacs-china.org/t/topic/655][手动美化 mode-line 第二季 - Spacemacs - Emacs China]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Mode-Line.html][Mode Line - Programming in Emacs Lisp]]
+
+* Auto Insert Mode
+  可以借助这一模式实现自动插入文件头的功能，可以参考：
+  + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][Emacs 自动添加文件头 · honmaple's blog · 风落花语风落天，花落风雨花落田.]]
+  + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][Emacs 自动更新文件头 · honmaple's blog · 风落花语风落天，花落风雨花落田.]]
+

@@ -1,70 +1,48 @@
 #+TITLE:      Emacs - Org-mode
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#hyperlinks][hyperlinks]]
-- [[#tables][tables]]
-- [[#org-babel][org-babel]]
+- [[#org-capture][org-capture]]
 - [[#org-agenda][org-agenda]]
+- [[#org-table][org-table]]
 - [[#timestamps][timestamps]]
 - [[#footnote][footnote]]
 
-* hyperlinks
-  + 页内链接：
-    #+BEGIN_EXAMPLE
-      link::tag
-    #+END_EXAMPLE
+* org-capture
+  将 org-capture 捕获的内容插入当当前光标位置：
+  #+BEGIN_QUOTE
+  When called with a ‘C-0’ (zero) prefix, insert a template at point.
+  #+END_QUOTE
 
-* tables
-  + 在表格中插入竖线：
-    #+BEGIN_EXAMPLE
-      \vert
-    #+END_EXAMPLE
-
-* org-babel
-  #+BEGIN_EXAMPLE
-    #+NAME: <name>
-    #+BEGIN_SRC <language> <switches> <header arguments>
-      <body>
-    #+END_SRC
-  #+END_EXAMPLE
-
-  + :results -- 显示结果
-    - :results value 默认值, 捕捉最后一个表达式的结果,代码块当做一个函数
-    - :results output 捕捉输出到stdout的内容
-    - :results file 把 return 的内容用方括号包裹成链接
-  + :export --  export 时包括哪些
-    - :exports code 默认，只输出代码
-    - :exports both 输出code与results
-    - :exports results 只输出结果
-    - :exports none 都不输出
-  + :noweb -- 嵌入
-  + :cmdline -- 命令行参数
-
-  比如：
-  #+BEGIN_SRC plantuml :file test.png :cmdline -charset utf-8
-    @startuml
-
-    Alice -> Bob : 认证请求
-    Bob --> Alice: 认证请求响应
-
-    Alice -> Bob: 应用请求
-    Alice <-- Bob: 应用响应
-
-    @enduml
+  定义方便使用的函数：
+  #+BEGIN_SRC elisp
+    (defun org-capture-at-point ()
+      "Insert an org capture template at point."
+      (interactive)
+      (org-capture 0))
   #+END_SRC
 
+  + [[http://www.zmonster.me/2018/02/28/org-mode-capture.html][使用 capture 功能快速记录 · ZMonster's Blog]]
+  + [[https://orgmode.org/manual/Capture-templates.html#Capture-templates][The Org Manual: Capture templates]]
+
 * org-agenda   
-  + 让 ~org-agenda-view~ 显示当前文件缓冲区的内容：
-    #+BEGIN_EXAMPLE
-      C-c a < a
-    #+END_EXAMPLE
+  org-agenda 默认情况下会显示 Task 的 ~CATEGORY~, 该属性可以通过快捷键 ~C-c C-x p~ 进行插入。
 
-  + 导出 ~org-agenda-view~ 的内容
-    #+BEGIN_EXAMPLE
-      C-x C-w
-    #+END_EXAMPLE
+* org-table
+  表格公式运算符之间是允许空格的，因此在编写公式时，可以考虑添加空格增强可读性。
 
-    + [[https://orgmode.org/manual/Exporting-agenda-views.html][Exporting agenda views]]
+  日期的计算：
+  #+BEGIN_EXAMPLE
+    ,#+TBLFM: $5=($2 - now()); %dd
+  #+END_EXAMPLE
+
+  可以通过快捷键 C-c C-x C-r 插入 clock table 来进行时间统计，它的 ~tags~ 选项要求是用引号包围的字符串，
+  不同的标签用逗号分隔。
+
+  + [[https://orgmode.org/manual/The-clock-table.html][The Org Manual: The clock table]]
+  + [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]]
+
+  有关表格操作的教程：
+  + [[http://www.zmonster.me/2016/06/03/org-mode-table.html][表格的基本操作及公式、绘图 · ZMonster's Blog]]
 
 * timestamps
   + 插入非活动时间戳：

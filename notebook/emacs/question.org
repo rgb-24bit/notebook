@@ -1,0 +1,28 @@
+#+TITLE:      Emacs - 问题集
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#怎样在-org-mode-的表格中插入竖线][怎样在 org-mode 的表格中插入竖线]]
+- [[#怎样调整-python-代码块的缩进][怎样调整 Python 代码块的缩进]]
+- [[#怎样设置某个-major-mode-的快捷键][怎样设置某个 Major mode 的快捷键]]
+- [[#怎样获取光标位置的字体颜色][怎样获取光标位置的字体、颜色......]]
+
+* 怎样在 org-mode 的表格中插入竖线
+  使用符号 ~\vert~ 代替，导出时会显示为竖线，参考：
+  + [[https://orgmode.org/manual/Special-symbols.html][The Org Manual: Special symbols]]
+
+* 怎样调整 Python 代码块的缩进
+  选中代码然后通过快捷键 C-c < 或 C-c > 调整它们的缩进层次，参考：
+  + [[https://stackoverflow.com/questions/2585091/emacs-bulk-indent-for-python][Emacs bulk indent for Python - Stack Overflow]]
+
+* 怎样设置某个 Major mode 的快捷键
+  #+BEGIN_SRC elisp
+    (define-key name-mode-map (kbd "o") 'function)
+  #+END_SRC
+
+  参考：[[http://ergoemacs.org/emacs/emacs_set_keys_for_major_mode.html][Emacs: Change Major Mode Keys]]
+
+* 怎样获取光标位置的字体、颜色......
+  通过快捷键 C-u C-x = 获取光标所在位置的 face，face 会决定内容的显示模式。
+
+  可以参考：[[http://ergoemacs.org/emacs/elisp_define_face.html][Elisp: How to Define Face]]
+

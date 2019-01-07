@@ -29,17 +29,17 @@
       ...
   #+END_SRC
 
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html][Simple Packages]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html][Simple Packages - GNU Emacs Lisp Reference Manual]]
 
 * 命名风格  
-    #+BEGIN_EXAMPLE
-    # 自定义变量可以使用自己的名字作为命名方式
-    rgb-24bit/XXXX
+  #+BEGIN_SRC elisp
+    ;; define custom variable
+    (setq rgb-24bit/variable-name)
 
-    # 模式命名规则
-    ModeName-mode
+    ;; define mode
+    (define-minor-mode name-mode)
 
-    # 模式内的变量则可以使用
-    ModeName-VariableName
-  #+END_EXAMPLE
+    ;; define mode variable
+    (setq name-mode-variable-name)
+  #+END_SRC
 

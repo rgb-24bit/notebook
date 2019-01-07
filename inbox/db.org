@@ -1,0 +1,48 @@
+* SQL 规范
+  SQL 关键字使用大写，而对列名和表名使用小写，这样做使代码更易于阅读和调试。
+
+* 简单查询
+  #+BEGIN_SRC sql
+    /**
+     ,* 通过关键字 DISTINCT 检索不重复的数据
+     ,*
+     ,* Note: 该关键字会作用于所有列
+     ,*/
+    SELECT DISTINCT col_name FROM tbl_name;
+
+
+    /**
+     ,* 选择结果中前五行数据
+     ,*/
+    SELECT TOP 5 col_name FROM tbl_name;  -- SQL Server
+    SELECT col_name FROM tbl_name FETCH FIRST 5 ROWS ONLY;  -- DB2
+    SELECT col_name FROM tbl_name WHERE ROWNUM <=5;  -- Oracle
+    SELECT col_name FROM tbl_name LIMIT 5;  -- MySQL, SQLite, PostgreSQL
+  #+END_SRC
+
+* 排序
+  #+BEGIN_SRC sql
+    /**
+     ,* 通过 ORDER BY 子句对检索的数据进行排序
+     ,*
+     ,* Note: ORDER BY 子句应该总是最后一个子句
+     ,*/
+    SELECT col_name FROM tbl_name
+     ORDER BY col_name;  -- 单列默认升序排序
+    SELECT col_name FROM tbl_name
+     ORDER BY other_col_name;  -- 根据非检索列排序
+    SELECT col_name FROM tbl_name
+     ORDER BY col_name, other_col_name;  -- 根据多列排序
+    SELECT col_name FROM tbl_name
+     ORDER BY 1;  -- 根据 col_name 排序
+    SELECT col_name FROM tbl_name
+     ORDER BY col_name DESC;  -- 单列降序排序，DESC 只会单独作用于一列
+  #+END_SRC
+
+  注意事项：MySQL 中 LIMIT 不是子句，需要放在 ORDER BY 后面。 
+
+* sqlite3
+  + 命令行工具
+    + [[https://www.sqlite.org/cli.html][Command Line Shell For SQLite]]
+    + [[https://github.com/dbcli/litecli][dbcli/litecli: CLI for SQLite Databases with auto-completion and syntax highlighting]]
+
