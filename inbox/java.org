@@ -82,3 +82,14 @@
 
 * 验证码生成
   + [[https://www.cnblogs.com/whgk/p/6426072.html][Java Web(四) 一次性验证码的代码实现 - 一杯凉茶 - 博客园]]
+* 数组类型判断
+  #+BEGIN_QUOTE
+  Primitive arrays are instance of Object and self type. e.g. int[] is type of Object and int[]. Both comparison returns true.
+
+  Object arrays are types of Object, Object array, classtype array, parent class type array. 
+  e.g. Integer[] is type of Object, Object[], Integer[] and Number[] (Integer extends Number).
+  #+END_QUOTE
+  + [[https://howtodoinjava.com/oops/java-instanceof/][Java instanceof - Java type comparison operator - HowToDoInJava]]
+  
+  特别的， int[][] 是 Object[] 的实例。
+
