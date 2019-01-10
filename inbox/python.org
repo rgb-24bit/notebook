@@ -59,3 +59,13 @@
   + [[https://www.v2ex.com/t/524241#reply0][Python 性能分析 - V2EX]]
   + [[https://stackoverflow.com/questions/15707056/get-time-of-execution-of-a-block-of-code-in-python-2-7][Get time of execution of a block of code in Python 2.7 - Stack Overflow]]
 
+* 创建文件
+  #+BEGIN_SRC python
+    try:
+        fd, tmp = tempfile.mkstemp(...)
+        os.rename(tmp, filename)
+        os.chmod(filename, ...)
+    except (IOError, OSError):
+        return False
+  #+END_SRC
+

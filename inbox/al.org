@@ -17,3 +17,6 @@
   + [[https://octman.com/blog/2013-09-27-binary-search-and-variants/][二分查找及其变形 | Tsung's BLOG]]
   + 查找二叉树
 
+* 拼写检查
+  + [[https://en.wikipedia.org/wiki/BK-tree][BK-tree - Wikipedia]]
+

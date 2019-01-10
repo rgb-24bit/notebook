@@ -24,3 +24,39 @@
   + [[http://ergoemacs.org/emacs/elisp_toggle_command.html][Elisp: How to Write a Toggle/Cycle Command]]
   + [[https://emacs-china.org/t/topic/8095][有没有现成的，可以把一组函数组合成一个函数的包或命令？ - Emacs-general - Emacs China]]
 
+* 候选列表
+  + [[https://github.com/lujun9972/emacs-document/blob/master/emacs-common/%E4%BB%8EHelm%E5%88%B0Ivy.org][emacs-document/从Helm到Ivy.org at master · lujun9972/emacs-document]]
+  + [[https://www.emacswiki.org/emacs/InteractivelyDoThings][EmacsWiki: Interactively Do Things]]
+  + [[https://oremacs.com/swiper/#getting-started][Ivy User Manual]]
+
+* 函数
+  + [[https://stackoverflow.com/questions/16801396/when-should-emacs-function-syntax-be-used][lisp - When should Emacs #'function syntax be used? - Stack Overflow]]
+  + [[https://github.com/abo-abo/swiper/blob/master/ivy.el#L1740][swiper/ivy.el at master · abo-abo/swiper]]
+  + [[https://www.emacswiki.org/emacs/KeywordArguments][EmacsWiki: Keyword Arguments]]
+
+* 宏展开
+  + macrostep
+
+* 可能用到的配置
+  #+BEGIN_SRC elisp
+    (setq initial-scratch-message "")
+
+    (setq initial-buffer-choice
+          '(lambda ()
+             (let ((buf (get-buffer-create "*scratch*"))
+                   (file "~/.emacs.d/scratch.el"))
+               (with-current-buffer buf
+                 (insert-file-contents file)
+                 (local-set-key
+                  "\C-x\C-s"
+                  '(lambda ()
+                     (interactive)
+                     (let ((str (buffer-string)))
+                       (with-current-buffer
+                           (find-file "~/.emacs.d/scratch.el")
+                         (erase-buffer)   (insert str)
+                         (save-buffer)    (kill-buffer)
+                         )))))
+               buf)))
+  #+END_SRC
+

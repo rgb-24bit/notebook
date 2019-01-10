@@ -80,3 +80,5 @@
 * TextUtils
   + [[https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/text/TextUtils.java][core/java/android/text/TextUtils.java - platform/frameworks/base - Git at Google]]
 
+* 验证码生成
+  + [[https://www.cnblogs.com/whgk/p/6426072.html][Java Web(四) 一次性验证码的代码实现 - 一杯凉茶 - 博客园]]
