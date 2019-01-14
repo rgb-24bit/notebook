@@ -60,3 +60,10 @@
                buf)))
   #+END_SRC
 
+* org-mode 9.2
+  + [[https://emacs.stackexchange.com/questions/46988/easy-templates-in-org-9-2][org mode - Easy Templates in Org 9.2 - Emacs Stack Exchange]]
+  e.g.
+
+* elisp
+  + [[https://github.com/bbatsov/emacs-lisp-style-guide][bbatsov/emacs-lisp-style-guide: A community-driven Emacs Lisp style guide]]
+
