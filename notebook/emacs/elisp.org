@@ -13,6 +13,10 @@
 - [[#keyword][Keyword]]
 - [[#关于符号][关于符号]]
 - [[#hooks][Hooks]]
+- [[#macro][Macro]]
+- [[#timer][Timer]]
+- [[#函数相关][函数相关]]
+  - [[#关键字参数][关键字参数]]
 
 * interactive
   ~Emacs~ 中存在 *两种函数*:
@@ -185,4 +189,59 @@
   Hook 是 Emacs 中重要的扩展机制，是一个函数列表，会在执行某些操作后执行这个列表中的函数。
 
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]
+
+* Macro
+  宏是一种可以生成代码的代码。类比与 C 语言中的宏以及 C++中的模板：
+  #+BEGIN_SRC elisp
+    (defmacro inc (var)
+      (list 'setq var (list '1+ var)))
+
+    (setq my-var 1)
+    (setq my-var (+ 1 my-var))
+
+    (macroexpand '(inc my-var))
+  #+END_SRC
+
+  可以使用 macroexpand 获得宏展开的结果，以上代码结果为：
+  #+BEGIN_SRC elisp
+    (setq my-var (1+ my-var))
+  #+END_SRC
+
+  宏和函数的区别：
+  + 宏的参数并不会被马上求值，解释器会先展开宏，宏展开之后解释器才会执行宏展开的结果
+  + 宏的执行结果是一个表达式，该表达式会立即被解释器执行
+
+* Timer
+  可以通过函数 run-with-timer 创建定时任务：
+  #+BEGIN_SRC elisp
+    (run-with-timer SECS REPEAT FUNCTION &rest ARGS)
+  #+END_SRC
+
+  参数含义：
+  + SECS: 间隔多少秒执行 FUNCTION
+  + REPEAT: 非空便重复执行
+    
+  可以通过函数 cancel-timer 取消一个 Timer:
+  #+BEGIN_SRC elisp
+    (cancel-timer TIMER)
+  #+END_SRC
+  
+  TIMER 是由函数 run-with-timer 创建的。
+  
+* 函数相关
+  两种新式及展开后的形式：
+  #+BEGIN_SRC elisp
+    #'foo  ; => (function foo)
+    'foo   ; => (quote foo)
+  #+END_SRC
+
+  + [[https://stackoverflow.com/questions/18390586/why-use-before-function-arguments-in-emacs-lisp?rq=1][Why use #' before function arguments in emacs-lisp? - Stack Overflow]]
+
+** 关键字参数
+   使用 cl-defun 可以更方便的定义带关键字参数的函数：
+   #+BEGIN_SRC elisp
+     (cl-defun func (&key foo bar))
+   #+END_SRC
+
+   + [[https://www.emacswiki.org/emacs/KeywordArguments][EmacsWiki: Keyword Arguments]]
 

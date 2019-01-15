@@ -64,6 +64,8 @@
 - [[file:notebook/flask/flask.org][Flask - 笔记]]
 - [[file:notebook/flask/guide.org][Flask - Quick Start]]
 #+HTML: </details>
+#+HTML: <details><summary><b><i>framework</i></b></summary>
+#+HTML: </details>
 #+HTML: <details><summary><b><i>front-end</i></b></summary>
 - [[file:notebook/front-end/css.org][前端 - CSS 相关笔记]]
 - [[file:notebook/front-end/html-css-base.org][前端 - HTML/CSS 基础笔记]]
@@ -133,6 +135,7 @@
 #+HTML: <details><summary><b><i>network</i></b></summary>
 - [[file:notebook/network/protocol.org][计算机网络 - 协议]]
 - [[file:notebook/network/url.org][计算机网络 - 统一资源定位符 URL]]
+- [[file:notebook/network/xnote.org][计算机网络 - 五层模型]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>os</i></b></summary>
 - [[file:notebook/os/base.org][操作系统 - 基础内容]]

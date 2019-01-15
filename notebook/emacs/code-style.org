@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#package][Package]]
 - [[#命名风格][命名风格]]
+- [[#the-emacs-lisp-style-guide][The Emacs Lisp Style Guide]]
 
 * Package
   #+BEGIN_SRC elisp
@@ -42,4 +43,7 @@
     ;; define mode variable
     (setq name-mode-variable-name)
   #+END_SRC
+
+* The Emacs Lisp Style Guide
+  + [[https://github.com/bbatsov/emacs-lisp-style-guide][A community-driven Emacs Lisp style guide]]
 

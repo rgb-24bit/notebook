@@ -5,6 +5,7 @@
 - [[#怎样调整-python-代码块的缩进][怎样调整 Python 代码块的缩进]]
 - [[#怎样设置某个-major-mode-的快捷键][怎样设置某个 Major mode 的快捷键]]
 - [[#怎样获取光标位置的字体颜色][怎样获取光标位置的字体、颜色......]]
+- [[#中英等宽字体的配置][中英等宽字体的配置]]
 
 * 怎样在 org-mode 的表格中插入竖线
   使用符号 ~\vert~ 代替，导出时会显示为竖线，参考：
@@ -25,4 +26,16 @@
   通过快捷键 C-u C-x = 获取光标所在位置的 face，face 会决定内容的显示模式。
 
   可以参考：[[http://ergoemacs.org/emacs/elisp_define_face.html][Elisp: How to Define Face]]
+
+* 中英等宽字体的配置
+  通过 cnfonts 可以快速的配置，也可以借鉴 Spacemacs 的配置：
+  #+BEGIN_SRC elisp
+    (defun spacemacs//set-monospaced-font (english chinese english-size chinese-size)
+      "Set the monospaced font size when mixed Chinese and English words."
+      (set-face-attribute 'default nil :font
+                          (format   "%s:pixelsize=%d"  english english-size))
+      (dolist (charset '(kana han cjk-misc bopomofo))
+        (set-fontset-font (frame-parameter nil 'font) charset
+                          (font-spec :family chinese :size chinese-size))))
+  #+END_SRC
 

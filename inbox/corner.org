@@ -28,3 +28,28 @@
 
    + [[https://zh.wikipedia.org/wiki/%E6%AD%90%E5%B9%BE%E9%87%8C%E5%BE%97-%E6%AD%90%E6%8B%89%E5%AE%9A%E7%90%86][维基百科 - 欧几里得-欧拉定理]]
 
+* Emacs 相关
+  + [[https://emacs.stackexchange.com/questions/46988/easy-templates-in-org-9-2][org mode - Easy Templates in Org 9.2 - Emacs Stack Exchange]]
+  + scratch 缓冲区的配置
+    #+BEGIN_SRC elisp
+      (setq initial-scratch-message "")
+
+      (setq initial-buffer-choice
+            '(lambda ()
+               (let ((buf (get-buffer-create "*scratch*"))
+                     (file "~/.emacs.d/scratch.el"))
+                 (with-current-buffer buf
+                   (insert-file-contents file)
+                   (local-set-key
+                    "\C-x\C-s"
+                    '(lambda ()
+                       (interactive)
+                       (let ((str (buffer-string)))
+                         (with-current-buffer
+                             (find-file "~/.emacs.d/scratch.el")
+                           (erase-buffer)   (insert str)
+                           (save-buffer)    (kill-buffer)
+                           )))))
+                 buf)))
+     #+END_SRC
+

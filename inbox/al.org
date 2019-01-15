@@ -20,3 +20,11 @@
 * 拼写检查
   + [[https://en.wikipedia.org/wiki/BK-tree][BK-tree - Wikipedia]]
 
+* 二叉树高度获取
+  #+BEGIN_SRC java
+    public int getHeight(TreeNode root) {
+      if (root == null)
+        return 0;
+      return 1 + Math.max(getHeight(root.left), getHeight(root.right));
+    }
+  #+END_SRC

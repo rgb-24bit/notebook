@@ -1,69 +1,11 @@
-* 宏和 use-package
-  + [[https://github.com/emacs-china/Spacemacs-rocks#%25E7%25AC%25AC%25E4%25B9%259D%25E5%25A4%25A9macro-%25E4%25B8%258E-use-package][Macro 与 Use-package]]
-
 * web-mode
   + [[https://emacs.stackexchange.com/questions/23810/getting-proper-indentation-for-python-flask-templates][Getting proper indentation for Python Flask templates - Emacs Stack Exchange]]
 
 * Conses
   + [[https://acl.readthedocs.io/en/latest/zhCN/ch3-cn.html#conses][构造 (Conses)]]
 
-* Basic
-  + [[https://www.emacswiki.org/emacs/FillParagraph][FillParagraph]]
-
-* 定时任务
-  + [[https://www.jianshu.com/p/8266eb4b135a][Emacs 定时任务 - 简书]]
-  + [[https://github.com/lolownia/org-pomodoro][org-pomodoro]]
-
-* 矩形编辑
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Rectangles.html][Rectangles - GNU Emacs Manual]]
-
-* 字体配置
-  + [[https://github.com/rgb-24bit/spacemacs/blob/develop/layers/%2Bintl/chinese/config.el#L27][spacemacs/config.el at develop · rgb-24bit/spacemacs]]
-
-* 循环和切换命令的实现
-  + [[http://ergoemacs.org/emacs/elisp_toggle_command.html][Elisp: How to Write a Toggle/Cycle Command]]
-  + [[https://emacs-china.org/t/topic/8095][有没有现成的，可以把一组函数组合成一个函数的包或命令？ - Emacs-general - Emacs China]]
-
 * 候选列表
   + [[https://github.com/lujun9972/emacs-document/blob/master/emacs-common/%E4%BB%8EHelm%E5%88%B0Ivy.org][emacs-document/从Helm到Ivy.org at master · lujun9972/emacs-document]]
   + [[https://www.emacswiki.org/emacs/InteractivelyDoThings][EmacsWiki: Interactively Do Things]]
   + [[https://oremacs.com/swiper/#getting-started][Ivy User Manual]]
-
-* 函数
-  + [[https://stackoverflow.com/questions/16801396/when-should-emacs-function-syntax-be-used][lisp - When should Emacs #'function syntax be used? - Stack Overflow]]
-  + [[https://github.com/abo-abo/swiper/blob/master/ivy.el#L1740][swiper/ivy.el at master · abo-abo/swiper]]
-  + [[https://www.emacswiki.org/emacs/KeywordArguments][EmacsWiki: Keyword Arguments]]
-
-* 宏展开
-  + macrostep
-
-* 可能用到的配置
-  #+BEGIN_SRC elisp
-    (setq initial-scratch-message "")
-
-    (setq initial-buffer-choice
-          '(lambda ()
-             (let ((buf (get-buffer-create "*scratch*"))
-                   (file "~/.emacs.d/scratch.el"))
-               (with-current-buffer buf
-                 (insert-file-contents file)
-                 (local-set-key
-                  "\C-x\C-s"
-                  '(lambda ()
-                     (interactive)
-                     (let ((str (buffer-string)))
-                       (with-current-buffer
-                           (find-file "~/.emacs.d/scratch.el")
-                         (erase-buffer)   (insert str)
-                         (save-buffer)    (kill-buffer)
-                         )))))
-               buf)))
-  #+END_SRC
-
-* org-mode 9.2
-  + [[https://emacs.stackexchange.com/questions/46988/easy-templates-in-org-9-2][org mode - Easy Templates in Org 9.2 - Emacs Stack Exchange]]
-  e.g.
-
-* elisp
-  + [[https://github.com/bbatsov/emacs-lisp-style-guide][bbatsov/emacs-lisp-style-guide: A community-driven Emacs Lisp style guide]]
 
