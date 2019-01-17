@@ -59,12 +59,9 @@
 - [[file:notebook/emacs/utils.org][Emacs - 实用功能]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>flask</i></b></summary>
-- [[file:notebook/flask/deploy.org][Flask - 部署]]
-- [[file:notebook/flask/extend.org][Flask - 扩展]]
-- [[file:notebook/flask/flask.org][Flask - 笔记]]
-- [[file:notebook/flask/guide.org][Flask - Quick Start]]
 #+HTML: </details>
-#+HTML: <details><summary><b><i>framework</i></b></summary>
+#+HTML: <details><summary><b><i>frameworks</i></b></summary>
+- [[file:notebook/frameworks/flask.org][框架 - Flask 笔记]]
 #+HTML: </details>
 #+HTML: <details><summary><b><i>front-end</i></b></summary>
 - [[file:notebook/front-end/css.org][前端 - CSS 相关笔记]]
@@ -112,6 +109,8 @@
 - [[file:notebook/lang/graphviz.org][Language - Dot]]
 - [[file:notebook/lang/plantuml.org][Language - plantuml]]
 - [[file:notebook/lang/uml.org][Language - UML]]
+#+HTML: </details>
+#+HTML: <details><summary><b><i>libraries</i></b></summary>
 #+HTML: </details>
 #+HTML: <details><summary><b><i>linux</i></b></summary>
 - [[file:notebook/linux/debian.org][Linux - Debian 系统使用]]
@@ -161,13 +160,13 @@
 - [[file:notebook/python/tkinter.org][Python - Tkinter 使用]]
 - [[file:notebook/python/weakref.org][Python - 弱引用]]
 #+HTML: </details>
-#+HTML: <details><summary><b><i>tool</i></b></summary>
-- [[file:notebook/tool/chrome.org][Tool - Chrome]]
-- [[file:notebook/tool/ci.org][Tool - 自动集成]]
-- [[file:notebook/tool/cmd.org][Tool - Windows CMD 命令]]
-- [[file:notebook/tool/curl.org][Tool - curl]]
-- [[file:notebook/tool/shell.org][Tool - Linux Shell 命令]]
-- [[file:notebook/tool/ssh.org][Tool - SSH]]
-- [[file:notebook/tool/utils.org][Tool - 实用开源工具收集]]
-- [[file:notebook/tool/vim.org][Tool - Vim 笔记]]
+#+HTML: <details><summary><b><i>tools</i></b></summary>
+- [[file:notebook/tools/chrome.org][Tool - Chrome]]
+- [[file:notebook/tools/ci.org][Tool - 自动集成]]
+- [[file:notebook/tools/cmd.org][Tool - Windows CMD 命令]]
+- [[file:notebook/tools/curl.org][Tool - curl]]
+- [[file:notebook/tools/shell.org][Tool - Linux Shell 命令]]
+- [[file:notebook/tools/ssh.org][Tool - SSH]]
+- [[file:notebook/tools/utils.org][Tool - 实用开源工具收集]]
+- [[file:notebook/tools/vim.org][Tool - Vim 笔记]]
 #+HTML: </details>

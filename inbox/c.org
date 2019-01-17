@@ -1,0 +1,15 @@
+* 数组相关
+  初始化：
+  #+BEGIN_SRC C
+    int arr[] = {1, 2, 3};   // int arr[3] = {1, 2, 3}
+    int arr[4] = {1, 2, 3};  // int arr[4] = {1, 2, 3, 0}
+  #+END_SRC
+
+  数组大小计算：
+  #+BEGIN_SRC C
+    sizeof(arr) / sizeof(arr[0]);
+  #+END_SRC
+
+  + [[https://www.jianshu.com/p/f54547d24221][C语言数组的讲解 - 简书]]
+  + [[https://zh.cppreference.com/w/cpp/language/sizeof][sizeof 运算符 - cppreference.com]]
+

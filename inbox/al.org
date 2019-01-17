@@ -13,10 +13,6 @@
   + [[https://www.cnblogs.com/skywang12345/p/3659060.html][斐波那契堆(一)之 图文解析 和 C语言的实现 - 如果天空不死 - 博客园]]
   + [[https://github.com/danielborowski/fibonacci-heap-python/blob/master/fib-heap.py][fibonacci-heap-python/fib-heap.py at master · danielborowski/fibonacci-heap-python]]
 
-* 二分查找
-  + [[https://octman.com/blog/2013-09-27-binary-search-and-variants/][二分查找及其变形 | Tsung's BLOG]]
-  + 查找二叉树
-
 * 拼写检查
   + [[https://en.wikipedia.org/wiki/BK-tree][BK-tree - Wikipedia]]
 
@@ -28,3 +24,64 @@
       return 1 + Math.max(getHeight(root.left), getHeight(root.right));
     }
   #+END_SRC
+
+* 二分查找
+  基础实现：
+  #+BEGIN_SRC python
+    def binary_search(array, size, target):
+        left, right = 0, size - 1
+        while left <= right:
+            mid = floor((left + right) / 2)
+            if array[mid] > target:
+                right = mid - 1
+            elif array[mid] < target:
+                left = mid + 1
+            else:
+                return mid
+        return -1
+  #+END_SRC
+
+  基础实现的变种，可以减少每次比较的次数，但是需要多进行一次迭代：
+  #+BEGIN_SRC python
+    def binary_search(array, size, target):
+        left, right = 0, size - 1
+        while not left == right:
+            mid = ceil((left + right) / 2)
+            if array[mid] > target:
+                right = mid - 1
+            else:
+                left = mid
+
+        if array[left] == target:
+            return left
+        return -1
+  #+END_SRC
+  
+  当序列中存在重复元素时，寻找最左匹配元素：
+  #+BEGIN_SRC python
+    def binary_search_leftmost(array, size, target):
+        left, right = 0, size
+        while left < right:
+            mid = floor((left + right) / 2)
+            if array[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+        return left
+  #+END_SRC
+
+  当序列中存在重复元素时，寻找最右匹配元素：
+  #+BEGIN_SRC python
+    def binary_search_leftmost(array, size, target):
+        left, right = 0, size
+        while left < right:
+            mid = floor((left + right) / 2)
+            if array[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid
+        return left - 1
+  #+END_SRC
+
+  + [[https://en.wikipedia.org/wiki/Binary_search_algorithm][Binary search algorithm - Wikipedia]]
+  

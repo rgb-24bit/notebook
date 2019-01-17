@@ -21,3 +21,6 @@
 
   所以说，在某个地方手机号码后四位重复的可能性很低，因此用后四位验证外卖。
 
+* 杰西卡相似度计算
+  + [[https://stackoverflow.com/questions/40579415/computing-jaccard-similarity-in-python][performance - Computing Jaccard Similarity in Python - Stack Overflow]]
+

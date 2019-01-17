@@ -1,0 +1,391 @@
+#+TITLE:      框架 - Flask 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#基本使用][基本使用]]
+  - [[#flask][Flask]]
+  - [[#jinja2][Jinja2]]
+- [[#使用][使用]]
+- [[#扩展][扩展]]
+  - [[#flask-migrate][flask-migrate]]
+- [[#部署][部署]]
+  - [[#iis-部署][IIS 部署]]
+  - [[#debian--nginx-部署][Debian + Nginx 部署]]
+
+* 基本使用
+** Flask
+   运行 Flask 程序相关的环境变量：
+   #+BEGIN_SRC bash
+     # FLASK_APP - 运行的脚本
+     export FLASK_APP=hello.py
+
+     # FLASK_ENV - 运行的环境
+     export FLASK_ENV=development
+   #+END_SRC
+
+   路由的设置方式：
+   #+BEGIN_SRC python
+     @app.route('/')
+     @app.route('/index')
+     def index():
+         return 'Index Page'
+   #+END_SRC
+
+   路由变量的设置方式：
+   #+BEGIN_SRC python
+     # 简单的使用方式，变量就是字符串
+     @app.route('/<variable_name>')
+     def page(variable_name):
+         return variable_name
+
+     # 指定变量类型转换器 <converter:variable_name>
+     # 支持的类型：
+     #     string - default
+     #     int
+     #     float
+     #     path
+     #     uuid
+     @app.route('/<int:id>')
+     def page(id):
+         return str(id)
+   #+END_SRC
+
+   路由以 ~/~ 结尾防止两次请求：
+   #+BEGIN_SRC python
+     @app.route('/projects/')
+     def projects():
+         return 'The project page'
+   #+END_SRC
+
+   通过函数 ~url_for~ 来获取地址：
+   #+BEGIN_SRC python
+     @main.route('/')
+     def index():
+         return ''
+
+     @auth.route('/unconfirmed')
+     def unconfirmed():
+         return redirect(url_for('main.index'))
+   #+END_SRC
+
+   获取请求信息：
+   #+BEGIN_SRC python
+     from flask import request
+
+
+     @app.route('/login', methods=['POST', 'GET'])
+     def login():
+         error = None
+         if request.method == 'POST':
+             if valid_login(request.form['username'],
+                            request.form['password']):
+                 return log_the_user_in(request.form['username'])
+             else:
+                 error = 'Invalid username/password'
+                 # the code below is executed if the request method
+                 # was GET or the credentials were invalid
+         return render_template('login.html', error=error)
+   #+END_SRC
+
+   获取设置 Cookie 信息：
+   #+BEGIN_SRC python
+     from flask import request, make_reponse
+
+     @app.route('/')
+     def index():
+         username = request.cookies.get('username')
+         # use cookies.get(key) instead of cookies[key] to not get a
+         # KeyError if the cookie is missing.
+
+
+     @app.route('/')
+     def index():
+         resp = make_response(render_template(...))
+         resp.set_cookie('username', 'the username')
+         return resp
+   #+END_SRC
+
+   重定向和错误处理：
+   #+BEGIN_SRC python
+     from flask import abort, redirect, render_template, url_for
+
+     @app.route('/')
+     def index():
+         return redirect(url_for('login'))  # 重定向
+
+     @app.route('/login')
+     def login():
+         abort(401)                         # 调用错误代码 401 终止请求
+         this_is_never_executed()
+
+     @app.errorhandler(404)                 # 错误处理
+     def page_not_found(error):
+         return render_template('page_not_found.html'), 404
+   #+END_SRC
+
+   响应对象的设置：
+   #+BEGIN_SRC python
+     # 返回值：
+     # response
+     # (response, headers)
+     # (response, status, headers)
+     @app.errorhandler(404)
+     def not_found(error):
+         return render_template('error.html'), 404
+
+
+     # make_response()
+     @app.errorhandler(404)
+     def not_found(error):
+         resp = make_response(render_template('error.html'), 404)
+         resp.headers['X-Something'] = 'A value'
+         return resp
+   #+END_SRC
+
+   使用 ~Session~:
+   #+BEGIN_SRC python
+     from flask import Flask, session, redirect, url_for, escape, request
+
+     app = Flask(__name__)
+
+     # Set the secret key to some random bytes. Keep this really secret!
+     app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+     @app.route('/')
+     def index():
+         if 'username' in session:
+             return 'Logged in as %s' % escape(session['username'])
+         return 'You are not logged in'
+
+     @app.route('/login', methods=['GET', 'POST'])
+     def login():
+         if request.method == 'POST':
+             session['username'] = request.form['username']
+             return redirect(url_for('index'))
+         return '''
+             <form method="post">
+                 <p><input type=text name=username>
+                 <p><input type=submit value=Login>
+             </form>
+         '''
+
+     @app.route('/logout')
+     def logout():
+         # remove the username from the session if it's there
+         session.pop('username', None)
+         return redirect(url_for('index'))
+   #+END_SRC
+
+** Jinja2
+   模板语法中的几种分隔符：
+   + ~{% ... %}~ - 语句
+   + ~{{ ... }}~ - 表达式
+   + ~{# ... #}~ - 注释
+   + ~#  ... ##~ - 行语句
+
+   对象属性值的获取，以下两种方式是等价的，这对于字典来说方便不少：
+   #+BEGIN_SRC html
+     {{ foo.bar }}
+     {{ foo['bar'] }}
+   #+END_SRC
+
+   可以通过过滤器修改变量：
+   #+BEGIN_SRC html
+     {{ name|striptags|title }}
+   #+END_SRC
+
+   + [[http://jinja.pocoo.org/docs/2.10/templates/#builtin-filters][List of Builtin Filters]]
+
+   同时，可以使用一些测试方法：
+   #+BEGIN_SRC html
+     {% if loop.index is divisibleby 3 %}
+     {% if loop.index is divisibleby(3) %}
+   #+END_SRC
+
+   这些测试方法可以考虑移植到 Python 本身上：
+   + [[http://jinja.pocoo.org/docs/2.10/templates/#builtin-tests][List of Builtin Tests]]
+
+   注释分隔符的使用方式：
+   #+BEGIN_SRC html
+     {# note: commented-out template because we no longer use this
+     {% for user in users %}
+     ...
+     {% endfor %}
+     #}
+   #+END_SRC
+
+   通过在块首或块为使用 ~+~ 和 ~-~ 来控制空白符的行为：
+   #+BEGIN_SRC html
+     {%- if foo -%}...{% endif %}
+   #+END_SRC
+
+   + [[http://jinja.pocoo.org/docs/2.10/templates/#whitespace-control][Whitespace Control]]
+
+   转义 ~Jinja2~ 模板语法符号：
+   #+BEGIN_SRC html
+     {# 简短的 #}
+     {{ '{{' }}
+
+     {# 更多的 #}
+     {% raw %}
+     <ul>
+       {% for item in seq %}
+       <li>{{ item }}</li>
+       {% endfor %}
+     </ul>
+     {% endraw %}
+   #+END_SRC
+
+   使用行语句的情况下，一下两种方式是等价的：
+   #+BEGIN_SRC html
+     <ul>
+       # for item in seq
+       <li>{{ item }}</li>
+       # endfor
+     </ul>
+
+     <ul>
+       {% for item in seq %}
+       <li>{{ item }}</li>
+       {% endfor %}
+     </ul>
+   #+END_SRC
+
+   通过 ~##~ 作为行语句的注释：
+   #+BEGIN_SRC html
+     # for item in seq:
+     <li>{{ item }}</li>     ## this comment is ignored
+     # endfor
+   #+END_SRC
+
+   模板中通过 ~{% block %}~ 定义的部分可以被子模块重写：
+   #+BEGIN_SRC html
+     {% block block_name %}
+
+     {% endblock %}
+
+     {# or #}
+
+     {% block block_name %}
+
+     {% endblock block_name %}
+   #+END_SRC
+
+   子模块通过 ~{% extends %}~ 语句继承父模块，通过 ~{% block block_name %}~ 重写指定的块：
+   #+BEGIN_SRC html
+     {% block head %}
+     {{ super() }}
+     <style type="text/css">
+       .important { color: #336699; }
+     </style>
+     {% endblock %}
+   #+END_SRC
+
+   通过 ~{{ super() }}~ 继承父模块的内容，子目录下的模块的继承方式：
+   #+BEGIN_SRC html
+     {% extends "layout/default.html" %}
+   #+END_SRC
+
+   嵌套的块可能无法访问外部块的变量，因此可以通过将块声明为 ~scoped~ 的来支持访问：
+   #+BEGIN_SRC html
+     {% for item in seq %}
+     <li>{% block loop_item scoped %}{{ item }}{% endblock %}</li>
+     {% endfor %}
+   #+END_SRC
+
+   手动进行 HTML 字符转义：
+   #+BEGIN_SRC html
+     {{ user.username|e }}
+   #+END_SRC
+
+   更多的内容：[[http://jinja.pocoo.org/docs/2.10/templates/#extensions][Template Designer Documentation]]
+
+* 使用
+  + 资源的访问：flask 中的资源目录主要有 *静态资源目录* 和  *模板目录*, 其中，静态资源目录中的资源可以直接获取，
+    而模板目录中的资源需要设置路由。
+
+  + MVC & REST：flask 默认的开发模式为 ~MVC~, 如果要使用 ~REST~, 可以将 *静态资源目录* 和 *模板目录* 分出，单独编写。
+
+  + 自定义缓存装饰器
+    #+BEGIN_SRC python
+      from werkzeug.contrib.cache import SimpleCache
+
+      cache = SimpleCache()
+
+      def cached(timeout=300):
+          def decorator(func):
+              @wraps(func)
+              def decorated_function(*args, **kwargs):
+                  cache_key = (id(func), args, tuple(kwargs.items()))
+                  value = cache.get(cache_key)
+                  if value is None:
+                      value = func(*args, **kwargs)
+                      cache.set(cache_key, value, timeout=timeout)
+                  return value
+              return decorated_function
+          return decorator
+    #+END_SRC
+
+* 扩展
+** flask-migrate
+   + 问题：开发环境中切换分支后更新数据库失败，数据库是 sqlite
+
+     解决：直接删除原有数据库可以很简单的解决该问题
+
+* 部署
+** IIS 部署
+   IIS 部署教程：[[https://segmentfault.com/a/1190000008909201][在 Windows 平台使用 IIS 部署 Flask 网站]]
+
+   + 问题：IIS 拒绝 PUT, DELETE 等请求
+
+     解决：[[https://stackoverflow.com/questions/6739124/iis-7-5-enable-put-and-delete-for-restful-service-extensionless][IIS 7.5 + enable PUT and DELETE for RESTFul service, extensionless]]
+
+     在 ~web.config~  中添加如下内容：
+     #+BEGIN_SRC xml
+       <modules>
+         <remove name="WebDAVModule" />
+       </modules>
+       <handlers>
+         <remove name="WebDAV" />
+       </handlers>
+
+       <security>
+         <requestFiltering>
+           <verbs allowUnlisted="false">
+             <add verb="GET" allowed="true" />
+             <add verb="POST" allowed="true" />
+             <add verb="DELETE" allowed="true" />
+             <add verb="PUT" allowed="true" />
+           </verbs>
+         </requestFiltering>
+       </security>
+     #+END_SRC
+
+** Debian + Nginx 部署
+   Nginx 部署教程：[[https://www.cnblogs.com/Ray-liang/p/4173923.html][阿里云部署 Flask + WSGI + Nginx 详解]]
+   Nginx 部署参考：[[https://github.com/rgb-24bit/viwp/tree/deploy/nginx][rgb-24bit/viwp at deploy/nginx]]
+
+   + 问题：编译 uWSGI 失败
+
+     解决：[[https://stackoverflow.com/questions/44037637/error-installing-uwsgi-in-virtualenv][Error installing uwsgi in virtualenv]]
+
+     #+BEGIN_SRC bash
+       $ apt-get install python3-all-dev
+     #+END_SRC
+
+     参考： [[https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html][Quickstart for Python/WSGI applications]]
+
+   + 问题：Supervisor 的作用
+
+     解决：启动并管理 ~Flask~ 程序， ~Nginx~ 只负责通讯，不负责启动管理程序
+
+   + 问题：root 用户根目录路径设置
+
+     解决：类似 ~~/path~ 的目录应该设置为 ~/root/path~
+
+   + 问题：Supervisor 需要的 Socket 文件缺失，需要手动创建
+
+     解决：[[https://stackoverflow.com/questions/6025755/how-to-create-special-files-of-type-socket][unix - How to create special files of type socket? - Stack Overflow]]
+
+     #+BEGIN_SRC bash
+       $ python -c "import socket as s; sock = s.socket(s.AF_UNIX); sock.bind('/tmp/somesocket')"
+     #+END_SRC
