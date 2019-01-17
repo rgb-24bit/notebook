@@ -58,8 +58,6 @@
 - [[file:notebook/emacs/regex.org][Emacs - 正则表达式]]
 - [[file:notebook/emacs/utils.org][Emacs - 实用功能]]
 #+HTML: </details>
-#+HTML: <details><summary><b><i>flask</i></b></summary>
-#+HTML: </details>
 #+HTML: <details><summary><b><i>frameworks</i></b></summary>
 - [[file:notebook/frameworks/flask.org][框架 - Flask 笔记]]
 #+HTML: </details>
