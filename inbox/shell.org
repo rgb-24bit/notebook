@@ -60,3 +60,12 @@
   + [[https://www.cnblogs.com/whseay/p/3456038.html][Windows命令行使用FTP - whseay - 博客园]]
   + [[https://linux.cn/article-6746-1.html][技术|如何在命令行中使用 ftp 命令上传和下载文件]]
   
+* sed
+  #+BEGIN_EXAMPLE
+    find . -name "*.cs" -exec sed -i "s/2018/2018 - 2019/g" {} \;
+  #+END_EXAMPLE
+
+* 目录切换
+  + [[https://stackoverflow.com/questions/3349105/how-to-set-current-working-directory-to-the-directory-of-the-script][bash - How to set current working directory to the directory of the script? - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/874452/change-the-current-directory-from-a-bash-script][environment - Change the current directory from a Bash script - Stack Overflow]]
+

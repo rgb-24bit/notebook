@@ -1,38 +1,79 @@
 # -*- coding: utf-8 -*-
 
-"""
-Generate README.org
-~~~~~~~~~~~~~~~~~~~
-
-1. Only .org files required.
-2. Depth does not exceed 1.
-"""
-
+import os
 import pathlib
 import re
 
 
-class DetailsWriter(object):
-    def __init__(self, fileobj, summary):
-        self._fileobj = fileobj
-        self._summary = summary
-
-    def __enter__(self):
-        line = '#+HTML: <details><summary><b><i>%s</i></b></summary>\n' % self._summary
-        self._fileobj.write(line)
-        return self
-
-    def __exit__(self, type_, value, trace):
-        self._fileobj.write('#+HTML: </details>\n')
-
-    def write(self, path, name):
-        self._fileobj.write('- [[file:%s][%s]]\n' % (path, name))
+HREF_PREFIX = '/rgb-24bit/notebook/blob/master'
+IGNORE_DIR = 'img', 'assets', 'static'
 
 
-def get_note_dir(notebook):
-    """Get the directory containing the notes."""
-    for fn in pathlib.Path(notebook).iterdir():
-        yield fn
+class FileVisitor(object):
+    """Accessing objects that process files during file tree traversal."""
+
+    def pre_visit_directory(self, dirname):
+        """Method called before accessing the directory.
+
+        Args:
+            dirname: The pathlib.Path object of the directory to be accessed.
+        """
+        pass
+
+    def post_visit_directory(self, dirname):
+        """Method called after accessing the directory.
+
+        Args:
+            dirname: The pathlib.Path object of the directory to be accessed.
+        """
+        pass
+
+    def visit_file(self, filename):
+        """Method called when accessing a file.
+
+        Args:
+            filename: The pathlib.Path object of the file to be accessed.
+        """
+
+    def error_handler(self, error):
+        """Method called when an exception occurs during traversal.
+
+        Args:
+            error: An instance of the exception that occurred.
+        """
+        pass
+
+
+class FileTreeWalker(object):
+    """File tree traversal object.
+
+    Args:
+        path: The directory to be traversed.
+        visitor: Object that implements the FileVisitor interface.
+        followlinks: Whether to traverse the symbolic link under the directory,
+            the default is False.
+    """
+    def __init__(self, path, visitor, followlinks=False):
+        self.visitor = visitor
+        self.walker = os.walk(path, onerror=visitor.error_handler,
+                              followlinks=followlinks)
+
+    def walk(self):
+        """Traversing the file tree."""
+        try:
+            dirpath, dirnames, filenames = next(self.walker)
+
+            for dirname in dirnames:
+                dirname = pathlib.Path(dirname)
+                self.visitor.pre_visit_directory(dirname)
+                self.walk()
+                self.visitor.post_visit_directory(dirname)
+
+            for filename in filenames:
+                self.visitor.visit_file(pathlib.Path(filename))
+
+        except StopIteration:
+            pass
 
 
 def get_note_name(note):
@@ -44,14 +85,46 @@ def get_note_name(note):
     return pathlib.Path(note).stem
 
 
-def generate(fn):
-    """Generate a README document."""
-    with open(fn, 'w', encoding='utf-8') as stream:
-        for note_dir in get_note_dir('notebook'):
-            with DetailsWriter(stream, note_dir.name) as writer:
-                for note in note_dir.glob('**/*.org'):
-                    writer.write(note.as_posix(), get_note_name(note))
+class NoteVisitor(FileVisitor):
+    """Traversing the processing notes directory."""
+    def __init__(self, file_obj, root, ignore_dir=None, href_prefix=None):
+        self._file_obj = file_obj
+        self.paths = [root]
+        self.ignore_dir = ignore_dir or tuple()
+        self.href_prefix = href_prefix or ''
+        self.ignore = []  # Ignore directories may be nested
+
+    def pre_visit_directory(self, dirname):
+        if dirname.name in self.ignore_dir:
+            self.ignore.append(dirname)
+            return None
+
+        self._file_obj.writelines([
+            '<details><summary><b><i>%s</i></b></summary>\n' % dirname,
+            '<ul>\n',
+        ])
+        self.paths.append(dirname)
+
+    def post_visit_directory(self, dirname):
+        if self.ignore:
+            self.ignore.pop()
+            return None
+
+        self._file_obj.writelines([
+            '</ul>\n',
+            '</details>\n',
+        ])
+        self.paths.pop()
+
+    def visit_file(self, filename):
+        if self.ignore: return None
+        href = pathlib.Path(self.href_prefix, *self.paths, filename).as_posix()
+        name = get_note_name(pathlib.Path(*self.paths, filename))
+        self._file_obj.write('<li><a href="%s">%s</a></li>\n' % (href, name))
 
 
 if __name__ == '__main__':
-    generate('README.org')
+    with open('README.md', 'w') as fd:
+        FileTreeWalker(
+            'notebook', NoteVisitor(fd, 'notebook', IGNORE_DIR, HREF_PREFIX)
+        ).walk()
