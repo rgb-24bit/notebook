@@ -122,5 +122,5 @@ class NoteVisitor(FileVisitor):
 
 
 if __name__ == '__main__':
-    with open('README.md', 'w') as fd:
+    with open('README.md', 'w', encoding='utf-8') as fd:
         FileTreeWalker('notebook', NoteVisitor(fd, 'notebook', IGNORE_DIR)).walk()
