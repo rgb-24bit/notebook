@@ -1,10 +1,11 @@
-#+TITLE:      前端 - CSS 相关笔记
+#+TITLE:      网页设计相关笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网页翻转镜像实现][网页翻转镜像实现]]
-- [[#网页设计常见问题][网页设计常见问题]]
+- [[#相关链接][相关链接]]
 
 * 网页翻转镜像实现
+  实现原理是通过 *transform* 属性翻转 *iframe* 元素：
   #+BEGIN_SRC html
     <html>
       <head>
@@ -25,7 +26,8 @@
     </html>
   #+END_SRC
 
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform][transform]]
+  更多有关于 *transform* 属性的内容：[[https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform][transform | MDN]]
 
-* 网页设计常见问题
-  + [[http://blog-en.tilda.cc/articles-website-design-mistakes][网页设计常见问题]]
+* 相关链接
+  + [[http://blog-en.tilda.cc/articles-website-design-mistakes][Common webpage design mistakes]] - 网页设计中的常见错误
+

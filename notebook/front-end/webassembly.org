@@ -1,8 +1,0 @@
-#+TITLE:      前端 - WebAssembly 相关
-
-* 目录                                                    :TOC_4_gh:noexport:
-- [[#博客教程][博客教程]]
-
-* 博客教程
-  + [[https://www.ibm.com/developerworks/cn/web/wa-lo-webassembly-status-and-reality/index.html][WebAssembly 现状与实战]]
-  

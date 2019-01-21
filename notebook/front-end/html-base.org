@@ -1,0 +1,119 @@
+#+TITLE:      HTML/HTML5 基础笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#通用声明][通用声明]]
+- [[#标签和属性][标签和属性]]
+- [[#字符实体][字符实体]]
+- [[#html5-shiv][HTML5 Shiv]]
+- [[#html5-图形][HTML5 图形]]
+- [[#html5-多媒体][HTML5 多媒体]]
+- [[#html5-应用][HTML5 应用]]
+
+* 通用声明
+  *HTML5*:
+  #+BEGIN_SRC html
+    <!DOCTYPE html>
+  #+END_SRC
+
+  *HTML 4.01*:
+  #+BEGIN_SRC html
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+  #+END_SRC
+
+  *XHTML 1.0*:
+  #+BEGIN_SRC html
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  #+END_SRC
+
+* 标签和属性
+  *HTML* 似乎并没有对内部的 *标签* 和 *属性* 做出限制， 除了标准的标签和属性以外， 非标准的标签和属性也可以使用。
+
+  *HTML* 属于 *XML* 的子集， *标签* 和 *属性* 的命名遵循 *XML* 的语法规则， 但 *HTML* 预定义了一部份标签和属性。
+
+  非标准标签和属性可以通过 *HTML DOM* 操作。
+
+  存在一类特殊的标签， 这类标签的 *闭合标签* 和 *起始标签* 是相同的， 比如： ~<br/>~
+  
+  适用于大多数 *HTML* 元素的 *属性*:
+  |-------+----------------------------------------|
+  | 属性  | 描述                                   |
+  |-------+----------------------------------------|
+  | class | 定义元素的 *一个或多个* 类名 (classname) |
+  | id    | 定义元素的唯一 id                      |
+  | style | 规定元素的行内样式 (inline style)      |
+  | title | 描述了元素的额外信息                   |
+  |-------+----------------------------------------|
+
+* 字符实体
+  |------+--------+----------|
+  | 字符 | 实体   | 实体编号 |
+  |------+--------+----------|
+  | 空格 | &nbsp; | &#160;   |
+  | <    | &lt;   | 	&#60;  |
+  | >    | &gt;   | 	&#62;  |
+  | &    | &amp;  | 	&#38;  |
+  | "    | &quot; | 	&#34;  |
+  | '    | &apos; | &#39;    |
+  |------+--------+----------|
+
+* HTML5 Shiv
+  #+BEGIN_SRC html
+    <!--[if lt IE 9]>
+      <script src="http://cdn.static.runoob.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+  #+END_SRC
+
+  通过 *Shiv* 的方式为 *IE* 浏览器添加 *HTML* 支持。
+
+  *注*: *html5shiv.js* 引用代码必须放在 ~<head>~ 元素中， 因为 *IE* 浏览器在解析 *HTML5* 新元素时需要先加载该文件
+
+* HTML5 图形
+  标签 ~<canvas>~ 用于图形的绘制， 通过脚本(JavaScript)来完成这一工作。
+
+  *创建一个画布*:
+  #+BEGIN_SRC html
+    <canvas id="myCanvas" width="200" height="100"></canvas>
+  #+END_SRC
+
+  *使用 JavaScript 绘制图形*:
+  #+BEGIN_SRC javascript
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0, 0, 150, 75);
+  #+END_SRC
+
+  标签 ~<svg>~ 同样可以用于图形的绘制， 通过 *XML* 来描述 *2D* 图形。
+
+  + [[http://www.runoob.com/svg/svg-tutorial.html][SVG 教程]]
+  
+* HTML5 多媒体
+  标签 ~<video>~ 可以用于播放视频：
+  #+BEGIN_SRC html
+    <video width="320" height="240" controls>
+      <source src="movie.mp4" type="video/mp4">
+      <source src="movie.ogg" type="video/ogg">
+    </video>
+  #+END_SRC
+
+  标签 ~<audio>~ 可以用于播放音频：
+  #+BEGIN_SRC html
+    <audio controls>
+      <source src="horse.ogg" type="audio/ogg">
+      <source src="horse.mp3" type="audio/mpeg">
+    </audio>
+  #+END_SRC
+
+* HTML5 应用
+  + HTML5 Web 存储 ::
+    + *localStorage*: 用于长久保存整个网站的数据， 保存的数据没有过期时间， 直到手动去除。
+    + *sessionStorage*: 用于临时保存同一窗口(或标签页)的数据， 在关闭窗口或标签页之后将会删除这些数据。
+
+  + HTML5 Web SQL 数据库 ::
+    + *openDatabase*: 这个方法使用现有的数据库或者新建的数据库创建一个数据库对象。
+    + *transaction*: 这个方法让我们能够控制一个事务， 以及基于这种情况执行提交或者回滚。
+    + *executeSql*: 这个方法用于执行实际的 SQL 查询。
+
+  + [[http://www.runoob.com/html/html5-websocket.html][HTML5 WebSocket]]

@@ -1,4 +1,4 @@
-#+TITLE:      前端 - JavaScript 基础笔记
+#+TITLE:      JavaScript 基础笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#语法和数据类型][语法和数据类型]]
@@ -8,6 +8,7 @@
 - [[#使用对象][使用对象]]
 - [[#入口函数][入口函数]]
 - [[#定时器][定时器]]
+- [[#json][JSON]]
 - [[#相关链接][相关链接]]
 
 * 语法和数据类型
@@ -274,11 +275,15 @@
     }, 1000)
   #+END_SRC
 
+* JSON
+  #+BEGIN_SRC js
+    > JSON.parse('{"id": 123456, "name": "rgb-24bit"}')
+    {id: 123456, name: "rgb-24bit"}
+    > JSON.stringify({id: 123456, name: "rgb-24bit"})
+    "{"id":123456,"name":"rgb-24bit"}"
+  #+END_SRC
+
 * 相关链接
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide][JavaScript 指南]]
-  + [[http://www.w3school.com.cn/jsref/index.asp][JavaScript 参考手册]]
-  + [[http://www.runoob.com/json/json-parse.html][JSON.parse()]]
-  + [[http://www.runoob.com/json/json-stringify.html][JSON.stringify()]]
   + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-create.html][AJAX - 创建 XMLHttpRequest 对象]]
   + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-send.html][AJAX - 向服务器发送请求请求]]
   + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-response.html][AJAX - 服务器 响应]]

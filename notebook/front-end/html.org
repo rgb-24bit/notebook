@@ -1,33 +1,55 @@
-#+TITLE:      前端 - HTML 相关笔记
+#+TITLE:      HTML 标签使用笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#css--javascript][CSS & JavaScript]]
-- [[#图片][图片]]
-- [[#meta][meta]]
+- [[#图片和多媒体][图片和多媒体]]
+  - [[#img][<img>]]
+- [[#文档元数据][文档元数据]]
+  - [[#link][<link>]]
+  - [[#meta][<meta>]]
+- [[#脚本][脚本]]
+  - [[#script][<script>]]
 - [[#相关链接][相关链接]]
 
-* CSS & JavaScript
-  #+BEGIN_SRC html
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-    <script src="myScript.js"></script>
-  #+END_SRC
+* 图片和多媒体
+** <img>
+   + 显示 Base64 格式的图片：
+     #+BEGIN_SRC html
+       <img src="data:image/png;base64,iVBORw0KGgoAAA
+                 ANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
+                 //8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU
+                 5ErkJggg==" alt="Red dot" />
+     #+END_SRC
 
-* 图片
-  + ~img~ 标签显示 ~base64~ 编码格式的图片：
-    #+BEGIN_SRC html
-      <img src="data:image/png;base64,编码值">
-    #+END_SRC
+     可以参考：[[https://rgb-24bit.github.io/blog/2018/uri.html#orge25ad94][URI - 统一资源标识符]]
 
-    参考 [[https://en.wikipedia.org/wiki/Data_URI_scheme#Syntax][Data URI scheme]]
+* 文档元数据
+** <link>
+   + 引入一个 CSS 文件：
+     #+BEGIN_SRC html
+       <link href="style.css" rel="stylesheet">
+     #+END_SRC
 
-* meta
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta][<meta> | MDN]]
+** <meta>
+   + 在指定时间间隔后刷新网页：
+     #+BEGIN_SRC html
+       <meta http-equiv="refresh" content="3">
+     #+END_SRC
 
-  通过 content 属性来指定 name 或 http-equiv 的值，http-equiv 的一些值：
-  + *refresh* 
-    - 如果 content 只包含一个正整数,则是重新载入页面的时间间隔
-    - 如果content 包含一个正整数并且跟着一个字符串,则是重定向到指定链接的时间间隔(秒)
-    
+   + 在指定时间间隔后重定向网页：
+     #+BEGIN_SRC html
+       <meta http-equiv="refresh" content="3;url=http://www.mozilla.org/">
+     #+END_SRC
+
+* 脚本
+** <script>
+   + 加载一个 JavaScript 脚本：
+     #+BEGIN_SRC html
+       <!-- HTML4 and (x)HTML -->
+       <script type="text/javascript" src="javascript.js">
+
+       <!-- HTML5 -->
+       <script src="javascript.js"></script>
+     #+END_SRC
+
 * 相关链接
-  + [[http://www.runoob.com/html/html-quicklist.html][HTML 速查列表]]
-  + [[http://entitycode.com/][HTML 字符实体]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element][HTML 元素参考 | MDN]]

@@ -1,4 +1,4 @@
-#+TITLE:      前端 - jQuery 笔记
+#+TITLE:      jQuery 相关笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#jquery-语法][jQuery 语法]]
@@ -35,6 +35,7 @@
       .slideUp(2000)
       .slideDown(2000);
   #+END_SRC
+
 * 发送 AJAX 请求
   #+BEGIN_SRC javascript
     // for get & post
@@ -51,6 +52,7 @@
       success: function() {}
     });
   #+END_SRC
+
 * Without jQuery
   + [[http://youmightnotneedjquery.com/][YOU MIGHT NOT NEED JQUERY]]
 

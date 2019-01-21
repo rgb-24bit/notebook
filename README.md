@@ -72,20 +72,27 @@
 <li><a href="notebook/emacs/utils.org">Emacs - 实用功能</a></li>
 </ul>
 </details>
-<details><summary><b><i>frameworks</i></b></summary>
-<ul>
-<li><a href="notebook/frameworks/flask.org">框架 - Flask 笔记</a></li>
-</ul>
-</details>
 <details><summary><b><i>front-end</i></b></summary>
 <ul>
-<li><a href="notebook/front-end/css.org">前端 - CSS 相关笔记</a></li>
-<li><a href="notebook/front-end/html-css-base.org">前端 - HTML/CSS 基础笔记</a></li>
-<li><a href="notebook/front-end/html.org">前端 - HTML 相关笔记</a></li>
-<li><a href="notebook/front-end/javascript-base.org">前端 - JavaScript 基础笔记</a></li>
-<li><a href="notebook/front-end/jquery.org">前端 - jQuery 笔记</a></li>
-<li><a href="notebook/front-end/technology.org">前端 - Web 相关技术</a></li>
-<li><a href="notebook/front-end/webassembly.org">前端 - WebAssembly 相关</a></li>
+<details><summary><b><i>frameworks</i></b></summary>
+<ul>
+</ul>
+</details>
+<details><summary><b><i>libraries</i></b></summary>
+<ul>
+<li><a href="notebook/front-end/libraries/jquery.org">jQuery 相关笔记</a></li>
+</ul>
+</details>
+<details><summary><b><i>tools</i></b></summary>
+<ul>
+</ul>
+</details>
+<li><a href="notebook/front-end/css-base.org">CSS/CSS3 基础笔记</a></li>
+<li><a href="notebook/front-end/design.org">网页设计相关笔记</a></li>
+<li><a href="notebook/front-end/html-base.org">HTML/HTML5 基础笔记</a></li>
+<li><a href="notebook/front-end/html.org">HTML 标签使用笔记</a></li>
+<li><a href="notebook/front-end/javascript-base.org">JavaScript 基础笔记</a></li>
+<li><a href="notebook/front-end/technology.org">Web 相关技术</a></li>
 </ul>
 </details>
 <details><summary><b><i>git</i></b></summary>
@@ -132,10 +139,6 @@
 <li><a href="notebook/lang/graphviz.org">Language - Dot</a></li>
 <li><a href="notebook/lang/plantuml.org">Language - plantuml</a></li>
 <li><a href="notebook/lang/uml.org">Language - UML</a></li>
-</ul>
-</details>
-<details><summary><b><i>libraries</i></b></summary>
-<ul>
 </ul>
 </details>
 <details><summary><b><i>linux</i></b></summary>
@@ -195,6 +198,19 @@
 </details>
 <details><summary><b><i>python</i></b></summary>
 <ul>
+<details><summary><b><i>frameworks</i></b></summary>
+<ul>
+<li><a href="notebook/python/frameworks/flask.org">框架 - Flask 笔记</a></li>
+</ul>
+</details>
+<details><summary><b><i>libraries</i></b></summary>
+<ul>
+</ul>
+</details>
+<details><summary><b><i>tools</i></b></summary>
+<ul>
+</ul>
+</details>
 <li><a href="notebook/python/async.org">Python - 异步 I/O</a></li>
 <li><a href="notebook/python/coroutine.org">Python 协程</a></li>
 <li><a href="notebook/python/faq.org">Python - 常见问题</a></li>

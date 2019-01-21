@@ -6,6 +6,7 @@
 - [[#日志工具][日志工具]]
 - [[#android-代码风格和指南][Android 代码风格和指南]]
 - [[#support-库][support 库]]
+- [[#应用程序类型][应用程序类型]]
 - [[#相关链接][相关链接]]
 
 * 基本概念
@@ -58,6 +59,12 @@
     com.android.support:support-fragment:24.2.0
     ...
   #+END_EXAMPLE
+
+* 应用程序类型
+  根据应用的开发方式可以分为：
+  + 原生应用，使用 Android 原生接口实现
+  + Web App，实质上就是网页，升级版为 PWA，需要 HTTPS 支持
+  + 混合应用，结合原生接口和 Web 的应用，现在的常见形式
 
 * 相关链接
   + Android 的模块化编程 - [[https://developer.android.google.cn/studio/projects/android-library][创建 Android 库 | Android Developers]]
