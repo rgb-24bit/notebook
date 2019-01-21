@@ -5,7 +5,6 @@ import pathlib
 import re
 
 
-HREF_PREFIX = '/rgb-24bit/notebook/blob/master'
 IGNORE_DIR = 'img', 'assets', 'static'
 
 
@@ -87,11 +86,10 @@ def get_note_name(note):
 
 class NoteVisitor(FileVisitor):
     """Traversing the processing notes directory."""
-    def __init__(self, file_obj, root, ignore_dir=None, href_prefix=None):
+    def __init__(self, file_obj, root, ignore_dir=None):
         self._file_obj = file_obj
         self.paths = [root]
         self.ignore_dir = ignore_dir or tuple()
-        self.href_prefix = href_prefix or ''
         self.ignore = []  # Ignore directories may be nested
 
     def pre_visit_directory(self, dirname):
@@ -118,13 +116,11 @@ class NoteVisitor(FileVisitor):
 
     def visit_file(self, filename):
         if self.ignore: return None
-        href = pathlib.Path(self.href_prefix, *self.paths, filename).as_posix()
-        name = get_note_name(pathlib.Path(*self.paths, filename))
-        self._file_obj.write('<li><a href="%s">%s</a></li>\n' % (href, name))
+        path = pathlib.Path(*self.paths, filename).as_posix()
+        name = get_note_name(path)
+        self._file_obj.write('<li><a href="%s">%s</a></li>\n' % (path, name))
 
 
 if __name__ == '__main__':
     with open('README.md', 'w') as fd:
-        FileTreeWalker(
-            'notebook', NoteVisitor(fd, 'notebook', IGNORE_DIR, HREF_PREFIX)
-        ).walk()
+        FileTreeWalker('notebook', NoteVisitor(fd, 'notebook', IGNORE_DIR)).walk()
