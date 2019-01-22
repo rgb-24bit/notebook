@@ -2,7 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#searching-code][Searching code]]
-- [[#github-help][Github Help]]
+- [[#github-fork][github fork]]
 
 * Searching code
   由于搜索代码的复杂性，对搜索的执行方式有一些限制：
@@ -35,6 +35,17 @@
     extension:EXTENSION
   #+END_EXAMPLE
 
-* Github Help
-  + [[https://help.github.com/categories/searching-for-information-on-github/][Searching for information on GitHub]]
+  + [[https://help.github.com/categories/searching-for-information-on-github/][Searching for information on GitHub]]  
+
+* github fork
+  添加上游仓库源： ~git remote add upstream source~.
+
+  同步上游仓库：
+  #+BEGIN_SRC bash
+    # 获取上游更新
+    git fetch upstream
+
+    # 合并到本地分支
+    git merge upstream/<branch>
+  #+END_SRC
 
