@@ -74,17 +74,9 @@
 </details>
 <details><summary><b><u>front-end</u></b></summary>
 <ul>
-<li><details><summary><b><u>frameworks</u></b></summary>
-<ul>
-</ul>
-</details>
 <li><details><summary><b><u>libraries</u></b></summary>
 <ul>
 <li><a href="notebook/front-end/libraries/jquery.org">jQuery 相关笔记</a></li>
-</ul>
-</details>
-<li><details><summary><b><u>tools</u></b></summary>
-<ul>
 </ul>
 </details>
 <li><a href="notebook/front-end/css-base.org">CSS/CSS3 基础笔记</a></li>
@@ -105,33 +97,36 @@
 <li><a href="notebook/git/style.org">Git - 规范</a></li>
 </ul>
 </details>
-<details><summary><b><u>gradle</u></b></summary>
-<ul>
-<li><a href="notebook/gradle/flyway.org">Gradle - 使用 Flyway</a></li>
-<li><a href="notebook/gradle/gradle.org">Gradle - 基础使用</a></li>
-<li><a href="notebook/gradle/java-build.org">Gradle - Java 项目构建</a></li>
-<li><a href="notebook/gradle/plugin.org">Gradle - 常用插件</a></li>
-</ul>
-</details>
 <details><summary><b><u>java</u></b></summary>
 <ul>
-<li><a href="notebook/java/annotations.org">Java - 注解类</a></li>
-<li><a href="notebook/java/class-object.org">Java - 类和对象</a></li>
-<li><a href="notebook/java/faq.org">Java - 遇到的问题</a></li>
-<li><a href="notebook/java/interface-inheritance.org">Java - 接口和继承</a></li>
-<li><a href="notebook/java/java-feature.org">Java - 高级特性</a></li>
+<li><details><summary><b><u>frameworks</u></b></summary>
+<ul>
+<li><a href="notebook/java/frameworks/swing.org">Swing</a></li>
+</ul>
+</details>
+<li><details><summary><b><u>libraries</u></b></summary>
+<ul>
+<li><a href="notebook/java/libraries/jdbc.org">JDBC</a></li>
+</ul>
+</details>
+<li><details><summary><b><u>tools</u></b></summary>
+<ul>
+<li><a href="notebook/java/tools/gradle.org">Gradle</a></li>
+</ul>
+</details>
+<li><a href="notebook/java/annotations.org">Java 注解类的定义与使用</a></li>
+<li><a href="notebook/java/java-abstract.org">Java 抽象系统</a></li>
+<li><a href="notebook/java/java-feature.org">Java 高级特性</a></li>
 <li><a href="notebook/java/java-generics.org">Java - 泛型</a></li>
 <li><a href="notebook/java/java-io.org">Java - I/O 操作</a></li>
 <li><a href="notebook/java/java-lambda.org">Java - Lambda 表达式</a></li>
 <li><a href="notebook/java/java-reflection.org">Java - 反射</a></li>
 <li><a href="notebook/java/java-stream.org">Java - 流相关</a></li>
-<li><a href="notebook/java/java.org">Java - 基础笔记</a></li>
-<li><a href="notebook/java/javadoc.org">Java - JavaDoc 笔记</a></li>
-<li><a href="notebook/java/jdbc.org">Java - JDBC 使用</a></li>
-<li><a href="notebook/java/misc.org">Java - Misc</a></li>
-<li><a href="notebook/java/package.org">Java - 导入对象</a></li>
-<li><a href="notebook/java/swing.org">Java - Swing</a></li>
-<li><a href="notebook/java/tips.org">Java - 使用技巧</a></li>
+<li><a href="notebook/java/java.org">Java 基础笔记</a></li>
+<li><a href="notebook/java/javadoc.org">JavaDoc 的使用</a></li>
+<li><a href="notebook/java/misc.org">Java Misc</a></li>
+<li><a href="notebook/java/question.org">Java 问题集</a></li>
+<li><a href="notebook/java/tips.org">Java 使用技巧</a></li>
 </ul>
 </details>
 <details><summary><b><u>lang</u></b></summary>

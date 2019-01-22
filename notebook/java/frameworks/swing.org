@@ -1,4 +1,4 @@
-#+TITLE:      Java - Swing
+#+TITLE:      Swing
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#基本对象][基本对象]]

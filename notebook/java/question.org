@@ -1,4 +1,4 @@
-#+TITLE:      Java - 遇到的问题
+#+TITLE:      Java 问题集
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#怎样执行包中的类][怎样执行包中的类]]
@@ -11,7 +11,8 @@
 - [[#内部类引用外部类的实例][内部类引用外部类的实例]]
 - [[#java-编程中-bean-类的含义][Java 编程中 Bean 类的含义]]
 - [[#null-重载的问题][null 重载的问题]]
-- [[#void-和-void-的问题][Void 和 void 的问题]]
+- [[#void-和-void-的使用][Void 和 void 的使用]]
+- [[#怎样实现静态方法的链式调用][怎样实现静态方法的链式调用]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -142,9 +143,25 @@
     Example.method(string);
   #+END_SRC
 
-* Void 和 void 的问题
+* Void 和 void 的使用
   void 关键字表示无返回值，而 Void 表示需要返回 null, 也只能返回 null.
 
   在 Lambda 表达式中，不需要返回值时可以用 ~Consumer<T>~, 对于 ~Function<T, Void>~ 来说，
   还是必须要返回 ~null~ 才行。
+
+* 怎样实现静态方法的链式调用
+  让静态方法返回指定类型的 null 值就可以了，因为静态方法的调用不依赖于实例：
+  #+BEGIN_SRC java
+    public class Test {
+      public static Test methodA(){
+        return null;
+      }
+
+      public static Test methodB(){
+        return null;
+      }
+    }
+
+    Test.methodA().methodB();
+  #+END_SRC
 

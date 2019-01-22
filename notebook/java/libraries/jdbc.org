@@ -1,11 +1,11 @@
-#+TITLE:      Java - JDBC 使用
+#+TITLE:      JDBC
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#官方教程链接][官方教程链接]]
+- [[#概要][概要]]
 - [[#关系数据库概述][关系数据库概述]]
 - [[#执行-sql-语句][执行 SQL 语句]]
 
-* 官方教程链接
+* 概要
   + [[https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html][Lesson: JDBC Introduction]]
 
   JDBC 帮助管理以下三种编程活动：

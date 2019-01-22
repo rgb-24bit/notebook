@@ -1,26 +1,33 @@
-#+TITLE:      Java - JavaDoc 笔记
+#+TITLE:      JavaDoc 的使用
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概要][概要]]
 - [[#javadoc-tags][Javadoc Tags]]
-- [[#package-infojava][package-info.java]]
-- [[#gradle][gradle]]
-- [[#maven][maven]]
+- [[#构建文档][构建文档]]
+  - [[#gradle][gradle]]
+  - [[#maven][maven]]
 
 * 概要
   #+BEGIN_QUOTE
   javadoc {packages|source-files} [options] [@argfiles]
   #+END_QUOTE
 
-  + packages :: 指定要生成文档的包的名称，不同的包之间使用空格分开。
+  + *packages:* 指定要生成文档的包的名称，不同的包之间使用空格分开。
 
-                如果要生成 *子包* 中的内容需要使用选项 ~-subpackages~.
+    如果要生成 *子包* 中的内容需要使用选项 ~-subpackages~.
   
-                默认情况下载当前目录和子目录中寻找指定的包，通过选项 ~-sourcepath~ 指定路径。
+    默认情况下载当前目录和子目录中寻找指定的包，通过选项 ~-sourcepath~ 指定路径。
 
-  + source-files :: 指定要生成文档的文件的名称，不同的文件使用空格分开。
+  + *source-files:* 指定要生成文档的文件的名称，不同的文件使用空格分开。
 
-                    默认在当前目录中寻找文件，也可以使用通配符指定文件名，支持相对绝对路径。
+    默认在当前目录中寻找文件，也可以使用通配符指定文件名，支持相对绝对路径。
+
+  在 Java 包中可以存在 package-info.java 文件，其目标是提供一个包级的文档说明或者是包级的注释。
+
+  pacakge-info.java 文件中，唯一要求包含的内容是包的声明语句：
+  #+BEGIN_SRC java
+    package pkg;
+  #+END_SRC
 
 * Javadoc Tags
   + ~@author name-text~ 作者标记
@@ -89,28 +96,21 @@
 
   + [[https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html#CHDJGIJB][Javadoc Tags]]
 
-* package-info.java
-  pacakge-info.java 的目标是提供一个包级的文档说明或者是包级的注释。
+* 构建文档
+** gradle
+   #+BEGIN_SRC groovy
+     apply plugin: 'java'
 
-  pacakge-info.java 文件中，唯一要求包含的内容是包的声明语句：
-  #+BEGIN_SRC java
-    package pkg;
-  #+END_SRC
+     javadoc {
+         source = sourceSets.main.allJava
+         classpath = configurations.compile
+     }
+   #+END_SRC
 
-* gradle
-  #+BEGIN_SRC groovy
-    apply plugin: 'java'
+   + [[https://stackoverflow.com/questions/45997976/how-generate-javadoc-with-gradle][How generate javadoc with Gradle ?]]
 
-    javadoc {
-        source = sourceSets.main.allJava
-        classpath = configurations.compile
-    }
-  #+END_SRC
-
-  + [[https://stackoverflow.com/questions/45997976/how-generate-javadoc-with-gradle][How generate javadoc with Gradle ?]]
-
-* maven
-  #+BEGIN_EXAMPLE
-    mvn javadoc:javadoc
-  #+END_EXAMPLE
+** maven
+   #+BEGIN_EXAMPLE
+     mvn javadoc:javadoc
+   #+END_EXAMPLE
 
