@@ -1,4 +1,4 @@
-<details><summary><b><i>algorithm</i></b></summary>
+<details><summary><b><u>algorithm</u></b></summary>
 <ul>
 <li><a href="notebook/algorithm/bit-operation.org">数据结构与算法 - 位运算相关</a></li>
 <li><a href="notebook/algorithm/concept.org">数据结构与算法 - 概念了解</a></li>
@@ -11,7 +11,7 @@
 <li><a href="notebook/algorithm/struct.org">数据结构与算法 - 表树图</a></li>
 </ul>
 </details>
-<details><summary><b><i>android</i></b></summary>
+<details><summary><b><u>android</u></b></summary>
 <ul>
 <li><a href="notebook/android/activity.org">Android - Activity</a></li>
 <li><a href="notebook/android/content-provider.org">Android - 内容提供器</a></li>
@@ -22,7 +22,7 @@
 <li><a href="notebook/android/service.org">Android - Service</a></li>
 </ul>
 </details>
-<details><summary><b><i>c-c++</i></b></summary>
+<details><summary><b><u>c-c++</u></b></summary>
 <ul>
 <li><a href="notebook/c-c++/c.org">C-C++ - C 语言笔记</a></li>
 <li><a href="notebook/c-c++/compile.org">C-C++ - 编译器的使用</a></li>
@@ -34,14 +34,14 @@
 <li><a href="notebook/c-c++/question.org">C-C++ - 问题集</a></li>
 </ul>
 </details>
-<details><summary><b><i>compile</i></b></summary>
+<details><summary><b><u>compile</u></b></summary>
 <ul>
 <li><a href="notebook/compile/grammar.org">编译原理 - 语法分析</a></li>
 <li><a href="notebook/compile/lex.org">编译原理 - 词法分析</a></li>
 <li><a href="notebook/compile/simple-compile.org">编译原理 - 简单的语法制导翻译器</a></li>
 </ul>
 </details>
-<details><summary><b><i>database</i></b></summary>
+<details><summary><b><u>database</u></b></summary>
 <ul>
 <li><a href="notebook/database/mssql.org">数据库 - SQL Server</a></li>
 <li><a href="notebook/database/mysql.org">数据库 - MySQL 笔记</a></li>
@@ -52,7 +52,7 @@
 <li><a href="notebook/database/vc.org">数据库 - 版本控制</a></li>
 </ul>
 </details>
-<details><summary><b><i>dotnet</i></b></summary>
+<details><summary><b><u>dotnet</u></b></summary>
 <ul>
 <li><a href="notebook/dotnet/csharp-feature.org">.NET - C# 高级特性</a></li>
 <li><a href="notebook/dotnet/csharp-note.org">.NET - C# 基础</a></li>
@@ -60,7 +60,7 @@
 <li><a href="notebook/dotnet/winforms.org">.NET - WinForm 相关笔记</a></li>
 </ul>
 </details>
-<details><summary><b><i>emacs</i></b></summary>
+<details><summary><b><u>emacs</u></b></summary>
 <ul>
 <li><a href="notebook/emacs/code-style.org">Elisp - 风格规范</a></li>
 <li><a href="notebook/emacs/elisp.org">Emacs - Emacs Lisp</a></li>
@@ -72,18 +72,18 @@
 <li><a href="notebook/emacs/utils.org">Emacs - 实用功能</a></li>
 </ul>
 </details>
-<details><summary><b><i>front-end</i></b></summary>
+<details><summary><b><u>front-end</u></b></summary>
 <ul>
-<details><summary><b><i>frameworks</i></b></summary>
+<li><details><summary><b><u>frameworks</u></b></summary>
 <ul>
 </ul>
 </details>
-<details><summary><b><i>libraries</i></b></summary>
+<li><details><summary><b><u>libraries</u></b></summary>
 <ul>
 <li><a href="notebook/front-end/libraries/jquery.org">jQuery 相关笔记</a></li>
 </ul>
 </details>
-<details><summary><b><i>tools</i></b></summary>
+<li><details><summary><b><u>tools</u></b></summary>
 <ul>
 </ul>
 </details>
@@ -95,7 +95,7 @@
 <li><a href="notebook/front-end/technology.org">Web 相关技术</a></li>
 </ul>
 </details>
-<details><summary><b><i>git</i></b></summary>
+<details><summary><b><u>git</u></b></summary>
 <ul>
 <li><a href="notebook/git/git-book.org">Git - Git-Book 阅读笔记</a></li>
 <li><a href="notebook/git/git-hook.org">Git - Hook 收集</a></li>
@@ -104,7 +104,7 @@
 <li><a href="notebook/git/style.org">Git - 规范</a></li>
 </ul>
 </details>
-<details><summary><b><i>gradle</i></b></summary>
+<details><summary><b><u>gradle</u></b></summary>
 <ul>
 <li><a href="notebook/gradle/flyway.org">Gradle - 使用 Flyway</a></li>
 <li><a href="notebook/gradle/gradle.org">Gradle - 基础使用</a></li>
@@ -112,7 +112,7 @@
 <li><a href="notebook/gradle/plugin.org">Gradle - 常用插件</a></li>
 </ul>
 </details>
-<details><summary><b><i>java</i></b></summary>
+<details><summary><b><u>java</u></b></summary>
 <ul>
 <li><a href="notebook/java/annotations.org">Java - 注解类</a></li>
 <li><a href="notebook/java/class-object.org">Java - 类和对象</a></li>
@@ -133,7 +133,7 @@
 <li><a href="notebook/java/tips.org">Java - 使用技巧</a></li>
 </ul>
 </details>
-<details><summary><b><i>lang</i></b></summary>
+<details><summary><b><u>lang</u></b></summary>
 <ul>
 <li><a href="notebook/lang/bash.org">Language - Bash</a></li>
 <li><a href="notebook/lang/graphviz.org">Language - Dot</a></li>
@@ -141,34 +141,34 @@
 <li><a href="notebook/lang/uml.org">Language - UML</a></li>
 </ul>
 </details>
-<details><summary><b><i>linux</i></b></summary>
+<details><summary><b><u>linux</u></b></summary>
 <ul>
 <li><a href="notebook/linux/debian.org">Linux - Debian 系统使用</a></li>
 <li><a href="notebook/linux/faq.org">Linux - 常见问题</a></li>
 <li><a href="notebook/linux/linux.org">Linux - 基础笔记</a></li>
 </ul>
 </details>
-<details><summary><b><i>math</i></b></summary>
+<details><summary><b><u>math</u></b></summary>
 <ul>
-<details><summary><b><i>discrete</i></b></summary>
+<li><details><summary><b><u>discrete</u></b></summary>
 <ul>
 <li><a href="notebook/math/discrete/基本结构.org">离散数学 - 基本结构</a></li>
 <li><a href="notebook/math/discrete/逻辑和证明.org">离散数学 - 逻辑和证明</a></li>
 </ul>
 </details>
-<details><summary><b><i>linear</i></b></summary>
+<li><details><summary><b><u>linear</u></b></summary>
 <ul>
 <li><a href="notebook/math/linear/矩阵和方程组.org">线性代数 - 矩阵和方程组</a></li>
 </ul>
 </details>
-<details><summary><b><i>probability</i></b></summary>
+<li><details><summary><b><u>probability</u></b></summary>
 <ul>
 <li><a href="notebook/math/probability/lea.org">概率 - 概率编程框架</a></li>
 </ul>
 </details>
 </ul>
 </details>
-<details><summary><b><i>misc</i></b></summary>
+<details><summary><b><u>misc</u></b></summary>
 <ul>
 <li><a href="notebook/misc/coding.org">Misc - 编程相关</a></li>
 <li><a href="notebook/misc/liscense.org">Misc - 开源协议</a></li>
@@ -178,14 +178,14 @@
 <li><a href="notebook/misc/unicode.org">Misc - Unicode 相关</a></li>
 </ul>
 </details>
-<details><summary><b><i>network</i></b></summary>
+<details><summary><b><u>network</u></b></summary>
 <ul>
 <li><a href="notebook/network/protocol.org">计算机网络 - 协议</a></li>
 <li><a href="notebook/network/url.org">计算机网络 - 统一资源定位符 URL</a></li>
 <li><a href="notebook/network/xnote.org">计算机网络 - 五层模型</a></li>
 </ul>
 </details>
-<details><summary><b><i>os</i></b></summary>
+<details><summary><b><u>os</u></b></summary>
 <ul>
 <li><a href="notebook/os/base.org">操作系统 - 基础内容</a></li>
 <li><a href="notebook/os/concurrency.org">操作系统 - 并发</a></li>
@@ -196,18 +196,18 @@
 <li><a href="notebook/os/link.org">操作系统 - 链接</a></li>
 </ul>
 </details>
-<details><summary><b><i>python</i></b></summary>
+<details><summary><b><u>python</u></b></summary>
 <ul>
-<details><summary><b><i>frameworks</i></b></summary>
+<li><details><summary><b><u>frameworks</u></b></summary>
 <ul>
 <li><a href="notebook/python/frameworks/flask.org">框架 - Flask 笔记</a></li>
 </ul>
 </details>
-<details><summary><b><i>libraries</i></b></summary>
+<li><details><summary><b><u>libraries</u></b></summary>
 <ul>
 </ul>
 </details>
-<details><summary><b><i>tools</i></b></summary>
+<li><details><summary><b><u>tools</u></b></summary>
 <ul>
 </ul>
 </details>
@@ -226,7 +226,7 @@
 <li><a href="notebook/python/weakref.org">Python - 弱引用</a></li>
 </ul>
 </details>
-<details><summary><b><i>tools</i></b></summary>
+<details><summary><b><u>tools</u></b></summary>
 <ul>
 <li><a href="notebook/tools/chrome.org">Tool - Chrome</a></li>
 <li><a href="notebook/tools/ci.org">Tool - 自动集成</a></li>

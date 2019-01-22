@@ -9,3 +9,10 @@
   + [[https://www.emacswiki.org/emacs/InteractivelyDoThings][EmacsWiki: Interactively Do Things]]
   + [[https://oremacs.com/swiper/#getting-started][Ivy User Manual]]
 
+* org-clocktable
+  + tags 选项，多个 tag
+    #+BEGIN_EXAMPLE
+      tag1|tag2
+    #+END_EXAMPLE
+
+    不同标签之间不能有空格

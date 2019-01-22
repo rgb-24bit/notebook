@@ -91,28 +91,47 @@ class NoteVisitor(FileVisitor):
         self.paths = [root]
         self.ignore_dir = ignore_dir or tuple()
         self.ignore = []  # Ignore directories may be nested
+        self.depth = 1
 
     def pre_visit_directory(self, dirname):
         if dirname.name in self.ignore_dir:
             self.ignore.append(dirname)
             return None
 
-        self._file_obj.writelines([
-            '<details><summary><b><i>%s</i></b></summary>\n' % dirname,
-            '<ul>\n',
-        ])
+        self.depth += 1
         self.paths.append(dirname)
+
+        if self.depth >= 3:
+            self._file_obj.writelines([
+                '<li>',
+                '<details><summary><b><u>%s</u></b></summary>\n' % dirname,
+                '<ul>\n',
+            ])
+        else:
+            self._file_obj.writelines([
+                '<details><summary><b><u>%s</u></b></summary>\n' % dirname,
+                '<ul>\n',
+            ])
 
     def post_visit_directory(self, dirname):
         if self.ignore:
             self.ignore.pop()
             return None
 
-        self._file_obj.writelines([
-            '</ul>\n',
-            '</details>\n',
-        ])
+        self.depth -= 1
         self.paths.pop()
+
+        if self.depth >= 3:
+            self._file_obj.writelines([
+                '</ul>\n',
+                '</details>\n',
+                '</li>',
+            ])
+        else:
+            self._file_obj.writelines([
+                '</ul>\n',
+                '</details>\n',
+            ])
 
     def visit_file(self, filename):
         if self.ignore: return None

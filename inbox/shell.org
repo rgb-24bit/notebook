@@ -69,3 +69,10 @@
   + [[https://stackoverflow.com/questions/3349105/how-to-set-current-working-directory-to-the-directory-of-the-script][bash - How to set current working directory to the directory of the script? - Stack Overflow]]
   + [[https://stackoverflow.com/questions/874452/change-the-current-directory-from-a-bash-script][environment - Change the current directory from a Bash script - Stack Overflow]]
 
+* 数学运算
+  + [[http://www.cnblogs.com/snowsolf/p/3325235.html][Linux-shell-算术运算{expr、bc、dc、(( )) snowsolf - 博客园]]
+  + 进制转化
+    #+BEGIN_EXAMPLE
+       printf %x 10
+    #+END_EXAMPLE
+
