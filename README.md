@@ -6,9 +6,9 @@
 <li><a href="notebook/algorithm/encrypt.org">数据结构与算法 - 加密算法</a></li>
 <li><a href="notebook/algorithm/hash.org">数据结构与算法 - 消息摘要算法</a></li>
 <li><a href="notebook/algorithm/misc.org">数据结构与算法 - 未分类</a></li>
-<li><a href="notebook/algorithm/random.org">数据结构与算法 - 随机算法</a></li>
-<li><a href="notebook/algorithm/search-sort.org">数据结构与算法 - 查找与排序</a></li>
-<li><a href="notebook/algorithm/struct.org">数据结构与算法 - 表树图</a></li>
+<li><a href="notebook/algorithm/random.org">随机数的生成与使用</a></li>
+<li><a href="notebook/algorithm/search-sort.org">查找与排序算法</a></li>
+<li><a href="notebook/algorithm/struct.org">表、树、图</a></li>
 </ul>
 </details>
 <details><summary><b><u>android</u></b></summary>
@@ -24,7 +24,7 @@
 </details>
 <details><summary><b><u>c-c++</u></b></summary>
 <ul>
-<li><a href="notebook/c-c++/c.org">C-C++ - C 语言笔记</a></li>
+<li><a href="notebook/c-c++/c.org">C 语言笔记</a></li>
 <li><a href="notebook/c-c++/compile.org">C-C++ - 编译器的使用</a></li>
 <li><a href="notebook/c-c++/cpp.org">C-C++ - C++ 笔记</a></li>
 <li><a href="notebook/c-c++/gdb.org">C-C++ - GDB 的使用</a></li>

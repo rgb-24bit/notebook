@@ -1,4 +1,4 @@
-#+TITLE:      数据结构与算法 - 表树图
+#+TITLE:      表、树、图
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#表相关][表相关]]
@@ -6,13 +6,15 @@
   - [[#合并有序链表][合并有序链表]]
 - [[#树相关][树相关]]
   - [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]
+  - [[#获取二叉树的高度][获取二叉树的高度]]
+  - [[#bk-tree][BK-Tree]]
 - [[#图相关][图相关]]
   - [[#迪杰斯特拉算法][迪杰斯特拉算法]]
   - [[#斐波那契堆][斐波那契堆]]
 
 * 表相关
 ** 删除当前链表节点
-   这个方法需要保证传入的节点不会是为节点：
+   这个方法需要保证传入的节点不会是尾节点：
    #+BEGIN_SRC java
      class Solution {
        public void deleteNode(ListNode node) {
@@ -101,6 +103,19 @@
 
    + [[https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9][二叉搜索树 - 维基百科，自由的百科全书]]
 
+** 获取二叉树的高度
+   #+BEGIN_SRC java
+     public int getHeight(TreeNode root) {
+       if (root == null)
+         return 0;
+       return 1 + Math.max(getHeight(root.left), getHeight(root.right));
+     }
+   #+END_SRC
+
+** BK-Tree
+   BK 树通常用于拼写检查，是比 Tries 树更好的选择：
+   + [[https://en.wikipedia.org/wiki/BK-tree][BK-tree - Wikipedia]]
+
 * 图相关
 ** 迪杰斯特拉算法
    Dijkstra's algorithm 用于计算一个节点到其他所有节点的最短路径，其原理很简单：
@@ -113,7 +128,7 @@
    需要注意的是：不能有负权边。
 
    #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/DijkstraDemo.gif/220px-DijkstraDemo.gif">
-  
+
    算法的伪码实现：
    #+BEGIN_EXAMPLE
      function Dijkstra(Graph, source):
@@ -126,24 +141,24 @@
              add v to Q                          // All nodes initially in Q (unvisited nodes)
 
          dist[source] ← 0                        // Distance from source to source
-    
+
          while Q is not empty:
              u ← vertex in Q with min dist[u]    // Node with the least distance
                                                  // will be selected first
-             remove u from Q 
-        
+             remove u from Q
+
              for each neighbor v of u:           // where v is still in Q.
                  alt ← dist[u] + length(u, v)
                  if alt < dist[v]:               // A shorter path to v has been found
-                     dist[v] ← alt 
-                     prev[v] ← u 
+                     dist[v] ← alt
+                     prev[v] ← u
 
          return dist[], prev[]
    #+END_EXAMPLE
-  
+
    相关链接：
    + [[https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm][Dijkstra's algorithm - Wikipedia]]
-  
+
 ** 斐波那契堆
    *斐波那契堆（Fibonacci heap）* 是计算机科学中 *树* 的集合。它比二项堆具有更好的平摊分析性能，可用于实现合并优先队列。
 
@@ -170,7 +185,7 @@
    #+END_SRC
 
    其中，每个节点的所有子节点通过 left 和 right 链接为一个循环链表，而所有根结点也通过 left 和 right 链接为一个循环链表。
-  
+
    执行的各个操作：
    + *插入一个节点：* 创建一个仅包含一个节点的新的斐波纳契堆，然后执行 *堆合并*
    + *查找最小的节点：* 由于用一个指针指向了具有最小值的根节点，因此查找最小的节点是简单的操作
@@ -179,7 +194,7 @@
      1. 找到最小的根节点并删除它，其所有的子节点都加入堆的根表，即它的子树都成为堆所包含的树
      2. 合并当前根结点中所有度数相同的节点，节点值大的作为节点值小的子节点，重复直到所有根结点的度数不相同
      3. 找到最小的根结点并用 min 指向它
-   + *降低一个节点的键值：* 
+   + *降低一个节点的键值：*
      1. 如果当前节点键值小于其父节点的键值，则把该节点及其子树摘下来作为堆的新树的根节点
      2. 其原父节点如果是被标记（marked）节点，则也被摘下来作为堆的新树的根节点
      3. 如果其原父节点不是被标记（marked）节点且不是根节点，则其原父节点被加标记
@@ -200,10 +215,9 @@
       #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Fibonacci_heap_extractmin2.png/130px-Fibonacci_heap_extractmin2.png">
 
    4. 降低节点 9 的值为 0：
-     
+
       #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Fibonacci_heap-decreasekey.png/250px-Fibonacci_heap-decreasekey.png">
-     
+
    相关链接：
    + [[https://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%A0%86][斐波那契堆 - 维基百科，自由的百科全书]]
    + [[https://en.wikipedia.org/wiki/Fibonacci_heap][Fibonacci heap - Wikipedia]]
-

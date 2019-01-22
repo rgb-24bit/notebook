@@ -1,4 +1,4 @@
-#+TITLE:      数据结构与算法 - 随机算法
+#+TITLE:      随机数的生成与使用
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#c-语言随机数生成器源码][C 语言随机数生成器源码]]
@@ -7,6 +7,7 @@
 - [[#随机数生成算法][随机数生成算法]]
   - [[#随机数的分类][随机数的分类]]
   - [[#线性同余方法][线性同余方法]]
+- [[#红包算法][红包算法]]
 
 * C 语言随机数生成器源码
   #+BEGIN_SRC c
@@ -16,7 +17,7 @@
     int (rand) (void) {
       _Randseed = _Randseed * 1103515245 + 12345;
       return ((unsigned int)(_Randseed >> 16) & RAND_MAX)
-    }
+          }
 
 
     /* srand */
@@ -70,8 +71,8 @@
 * 随机数生成算法
 ** 随机数的分类
    随机数的随机性检验的三个标准：
-   1. *统计学伪随机性* 
-     
+   1. *统计学伪随机性*
+
       统计学伪随机性指的是在给定的随机比特流样本中，1 的数量大致等于 0 的数量，同理，“10” “01” “00” “11” 四者数量大致相等。
       类似的标准被称为统计学随机性。满足这类要求的数字在人类“一眼看上去”是随机的
 
@@ -79,8 +80,8 @@
 
       其定义为，给定随机样本的一部分和随机算法，不能有效的演算出随机样本的剩余部分
 
-   3. *真随机性* 
-     
+   3. *真随机性*
+
       其定义为随机样本不可重现。实际上只要给定边界条件，真随机数并不存在，可是如果产生一个真随机数样本的边界条件十分复杂且难以捕捉，
       可以认为用这个方法演算出来了真随机数
 
@@ -107,4 +108,65 @@
    5. *A*, *B* 是正整数
 
    *PS:* 如果要获得 ~(0, 1)~ 之间的随机数， 可以用获取的随机数 *除 M*
+
+* 红包算法
+  问题：生成 10 个随机数 [0, 100] 且最终 10 个随机数之和为 100：
+
+  解决方案：在一根 1 到 100 的数轴上，随机取 9 个点，拿到 10 个线段。计算每个线段的长度，即是取值。
+
+  代码实现：
+  #+BEGIN_SRC python :results output
+    import random
+
+    nums = [random.randint(0, 101) for i in range(9)]
+    nums.extend([0, 100])
+    nums.sort()
+
+    result = []
+    for i in range(1, 11):
+        result.append(nums[i] - nums[i - 1])
+
+    print(result, sum(result))
+  #+END_SRC
+
+  #+RESULTS:
+  : [6, 7, 2, 2, 38, 22, 2, 2, 17, 2] 100
+
+  概率统计：
+  #+BEGIN_SRC python
+    from collections import defaultdict
+
+    import random
+
+
+    def random_nums():
+        nums = [random.randint(0, 101) for i in range(9)]
+        nums.extend([0, 100])
+        nums.sort()
+
+        result = []
+        for i in range(1, 11):
+            result.append(nums[i] - nums[i - 1])
+
+        return result
+
+    counter = defaultdict(int)
+
+    for i in range(1000):
+        for num in random_nums():
+            counter[num] += 1
+
+    total = sum(counter.keys())
+    for i in range(101):
+        print('%d: %f' % (i, counter[i] / total))
+  #+END_SRC
+
+  更多参考：
+  + [[https://www.zhihu.com/question/22625187][微信红包的随机算法是怎样实现的 - 知乎]]
+
+    这种实现是根据剩余数量进行分配的，实现存储方便。
+
+  + [[http://blog.sciencenet.cn/blog-797552-1089280.html][科学网—分红包的 Python 算法 - 康建的博文]]
+
+    这种实现需要预先分配，实现简单，但存储要复杂一些
 
