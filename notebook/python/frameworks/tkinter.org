@@ -1,4 +1,4 @@
-#+TITLE:      Python - Tkinter 使用
+#+TITLE:      Tkinter
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#tkpy][tk.py]]
@@ -77,3 +77,4 @@
   + [[https://docs.python.org/2.7/library/tkinter.html][Python2.7 Tkinter]]
   + [[https://docs.python.org/3.6/library/tkinter.html][Python3.6 tkinter]]
   + [[http://www.tkdocs.com/tutorial/index.html][TkDocs]]
+

@@ -1,9 +1,8 @@
-#+TITLE:      Python - 打包
+#+TITLE:      Python Setup
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#a-humans-ultimate-guide-to-setuppy][A Human's Ultimate Guide to setup.py]]
 - [[#list_classifiers][list_classifiers]]
-- [[#python-packaging][python-packaging]]
 
 * A Human's Ultimate Guide to setup.py
   + [[https://github.com/kennethreitz/setup.py][kennethreitz/setup.py]]
@@ -43,7 +42,4 @@
       Programming Language :: Python :: 3.7
       Programming Language :: Python :: 3 :: Only
     #+END_EXAMPLE
-
-* python-packaging
-  + [[http://python-packaging-zh.readthedocs.io/zh_CN/latest/index.html][如何打包你的Python代码]]
 

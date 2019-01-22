@@ -190,28 +190,23 @@
 <li><details><summary><b><u>frameworks</u></b></summary>
 <ul>
 <li><a href="notebook/python/frameworks/flask.org">框架 - Flask 笔记</a></li>
+<li><a href="notebook/python/frameworks/tkinter.org">Tkinter</a></li>
 </ul>
 </details>
 <li><details><summary><b><u>libraries</u></b></summary>
 <ul>
-</ul>
-</details>
-<li><details><summary><b><u>tools</u></b></summary>
-<ul>
+<li><a href="notebook/python/libraries/socket.org">socket</a></li>
+<li><a href="notebook/python/libraries/stdlib.org">Python - 标准库</a></li>
 </ul>
 </details>
 <li><a href="notebook/python/async.org">Python - 异步 I/O</a></li>
 <li><a href="notebook/python/coroutine.org">Python 协程</a></li>
-<li><a href="notebook/python/faq.org">Python - 常见问题</a></li>
 <li><a href="notebook/python/pep249.org">PEP249 - 数据库接口</a></li>
 <li><a href="notebook/python/python.org">Python - 基础笔记</a></li>
-<li><a href="notebook/python/pythondoc.org">Python - 文档字符串</a></li>
-<li><a href="notebook/python/setup.org">Python - 打包</a></li>
-<li><a href="notebook/python/socket.org">Python - socket 编程</a></li>
-<li><a href="notebook/python/stdlib.org">Python - 标准库</a></li>
-<li><a href="notebook/python/text-process.org">Python - 文本处理</a></li>
+<li><a href="notebook/python/pythondoc.org">Python 文档字符串</a></li>
+<li><a href="notebook/python/question.org">Python 问题集</a></li>
+<li><a href="notebook/python/setup.org">Python Setup</a></li>
 <li><a href="notebook/python/thread.org">Python - 并发编程</a></li>
-<li><a href="notebook/python/tkinter.org">Python - Tkinter 使用</a></li>
 <li><a href="notebook/python/weakref.org">Python - 弱引用</a></li>
 </ul>
 </details>

@@ -1,35 +1,10 @@
-#+TITLE:      Python - socket 编程
+#+TITLE:      socket
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#server--client][server & client]]
 - [[#socket][socket]]
 - [[#socket-module][socket module]]
 - [[#udp][UDP]]
 - [[#socketserver][socketserver]]
-
-* server & client
-  #+BEGIN_SRC plantuml :file img/socket.png :cmdline -charset utf-8
-    @startuml
-
-    start
-
-    : 服务器启动;
-
-    : 监听端口并等待链接;
-
-    while (获得来自客户端的链接请求) is (True)
-    : 与客户端建立连接;
-    : 完成服务;
-    endwhile
-
-    : 服务器关闭;
-
-    end
-
-    @enduml
-  #+END_SRC
-
-  [[file:img/socket.png]]
 
 * socket
   计算机网络数据结构 - ~socket~.

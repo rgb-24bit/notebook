@@ -5,7 +5,7 @@ import pathlib
 import re
 
 
-IGNORE_DIR = 'img', 'assets', 'static'
+IGNORE_DIR = 'img', 'image', 'assets', 'static'
 
 
 class FileVisitor(object):
