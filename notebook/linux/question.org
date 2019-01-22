@@ -1,0 +1,64 @@
+#+TITLE:      Linux 问题集
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#如何快速删除文件][如何快速删除文件]]
+- [[#避免-ssh-连接因超时闲置断开][避免 SSH 连接因超时闲置断开]]
+  - [[#方案一客户端设置][方案一：客户端设置]]
+  - [[#方案二在服务器端设置][方案二：在服务器端设置]]
+- [[#忘记-root-密码怎么办][忘记 root 密码怎么办]]
+- [[#如何强制用户下线][如何强制用户下线]]
+- [[#怎样编译开源程序][怎样编译开源程序]]
+
+* 如何快速删除文件
+  + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
+
+  #+BEGIN_EXAMPLE
+    $ perl -e 'for(<*>){((stat)[9]<(unlink))}'
+  #+END_EXAMPLE
+
+* 避免 SSH 连接因超时闲置断开
+** 方案一：客户端设置
+   编辑文件 ~/etc/ssh/ssh_config~, 添加如下一行：
+   #+BEGIN_EXAMPLE
+     ServerAliveInterval 60
+   #+END_EXAMPLE
+
+   *NOTE:* 是 ~ssh_config~ 不是 ~sshd_config~.
+
+** 方案二：在服务器端设置
+   编辑文件 ~/etc/ssh/sshd_config~ 并添加：
+   #+BEGIN_EXAMPLE
+     ClientAliveInterval 60
+   #+END_EXAMPLE
+
+   重启 SSH 服务后该项设置会生效，这样设置安全性会有一定下降。
+
+* 忘记 root 密码怎么办
+  1. 系统启动时按任意键进入如下界面：
+     #+BEGIN_EXAMPLE
+       root (hd0,0) 
+       kernel /vmlinuz-2.6.18-128.el5 ro root=LABEL=/ rhgb quiet 
+       initrd /initrd-2.6.18-128.el5.img 
+     #+END_EXAMPLE
+
+  2. 将光标移动到 kernel 那一行，按 e 进行编辑，在最后键入 ~single~:
+     #+BEGIN_EXAMPLE
+       kernel /vmlinuz-2.6.18-128.el5 ro root=LABEL=/ rhgb quiet single 
+     #+END_EXAMPLE
+
+  3. 按下 Enter 确定，按 b 进入单人维护模式。然后使用命令 ~passwd~ 修改密码
+
+* 如何强制用户下线
+  1. 命令 who 查看哪些用户在线
+  2. 使用 ~pkill -kill -t pts/n~ 踢出用户
+
+* 怎样编译开源程序
+  通常的步骤：
+  #+BEGIN_EXAMPLE
+    ./configure - 生成 Makefile
+    make - 编译
+    make intsall - 安装
+  #+END_EXAMPLE
+
+  在第一步前也可能存在 ~./autogen.sh~ 这一步骤。
+

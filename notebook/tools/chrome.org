@@ -1,4 +1,4 @@
-#+TITLE:      Tool - Chrome
+#+TITLE:      Chrome
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网络面板过滤请求][网络面板过滤请求]]
@@ -23,6 +23,7 @@
   
 * puppeteer
   中国区使用需要换源： ~PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors~
+
 * User-Agent
   早期的 ~User-Agent~ 字符串格式为 ~Mozilla/Version [Language] (Platform; Encryption)~.
 

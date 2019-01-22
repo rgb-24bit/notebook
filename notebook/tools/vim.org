@@ -1,4 +1,4 @@
-#+TITLE:      Tool - Vim 笔记
+#+TITLE:      Vim 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#文本编辑][文本编辑]]
@@ -33,10 +33,10 @@
   + 退出插入模式到正常模式: ~ESC~ 或 ~C-[~
 
 * 宏录制
-  * 开始录制: qa - a, 寄存器名
-  * 记录命令
-  * q 退出
-  * @a 使用
+  + 开始录制: qa - a, 寄存器名
+  + 记录命令
+  + q 退出
+  + @a 使用
 
 * 正则表达式
   + [[http://www.cnblogs.com/RigorosLee/archive/2011/05/13/2045806.html][博客园]]

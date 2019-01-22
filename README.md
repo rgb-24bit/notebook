@@ -131,60 +131,53 @@
 </details>
 <details><summary><b><u>lang</u></b></summary>
 <ul>
-<li><a href="notebook/lang/bash.org">Language - Bash</a></li>
-<li><a href="notebook/lang/graphviz.org">Language - Dot</a></li>
-<li><a href="notebook/lang/plantuml.org">Language - plantuml</a></li>
-<li><a href="notebook/lang/uml.org">Language - UML</a></li>
+<li><a href="notebook/lang/bash.org">Bash</a></li>
+<li><a href="notebook/lang/dot.org">Dot</a></li>
+<li><a href="notebook/lang/plantuml.org">Plantuml</a></li>
+<li><a href="notebook/lang/uml.org">UML</a></li>
 </ul>
 </details>
 <details><summary><b><u>linux</u></b></summary>
 <ul>
-<li><a href="notebook/linux/debian.org">Linux - Debian 系统使用</a></li>
-<li><a href="notebook/linux/faq.org">Linux - 常见问题</a></li>
-<li><a href="notebook/linux/linux.org">Linux - 基础笔记</a></li>
+<li><a href="notebook/linux/debian.org">Debian 系统使用</a></li>
+<li><a href="notebook/linux/linux.org">Linux 基础笔记</a></li>
+<li><a href="notebook/linux/question.org">Linux 问题集</a></li>
 </ul>
 </details>
 <details><summary><b><u>math</u></b></summary>
 <ul>
 <li><details><summary><b><u>discrete</u></b></summary>
 <ul>
-<li><a href="notebook/math/discrete/基本结构.org">离散数学 - 基本结构</a></li>
-<li><a href="notebook/math/discrete/逻辑和证明.org">离散数学 - 逻辑和证明</a></li>
+<li><a href="notebook/math/discrete/basic">离散数学 - 基本结构</a></li>
+<li><a href="notebook/math/discrete/logic.org">离散数学 - 逻辑和证明</a></li>
 </ul>
 </details>
 <li><details><summary><b><u>linear</u></b></summary>
 <ul>
-<li><a href="notebook/math/linear/矩阵和方程组.org">线性代数 - 矩阵和方程组</a></li>
-</ul>
-</details>
-<li><details><summary><b><u>probability</u></b></summary>
-<ul>
-<li><a href="notebook/math/probability/lea.org">概率 - 概率编程框架</a></li>
+<li><a href="notebook/math/linear/matrix.org">线性代数 - 矩阵和方程组</a></li>
 </ul>
 </details>
 </ul>
 </details>
 <details><summary><b><u>misc</u></b></summary>
 <ul>
-<li><a href="notebook/misc/coding.org">Misc - 编程相关</a></li>
-<li><a href="notebook/misc/liscense.org">Misc - 开源协议</a></li>
-<li><a href="notebook/misc/noun.org">Misc - 技术了解</a></li>
-<li><a href="notebook/misc/rest-api.org">Misc - REST API</a></li>
-<li><a href="notebook/misc/se.org">Misc - 结构化编程</a></li>
-<li><a href="notebook/misc/unicode.org">Misc - Unicode 相关</a></li>
+<li><a href="notebook/misc/coding.org">编程相关</a></li>
+<li><a href="notebook/misc/liscense.org">开源协议</a></li>
+<li><a href="notebook/misc/noun.org">技术了解</a></li>
+<li><a href="notebook/misc/rest-api.org">REST API</a></li>
+<li><a href="notebook/misc/se.org">结构化编程</a></li>
+<li><a href="notebook/misc/unicode.org">Unicode 相关</a></li>
 </ul>
 </details>
 <details><summary><b><u>network</u></b></summary>
 <ul>
+<li><a href="notebook/network/five-layer-model.org">计算机网络 - 五层模型</a></li>
 <li><a href="notebook/network/protocol.org">计算机网络 - 协议</a></li>
-<li><a href="notebook/network/url.org">计算机网络 - 统一资源定位符 URL</a></li>
-<li><a href="notebook/network/xnote.org">计算机网络 - 五层模型</a></li>
 </ul>
 </details>
 <details><summary><b><u>os</u></b></summary>
 <ul>
 <li><a href="notebook/os/base.org">操作系统 - 基础内容</a></li>
-<li><a href="notebook/os/concurrency.org">操作系统 - 并发</a></li>
 <li><a href="notebook/os/ecf.org">操作系统 - 异常控制流</a></li>
 <li><a href="notebook/os/express.org">操作系统 - 程序的机器级表示</a></li>
 <li><a href="notebook/os/info.org">操作系统 - 信息的表示和处理</a></li>
@@ -224,13 +217,13 @@
 </details>
 <details><summary><b><u>tools</u></b></summary>
 <ul>
-<li><a href="notebook/tools/chrome.org">Tool - Chrome</a></li>
-<li><a href="notebook/tools/ci.org">Tool - 自动集成</a></li>
-<li><a href="notebook/tools/cmd.org">Tool - Windows CMD 命令</a></li>
-<li><a href="notebook/tools/curl.org">Tool - curl</a></li>
-<li><a href="notebook/tools/shell.org">Tool - Linux Shell 命令</a></li>
-<li><a href="notebook/tools/ssh.org">Tool - SSH</a></li>
-<li><a href="notebook/tools/utils.org">Tool - 实用开源工具收集</a></li>
-<li><a href="notebook/tools/vim.org">Tool - Vim 笔记</a></li>
+<li><a href="notebook/tools/chrome.org">Chrome</a></li>
+<li><a href="notebook/tools/ci.org">自动集成</a></li>
+<li><a href="notebook/tools/cmd.org">Windows CMD 命令</a></li>
+<li><a href="notebook/tools/curl.org">curl</a></li>
+<li><a href="notebook/tools/shell.org">Shell 命令</a></li>
+<li><a href="notebook/tools/ssh.org">SSH</a></li>
+<li><a href="notebook/tools/utils.org">实用开源工具收集</a></li>
+<li><a href="notebook/tools/vim.org">Vim 笔记</a></li>
 </ul>
 </details>

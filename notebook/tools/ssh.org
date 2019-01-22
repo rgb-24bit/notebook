@@ -1,10 +1,9 @@
-#+TITLE:      Tool - SSH
+#+TITLE:      SSH
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简单使用][简单使用]]
 - [[#文件传输][文件传输]]
 - [[#git-ssh-私钥][git ssh 私钥]]
-- [[#避免-ssh-连接因超时闲置断开][避免 SSH 连接因超时闲置断开]]
 
 * 简单使用
   使用用户名和密码登录：
@@ -59,15 +58,4 @@
   #+BEGIN_EXAMPLE
     $ chome go=---
   #+END_EXAMPLE
-
-* 避免 SSH 连接因超时闲置断开
-  在客户端设置：
-  #+BEGIN_QUOTE
-  ServerAliveInterval 60
-  #+END_QUOTE
-
-  或者在服务器端设置：
-  #+BEGIN_QUOTE
-  ClientAliveInterval 60
-  #+END_QUOTE
 

@@ -1,4 +1,4 @@
-#+TITLE:      Language - plantuml
+#+TITLE:      Plantuml
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#emacs-环境配置][Emacs 环境配置]]

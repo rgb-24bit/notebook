@@ -68,3 +68,8 @@
    + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
    + [[http://www.cnblogs.com/liuzhang/p/3929198.html][我所了解的 cgi - 博客园]]
 
+
+* 数学相关
+  + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][Probabilistic programming language]]
+  + [[https://bitbucket.org/piedenis/lea/overview][Lea]] - *Discrete probability distributions in Python*.
+

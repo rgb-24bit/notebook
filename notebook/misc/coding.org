@@ -1,4 +1,4 @@
-#+TITLE:      Misc - 编程相关
+#+TITLE:      编程相关
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#伪代码][伪代码]]
@@ -150,7 +150,6 @@
    + RESULTS:
      : 10
      : 10
-
 
 * 文件签名列表
   + [[https://en.wikipedia.org/wiki/List_of_file_signatures][List of file signatures]]

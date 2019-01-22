@@ -1,88 +1,97 @@
-#+TITLE:      Tool - Windows CMD 命令
+#+TITLE:      Windows CMD 命令
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#nslookup][nslookup]]
-- [[#traceroute][traceroute]]
-- [[#copy][copy]]
-- [[#for][for]]
-- [[#mklink][mklink]]
+- [[#cmd-语法相关][CMD 语法相关]]
+  - [[#for][for]]
+- [[#文件目录管理][文件目录管理]]
+  - [[#copy][copy]]
+  - [[#mklink][mklink]]
+- [[#网络管理][网络管理]]
+  - [[#nslookup][nslookup]]
+  - [[#traceroute][traceroute]]
 - [[#相关链接][相关链接]]
 
-* nslookup
-  nslookup 命令用于查询 DNS 的记录， 查看域名解析是否正常， 
-  在网络故障的时候用来诊断网络问题。
+* CMD 语法相关
+** for
+   /for /L %i in (1, 1, 10) do mkdir Chapter_%i/  -- 创建10个文件夹
 
-  主要有三种用法：
-  1. 直接查询：
-     #+BEGIN_EXAMPLE
-       nslookup domain [dns-server]
-     #+END_EXAMPLE
+* 文件目录管理
 
-     如果没指定 dns-server, 用系统默认的 dns 服务器
+** copy
+   /copy b xxx.jpg + xxx.rar xxx.jpg/  --  合成图片和压缩包
+
+** mklink
+   可以通过 mklink /J 的方式创建目录联接来转移文件。
+
+* 网络管理
+** nslookup
+   nslookup 命令用于查询 DNS 的记录， 查看域名解析是否正常， 
+   在网络故障的时候用来诊断网络问题。
+
+   主要有三种用法：
+   1) 直接查询：
+      #+BEGIN_EXAMPLE
+        nslookup domain [dns-server]
+      #+END_EXAMPLE
+
+      如果没指定 dns-server, 用系统默认的 dns 服务器
      
-     例子：
-     #+BEGIN_EXAMPLE
-       nslookup github.com 1.1.1.1
+      例子：
+      #+BEGIN_EXAMPLE
+        nslookup github.com 1.1.1.1
 
-       Server:  1dot1dot1dot1.cloudflare-dns.com  DNS 服务器
-       Address:  1.1.1.1  DNS 服务器地址
+        Server:  1dot1dot1dot1.cloudflare-dns.com  DNS 服务器
+        Address:  1.1.1.1  DNS 服务器地址
 
-       Non-authoritative answer:  非权威应答
-       Name:    github.com  域名
-       Addresses:  52.74.223.119  地址
-                 13.229.188.59
-                 13.250.177.223
-     #+END_EXAMPLE
+        Non-authoritative answer:  非权威应答
+        Name:    github.com  域名
+        Addresses:  52.74.223.119  地址
+                  13.229.188.59
+                  13.250.177.223
+      #+END_EXAMPLE
 
-  2. 查询其他记录
-     #+BEGIN_EXAMPLE
-       nslookup -qt=type domain [dns-server]
-     #+END_EXAMPLE
+   2) 查询其他记录
+      #+BEGIN_EXAMPLE
+        nslookup -qt=type domain [dns-server]
+      #+END_EXAMPLE
 
-     默认查询返回的是 A 记录， 我们可以指定参数来查询其他记录， 支持的类型有：
-     #+BEGIN_EXAMPLE
-       A 地址记录 
-       AAAA 地址记录 
-       AFSDB Andrew文件系统数据库服务器记录 
-       ATMA ATM地址记录
-       CNAME 别名记录 
-       HINFO 硬件配置记录，包括CPU、操作系统信息 
-       ISDN 域名对应的ISDN号码 
-       MB 存放指定邮箱的服务器 
-       MG 邮件组记录 
-       MINFO 邮件组和邮箱的信息记录 
-       MR 改名的邮箱记录 
-       MX 邮件服务器记录 
-       NS 名字服务器记录 
-       PTR 反向记录 
-       RP 负责人记录 
-       RT 路由穿透记录 
-       SRV TCP服务器信息记录 
-       TXT 域名对应的文本信息 
-       X25 域名对应的X.25地址记录
-     #+END_EXAMPLE
+      默认查询返回的是 A 记录， 我们可以指定参数来查询其他记录， 支持的类型有：
+      #+BEGIN_EXAMPLE
+        A 地址记录 
+        AAAA 地址记录 
+        AFSDB Andrew文件系统数据库服务器记录 
+        ATMA ATM地址记录
+        CNAME 别名记录 
+        HINFO 硬件配置记录，包括CPU、操作系统信息 
+        ISDN 域名对应的ISDN号码 
+        MB 存放指定邮箱的服务器 
+        MG 邮件组记录 
+        MINFO 邮件组和邮箱的信息记录 
+        MR 改名的邮箱记录 
+        MX 邮件服务器记录 
+        NS 名字服务器记录 
+        PTR 反向记录 
+        RP 负责人记录 
+        RT 路由穿透记录 
+        SRV TCP服务器信息记录 
+        TXT 域名对应的文本信息 
+        X25 域名对应的X.25地址记录
+      #+END_EXAMPLE
 
-  3. 查询更具体的信息
-     #+BEGIN_EXAMPLE
-       nslookup –d [其他参数] domain [dns-server]
-     #+END_EXAMPLE
+   3) 查询更具体的信息
+      #+BEGIN_EXAMPLE
+        nslookup –d [其他参数] domain [dns-server]
+      #+END_EXAMPLE
 
-* traceroute
-  Traceroute 是一种网络诊断工具， 可显示数据包通过网络所采用的路由， 并测量任何传输延迟。
+** traceroute
+   Traceroute 是一种网络诊断工具， 可显示数据包通过网络所采用的路由， 并测量任何传输延迟。
 
-  ~Windows~ 中的使用方式如下：
-  #+BEGIN_EXAMPLE
-    > tracert yourdomain.com
-    > tracert -6 yourdomain.com
-  #+END_EXAMPLE
-* copy
-  /copy b xxx.jpg + xxx.rar xxx.jpg/  --  合成图片和压缩包
-
-* for
-  /for /L %i in (1, 1, 10) do mkdir Chapter_%i/  -- 创建10个文件夹
-
-* mklink
-  创建符号链接。
+   ~Windows~ 中的使用方式如下：
+   #+BEGIN_EXAMPLE
+     > tracert yourdomain.com
+     > tracert -6 yourdomain.com
+   #+END_EXAMPLE
 
 * 相关链接
   + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands][Windows Commands]]
+

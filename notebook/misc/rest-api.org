@@ -1,4 +1,4 @@
-#+TITLE:      Misc - REST API
+#+TITLE:      REST API
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#教程--例子][教程 & 例子]]

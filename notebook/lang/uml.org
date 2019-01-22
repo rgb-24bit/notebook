@@ -1,4 +1,4 @@
-#+TITLE:      Language - UML
+#+TITLE:      UML
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#uml-基本概念][UML 基本概念]]

@@ -1,12 +1,10 @@
-#+TITLE:      Language - Dot
+#+TITLE:      Dot
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#dot][dot]]
 - [[#绘制-erd-图][绘制 ERD 图]]
 
 * dot
-  教程: [[https://github.com/uolcano/blog/issues/13][dot 教程]]
-
   解决中文乱码问题:
   #+BEGIN_SRC dot
     /* 添加这些代码即可(保证文件编码为utf-8) */
@@ -14,6 +12,8 @@
     node [shape=box, fontname="FangSong"];    /*set the node's font and shape*/
     graph[fontname="FangSong"];    /*set the subgraph's font*/
   #+END_SRC
+
+  + [[https://github.com/uolcano/blog/issues/13][DOT 语言学习笔记]]
 
 * 绘制 ERD 图
   #+BEGIN_SRC dot
@@ -42,3 +42,4 @@
       tbl0:0 -> tbl1: 1;
     }
   #+END_SRC
+
