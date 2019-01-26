@@ -8,6 +8,7 @@
 - [[#系统事件的使用][系统事件的使用]]
 - [[#开机自启动的实现][开机自启动的实现]]
 - [[#appconfig][App.Config]]
+- [[#右下角弹窗实现][右下角弹窗实现]]
 
 * MouseEventArgs
   ~MouseEventArgs~ 的属性 ~X, Y~ 得到的坐标是相对于 *控件* 而言的，而不是屏幕或窗口。
@@ -147,4 +148,27 @@
       config.Save(ConfigurationSaveMode.Modified);
       ConfigurationManager.RefreshSection("appSettings");
     #+END_SRC
+
+* 右下角弹窗实现
+  #+BEGIN_SRC csharp
+    void PopupFormLoad(object sender, EventArgs e)
+    {
+      Rectangle workingArea = Screen.GetWorkingArea(this);
+      this.Location = new Point(workingArea.Right, workingArea.Bottom - this.Size.Height);
+      timer.Enabled = true;
+    }
+
+    void TimerTick(object sender, EventArgs e)
+    {
+      if (widthOffset < this.Size.Width) {
+        widthOffset += 4;
+
+        Rectangle workingArea = Screen.GetWorkingArea(this);
+        this.Location = new Point(workingArea.Right - widthOffset,
+                                  workingArea.Bottom - this.Size.Height);
+      } else {
+        timer.Enabled = false;
+      }
+    }
+  #+END_SRC
 

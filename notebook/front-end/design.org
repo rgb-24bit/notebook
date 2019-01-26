@@ -2,6 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网页翻转镜像实现][网页翻转镜像实现]]
+- [[#子元素居中雾][子元素居中（雾）]]
+- [[#显示所有元素的-outline][显示所有元素的 outline]]
 - [[#相关链接][相关链接]]
 
 * 网页翻转镜像实现
@@ -28,6 +30,23 @@
 
   更多有关于 *transform* 属性的内容：[[https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform][transform | MDN]]
 
+* 子元素居中（雾）
+  #+BEGIN_SRC css
+    body {
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+  #+END_SRC
+
+* 显示所有元素的 outline
+  控制台中 $$ 相当于 document.querySelectorAll
+  #+BEGIN_SRC js
+    $$("*").forEach(
+      e => e.style.outline = "1px solid #" + (~~(Math.random() * (1<<24))).toString(16)
+    )
+  #+END_SRC
+ 
 * 相关链接
   + [[http://blog-en.tilda.cc/articles-website-design-mistakes][Common webpage design mistakes]] - 网页设计中的常见错误
 

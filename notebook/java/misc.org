@@ -4,6 +4,7 @@
 - [[#序列化][序列化]]
 - [[#日期和时间][日期和时间]]
 - [[#vector--stack][Vector & Stack]]
+- [[#collectiontoarray][Collection.toArray]]
 
 * 序列化
   实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
@@ -77,4 +78,23 @@
   | pop()        | removeFirst()           |
   | peek()       | peekFirst()             |
   |--------------+-------------------------|
+
+* Collection.toArray
+  #+BEGIN_SRC java
+    // ArraysList.toArray()
+    public <T> T[] toArray(T[] a) {
+      if (a.length < size)
+        // Make a new array of a's runtime type, but my contents:
+        return (T[]) Arrays.copyOf(elementData, size, a.getClass());
+      System.arraycopy(elementData, 0, a, 0, size);
+      if (a.length > size)
+        a[size] = null;
+      return a;
+    }
+  #+END_SRC
+  
+  因此，简单的使用不需要考虑传入参数的长度：
+  #+BEGIN_SRC java
+    list.toArray(new Integer[0]);
+  #+END_SRC
 

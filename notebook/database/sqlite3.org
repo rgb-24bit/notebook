@@ -1,0 +1,9 @@
+#+TITLE:      SQLite 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#命令行工具][命令行工具]]
+
+* 命令行工具
+  + 官方实现：[[https://www.sqlite.org/cli.html][Command Line Shell For SQLite]]
+  + 强力扩展：[[https://github.com/dbcli/litecli][CLI for SQLite Databases with auto-completion and syntax highlighting]]
+

@@ -7,10 +7,12 @@
   - [[#boolean][boolean]]
 - [[#类型转换][类型转换]]
 - [[#数组][数组]]
+  - [[#数组的类型判断][数组的类型判断]]
 - [[#异常][异常]]
 - [[#java-import][Java Import]]
   - [[#导入名称][导入名称]]
   - [[#static-import][static import]]
+- [[#块作用域][块作用域]]
 - [[#注意事项][注意事项]]
 
 * Primitive Types
@@ -129,9 +131,19 @@
   2. ~public T[] clone()~
   3. ~Object method~
 
-  相关链接：
-  + [[http://www.importnew.com/7127.html][Java 数组]]
-  + [[http://wiki.jikexueyuan.com/project/java-enhancement/java-thirtysix.html][asList 的缺陷]]
+** 数组的类型判断
+   #+BEGIN_QUOTE
+   Primitive arrays are instance of Object and self type. e.g. int[] is type of Object and int[]. Both comparison returns true.
+
+   Object arrays are types of Object, Object array, classtype array, parent class type array.
+   e.g. Integer[] is type of Object, Object[], Integer[] and Number[] (Integer extends Number).
+   #+END_QUOTE
+
+   + [[https://howtodoinjava.com/oops/java-instanceof/][Java instanceof - Java type comparison operator - HowToDoInJava]]
+
+   特别的， int[][] 是 Object[] 的实例。
+
+   这也就是为什么 ~asList~ 不要使用 ~int[]~ 参数的原因。
 
 * 异常
   + 捕获异常：
@@ -232,6 +244,22 @@
 
    可以看到， 省略了前面的 *名称空间.类*, 直接使用导入的 *静态成员*.
  
+
+* 块作用域
+  块作用域是由大括号确定的作用域：
+  #+BEGIN_SRC java
+    public class Test {
+      public static void main(String[] args) {
+        {
+          int num = 10;
+          System.out.println(num);
+        }
+        int num = 10;
+      }
+    }
+  #+END_SRC
+
+
 * 注意事项
   + Java 没有无符号数
    

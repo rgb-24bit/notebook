@@ -10,6 +10,7 @@
 - [[#git-submodule][git submodule]]
 - [[#git-pull][git pull]]
 - [[#git-stash][git stash]]
+- [[#git-commit][git commit]]
 
 * git clone
   使用 ~git clone -b branch~ 克隆指定分支。
@@ -45,6 +46,14 @@
     #+BEGIN_EXAMPLE
       git log <branch>
     #+END_EXAMPLE
+  + 代码行数变动统计，需要在 bash 中执行
+    #+BEGIN_SRC bash
+      $ git log --author="$(git config --get user.name)" --pretty=tformat: --numstat | awk '{ add += $1 ; sub s += $2 ; loc += $1 - $2 } END { printf "added lines: %s removed lines : %s total lines: %s\n",add,subs, loc }'
+    #+END_SRC
+  + 指定时间范围
+    #+BEGIN_SRC bash
+      git log --author="$(git config --get user.name)" --after="2018-01-01" --before="2019-01-01" --pretty= tformat: --numstat | awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s remo ved lines : %s total lines: %s\n",add,subs,loc }'
+    #+END_SRC
 
 * git branch
   #+BEGIN_SRC bash
@@ -95,4 +104,10 @@
   #+END_SRC
 
   + [[https://git-scm.com/book/zh/v1/Git-%25E5%25B7%25A5%25E5%2585%25B7-%25E5%2582%25A8%25E8%2597%258F%25EF%25BC%2588Stashing%25EF%25BC%2589][Git 工具 - 储藏（Stashing）]]
+
+* git commit
+  将所有修改直接提交：
+  #+BEGIN_SRC bash
+    $ git commit --am
+  #+END_SRC
 

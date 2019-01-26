@@ -13,6 +13,10 @@
 - [[#null-重载的问题][null 重载的问题]]
 - [[#void-和-void-的使用][Void 和 void 的使用]]
 - [[#怎样实现静态方法的链式调用][怎样实现静态方法的链式调用]]
+- [[#parsexxx-和-valueof-的区别][parseXXX 和 valueOf 的区别]]
+- [[#带标签的-break-与-continue-的使用][带标签的 break 与 continue 的使用]]
+- [[#同名标识符的优先级][同名标识符的优先级]]
+- [[#数组长度允许为-0-的好处][数组长度允许为 0 的好处]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -164,4 +168,34 @@
 
     Test.methodA().methodB();
   #+END_SRC
+
+* parseXXX 和 valueOf 的区别
+  Java Primitive Types 的包装类都存在 parseXXX 和 valueOf 这两个方法，它们的作用很相似，
+  但也存在区别：
+  + parseXXX 返回的是 Primitive Types 类型的值，比如 parseInt 返回 int
+  + valueOf 返回的是包装类型的值，比如 Integer.valueOf 返回 Integer
+
+* 带标签的 break 与 continue 的使用
+  Java 允许在 break 和 continue 关键字后跟一个 label 进行跳转，然而实际使用这一特性的地方很少，
+  如果存在需要使用的地方，可以参考如下链接考虑修改：
+
+  + [[https://stackoverflow.com/questions/14960419/is-using-a-labeled-break-a-good-practice-in-java][Is using a labeled break a good practice in Java? - Stack Overflow]]
+
+* 同名标识符的优先级
+  当字段名、类名、方法名、函数参数名、局部变量名存在相同名称时的优先级是怎样的？
+
+  对于这一点，简单的规则是越靠近内部作用域的标识符优先级越高，可以参考：
+  + [[https://stackoverflow.com/questions/9960560/java-instance-variable-and-method-having-same-name][java instance variable and method having same name - Stack Overflow]]
+
+  思考：同名标识符的区分是在语义分析阶段完成的吗？
+
+* 数组长度允许为 0 的好处
+  数组长度允许为 0 的一个直接好处就是可以避免 null 值：
+  #+BEGIN_SRC java
+    for(int k = 0; k < strings.length; k++){
+      // something
+    }
+  #+END_SRC
+
+  参考：[[https://stackoverflow.com/questions/4612471/why-does-java-allow-arrays-of-size-0][Why does Java allow arrays of size 0? - Stack Overflow]]
 

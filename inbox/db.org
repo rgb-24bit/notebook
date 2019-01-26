@@ -41,8 +41,3 @@
 
   注意事项：MySQL 中 LIMIT 不是子句，需要放在 ORDER BY 后面。 
 
-* sqlite3
-  + 命令行工具
-    + [[https://www.sqlite.org/cli.html][Command Line Shell For SQLite]]
-    + [[https://github.com/dbcli/litecli][dbcli/litecli: CLI for SQLite Databases with auto-completion and syntax highlighting]]
-

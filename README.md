@@ -2,9 +2,9 @@
 <ul>
 <li><a href="notebook/algorithm/bit-operation.org">数据结构与算法 - 位运算相关</a></li>
 <li><a href="notebook/algorithm/concept.org">数据结构与算法 - 概念了解</a></li>
+<li><a href="notebook/algorithm/digest.org">消息摘要算法</a></li>
 <li><a href="notebook/algorithm/encode.org">数据结构与算法分析 - 编码</a></li>
 <li><a href="notebook/algorithm/encrypt.org">数据结构与算法 - 加密算法</a></li>
-<li><a href="notebook/algorithm/hash.org">数据结构与算法 - 消息摘要算法</a></li>
 <li><a href="notebook/algorithm/misc.org">数据结构与算法 - 未分类</a></li>
 <li><a href="notebook/algorithm/random.org">随机数的生成与使用</a></li>
 <li><a href="notebook/algorithm/search-sort.org">查找与排序算法</a></li>
@@ -49,6 +49,7 @@
 <li><a href="notebook/database/question.org">数据库 - 问题集</a></li>
 <li><a href="notebook/database/redis.org">数据库 - Redis 笔记</a></li>
 <li><a href="notebook/database/sql.org">数据库 - SQL 笔记</a></li>
+<li><a href="notebook/database/sqlite3.org">SQLite 笔记</a></li>
 <li><a href="notebook/database/vc.org">数据库 - 版本控制</a></li>
 </ul>
 </details>
@@ -63,7 +64,7 @@
 <details><summary><b><u>emacs</u></b></summary>
 <ul>
 <li><a href="notebook/emacs/code-style.org">Elisp - 风格规范</a></li>
-<li><a href="notebook/emacs/elisp.org">Emacs - Emacs Lisp</a></li>
+<li><a href="notebook/emacs/elisp.org">Emacs Lisp 笔记</a></li>
 <li><a href="notebook/emacs/emacs.org">Emacs - 操作技巧</a></li>
 <li><a href="notebook/emacs/minor-mode.org">Emacs - 实用模式</a></li>
 <li><a href="notebook/emacs/org-mode.org">Emacs - Org-mode</a></li>
@@ -83,7 +84,7 @@
 <li><a href="notebook/front-end/design.org">网页设计相关笔记</a></li>
 <li><a href="notebook/front-end/html-base.org">HTML/HTML5 基础笔记</a></li>
 <li><a href="notebook/front-end/html.org">HTML 标签使用笔记</a></li>
-<li><a href="notebook/front-end/javascript-base.org">JavaScript 基础笔记</a></li>
+<li><a href="notebook/front-end/js-tips.org">JavaScript 中的小技巧</a></li>
 <li><a href="notebook/front-end/technology.org">Web 相关技术</a></li>
 </ul>
 </details>
@@ -202,6 +203,7 @@
 <li><a href="notebook/python/async.org">Python - 异步 I/O</a></li>
 <li><a href="notebook/python/coroutine.org">Python 协程</a></li>
 <li><a href="notebook/python/pep249.org">PEP249 - 数据库接口</a></li>
+<li><a href="notebook/python/python-crawler.org">Python 爬虫笔记</a></li>
 <li><a href="notebook/python/python.org">Python - 基础笔记</a></li>
 <li><a href="notebook/python/pythondoc.org">Python 文档字符串</a></li>
 <li><a href="notebook/python/question.org">Python 问题集</a></li>

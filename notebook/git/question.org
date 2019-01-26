@@ -7,6 +7,8 @@
 - [[#如何创建空白分支][如何创建空白分支]]
 - [[#本地分支如何跟踪远程分支][本地分支如何跟踪远程分支]]
 - [[#怎样创建-git-扩展][怎样创建 Git 扩展]]
+- [[#怎样在存储库中保存本地配置][怎样在存储库中保存本地配置]]
+- [[#git-checkout-reset-revert-的区别][git checkout, reset, revert 的区别]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -58,4 +60,40 @@
 * 怎样创建 Git 扩展
  1) 将可执行文件命名为 git-<name>
  2) 通过 git <name> 的方式调用
+
+* 怎样在存储库中保存本地配置
+  可以参考的解决方案：
+  + 创建文件 ~.gitconfig~ 保存本地配置
+  + 克隆存储库后执行：
+    #+BEGIN_SRC bash
+      git config --local include.path ../.gitconfig
+    #+END_SRC
+
+  参考：[[https://stackoverflow.com/questions/18329621/storing-git-config-as-part-of-the-repository][Storing git config as part of the repository - Stack Overflow]]
+
+* git checkout, reset, revert 的区别
+  #+BEGIN_EXAMPLE
+    A -> B -> C -> D
+                   ^
+                  HEAD
+
+    checkout:
+
+    A -> B -> C -> D
+         ^
+        HEAD
+
+    reset:
+
+    A -> B
+         ^
+        HEAD
+
+
+    revert:
+
+    A -> B -> C -> D -> B
+                        ^
+                       HEAD
+  #+END_EXAMPLE
 

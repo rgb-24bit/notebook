@@ -59,6 +59,18 @@
     /* 定义 Func 类型函数指针变量 */
     Func func = fib;
   #+END_SRC
+
+  函数指针的值就是其本身，因此可以无限解引用：
+  #+BEGIN_SRC C
+    #include <stdio.h>
+
+    void func() {}
+
+    int main(int argc, char* argv[]) {
+      printf("%p", *************************************************************func);
+      return 0;
+    }
+  #+END_SRC
   
 * 指针参数的传递
   指针也是 *按值* 传参的：

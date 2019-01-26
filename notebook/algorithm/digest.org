@@ -1,10 +1,11 @@
-#+TITLE:      数据结构与算法 - 消息摘要算法
+#+TITLE:      消息摘要算法
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概念][概念]]
 - [[#md5][MD5]]
   - [[#基本思路][基本思路]]
   - [[#注意事项][注意事项]]
+- [[#hmac][HMAC]]
 
 * 概念
   ~Hash~ 算法又称为消息摘要算法， 通过将任意数据通过一个函数转换成长度固定的数据串，
@@ -50,3 +51,40 @@
    5. 当然生成的结果，MD5 也要求是 LITTLE-ENDIAN，SHA1 也要求结果是 BIG-ENDIAN 的.
       不同的平台还是要进行转换.
 
+* HMAC
+  通过 Hash 算法进行消息摘要的时候，可以增加一个 slat 使得相同的输入也能得到不同的摘要结果，避免通过彩虹表得到原始输入。
+
+  算法：
+  #+BEGIN_EXAMPLE
+    Function hmac
+       Inputs:
+          key:        Bytes     //array of bytes
+          message:    Bytes     //array of bytes to be hashed
+          hash:       Function  //the hash function to use (e.g. SHA-1)
+          blockSize:  Integer   //the block size of the underlying hash function (e.g. 64 bytes for SHA-1)
+          outputSize: Integer   //the output size of the underlying hash function (e.g. 20 bytes for SHA-1)
+
+       //Keys longer than blockSize are shortened by hashing them
+       if (length(key) > blockSize) then
+          key ← hash(key) //Key becomes outputSize bytes long
+   
+       //Keys shorter than blockSize are padded to blockSize by padding with zeros on the right
+       if (length(key) < blockSize) then
+          key ← Pad(key, blockSize) //pad key with zeros to make it blockSize bytes long
+    
+       o_key_pad = key xor [0x5c * blockSize]   //Outer padded key
+       i_key_pad = key xor [0x36 * blockSize]   //Inner padded key
+    
+       return hash(o_key_pad ∥ hash(i_key_pad ∥ message)) //Where ∥ is concatenation
+  #+END_EXAMPLE
+
+  在 Python 中的使用：
+  #+BEGIN_SRC python
+    >>> import hmac
+    >>> message = b'Hello, world!'
+    >>> key = b'secret'
+    >>> h = hmac.new(key, message, digestmod='MD5')
+    >>> # 如果消息很长，可以多次调用 h.update(msg)
+    >>> h.hexdigest()
+    'fa4ee7d173f2d97ee79022d1a7355bcf'
+  #+END_SRC

@@ -1,11 +1,4 @@
-* 本地配置
-  + [[https://stackoverflow.com/questions/18329621/storing-git-config-as-part-of-the-repository][Storing git config as part of the repository - Stack Overflow]]
-
-* git ci --am
-* git reset, checkout, revert
-  + [[https://www.puritys.me/docs-blog/article-365-Git-checkout-reset-revert-rebase-%E7%9A%84%E5%B7%AE%E5%88%A5.html][Git checkout reset revert rebase 的差別]]
-
 * 补丁
-  + [[https://www.jianshu.com/p/e5d801b936b6][git apply、git am打补丁.diff 和 .patch - 简书]]
-  + [[https://en.wikipedia.org/wiki/Patch_(computing)][Patch (computing) - Wikipedia]]
+  + [[https://www.jianshu.com/p/e5d801b936b6][git apply、git am 打补丁.diff 和 .patch - 简书]]
+  + [[https://juejin.im/post/5b5851976fb9a04f844ad0f4][Git 打补丁-- patch 和 diff 的使用（详细） - 掘金]]
 

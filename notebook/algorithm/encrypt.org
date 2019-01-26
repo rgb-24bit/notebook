@@ -3,7 +3,6 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#rsa-算法][RSA 算法]]
 - [[#aes-算法][AES 算法]]
-- [[#hmac][HMAC]]
 
 * RSA 算法
   *RSA 加密算法* 是一种 _非对称加密算法_, 可靠性来源于对极大整数做因数分解的难度。
@@ -102,42 +101,4 @@
   #+HTML: <img src="https://images0.cnblogs.com/blog2015/671127/201503/130035028553414.png">
 
   + [[https://www.cnblogs.com/luop/p/4334160.html][密码算法详解——AES - ReadingLover - 博客园]]
-
-* HMAC
-  通过 Hash 算法进行消息摘要的时候，可以增加一个 slat 使得相同的输入也能得到不同的摘要结果，避免通过彩虹表得到原始输入。
-
-  算法：
-  #+BEGIN_EXAMPLE
-    Function hmac
-       Inputs:
-          key:        Bytes     //array of bytes
-          message:    Bytes     //array of bytes to be hashed
-          hash:       Function  //the hash function to use (e.g. SHA-1)
-          blockSize:  Integer   //the block size of the underlying hash function (e.g. 64 bytes for SHA-1)
-          outputSize: Integer   //the output size of the underlying hash function (e.g. 20 bytes for SHA-1)
-
-       //Keys longer than blockSize are shortened by hashing them
-       if (length(key) > blockSize) then
-          key ← hash(key) //Key becomes outputSize bytes long
-   
-       //Keys shorter than blockSize are padded to blockSize by padding with zeros on the right
-       if (length(key) < blockSize) then
-          key ← Pad(key, blockSize) //pad key with zeros to make it blockSize bytes long
-    
-       o_key_pad = key xor [0x5c * blockSize]   //Outer padded key
-       i_key_pad = key xor [0x36 * blockSize]   //Inner padded key
-    
-       return hash(o_key_pad ∥ hash(i_key_pad ∥ message)) //Where ∥ is concatenation
-  #+END_EXAMPLE
-
-  在 Python 中的使用：
-  #+BEGIN_SRC python
-    >>> import hmac
-    >>> message = b'Hello, world!'
-    >>> key = b'secret'
-    >>> h = hmac.new(key, message, digestmod='MD5')
-    >>> # 如果消息很长，可以多次调用 h.update(msg)
-    >>> h.hexdigest()
-    'fa4ee7d173f2d97ee79022d1a7355bcf'
-  #+END_SRC
 

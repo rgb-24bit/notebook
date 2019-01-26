@@ -1,15 +1,16 @@
-#+TITLE:      Emacs - Emacs Lisp
+#+TITLE:     Emacs Lisp 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#interactive][interactive]]
-- [[#quote--backquote][Quote & Backquote]]
-- [[#有用的函数][有用的函数]]
+- [[#列表相关][列表相关]]
+  - [[#alist--plist][alist & plist]]
+  - [[#quote--backquote][Quote & Backquote]]
+  - [[#cons-概念的理解][cons 概念的理解]]
+- [[#变量相关][变量相关]]
+  - [[#setq--setq-default][setq & setq-default]]
+  - [[#let--let][let & let*]]
 - [[#autoload][autoload]]
-- [[#setq--setq-default][setq & setq-default]]
 - [[#启用-minor-mode][启用 minor-mode]]
-- [[#let--let][let & let*]]
 - [[#type-predicates][Type Predicates]]
-- [[#alist--plist][alist & plist]]
 - [[#keyword][Keyword]]
 - [[#关于符号][关于符号]]
 - [[#hooks][Hooks]]
@@ -17,56 +18,74 @@
 - [[#timer][Timer]]
 - [[#函数相关][函数相关]]
   - [[#关键字参数][关键字参数]]
+  - [[#interactive][interactive]]
+  - [[#有用的函数][有用的函数]]
 
-* interactive
-  ~Emacs~ 中存在 *两种函数*:
-  1) 可以作为命令执行的函数
-  2) 不能作为命令执行的普通函数
+* 列表相关
+** alist & plist
+   alist 的常见的两种形式：
+   #+BEGIN_SRC elisp
+     '((a . 1) ("b" 2 3))
+     '((rose red) (lily white) (buttercup yellow))
+   #+END_SRC
 
-  如果要让定义的函数可以作为命令执行， 需要在函数中添加 ~interactive~:
-  #+BEGIN_SRC emacs-lisp
-    (defun hello-world ()
-      (interactive)
-      (insert "hello, world"))
-  #+END_SRC
+   plist 常见的形式：
+   #+BEGIN_SRC elisp
+     (plist-get '(foo 4) 'foo)     ;; ⇒ 4
+     (plist-get '(foo 4 bad) 'foo) ;; ⇒ 4
+     (plist-get '(foo 4 bad) 'bad) ;; ⇒ nil
+     (plist-get '(foo 4 bad) 'bar) ;; ⇒ nil
+   #+END_SRC
 
-  同时可以在 ~interactive~ 中获取函数调用时需要的参数：
-  #+BEGIN_SRC emacs-lisp
-    (defun c-malloc (name value)
-      (interactive
-       (list (read-string "name")
-             (read-string "value"))
-       (insert (format "%s = %s" name value)))
-  #+END_SRC
+   可见两者的本质是相同的：
+   #+BEGIN_SRC elisp
+     ELISP> (type-of '(foo 4))
+     cons
+     ELISP> (type-of '((foo 4)))
+     cons
+   #+END_SRC
 
-* Quote & Backquote
-  通过 quote 包裹的对象将不会执行，而是直接返回：
-  #+BEGIN_SRC elisp
-    '( a b c)  ; => (a b c)
-  #+END_SRC
+   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Association-Lists.html][Association Lists - GNU Emacs Lisp Reference Manual]]
+   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Plist-Access.html#Plist-Access][Plist Access - GNU Emacs Lisp Reference Manual]]
+   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Dotted-Pair-Notation.html][Dotted Pair Notation - GNU Emacs Lisp Reference Manual]]
+** Quote & Backquote
+   通过 quote 包裹的对象将不会执行，而是直接返回：
+   #+BEGIN_SRC elisp
+     '( a b c)  ; => (a b c)
+   #+END_SRC
 
-  反引号内部可以通过 ~,~ 和 ~,@~ 进行计算：
-  #+BEGIN_SRC elisp
-    `(1 2 ,(+ 3 4))  ; => (1 2 7)
-    `(1 2 ,@(+ 3 4)) ; => (1 2 . 7)
-  #+END_SRC
+   反引号内部可以通过 ~,~ 和 ~,@~ 进行计算：
+   #+BEGIN_SRC elisp
+     `(1 2 ,(+ 3 4))  ; => (1 2 7)
+     `(1 2 ,@(+ 3 4)) ; => (1 2 . 7)
+   #+END_SRC
 
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Quoting.html][Quoting - GNU Emacs Lisp Reference Manual]]
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html#Backquote][Backquote - GNU Emacs Lisp Reference Manual]]
+   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Quoting.html][Quoting - GNU Emacs Lisp Reference Manual]]
+   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html#Backquote][Backquote - GNU Emacs Lisp Reference Manual]]
+** cons 概念的理解
+   任何非空的列表，都可以被视为一对由列表第一个元素及列表其余元素所组成的列表。
 
-* 有用的函数
-  + 获取 Emacs 已启动时间长度：
-    #+BEGIN_SRC elisp
-      (emacs-uptime)
-    #+END_SRC
+   Lisp 的惯例是使用 car 代表列表的第一个元素，而用 cdr 代表列表的其余的元素。
 
-  + 消息摘要算法的支持
-    #+BEGIN_SRC elisp
-      (md5 "str")
-      (secure-hash 'sha256 "123")
-    #+END_SRC
+   + [[https://acl.readthedocs.io/en/latest/zhCN/ch3-cn.html#conses][第三章：列表 — ANSI Common Lisp 中文版]]
 
-    参考：[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Checksum_002fHash.html][Checksum/Hash - GNU Emacs Lisp Reference Manual]]
+* 变量相关
+** setq & setq-default
+   Emacs 中有些变量是 buffer-local 的，通过 setq 设置 buffer-local 变量时，
+   只会影响该缓冲区，而 setq-default 会设置全局的值。
+
+   简单的说，就是：
+   + setq：设置的值可能只影响当前缓冲区
+   + setq-default：设置的值是全局的，影响所有的缓冲区
+
+** let & let*
+   ~let~ 的参数列表中，后序的参数不能使用前面定义的参数，而 ~let*~ 可以：
+   #+BEGIN_SRC elisp
+     ELISP> (let ((num 10) (n num)))
+     ,*** Eval error ***  Symbol’s value as variable is void: num
+     ELISP> (let* ((num 10) (n num)))
+     nil
+   #+END_SRC  
     
 * autoload
   通过如下格式的注释声明某个函数为自动加载的：
@@ -78,14 +97,6 @@
       (switch-to-buffer "*doctor*")
       (doctor-mode))
   #+END_SRC
-
-* setq & setq-default
-  Emacs 中有些变量是 buffer-local 的，通过 setq 设置 buffer-local 变量时，
-  只会影响该缓冲区，而 setq-default 会设置全局的值。
-
-  简单的说，就是：
-  + setq：设置的值可能只影响当前缓冲区
-  + setq-default：设置的值是全局的，影响所有的缓冲区
 
 * 启用 minor-mode
   *概念：* ~Non-nil~ 指的是所有非 ~nil~ 的值，包括 ~0~ 和负数。
@@ -113,15 +124,6 @@
     (blink-cursor-mode -1)        ; Negative argument
   #+END_SRC
 
-* let & let*
-  ~let~ 的参数列表中，后序的参数不能使用前面定义的参数，而 ~let*~ 可以：
-  #+BEGIN_SRC elisp
-    ELISP> (let ((num 10) (n num)))
-    ,*** Eval error ***  Symbol’s value as variable is void: num
-    ELISP> (let* ((num 10) (n num)))
-    nil
-  #+END_SRC  
-
 * Type Predicates
   通过函数 ~type-of~ 判断一个对象的类型：
   #+BEGIN_SRC elisp
@@ -129,33 +131,6 @@
   #+END_SRC
 
   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Type-Predicates.html][Type Predicates - GNU Emacs Lisp Reference Manual]]
-    
-* alist & plist
-  alist 的常见的两种形式：
-  #+BEGIN_SRC elisp
-    '((a . 1) ("b" 2 3))
-    '((rose red) (lily white) (buttercup yellow))
-  #+END_SRC
-
-  plist 常见的形式：
-  #+BEGIN_SRC elisp
-    (plist-get '(foo 4) 'foo)     ;; ⇒ 4
-    (plist-get '(foo 4 bad) 'foo) ;; ⇒ 4
-    (plist-get '(foo 4 bad) 'bad) ;; ⇒ nil
-    (plist-get '(foo 4 bad) 'bar) ;; ⇒ nil
-  #+END_SRC
-
-  可见两者的本质是相同的：
-  #+BEGIN_SRC elisp
-    ELISP> (type-of '(foo 4))
-    cons
-    ELISP> (type-of '((foo 4)))
-    cons
-  #+END_SRC
-
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Association-Lists.html][Association Lists - GNU Emacs Lisp Reference Manual]]
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Plist-Access.html#Plist-Access][Plist Access - GNU Emacs Lisp Reference Manual]]
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Dotted-Pair-Notation.html][Dotted Pair Notation - GNU Emacs Lisp Reference Manual]]
 
 * Keyword
   Elisp 中以符号 *:* 开头的符号属于 *关键字*, 声明一个 *:xxx* 形式的变量会主动出击关键字：
@@ -244,4 +219,37 @@
    #+END_SRC
 
    + [[https://www.emacswiki.org/emacs/KeywordArguments][EmacsWiki: Keyword Arguments]]
+** interactive
+   ~Emacs~ 中存在 *两种函数*:
+   1) 可以作为命令执行的函数
+   2) 不能作为命令执行的普通函数
+
+   如果要让定义的函数可以作为命令执行， 需要在函数中添加 ~interactive~:
+   #+BEGIN_SRC emacs-lisp
+     (defun hello-world ()
+       (interactive)
+       (insert "hello, world"))
+   #+END_SRC
+
+   同时可以在 ~interactive~ 中获取函数调用时需要的参数：
+   #+BEGIN_SRC emacs-lisp
+     (defun c-malloc (name value)
+       (interactive
+        (list (read-string "name")
+              (read-string "value"))
+        (insert (format "%s = %s" name value)))
+   #+END_SRC
+** 有用的函数
+   + 获取 Emacs 已启动时间长度：
+     #+BEGIN_SRC elisp
+       (emacs-uptime)
+     #+END_SRC
+
+   + 消息摘要算法的支持
+     #+BEGIN_SRC elisp
+       (md5 "str")
+       (secure-hash 'sha256 "123")
+     #+END_SRC
+
+     参考：[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Checksum_002fHash.html][Checksum/Hash - GNU Emacs Lisp Reference Manual]]
 

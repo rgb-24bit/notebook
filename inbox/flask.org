@@ -1,5 +1,0 @@
-* Redis cache
-  + [[https://github.com/thadeusb/flask-cache/blob/master/flask_cache/backends.py#L54][flask-cache redis cache]]
-  + [[https://github.com/pallets/werkzeug/blob/master/werkzeug/contrib/cache.py#L534][werkzeug.contrib.cache.RedisCache]]
-
-

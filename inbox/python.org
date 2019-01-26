@@ -73,3 +73,6 @@
   Jupyter notebook 是从 Ipython 分离出来的项目，在 Github 上可以直接渲染 .ipynb 后缀名的文件。 
 
   + [[https://zh.wikipedia.org/wiki/Jupyter%E9%A1%B9%E7%9B%AE][Jupyter项目 - 维基百科，自由的百科全书]]
+* 时间复杂度
+  + [[https://stackoverflow.com/questions/1115313/cost-of-len-function][python - Cost of len() function - Stack Overflow]]
+

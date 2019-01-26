@@ -33,6 +33,8 @@
     double rand_num = (double)rand() / RADN_MAX;
   #+END_SRC
 
+  更多内容可参考：[[https://stackoverflow.com/questions/18634079/glibc-rand-function-implementation][C - glibc rand function implementation - Stack Overflow]]
+
 * 蒙特卡洛方法
   *蒙特卡罗方法(Monte Carlo method)* 是一种以概率统计理论为指导的数值计算方法。
   是指使用随机数（伪随机数）来解决很多计算问题的方法。

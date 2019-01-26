@@ -4,6 +4,7 @@
 - [[#org-capture][org-capture]]
 - [[#org-agenda][org-agenda]]
 - [[#org-table][org-table]]
+  - [[#org-clocktable][org-clocktable]]
 - [[#timestamps][timestamps]]
 - [[#footnote][footnote]]
 
@@ -43,6 +44,16 @@
 
   有关表格操作的教程：
   + [[http://www.zmonster.me/2016/06/03/org-mode-table.html][表格的基本操作及公式、绘图 · ZMonster's Blog]]
+
+** org-clocktable
+   + 使用 tags 选项需要用双引号将需要的 tag 包起来，同时不同的 tag 之间应该用 | 进行分隔，
+     不能有空格。
+
+     #+BEGIN_SRC org
+       ,#+BEGIN: clocktable :tags "tag1|tag2"
+
+       ,#+END:
+     #+END_SRC
 
 * timestamps
   + 插入非活动时间戳：

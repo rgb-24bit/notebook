@@ -1,15 +1,6 @@
 * 动态背景
   + [[https://juejin.im/post/5926ea2b0ce463006bfce337][html5canvas: 教你实现知乎登录动态粒子背景 - 掘金]]
 
-* 浏览器地址栏
-  #+BEGIN_SRC javascript
-    javascript:alert('test');
-  #+END_SRC
-
-* ES6
-  + [[http://es6.ruanyifeng.com/][ECMAScript 6 入门]]
-  + [[https://wangdoc.com/javascript/index.html][JavaScript 教程]]
-
 * 本地化
   + [[https://www.w3schools.com/jsref/obj_navigator.asp][Navigator Object]]
   + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
@@ -18,31 +9,11 @@
 * 拷贝到剪切板
   + [[https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript][How do I copy to the clipboard in JavaScript? - Stack Overflow]]
 
-* void
-  #+BEGIN_SRC javascript
-    javascript:void window.prompt("Copy to clipboard: Ctrl+C, Enter", `[[${window.location.href}][${document.title}]]`)
-  #+END_SRC
-
 * 折叠面板
   + [[https://alligator.io/css/collapsible/][Implementing A Pure CSS Collapsible ← Alligator.io]]
 
 * innerHTML
   + [[https://stackoverflow.com/questions/13775519/html-draw-table-using-innerhtml][javascript - HTML : draw table using innerHTML - Stack Overflow]]
-
-* 动态加载脚本
-  + [[https://www.jb51.net/article/17992.htm][JS 动态加载脚本的4种方法_javascript技巧_脚本之家]]
-
-* outline
-  + 控制台中 $$ 相当于 document.querySelectorAll
-  + 显示元素边框
-    #+BEGIN_SRC js
-      $$("*").forEach(
-        e => e.style.outline = "1px solid #" + (~~(Math.random() * (1<<24))).toString(16)
-      )
-    #+END_SRC
-
-* find json string
-  + [[https://stackoverflow.com/questions/21994677/find-json-strings-in-a-string][php - Find JSON strings in a string - Stack Overflow]]
 
 * box-sizing
   [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing][box-sizing | MDN]]
@@ -52,15 +23,7 @@
 
 * jsonp
   + [[https://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html][【原创】说说JSON和JSONP，也许你会豁然开朗，含jQuery用例 - 随它去吧 - 博客园]]
-
-* 居中邪法
-  #+BEGIN_SRC css
-    body {
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-  #+END_SRC
+  + [[https://www.jb51.net/article/17992.htm][JS 动态加载脚本的4种方法_javascript技巧_脚本之家]]
 
 * 百分号编码
   + [[https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/index.html][URL编码的奥秘 | Aotu.io「凹凸实验室」]]
