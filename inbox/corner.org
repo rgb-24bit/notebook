@@ -56,19 +56,6 @@
 * Utils
   + [[https://github.com/gogs/gogs][gogs/gogs: Gogs is a painless self-hosted Git service.]]
 
-* 网络相关
-** 网关接口
-   + 通用网关接口 - CGI
-   + 服务器网关接口 - WSGI
-    
-   两者都是 *协议*, 规定了 *服务器* 和 *应用程序(脚本)* 之间的通信规范.
-
-   + [[https://www.biaodianfu.com/cgi-fastcgi-wsgi.html][网关协议学习：CGI、FastCGI、WSGI]]
-   + [[https://en.wikipedia.org/wiki/Common_Gateway_Interface][Wiki - Common Gateway Interface]]
-   + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
-   + [[http://www.cnblogs.com/liuzhang/p/3929198.html][我所了解的 cgi - 博客园]]
-
-
 * 数学相关
   + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][Probabilistic programming language]]
   + [[https://bitbucket.org/piedenis/lea/overview][Lea]] - *Discrete probability distributions in Python*.

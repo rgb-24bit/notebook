@@ -1,7 +1,3 @@
-* where 命令
-  + windows - where
-  + linux - whereis
-
 * 合并两个目录
   + [[https://unix.stackexchange.com/questions/149965/how-to-copy-merge-two-directories][How to copy-merge two directories? {duplicate}]]
   + [[https://stackoverflow.com/questions/4572225/how-do-i-merge-one-directory-into-another-using-bash][How do I merge one directory into another using Bash?]]
@@ -9,16 +5,10 @@
 * nc 命令
   + [[http://www.tutorialspoint.com/unix_commands/nc.htm][nc - Unix, Linux Command]]
 
-* windows
-  + [[https://jingyan.baidu.com/article/3c48dd34491d47e10be358b8.html][如何查看某个端口被谁占用]]
-
 * bash
   + C-l 清屏
+  + C-u 清除输入
 
-* 查看端口占用情况
-  #+BEGIN_SRC bash
-    netstat -l
-  #+END_SRC
 * at 命令
   + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/at][at | Microsoft Docs]]
   + [[https://www.cnblogs.com/hushaojun/p/4522398.html][windows 下 at 命令使用详解]]
@@ -28,9 +18,6 @@
 
   环境变量 USERNAME 是当前用户名
 
-* 终端的使用
-  + [[https://stackoverflow.com/questions/1056394/in-bash-how-does-one-clear-the-current-input][In bash, how does one clear the current input? - Stack Overflow]]
-
 * $RANDOM
   + 可以用于产生随机数
     #+BEGIN_SRC bash
@@ -39,22 +26,6 @@
 
 * alias & unalias
   + [[https://zh.wikipedia.org/wiki/Alias_(%E5%91%BD%E4%BB%A4)][alias (命令) - 维基百科，自由的百科全书]]
-
-* windows 符号链接
-  #+BEGIN_EXAMPLE
-    MKLINK [[/D] | [/H] | [/J]] Link Target
-
-            /D      创建目录符号链接。默认为文件
-                    符号链接。
-            /H      创建硬链接，而不是符号链接。
-            /J      创建目录联接。
-            Link    指定新的符号链接名称。
-            Target  指定新链接引用的路径
-  #+END_EXAMPLE
-
-  目录联接感觉更好用，参数顺序和 Linux ln 是相反的，同时 Linux 不支持联接！
-
-  Windows 中快捷方式的小箭头可以通过 360 去除！
 
 * 访问 ftp 服务器
   + [[https://www.cnblogs.com/whseay/p/3456038.html][Windows命令行使用FTP - whseay - 博客园]]

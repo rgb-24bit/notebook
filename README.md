@@ -84,7 +84,9 @@
 <li><a href="notebook/front-end/design.org">网页设计相关笔记</a></li>
 <li><a href="notebook/front-end/html-base.org">HTML/HTML5 基础笔记</a></li>
 <li><a href="notebook/front-end/html.org">HTML 标签使用笔记</a></li>
+<li><a href="notebook/front-end/js-base.org">JavaScript 基础笔记</a></li>
 <li><a href="notebook/front-end/js-tips.org">JavaScript 中的小技巧</a></li>
+<li><a href="notebook/front-end/question.org">前端问题集</a></li>
 <li><a href="notebook/front-end/technology.org">Web 相关技术</a></li>
 </ul>
 </details>
@@ -218,7 +220,7 @@
 <li><a href="notebook/tools/ci.org">自动集成</a></li>
 <li><a href="notebook/tools/cmd.org">Windows CMD 命令</a></li>
 <li><a href="notebook/tools/curl.org">curl</a></li>
-<li><a href="notebook/tools/shell.org">Shell 命令</a></li>
+<li><a href="notebook/tools/shell.org">Shell 命令使用</a></li>
 <li><a href="notebook/tools/ssh.org">SSH</a></li>
 <li><a href="notebook/tools/utils.org">实用开源工具收集</a></li>
 <li><a href="notebook/tools/vim.org">Vim 笔记</a></li>

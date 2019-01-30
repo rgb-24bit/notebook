@@ -6,4 +6,8 @@
   + [[https://www.emacswiki.org/emacs/InteractivelyDoThings][EmacsWiki: Interactively Do Things]]
   + [[https://oremacs.com/swiper/#getting-started][Ivy User Manual]]
 
+* 日记记录
+  导入日志后可以在 agenda 界面通过 C-k 移除重复条目，考虑使用 m mark.
 
+  然后是 clocktabkle 的时间范围：
+  #+BEGIN: clocktable :scope tree :maxlevel 1 :tstart "<2019-01-21>"

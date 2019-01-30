@@ -4,6 +4,7 @@
 - [[#网页翻转镜像实现][网页翻转镜像实现]]
 - [[#子元素居中雾][子元素居中（雾）]]
 - [[#显示所有元素的-outline][显示所有元素的 outline]]
+- [[#box-sizing][box-sizing]]
 - [[#相关链接][相关链接]]
 
 * 网页翻转镜像实现
@@ -46,7 +47,19 @@
       e => e.style.outline = "1px solid #" + (~~(Math.random() * (1<<24))).toString(16)
     )
   #+END_SRC
- 
+
+* box-sizing
+  box-sizing 属性用于更改用于计算元素宽度和高度的默认的 CSS 盒子模型。可以使用此属性来模拟不正确支持 CSS 盒子模型规范的浏览器的行为。
+
+  一些专家甚至建议所有的 Web 开发者们将所有的元素的 box-sizing 都设为 border-box。
+
+  #+BEGIN_SRC css
+    box-sizing: border-box;
+  #+END_SRC
+
+  参考：[[https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing][box-sizing | MDN]]
+
 * 相关链接
   + [[http://blog-en.tilda.cc/articles-website-design-mistakes][Common webpage design mistakes]] - 网页设计中的常见错误
+
 

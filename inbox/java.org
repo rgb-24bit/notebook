@@ -24,3 +24,27 @@
 * timer
   + [[https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html][Timer (Java Platform SE 8 )]]
 
+* 数组类型转换
+  #+BEGIN_SRC java
+    public static <T> T convert(Object array, Class<T> clazz) {
+      Object newArray = Array.newInstance(clazz, Array.getLength(array));
+      for (int i = 0; i < Array.getLength(array); ++i) {
+        Array.set(newArray, i, Array.get(array, i));
+      }
+      return (T) newArray;
+    }
+  #+END_SRC
+
+  + [[http://tutorials.jenkov.com/java-reflection/arrays.html][Java Reflection - Arrays]]
+* 编码规范
+** 阿里巴巴
+   + 接口类中的方法和属性不要加任何修饰符号 （public 也不要加 ） ，保持代码的简洁性，并加上有效的 Javadoc 注释。
+     尽量不要在接口里定义变量，如果一定要定义变量，肯定是与接口方法相关，并且是整个应用的基础常量。
+
+   + 接口和实现类的命名有两套规则：
+     + CacheService -> CacheServiceImpl
+     + Translatable ->  AbstractTranslator
+
+   + 大括号的使用约定。如果是大括号内为空，则简洁地写成 {} 即可，不需要换行。
+
+   + 在 if / else / for / while / do 语句中必须使用大括号。

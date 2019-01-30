@@ -13,6 +13,8 @@
 - [[#内存分区与生命周期问题][内存分区与生命周期问题]]
   - [[#关键字-static-的作用][关键字 static 的作用]]
 - [[#预处理器][预处理器]]
+  - [[#替换文本宏的使用][替换文本宏的使用]]
+    - [[#关键字参数的模拟实现][关键字参数的模拟实现]]
 - [[#数组相关][数组相关]]
   - [[#数组的初始化][数组的初始化]]
   - [[#数组大小的获取][数组大小的获取]]
@@ -231,6 +233,53 @@
     #+END_EXAMPLE
 
   预处理器的相关内容很多，可以参考：[[https://zh.cppreference.com/w/c/preprocessor][预处理器 - cppreference.com]].
+
+** 替换文本宏的使用
+   通过宏 *__VA_ARGS__* 定义可变参数宏：
+   #+BEGIN_SRC C
+     #define F(...) func(__VA_ARGS__)
+   #+END_SRC
+
+   *#* 出现在 *__VA_ARGS__* 前时，将整个展开的 *__VA_ARGS__* 放入引号：
+   #+BEGIN_SRC C
+     #define showlist(...) puts(#__VA_ARGS__)
+     showlist();             // 展开成 puts("")
+     showlist(1, "x", int);  // 展开成 puts("1, \"x\", int")
+   #+END_SRC
+
+   一些编译器提供允许 *##* 出现在逗号后和 *__VA_ARGS__* 前的扩展，在此情况下 *##* 在 *__VA_ARGS__* 非空时无效，
+   但在 *__VA_ARGS__* 为空时移除逗号。
+
+   这使得可以定义如 fprintf (stderr, format, ##__VA_ARGS__) 的宏：
+   #+BEGIN_SRC C
+     #define pf(...) fprintf(stderr, format, ##__VA_ARGS__)
+
+     pf();        // fprintf(stderr, format)
+     pf(a, b, c)  // fprintf(stderr, format, a, b, c)
+   #+END_SRC
+
+   如下情况会导致编译出错：
+   #+BEGIN_SRC C
+     printf("string", );
+   #+END_SRC
+
+*** 关键字参数的模拟实现
+    #+BEGIN_SRC C
+      typedef struct KWARGS {
+        int key;
+        int val;
+      } KWARGS;
+
+      int func(KWARGS kwargs) {
+        return kwargs.key + kwargs.val;
+      }
+
+      #define func(...) func((KWARGS){__VA_ARGS__})
+
+      func(.key = 10, .val = 100);  // func(KWARGS {.key = 10, .val = 100})
+    #+END_SRC
+
+    实质上就是通过文本替换宏创建匿名的结构体变量，大括号前面必须有分号、逗号或括号。
 
 * 数组相关
 ** 数组的初始化

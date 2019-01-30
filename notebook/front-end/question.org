@@ -1,0 +1,38 @@
+#+TITLE:      前端问题集
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#通过-innerhtml-的方式为-table-添加行失败][通过 innerHTML 的方式为 table 添加行失败]]
+
+* 通过 innerHTML 的方式为 table 添加行失败
+  通过 innerHTML 属性设置 HTML 时，底层引擎会自动关闭未关闭的标签（并修复其他错误的HTML）。
+
+  而单独的 <tr> 标签将被视作为关闭的标签。
+
+  解决方案：
+  #+BEGIN_SRC js
+    let table = document.createElement('table');
+    for (let i = 0; i < 3; ++i) {
+      let row = table.insertRow(i);
+      let text = document.createTextNode(i.toString());
+      let cell = row.insertCell(0);
+      cell.appendChild(text);
+    }
+  #+END_SRC
+
+  生成结果：
+  #+BEGIN_SRC html
+    <table>
+      <tbody>
+        <tr>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+  #+END_SRC
+

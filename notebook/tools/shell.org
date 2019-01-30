@@ -1,300 +1,239 @@
-#+TITLE:      Shell 命令
+#+TITLE:      Shell 命令使用
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网络操作相关][网络操作相关]]
-  - [[#traceroute][traceroute]]
-  - [[#wget][wget]]
+  - [[#网络诊断相关][网络诊断相关]]
+  - [[#网络资源获取][网络资源获取]]
 - [[#文件操作相关][文件操作相关]]
-  - [[#grep][grep]]
-  - [[#cat][cat]]
-  - [[#wc][wc]]
-  - [[#seq][seq]]
-  - [[#ls][ls]]
-  - [[#find][find]]
-  - [[#cp][cp]]
-  - [[#mv][mv]]
-  - [[#rm][rm]]
-  - [[#file][file]]
-  - [[#tar][tar]]
-  - [[#whereis][whereis]]
-  - [[#which][which]]
-  - [[#less][less]]
-  - [[#ln][ln]]
+  - [[#文件内容相关][文件内容相关]]
+  - [[#文件的查找][文件的查找]]
+  - [[#其他文件操作][其他文件操作]]
 - [[#系统管理相关][系统管理相关]]
-  - [[#ps][ps]]
-  - [[#kill][kill]]
-  - [[#env][env]]
+  - [[#系统进程管理][系统进程管理]]
+  - [[#环境变量管理][环境变量管理]]
+- [[#其他命令][其他命令]]
 
 * 网络操作相关
-** traceroute
-   traceroute 是一种网络诊断工具， 可显示数据包通过网络所采用的路由， 并测量任何传输延迟。
+** 网络诊断相关
+   + 可以通过 traceroute 命令显示数据包通过网络所采用的路由， 并测量任何传输延迟：
+     #+BEGIN_EXAMPLE
+       > traceroute yourdomain.com
+       > traceroute -6 yourdomain.com
+     #+END_EXAMPLE
+   
+** 网络资源获取
+   + 通过命令 ~wget~ 可以从指定的 ~URL~ 下载网页或文件，支持 ~HTTP~, ~HTTPS~, ~FTP~ 协议：
+     + 如果因为 ~HTTPS~ 和 ~SSL~ 的原因导致不能下载， 可以使用选项 ~--no-cookie~ 和 ~--no-check-certificate~ 解决：
+         #+BEGIN_EXAMPLE
+           wget --no-cookie --no-check-certificate https://www.bilibili.com/
+         #+END_EXAMPLE
 
-   ~Linux~ 中的使用方式如下：
-   #+BEGIN_EXAMPLE
-     > traceroute yourdomain.com
-     > traceroute -6 yourdomain.com
-   #+END_EXAMPLE
-
-** wget
-   命令 ~wget~ 可以从指定的 ~URL~ 下载网页或文件， 支持 ~HTTP~, ~HTTPS~, ~FTP~ 协议。
-  
-   + 如果因为 ~HTTPS~ 和 ~SSL~ 的原因导致不能下载， 可以使用选项 ~--no-cookie~ 和 ~--no-check-certificate~ 解决：
+     + 选项 ~-o~ 是将命令执行过程保存到指定文件， 而选项 ~-O~ 才是指定保存下载内容的文件名
        #+BEGIN_EXAMPLE
-         wget --no-cookie --no-check-certificate https://www.bilibili.com/
+         wget --no-cookie --no-check-certificate -o log.txt -O bilibili.html https://www.bilibili.com/
        #+END_EXAMPLE
 
-   + 选项 ~-o~ 是将命令执行过程保存到指定文件， 而选项 ~-O~ 才是指定保存下载内容的文件名
-     #+BEGIN_EXAMPLE
-       wget --no-cookie --no-check-certificate -o log.txt -O bilibili.html https://www.bilibili.com/
-     #+END_EXAMPLE
+     + 使用选项 ~-i~ 可以让 ~wget~ 下载指定文件中的 ~URL~, 选项 ~-B~ 可以指定 ~URL~ 作为 ~-i~ 参数输入文件中相对链接的基本链接。
+       #+BEGIN_EXAMPLE
+         wget -i bilibili.html -B https://www.bilibili.com/ --no-cookie --no-check-certificate
+       #+END_EXAMPLE
 
-   + 使用选项 ~-i~ 可以让 ~wget~ 下载指定文件中的 ~URL~, 选项 ~-B~ 可以指定 ~URL~ 作为 ~-i~ 参数输入文件中相对链接的基本链接。
-     #+BEGIN_EXAMPLE
-       wget -i bilibili.html -B https://www.bilibili.com/ --no-cookie --no-check-certificate
-     #+END_EXAMPLE
-
-   + 使用选项 ~--limit-rate~ 进行限速下载， 选项 ~-w~ 指定两个下载项之间的时间间隔（秒）
-     #+BEGIN_EXAMPLE
-       wget --limit-rate=500k -w 1 -i bilibili.html -B https://www.bilibili.com/ --no-cookie --no-check-certificate
-     #+END_EXAMPLE
+     + 使用选项 ~--limit-rate~ 进行限速下载， 选项 ~-w~ 指定两个下载项之间的时间间隔（秒）
+       #+BEGIN_EXAMPLE
+         wget --limit-rate=500k -w 1 -i bilibili.html -B https://www.bilibili.com/ --no-cookie --no-check-certificate
+       #+END_EXAMPLE
 
 * 文件操作相关
-** grep
-   命令 ~grep~ 可以使用正则表达式在指定字符串或文件中搜索匹配的文本并打印出来。
+** 文件内容相关
+   + 命令 ~grep~ 可以使用正则表达式在指定字符串或文件中搜索匹配的文本并打印出来：
+     + ~grep~ 支持多种类型的正则表达式， 但是还是感觉 ~perl-regexp~ 风格的正则最好用。使用选项 ~-P~ 指定 ~perl-regexp~ 风格的正则：
+       #+BEGIN_EXAMPLE
+         git status | grep -P "\b\S+\.org\b" -o
+       #+END_EXAMPLE
 
-   + ~grep~ 支持多种类型的正则表达式， 但是还是感觉 ~perl-regexp~ 风格的正则最好用。 使用选项 ~-P~ 指定 ~perl-regexp~ 风格的正则：
+     + 使用选项 ~-i~ 忽略大小写
+     + 使用选项 ~-o~ 只输出匹配的内容
+     + 使用选项 ~--color~ 指定匹配内容的颜色， 通常可以使用 ~--color=auto~
+     + 使用选项 ~-r~ 进行递归查找：
+       #+BEGIN_EXAMPLE
+         grep -P "text" . -r
+       #+END_EXAMPLE
+
+   + 命令 ~cat~ 可以连接文件并把内容打印到标准输出设备上， 支持 ~glob~ 语法：
+     + 使用选项 ~-n~ 显示行号
+     + 使用选项 ~-b~ 显示行号， 但不对空白行编号
+     + 使用选项 ~-s~ 将两行以上的空白行代换为一行显示， 不会显示行号
+     + 使用选项 ~-A~ 显示不可打印字符
+
+   + 命令 ~wc~ 可以用来统计文件的字节数、 字数或行数， 支持 ~glob~ 语法：
+     + 如果列举的文件为多个， 那么 ~wc~ 会将每个文件的统计结果单独显示出来
+     + 如果未指定文件， 那么 ~wc~ 将尝试从 *标准输入* 中读取数据
+     + 选项 ~-c~ 只显示字节数、 ~-l~ 只显示行数、 ~-w~ 只显示字数
+     + 可以使用以下组合统计代码行数：
+       #+BEGIN_EXAMPLE
+         cat **/*.py | wc -l
+       #+END_EXAMPLE
+
+** 文件的查找
+   + 可以通过命令 ~find~ 来查找文件，其格式为：：
      #+BEGIN_EXAMPLE
-       git status | grep -P "\b\S+\.org\b" -o
+       find pathname -options [-print -exec -ok ...]
      #+END_EXAMPLE
 
-   + 使用选项 ~-i~ 忽略大小写
+     如果不指定 ~pathname~, 那么 ~pathname~ 默认为当前目录。
+  
+     *逻辑选项：*
+     + ~-not~ 或 ~!~ 否定指定的搜索条件
+     + ~-and~ 或 ~-a~ 要求同时满足两个搜索条件
+     + ~-or~ 或 ~-o~ 要求满足两个搜索条件中任意一个
 
-   + 使用选项 ~-o~ 只输出匹配的内容
+     *文件名称相关选项：*
+     + ~-name~ 按照文件名查找文件， ~-iname~ 忽略大小写
+     + ~-regex~ 按照正则表达式查找文件， ~-iregex~ 忽略大小写
+     + -~path~ 匹配文件路径或者文件
+     + ~-prune~ 搜索但跳出指定的目录
 
-   + 使用选项 ~--color~ 指定匹配内容的颜色， 通常可以使用 ~--color=auto~
+     *文件权限/所有权相关选项：*
+     + ~-perm~ 按照指定权限查找文件
+     + ~-user~ 查找指定用户拥有的文件
+     + ~-group~ 查找指定用户组拥有的文件
 
-   + 使用选项 ~-r~ 进行递归查找：
+     *文件属性相关选项：*
+     + ~-atime~, ~-amin~ 按照最近访问时间查找文件， 第一个单位为 *天*, 第二个为 *分*
+     + ~-mtime~, ~-mmin~ 按照最近修改时间查找文件， 第一个单位为 *天*, 第二个为 *分*
+     + ~-ctime~, ~-cmin~ 按照最近数据元最后一次修改时间查找文件， 第一个单位为 *天*, 第二个为 *分*
+     + ~-newer~ 查找比指定文件修改时间更长的文件
+     + ~-size~ 按照文件大小查找文件
+
+     *其他选项：*
+     + ~-type~ 指定文件类型
+     + ~-delete~ 删除匹配的文件
+     + ~-maxdepth~ 指定最大文件深度
+     + ~-mindepth~ 指定最小文件深度
+
+   + 命令 ~whereis~ 可以用来查看一个可执行文件的位置：
      #+BEGIN_EXAMPLE
-       grep -P "text" . -r
+       whereis bash
      #+END_EXAMPLE
 
-** cat
-   命令 ~cat~ 可以连接文件并把内容打印到标准输出设备上， 支持 ~glob~ 语法。
-
-   + 使用选项 ~-n~ 显示行号
-
-   + 使用选项 ~-b~ 显示行号， 但不对空白行编号
-
-   + 使用选项 ~-s~ 将两行以上的空白行代换为一行显示， 不会显示行号
-
-   + 使用选项 ~-A~ 显示不可打印字符
-
-** wc
-   命令 ~wc~ 可以用来统计文件的字节数、 字数或行数， 支持 ~glob~ 语法。
-
-   + 如果列举的文件为多个， 那么 ~wc~ 会将每个文件的统计结果单独显示出来
-
-   + 如果未指定文件， 那么 ~wc~ 将尝试从 *标准输入* 中读取数据
-
-   + 选项 ~-c~ 只显示字节数、 ~-l~ 只显示行数、 ~-w~ 只显示字数
-
-   + 可以使用以下组合统计代码行数：
+   + 命令 ~which~ 在环境变量中的路径下寻找指定的程序。
      #+BEGIN_EXAMPLE
-       cat **/*.py | wc -l
-     #+END_EXAMPLE
-** seq
-   命令 ~seq~ 可以生成某个数字到另一个数字之间的所有整数。
-
-   + ~seq~ 支持 *首数*, *尾数* 和 *增量* 三个参数
-     #+BEGIN_EXAMPLE
-       seq [选项]... 尾数
-       seq [选项]... 首数 尾数
-       seq [选项]... 首数 增量 尾数
+       which bash
      #+END_EXAMPLE
 
-   + 使用选项 ~-f~ 指定输出格式
-     #+BEGIN_EXAMPLE
-       $  seq -f "Num: %g" 1 1 5
-       Num: 1
-       Num: 2
-       Num: 3
-       Num: 4
-       Num: 5
-     #+END_EXAMPLE
-
-   + 使用选项 ~-s~ 指定分割数字的字符串
-     #+BEGIN_EXAMPLE
-       $  seq -s "-" 1 1 5
-       1-2-3-4-5
-     #+END_EXAMPLE
-
-** ls
-   命令 ~ls~ 可以用来查看文件与目录。
-
-   + ~ls~ 默认情况下会列出当前目录的内容， 但也可以指定要列出的目录
+** 其他文件操作
+   + 命令 ~ls~ 可以用来查看文件与目录，默认情况下会列出当前目录的内容， 但也可以指定要列出的目录：
      #+BEGIN_EXAMPLE
         ls ~
      #+END_EXAMPLE
 
-   + 使用 ~-l~ 选项列出长数据串， 包含文件属性与权限数据等
+     + 使用 ~-l~ 选项列出长数据串， 包含文件属性与权限数据等
 
-   + 使用 ~-a~ 选项列出所有文件， 包括隐藏文件
+     + 使用 ~-a~ 选项列出所有文件， 包括隐藏文件
 
-   + 使用 ~-h~ 选项将文件容量以较易阅读的方式列出
-     #+BEGIN_EXAMPLE
-       ls -lh
-     #+END_EXAMPLE
+     + 使用 ~-h~ 选项将文件容量以较易阅读的方式列出
+       #+BEGIN_EXAMPLE
+         ls -lh
+       #+END_EXAMPLE
 
-   + 使用 ~-R~ 选项将子目录的内容也一同列出
-     #+BEGIN_EXAMPLE
-       ls -lhR
-     #+END_EXAMPLE
+     + 使用 ~-R~ 选项将子目录的内容也一同列出
+       #+BEGIN_EXAMPLE
+         ls -lhR
+       #+END_EXAMPLE
    
-** find
-   命令 ~find~ 的格式为：
-   #+BEGIN_EXAMPLE
-     find pathname -options [-print -exec -ok ...]
-   #+END_EXAMPLE
+   + 命令 ~cp~ 用于复制文件或目录：
+     + 如果要复制目录， 应该使用选项 ~-r~, 如果目标目录已存在， 那么复制的目录会称为目标目录的子目录
+     + 复制多个文件时目标参数要求是 *目录*
+     + 使用选项 ~-f~ 强制复制， 选项 ~-i~ 要求在覆盖已有文件时询问用户
+     + 使用选项 ~-u~ 要求目标文件和源文件存在差异时才复制
+     + 选项 ~-p~ 连同文件的属性也一同复制， 选项 ~-a~ 和 ~-p~ 类似， 但更加强力， 相当于 ~-dpr~   
 
-   如果不指定 ~pathname~, 那么 ~pathname~ 默认为 ~.~
-  
-   *逻辑选项：*
-   + ~-not~ 或 ~!~ 否定指定的搜索条件
-   + ~-and~ 或 ~-a~ 要求同时满足两个搜索条件
-   + ~-or~ 或 ~-o~ 要求满足两个搜索条件中任意一个
+   + 命令 ~mv~ 令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中：
 
-   *文件名称相关选项：*
-   + ~-name~ 按照文件名查找文件， ~-iname~ 忽略大小写
-   + ~-regex~ 按照正则表达式查找文件， ~-iregex~ 忽略大小写
-   + -~path~ 匹配文件路径或者文件
-   + ~-prune~ 搜索但跳出指定的目录
+     源文件被移至目标文件有两种不同的结果：
+     + 如果目标文件是到某一目录文件的路径，源文件会被移到此目录下，且文件名不变
+     + 如果目标文件不是目录文件，则源文件名会变为此目标文件名， 并覆盖己存在的同名文件
 
-   *文件权限/所有权相关选项：*
-   + ~-perm~ 按照指定权限查找文件
-   + ~-user~ 查找指定用户拥有的文件
-   + ~-group~ 查找指定用户组拥有的文件
+     其他的一些选项：
+     + 使用选项 ~-f~ 强制移动， 如果目标文件已存在便直接覆盖
+     + 使用选项 ~-i~ 询问是否覆盖
+     + 选项 ~-u~ 当源文件比目标文件新或者目标文件不存在时才执行移动操作
 
-   *文件属性相关选项：*
-   + ~-atime~, ~-amin~ 按照最近访问时间查找文件， 第一个单位为 *天*, 第二个为 *分*
-   + ~-mtime~, ~-mmin~ 按照最近修改时间查找文件， 第一个单位为 *天*, 第二个为 *分*
-   + ~-ctime~, ~-cmin~ 按照最近数据元最后一次修改时间查找文件， 第一个单位为 *天*, 第二个为 *分*
-   + ~-newer~ 查找比指定文件修改时间更长的文件
-   + ~-size~ 按照文件大小查找文件
+   + 命令 ~rm~ 用于删除文件或目录：
+     + 选项 ~-f~ 强制删除， 选项 ~-i~ 在删除前询问用户是否操作
+     + 选项 ~-r~ 递归删除， 常用于目录删除
 
-   *其他选项：*
-   + ~-type~ 指定文件类型
-   + ~-delete~ 删除匹配的文件
-   + ~-maxdepth~ 指定最大文件深度
-   + ~-mindepth~ 指定最小文件深度
+   + 命令 ~file~ 可以用于判断文件的基本数据类型：
+     #+BEGIN_EXAMPLE
+       $  file idea.txt
+       idea.txt: ASCII text
+     #+END_EXAMPLE
 
-** cp
-   命令 ~cp~ 用于复制文件或目录。
+   + 命令 ~tar~ 用于对文件进行打包， 默认情况并不会进行压缩， 如果指定了相应的参数，它会调用相应的压缩程序进行压缩和解压：
+     #+BEGIN_EXAMPLE
+       -c ：新建打包文件
+       -t ：查看打包文件的内容含有哪些文件名
+       -x ：解打包或解压缩的功能，可以搭配-C（大写）指定解压的目录，注意-c,-t,-x不能同时出现在同一条命令中
+       -j ：通过bzip2的支持进行压缩/解压缩
+       -z ：通过gzip的支持进行压缩/解压缩
+       -v ：在压缩/解压缩过程中，将正在处理的文件名显示出来
+       -f filename ：filename为要处理的文件
+       -C dir ：指定压缩/解压缩的目录dir
+     #+END_EXAMPLE
 
-   + 如果要复制目录， 应该使用选项 ~-r~, 如果目标目录已存在， 那么复制的目录会称为目标目录的子目录
-   + 复制多个文件时目标参数要求是 *目录*
-   + 使用选项 ~-f~ 强制复制， 选项 ~-i~ 要求在覆盖已有文件时询问用户
-   + 使用选项 ~-u~ 要求目标文件和源文件存在差异时才复制
-   + 选项 ~-p~ 连同文件的属性也一同复制， 选项 ~-a~ 和 ~-p~ 类似， 但更加强力， 相当于 ~-dpr~
-** mv
-   命令 ~mv~ 令用来对文件或目录重新命名， 或者将文件从一个目录移到另一个目录中。
-
-   源文件被移至目标文件有两种不同的结果：
-   + 如果目标文件是到某一目录文件的路径，源文件会被移到此目录下，且文件名不变
-   + 如果目标文件不是目录文件，则源文件名会变为此目标文件名， 并覆盖己存在的同名文件
-
-   + 使用选项 ~-f~ 强制移动， 如果目标文件已存在便直接覆盖
-
-   + 使用选项 ~-i~ 询问是否覆盖
-
-   + 选项 ~-u~ 当源文件比目标文件新或者目标文件不存在时才执行移动操作
-
-** rm
-   命令 ~rm~ 用于删除文件或目录。
-
-   + 选项 ~-f~ 强制删除， 选项 ~-i~ 在删除前询问用户是否操作
-
-   + 选项 ~-r~ 递归删除， 常用于目录删除
-
-** file
-   命令 ~file~ 可以用于判断文件的基本数据类型：
-   #+BEGIN_EXAMPLE
-     $  file idea.txt
-     idea.txt: ASCII text
-   #+END_EXAMPLE
-
-** tar
-   命令 ~tar~ 用于对文件进行打包， 默认情况并不会进行压缩， 如果指定了相应的参数，它会调用相应的压缩程序进行压缩和解压。
-
-   常用的选项有：
-   #+BEGIN_EXAMPLE
-     -c ：新建打包文件
-     -t ：查看打包文件的内容含有哪些文件名
-     -x ：解打包或解压缩的功能，可以搭配-C（大写）指定解压的目录，注意-c,-t,-x不能同时出现在同一条命令中
-     -j ：通过bzip2的支持进行压缩/解压缩
-     -z ：通过gzip的支持进行压缩/解压缩
-     -v ：在压缩/解压缩过程中，将正在处理的文件名显示出来
-     -f filename ：filename为要处理的文件
-     -C dir ：指定压缩/解压缩的目录dir
-   #+END_EXAMPLE
-
-   常用组合选项：
-   #+BEGIN_EXAMPLE
-     压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称
-     查询：tar -jtv -f filename.tar.bz2
-     解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录
-   #+END_EXAMPLE
-
-** whereis
-   命令 ~whereis~ 可以用来查看一个可执行文件的位置：
-   #+BEGIN_EXAMPLE
-     whereis bash
-   #+END_EXAMPLE
-
-** which
-   命令 ~which~ 在环境变量中的路径下寻找指定的程序。
-   #+BEGIN_EXAMPLE
-     which bash
-   #+END_EXAMPLE
-** less
-   命令 ~less~ 可以用来浏览文字档函的内容， 用 ~PageUp~ 键向上翻页， 用 ~PageDown~ 键向下翻页。
-
-   退出按键 ~q~
-
-** ln
-   命令 ~ln~ 可以用于创建 *符号链接*.
-
-   #+BEGIN_EXAMPLE
-     ln -s target link
-   #+END_EXAMPLE
+     常用组合选项：
+     #+BEGIN_EXAMPLE
+       压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称
+       查询：tar -jtv -f filename.tar.bz2
+       解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录
+     #+END_EXAMPLE
 
 * 系统管理相关
-** ps
-   命令 ~ps~ 用于报告当前系统的进程状态。
+** 系统进程管理
+   + 命令 ~ps~ 用于报告当前系统的进程状态：
+     + 选项 ~-A~ 列出所有进程， 选项 ~-a~ 列出不与 ~terminal~ 相关的所有进程
+     + 选项 ~-u~ 列出一个有效用户的相关进程
+     + 选项 ~-x~ 列出较完整的信息， ~-l~ 较详细的将 ~PID~ 的信息列出
 
-   + 选项 ~-A~ 列出所有进程， 选项 ~-a~ 列出不与 ~terminal~ 相关的所有进程
+   + 命令 ~kill~ 用于向某个 *工作(%jobnumber)* 或某个 *PID* 发送一个信号：
+     |---------+--------------------------------|
+     | 信号    | 作用                           |
+     |---------+--------------------------------|
+     | SIGHUP  | 启动被终止的进程               |
+     | SIGINT  | 中断一个程序的进行             |
+     | SIGKILL | 强制中断一个进程的进行         |
+     | SIGTERM | 以正常的结束进程方式来终止进程 |
+     | SIGSTOP | 暂停一个进程的进行             |
+     |---------+--------------------------------|
 
-   + 选项 ~-u~ 列出一个有效用户的相关进程
+** 环境变量管理
+   + 命令 ~env~ 可以用于显示系统中已存在的环境变量，以及在定义的环境中执行指令：
+     #+BEGIN_EXAMPLE
+       env bash
+     #+END_EXAMPLE
 
-   + 选项 ~-x~ 列出较完整的信息， ~-l~ 较详细的将 ~PID~ 的信息列出
+* 其他命令
+   + 命令 ~seq~ 可以生成某个数字到另一个数字之间的所有整数：
+     + ~seq~ 支持 *首数*, *尾数* 和 *增量* 三个参数
+       #+BEGIN_EXAMPLE
+         seq [选项]... 尾数
+         seq [选项]... 首数 尾数
+         seq [选项]... 首数 增量 尾数
+       #+END_EXAMPLE
 
-** kill
-   命令 ~kill~ 用于向某个 *工作(%jobnumber)* 或某个 *PID* 发送一个信号。
+     + 使用选项 ~-f~ 指定输出格式
+       #+BEGIN_EXAMPLE
+         $  seq -f "Num: %g" 1 1 5
+         Num: 1
+         Num: 2
+         Num: 3
+         Num: 4
+         Num: 5
+       #+END_EXAMPLE
 
-   + 选项 ~-s~ 发送信号， ~-l~ 列出所有信号
-
-   |---------+--------------------------------|
-   | 信号    | 作用                           |
-   |---------+--------------------------------|
-   | SIGHUP  | 启动被终止的进程               |
-   | SIGINT  | 中断一个程序的进行             |
-   | SIGKILL | 强制中断一个进程的进行         |
-   | SIGTERM | 以正常的结束进程方式来终止进程 |
-   | SIGSTOP | 暂停一个进程的进行             |
-   |---------+--------------------------------|
-** env
-   命令 ~env~ 可以用于显示系统中已存在的环境变量， 以及在定义的环境中执行指令。
-
-   #+BEGIN_EXAMPLE
-     env bash
-   #+END_EXAMPLE
+     + 使用选项 ~-s~ 指定分割数字的字符串
+       #+BEGIN_EXAMPLE
+         $  seq -s "-" 1 1 5
+         1-2-3-4-5
+       #+END_EXAMPLE
 

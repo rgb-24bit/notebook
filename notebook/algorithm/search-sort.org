@@ -1,75 +1,99 @@
 #+TITLE:      查找与排序算法
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#二分查找][二分查找]]
+- [[#二分搜索算法][二分搜索算法]]
 - [[#遗传算法][遗传算法]]
 - [[#归并排序][归并排序]]
 - [[#埃拉托斯特尼筛法][埃拉托斯特尼筛法]]
 
-* 二分查找
-  基础实现：
-  #+BEGIN_SRC python
-    def binary_search(array, size, target):
-        left, right = 0, size - 1
-        while left <= right:
-            mid = floor((left + right) / 2)
-            if array[mid] > target:
-                right = mid - 1
-            elif array[mid] < target:
-                left = mid + 1
-            else:
-                return mid
-        return -1
-  #+END_SRC
+* 二分搜索算法
+  #+BEGIN_EXAMPLE
+    a <= b, (a + b) / 2 <= b
+  #+END_EXAMPLE
 
-  基础实现的变种，可以减少每次比较的次数，但是需要多进行一次迭代：
-  #+BEGIN_SRC python
-    def binary_search(array, size, target):
-        left, right = 0, size - 1
-        while not left == right:
-            mid = ceil((left + right) / 2)
-            if array[mid] > target:
-                right = mid - 1
-            else:
-                left = mid
-
-        if array[left] == target:
-            return left
-        return -1
-  #+END_SRC
-  
-  当序列中存在重复元素时，寻找最左匹配元素：
-  #+BEGIN_SRC python
-    def binary_search_leftmost(array, size, target):
-        left, right = 0, size
-        while left < right:
-            mid = floor((left + right) / 2)
-            if array[mid] < target:
-                left = mid + 1
-            else:
-                right = mid
-        return left
-  #+END_SRC
-
-  当序列中存在重复元素时，寻找最右匹配元素：
-  #+BEGIN_SRC python
-    def binary_search_leftmost(array, size, target):
-        left, right = 0, size
-        while left < right:
-            mid = floor((left + right) / 2)
-            if array[mid] <= target:
-                left = mid + 1
-            else:
-                right = mid
-        return left - 1
-  #+END_SRC
-
-  计算时避免溢出：
+  只是单纯的查找指定元素，可以在闭区间 [left, right] 类进行查找：
   #+BEGIN_SRC C
-    (low + high) / 2 == low + (high - low) / 2
-  #+END_SRC  
+    int bsearch(arr, left, right, target) {
+      while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) {
+          return mid;
+        } else if (arr[mid] > target) {
+          right = mid - 1;
+        } else {
+          left = mid + 1;
+        }
+      }
+      return -1;
+    }
+  #+END_SRC
 
+  开区间 [left, right) 需要修改终止条件：
+  #+BEGIN_SRC C
+    int bsearch(arr, left, right, target) {
+      while (left < right) {  // when left == right, mid = right, not in [left, right)
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) {
+          return mid;
+        } else if (arr[mid] > target) {
+          right = mid;  // [left, mid)
+        } else {
+          left = mid + 1;
+        }
+      }
+      return -1;
+    }
+  #+END_SRC
+
+  寻找下界时使用闭区间会陷入死循环，因此需要使用左闭右开区间 [left, right)：
+  #+BEGIN_SRC C
+    // arr[index] >= taget, arr[index - 1] < target
+    int lower_bound(arr, left, right, target) {
+      while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] < target) {
+          left = mid + 1; // [mid, right)
+        } else {
+          right = mid;   // [left, mid)
+        }
+      }
+      return left;
+    }
+  #+END_SRC
+
+  当 target 比所有值都大时，left 会逐渐逼近 right，直到相等。
+
+  当 target 比所有值都小时，right 会逐渐逼近 left，直到相等。
+
+  寻找上界：
+  #+BEGIN_SRC C
+    // arr[index] > taget, arr[index - 1] <= target
+    int lower_bound(arr, left, right, target) {
+      while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] <= target) {
+          left = mid + 1; // [mid, right)
+        } else {
+          right = mid;   // [left, mid)
+        }
+      }
+      return left;
+    }
+  #+END_SRC
+
+  + [[https://www.zhihu.com/question/36132386/answer/530313852][二分查找算法讲解 - 知乎]]
   + [[https://en.wikipedia.org/wiki/Binary_search_algorithm][Binary search algorithm - Wikipedia]]
+
+  关键问题：
+  1. while 循环的终止条件，开区间与闭区间时是不一样的
+  2. 区间范围的收缩标准，目的与区间不一样时也是不一样的
+  3. 实际上存在有三个区间
+  4. 上界和下界之间的联系
+  5. 中点的计算：
+     #+BEGIN_EXAMPLE
+       first + (last - first) / 2
+       last - (last - first) / 2
+     #+END_EXAMPLE
 
 * 遗传算法
   *遗传算法(genetic algorithm (GA))* 是计算数学中用于解决最佳化的 *搜索算法*, 是进化算法的一种。
