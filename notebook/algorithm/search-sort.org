@@ -44,7 +44,7 @@
       return -1;
     }
   #+END_SRC
-
+  
   寻找下界时使用闭区间会陷入死循环，因此需要使用左闭右开区间 [left, right)：
   #+BEGIN_SRC C
     // arr[index] >= taget, arr[index - 1] < target

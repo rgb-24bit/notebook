@@ -17,3 +17,11 @@
   + [[https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/index.html][URL编码的奥秘 | Aotu.io「凹凸实验室」]]
   + [[https://tools.ietf.org/html/rfc3986][RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax]]
 
+
+* 循环数组
+  #+BEGIN_SRC js
+    function get(arr, x, offset) {
+      return arr[(arr.length + x + offset) % arr.length];
+    }
+  #+END_SRC
+

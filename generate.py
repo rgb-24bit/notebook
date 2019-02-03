@@ -78,7 +78,7 @@ class FileTreeWalker(object):
 def get_note_name(note):
     """Get the name of the note."""
     with open(note, encoding='utf-8') as fp:
-        match = re.search(r'#\+TITLE:\s*(.+)', fp.read())
+        match = re.search(r'#\+TITLE:\s*(.+)', fp.readline())
         if match:
             return match.group(1)
     return pathlib.Path(note).stem
