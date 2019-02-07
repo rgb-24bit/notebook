@@ -60,3 +60,8 @@
   + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][Probabilistic programming language]]
   + [[https://bitbucket.org/piedenis/lea/overview][Lea]] - *Discrete probability distributions in Python*.
 
+* Git 相关
+  + 打补丁：
+    + [[https://www.jianshu.com/p/e5d801b936b6][git apply、git am 打补丁.diff 和 .patch - 简书]]
+    + [[https://juejin.im/post/5b5851976fb9a04f844ad0f4][Git 打补丁-- patch 和 diff 的使用（详细） - 掘金]]
+    

@@ -1,0 +1,15 @@
+#+TITLE:      XML 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#命名空间][命名空间]]
+
+* 命名空间
+  XML 可以通过命名空间来避免名称的冲突，定义和使用方式如下：
+  #+BEGIN_SRC xml
+    <root xmlns:prefix="https://www.example.org/prefix">
+      <prefix:xxx>xxx</prefix:xxx>
+    </root>
+  #+END_SRC
+
+  命名空间 URI 不会被解析器用于查找信息，但通常会指向实际的网页，方便查询该命名空间的信息。
+

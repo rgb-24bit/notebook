@@ -1,4 +1,0 @@
-* css
-  + [[https://stackoverflow.com/questions/14628838/css-div-100-height][CSS div 100% height - Stack Overflow]]
-  + [[https://adactio.com/journal/14574][Adactio: Journal—Programming CSS]]
-

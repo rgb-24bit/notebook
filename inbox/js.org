@@ -6,9 +6,6 @@
   + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
   + [[https://stackoverflow.com/questions/673905/best-way-to-determine-users-locale-within-browser][javascript - Best way to determine user's locale within browser - Stack Overflow]]
 
-* Normalize.css
-  + [[http://jerryzou.com/posts/aboutNormalizeCss/][来，让我们谈一谈 Normalize.css | 咀嚼之味]]
-
 * jsonp
   + [[https://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html][【原创】说说JSON和JSONP，也许你会豁然开朗，含jQuery用例 - 随它去吧 - 博客园]]
   + [[https://www.jb51.net/article/17992.htm][JS 动态加载脚本的4种方法_javascript技巧_脚本之家]]
@@ -16,7 +13,6 @@
 * 百分号编码
   + [[https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/index.html][URL编码的奥秘 | Aotu.io「凹凸实验室」]]
   + [[https://tools.ietf.org/html/rfc3986][RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax]]
-
 
 * 循环数组
   #+BEGIN_SRC js

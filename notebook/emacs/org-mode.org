@@ -28,6 +28,8 @@
 * org-agenda   
   org-agenda 默认情况下会显示 Task 的 ~CATEGORY~, 该属性可以通过快捷键 ~C-c C-x p~ 进行插入。
 
+  agenda 视图中可以通过 C-k 删除条目，也可以通过 B f org-agenda-kill 的方式批量删除条目。
+
 * org-table
   表格公式运算符之间是允许空格的，因此在编写公式时，可以考虑添加空格增强可读性。
 
@@ -53,6 +55,11 @@
        ,#+BEGIN: clocktable :tags "tag1|tag2"
 
        ,#+END:
+     #+END_SRC
+
+   + 使用 tstart 时的时间戳格式：
+     #+BEGIN_SRC org
+       ,#+BEGIN: clocktable :scope tree :maxlevel 1 :tstart "<2019-01-21>"
      #+END_SRC
 
 * timestamps

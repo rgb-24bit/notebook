@@ -1,4 +1,11 @@
-* 安装
+#+TITLE:      MongoDB 笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#debian-安装][Debian 安装]]
+- [[#概念解析][概念解析]]
+- [[#远程连接][远程连接]]
+
+* Debian 安装
   Debian 上 mongodb 的安装还是很方便的，基本上就是一条命令的事：
   #+BEGIN_SRC bash
     $ apt-get install mongodb

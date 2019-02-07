@@ -1,2 +1,0 @@
-* glob
-  + [[https://stackoverflow.com/questions/32604656/what-is-the-glob-character][gulp - What is the ** glob character? - Stack Overflow]]

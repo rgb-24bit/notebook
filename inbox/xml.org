@@ -1,4 +1,0 @@
-* 名称空间
-  + [[http://www.runoob.com/xml/xml-namespaces.html][XML 命名空间]]
-  
-  XML 还是需要去了解一下！

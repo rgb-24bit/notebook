@@ -19,6 +19,7 @@
   - [[#数组的初始化][数组的初始化]]
   - [[#数组大小的获取][数组大小的获取]]
   - [[#柔性数组的定义][柔性数组的定义]]
+  - [[#二维数组的动态创建][二维数组的动态创建]]
 - [[#结构体相关][结构体相关]]
   - [[#结构体字段内存对齐][结构体字段内存对齐]]
   - [[#结构体的嵌套与位域][结构体的嵌套与位域]]
@@ -306,6 +307,24 @@
    #+END_SRC
 
    + [[https://coolshell.cn/articles/11377.html][C 语言结构体里的成员数组和指针 | 酷 壳 - CoolShell]]
+
+** 二维数组的动态创建
+  不连续内存的初始化方式：
+  #+BEGIN_SRC C
+    int** arr = (int**) malloc(rows * sizeof(int*));
+    for (int i = 0; i < rows; ++i) {
+      arr[i] = (int*) malloc(cols * sizeof(int));
+    }
+  #+END_SRC
+
+  连续内存：
+  #+BEGIN_SRC C
+    int** arr = (int**) malloc(rows * sizeof(int*));
+    arr[0] = (int*) malloc(rows * cols * sizeof(int));
+    for (int i = 1; i < rows; ++i) {
+      arr[i] = arr[i - 1] + cols;
+    }
+  #+END_SRC
 
 * 结构体相关
 ** 结构体字段内存对齐

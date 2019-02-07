@@ -43,6 +43,7 @@
 </details>
 <details><summary><b><u>database</u></b></summary>
 <ul>
+<li><a href="notebook/database/mongo.org">MongoDB 笔记</a></li>
 <li><a href="notebook/database/mssql.org">数据库 - SQL Server</a></li>
 <li><a href="notebook/database/mysql.org">数据库 - MySQL 笔记</a></li>
 <li><a href="notebook/database/orm.org">数据库 - ORM 框架</a></li>
@@ -129,6 +130,7 @@
 <li><a href="notebook/java/javadoc.org">JavaDoc 的使用</a></li>
 <li><a href="notebook/java/misc.org">Java Misc</a></li>
 <li><a href="notebook/java/question.org">Java 问题集</a></li>
+<li><a href="notebook/java/style.org">Java 编码规范</a></li>
 <li><a href="notebook/java/tips.org">Java 使用技巧</a></li>
 </ul>
 </details>
@@ -138,6 +140,7 @@
 <li><a href="notebook/lang/dot.org">Dot</a></li>
 <li><a href="notebook/lang/plantuml.org">Plantuml</a></li>
 <li><a href="notebook/lang/uml.org">UML</a></li>
+<li><a href="notebook/lang/xml.org">XML 笔记</a></li>
 </ul>
 </details>
 <details><summary><b><u>linux</u></b></summary>

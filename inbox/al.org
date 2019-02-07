@@ -9,3 +9,5 @@
   可参考的思路：
   + [[https://www.pediy.com/kssd/pediy05/pediy50664.htm][RSA 与大数运算]]
 
+* 最长字串问题
+  + [[https://en.wikipedia.org/wiki/Longest_common_substring_problem][Longest common substring problem - Wikipedia]]
