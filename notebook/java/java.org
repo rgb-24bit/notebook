@@ -8,6 +8,7 @@
 - [[#类型转换][类型转换]]
 - [[#数组][数组]]
   - [[#数组的类型判断][数组的类型判断]]
+  - [[#数组的克隆][数组的克隆]]
 - [[#异常][异常]]
 - [[#java-import][Java Import]]
   - [[#导入名称][导入名称]]
@@ -145,6 +146,27 @@
 
    这也就是为什么 ~asList~ 不要使用 ~int[]~ 参数的原因。
 
+** 数组的克隆
+   数组对象的 ~clone()~ 方法会返回一个新的数组对象，这个数组对象包含和原数组中相同的元素。
+
+   对于 Primitive 数据类型的数组来说，由于数组元素是值，因此，克隆出来的数组和原数组互不干扰。
+
+   对于其他类型的数组，克隆出来的数组和原数组中的对象是一样的，修改一个就会影响另一个。
+
+   #+BEGIN_SRC java
+     int[] a = {1, 2, 3};
+     int[] b = a.clone();
+
+     System.out.println(a == b ? "Same Instance":"Different Instance");
+     //Outputs different instance
+
+     System.out.println(myDogs[0] == myDogsClone[0] ? "Same":"Different");
+     System.out.println(myDogs[1] == myDogsClone[1] ? "Same":"Different");
+     System.out.println(myDogs[2] == myDogsClone[2] ? "Same":"Different");
+     System.out.println(myDogs[3] == myDogsClone[3] ? "Same":"Different");
+     //Outputs Same (4 Times)
+   #+END_SRC
+
 * 异常
   + 捕获异常：
     #+BEGIN_SRC java
@@ -244,7 +266,6 @@
 
    可以看到， 省略了前面的 *名称空间.类*, 直接使用导入的 *静态成员*.
  
-
 * 块作用域
   块作用域是由大括号确定的作用域：
   #+BEGIN_SRC java
@@ -258,7 +279,6 @@
       }
     }
   #+END_SRC
-
 
 * 注意事项
   + Java 没有无符号数

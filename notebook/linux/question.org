@@ -10,6 +10,7 @@
 - [[#怎样编译开源程序][怎样编译开源程序]]
 - [[#怎样创建交换分区][怎样创建交换分区]]
 - [[#怎样搭建-ftp-服务器][怎样搭建 FTP 服务器]]
+- [[#怎样合并两个目录][怎样合并两个目录]]
 
 * 如何快速删除文件
   + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
@@ -87,4 +88,19 @@
      + 服务器的安全组需要配置，开放需要的端口，例如 TCP:10240-20480
      + FTP 服务器网页可以查看文件，在资源管理器中打开可以上传文件
      + 链接格式： ftp://user:passwd@host
+
+* 怎样合并两个目录
+  方式一：通过 cp 命令合并目录：
+  #+BEGIN_SRC bash
+    $ cp -RT src dst
+  #+END_SRC
+
+  参考：[[https://stackoverflow.com/questions/4572225/how-do-i-merge-one-directory-into-another-using-bash][shell - How do I merge one directory into another using Bash? - Stack Overflow]]
+
+  方式二：通过 rsync 命令合并目录：
+  #+BEGIN_SRC bash
+    rsync -a src/ dst/
+  #+END_SRC
+
+  参考：[[https://unix.stackexchange.com/questions/149965/how-to-copy-merge-two-directories][ubuntu - How to copy-merge two directories? - Unix & Linux Stack Exchange]]
 

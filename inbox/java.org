@@ -37,3 +37,5 @@
 
   + [[http://tutorials.jenkov.com/java-reflection/arrays.html][Java Reflection - Arrays]]
 
+* 书籍参考
+  + [[https://www.jianshu.com/p/0b07f38aaf82][干货来袭：2017最新版JavaEE学习路线图 - 简书]]

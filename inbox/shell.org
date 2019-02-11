@@ -1,14 +1,3 @@
-* 合并两个目录
-  + [[https://unix.stackexchange.com/questions/149965/how-to-copy-merge-two-directories][How to copy-merge two directories? {duplicate}]]
-  + [[https://stackoverflow.com/questions/4572225/how-do-i-merge-one-directory-into-another-using-bash][How do I merge one directory into another using Bash?]]
-
-* nc 命令
-  + [[http://www.tutorialspoint.com/unix_commands/nc.htm][nc - Unix, Linux Command]]
-
-* bash
-  + C-l 清屏
-  + C-u 清除输入
-
 * at 命令
   + [[https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/at][at | Microsoft Docs]]
   + [[https://www.cnblogs.com/hushaojun/p/4522398.html][windows 下 at 命令使用详解]]
@@ -31,11 +20,6 @@
   + [[https://www.cnblogs.com/whseay/p/3456038.html][Windows命令行使用FTP - whseay - 博客园]]
   + [[https://linux.cn/article-6746-1.html][技术|如何在命令行中使用 ftp 命令上传和下载文件]]
   
-* sed
-  #+BEGIN_EXAMPLE
-    find . -name "*.cs" -exec sed -i "s/2018/2018 - 2019/g" {} \;
-  #+END_EXAMPLE
-
 * 目录切换
   + [[https://stackoverflow.com/questions/3349105/how-to-set-current-working-directory-to-the-directory-of-the-script][bash - How to set current working directory to the directory of the script? - Stack Overflow]]
   + [[https://stackoverflow.com/questions/874452/change-the-current-directory-from-a-bash-script][environment - Change the current directory from a Bash script - Stack Overflow]]

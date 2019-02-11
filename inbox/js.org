@@ -21,3 +21,7 @@
     }
   #+END_SRC
 
+* 模块化
+  + [[http://es6.ruanyifeng.com/#docs/module][Module 的语法 - ECMAScript 6入门]]
+  + [[https://stackoverflow.com/questions/41722621/es6-in-the-browser-uncaught-syntaxerror-unexpected-token-import][javascript - ES6 in the browser: Uncaught SyntaxError: Unexpected token import - Stack Overflow]]
+

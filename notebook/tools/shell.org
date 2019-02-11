@@ -12,6 +12,7 @@
   - [[#系统进程管理][系统进程管理]]
   - [[#环境变量管理][环境变量管理]]
 - [[#其他命令][其他命令]]
+- [[#使用技巧][使用技巧]]
 
 * 网络操作相关
 ** 网络诊断相关
@@ -20,7 +21,13 @@
        > traceroute yourdomain.com
        > traceroute -6 yourdomain.com
      #+END_EXAMPLE
-   
+
+   + 可以通过 nc 命令建立服务器或者直接连接已有服务器发送数据：
+     #+BEGIN_EXAMPLE
+       $ nc -lp port
+       $ nc host port
+     #+END_EXAMPLE
+
 ** 网络资源获取
    + 通过命令 ~wget~ 可以从指定的 ~URL~ 下载网页或文件，支持 ~HTTP~, ~HTTPS~, ~FTP~ 协议：
      + 如果因为 ~HTTPS~ 和 ~SSL~ 的原因导致不能下载， 可以使用选项 ~--no-cookie~ 和 ~--no-check-certificate~ 解决：
@@ -188,6 +195,11 @@
        解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录
      #+END_EXAMPLE
 
+   + 以下命令需要使用双引号才能执行成功：
+     #+BEGIN_EXAMPLE
+       find . -name "*.cs" -exec sed -i "s/2018/2018 - 2019/g" {} \;
+     #+END_EXAMPLE
+
 * 系统管理相关
 ** 系统进程管理
    + 命令 ~ps~ 用于报告当前系统的进程状态：
@@ -237,3 +249,11 @@
          1-2-3-4-5
        #+END_EXAMPLE
 
+* 使用技巧
+  + 快捷键相关：
+    |--------+--------------|
+    | 快捷键 | 作用         |
+    |--------+--------------|
+    | C-l    | 清屏         |
+    | C-u    | 清楚当前输入 |
+    |--------+--------------|
