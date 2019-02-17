@@ -4,7 +4,6 @@
 - [[#基本概念][基本概念]]
 - [[#进制转化][进制转化]]
 - [[#简单的技巧][简单的技巧]]
-- [[#加减法的实现][加减法的实现]]
 - [[#字节对齐][字节对齐]]
 - [[#截取保存单字节数据][截取保存单字节数据]]
 
@@ -37,25 +36,6 @@
   | ~a ^ 0 = a~      | 任意数字和 0 异或得到他它身 |
   | ~num && 5 / num~ | 防止零除                    |
   |----------------+-----------------------------|
-
-* 加减法的实现
-  #+BEGIN_SRC C
-    int add(int a, int b) {
-      int sum = a, carry = b;
-
-      while (carry) {
-        int temp = sum;
-        sum = temp ^ carry;
-        carry = (temp & carry) << 1;
-      }
-
-      return sum;
-    }
-
-    int sub(int a, int b) {
-      return add(a, add(~b, 1));
-    }
-  #+END_SRC
 
 * 字节对齐
   + 4 字节对齐

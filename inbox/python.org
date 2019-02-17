@@ -73,3 +73,11 @@
   + [[https://www.zhihu.com/question/30526656/answer/456366082][编程语言中，取余和取模的区别到底是什么]]
 
   
+* 多线程访问 sqlite
+  + [[https://stackoverflow.com/questions/393554/python-sqlite3-and-concurrency][sqlite - Python sqlite3 and concurrency - Stack Overflow]]
+  + [[https://github.com/remdragon/sqlite3worker][remdragon/sqlite3worker: A threadsafe sqlite worker for Python]]
+  + [[https://docs.python.org/3/library/sqlite3.html#sqlite3.connect][sqlite3 — DB-API 2.0 interface for SQLite databases — Python 3.7.2 documentation]]
+
+* MongoDB
+  + https://github.com/py-bson/bson/issues/82
+  没有 bson 这个依赖

@@ -1,3 +1,5 @@
 * 守护进程
   + [[https://askubuntu.com/questions/903354/difference-between-systemctl-and-service-commands][Difference between systemctl and service commands - Ask Ubuntu]]
 
+* 定时任务
+  + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html][19. crontab 定时任务 — Linux Tools Quick Tutorial]]
