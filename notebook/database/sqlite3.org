@@ -2,8 +2,40 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#命令行工具][命令行工具]]
+- [[#问题集][问题集]]
+  - [[#怎样根据时间进行查询][怎样根据时间进行查询]]
+  - [[#不存在时才插入怎样实现][不存在时才插入怎样实现]]
 
 * 命令行工具
   + 官方实现：[[https://www.sqlite.org/cli.html][Command Line Shell For SQLite]]
   + 强力扩展：[[https://github.com/dbcli/litecli][CLI for SQLite Databases with auto-completion and syntax highlighting]]
+
+* 问题集
+** 怎样根据时间进行查询
+   可以通过函数 ~strftime~ 实现这一操作：
+   #+BEGIN_SRC sql
+     SELECT col
+       FROM tbl
+      WHERE STRFTIME('%Y', datetime) = '2016' AND
+            STRFTIME('%H', datetime) < '13'   AND
+            STRFTIME('%H', datetime) > '12'
+   #+END_SRC
+
+   参考：
+   + [[https://stackoverflow.com/questions/38708608/sqlite-select-rows-within-a-specific-time-range-ignoring-the-date][sqlite3 - SQlite: Select rows within a specific time range, ignoring the date - Stack Overflow]]
+   + [[https://www.sqlite.org/lang_datefunc.html][SQLite Query Language: Date And Time Functions]]
+
+** 不存在时才插入怎样实现
+   通过 SELECT 语句实现：
+   #+BEGIN_SRC sql
+     INSERT INTO tbl VALUES() WHERE NOT EXISTS(SELECT * FROM tbl WHERE col='xxx')
+   #+END_SRC
+
+   通过 sqlite3 本身特性实现：
+   #+BEGIN_SRC sql
+     INSERT OR IGNORE INTO tbl VALUES(123, 456)
+   #+END_SRC
+
+   参考：
+   + [[https://stackoverflow.com/questions/19337029/insert-if-not-exists-statement-in-sqlite][constraints - "Insert if not exists" statement in SQLite - Stack Overflow]]
 

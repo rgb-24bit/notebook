@@ -55,6 +55,8 @@
 
 * Utils
   + [[https://github.com/gogs/gogs][gogs/gogs: Gogs is a painless self-hosted Git service.]]
+  + [[https://github.com/justinfrankel/licecap][justinfrankel/licecap: LICEcap simple animated screen capture tool for Windows and OS X]]
+  + [[https://pandownload.com/][PanDownload]]
 
 * 数学相关
   + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][Probabilistic programming language]]

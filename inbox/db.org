@@ -41,6 +41,3 @@
 
   注意事项：MySQL 中 LIMIT 不是子句，需要放在 ORDER BY 后面。 
 
-* sqlite
-  + [[https://stackoverflow.com/questions/38708608/sqlite-select-rows-within-a-specific-time-range-ignoring-the-date][sqlite3 - SQlite: Select rows within a specific time range, ignoring the date - Stack Overflow]]
-  + [[https://stackoverflow.com/questions/19337029/insert-if-not-exists-statement-in-sqlite][constraints - "Insert if not exists" statement in SQLite - Stack Overflow]]
