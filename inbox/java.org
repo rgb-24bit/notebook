@@ -42,4 +42,3 @@
   + [[https://www.cnblogs.com/xdp-gacl/p/3729033.html][JavaWeb学习总结(一)——JavaWeb开发入门 - 孤傲苍狼 - 博客园]]
   + [[https://github.com/skyline75489/Heart-First-JavaWeb][skyline75489/Heart-First-JavaWeb: 一个走心的 Java Web 入门开发教程]]
   + [[http://developer.51cto.com/art/201811/586366.htm][Java程序员必备的15个框架，前3个地位无可动摇！ - 51CTO.COM]]
-  + [[https://skyline75489.github.io/Heart-First-JavaWeb/1-Intro.html][基本概念 · Heart First JavaWeb]]
