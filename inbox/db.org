@@ -41,3 +41,6 @@
 
   注意事项：MySQL 中 LIMIT 不是子句，需要放在 ORDER BY 后面。 
 
+* export
+  + [[http://www.sqlitetutorial.net/sqlite-tutorial/sqlite-export-csv/][Export SQLite Database To a CSV File]]
+
