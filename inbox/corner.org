@@ -61,9 +61,13 @@
 * 数学相关
   + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][Probabilistic programming language]]
   + [[https://bitbucket.org/piedenis/lea/overview][Lea]] - *Discrete probability distributions in Python*.
+  + [[https://zh.wikipedia.org/wiki/%E6%9C%AC%E7%A6%8F%E7%89%B9%E5%AE%9A%E5%BE%8B][本福特定律 - 维基百科，自由的百科全书]]
+  + [[https://www.zhihu.com/question/20165675/answer/17951851][计算机专业相关的数学知识]]
 
 * Git 相关
   + 打补丁：
     + [[https://www.jianshu.com/p/e5d801b936b6][git apply、git am 打补丁.diff 和 .patch - 简书]]
     + [[https://juejin.im/post/5b5851976fb9a04f844ad0f4][Git 打补丁-- patch 和 diff 的使用（详细） - 掘金]]
     
+* 书籍
+  + [[https://www.zhihu.com/question/20757000][在数据分析、挖掘方面，有哪些好书值得推荐？ - 知乎]]

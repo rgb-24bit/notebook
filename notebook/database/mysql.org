@@ -1,10 +1,14 @@
-#+TITLE:      数据库 - MySQL 笔记
+#+TITLE:      MySQL
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#mysql-安装与配置][MySQL 安装与配置]]
-- [[#问题][问题]]
+- [[#安装与配置][安装与配置]]
+- [[#问题集][问题集]]
+  - [[#时区陷阱问题][时区陷阱问题]]
+  - [[#怎样执行-sql-脚本][怎样执行 SQL 脚本]]
+  - [[#怎样通过远程主机进行访问][怎样通过远程主机进行访问]]
+  - [[#怎样在数据存在时更新不存在时插入][怎样在数据存在时更新不存在时插入]]
 
-* MySQL 安装与配置
+* 安装与配置
   + 安装指令：
     #+BEGIN_SRC bash
       apt-get install mariadb-server
@@ -40,8 +44,8 @@
          service mysql restart
        #+END_SRC
 
-* 问题
-  + 时区陷阱问题 ::
+* 问题集
+** 时区陷阱问题
     ~mysql~ 6.0 以上的版本需要在链接字符串中假设参数 ~serverTimezone~ 指定时区：
     #+BEGIN_SRC xml
       <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=UTC"/>
@@ -52,23 +56,28 @@
       <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=Asia/Shanghai"/>
     #+END_SRC
 
-  + 执行 SQL 脚本 :: 
+** 怎样执行 SQL 脚本
     #+BEGIN_SRC bash
       mysql> source /path/to/script
     #+END_SRC
 
-  + 远程主机拒接访问 :: 
-    
-    更改配置文件中的 ~bind-address~ 为 ~0.0.0.0~, 配置文件在 ~/etc/mysql/~
-
-  + 远程主机无法访问 :: 
-                
-    更改用户的 ~host~ 为 ~%~
-
-  + 创建拥有所有权限可远程访问的用户 :: 
+** 怎样通过远程主机进行访问
+   + 更改配置文件中的 ~bind-address~ 为 ~0.0.0.0~, 配置文件在 ~/etc/mysql/~, 使得允许远程主机访问
+   + 更改用户的 ~host~ 为 ~%~, 允许该用户进行远程访问
+   + 通过如下方式创建拥有所有权限可远程访问的用户
      #+BEGIN_SRC sql
        CREATE USER 'user'@'%' IDENTIFIED BY 'password';
-       GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+
+       GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' = WITH GRANT OPTION;
+
        FLUSH PRIVILEGES;
      #+END_SRC
+
+** 怎样在数据存在时更新不存在时插入
+   #+BEGIN_SRC sql
+     IF EXISTS(SELECT * FROM tbl WHERE id = 30122)
+       UPDATE tbl SET name = 'john' WHERE id = 3012
+     ELSE
+       INSERT INTO tbl(name) VALUES('john');
+   #+END_SRC
 

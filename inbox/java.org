@@ -37,29 +37,6 @@
 
   + [[http://tutorials.jenkov.com/java-reflection/arrays.html][Java Reflection - Arrays]]
 
-* Java EE
-  + [[https://www.jianshu.com/p/0b07f38aaf82][干货来袭：2017最新版JavaEE学习路线图 - 简书]]
-  + [[https://www.cnblogs.com/xdp-gacl/p/3729033.html][JavaWeb学习总结(一)——JavaWeb开发入门 - 孤傲苍狼 - 博客园]]
-  + [[https://github.com/skyline75489/Heart-First-JavaWeb][skyline75489/Heart-First-JavaWeb: 一个走心的 Java Web 入门开发教程]]
-  + [[http://developer.51cto.com/art/201811/586366.htm][Java程序员必备的15个框架，前3个地位无可动摇！ - 51CTO.COM]]
-
-* 私有字段
-  类的私有字段可以在类内部直接方问，不管是不是当前的实例。
-
-  #+BEGIN_SRC java
-    public class TestP {
-      private int val = 10;
-
-      public static void main(String[] args) {
-        TestP t = new TestP();
-        t.val = 100;
-        System.out.println(t.val);
-      }
-    }
-  #+END_SRC
-
 * 对象的克隆
   + [[https://www.cnblogs.com/Qian123/p/5710533.html][Java提高篇——对象克隆（复制） - 萌小Q - 博客园]]
 
-* 方法签名
-  方法签名值包括方法名称和参数类型，不包括返回值类型及访问修饰符。

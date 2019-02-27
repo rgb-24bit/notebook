@@ -22,7 +22,7 @@
 
 * 通用操作系统服务
   + argparse :: 命令行参数解析                
-    + [[http://blog.xiayf.cn/2013/03/30/argparse/][argparse - 命令行选项与参数解析（译）]]
+    + [[https://pymotw.com/2/argparse/][argparse – Command line option and argument parsing. - Python Module of the Week]]
 
   + logging :: 日志记录
     + [[http://python.jobbole.com/81666/][每个 Python 程序员都要知道的日志实践]]

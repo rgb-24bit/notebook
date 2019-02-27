@@ -1,3 +1,0 @@
-* 相关理论
-  + [[https://www.zhihu.com/question/20165675/answer/17951851][计算机专业相关的数学知识]]
-

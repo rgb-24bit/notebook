@@ -1,2 +1,0 @@
-* 最长字串问题
-  + [[https://en.wikipedia.org/wiki/Longest_common_substring_problem][Longest common substring problem - Wikipedia]]

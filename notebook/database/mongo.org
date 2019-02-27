@@ -1,4 +1,4 @@
-#+TITLE:      MongoDB 笔记
+#+TITLE:      MongoDB
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#debian-安装][Debian 安装]]

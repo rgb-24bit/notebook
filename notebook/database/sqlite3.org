@@ -1,10 +1,12 @@
-#+TITLE:      SQLite 笔记
+#+TITLE:      SQLite3
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#命令行工具][命令行工具]]
 - [[#问题集][问题集]]
   - [[#怎样根据时间进行查询][怎样根据时间进行查询]]
   - [[#不存在时才插入怎样实现][不存在时才插入怎样实现]]
+  - [[#存在更新不存在插入怎样实现][存在更新不存在插入怎样实现]]
+  - [[#怎样导出数据到-csv-文件][怎样导出数据到 CSV 文件]]
 
 * 命令行工具
   + 官方实现：[[https://www.sqlite.org/cli.html][Command Line Shell For SQLite]]
@@ -38,4 +40,17 @@
 
    参考：
    + [[https://stackoverflow.com/questions/19337029/insert-if-not-exists-statement-in-sqlite][constraints - "Insert if not exists" statement in SQLite - Stack Overflow]]
+
+** 存在更新不存在插入怎样实现
+   #+BEGIN_SRC sql
+     INSERT OR replace INTO tbl VALUES(...);
+   #+END_SRC
+
+** 怎样导出数据到 CSV 文件
+   #+BEGIN_SRC bash
+     # Directly provide sql statement
+     $ sqlite3 -header -csv data.db "select * from tbl;" > data.csv
+     # Provide sql statement through file
+     $ sqlite3 -header -csv data.db < query.sql > data.csv
+   #+END_SRC
 

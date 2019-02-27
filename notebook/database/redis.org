@@ -1,4 +1,4 @@
-#+TITLE:      数据库 - Redis 笔记
+#+TITLE:      Redis
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#redis-安装与配置][Redis 安装与配置]]

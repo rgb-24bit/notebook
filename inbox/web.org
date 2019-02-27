@@ -27,5 +27,16 @@
 
 * Good
   + https://codepen.io/doriancami/pen/jEJvaV
-  + [[https://github.com/fouber/blog/issues/2][前端开发体系建设日记 · Issue #2 · fouber/blog]]
+  + [[https://stackoverflow.com/questions/4698054/css-does-the-width-include-the-padding][CSS does the width include the padding? - Stack Overflow]]
+
+* HTML & CSS
+  + 有几种默认的字体是所有浏览器都可用的，包括 Monospace、Serif 和 Sans-Serif。
+  + 表单输入元素的 required 属性：
+    #+BEGIN_SRC html
+      <input type="text" placeholder="example" required>
+    #+END_SRC
+  + 表单输入元素的 checked 属性：
+    #+BEGIN_SRC html
+      <input type="radio" name="test-name" checked>
+    #+END_SRC
 

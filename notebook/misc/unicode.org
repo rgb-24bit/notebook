@@ -1,4 +1,4 @@
-#+TITLE:      Unicode 相关
+#+TITLE:      Unicode
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#码点][码点]]

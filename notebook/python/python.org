@@ -25,6 +25,7 @@
   - [[#修改全局变量][修改全局变量]]
 - [[#特殊属性][特殊属性]]
 - [[#dict__missing__][dict.__missing__]]
+- [[#字符映射][字符映射]]
 
 * 函数相关
 ** 函数默认参数
@@ -422,4 +423,15 @@
     >>> c['red']
     1
   #+END_SRC
+
+* 字符映射
+  #+BEGIN_SRC python
+    new_file = old_file.translate(str.maketrans(' :', '--', '“”()'))
+
+    # >>> '“文件 A”: (测试用)'.translate(str.maketrans(' :', '--', '“”()'))
+    # '文件-A--测试用'
+  #+END_SRC
+  
+  + 前两个参数建立一对一的映射
+  + 第三个参数的字符会映射到 ''
 

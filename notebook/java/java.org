@@ -6,10 +6,10 @@
   - [[#自动装箱][自动装箱]]
   - [[#boolean][boolean]]
 - [[#类型转换][类型转换]]
-- [[#数组][数组]]
+- [[#数组相关][数组相关]]
   - [[#数组的类型判断][数组的类型判断]]
   - [[#数组的克隆][数组的克隆]]
-- [[#异常][异常]]
+- [[#异常相关][异常相关]]
 - [[#java-import][Java Import]]
   - [[#导入名称][导入名称]]
   - [[#static-import][static import]]
@@ -111,7 +111,7 @@
     SubClass ref = (SubClass) SuperClassRef;
   #+END_SRC
 
-* 数组
+* 数组相关
   数组的声明和初始化方式：
   #+BEGIN_SRC java
     // 声明数组
@@ -167,7 +167,7 @@
      //Outputs Same (4 Times)
    #+END_SRC
 
-* 异常
+* 异常相关
   + 捕获异常：
     #+BEGIN_SRC java
       try {
@@ -329,3 +329,4 @@
 
   + ~switch~ 语句支持的类型为： 原始数据类型 byte, short, char, int 及对应的包装类；字符串 ~String~ 和 枚举 ~Enum~.
 
+  + Java 方法签名值包括方法名称和参数类型，不包括返回值类型及访问修饰符。

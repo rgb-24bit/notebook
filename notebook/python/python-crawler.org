@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#基本结构][基本结构]]
+- [[#爬虫深度限制][爬虫深度限制]]
 
 * 基本结构
   |-------------------------+---------------------------------------------------|
@@ -42,4 +43,19 @@
   |-------------------------+---------------------------------------------------|
 
   请求模拟、数据抓取、资源的最大化利用、合理使用
+
+* 爬虫深度限制
+  通过限制爬取链接的最大深度和数量来避免无限爬取：
+  #+BEGIN_SRC python
+    def crawler():
+        count, seen = 0, {seed_url: 0}
+        while crawl_queue:
+            url = crawl_queue.pop()
+            if seen[url] < max_depth and count < max_count:
+                for links in download(url):
+                    if link not in seen:
+                        seen[link] = seen[url] + 1
+                        crawl_queue.append(link)
+                        count += 1
+  #+END_SRC
 

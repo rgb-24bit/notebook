@@ -9,6 +9,7 @@
   - [[#抽象类与抽象方法][抽象类与抽象方法]]
   - [[#继承][继承]]
   - [[#多态][多态]]
+  - [[#私有字段][私有字段]]
 - [[#java-object][Java Object]]
   - [[#对象的创建][对象的创建]]
   - [[#对象的生命周期][对象的生命周期]]
@@ -181,6 +182,20 @@
    2. 该引用只能调用父类中定义的方法和变量
 
    编译器根据 *引用类型* 来判断有哪些 ~method~ 可以调用， 而不是 ~Object~ 确实的类型。
+
+** 私有字段
+   类的私有字段可以在类内部直接方问，不管是不是当前的实例：
+   #+BEGIN_SRC java
+     public class TestP {
+       private int val = 10;
+
+       public static void main(String[] args) {
+         TestP t = new TestP();
+         t.val = 100;
+         System.out.println(t.val);
+       }
+     }
+   #+END_SRC
 
 * Java Object
 ** 对象的创建

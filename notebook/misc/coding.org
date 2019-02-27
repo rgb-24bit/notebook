@@ -1,10 +1,6 @@
 #+TITLE:      编程相关
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#伪代码][伪代码]]
-- [[#事件驱动程序设计][事件驱动程序设计]]
-- [[#函数式编程][函数式编程]]
-- [[#可扩展编程][可扩展编程]]
 - [[#单字节字符集][单字节字符集]]
 - [[#技术名词][技术名词]]
 - [[#同名标识符优先级问题][同名标识符优先级问题]]
@@ -13,18 +9,6 @@
   - [[#c][C]]
   - [[#javascript][JavaScript]]
 - [[#文件签名列表][文件签名列表]]
-
-* 伪代码
-  + [[https://en.wikipedia.org/wiki/Pseudocode][Pseudocode]]
-
-* 事件驱动程序设计
-  + [[https://zh.wikipedia.org/wiki/%E4%BA%8B%E4%BB%B6%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88][事件驱动程序设计]]
-
-* 函数式编程
-  + [[https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000][函数式编程]]
-    
-* 可扩展编程
-  + [[https://en.wikipedia.org/wiki/Extensible_programming][可扩展编程]]
 
 * 单字节字符集
   单字节字符集如 ~latin-1~ 的一种使用：
@@ -52,6 +36,10 @@
   #+END_SRC
 
 * 技术名词
+  + [[https://zh.wikipedia.org/wiki/%E4%BA%8B%E4%BB%B6%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88][事件驱动程序设计]]
+  + [[https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/00143449934543461c9d5dfeeb848f5b72bd012e1113d15000][函数式编程]]
+  + [[https://en.wikipedia.org/wiki/Extensible_programming][可扩展编程]]
+  + [[https://en.wikipedia.org/wiki/Pseudocode][Pseudocode]] 
   + [[https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%AD%89%E7%B6%B2%E8%B7%AF][P2P]] 
   + [[https://zh.wikipedia.org/wiki/%E5%85%A7%E5%AE%B9%E5%82%B3%E9%81%9E%E7%B6%B2%E8%B7%AF][CDN]]
   + [[https://zh.wikipedia.org/wiki/MIDI][MIDI]]

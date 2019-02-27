@@ -1,0 +1,38 @@
+#+TITLE:      urllib
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#自定义-opener][自定义 Opener]]
+
+* 自定义 Opener
+  通过 build_opener() 方法返回的对象具有 open() 方法，与 urlopen() 函数的功能相同。
+
+  我们可以通过自定义 opener 来支持更多的功能：
+  1. 通用 HTTP 报头设置：
+     #+BEGIN_SRC python
+       opener = urllib.request.build_opener()
+       opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+       opener.open('http://www.example.com/')
+     #+END_SRC
+  2. HTTPBasicAuthHandler - 密码验证
+     #+BEGIN_SRC python
+       auth = urllib.request.HTTPBasicAuthHandler()
+       auth.add_password('Administrator','http://www.example.com','Dave','123456')
+       opener = urllib.request.build_opener(auth)
+       u = opener.open('http://www.example.com/evilplan.html')
+     #+END_SRC
+  3. HTTPCookieProcessor - Cookie  处理
+     #+BEGIN_SRC python
+       cookie = cookielib.CookieJar()
+       cookiehand = urllib.request.HTTPCookieProcessor(cookie)
+       opener = urllib.request.build_opener(cookiehand)
+     #+END_SRC
+  4. ProxyHandler - 代理
+     #+BEGIN_SRC python
+       proxy = ProxyHandler({'http':'http://someproxy.com:8080'})
+       auth = HTTPBasicAuthHandler()
+       auth.add_password()
+       opener = build_opener(auth, proxy)
+     #+END_SRC
+  
+  可以通过 install_opener 方法将 opener 对象作为全局默认的 opener 对象。
+

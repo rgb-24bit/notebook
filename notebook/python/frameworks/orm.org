@@ -1,4 +1,4 @@
-#+TITLE:      数据库 - ORM 框架
+#+TITLE:      ORM 框架
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#sqlalchemy][SQLAlchemy]]
