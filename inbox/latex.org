@@ -1,0 +1,18 @@
+* 教程
+  + [[https://liam.page/2014/09/08/latex-introduction/][一份其实很短的 LaTeX 入门文档 | 始终]]
+  + [[https://zhuanlan.zhihu.com/p/36240727][TeX Live 2018安装流程 - 知乎]]
+
+* 问题集
+** Tex Live 下怎样安装更新宏包
+   可以通过命令行工具 ~tlmgr~ 下载更新宏包：
+   #+BEGIN_SRC bash
+     $ tlmgr install package
+   #+END_SRC
+
+** Tex Live 下编译 Tex 文件
+   #+BEGIN_SRC bash
+     $ pdflatex filename  # output latex
+     $ latex    filename  # all
+     $ bibtex   filename  # refrence document
+   #+END_SRC
+

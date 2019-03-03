@@ -63,6 +63,7 @@
   + [[https://bitbucket.org/piedenis/lea/overview][Lea]] - *Discrete probability distributions in Python*.
   + [[https://zh.wikipedia.org/wiki/%E6%9C%AC%E7%A6%8F%E7%89%B9%E5%AE%9A%E5%BE%8B][本福特定律 - 维基百科，自由的百科全书]]
   + [[https://www.zhihu.com/question/20165675/answer/17951851][计算机专业相关的数学知识]]
+  + [[https://www.zhihu.com/question/24066773][无法理解高等数学怎么办？ - 知乎]]
 
 * Git 相关
   + 打补丁：

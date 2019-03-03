@@ -57,8 +57,9 @@
   #+BEGIN_SRC css
     box-sizing: border-box;
   #+END_SRC
-
-  参考：[[https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing][box-sizing | MDN]]
+  
+  + [[https://stackoverflow.com/questions/4698054/css-does-the-width-include-the-padding][CSS does the width include the padding? - Stack Overflow]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing][box-sizing | MDN]]
 
 * div 高度 100%
   实现其实很简单：

@@ -73,23 +73,6 @@
 <li><a href="notebook/emacs/utils.org">Emacs - 实用功能</a></li>
 </ul>
 </details>
-<details><summary><b><u>front-end</u></b></summary>
-<ul>
-<li><details><summary><b><u>libraries</u></b></summary>
-<ul>
-<li><a href="notebook/front-end/libraries/jquery.org">jQuery 相关笔记</a></li>
-</ul>
-</details>
-<li><a href="notebook/front-end/css-base.org">CSS/CSS3 基础笔记</a></li>
-<li><a href="notebook/front-end/design.org">网页设计相关笔记</a></li>
-<li><a href="notebook/front-end/html-base.org">HTML/HTML5 基础笔记</a></li>
-<li><a href="notebook/front-end/html.org">HTML 标签使用笔记</a></li>
-<li><a href="notebook/front-end/js-base.org">JavaScript 基础笔记</a></li>
-<li><a href="notebook/front-end/js-tips.org">JavaScript 中的小技巧</a></li>
-<li><a href="notebook/front-end/question.org">前端问题集</a></li>
-<li><a href="notebook/front-end/technology.org">Web 相关技术</a></li>
-</ul>
-</details>
 <details><summary><b><u>git</u></b></summary>
 <ul>
 <li><a href="notebook/git/git-book.org">Git-Book 阅读笔记</a></li>
@@ -229,5 +212,22 @@
 <li><a href="notebook/tools/ssh.org">SSH</a></li>
 <li><a href="notebook/tools/utils.org">实用开源工具收集</a></li>
 <li><a href="notebook/tools/vim.org">Vim 笔记</a></li>
+</ul>
+</details>
+<details><summary><b><u>web-fe</u></b></summary>
+<ul>
+<li><details><summary><b><u>libraries</u></b></summary>
+<ul>
+<li><a href="notebook/web-fe/libraries/jquery.org">jQuery 相关笔记</a></li>
+</ul>
+</details>
+<li><a href="notebook/web-fe/css-base.org">CSS/CSS3 基础笔记</a></li>
+<li><a href="notebook/web-fe/design.org">网页设计相关笔记</a></li>
+<li><a href="notebook/web-fe/html-base.org">HTML/HTML5 基础笔记</a></li>
+<li><a href="notebook/web-fe/html.org">HTML 标签使用笔记</a></li>
+<li><a href="notebook/web-fe/js-base.org">JavaScript 基础笔记</a></li>
+<li><a href="notebook/web-fe/js-tips.org">JavaScript 中的小技巧</a></li>
+<li><a href="notebook/web-fe/question.org">前端问题集</a></li>
+<li><a href="notebook/web-fe/technology.org">Web 相关技术</a></li>
 </ul>
 </details>

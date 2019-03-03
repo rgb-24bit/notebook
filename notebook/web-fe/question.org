@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#通过-innerhtml-的方式为-table-添加行失败][通过 innerHTML 的方式为 table 添加行失败]]
+- [[#浏览器中-es6-模块化的语法不能使用][浏览器中 ES6 模块化的语法不能使用]]
 
 * 通过 innerHTML 的方式为 table 添加行失败
   通过 innerHTML 属性设置 HTML 时，底层引擎会自动关闭未关闭的标签（并修复其他错误的HTML）。
@@ -36,3 +37,10 @@
     </table>
   #+END_SRC
 
+* 浏览器中 ES6 模块化的语法不能使用
+  需要使用如下形式的 script 标签：
+  #+BEGIN_SRC html
+    <script type="module" src="...">
+  #+END_SRC
+
+  参考：[[http://es6.ruanyifeng.com/#docs/module][Module 的语法 - ECMAScript 6入门]]

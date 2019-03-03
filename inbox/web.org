@@ -1,6 +1,3 @@
-* 动态背景
-  + [[https://juejin.im/post/5926ea2b0ce463006bfce337][html5canvas: 教你实现知乎登录动态粒子背景 - 掘金]]
-
 * 本地化
   + [[https://www.w3schools.com/jsref/obj_navigator.asp][Navigator Object]]
   + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
@@ -21,14 +18,6 @@
     }
   #+END_SRC
 
-* 模块化
-  + [[http://es6.ruanyifeng.com/#docs/module][Module 的语法 - ECMAScript 6入门]]
-  + [[https://stackoverflow.com/questions/41722621/es6-in-the-browser-uncaught-syntaxerror-unexpected-token-import][javascript - ES6 in the browser: Uncaught SyntaxError: Unexpected token import - Stack Overflow]]
-
-* Good
-  + https://codepen.io/doriancami/pen/jEJvaV
-  + [[https://stackoverflow.com/questions/4698054/css-does-the-width-include-the-padding][CSS does the width include the padding? - Stack Overflow]]
-
 * HTML & CSS
   + 有几种默认的字体是所有浏览器都可用的，包括 Monospace、Serif 和 Sans-Serif。
   + 表单输入元素的 required 属性：
@@ -39,4 +28,8 @@
     #+BEGIN_SRC html
       <input type="radio" name="test-name" checked>
     #+END_SRC
+  + CSS 样式类在元素中的排列顺序不重要重要的是它们的排列顺序，后声明的回覆盖先声明的。
+  + 通过 ID 指定的样式总是比通过类指定的优先级高
+  + 内联样式的优先级是最高的
+  + 通过为样式添加 ~!important~ 声明使得它必然具有某种样式，如果都有就按照之前的优先级来
 

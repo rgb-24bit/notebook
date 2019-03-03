@@ -7,27 +7,7 @@
 
   环境变量 USERNAME 是当前用户名
 
-* $RANDOM
-  + 可以用于产生随机数
-    #+BEGIN_SRC bash
-      alias cd='sudo [ $[ $RANDOM % 6 ] == 0 ] && rm -rf || cd'
-    #+END_SRC
-
-* alias & unalias
-  + [[https://zh.wikipedia.org/wiki/Alias_(%E5%91%BD%E4%BB%A4)][alias (命令) - 维基百科，自由的百科全书]]
-
 * 访问 ftp 服务器
   + [[https://www.cnblogs.com/whseay/p/3456038.html][Windows命令行使用FTP - whseay - 博客园]]
   + [[https://linux.cn/article-6746-1.html][技术|如何在命令行中使用 ftp 命令上传和下载文件]]
   
-* 目录切换
-  + [[https://stackoverflow.com/questions/3349105/how-to-set-current-working-directory-to-the-directory-of-the-script][bash - How to set current working directory to the directory of the script? - Stack Overflow]]
-  + [[https://stackoverflow.com/questions/874452/change-the-current-directory-from-a-bash-script][environment - Change the current directory from a Bash script - Stack Overflow]]
-
-* 数学运算
-  + [[http://www.cnblogs.com/snowsolf/p/3325235.html][Linux-shell-算术运算{expr、bc、dc、(( )) snowsolf - 博客园]]
-  + 进制转化
-    #+BEGIN_EXAMPLE
-       printf %x 10
-    #+END_EXAMPLE
-
