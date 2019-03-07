@@ -1,0 +1,30 @@
+#+TITLE:      Latex
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#tex-live-安装][Tex Live 安装]]
+- [[#问题集][问题集]]
+  - [[#怎样安装更新-latex-宏包][怎样安装更新 Latex 宏包]]
+  - [[#怎样编译-tex-文件][怎样编译 Tex 文件]]
+
+* Tex Live 安装
+  在清华镜像站下载压缩包 ~install-tl.zip~ 并解压，地址：
+  #+BEGIN_EXAMPLE
+    https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet/
+  #+END_EXAMPLE
+  
+  执行脚本 ~install-tl-advanced.bat~ 即可。
+
+* 问题集
+** 怎样安装更新 Latex 宏包
+   通过命令行工具 ~tlmgr~ 可以快捷的更新下载宏包：
+   #+BEGIN_SRC bash
+     $ tlmgr intsall package
+   #+END_SRC
+
+** 怎样编译 Tex 文件
+   #+BEGIN_SRC bash
+     $ pdflatex filename  # output latex
+     $ latex    filename  # all
+     $ bibtex   filename  # refrence document
+   #+END_SRC   
+

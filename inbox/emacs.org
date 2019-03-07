@@ -1,0 +1,2 @@
+* scimax
+  + alias scimax=runemacs -q -l /path/to/scimax/init.el

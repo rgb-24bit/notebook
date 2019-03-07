@@ -1,5 +1,5 @@
 * 网络编程
-  + [[https://docs.oracle.com/javase/tutorial/networking/overview/index.html][官方教程]]
+  + [[https://docs.oracle.com/javase/tutorial/networking/overview/index.html][Lesson: Overview of Networking (The Java™ Tutorials > Custom Networking)]]
   + [[https://www.baeldung.com/java-http-request][Do a Simple HTTP Request in Java]]
 
 * 图片处理
@@ -9,14 +9,8 @@
 * synchronized
   + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
 
-* Essential Classes
-  + [[https://docs.oracle.com/javase/tutorial/essential/index.html][Trail: Essential Classes]]
-
 * 引用类型
   + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
-
-* comparator
-  + [[https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html][Comparator (Java Platform SE 8 )]]
 
 * 各版本的功能增强
   + [[https://docs.oracle.com/javase/8/docs/technotes/guides/language/enhancements.html][Java Programming Language Enhancements]]

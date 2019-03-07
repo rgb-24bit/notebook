@@ -8,6 +8,7 @@
 - [[#中英等宽字体的配置][中英等宽字体的配置]]
 - [[#怎样选取-web-mode-的模板引擎][怎样选取 web-mode 的模板引擎]]
 - [[#spacemacs-中那种-m-x-的命令列表怎么实现][Spacemacs 中那种 M-x 的命令列表怎么实现]]
+- [[#怎样对齐-org-mode-中的标签][怎样对齐 Org-mode 中的标签]]
 
 * 怎样在 org-mode 的表格中插入竖线
   使用符号 ~\vert~ 代替，导出时会显示为竖线，参考：
@@ -56,3 +57,5 @@
     (lambda (x) (command-execute (intern x)))
   #+END_SRC
 
+* 怎样对齐 Org-mode 中的标签
+  通过快捷键 C-u C-c C-q 就可以了

@@ -1,4 +1,1 @@
-* 教程
-  + [[https://github.com/MLEveryday/100-Days-Of-ML-Code][MLEveryday/100-Days-Of-ML-Code: 100-Days-Of-ML-Code 中文版]]
-
 

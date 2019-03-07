@@ -33,3 +33,104 @@
   + 内联样式的优先级是最高的
   + 通过为样式添加 ~!important~ 声明使得它必然具有某种样式，如果都有就按照之前的优先级来
 
+* DOM
+  #+BEGIN_SRC plantuml
+    @startuml
+
+    class Node {
+      + nodeType
+      + nodeName
+      + nodeValue
+      + textContent
+      + baseURI
+      + ownerDocument
+      + nextSibling
+      + previousSibling
+      + parentNode
+      + parentElement
+      + firstChild
+      + lastChild
+      + NodeList childNodes
+      + isConnected
+      + appendChild()
+      + hasChildNodes()
+      + cloneNode()
+      + insertBefore()
+      + removeChild()
+      + replaceChild()
+      + contains()
+      + compareDocumentPosition()
+      + isEqualNode()
+      + isSameNode()
+      + normalize()
+      + getRootNode()
+    }
+
+    class NodeList {
+      + length
+      + forEach()
+      + item()
+      + keys()
+      + values()
+      + entries()
+    }
+
+    class HTMLCollection {
+      + length
+      + item()
+      + namedItem()
+    }
+
+    class ParentNode {
+      + HTMLCollection children
+      + firstElementChild
+      + lastElementChild
+      + childElementCount
+      + append()
+      + prepend()
+    }
+
+    class ChildNode {
+      + remove()
+      + before()
+      + after()
+      + replaceWith()
+    }
+
+    class Document {
+      + querySelector()
+      + querySelectorAll() -> NodeList
+    }
+
+    class Element {
+      + dataset
+      + querySelector()
+      + querySelectorAll() -> NodeList
+    }
+
+    class GlobalEventHandlers {
+      + onabort
+      + onerror
+      + onload
+      + onloadstart
+      + onfocus
+      + onblur
+      + onscroll
+      + oncontextmenu
+      + onshow
+    }
+
+    Document --|> Node
+    Document --|> ParentNode
+    Document --|> GlobalEventHandlers
+
+    Element --|> Node
+    Element --|> GlobalEventHandlers
+
+    @enduml
+  #+END_SRC
+
+  + [[http://www.w3school.com.cn/html/html_standardattributes.asp][HTML 4.0 标准属性]]
+  + [[http://www.shouce.ren/api/html/html4/html-09.html][标准属性]]
+  + [[https://wangdoc.com/javascript/events/globaleventhandlers.html#%E5%85%B6%E4%BB%96%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%B1%9E%E6%80%A7][GlobalEventHandlers 接口 - JavaScript 教程 - 网道]]
+  + [[https://stackoverflow.com/questions/588040/window-onload-vs-document-onload][javascript - window.onload vs document.onload - Stack Overflow]]

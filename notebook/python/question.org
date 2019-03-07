@@ -17,11 +17,12 @@
   但是由于 ~Python~ 的动态特性，使得它的 ~JIT~ 难以实现，所以运行速度不快。
 
 * Python 的常见实现有哪些
-  + CPython :: Python 的标准实现
-  + Jython :: Python 的 Java 实现
-  + PyPy :: Python 的 Python 实现
-  + IronPython :: Python 的 C# 实现
-  + Cython :: 包含 C 数据类型的 Python
+  + CPython - Python 的标准实现
+  + Jython - Python 的 Java 实现
+  + PyPy - Python 的 Python 实现
+  + IronPython - Python 的 C# 实现
+  + Cython - 包含 C 数据类型的 Python
+  + Anaconda - 适用于科学计算和数据分析的发行版
 
 * 怎样安装 PIP
   ~Python3~ 可以通过 ~Python -m ensurepip~ 来安装 ~pip~, 如果不信的话，可以通过以下指令：

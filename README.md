@@ -120,6 +120,7 @@
 <ul>
 <li><a href="notebook/lang/bash.org">Bash</a></li>
 <li><a href="notebook/lang/dot.org">Dot</a></li>
+<li><a href="notebook/lang/latex.org">Latex</a></li>
 <li><a href="notebook/lang/plantuml.org">Plantuml</a></li>
 <li><a href="notebook/lang/uml.org">UML</a></li>
 <li><a href="notebook/lang/xml.org">XML 笔记</a></li>
