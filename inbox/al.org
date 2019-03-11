@@ -1,6 +1,0 @@
-* 动态规划
-  + [[https://juejin.im/post/5c2308abf265da615304ce41][看动画轻松理解「递归」与「动态规划」 - 掘金]]
-  + [[https://www.zhihu.com/question/23995189][什么是动态规划？动态规划的意义是什么？ - 知乎]]
-  + [[https://blog.csdn.net/tyhj_sf/article/details/53969072][递归、分治策略、动态规划以及贪心算法之间的关系 - StevenSun的博客空间 - CSDN博客]]
-  + [[https://www.jianshu.com/p/3426660df91d][动态规划与递归 - 简书]]
-

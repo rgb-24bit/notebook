@@ -28,11 +28,7 @@
     #+BEGIN_SRC html
       <input type="radio" name="test-name" checked>
     #+END_SRC
-  + CSS 样式类在元素中的排列顺序不重要重要的是它们的排列顺序，后声明的回覆盖先声明的。
-  + 通过 ID 指定的样式总是比通过类指定的优先级高
-  + 内联样式的优先级是最高的
-  + 通过为样式添加 ~!important~ 声明使得它必然具有某种样式，如果都有就按照之前的优先级来
-
+    
 * DOM
   #+BEGIN_SRC plantuml
     @startuml

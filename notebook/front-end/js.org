@@ -1,4 +1,4 @@
-#+TITLE:      JavaScript 基础笔记
+#+TITLE:      JavaScript
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#语法和数据类型][语法和数据类型]]

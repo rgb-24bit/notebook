@@ -1,36 +1,40 @@
-* 网络编程
-  + [[https://docs.oracle.com/javase/tutorial/networking/overview/index.html][Lesson: Overview of Networking (The Java™ Tutorials > Custom Networking)]]
-  + [[https://www.baeldung.com/java-http-request][Do a Simple HTTP Request in Java]]
+* Misc
+** 网络编程
+   + [[https://docs.oracle.com/javase/tutorial/networking/overview/index.html][Lesson: Overview of Networking (The Java™ Tutorials > Custom Networking)]]
+   + [[https://www.baeldung.com/java-http-request][Do a Simple HTTP Request in Java]]
 
-* 图片处理
-  + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][java 图片处理 (文字水印、图片水印、缩放、补白)]]
-  + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
+** 图片处理
+   + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][java 图片处理 (文字水印、图片水印、缩放、补白)]]
+   + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
 
-* synchronized
-  + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
+** synchronized
+   + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
 
-* 引用类型
-  + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
+** 引用类型
+   + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
 
-* 各版本的功能增强
-  + [[https://docs.oracle.com/javase/8/docs/technotes/guides/language/enhancements.html][Java Programming Language Enhancements]]
-
-* timer
-  + [[https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html][Timer (Java Platform SE 8 )]]
-
-* 数组类型转换
-  #+BEGIN_SRC java
-    public static <T> T convert(Object array, Class<T> clazz) {
-      Object newArray = Array.newInstance(clazz, Array.getLength(array));
-      for (int i = 0; i < Array.getLength(array); ++i) {
-        Array.set(newArray, i, Array.get(array, i));
-      }
-      return (T) newArray;
-    }
-  #+END_SRC
-
-  + [[http://tutorials.jenkov.com/java-reflection/arrays.html][Java Reflection - Arrays]]
+** timer
+   + [[https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html][Timer (Java Platform SE 8 )]]
 
 * 对象的克隆
   + [[https://www.cnblogs.com/Qian123/p/5710533.html][Java提高篇——对象克隆（复制） - 萌小Q - 博客园]]
+
+* core java
+  + java 语言规范 - javase/specs
+  + Java 初始化块执行顺序
+  + Runtime.addShutdownHook
+  + user.dir 是 java 运行环境的启动路径
+  + 默认类路径包含当前目录，设置后就不一定了
+  + 子类和父类同名的字段
+  + 覆盖的方法的可见性不能低于父类
+  + null isinstanceof xxx => false
+  + 枚举值比较用 == 就可以了
+  + [[https://stackoverflow.com/questions/11720288/is-an-interface-a-class][java - Is an interface a class? - Stack Overflow]]
+
+* 反射
+  + int.class, Integer.class, Integer.TYPE
+
+* Tomcat
+  + [[https://stackoverflow.com/questions/1153521/setting-default-locale-for-tomcat-service-in-windows-xp][java - Setting default locale for Tomcat Service in Windows XP - Stack Overflow]]
+
 

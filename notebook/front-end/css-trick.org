@@ -1,0 +1,39 @@
+#+TITLE:      CSS 使用技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#实现网页翻转镜像][实现网页翻转镜像]]
+- [[#让-body-的子元素居中---雾][让 body 的子元素居中 - 雾]]
+
+* 实现网页翻转镜像
+  实现原理是通过 *transform* 属性翻转 *iframe* 元素：
+  #+BEGIN_SRC html
+    <html>
+      <head>
+        <title>...</title>
+        <style>
+          .mirror_ifrom {
+            -webkit-transform: scaleX(-1);
+            animation: mirror forwards 0s;
+            -moz-animation: mirror forwards 0s;
+            -webkit-animation: mirror forwards 0s;
+            -o-animation: mirror forwards 0s;
+          }
+        </style>
+      </head>
+      <body>
+        <iframe src="https://www.bilibili.com/" frameborder="0" width="100%" height="100%" class="mirror_ifrom"></iframe>
+      </body>
+    </html>
+  #+END_SRC
+
+  更多有关于 *transform* 属性的内容：[[https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform][transform | MDN]]
+
+* 让 body 的子元素居中 - 雾
+  #+BEGIN_SRC css
+    body {
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+  #+END_SRC
+

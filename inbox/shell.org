@@ -11,3 +11,5 @@
   + [[https://www.cnblogs.com/whseay/p/3456038.html][Windows命令行使用FTP - whseay - 博客园]]
   + [[https://linux.cn/article-6746-1.html][技术|如何在命令行中使用 ftp 命令上传和下载文件]]
   
+* 配置文件执行顺序
+  #+HTML: <img src="http://cn.linux.vbird.org/linux_basic/0320bash_files/bashrc_1.gif">

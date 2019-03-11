@@ -1,7 +1,7 @@
 <details><summary><b><u>algorithm</u></b></summary>
 <ul>
 <li><a href="notebook/algorithm/bit-operation.org">数据结构与算法 - 位运算相关</a></li>
-<li><a href="notebook/algorithm/concept.org">数据结构与算法 - 概念了解</a></li>
+<li><a href="notebook/algorithm/concept.org">概念</a></li>
 <li><a href="notebook/algorithm/digest.org">消息摘要算法</a></li>
 <li><a href="notebook/algorithm/encode.org">数据结构与算法分析 - 编码</a></li>
 <li><a href="notebook/algorithm/encrypt.org">数据结构与算法 - 加密算法</a></li>
@@ -70,7 +70,26 @@
 <li><a href="notebook/emacs/org-mode.org">Emacs - Org-mode</a></li>
 <li><a href="notebook/emacs/question.org">Emacs - 问题集</a></li>
 <li><a href="notebook/emacs/regex.org">Emacs - 正则表达式</a></li>
+<li><a href="notebook/emacs/scimax.org">scimax</a></li>
 <li><a href="notebook/emacs/utils.org">Emacs - 实用功能</a></li>
+</ul>
+</details>
+<details><summary><b><u>front-end</u></b></summary>
+<ul>
+<li><details><summary><b><u>libraries</u></b></summary>
+<ul>
+<li><a href="notebook/front-end/libraries/jquery.org">jQuery 相关笔记</a></li>
+</ul>
+</details>
+<li><a href="notebook/front-end/css-question.org">CSS 问题集</a></li>
+<li><a href="notebook/front-end/css-trick.org">CSS 使用技巧</a></li>
+<li><a href="notebook/front-end/css.org">CSS</a></li>
+<li><a href="notebook/front-end/html-trick.org">HTML 使用技巧</a></li>
+<li><a href="notebook/front-end/html.org">HTML</a></li>
+<li><a href="notebook/front-end/js-question.org">JavaScript 问题集</a></li>
+<li><a href="notebook/front-end/js-trick.org">JavaScript 使用技巧</a></li>
+<li><a href="notebook/front-end/js.org">JavaScript</a></li>
+<li><a href="notebook/front-end/technology.org">前端相关技术了解</a></li>
 </ul>
 </details>
 <details><summary><b><u>git</u></b></summary>
@@ -213,22 +232,5 @@
 <li><a href="notebook/tools/ssh.org">SSH</a></li>
 <li><a href="notebook/tools/utils.org">实用开源工具收集</a></li>
 <li><a href="notebook/tools/vim.org">Vim 笔记</a></li>
-</ul>
-</details>
-<details><summary><b><u>web-fe</u></b></summary>
-<ul>
-<li><details><summary><b><u>libraries</u></b></summary>
-<ul>
-<li><a href="notebook/web-fe/libraries/jquery.org">jQuery 相关笔记</a></li>
-</ul>
-</details>
-<li><a href="notebook/web-fe/css-base.org">CSS/CSS3 基础笔记</a></li>
-<li><a href="notebook/web-fe/design.org">网页设计相关笔记</a></li>
-<li><a href="notebook/web-fe/html-base.org">HTML/HTML5 基础笔记</a></li>
-<li><a href="notebook/web-fe/html.org">HTML 标签使用笔记</a></li>
-<li><a href="notebook/web-fe/js-base.org">JavaScript 基础笔记</a></li>
-<li><a href="notebook/web-fe/js-tips.org">JavaScript 中的小技巧</a></li>
-<li><a href="notebook/web-fe/question.org">前端问题集</a></li>
-<li><a href="notebook/web-fe/technology.org">Web 相关技术</a></li>
 </ul>
 </details>

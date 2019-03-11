@@ -1,0 +1,10 @@
+#+TITLE:      scimax
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#配置][配置]]
+
+* 配置
+  #+BEGIN_SRC bash
+    $ alias scimax=runemacs -q -l /path/to/scimax/init.el
+  #+END_SRC
+

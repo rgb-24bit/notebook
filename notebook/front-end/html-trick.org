@@ -1,0 +1,18 @@
+#+TITLE:      HTML 使用技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#怎样显示-base64-格式的图片][怎样显示 Base64 格式的图片]]
+- [[#通过-meta-标签指定网页编码时需要注意的问题][通过 meta 标签指定网页编码时需要注意的问题]]
+
+* 怎样显示 Base64 格式的图片
+  #+BEGIN_SRC html
+    <img src="data:image/png;base64,iVBORw0KGgoAAA
+              ANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
+              //8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU
+              5ErkJggg==" alt="Red dot" />
+  #+END_SRC
+
+* 通过 meta 标签指定网页编码时需要注意的问题
+  通过 meta 标签指定页面编码格式是应该作为 head 内部第一个节点，因为浏览器一看到这个标签，就会停止解析页面，
+  转而用你指定的编码重新解读并加载页面。
+

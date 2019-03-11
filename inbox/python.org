@@ -30,3 +30,8 @@
 
   + [[https://zh.wikipedia.org/wiki/Jupyter%E9%A1%B9%E7%9B%AE][Jupyter项目 - 维基百科，自由的百科全书]]
 
+* matplotlib
+  #+BEGIN_SRC python
+    >>> from matplotlib.font_manager import _rebuild
+    >>> _rebuild()
+  #+END_SRC
