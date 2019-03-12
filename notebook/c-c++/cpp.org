@@ -1,4 +1,4 @@
-#+TITLE:      C-C++ - C++ 笔记
+#+TITLE:      C++
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#static][static]]

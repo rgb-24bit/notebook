@@ -1,0 +1,13 @@
+#+TITLE:      算法技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#快速求取两个整数的最大公约数][快速求取两个整数的最大公约数]]
+
+* 快速求取两个整数的最大公约数
+  #+BEGIN_SRC python
+    def gcd(x, y):
+        while not y == 0:
+            x, y = y, x % y
+        return x
+  #+END_SRC
+

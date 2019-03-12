@@ -1,14 +1,15 @@
 <details><summary><b><u>algorithm</u></b></summary>
 <ul>
-<li><a href="notebook/algorithm/bit-operation.org">数据结构与算法 - 位运算相关</a></li>
-<li><a href="notebook/algorithm/concept.org">概念</a></li>
+<li><a href="notebook/algorithm/bitop.org">位运算</a></li>
 <li><a href="notebook/algorithm/digest.org">消息摘要算法</a></li>
-<li><a href="notebook/algorithm/encode.org">数据结构与算法分析 - 编码</a></li>
-<li><a href="notebook/algorithm/encrypt.org">数据结构与算法 - 加密算法</a></li>
-<li><a href="notebook/algorithm/misc.org">数据结构与算法 - 未分类</a></li>
-<li><a href="notebook/algorithm/random.org">随机数的生成与使用</a></li>
-<li><a href="notebook/algorithm/search-sort.org">查找与排序算法</a></li>
+<li><a href="notebook/algorithm/encrypt.org">加密算法</a></li>
+<li><a href="notebook/algorithm/misc.org">Misc</a></li>
+<li><a href="notebook/algorithm/question.org">算法问题集</a></li>
+<li><a href="notebook/algorithm/random.org">随机数相关</a></li>
+<li><a href="notebook/algorithm/search.org">查找 Search</a></li>
+<li><a href="notebook/algorithm/sort.org">排序 Sort</a></li>
 <li><a href="notebook/algorithm/struct.org">表、树、图</a></li>
+<li><a href="notebook/algorithm/trick.org">算法技巧</a></li>
 </ul>
 </details>
 <details><summary><b><u>android</u></b></summary>
@@ -24,14 +25,13 @@
 </details>
 <details><summary><b><u>c-c++</u></b></summary>
 <ul>
-<li><a href="notebook/c-c++/c.org">C 语言笔记</a></li>
-<li><a href="notebook/c-c++/compile.org">C-C++ - 编译器的使用</a></li>
-<li><a href="notebook/c-c++/cpp.org">C-C++ - C++ 笔记</a></li>
-<li><a href="notebook/c-c++/gdb.org">C-C++ - GDB 的使用</a></li>
-<li><a href="notebook/c-c++/libc.org">C-C++ - C 标准库使用</a></li>
-<li><a href="notebook/c-c++/makefile.org">C-C++ - Makefile</a></li>
-<li><a href="notebook/c-c++/pointer.org">C-C++ - 指针</a></li>
-<li><a href="notebook/c-c++/question.org">C-C++ - 问题集</a></li>
+<li><a href="notebook/c-c++/c-question.org">C 语言问题集</a></li>
+<li><a href="notebook/c-c++/c-trick.org">C 语言使用技巧</a></li>
+<li><a href="notebook/c-c++/c.org">C 语言</a></li>
+<li><a href="notebook/c-c++/cpp.org">C++</a></li>
+<li><a href="notebook/c-c++/gcc-gdb.org">GCC & GDB</a></li>
+<li><a href="notebook/c-c++/makefile.org">Makefile</a></li>
+<li><a href="notebook/c-c++/pointer.org">指针</a></li>
 </ul>
 </details>
 <details><summary><b><u>compile</u></b></summary>

@@ -1,23 +1,14 @@
-#+TITLE:      C 语言笔记
+#+TITLE:      C 语言
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#语法相关][语法相关]]
-  - [[#赋值语句][赋值语句]]
-  - [[#逗号][逗号]]
-  - [[#自增运算][自增运算]]
-  - [[#声明和定义][声明和定义]]
-  - [[#字符串字面量][字符串字面量]]
-- [[#类型转换][类型转换]]
-  - [[#有符号数--无符号数][有符号数 & 无符号数]]
-  - [[#隐式类型转换规则][隐式类型转换规则]]
-- [[#内存分区与生命周期问题][内存分区与生命周期问题]]
+- [[#字符串字面量][字符串字面量]]
+- [[#声明和定义][声明和定义]]
+- [[#内存分区与生命周期][内存分区与生命周期]]
   - [[#关键字-static-的作用][关键字 static 的作用]]
 - [[#预处理器][预处理器]]
-  - [[#替换文本宏的使用][替换文本宏的使用]]
-    - [[#关键字参数的模拟实现][关键字参数的模拟实现]]
+  - [[#可变参数宏][可变参数宏]]
 - [[#数组相关][数组相关]]
   - [[#数组的初始化][数组的初始化]]
-  - [[#数组大小的获取][数组大小的获取]]
   - [[#柔性数组的定义][柔性数组的定义]]
   - [[#二维数组的动态创建][二维数组的动态创建]]
 - [[#结构体相关][结构体相关]]
@@ -26,165 +17,55 @@
   - [[#结构体的初始化][结构体的初始化]]
 - [[#枚举类型][枚举类型]]
 
-* 语法相关
-** 赋值语句
-   + 条件语句中的赋值语句：
+* 字符串字面量
+  支持的字符串字面量形式及支持该新式的标准：
+  #+BEGIN_SRC C
+    char* str = "Test string";
+    char* str = u8"Test string";    // C11
+    char16_t* str = u"Test string"; // C11
+    char32_t* str = U"Test string"; // C11
+    wchar_t* str = L"Test string";
+  #+END_SRC
+
+  若在字符串字面量中合法十六进制数位后随十六进制转义，则这会作为非法的转义序列导致编译失败，但能以字符串连接为变通方式：
+  #+BEGIN_SRC C
+    //char* p = "\xfff"; // 错误：十六进制转义在范围外
+    char* p = "\xff""f"; // OK ：字面量为 char[3] ，保有 {'\xff', 'f', '\0'}
+  #+END_SRC
+
+  + [[https://zh.cppreference.com/w/c/language/string_literal][字符串字面量 - cppreference.com]]
+
+* 声明和定义
+  1) 声明可以出现在任意作用域，包括在函数体内部
      #+BEGIN_SRC C
-       if (x = func()) {
-         // ...
+       int main(int argc, char* argv[]) {
+         int func(int, int);
        }
      #+END_SRC
 
-   + 连续赋值语句，分为在声明时和使用时两种情况：
+  2) 函数定义不能嵌套，但结构体可以
      #+BEGIN_SRC C
-       int x = y = 2;  // 声明时 y 并没有定义，所以会出错
-       x = y = 2;      // 使用时， x 和 y 都已定义，可以这样赋值
-     #+END_SRC
-
-** 逗号
-   通过逗号可以将两个语句放在同一行：
-   #+BEGIN_SRC C
-     x = func(10), y = func(20);  // 可以这样将简短的语句放在一行
-   #+END_SRC
-
-   在 Java 中是不可以这样操作的。
-
-** 自增运算
-   + 自增运算通常的使用场景：
-     #+BEGIN_SRC C
-       #include <stdio.h>
-
-       int main(void) {
-         int num = 0, count = 0;
-
-         for (int i = 0; i < 10; ++i) {
-           num = count++;  // 7
+       int main(int argc, char* argv[]) {
+         ing func(int a, int b) {
+           // error
          }
-
-         return 0;
        }
      #+END_SRC
 
-     第七行对应汇编代码：
-     #+BEGIN_SRC asm
-         // count in -4(rbb), num in -8(rbp)
-         0x0000000000401594 <+36>:    mov    -0x4(%rbp),%eax
-         0x0000000000401597 <+39>:    lea    0x1(%rax),%edx
-         0x000000000040159a <+42>:    mov    %edx,-0x4(%rbp)
-         0x000000000040159d <+45>:    mov    %eax,-0x8(%rbp)
-     #+END_SRC
+     PS: GCC 支持嵌套函数
 
-   + 当做操作数和右操作数相同时：
+  3) 枚举声明的同时必须定义
      #+BEGIN_SRC C
-       #include <stdio.h>
-
-       int main(void) {
-         int count = 0;
-
-         for (int i = 0; i < 10; ++i) {
-           count = count++;  // 7
-         }
-
-         return 0;
-       }
+       typedef enum COLOR {
+         RED, GREEN, BLUE
+       } COLOR;
      #+END_SRC
 
-     第七行对应汇编代码：
-     #+BEGIN_SRC asm
-         // count in -4(rbp)
-         0x000000000040158d <+29>:    mov    -0x4(%rbp),%eax
-         0x0000000000401590 <+32>:    lea    0x1(%rax),%edx
-         0x0000000000401593 <+35>:    mov    %edx,-0x4(%rbp)
-         0x0000000000401596 <+38>:    mov    %eax,-0x4(%rbp)
-     #+END_SRC
+  4) 枚举定义后其成员在定义它的 *作用域* 全局有效
 
-   + 具体的执行过程：
-     1) 取有右操作数的值放入寄存器 eax
-     2) eax + 1 放入寄存器 edx
-     3) edx 的值放入右操作数地址
-     4) eax 的值放入左操作数地址
+  参考：[[https://zh.cppreference.com/w/c/language/declarations][声明 - cppreference.com]]
 
-   + 导致的结果理解：
-     在这样的操作中，编译器使用了两个寄存器来保存 *自增前* 和 *自增后* 的值。
-
-     然后首先将 *自增后* 的值保存，然后将 *自增前* 的值赋给 *左值*.
-
-     因此 ~count = count++~ 不会改变 ~count~ 的值。
-
-     这是一个运算优先级的问题。先赋值在自增指的只是赋给 *左值* 的值是 *自增前* 的值。
-
-     而 ~++count~ 赋的是 *自增后* 的值。
-
-** 声明和定义
-   1) 声明可以出现在任意作用域，包括在函数体内部
-      #+BEGIN_SRC C
-        int main(int argc, char* argv[]) {
-          int func(int, int);
-        }
-      #+END_SRC
-
-   2) 函数定义不能嵌套，但结构体可以
-      #+BEGIN_SRC C
-        int main(int argc, char* argv[]) {
-          ing func(int a, int b) {
-            // error
-          }
-        }
-      #+END_SRC
-
-      PS: GCC 支持嵌套函数
-
-   3) 枚举声明的同时必须定义
-      #+BEGIN_SRC C
-        typedef enum COLOR {
-          RED, GREEN, BLUE
-        } COLOR;
-      #+END_SRC
-
-   4) 枚举定义后其成员在定义它的 *作用域* 全局有效
-
-   参考：[[https://zh.cppreference.com/w/c/language/declarations][声明 - cppreference.com]]
-
-** 字符串字面量
-   支持的字符串字面量形式及支持该新式的标准：
-   #+BEGIN_SRC C
-     char* str = "Test string";
-     char* str = u8"Test string";    // C11
-     char16_t* str = u"Test string"; // C11
-     char32_t* str = U"Test string"; // C11
-     wchar_t* str = L"Test string";
-   #+END_SRC
-
-   若在字符串字面量中合法十六进制数位后随十六进制转义，则这会作为非法的转义序列导致编译失败，但能以字符串连接为变通方式：
-   #+BEGIN_SRC C
-     //char* p = "\xfff"; // 错误：十六进制转义在范围外
-     char* p = "\xff""f"; // OK ：字面量为 char[3] ，保有 {'\xff', 'f', '\0'}
-   #+END_SRC
-
-   + [[https://zh.cppreference.com/w/c/language/string_literal][字符串字面量 - cppreference.com]]
-
-* 类型转换
-** 有符号数 & 无符号数
-   整数字面值默认为 *有符号数*, 定义无符号数可以使用后缀 ~u~ 或 ~U~.
-
-   如果一个运算同时存在有符号数和无符号数， 那么会隐式的将有符号数转换为无符号数：
-   #+BEGIN_SRC C
-     // 1st. -2147483647 - 1 = -2147483648
-     // 2st. -2147483648 ==> 2147483648U
-     // 3st. 2147483647 > 2147483648U
-
-     2147483647U > -2147483647 - 1;  // false
-   #+END_SRC
-
-** 隐式类型转换规则
-   C 语言中隐式类型转换的一般规则：将 *比较窄* 的操作数转换为 *比较宽* 的操作数。
-   #+BEGIN_EXAMPLE
-     char --> short --> int --> unsigned --> long --> double <-- float
-   #+END_EXAMPLE
-  
-   + [[https://zh.cppreference.com/w/c/language/conversion][隐式转换 - cppreference.com]]
-
-* 内存分区与生命周期问题
+* 内存分区与生命周期
   + 栈区，由编译器在需要的时候分配，在不需要的时候自动清处的变量的存储区。里面的变量通常是局部变量、函数参数等。
 
   + 堆区，new 操作（C++）分配的内存块，它们的释放编译器不去管， 由应用程序去控制，一般一个 ~new~ 就要对应一个 ~delete~.
@@ -206,7 +87,7 @@
    使用：
    1) 不想被释放的时候，可以使用 static 修饰。比如修饰函数中存放在栈空间的数组。如果不想让这个数组在函数调用结束释放可以使用 static 修饰
    2) 考虑到数据安全性（当程序想要使用全局变量的时候应该先考虑使用 static）
-
+      
 * 预处理器
   C 语言中 *宏* 是一个很重要的工具，和 C++ 不同，C 语言本身的语法特性少的可伶，只能通过宏的方式来实现灵活的编程方式。
 
@@ -235,7 +116,7 @@
 
   预处理器的相关内容很多，可以参考：[[https://zh.cppreference.com/w/c/preprocessor][预处理器 - cppreference.com]].
 
-** 替换文本宏的使用
+** 可变参数宏
    通过宏 *__VA_ARGS__* 定义可变参数宏：
    #+BEGIN_SRC C
      #define F(...) func(__VA_ARGS__)
@@ -264,34 +145,11 @@
      printf("string", );
    #+END_SRC
 
-*** 关键字参数的模拟实现
-    #+BEGIN_SRC C
-      typedef struct KWARGS {
-        int key;
-        int val;
-      } KWARGS;
-
-      int func(KWARGS kwargs) {
-        return kwargs.key + kwargs.val;
-      }
-
-      #define func(...) func((KWARGS){__VA_ARGS__})
-
-      func(.key = 10, .val = 100);  // func(KWARGS {.key = 10, .val = 100})
-    #+END_SRC
-
-    实质上就是通过文本替换宏创建匿名的结构体变量，大括号前面必须有分号、逗号或括号。
-
 * 数组相关
 ** 数组的初始化
    #+BEGIN_SRC C
      int arr[] = {1, 2, 3};   // int arr[3] = {1, 2, 3}
      int arr[4] = {1, 2, 3};  // int arr[4] = {1, 2, 3, 0}
-   #+END_SRC
-
-** 数组大小的获取
-   #+BEGIN_SRC C
-     sizeof(arr) / sizeof(arr[0]);
    #+END_SRC
 
 ** 柔性数组的定义

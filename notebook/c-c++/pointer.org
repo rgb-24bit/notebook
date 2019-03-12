@@ -1,4 +1,4 @@
-#+TITLE:      C-C++ - 指针
+#+TITLE:      指针
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#指针与数组][指针与数组]]

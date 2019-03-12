@@ -1,4 +1,4 @@
-#+TITLE:      C-C++ - 编译器的使用
+#+TITLE:      GCC & GDB
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#gcc][GCC]]
@@ -8,6 +8,9 @@
   - [[#选择编译标准][选择编译标准]]
   - [[#指定目标平台][指定目标平台]]
   - [[#指定应用程序图标][指定应用程序图标]]
+- [[#gdb][GDB]]
+  - [[#简单指令][简单指令]]
+  - [[#使用技巧][使用技巧]]
 
 * GCC
 ** 常用命令行选项
@@ -80,4 +83,22 @@
         #+BEGIN_EXAMPLE
           gcc -o app app.o example.o
         #+END_EXAMPLE
+
+* GDB
+** 简单指令
+   |-------+--------------------------------------|
+   | 指令  | 作用                                 |
+   |-------+--------------------------------------|
+   | n     | 单步调试，执行下一条语句，不进入函数 |
+   | s     | 单步跟踪，执行下一条语句，进入函数   |
+   | p var | 打印变量的值                         |
+   |-------+--------------------------------------|
+
+** 使用技巧
+   + 将函数代码和汇编指令映射起来
+     #+BEGIN_EXAMPLE
+       disas /m fun
+     #+END_EXAMPLE
+
+   + [[https://github.com/hellogcc/100-gdb-tips][hellogcc/100-gdb-tips: A collection of gdb tips. 100 maybe just mean many here.]]
 

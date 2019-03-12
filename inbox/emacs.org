@@ -1,0 +1,4 @@
+* org-mdoe
+  batch 导出时的样式设置：
+  + [[https://emacs.stackexchange.com/questions/31439/how-to-get-colored-syntax-highlighting-of-code-blocks-in-asynchronous-org-mode-e][How to get colored syntax highlighting of code blocks in asynchronous Org-mode exports to HTML? - Emacs Stack Exchange]]
+  + [[https://github.com/gongzhitaao/orgcss#code-highlight][gongzhitaao/orgcss: Simple and clean CSS for Org-exported HTML]]

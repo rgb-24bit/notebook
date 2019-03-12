@@ -1,0 +1,74 @@
+#+TITLE:      C 语言使用技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#赋值语句在条件语句中的使用][赋值语句在条件语句中的使用]]
+- [[#连续赋值语句的使用][连续赋值语句的使用]]
+- [[#逗号运算符][逗号运算符]]
+- [[#关键字参数的模拟实现][关键字参数的模拟实现]]
+- [[#通过-sizeof-运算符获取数组的大小][通过 sizeof 运算符获取数组的大小]]
+- [[#获取输出程序运行过程中的错误信息][获取输出程序运行过程中的错误信息]]
+- [[#通过-memset-函数快速初始化数组][通过 memset 函数快速初始化数组]]
+
+* 赋值语句在条件语句中的使用
+  C 语言的赋值语句可以在条件语句中进行使用：
+  #+BEGIN_SRC C
+    if ((x = func())) {
+      // ...
+    }
+  #+END_SRC
+
+* 连续赋值语句的使用
+  连续赋值语句如果在声明时使用，会因为后面的变量尚未声明而出现错误：
+  #+BEGIN_SRC C
+    int x = y = 10;  // error
+  #+END_SRC
+
+  但是，当所有变量都已声明，那么就可以放心的使用连续赋值语句：
+  #+BEGIN_SRC C
+    x = y = 10;
+  #+END_SRC
+
+* 逗号运算符
+  C 语言中允许使用逗号运算符，因此可以将一些短小的语句放到一行：
+  #+BEGIN_SRC C
+    x = 1, y = 2, c = 3;
+  #+END_SRC
+
+* 关键字参数的模拟实现
+  通过替换文本宏和可变参数宏来实现关键字参数：
+  #+BEGIN_SRC C
+    typedef struct KWARGS {
+      int key;
+      int val;
+    } KWARGS;
+
+    int func(KWARGS kwargs) {
+      return kwargs.key + kwargs.val;
+    }
+
+    #define func(...) func((KWARGS){__VA_ARGS__})
+
+    func(.key = 10, .val = 100);  // func(KWARGS {.key = 10, .val = 100})
+  #+END_SRC
+
+  实质上就是通过文本替换宏创建匿名的结构体变量。
+
+  注：大括号前面必须有分号、逗号或括号。
+
+* 通过 sizeof 运算符获取数组的大小
+  #+BEGIN_SRC C
+    sizeof(arr) / sizeof(arr[0]);
+  #+END_SRC
+
+* 获取输出程序运行过程中的错误信息
+  在标准库 <stdio.h> 中存在函数 ~perror~ 可以用来输出程序运行过程中的错误信息：
+  #+BEGIN_SRC C
+    rror(const char* s);  // "%s: " % s
+  #+END_SRC
+
+* 通过 memset 函数快速初始化数组
+ #+BEGIN_SRC C
+   bool met[MAXN * 2];
+   memset(met, 0, sizeof(met));
+ #+END_SRC
+
