@@ -35,3 +35,13 @@
     >>> from matplotlib.font_manager import _rebuild
     >>> _rebuild()
   #+END_SRC
+
+* Py2.7
+  #+BEGIN_SRC python
+    >>> def cr():
+    ...     return (yield 10)
+    ...
+      File "<stdin>", line 2
+    SyntaxError: 'return' with argument inside generator
+  #+END_SRC
+

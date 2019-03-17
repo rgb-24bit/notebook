@@ -1,0 +1,2 @@
+all:
+	python makenote.py

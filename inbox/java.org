@@ -36,5 +36,46 @@
 
 * Tomcat
   + [[https://stackoverflow.com/questions/1153521/setting-default-locale-for-tomcat-service-in-windows-xp][java - Setting default locale for Tomcat Service in Windows XP - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/9361623/catalina-home-environmental-variable-is-not-defined-correctly][tomcat6 - CATALINA_HOME environmental variable is not defined correctly - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/6623161/javac-option-to-compile-all-java-files-under-a-given-directory-recursively][javac option to compile all java files under a given directory recursively - Stack Overflow]]
 
+* 语法
+  + [[https://stackoverflow.com/questions/1958636/what-is-double-brace-initialization-in-java][What is Double Brace initialization in Java? - Stack Overflow]]
+* Core Java
+  + 根据 Java 语言规范，main 方法必须声明为 public
+  + 字符 $ 在 Java 中虽然合法，但是只用在 Java 编译器工具生成的名字中
+  + const 是 Java 保留的关键字，但目前并没有使用，因此必须使用 final 关键字定义常量
+  + Java 不使用逗号运算符
+  + 格式化字符串是，s 转换符对于实现了 Formattable 接口的对象会调用 gromatTo 方法，否则调用 toString
+  + 命令行参数中，程序名并没有保存在 args 数组中
+  + 打印二维数组 Arrays.deepToString()
+  + 编译器在编译源文件是不检查目录结构，但是不合适的目录结构会导致找不到类
+  + 未指定访问修饰符的域可以被包内所有成员访问
+  + 覆盖方法是，子类方法不能低于超类方法的可见性
+  + 将超类转换为子类之前应该用 instanceof 进行检查
+  + null instanceof type 返回 false
+  + 抄写类可以包含具体数据和具体方法
+  + 默认访问级别对子类不可见
+  + 比较枚举值使用 == 就可以了
+  + 接口中的所有方法自动为 public
+  + 接口中的与自动设为 public static final
+  + 伴随类 - Path/Paths，伴随类包含静态方法
+  + 默认方法冲突 - 超类优先，接口冲突就必须手动覆盖
+  + 所有数组类型都有一个 public 的 clone 方法，可以建立一个新数组，包含源数组所有元素的副本
+  + 函数式接口注释 - FunctionalInterface
+  + 非静态内部类不能有 static 方法
+  + 内部类的所有静态域都必须是 final
+  + 局部类不能用访问修饰符修饰
+  + 内部类访问的局部变量必须为事实上的 final
+  + 静态内部类可以有静态域和静态方法
+  + 声明在接口中的内部类自动成为 static 和 public 类
+  + 双括号初始化
+    #+BEGIN_SRC java
+      new ArrayList<>() {{
+        add(1); add(2);
+      }};
+    #+END_SRC
+
+    外层括号构建匿名子类，内层括号是个对象构造块
+  + [[https://stackoverflow.com/questions/2420389/static-initialization-blocks][java - Static Initialization Blocks - Stack Overflow]]
 
