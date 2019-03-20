@@ -78,4 +78,49 @@
 
     外层括号构建匿名子类，内层括号是个对象构造块
   + [[https://stackoverflow.com/questions/2420389/static-initialization-blocks][java - Static Initialization Blocks - Stack Overflow]]
+  + Java 数组会保存存储的元素的类型信息，虽然符类型的数组引用可以引用子类型的数组的实例，
+    而且往该引用中存入父类型实例的操作可以通过编译器的检查，但是会在运行期间抛出异常。
 
+* Proxy
+  动态创建实现了指定接口的类，调用这个类的方法的时候实际上是调用内部包装的对象的方法。
+
+  创建：
+  #+BEGIN_SRC java
+    Proxy.newProxyInstance(null, new Class<?>[] { Comparable.class }, InvocationHandler);
+  #+END_SRC
+
+  需要实现的方法：
+  #+BEGIN_SRC java
+    public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {}
+  #+END_SRC
+
+  Timer:
+  #+BEGIN_SRC java
+    class TimerHandler implements InvocationHandler {
+      private Object target;
+
+      public TimerHandler(Object target) {
+        this.target = target;
+      }
+
+      public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        long start = System.currentTimeMillis();
+        method.invoke(target, args);
+        long end = System.currentTimeMillis();
+        System.out.printf("Runtime: %ldms\n", end - start);
+      }
+    }
+  #+END_SRC
+
+* Exception
+  Throwable:
+  #+BEGIN_SRC java
+    Throwable()
+    Throwable(String message);
+    String getMessage();
+  #+END_SRC
+
+* 泛型
+  + [[https://www.cnblogs.com/wuqinglong/p/9456193.html][Java泛型类型擦除以及类型擦除带来的问题 - 蜗牛大师 - 博客园]]
+
+  泛型的类型检查是在 *编译前* 进行的。

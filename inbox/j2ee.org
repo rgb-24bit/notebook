@@ -1,3 +1,20 @@
+* 可能的流程
+  1. 服务器启动
+  2. 容器启动
+     + 读取配置文件，创建 ServletContext
+  3. 收到请求
+  4. 请求转发给容器
+  5. 容器创建 Servlet 实例
+     + 读取配置文件创建 ServletConfig 绑定到实例
+  6. Servlet 处理请求并返回响应
+  7. 容器将响应交给服务器
+  8. 服务器返回响应
+
+* 相关链接
+  + [[https://spring.io/understanding/POJO][Understanding POJO]]
+  + [[https://zh.wikipedia.org/wiki/EJB][EJB - 维基百科，自由的百科全书]]
+  + [[https://zh.wikipedia.org/wiki/JavaBeans][JavaBeans - 维基百科，自由的百科全书]]
+
 * 问题
   + MIME
   + Tomcat 的使用

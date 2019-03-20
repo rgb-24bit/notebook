@@ -2,3 +2,15 @@
   batch 导出时的样式设置：
   + [[https://emacs.stackexchange.com/questions/31439/how-to-get-colored-syntax-highlighting-of-code-blocks-in-asynchronous-org-mode-e][How to get colored syntax highlighting of code blocks in asynchronous Org-mode exports to HTML? - Emacs Stack Exchange]]
   + [[https://github.com/gongzhitaao/orgcss#code-highlight][gongzhitaao/orgcss: Simple and clean CSS for Org-exported HTML]]
+
+* org-table
+  时间计算与显示：
+  |-------------------+-------------------+--------|
+  | strat             | end               | length |
+  |-------------------+-------------------+--------|
+  | <2019-03-19 周二> | <2019-03-20 周三> |     1d |
+  |-------------------+-------------------+--------|
+  #+TBLFM: $3=($2 - $1); %dd
+
+  结果的格式化用哪个分号 ~;~ 跟在公式的后面。
+
