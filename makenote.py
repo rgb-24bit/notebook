@@ -5,74 +5,7 @@ import pathlib
 import re
 
 
-IGNORE_DIR = 'image', 'assets', 'static'
-
-
-class FileVisitor(object):
-    """Accessing objects that process files during file tree traversal."""
-
-    def pre_visit_directory(self, dirname):
-        """Method called before accessing the directory.
-
-        Args:
-            dirname: The pathlib.Path object of the directory to be accessed.
-        """
-        pass
-
-    def post_visit_directory(self, dirname):
-        """Method called after accessing the directory.
-
-        Args:
-            dirname: The pathlib.Path object of the directory to be accessed.
-        """
-        pass
-
-    def visit_file(self, filename):
-        """Method called when accessing a file.
-
-        Args:
-            filename: The pathlib.Path object of the file to be accessed.
-        """
-
-    def error_handler(self, error):
-        """Method called when an exception occurs during traversal.
-
-        Args:
-            error: An instance of the exception that occurred.
-        """
-        pass
-
-
-class FileTreeWalker(object):
-    """File tree traversal object.
-
-    Args:
-        path: The directory to be traversed.
-        visitor: Object that implements the FileVisitor interface.
-        followlinks: Whether to traverse the symbolic link under the directory,
-            the default is False.
-    """
-    def __init__(self, path, visitor, followlinks=False):
-        self.visitor = visitor
-        self.walker = os.walk(path, onerror=visitor.error_handler,
-                              followlinks=followlinks)
-
-    def walk(self):
-        """Traversing the file tree."""
-        try:
-            dirpath, dirnames, filenames = next(self.walker)
-
-            for dirname in dirnames:
-                dirname = pathlib.Path(dirname)
-                self.visitor.pre_visit_directory(dirname)
-                self.walk()
-                self.visitor.post_visit_directory(dirname)
-
-            for filename in filenames:
-                self.visitor.visit_file(pathlib.Path(filename))
-
-        except StopIteration:
-            pass
+EXCLUDE_DIR = 'image', 'assets', 'static'
 
 
 def get_note_name(note):
@@ -84,62 +17,64 @@ def get_note_name(note):
     return pathlib.Path(note).stem
 
 
-class NoteVisitor(FileVisitor):
-    """Traversing the processing notes directory."""
-    def __init__(self, file_obj, root, ignore_dir=None):
-        self._file_obj = file_obj
-        self.paths = [root]
-        self.ignore_dir = ignore_dir or tuple()
-        self.ignore = []  # Ignore directories may be nested
-        self.depth = 1
+def walk(walker):
+    """Traverse the specified directory to get the note files in it."""
+    try:
+        dirpath, subdirs, subfiles = next(walker)
 
-    def pre_visit_directory(self, dirname):
-        if dirname.name in self.ignore_dir:
-            self.ignore.append(dirname)
-            return None
+        notes = []
 
-        self.depth += 1
-        self.paths.append(dirname)
+        for subdir in subdirs:
+            subnotes = walk(walker)
+            if not (subdir in EXCLUDE_DIR or len(subnotes) == 0):
+                notes.append({subdir: subnotes})
 
-        if self.depth >= 3:
-            self._file_obj.writelines([
-                '<li>',
-                '<details><summary><b><i>%s</i></b></summary>\n' % dirname,
-                '<ul>\n',
-            ])
+        for subfile in subfiles:
+            notes.append(pathlib.Path(dirpath, subfile).as_posix())
+
+        return notes
+    except StopIteration:
+        pass
+
+
+def makecatalog(fd, notes, level=1):
+    """Generate file content directory."""
+    itemfmt = '  ' * level + '+ [{name}](#{anchor})\n'
+
+    for subnotes in notes:
+        if not isinstance(subnotes, dict):
+            break
+        name = next(iter(subnotes))
+        fd.write(itemfmt.format(name=name, anchor=name.lower()))
+
+
+def makecontent(fd, notes, level=0):
+    """Generate file specific content."""
+    headfmt = '## {name}\n'
+    typefmt = '  ' * level + '+ **{name}**\n'
+    itemfmt = '  ' * level + '+ [{name}]({href})\n'
+
+    for subnotes in notes:
+        if isinstance(subnotes, dict):
+            name = next(iter(subnotes))
+            if level == 0:
+                fd.write(headfmt.format(name=name))
+            else:
+                fd.write(typefmt.format(name=name))
+            makecontent(fd, subnotes[name], level + 1)
         else:
-            self._file_obj.writelines([
-                '<details><summary><b><i>%s</i></b></summary>\n' % dirname,
-                '<ul>\n',
-            ])
+            fd.write(itemfmt.format(name=get_note_name(subnotes), href=subnotes))
 
-    def post_visit_directory(self, dirname):
-        if self.ignore:
-            self.ignore.pop()
-            return None
 
-        self.depth -= 1
-        self.paths.pop()
+def make(fn, basedir):
+    """Generate note index."""
+    notes = walk(os.walk(basedir))
 
-        if self.depth >= 3:
-            self._file_obj.writelines([
-                '</ul>\n',
-                '</details>\n',
-                '</li>',
-            ])
-        else:
-            self._file_obj.writelines([
-                '</ul>\n',
-                '</details>\n',
-            ])
-
-    def visit_file(self, filename):
-        if self.ignore: return None
-        path = pathlib.Path(*self.paths, filename).as_posix()
-        name = get_note_name(path)
-        self._file_obj.write('<li><a href="%s">%s</a></li>\n' % (path, name))
+    with open(fn, 'w', encoding='utf-8') as fd:
+        fd.write('## Table of contents\n')
+        makecatalog(fd, notes)
+        makecontent(fd, notes)
 
 
 if __name__ == '__main__':
-    with open('README.md', 'w', encoding='utf-8') as fd:
-        FileTreeWalker('notebook', NoteVisitor(fd, 'notebook', IGNORE_DIR)).walk()
+    make('README.md', 'notebook')

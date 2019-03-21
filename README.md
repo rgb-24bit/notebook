@@ -1,236 +1,177 @@
-<details><summary><b><i>algorithm</i></b></summary>
-<ul>
-<li><a href="notebook/algorithm/bitop.org">位运算</a></li>
-<li><a href="notebook/algorithm/digest.org">消息摘要算法</a></li>
-<li><a href="notebook/algorithm/encrypt.org">加密算法</a></li>
-<li><a href="notebook/algorithm/misc.org">Misc</a></li>
-<li><a href="notebook/algorithm/question.org">算法问题集</a></li>
-<li><a href="notebook/algorithm/random.org">随机数相关</a></li>
-<li><a href="notebook/algorithm/search.org">查找 Search</a></li>
-<li><a href="notebook/algorithm/sort.org">排序 Sort</a></li>
-<li><a href="notebook/algorithm/struct.org">表、树、图</a></li>
-<li><a href="notebook/algorithm/trick.org">算法技巧</a></li>
-</ul>
-</details>
-<details><summary><b><i>android</i></b></summary>
-<ul>
-<li><a href="notebook/android/activity.org">Android - Activity</a></li>
-<li><a href="notebook/android/content-provider.org">Android - 内容提供器</a></li>
-<li><a href="notebook/android/fragment.org">Android - Fragment</a></li>
-<li><a href="notebook/android/layout.org">Android - Layout</a></li>
-<li><a href="notebook/android/misc.org">Android - Misc</a></li>
-<li><a href="notebook/android/resource.org">Android - Resource</a></li>
-<li><a href="notebook/android/service.org">Android - Service</a></li>
-</ul>
-</details>
-<details><summary><b><i>c-c++</i></b></summary>
-<ul>
-<li><a href="notebook/c-c++/c-question.org">C 语言问题集</a></li>
-<li><a href="notebook/c-c++/c-trick.org">C 语言使用技巧</a></li>
-<li><a href="notebook/c-c++/c.org">C 语言</a></li>
-<li><a href="notebook/c-c++/cpp.org">C++</a></li>
-<li><a href="notebook/c-c++/gcc-gdb.org">GCC & GDB</a></li>
-<li><a href="notebook/c-c++/makefile.org">Makefile</a></li>
-<li><a href="notebook/c-c++/pointer.org">指针</a></li>
-</ul>
-</details>
-<details><summary><b><i>compile</i></b></summary>
-<ul>
-<li><a href="notebook/compile/grammar.org">编译原理 - 语法分析</a></li>
-<li><a href="notebook/compile/lex.org">编译原理 - 词法分析</a></li>
-<li><a href="notebook/compile/simple-compile.org">编译原理 - 简单的语法制导翻译器</a></li>
-</ul>
-</details>
-<details><summary><b><i>database</i></b></summary>
-<ul>
-<li><a href="notebook/database/mongo.org">MongoDB</a></li>
-<li><a href="notebook/database/mssql.org">SQL Server</a></li>
-<li><a href="notebook/database/mysql.org">MySQL</a></li>
-<li><a href="notebook/database/question.org">通用问题集</a></li>
-<li><a href="notebook/database/redis.org">Redis</a></li>
-<li><a href="notebook/database/sql.org">SQL</a></li>
-<li><a href="notebook/database/sqlite3.org">SQLite3</a></li>
-<li><a href="notebook/database/vc.org">数据库版本控制</a></li>
-</ul>
-</details>
-<details><summary><b><i>dotnet</i></b></summary>
-<ul>
-<li><a href="notebook/dotnet/csharp-feature.org">.NET - C# 高级特性</a></li>
-<li><a href="notebook/dotnet/csharp-note.org">.NET - C# 基础</a></li>
-<li><a href="notebook/dotnet/misc.org">.NET - 未分类</a></li>
-<li><a href="notebook/dotnet/winforms.org">.NET - WinForm 相关笔记</a></li>
-</ul>
-</details>
-<details><summary><b><i>emacs</i></b></summary>
-<ul>
-<li><a href="notebook/emacs/code-style.org">Elisp - 风格规范</a></li>
-<li><a href="notebook/emacs/elisp.org">Emacs Lisp 笔记</a></li>
-<li><a href="notebook/emacs/emacs.org">Emacs - 操作技巧</a></li>
-<li><a href="notebook/emacs/minor-mode.org">Emacs - 实用模式</a></li>
-<li><a href="notebook/emacs/org-mode.org">Emacs - Org-mode</a></li>
-<li><a href="notebook/emacs/question.org">Emacs - 问题集</a></li>
-<li><a href="notebook/emacs/regex.org">Emacs - 正则表达式</a></li>
-<li><a href="notebook/emacs/scimax.org">scimax</a></li>
-<li><a href="notebook/emacs/utils.org">Emacs - 实用功能</a></li>
-</ul>
-</details>
-<details><summary><b><i>front-end</i></b></summary>
-<ul>
-<li><details><summary><b><i>libraries</i></b></summary>
-<ul>
-<li><a href="notebook/front-end/libraries/jquery.org">jQuery 相关笔记</a></li>
-</ul>
-</details>
-<li><a href="notebook/front-end/css-question.org">CSS 问题集</a></li>
-<li><a href="notebook/front-end/css-trick.org">CSS 使用技巧</a></li>
-<li><a href="notebook/front-end/css.org">CSS</a></li>
-<li><a href="notebook/front-end/html-trick.org">HTML 使用技巧</a></li>
-<li><a href="notebook/front-end/html.org">HTML</a></li>
-<li><a href="notebook/front-end/js-question.org">JavaScript 问题集</a></li>
-<li><a href="notebook/front-end/js-trick.org">JavaScript 使用技巧</a></li>
-<li><a href="notebook/front-end/js.org">JavaScript</a></li>
-<li><a href="notebook/front-end/technology.org">前端相关技术了解</a></li>
-</ul>
-</details>
-<details><summary><b><i>git</i></b></summary>
-<ul>
-<li><a href="notebook/git/git-book.org">Git-Book 阅读笔记</a></li>
-<li><a href="notebook/git/git-hook.org">Git-Hook</a></li>
-<li><a href="notebook/git/git.org">Git 使用笔记</a></li>
-<li><a href="notebook/git/github.org">Git - Github</a></li>
-<li><a href="notebook/git/question.org">Git 问题集</a></li>
-<li><a href="notebook/git/style.org">Git - 规范</a></li>
-</ul>
-</details>
-<details><summary><b><i>java</i></b></summary>
-<ul>
-<li><details><summary><b><i>frameworks</i></b></summary>
-<ul>
-<li><a href="notebook/java/frameworks/swing.org">Swing</a></li>
-</ul>
-</details>
-<li><details><summary><b><i>libraries</i></b></summary>
-<ul>
-<li><a href="notebook/java/libraries/jdbc.org">JDBC</a></li>
-</ul>
-</details>
-<li><details><summary><b><i>tools</i></b></summary>
-<ul>
-<li><a href="notebook/java/tools/gradle.org">Gradle</a></li>
-</ul>
-</details>
-<li><a href="notebook/java/abstract.org">Java 抽象系统</a></li>
-<li><a href="notebook/java/annotations.org">Java 注解类的定义与使用</a></li>
-<li><a href="notebook/java/feature.org">Java 高级特性</a></li>
-<li><a href="notebook/java/generics.org">Java - 泛型</a></li>
-<li><a href="notebook/java/io.org">Java - I/O 操作</a></li>
-<li><a href="notebook/java/java.org">Java 基础笔记</a></li>
-<li><a href="notebook/java/javadoc.org">JavaDoc 的使用</a></li>
-<li><a href="notebook/java/lambda.org">Java - Lambda 表达式</a></li>
-<li><a href="notebook/java/misc.org">Java Misc</a></li>
-<li><a href="notebook/java/question.org">Java 问题集</a></li>
-<li><a href="notebook/java/reflection.org">Java - 反射</a></li>
-<li><a href="notebook/java/stream.org">Java - 流相关</a></li>
-<li><a href="notebook/java/style.org">Java 编码规范</a></li>
-<li><a href="notebook/java/tips.org">Java 使用技巧</a></li>
-</ul>
-</details>
-<details><summary><b><i>lang</i></b></summary>
-<ul>
-<li><a href="notebook/lang/bash.org">Bash</a></li>
-<li><a href="notebook/lang/dot.org">Dot</a></li>
-<li><a href="notebook/lang/latex.org">Latex</a></li>
-<li><a href="notebook/lang/plantuml.org">Plantuml</a></li>
-<li><a href="notebook/lang/uml.org">UML</a></li>
-<li><a href="notebook/lang/xml.org">XML 笔记</a></li>
-</ul>
-</details>
-<details><summary><b><i>linux</i></b></summary>
-<ul>
-<li><a href="notebook/linux/debian.org">Debian 系统使用</a></li>
-<li><a href="notebook/linux/linux.org">Linux 基础笔记</a></li>
-<li><a href="notebook/linux/question.org">Linux 问题集</a></li>
-</ul>
-</details>
-<details><summary><b><i>math</i></b></summary>
-<ul>
-<li><details><summary><b><i>discrete</i></b></summary>
-<ul>
-<li><a href="notebook/math/discrete/basic">离散数学 - 基本结构</a></li>
-<li><a href="notebook/math/discrete/logic.org">离散数学 - 逻辑和证明</a></li>
-</ul>
-</details>
-<li><details><summary><b><i>linear</i></b></summary>
-<ul>
-<li><a href="notebook/math/linear/matrix.org">线性代数 - 矩阵和方程组</a></li>
-</ul>
-</details>
-</ul>
-</details>
-<details><summary><b><i>misc</i></b></summary>
-<ul>
-<li><a href="notebook/misc/coding.org">编程相关</a></li>
-<li><a href="notebook/misc/liscense.org">开源协议</a></li>
-<li><a href="notebook/misc/noun.org">技术了解</a></li>
-<li><a href="notebook/misc/question.org">问题集</a></li>
-<li><a href="notebook/misc/rest-api.org">REST API</a></li>
-<li><a href="notebook/misc/se.org">结构化编程</a></li>
-<li><a href="notebook/misc/unicode.org">Unicode</a></li>
-</ul>
-</details>
-<details><summary><b><i>network</i></b></summary>
-<ul>
-<li><a href="notebook/network/five-layer-model.org">计算机网络 - 五层模型</a></li>
-<li><a href="notebook/network/protocol.org">计算机网络 - 协议</a></li>
-</ul>
-</details>
-<details><summary><b><i>os</i></b></summary>
-<ul>
-<li><a href="notebook/os/base.org">操作系统 - 基础内容</a></li>
-<li><a href="notebook/os/ecf.org">操作系统 - 异常控制流</a></li>
-<li><a href="notebook/os/express.org">操作系统 - 程序的机器级表示</a></li>
-<li><a href="notebook/os/info.org">操作系统 - 信息的表示和处理</a></li>
-<li><a href="notebook/os/io.org">操作系统 - I/O</a></li>
-<li><a href="notebook/os/link.org">操作系统 - 链接</a></li>
-</ul>
-</details>
-<details><summary><b><i>python</i></b></summary>
-<ul>
-<li><details><summary><b><i>frameworks</i></b></summary>
-<ul>
-<li><a href="notebook/python/frameworks/flask.org">框架 - Flask 笔记</a></li>
-<li><a href="notebook/python/frameworks/orm.org">ORM 框架</a></li>
-<li><a href="notebook/python/frameworks/tkinter.org">Tkinter</a></li>
-</ul>
-</details>
-<li><details><summary><b><i>libraries</i></b></summary>
-<ul>
-<li><a href="notebook/python/libraries/socket.org">socket</a></li>
-<li><a href="notebook/python/libraries/stdlib.org">Python - 标准库</a></li>
-<li><a href="notebook/python/libraries/urllib.org">urllib</a></li>
-</ul>
-</details>
-<li><a href="notebook/python/async.org">Python - 异步 I/O</a></li>
-<li><a href="notebook/python/coroutine.org">Python 协程</a></li>
-<li><a href="notebook/python/pep249.org">PEP249 - 数据库接口</a></li>
-<li><a href="notebook/python/python-crawler.org">Python 爬虫笔记</a></li>
-<li><a href="notebook/python/python.org">Python - 基础笔记</a></li>
-<li><a href="notebook/python/pythondoc.org">Python 文档字符串</a></li>
-<li><a href="notebook/python/question.org">Python 问题集</a></li>
-<li><a href="notebook/python/setup.org">Python Setup</a></li>
-<li><a href="notebook/python/thread.org">Python - 并发编程</a></li>
-<li><a href="notebook/python/weakref.org">Python - 弱引用</a></li>
-</ul>
-</details>
-<details><summary><b><i>tools</i></b></summary>
-<ul>
-<li><a href="notebook/tools/chrome.org">Chrome</a></li>
-<li><a href="notebook/tools/ci.org">自动集成</a></li>
-<li><a href="notebook/tools/cmd.org">Windows CMD 命令</a></li>
-<li><a href="notebook/tools/curl.org">curl</a></li>
-<li><a href="notebook/tools/shell.org">Shell 命令使用</a></li>
-<li><a href="notebook/tools/ssh.org">SSH</a></li>
-<li><a href="notebook/tools/utils.org">实用开源工具收集</a></li>
-<li><a href="notebook/tools/vim.org">Vim 笔记</a></li>
-</ul>
-</details>
+## Table of contents
+  + [algorithm](#algorithm)
+  + [android](#android)
+  + [c-c++](#c-c++)
+  + [compile](#compile)
+  + [database](#database)
+  + [dotnet](#dotnet)
+  + [emacs](#emacs)
+  + [front-end](#front-end)
+  + [git](#git)
+  + [java](#java)
+  + [lang](#lang)
+  + [linux](#linux)
+  + [math](#math)
+  + [misc](#misc)
+  + [network](#network)
+  + [os](#os)
+  + [python](#python)
+  + [tools](#tools)
+## algorithm
+  + [位运算](notebook/algorithm/bitop.org)
+  + [消息摘要算法](notebook/algorithm/digest.org)
+  + [加密算法](notebook/algorithm/encrypt.org)
+  + [Misc](notebook/algorithm/misc.org)
+  + [算法问题集](notebook/algorithm/question.org)
+  + [随机数相关](notebook/algorithm/random.org)
+  + [查找 Search](notebook/algorithm/search.org)
+  + [排序 Sort](notebook/algorithm/sort.org)
+  + [表、树、图](notebook/algorithm/struct.org)
+  + [算法技巧](notebook/algorithm/trick.org)
+## android
+  + [Android - Activity](notebook/android/activity.org)
+  + [Android - 内容提供器](notebook/android/content-provider.org)
+  + [Android - Fragment](notebook/android/fragment.org)
+  + [Android - Layout](notebook/android/layout.org)
+  + [Android - Misc](notebook/android/misc.org)
+  + [Android - Resource](notebook/android/resource.org)
+  + [Android - Service](notebook/android/service.org)
+## c-c++
+  + [C 语言问题集](notebook/c-c++/c-question.org)
+  + [C 语言使用技巧](notebook/c-c++/c-trick.org)
+  + [C 语言](notebook/c-c++/c.org)
+  + [C++](notebook/c-c++/cpp.org)
+  + [GCC & GDB](notebook/c-c++/gcc-gdb.org)
+  + [Makefile](notebook/c-c++/makefile.org)
+  + [指针](notebook/c-c++/pointer.org)
+## compile
+  + [编译原理 - 语法分析](notebook/compile/grammar.org)
+  + [编译原理 - 词法分析](notebook/compile/lex.org)
+  + [编译原理 - 简单的语法制导翻译器](notebook/compile/simple-compile.org)
+## database
+  + [MongoDB](notebook/database/mongo.org)
+  + [SQL Server](notebook/database/mssql.org)
+  + [MySQL](notebook/database/mysql.org)
+  + [通用问题集](notebook/database/question.org)
+  + [Redis](notebook/database/redis.org)
+  + [SQL](notebook/database/sql.org)
+  + [SQLite3](notebook/database/sqlite3.org)
+  + [数据库版本控制](notebook/database/vc.org)
+## dotnet
+  + [.NET - C# 高级特性](notebook/dotnet/csharp-feature.org)
+  + [.NET - C# 基础](notebook/dotnet/csharp-note.org)
+  + [.NET - 未分类](notebook/dotnet/misc.org)
+  + [.NET - WinForm 相关笔记](notebook/dotnet/winforms.org)
+## emacs
+  + [Elisp - 风格规范](notebook/emacs/code-style.org)
+  + [Emacs Lisp 笔记](notebook/emacs/elisp.org)
+  + [Emacs - 操作技巧](notebook/emacs/emacs.org)
+  + [Emacs - 实用模式](notebook/emacs/minor-mode.org)
+  + [Emacs - Org-mode](notebook/emacs/org-mode.org)
+  + [Emacs - 问题集](notebook/emacs/question.org)
+  + [Emacs - 正则表达式](notebook/emacs/regex.org)
+  + [scimax](notebook/emacs/scimax.org)
+  + [Emacs - 实用功能](notebook/emacs/utils.org)
+## front-end
+  + **libraries**
+    + [jQuery 相关笔记](notebook/front-end/libraries/jquery.org)
+  + [CSS 问题集](notebook/front-end/css-question.org)
+  + [CSS 使用技巧](notebook/front-end/css-trick.org)
+  + [CSS](notebook/front-end/css.org)
+  + [HTML 使用技巧](notebook/front-end/html-trick.org)
+  + [HTML](notebook/front-end/html.org)
+  + [JavaScript 问题集](notebook/front-end/js-question.org)
+  + [JavaScript 使用技巧](notebook/front-end/js-trick.org)
+  + [JavaScript](notebook/front-end/js.org)
+  + [前端相关技术了解](notebook/front-end/technology.org)
+## git
+  + [Git-Book 阅读笔记](notebook/git/git-book.org)
+  + [Git-Hook](notebook/git/git-hook.org)
+  + [Git 使用笔记](notebook/git/git.org)
+  + [Git - Github](notebook/git/github.org)
+  + [Git 问题集](notebook/git/question.org)
+  + [Git - 规范](notebook/git/style.org)
+## java
+  + **frameworks**
+    + [Swing](notebook/java/frameworks/swing.org)
+  + **libraries**
+    + [JDBC](notebook/java/libraries/jdbc.org)
+  + **tools**
+    + [Gradle](notebook/java/tools/gradle.org)
+  + [Java 抽象系统](notebook/java/abstract.org)
+  + [Java 注解类的定义与使用](notebook/java/annotations.org)
+  + [Java 高级特性](notebook/java/feature.org)
+  + [Java - 泛型](notebook/java/generics.org)
+  + [Java - I/O 操作](notebook/java/io.org)
+  + [Java 基础笔记](notebook/java/java.org)
+  + [JavaDoc 的使用](notebook/java/javadoc.org)
+  + [Java - Lambda 表达式](notebook/java/lambda.org)
+  + [Java Misc](notebook/java/misc.org)
+  + [Java 问题集](notebook/java/question.org)
+  + [Java - 反射](notebook/java/reflection.org)
+  + [Java - 流相关](notebook/java/stream.org)
+  + [Java 编码规范](notebook/java/style.org)
+  + [Java 使用技巧](notebook/java/tips.org)
+## lang
+  + [Bash](notebook/lang/bash.org)
+  + [Dot](notebook/lang/dot.org)
+  + [Latex](notebook/lang/latex.org)
+  + [Plantuml](notebook/lang/plantuml.org)
+  + [UML](notebook/lang/uml.org)
+  + [XML 笔记](notebook/lang/xml.org)
+## linux
+  + [Debian 系统使用](notebook/linux/debian.org)
+  + [Linux 基础笔记](notebook/linux/linux.org)
+  + [Linux 问题集](notebook/linux/question.org)
+## math
+  + **discrete**
+    + [离散数学 - 基本结构](notebook/math/discrete/basic)
+    + [离散数学 - 逻辑和证明](notebook/math/discrete/logic.org)
+  + **linear**
+    + [线性代数 - 矩阵和方程组](notebook/math/linear/matrix.org)
+## misc
+  + [编程相关](notebook/misc/coding.org)
+  + [开源协议](notebook/misc/liscense.org)
+  + [技术了解](notebook/misc/noun.org)
+  + [问题集](notebook/misc/question.org)
+  + [REST API](notebook/misc/rest-api.org)
+  + [结构化编程](notebook/misc/se.org)
+  + [Unicode](notebook/misc/unicode.org)
+## network
+  + [计算机网络 - 五层模型](notebook/network/five-layer-model.org)
+  + [计算机网络 - 协议](notebook/network/protocol.org)
+## os
+  + [操作系统 - 基础内容](notebook/os/base.org)
+  + [操作系统 - 异常控制流](notebook/os/ecf.org)
+  + [操作系统 - 程序的机器级表示](notebook/os/express.org)
+  + [操作系统 - 信息的表示和处理](notebook/os/info.org)
+  + [操作系统 - I/O](notebook/os/io.org)
+  + [操作系统 - 链接](notebook/os/link.org)
+## python
+  + **frameworks**
+    + [框架 - Flask 笔记](notebook/python/frameworks/flask.org)
+    + [ORM 框架](notebook/python/frameworks/orm.org)
+    + [Tkinter](notebook/python/frameworks/tkinter.org)
+  + **libraries**
+    + [socket](notebook/python/libraries/socket.org)
+    + [Python - 标准库](notebook/python/libraries/stdlib.org)
+    + [urllib](notebook/python/libraries/urllib.org)
+  + [Python - 异步 I/O](notebook/python/async.org)
+  + [Python 协程](notebook/python/coroutine.org)
+  + [PEP249 - 数据库接口](notebook/python/pep249.org)
+  + [Python 爬虫笔记](notebook/python/python-crawler.org)
+  + [Python - 基础笔记](notebook/python/python.org)
+  + [Python 文档字符串](notebook/python/pythondoc.org)
+  + [Python 问题集](notebook/python/question.org)
+  + [Python Setup](notebook/python/setup.org)
+  + [Python - 并发编程](notebook/python/thread.org)
+  + [Python - 弱引用](notebook/python/weakref.org)
+## tools
+  + [Chrome](notebook/tools/chrome.org)
+  + [自动集成](notebook/tools/ci.org)
+  + [Windows CMD 命令](notebook/tools/cmd.org)
+  + [curl](notebook/tools/curl.org)
+  + [Shell 命令使用](notebook/tools/shell.org)
+  + [SSH](notebook/tools/ssh.org)
+  + [实用开源工具收集](notebook/tools/utils.org)
+  + [Vim 笔记](notebook/tools/vim.org)
