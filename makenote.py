@@ -5,7 +5,7 @@ import pathlib
 import re
 
 
-IGNORE_DIR = 'img', 'image', 'assets', 'static'
+IGNORE_DIR = 'image', 'assets', 'static'
 
 
 class FileVisitor(object):
@@ -104,12 +104,12 @@ class NoteVisitor(FileVisitor):
         if self.depth >= 3:
             self._file_obj.writelines([
                 '<li>',
-                '<details><summary><b><u>%s</u></b></summary>\n' % dirname,
+                '<details><summary><b><i>%s</i></b></summary>\n' % dirname,
                 '<ul>\n',
             ])
         else:
             self._file_obj.writelines([
-                '<details><summary><b><u>%s</u></b></summary>\n' % dirname,
+                '<details><summary><b><i>%s</i></b></summary>\n' % dirname,
                 '<ul>\n',
             ])
 

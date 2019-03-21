@@ -43,19 +43,19 @@
 
   代表性文法的 FIRST 集：
    
-  [[file:img/FIRST.png]]
+  [[file:image/FIRST.png]]
 
   代表性文法的 FOLLOW 集：
 
-  [[file:img/FOLLOW.png]]
+  [[file:image/FOLLOW.png]]
 
   代表性文法的 SELECT 集：
 
-  [[file:img/SELECT.png]]
+  [[file:image/SELECT.png]]
 
   通过 SELECT 集构造 *预测分析表*, 输入符号和 SELECT 集相对应，单元格和产生式相对应：
 
-  [[file:img/table.png]]
+  [[file:image/table.png]]
   
   预测分析法的实现步骤：
   1. 构造文法

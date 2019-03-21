@@ -12,7 +12,7 @@
 
   各层的数据包的基本格式都是： ~head + data~, 分层嵌套。
 
-  [[file:img/net.png]]
+  [[file:image/net.png]]
 
   详细教程： [[http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html][阮一峰 - 互联网协议入门]].
 
