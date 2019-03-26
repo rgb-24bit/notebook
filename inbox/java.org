@@ -13,9 +13,6 @@
 ** 引用类型
    + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
 
-** timer
-   + [[https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html][Timer (Java Platform SE 8 )]]
-
 * 对象的克隆
   + [[https://www.cnblogs.com/Qian123/p/5710533.html][Java提高篇——对象克隆（复制） - 萌小Q - 博客园]]
 

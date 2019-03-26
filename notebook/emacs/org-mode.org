@@ -1,76 +1,53 @@
-#+TITLE:      Emacs - Org-mode
+#+TITLE:      Org mode
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#org-capture][org-capture]]
-- [[#org-agenda][org-agenda]]
-- [[#org-table][org-table]]
-  - [[#org-clocktable][org-clocktable]]
-- [[#timestamps][timestamps]]
-- [[#footnote][footnote]]
+- [[#使用技巧][使用技巧]]
+  - [[#agenda-views-相关][Agenda Views 相关]]
+  - [[#org-导出为-html-时使用-css文件-中的样式高亮代码][Org 导出为 HTML 时使用 CSS文件 中的样式高亮代码]]
+  - [[#使用-clocktable-进行时间统计][使用 clocktable 进行时间统计]]
+- [[#问题集][问题集]]
+  - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
+  - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
 
-* org-capture
-  将 org-capture 捕获的内容插入当当前光标位置：
-  #+BEGIN_QUOTE
-  When called with a ‘C-0’ (zero) prefix, insert a template at point.
-  #+END_QUOTE
+* 使用技巧
+** Agenda Views 相关
+   + Agenda Views 默认会显示每个条目的 ~CATEGORY~ 属性，该属性可以通过快捷键 ~C-c C-x p~ 进行插入
+   + Agenda Views 中可以通过快捷键 ~C-k~ 删除条目，也可以通过 ~B f org-agenda-kill~ 批量删除标记的条目
 
-  定义方便使用的函数：
-  #+BEGIN_SRC elisp
-    (defun org-capture-at-point ()
-      "Insert an org capture template at point."
-      (interactive)
-      (org-capture 0))
-  #+END_SRC
+** Org 导出为 HTML 时使用 CSS文件 中的样式高亮代码
+   通过将 ~org-html-htmlize-output-type~ 设置为 ~css~ 来让导出的 ~HTML~ 中的代码部分使用 ~CSS~ 文件中的高亮样式。
 
-  + [[http://www.zmonster.me/2018/02/28/org-mode-capture.html][使用 capture 功能快速记录 · ZMonster's Blog]]
-  + [[https://orgmode.org/manual/Capture-templates.html#Capture-templates][The Org Manual: Capture templates]]
-
-* org-agenda   
-  org-agenda 默认情况下会显示 Task 的 ~CATEGORY~, 该属性可以通过快捷键 ~C-c C-x p~ 进行插入。
-
-  agenda 视图中可以通过 C-k 删除条目，也可以通过 B f org-agenda-kill 的方式批量删除条目。
-
-* org-table
-  表格公式运算符之间是允许空格的，因此在编写公式时，可以考虑添加空格增强可读性。
-
-  日期的计算：
-  #+BEGIN_EXAMPLE
-    ,#+TBLFM: $5=($2 - now()); %dd
-  #+END_EXAMPLE
-
-  可以通过快捷键 C-c C-x C-r 插入 clock table 来进行时间统计，它的 ~tags~ 选项要求是用引号包围的字符串，
-  不同的标签用逗号分隔。
-
-  + [[https://orgmode.org/manual/The-clock-table.html][The Org Manual: The clock table]]
-  + [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][Clocking time with Org-mode]]
-
-  有关表格操作的教程：
-  + [[http://www.zmonster.me/2016/06/03/org-mode-table.html][表格的基本操作及公式、绘图 · ZMonster's Blog]]
-
-** org-clocktable
-   + 使用 tags 选项需要用双引号将需要的 tag 包起来，同时不同的 tag 之间应该用 | 进行分隔，
-     不能有空格。
-
+** 使用 clocktable 进行时间统计
+   可以通过快捷键 ~C-c C-x C-r~ 插入 clock table 来进行时间统计，其中：
+   + 通过用双引号包围的 tag 来过滤条目，不同的 tag 用 ~|~ 进行分隔
      #+BEGIN_SRC org
        ,#+BEGIN: clocktable :tags "tag1|tag2"
 
        ,#+END:
      #+END_SRC
 
-   + 使用 tstart 时的时间戳格式：
+   + 通过 tstart 指定起始时间：
      #+BEGIN_SRC org
        ,#+BEGIN: clocktable :scope tree :maxlevel 1 :tstart "<2019-01-21>"
      #+END_SRC
 
-* timestamps
-  + 插入非活动时间戳：
-    #+BEGIN_EXAMPLE
-      C-c !     (org-time-stamp-inactive)
-    #+END_EXAMPLE
+* 问题集
+** 如何将 org-capture 捕获的内容插入当前光标位置
+   #+BEGIN_QUOTE
+   When called with a ‘C-0’ (zero) prefix, insert a template at point.
+   #+END_QUOTE
 
-* footnote
-  + 脚注在第 0 列开始, *不允许* 缩进.
-  + 快捷键 C-c C-x f 插入脚注
-  + 快捷键 C-c C-c 在声明和定义之间跳转
-  + 选择前缀 C-u C-c C-x f
- 
+   可以将其定义为方便使用的函数：
+   #+BEGIN_SRC elisp
+     (defun org-capture-at-point ()
+       "Insert an org capture template at point."
+       (interactive)
+       (org-capture 0))
+   #+END_SRC
+
+** 怎样在 org-table 中计算日期
+   直接用列进行加减就可以了，也可以用函数 ~now~ 表示当前的时间：
+   #+BEGIN_EXAMPLE
+    ,#+TBLFM: $5=($2 - now()); %dd
+   #+END_EXAMPLE
+

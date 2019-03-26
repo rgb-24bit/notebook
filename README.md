@@ -67,7 +67,7 @@
   + [Emacs Lisp 笔记](notebook/emacs/elisp.org)
   + [Emacs - 操作技巧](notebook/emacs/emacs.org)
   + [Emacs - 实用模式](notebook/emacs/minor-mode.org)
-  + [Emacs - Org-mode](notebook/emacs/org-mode.org)
+  + [Org mode](notebook/emacs/org-mode.org)
   + [Emacs - 问题集](notebook/emacs/question.org)
   + [Emacs - 正则表达式](notebook/emacs/regex.org)
   + [scimax](notebook/emacs/scimax.org)
@@ -112,6 +112,7 @@
   + [Java - 流相关](notebook/java/stream.org)
   + [Java 编码规范](notebook/java/style.org)
   + [Java 使用技巧](notebook/java/tips.org)
+  + [Java 使用技巧](notebook/java/trick.org)
 ## lang
   + [Bash](notebook/lang/bash.org)
   + [Dot](notebook/lang/dot.org)
@@ -132,6 +133,7 @@
 ## misc
   + [编程相关](notebook/misc/coding.org)
   + [开源协议](notebook/misc/liscense.org)
+  + [日本麻将](notebook/misc/mahjong.org)
   + [技术了解](notebook/misc/noun.org)
   + [问题集](notebook/misc/question.org)
   + [REST API](notebook/misc/rest-api.org)

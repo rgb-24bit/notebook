@@ -1,0 +1,16 @@
+#+TITLE:      Java 使用技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#将-priorityqueue-作为最小堆][将 PriorityQueue 作为最小堆]]
+
+* 将 PriorityQueue 作为最小堆
+  可以将 PriorityQueue 作为最小堆来使用：
+  #+BEGIN_SRC java
+    PriorityQueue minHeap = new PriorityQueue();
+  #+END_SRC
+
+  同时，只需要简单的变化就可以当做最大对来使用：
+  #+BEGIN_SRC java
+    Queue maxHeap = new PriorityQueue(Collections.reverseOrder());
+  #+END_SRC
+

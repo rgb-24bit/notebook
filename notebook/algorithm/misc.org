@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#整数分解][整数分解]]
 - [[#base64-编码][Base64 编码]]
+- [[#lru-cache][LRU Cache]]
 
 * 整数分解
   *整数分解(integer factorization)* 将一个正整数写成几个约数的乘积，这样的分解结果应该是独一无二的。
@@ -92,4 +93,101 @@
   #+END_SRC
 
   + [[https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/Base64][Algorithm Implementation/Miscellaneous/Base64 - Wikibooks, open books for an open world]]
+
+* LRU Cache
+  LRU Cache 可以借助散列表和链表实现，基本思路如下：
+  1. 通过双向链表来存储所有的 *值*
+  2. 通过散列表来存储所有的 *键 - 链表节点* 对
+  3. 访问键时获取对应的节点，如果节点存在便将该节点移到链表一端，同时返回值
+  4. 增加键时判断是否达到容量上限，如果达到就删除链表另一端的节点
+
+  简易的实现：
+  #+BEGIN_SRC java
+    public class LRUCache<K, V> {
+      class Node<K, V> {
+        Node<K, V> prev;
+        Node<K, V> next;
+        K key;
+        V val;
+
+        Node(K key, V val) {
+          this.key = key;
+          this.val = val;
+        }
+      }
+
+      private Map<K, Node<K, V>> map = new HashMap<>();
+      private Node<K, V> head;
+      private Node<K, V> tail;
+
+      private int capacity;
+
+      public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.head = new Node<>(null, null);
+        this.tail = new Node<>(null, null);
+        head.next = tail;
+        tail.prev = head;
+      }
+
+      public V get(K key) {
+        Node<K, V> node = map.get(key);
+        if (node != null) {
+          node.prev.next = node.next;
+          node.next.prev = node.prev;
+          appendTail(node);
+          return node.val;
+        }
+        return null;
+      }
+
+      public void set(K key, V val) {
+        Node<K, V> node = map.get(key);
+
+        if (node != null) {
+          node.val = val;
+          // map.put(key, node);
+          node.prev.next = node.next;
+          node.next.prev = node.prev;
+          appendTail(node);
+        } else {
+          if (map.size() == capacity) {
+            Node<K, V> temp = head.next;
+            head.next = head.next.next;
+            head.next.prev = head;
+            map.remove(temp.key);
+          }
+
+          node = new Node<>(key, val);
+          appendTail(node);
+          map.put(key, node);
+        }
+      }
+
+      private void appendTail(Node<K, V> node) {
+        node.next = tail;
+        node.prev = tail.prev;
+        tail.prev.next = node;
+        tail.prev = node;
+      }
+    }
+  #+END_SRC
+
+  同时，可以借助 Java 中的 LinkedHashMap 快速实现：
+  #+BEGIN_SRC java
+    public class LRUCache<K, V> extends LinkedHashMap<K, V> {
+      private int maxSize;
+
+      public LRUCache(int initialCapcity, float loadFactor, int maxSize) {
+        super(initialCapcity, loadFactor, true);
+        this.maxSize = maxSize;
+      }
+
+      protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        return size() > maxSize;
+      }
+    }
+  #+END_SRC
+
+  参考：[[https://yikun.github.io/2015/04/03/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AALRU-Cache%EF%BC%9F/][如何设计实现一个 LRU Cache | Yikun]]
 
