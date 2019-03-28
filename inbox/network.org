@@ -8,3 +8,16 @@
   + [[https://en.wikipedia.org/wiki/Common_Gateway_Interface][Wiki - Common Gateway Interface]]
   + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
   + [[http://www.cnblogs.com/liuzhang/p/3929198.html][我所了解的 cgi - 博客园]]
+
+* socket
+  建立 socket 后会创建输入和输出两个缓冲区，为读取输入时输入会堆积在输入缓冲区。
+
+  + [[http://c.biancheng.net/cpp/html/3040.html][socket 缓冲区以及阻塞模式 - C 语言中文网]]
+
+  缓冲区可能会溢出。
+
+* HTTP
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Session][典型的 HTTP 会话 - HTTP | MDN]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x][HTTP/1.x 的连接管理 - HTTP | MDN]]
+  + [[https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/][How Browsers Work: Behind the scenes of modern web browsers - HTML5 Rocks]]
+

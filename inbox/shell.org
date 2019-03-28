@@ -16,4 +16,8 @@
 
 * make
   使用环境变量：[[https://stackoverflow.com/questions/28890634/how-to-get-a-shell-environment-variable-in-a-makefile][How to get a shell environment variable in a makefile? - Stack Overflow]]
+  Shell 命令的输出：
+  #+BEGIN_SRC makefile
+    VAR = $(shell command...)
+  #+END_SRC
 

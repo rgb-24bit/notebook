@@ -55,7 +55,7 @@
   + 默认访问级别对子类不可见
   + 比较枚举值使用 == 就可以了
   + 接口中的所有方法自动为 public
-  + 接口中的与自动设为 public static final
+  + 接口中的域自动设为 public static final
   + 伴随类 - Path/Paths，伴随类包含静态方法
   + 默认方法冲突 - 超类优先，接口冲突就必须手动覆盖
   + 所有数组类型都有一个 public 的 clone 方法，可以建立一个新数组，包含源数组所有元素的副本
@@ -117,7 +117,84 @@
     String getMessage();
   #+END_SRC
 
+  + 子类覆盖超类方法是，子类抛出的异常不能比超类的更通用，如果父类没有抛出任何受查异常，那么子类也不能抛出
+  + 创建自己的异常：
+    #+BEGIN_SRC java
+      public class MyException extends Exception {
+        public MyException() {}
+        public MyException(String message) {
+          super(message);
+        }
+      }
+    #+END_SRC
+  + 捕获多个异常是异常变量隐含为 final 变量：
+    #+BEGIN_SRC java
+      catch (E1 | E2 e)
+    #+END_SRC
+  + 异常链
+    #+BEGIN_SRC java
+      catch (Exception e) {
+        Throwable se = new ...;  // new ...(e);
+        se.initCause(e);
+        throws se;
+      }
+    #+END_SRC
+  + finally 子句的返回值会覆盖原本的返回值
+  + 解耦 finally 和 catch：
+    #+BEGIN_SRC java
+      try {
+        try {} finally {}
+      } catch (Throwable e) {
+        e.printStackTrace();
+      }
+    #+END_SRC
+  + 带资源的 try 语句：要求实现 AutoCloseable 或 Closeable 接口
+  + 早抛出晚捕获
+  + Thread.dumpStack
+  + java -verbose 观察类的加载过程
+  + -Xlint 选项对常见问题进行检查
+
 * 泛型
   + [[https://www.cnblogs.com/wuqinglong/p/9456193.html][Java泛型类型擦除以及类型擦除带来的问题 - 蜗牛大师 - 博客园]]
 
-  泛型的类型检查是在 *编译前* 进行的。
+  + 泛型的类型检查是在 *编译前* 进行的
+  + 类型参数放在修饰符后面返回值类型前面
+  + 泛型方法的使用 - ~Object.<Class>method~
+  + 限定类型： <T extends A & B>
+  + 约束
+    1. 运行时类型查询只能获取原始类型（反射）
+    2. 不能实例化参数化类型的数组：
+       #+BEGIN_SRC java
+         Pair<String>[] table = new Pair<>[10]; // error
+       #+END_SRC
+       这会带来潜在的问题。
+    3. 不能实例化类型变量
+    4. 不能创造泛型数组 - 看一下 JDK 源码中的集合实现好了
+    5. 泛型类的今天上下文中类型变量无效
+  + 不能捕获或抛出泛型异常
+  + Pair<Child> 是 Pair<? extends Super> 的子类
+  + 通配符捕获：
+    #+BEGIN_SRC java
+      public static <T> void helper(Pair<T> p) {
+        ...;
+      }
+
+      public static void swap(Pair<?> p) {
+        helper(p);
+      }
+    #+END_SRC
+
+* 集合
+  + 自定义集合时可以继承 AbstractXXX
+  + 迭代器位于两个元素之间
+  + 轻量级集合包装器
+
+* 并发
+  + 理解原子性时需要记住：读取、计算、写入是可能被分开的
+
+* 初始化块
+  + 类加载时执行静态初始化块
+  + 创造对象时按照块的出现顺序执行不同的初始化块
+
+* 数组
+  + 数组克隆对于数值类型来说是安全的，对于对象来说只是克隆了引用

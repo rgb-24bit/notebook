@@ -92,25 +92,18 @@
   + [Git 问题集](notebook/git/question.org)
   + [Git - 规范](notebook/git/style.org)
 ## java
-  + **frameworks**
-    + [Swing](notebook/java/frameworks/swing.org)
-  + **libraries**
-    + [JDBC](notebook/java/libraries/jdbc.org)
-  + **tools**
-    + [Gradle](notebook/java/tools/gradle.org)
-  + [Java 抽象系统](notebook/java/abstract.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
-  + [Java 高级特性](notebook/java/feature.org)
-  + [Java - 泛型](notebook/java/generics.org)
+  + [Gradle](notebook/java/gradle.org)
   + [Java - I/O 操作](notebook/java/io.org)
-  + [Java 基础笔记](notebook/java/java.org)
-  + [JavaDoc 的使用](notebook/java/javadoc.org)
-  + [Java - Lambda 表达式](notebook/java/lambda.org)
+  + [Java 基础知识](notebook/java/java.org)
+  + [JavaDoc](notebook/java/javadoc.org)
+  + [JDBC](notebook/java/jdbc.org)
   + [Java Misc](notebook/java/misc.org)
   + [Java 问题集](notebook/java/question.org)
   + [Java - 反射](notebook/java/reflection.org)
   + [Java - 流相关](notebook/java/stream.org)
   + [Java 编码规范](notebook/java/style.org)
+  + [Swing](notebook/java/swing.org)
   + [Java 使用技巧](notebook/java/tips.org)
   + [Java 使用技巧](notebook/java/trick.org)
 ## lang

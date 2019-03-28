@@ -1,4 +1,4 @@
-#+TITLE:      JavaDoc 的使用
+#+TITLE:      JavaDoc
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概要][概要]]

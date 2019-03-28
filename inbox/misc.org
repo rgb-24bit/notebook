@@ -12,3 +12,6 @@
 * 开源精神
   + [[https://github.com/lifesinger/blog/issues/167][什么是开源精神 · Issue #167 · lifesinger/blog]]
 
+* Windows 命名管道
+  + [[https://jalonwong.github.io/2012/10/16/name-pipe/][Windows 命名管道 | Jalon's Blog]]
+
