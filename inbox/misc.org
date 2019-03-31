@@ -15,3 +15,9 @@
 * Windows 命名管道
   + [[https://jalonwong.github.io/2012/10/16/name-pipe/][Windows 命名管道 | Jalon's Blog]]
 
+* 安全
+  + [[http://sec.sangfor.com.cn/attacks/3.html][XSS 注入攻击介绍]]
+
+* 编码
+  + [[https://dzone.com/articles/dont-waste-time-writing][Don't Waste Time Writing Perfect Code - DZone DevOps]]
+

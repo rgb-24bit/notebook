@@ -65,7 +65,7 @@
 ## emacs
   + [Elisp - 风格规范](notebook/emacs/code-style.org)
   + [Emacs Lisp 笔记](notebook/emacs/elisp.org)
-  + [Emacs - 操作技巧](notebook/emacs/emacs.org)
+  + [Emacs 使用笔记](notebook/emacs/emacs.org)
   + [Emacs - 实用模式](notebook/emacs/minor-mode.org)
   + [Org mode](notebook/emacs/org-mode.org)
   + [Emacs - 问题集](notebook/emacs/question.org)

@@ -48,3 +48,6 @@
 * 事件驱动程序
   + [[https://github.com/rgb-24bit/python3-cookbook/blob/master/source/c11/p12_understanding_event_driven_io.rst][python3-cookbook/p12_understanding_event_driven_io.rst at master · rgb-24bit/python3-cookbook]]
 
+* 配置
+  + [[https://hackernoon.com/4-ways-to-manage-the-configuration-in-python-4623049e841b][4 Ways to manage the configuration in Python – Hacker Noon]]
+

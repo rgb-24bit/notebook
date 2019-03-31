@@ -1,18 +1,31 @@
 #+TITLE:      Latex
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#tex-live-安装][Tex Live 安装]]
+- [[#简单使用][简单使用]]
+  - [[#tex-live-安装][Tex Live 安装]]
+  - [[#文本模式][文本模式]]
 - [[#问题集][问题集]]
   - [[#怎样安装更新-latex-宏包][怎样安装更新 Latex 宏包]]
   - [[#怎样编译-tex-文件][怎样编译 Tex 文件]]
+  - [[#tex-引擎格式发行版之间的关系][Tex 引擎、格式、发行版之间的关系]]
 
-* Tex Live 安装
-  在清华镜像站下载压缩包 ~install-tl.zip~ 并解压，地址：
-  #+BEGIN_EXAMPLE
-    https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet/
-  #+END_EXAMPLE
+* 简单使用
+** Tex Live 安装
+   在清华镜像站下载压缩包 ~install-tl.zip~ 并解压，地址：
+   #+BEGIN_EXAMPLE
+     https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet/
+   #+END_EXAMPLE
   
-  执行脚本 ~install-tl-advanced.bat~ 即可。
+   执行脚本 ~install-tl-advanced.bat~ 即可。
+
+** 文本模式
+   Tex 中的一些字符是特殊字符，需要输入这些字符时需要通过 ~\~ 进行转义，同时，由于 ~\\~ 表示为换行，因此，
+   如果要输入 ~\~ 需要使用 ~\textbackslash~.
+
+   一些特殊字符：
+   #+BEGIN_EXAMPLE
+     \# \$ \^ \& \_ \{ \} \~ \textbackslash \%
+   #+END_EXAMPLE
 
 * 问题集
 ** 怎样安装更新 Latex 宏包
@@ -28,3 +41,6 @@
      $ bibtex   filename  # refrence document
    #+END_SRC   
 
+** Tex 引擎、格式、发行版之间的关系
+   + [[https://tex.stackexchange.com/questions/296616/questions-regarding-the-distinction-between-xetex-and-xelatex-and-how-they-relat][Questions regarding the distinction between XeTeX and XeLaTeX and how they relate to TeX and LaTeX? - TeX - LaTeX Stack Exchange]]
+   + [[https://liam.page/2018/11/26/introduction-to-TeX-engine-format-and-distribution/][TeX 引擎、格式、发行版之介绍 | 始终]]
