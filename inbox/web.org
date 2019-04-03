@@ -130,3 +130,11 @@
   + [[http://www.shouce.ren/api/html/html4/html-09.html][标准属性]]
   + [[https://wangdoc.com/javascript/events/globaleventhandlers.html#%E5%85%B6%E4%BB%96%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%B1%9E%E6%80%A7][GlobalEventHandlers 接口 - JavaScript 教程 - 网道]]
   + [[https://stackoverflow.com/questions/588040/window-onload-vs-document-onload][javascript - window.onload vs document.onload - Stack Overflow]]
+
+* SVG 动画
+  + [[http://leocs.me/jquery-drawsvg/][jQuery DrawSVG]]
+  + [[https://imnerd.org/svg-animation-in-action.html][SVG 动画实践 - 怡红院落]]
+
+* display
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/display][display - CSS：层叠样式表 | MDN]]
+

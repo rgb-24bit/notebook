@@ -1,0 +1,275 @@
+* 进程同步问题
+  + *进程同步的基本概念*
+    1. 两种形式的制约关系
+       + 间接相互制约关系：多个程序并发执行时，由于共享系统资源，致使在这些并发执行的程序之间形成相互制约的关系
+       + 直接相互制约关系：多个程序为完成同一向任务而相互合作，进程间的直接相互制约关系就源于这种合作
+    2. 临界资源：必须互斥访问的资源，同一时间只能有一个进程访问
+    3. 临界区：把在每个进程中访问临界资源的那段代码称为临界区
+    4. 同步机制应遵循的规则
+       + 空闲让进：当无进程处于临界区时，表明临界资源处于空闲状态，应允许一个请求进入临界区的进程立即进入自己的临界区，以有效的利用临界资源
+       + 忙则等待：已有进程进入临界区时，表明临界资源正在被访问，因而其他试图进入临界区的进程必须等待，以保证对临界资源的互斥访问
+       + 有限等待：对要求访问的临界资源的进程，应保证在有限时间内能进入自己的临界区，以免陷如死等状态
+       + 让权等待：当进程不能进入自己的临界区时，应立即释放处理机，以免进程陷入忙等状态
+
+  + *硬件同步机制*
+    1. 关中断：进程进入锁测试之前关闭中断，知道完成锁测试并上锁后才能打开中断，实现简单，效率太低。
+
+       *NOTE*: 只有在能够执行中断的情况下才能进行进程调度。
+
+    2. 利用 Test-and-Set 指令实现互斥
+       #+BEGIN_SRC C
+         bool TS(bool* lock) {
+           bool old = *lock;
+           ,*lock = true;
+           return old;
+         }
+
+         do {
+           while(TS(&lock));  // 当 lock 为 true 时，等待 lock 为false
+
+           critical section;
+           lock = false;      // 释放所，将 lock 设为 false
+           remainder section;
+         } while(true);
+       #+END_SRC
+
+    3. 利用 Swap 指令实现进程互斥
+       #+BEGIN_SRC C
+         void swap(bool* a, bool* b) {
+           bool temp = *a;
+           ,*a = *b;
+           ,*b = temp;
+         }
+
+         do {
+           key = true;
+           do {
+             swap(&lock, &key);
+           } while(key != false);
+
+           // 临界区操作
+
+           lock = false;  // 释放锁
+         } while(true);
+       #+END_SRC
+
+       *NOTE:* lock 的初始值通常为 false.
+
+  + *信号量机制*
+    1. 整型信号量，通过整型数 S 表示资源的数量，通过 P, V 操作来访问资源：
+       #+BEGIN_SRC C
+         void wait(int S) {  // P
+           while (S <= 0);   // 等待 S > 0
+           S--;
+         }
+
+         void signal(int S) {  // V
+           S++;                // 资源增加
+         }
+       #+END_SRC
+
+    2. 记录型信号量，避免整型信号量中的忙等：
+       #+BEGIN_SRC C
+         typedef struct {
+           int value;
+           struct pcb* queue;  // 等待访问资源的进程
+         } semaphore;
+
+         void wait(semaphore* S) {
+           S->value--;
+           if (S->value < 0) {  // value < 0 说明资源以分配完毕，进程调用 block 自我阻塞
+             block(S->queue);
+           }
+         }
+
+         void signal(semaphore* S) {
+           S->value++;
+           if (S->value <= 0) {  // value <= 0 说明存在进程等待资源，唤醒第一个进程
+             wakeup(S->queue);
+           }
+         }
+       #+END_SRC
+
+  + *信号量的应用*
+    #+BEGIN_SRC C
+      // -----------------------------------------------------------------------------
+      //                                进程互斥
+      // -----------------------------------------------------------------------------
+
+      semaphore mutex = 1;
+
+      void PA() {
+        while (true) {
+          wait(mutex);
+
+          // 临界区
+
+          signal(mutex);
+
+          // 剩余区
+        }
+      }
+
+      void PB() {
+        while (true) {
+          wait(mutex);
+
+          // 临界区
+
+          signal(mutex);
+
+          // 剩余区
+        }
+      }
+
+      // -----------------------------------------------------------------------------
+      //                                前驱关系
+      // -----------------------------------------------------------------------------
+
+      // S1 -> S2, S1 -> S3
+      // S2 -> S4, S2 -> S5
+      // S3 -> S6
+      // S4 -> S6
+      // S5 -> S6
+
+      void P1() {
+        S1;
+        signal(a);  // S1 -> S2
+        signal(b);  // S1 -> S3
+      }
+
+      void P2() {
+        wait(a);
+        S2;
+        signal(c);  // S2 -> S4
+        signal(d);  // S2 -> S5
+      }
+
+      void P3() {
+        wait(b);
+        S3;
+        signal(e);  // S3 -> S6;
+      }
+
+      void P4() {
+        wait(c);
+        S4;
+        signal(f);  // S4 -> S6;
+      }
+
+      void P5() {
+        wait(d);
+        S5;
+        signal(g);  // S5 -> S6;
+      }
+
+      void P6() {
+        wait(e);
+        wait(f);
+        wait(g);
+        S6;
+      }
+    #+END_SRC
+
+  + *生产者-消费者问题*
+    #+BEGIN_SRC C
+      int in = 0, out = 0;
+      item buffer[n];
+      semaphore mutex = 1, empty = n, full = 0;
+
+      void Producer() {
+        do {
+          new_item = ...;  // 生产
+
+          wait(empty);  // 避免缓冲区溢出
+          wait(mutex);  // 保证缓冲区操作互斥
+
+          buffer[in] = new_item;
+          in = (in + 1) % n;
+
+          signal(mutex);
+          signal(full);  // 生产后 full 增加
+        } while(true);
+      }
+
+      void Consumer() {
+        do {
+          wait(full);  // 等待存在资源
+          wait(mutex);
+
+          new_item = buffer[out];  // 取出资源
+          out = (out + 1) % n;
+
+          signal(mutex);
+          signal(empty);  // 取出资源， empty 增加
+        } while(true);
+      }
+    #+END_SRC
+
+  + *哲学家进餐问题*
+    #+BEGIN_SRC C
+      semaphore chopstick[5] = {1, 1, 1, 1, 1};
+
+      do {
+        wait(chopstick[i]);  // 第 i 个哲学家左边的筷子
+        wait(chopstick[(i + 1) % 5]);  // 第 i 个哲学家右边的筷子
+
+        // eat
+
+        signal(chopstick[(i + 1) % 5]);
+        signal(chopstick[i]);
+
+        // think
+      } while(true);  // 存在死锁问题
+    #+END_SRC
+
+  + *读者写者问题*
+    #+BEGIN_SRC C
+      semaphore rmutex = 1, wmutex = 1;
+      int reader_count = 0;
+
+      void reader() {
+        do {
+          wait(rmutex);             // 保证 reader_count 同一时刻只有一个读者访问
+          if (reader_count == 0) {  // 只有读者数量为 0 时才可能存在写者
+            wait(wmutex);
+          }
+          reader_count++;
+          signal(rmutex);
+
+          // read...
+
+          wait(rmutex);
+          reader_count--;
+          if (reader_count == 0) {  // 读者数量为 0, 可以进行写入
+            signal(wmutex);
+          }
+          signal(rmutex);
+        } while(true);
+      }
+
+      void writer() {
+        do {
+          wait(wmutex);
+          // write...
+          signal(wmutex);
+        } while(true);
+      }
+    #+END_SRC
+* I/O 阻塞
+  + [[https://www.jianshu.com/p/b0b52e3d7ce8][二、文件IO，阻塞非阻塞 - 简书]]
+
+* 标准输入输出
+  #+BEGIN_SRC python
+    >>> open(0)
+    <_io.TextIOWrapper name=0 mode='r' encoding='utf-8'>
+    >>> open(0).readline()
+    asdasd
+    'asdasd\n'
+    >>> import sys
+    >>> sys.stdin.close()
+    >>> open(0).readline()
+    sad
+    'sad\n'
+  #+END_SRC
+

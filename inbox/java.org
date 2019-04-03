@@ -198,3 +198,19 @@
 
 * 数组
   + 数组克隆对于数值类型来说是安全的，对于对象来说只是克隆了引用
+* 环境变量
+  + 运行库路径会默认加载，不许要自己设置，如果没有其他需要，就可以省略 CLASSPATH
+  + JAVA_HOME 貌似没什么用
+
+* net
+  + [[https://blog.csdn.net/dabing69221/article/details/17351881][Java TCP/IP Socket — close()/shutdownOutput()/shutdownInput() 分析 - 开挂的程序猿 - CSDN博客]]
+  + [[https://www.cnblogs.com/amosli/p/3821474.html][Java--使用多线程下载,断点续传技术原理(RandomAccessFile) - Hi_Amos - 博客园]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range][Range - HTTP | MDN]]
+
+* IO
+  #+BEGIN_SRC java
+    class FilterInputStream extends InputStream {
+      protected	FilterInputStream(InputStream in) {}
+    }
+  #+END_SRC
+

@@ -5,6 +5,8 @@
 - [[#怎样让-div-的高度为-100-的屏幕高度][怎样让 div 的高度为 100% 的屏幕高度]]
 - [[#css-样式使用的优先级怎么判断][CSS 样式使用的优先级怎么判断]]
 - [[#盒子模型的宽度和高度包含-padding-吗][盒子模型的宽度和高度包含 padding 吗]]
+- [[#怎样让超出范围的文本显示为省略号][怎样让超出范围的文本显示为省略号]]
+- [[#怎样让文本居中显示][怎样让文本居中显示]]
 
 * CSS 属性中类似 -webkit 的前缀是怎么一回事
   这些是相关渲染引擎提供的供应商前缀属性：
@@ -26,11 +28,38 @@
   3. 内联样式的优先级是最高的
   4. 通过为样式添加 ~!important~ 声明使得它必然具有某种样式，如果都有就按照之前的优先级来
   
-
 * 盒子模型的宽度和高度包含 padding 吗
   这一点受到属性 ~box-sizing~ 的值的影响，当它的值为 ~border-box~ 时，包含。
 
   可以参考：
   + [[https://stackoverflow.com/questions/4698054/css-does-the-width-include-the-padding][CSS does the width include the padding? - Stack Overflow]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing][box-sizing - CSS：层叠样式表 | MDN]]
+
+* 怎样让超出范围的文本显示为省略号
+  + Single line text overflow shows ellipsis.
+    #+BEGIN_SRC css
+      div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    #+END_SRC
+
+  + Multi-line text overflow showing ellipsis.
+    #+BEGIN_SRC css
+      div {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+    #+END_SRC
+
+* 怎样让文本居中显示
+  #+BEGIN_SRC css
+    div {
+      height: 20px;
+      line-height: 20px;
+    }
+  #+END_SRC
 
