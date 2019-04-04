@@ -15,6 +15,7 @@
   - [[#实用指令][实用指令]]
   - [[#性能监控][性能监控]]
   - [[#矩形编辑][矩形编辑]]
+  - [[#保存-scratch-缓冲区的代码][保存 scratch 缓冲区的代码]]
 - [[#概念问题][概念问题]]
   - [[#前缀参数][前缀参数]]
   - [[#编码问题][编码问题]]
@@ -103,6 +104,29 @@
    |------------------------------------------------+----------------------------|
 
    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Rectangles.html][Rectangles - GNU Emacs Manual]]
+
+** 保存 scratch 缓冲区的代码
+   #+BEGIN_SRC elisp
+     (setq initial-scratch-message "")
+
+     (setq initial-buffer-choice
+           '(lambda ()
+              (let ((buf (get-buffer-create "*scratch*"))
+                    (file "~/.emacs.d/scratch.el"))
+                (with-current-buffer buf
+                  (insert-file-contents file)
+                  (local-set-key
+                   "\C-x\C-s"
+                   '(lambda ()
+                      (interactive)
+                      (let ((str (buffer-string)))
+                        (with-current-buffer
+                            (find-file "~/.emacs.d/scratch.el")
+                          (erase-buffer)   (insert str)
+                          (save-buffer)    (kill-buffer)
+                          )))))
+                buf)))
+   #+END_SRC
 
 * 概念问题
 ** 前缀参数

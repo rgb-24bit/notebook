@@ -16,67 +16,17 @@
 * 对象的克隆
   + [[https://www.cnblogs.com/Qian123/p/5710533.html][Java提高篇——对象克隆（复制） - 萌小Q - 博客园]]
 
-* core java
+* wait
   + java 语言规范 - javase/specs
-  + Java 初始化块执行顺序
   + Runtime.addShutdownHook
-  + user.dir 是 java 运行环境的启动路径
-  + 默认类路径包含当前目录，设置后就不一定了
   + 子类和父类同名的字段
-  + 覆盖的方法的可见性不能低于父类
-  + null isinstanceof xxx => false
-  + 枚举值比较用 == 就可以了
   + [[https://stackoverflow.com/questions/11720288/is-an-interface-a-class][java - Is an interface a class? - Stack Overflow]]
-
-* 反射
   + int.class, Integer.class, Integer.TYPE
 
 * Tomcat
   + [[https://stackoverflow.com/questions/1153521/setting-default-locale-for-tomcat-service-in-windows-xp][java - Setting default locale for Tomcat Service in Windows XP - Stack Overflow]]
   + [[https://stackoverflow.com/questions/9361623/catalina-home-environmental-variable-is-not-defined-correctly][tomcat6 - CATALINA_HOME environmental variable is not defined correctly - Stack Overflow]]
   + [[https://stackoverflow.com/questions/6623161/javac-option-to-compile-all-java-files-under-a-given-directory-recursively][javac option to compile all java files under a given directory recursively - Stack Overflow]]
-
-* 语法
-  + [[https://stackoverflow.com/questions/1958636/what-is-double-brace-initialization-in-java][What is Double Brace initialization in Java? - Stack Overflow]]
-* Core Java
-  + 根据 Java 语言规范，main 方法必须声明为 public
-  + 字符 $ 在 Java 中虽然合法，但是只用在 Java 编译器工具生成的名字中
-  + const 是 Java 保留的关键字，但目前并没有使用，因此必须使用 final 关键字定义常量
-  + Java 不使用逗号运算符
-  + 格式化字符串是，s 转换符对于实现了 Formattable 接口的对象会调用 gromatTo 方法，否则调用 toString
-  + 命令行参数中，程序名并没有保存在 args 数组中
-  + 打印二维数组 Arrays.deepToString()
-  + 编译器在编译源文件是不检查目录结构，但是不合适的目录结构会导致找不到类
-  + 未指定访问修饰符的域可以被包内所有成员访问
-  + 覆盖方法是，子类方法不能低于超类方法的可见性
-  + 将超类转换为子类之前应该用 instanceof 进行检查
-  + null instanceof type 返回 false
-  + 抄写类可以包含具体数据和具体方法
-  + 默认访问级别对子类不可见
-  + 比较枚举值使用 == 就可以了
-  + 接口中的所有方法自动为 public
-  + 接口中的域自动设为 public static final
-  + 伴随类 - Path/Paths，伴随类包含静态方法
-  + 默认方法冲突 - 超类优先，接口冲突就必须手动覆盖
-  + 所有数组类型都有一个 public 的 clone 方法，可以建立一个新数组，包含源数组所有元素的副本
-  + 函数式接口注释 - FunctionalInterface
-  + 非静态内部类不能有 static 方法
-  + 内部类的所有静态域都必须是 final
-  + 局部类不能用访问修饰符修饰
-  + 内部类访问的局部变量必须为事实上的 final
-  + 静态内部类可以有静态域和静态方法
-  + 声明在接口中的内部类自动成为 static 和 public 类
-  + 双括号初始化
-    #+BEGIN_SRC java
-      new ArrayList<>() {{
-        add(1); add(2);
-      }};
-    #+END_SRC
-
-    外层括号构建匿名子类，内层括号是个对象构造块
-  + [[https://stackoverflow.com/questions/2420389/static-initialization-blocks][java - Static Initialization Blocks - Stack Overflow]]
-  + Java 数组会保存存储的元素的类型信息，虽然符类型的数组引用可以引用子类型的数组的实例，
-    而且往该引用中存入父类型实例的操作可以通过编译器的检查，但是会在运行期间抛出异常。
 
 * Proxy
   动态创建实现了指定接口的类，调用这个类的方法的时候实际上是调用内部包装的对象的方法。
@@ -108,51 +58,6 @@
       }
     }
   #+END_SRC
-
-* Exception
-  Throwable:
-  #+BEGIN_SRC java
-    Throwable()
-    Throwable(String message);
-    String getMessage();
-  #+END_SRC
-
-  + 子类覆盖超类方法是，子类抛出的异常不能比超类的更通用，如果父类没有抛出任何受查异常，那么子类也不能抛出
-  + 创建自己的异常：
-    #+BEGIN_SRC java
-      public class MyException extends Exception {
-        public MyException() {}
-        public MyException(String message) {
-          super(message);
-        }
-      }
-    #+END_SRC
-  + 捕获多个异常是异常变量隐含为 final 变量：
-    #+BEGIN_SRC java
-      catch (E1 | E2 e)
-    #+END_SRC
-  + 异常链
-    #+BEGIN_SRC java
-      catch (Exception e) {
-        Throwable se = new ...;  // new ...(e);
-        se.initCause(e);
-        throws se;
-      }
-    #+END_SRC
-  + finally 子句的返回值会覆盖原本的返回值
-  + 解耦 finally 和 catch：
-    #+BEGIN_SRC java
-      try {
-        try {} finally {}
-      } catch (Throwable e) {
-        e.printStackTrace();
-      }
-    #+END_SRC
-  + 带资源的 try 语句：要求实现 AutoCloseable 或 Closeable 接口
-  + 早抛出晚捕获
-  + Thread.dumpStack
-  + java -verbose 观察类的加载过程
-  + -Xlint 选项对常见问题进行检查
 
 * 泛型
   + [[https://www.cnblogs.com/wuqinglong/p/9456193.html][Java泛型类型擦除以及类型擦除带来的问题 - 蜗牛大师 - 博客园]]
@@ -192,12 +97,9 @@
 * 并发
   + 理解原子性时需要记住：读取、计算、写入是可能被分开的
 
-* 初始化块
-  + 类加载时执行静态初始化块
-  + 创造对象时按照块的出现顺序执行不同的初始化块
-
 * 数组
   + 数组克隆对于数值类型来说是安全的，对于对象来说只是克隆了引用
+
 * 环境变量
   + 运行库路径会默认加载，不许要自己设置，如果没有其他需要，就可以省略 CLASSPATH
   + JAVA_HOME 貌似没什么用
@@ -206,6 +108,11 @@
   + [[https://blog.csdn.net/dabing69221/article/details/17351881][Java TCP/IP Socket — close()/shutdownOutput()/shutdownInput() 分析 - 开挂的程序猿 - CSDN博客]]
   + [[https://www.cnblogs.com/amosli/p/3821474.html][Java--使用多线程下载,断点续传技术原理(RandomAccessFile) - Hi_Amos - 博客园]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range][Range - HTTP | MDN]]
+
+  URLConnection:
+  + 调用 openConnection 方法发起请求
+  + 调用 getXXX 方法后会发起请求
+  + 单个实例只能发起一个请求，因此，调用 getXXX 方法后就不能设置请求属性了
 
 * IO
   #+BEGIN_SRC java

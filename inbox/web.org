@@ -138,3 +138,6 @@
 * display
   + [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/display][display - CSS：层叠样式表 | MDN]]
 
+* OAuth
+  + [[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html][理解 OAuth 2.0 - 阮一峰的网络日志]]
+

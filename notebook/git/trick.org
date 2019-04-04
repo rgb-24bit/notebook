@@ -1,0 +1,8 @@
+#+TITLE:      Git 使用技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#git-pull-时使用存储库的链接][git pull 时使用存储库的链接]]
+
+* git pull 时使用存储库的链接
+  git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
+

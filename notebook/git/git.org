@@ -1,4 +1,4 @@
-#+TITLE:      Git 使用笔记
+#+TITLE:      Git 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#git-clone][git clone]]
@@ -7,36 +7,49 @@
 - [[#git-log][git log]]
 - [[#git-branch][git branch]]
 - [[#git-push][git push]]
-- [[#git-submodule][git submodule]]
-- [[#git-pull][git pull]]
-- [[#git-stash][git stash]]
 - [[#git-commit][git commit]]
+- [[#git-apply][git apply]]
 
 * git clone
-  使用 ~git clone -b branch~ 克隆指定分支。
+  + 克隆远程库时指定分支或标签：
+    #+BEGIN_SRC bash
+      $ git clone -b <branch>
+      $ git clone -b <tag>
+    #+END_SRC
 
-  通过 ~git clone -b tag~ 指定要克隆的 ~tag~.
+  + 克隆远程库时指定克隆的深度，这在克隆提交记录很多的存储库时很有用：
+    #+BEGIN_SRC bash
+      $ git clone --depth=N
+    #+END_SRC
 
 * git clean
-  #+BEGIN_SRC bash
-    # 获取要删除的文件列表但不会删除
-    git clean -n
+  + 获取要删除的文件列表但不会删除：
+    #+BEGIN_SRC bash
+      $ git clean -n
+    #+END_SRC
 
-    # 删除当前目录下所有没有 track 过的文件. 但不会删除 .gitignore 文件里面指定的文件夹和文件
-    git clean -f
+  + 删除当前目录下所有没有 track 过的文件. 但不会删除 .gitignore 文件里面指定的文件夹和文件
+    #+BEGIN_SRC bash
+      $ git clean -f
+    #+END_SRC
 
-    # 删除指定路径下的没有被 track 过的文件
-    git clean -f <path>
+  + 删除指定路径下的没有被 track 过的文件
+    #+BEGIN_SRC bash
+      git clean -f <path>
+    #+END_SRC
 
-    # 删除当前目录下没有被 track 过的文件和文件夹
-    git clean -df
+  + 删除当前目录下没有被 track 过的文件和文件夹
+    #+BEGIN_SRC bash
+      $ git clean -fd
+    #+END_SRC
 
-    # 删除当前目录下所有没有 track 过的文件. 不管他是否是 .gitignore 文件里面指定的文件夹和文件
-    git clean -xf
-  #+END_SRC
+  + 删除当前目录下所有没有 track 过的文件. 不管他是否是 .gitignore 文件里面指定的文件夹和文件
+    #+BEGIN_SRC bash
+      $ git clean -xf
+    #+END_SRC
 
 * git checkout
-  + 指定源分支：
+  + 指定 checkout 时的源分支：
     #+BEGIN_EXAMPLE
       git checkout -b <new_branch> <src_branch>
     #+END_EXAMPLE    
@@ -44,70 +57,67 @@
 * git log
   + 指定目标分支：
     #+BEGIN_EXAMPLE
-      git log <branch>
+      $ git log <branch>
     #+END_EXAMPLE
+
   + 代码行数变动统计，需要在 bash 中执行
     #+BEGIN_SRC bash
       $ git log --author="$(git config --get user.name)" --pretty=tformat: --numstat | awk '{ add += $1 ; sub s += $2 ; loc += $1 - $2 } END { printf "added lines: %s removed lines : %s total lines: %s\n",add,subs, loc }'
     #+END_SRC
+
   + 指定时间范围
     #+BEGIN_SRC bash
-      git log --author="$(git config --get user.name)" --after="2018-01-01" --before="2019-01-01" --pretty= tformat: --numstat | awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s remo ved lines : %s total lines: %s\n",add,subs,loc }'
+      $ git log --author="$(git config --get user.name)" --after="2018-01-01" --before="2019-01-01" --pretty= tformat: --numstat | awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s remo ved lines : %s total lines: %s\n",add,subs,loc }'
     #+END_SRC
 
 * git branch
-  #+BEGIN_SRC bash
-    # 查看远程分支
-    git branch -r
+  + 获取所有远程分支的名称：
+    #+BEGIN_SRC bash
+      $ git branch -r
+    #+END_SRC
 
-    # 查看所有分支
-    git branch -a
+  + 获取所有分支的名称：
+    #+BEGIN_EXAMPLE
+      $ git branch -a
+    #+END_EXAMPLE
 
-    # 重命名分支
-    git branch -m <oldname> <newname>
+  + 重命名分支：
+    #+BEGIN_EXAMPLE
+      $ git branch -m <oldname> <newname>
+    #+END_EXAMPLE
 
-    # 详细的信息
-    git branch -vv
-  #+END_SRC
-
-  通过命令 ~git branch -r~ 可以查看远程分支， 通过命令 ~git branch -a~ 查看所有分支。
+  + 获取分支的详细信息：
+    #+BEGIN_EXAMPLE
+      $ git branch -vv
+    #+END_EXAMPLE
 
 * git push
-  #+BEGIN_SRC bash
-    git push --all  # push 所有分支
-    git push --tags  # push tag
-  #+END_SRC
+  + 将所有分支的修改都推送到远程存储库：
+    #+BEGIN_EXAMPLE
+      $ git push --all
+    #+END_EXAMPLE
 
-* git submodule
-  添加子模块: ~git submodule add~
-
-  子模块的添加会产生一个特殊文件： ~.gitmodules~.
-
-  + [[https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97][Git 工具 - 子模块]]
-
-* git pull
-  ~git pull~ 的参数可以为 *存储库链接*.
-
-* git stash
-  #+BEGIN_SRC bash
-    # 新建一个储藏
-    git stash
-
-    # 查看现有的储藏
-    git stash list
-
-    # 重新应用储藏
-    git stash apply
-
-    # 指定名称
-    git stash apply stash@{2}
-  #+END_SRC
-
-  + [[https://git-scm.com/book/zh/v1/Git-%25E5%25B7%25A5%25E5%2585%25B7-%25E5%2582%25A8%25E8%2597%258F%25EF%25BC%2588Stashing%25EF%25BC%2589][Git 工具 - 储藏（Stashing）]]
+  + 将所有标签推送到远程存储库：
+    #+BEGIN_EXAMPLE
+      $ git push --tags
+    #+END_EXAMPLE
 
 * git commit
-  将所有修改直接提交：
-  #+BEGIN_SRC bash
-    $ git commit --am
-  #+END_SRC
+  + 直接提交所有的修改：
+    #+BEGIN_EXAMPLE
+      $ git commit -a
+    #+END_EXAMPLE
+
+* git apply
+  git 提供了两种补丁方案：
+  + 通过 git diff 生成的 UNIX 标准补丁 .diff 文件
+    
+    这种生成方式将多个 commit 之间的区别生成为一个 diff 文件，不包含提交记录。
+
+  + 通过 git format-patch 生成的 git 专用 .patch 文件
+
+    这种生成方式可以保留 commit 日志，每个 commit 对应一个 patch 文件。
+
+  可以参考的文章：
+  + [[https://juejin.im/post/5b5851976fb9a04f844ad0f4][Git 打补丁-- patch 和 diff 的使用 - 掘金]]
 

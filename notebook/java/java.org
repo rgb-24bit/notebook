@@ -10,6 +10,7 @@
 - [[#抽象系统][抽象系统]]
   - [[#java-class][Java Class]]
     - [[#object][Object]]
+    - [[#方法的覆盖][方法的覆盖]]
     - [[#方法的重载][方法的重载]]
     - [[#内部类][内部类]]
     - [[#static--final][static & final]]
@@ -26,6 +27,7 @@
     - [[#接口的定义][接口的定义]]
   - [[#java-enum][Java Enum]]
 - [[#异常处理][异常处理]]
+  - [[#throwable][Throwable]]
   - [[#带资源的-try-语句][带资源的 try 语句]]
 - [[#泛型][泛型]]
   - [[#泛型类型][泛型类型]]
@@ -92,6 +94,8 @@
      SubClass ref = (SubClass) SuperClassRef;
    #+END_SRC
 
+   注意：null isinstanceof xxx 会返回 false
+
 ** 数组
    数组的声明和初始化方式：
    #+BEGIN_SRC java
@@ -112,6 +116,9 @@
    1. ~public final length~
    2. ~public T[] clone()~
    3. ~Object method~
+
+   注意：Java 数组会保存存储的元素的类型信息，虽然父类型的数组引用可以引用子类型的数组的实例，
+   而且往该引用中存入父类型实例的操作可以通过编译器的检查，但是会在运行期间抛出异常。
 
 *** 数组的类型判断
     #+BEGIN_QUOTE
@@ -164,6 +171,11 @@
     | ~finalize()~       | 析构函数                               |
     | ~getClass()~       | 获取类                                 |
     |------------------+----------------------------------------|
+
+*** 方法的覆盖
+    覆盖方法是需要注意：
+    1. 方法在覆盖时的可见性不能低于父类
+    2. 子类方法抛出的异常不能比父类的更通用，如果父类方法没有抛出异常那么子类的也不能抛出
 
 *** 方法的重载
     重载的意义是两个方法的 *名称相同*, 但参数不同，因此 *重载与多态毫无关系*.
@@ -532,7 +544,7 @@
         // 捕获异常后执行的代码块
       }
     #+END_SRC
-
+    
   + 抛出异常：
     #+BEGIN_SRC java
       public int function() throws Exception {  // 声明可能抛出的异常
@@ -596,6 +608,56 @@
   3. try 一定要有 catch 或 finally
   4. 只带有 finally 的 try 必须声明异常 - duck
 
+** Throwable
+   所有异常的父类，它的拥有构造函数和方法：
+   #+BEGIN_SRC java
+     Throwable()
+     Throwable(String message);
+     String getMessage();
+   #+END_SRC
+
+   + 创建自己的异常：
+     #+BEGIN_SRC java
+       public class MyException extends Exception {
+         public MyException() {}
+         public MyException(String message) {
+           super(message);
+         }
+       }
+     #+END_SRC
+
+   + 捕获多个异常是异常变量隐含为 final 变量：
+     #+BEGIN_SRC java
+       catch (E1 | E2 e)
+     #+END_SRC
+
+   + 异常链
+     #+BEGIN_SRC java
+       catch (Exception e) {
+         Throwable se = new ...;  // new ...(e);
+         se.initCause(e);
+         throws se;
+       }
+     #+END_SRC
+
+   + finally 子句的返回值会覆盖原本的返回值
+
+   + 解耦 finally 和 catch：
+     #+BEGIN_SRC java
+       try {
+         try {} finally {}
+       } catch (Throwable e) {
+         e.printStackTrace();
+       }
+     #+END_SRC
+   + 早抛出晚捕获
+
+   + Thread.dumpStack
+
+   + java -verbose 观察类的加载过程
+
+   + -Xlint 选项对常见问题进行检查
+
 ** 带资源的 try 语句
    #+BEGIN_SRC java
      try (AutoCloseable a = new xxx();
@@ -607,6 +669,8 @@
    + [[https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html][The try-with-resources Statement]]
 
    这一特性从 JDK 7 开始支持，实现 ~AutoCloseable~ 和 ~CloseAble~ 接口的对象都可以使用。
+
+   其中 ~io.CloseAble~ 是 ~lang.AutoCloseable~ 的子接口。
 
 * 泛型
 ** 泛型类型
@@ -1057,33 +1121,15 @@
 
 * 注意事项
   + Java 没有无符号数
-   
-  + 定义 ~float~ 的数值需要加 ~f~ 后缀， 如： ~float f = 32.45f~, 否则小数会
-    默认当做 ~double~ 处理
-
-  + 和 ~C~ 不同， 类似下面的行为在 ~Java~ 中不被允许， 编译器会报错：
-    #+BEGIN_SRC java
-      int x = 24;
-      byte b = x;
-    #+END_SRC
-    
-    隐式类型转换只允许在不会有数据丢失的情况下进行， 即: ~int~ 不能和
-    ~float~ 直接转换。
-   
-    也不能使用类似 ~byte x = 128~ 的语句
-   
+  + 定义 ~float~ 的数值需要加 ~f~ 后缀， 如： ~float f = 32.45f~, 否则小数会默认当做 ~double~ 处理
+  + 隐式类型转换只允许在不会有数据丢失的情况下进行， 即: ~int~ 不能和 ~float~ 直接转换。
+    也不能使用类似 ~byte x = 128~ 的语句。
   + 除此之外的类型的变量都是对一个对象的 *引用*, *对象* 实例保存在可回收垃圾的堆上
-
   + 所有引用变量的大小都一样， 不一样的是内存中的实例大小
-
   + 引用变量的空值为 ~null~
-   
   + 和 ~Python~ 一样， 当一个实例对象的引用数为 0 时， 这个对象就可以被回收。
-
   + 实例对象通常通过 ~new~ 创建， 这会在内存中创建唯一的对象实例
-
   + 数组也是对象， 数组名是引用类型变量
-   
   + 注意引用类型数组的初始化：
     #+BEGIN_SRC java
       Dog[] dog;  // 声明数组 dog
@@ -1093,16 +1139,39 @@
         dog[i] = new Dog();  // 为数组元素分配内存
       }
     #+END_SRC
-   
   + String 不是 Java 关键字
-   
   + 没有初始化的数值类型（包括 char） 默认为 0, 布尔类型默认为 false, 引用默认为 null.
-   
   + 局部变量没有默认值， 使用前必须初始化
-
   + 可以使用 == 来判断两个主数据类型是否相对， 会判断两个引用是否引用同一个对象
-
   + ~switch~ 语句支持的类型为： 原始数据类型 byte, short, char, int 及对应的包装类；字符串 ~String~ 和 枚举 ~Enum~.
-
   + Java 方法签名值包括方法名称和参数类型，不包括返回值类型及访问修饰符。
+  + 根据 Java 语言规范，main 方法必须声明为 public
+  + 字符 $ 在 Java 中虽然合法，但是只用在 Java 编译器工具生成的名字中
+  + const 是 Java 保留的关键字，但目前并没有使用，因此必须使用 final 关键字定义常量
+  + Java 不使用逗号运算符
+  + 格式化字符串时，s 转换符对于实现了 Formattable 接口的对象会调用 formatTo 方法，否则调用 toString
+  + 命令行参数中，程序名并没有保存在 args 数组中
+  + 打印二维数组 Arrays.deepToString()
+  + 编译器在编译源文件是不检查目录结构，但是不合适的目录结构会导致找不到类
+  + 未指定访问修饰符的域可以被包内所有成员访问
+  + 覆盖方法时，子类方法不能低于超类方法的可见性
+  + 将超类转换为子类之前应该用 instanceof 进行检查
+  + null instanceof type 返回 false
+  + 抄写类可以包含具体数据和具体方法
+  + 默认访问级别对子类不可见
+  + 比较枚举值使用 == 就可以了
+  + 接口中的所有方法自动为 public
+  + 接口中的域自动设为 public static final
+  + 伴随类 - Path/Paths，伴随类包含静态方法
+  + 默认方法冲突 - 超类优先，接口冲突就必须手动覆盖
+  + 所有数组类型都有一个 public 的 clone 方法，可以建立一个新数组，包含源数组所有元素的副本
+  + 函数式接口注释 - FunctionalInterface
+  + 非静态内部类不能有 static 方法
+  + 内部类的所有静态域都必须是 final
+  + 局部类不能用访问修饰符修饰
+  + 内部类访问的局部变量必须为事实上的 final
+  + 静态内部类可以有静态域和静态方法
+  + 声明在接口中的内部类自动成为 static 和 public 类
+  + user.dir 是 java 运行环境的启动路径
+  + 默认类路径包含当前目录，设置后就不一定了
 

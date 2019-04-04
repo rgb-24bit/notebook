@@ -85,13 +85,14 @@
   + [JavaScript](notebook/front-end/js.org)
   + [前端相关技术了解](notebook/front-end/technology.org)
 ## git
-  + [Git-Book 阅读笔记](notebook/git/git-book.org)
-  + [Git-Hook](notebook/git/git-hook.org)
-  + [Git 使用笔记](notebook/git/git.org)
+  + [Git 笔记](notebook/git/git.org)
   + [Git - Github](notebook/git/github.org)
   + [Git 问题集](notebook/git/question.org)
-  + [Git - 规范](notebook/git/style.org)
+  + [Git 使用规范](notebook/git/style.org)
+  + [Git 使用技巧](notebook/git/trick.org)
 ## java
+  + **servlet**
+    + [Servlet 基础笔记](notebook/java/servlet/servlet.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
   + [Gradle](notebook/java/gradle.org)
   + [Java - I/O 操作](notebook/java/io.org)
@@ -125,6 +126,7 @@
     + [线性代数 - 矩阵和方程组](notebook/math/linear/matrix.org)
 ## misc
   + [编程相关](notebook/misc/coding.org)
+  + [概念了解](notebook/misc/concept.org)
   + [开源协议](notebook/misc/liscense.org)
   + [日本麻将](notebook/misc/mahjong.org)
   + [技术了解](notebook/misc/noun.org)

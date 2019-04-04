@@ -1,0 +1,16 @@
+#+TITLE:      Servlet 基础笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#运行流程][运行流程]]
+
+* 运行流程
+  1. 启动服务器
+  2. 启动 Servlet 容器
+     + 读取配置文件，创建 ServletContext
+  3. 收到请求并转发给容器
+  4. 容器创建 Servlet 实例
+     + 读取配置文件创建 ServletConfig 绑定到实例
+  5. Servlet 处理请求并返回响应
+  6. 容器将响应交给服务器
+  7. 服务器返回响应
+

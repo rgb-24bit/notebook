@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#将-priorityqueue-作为最小堆][将 PriorityQueue 作为最小堆]]
+- [[#双括号初始化操作][双括号初始化操作]]
 
 * 将 PriorityQueue 作为最小堆
   可以将 PriorityQueue 作为最小堆来使用：
@@ -13,4 +14,17 @@
   #+BEGIN_SRC java
     Queue maxHeap = new PriorityQueue(Collections.reverseOrder());
   #+END_SRC
+
+* 双括号初始化操作
+  可以通过类似如下的方式初始化集合：
+  #+BEGIN_SRC java
+    new ArrayList<>() {{
+      add(1);
+      add(2);
+    }}
+  #+END_SRC
+
+  这种方式的原理：
+  1. 外层大括号创建 ArrayList 的匿名子类
+  2. 内存大括号是该匿名子类的初始化块
 

@@ -1,0 +1,50 @@
+#+TITLE:      概念了解
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#devops][DevOps]]
+- [[#本福特定律][本福特定律]]
+- [[#概率编程语言][概率编程语言]]
+- [[#图像重采样算法][图像重采样算法]]
+- [[#快速傅里叶变换][快速傅里叶变换]]
+- [[#马儿科夫链][马儿科夫链]]
+- [[#欧几里得-欧拉定理][欧几里得-欧拉定理]]
+
+* DevOps
+  DevOps 是一个完整的面向IT运维的工作流，以 IT 自动化以及持续集成（CI）、持续部署（CD）为基础，来优化程式开发、测试、系统运维等所有环节。
+
+  可以参考的文章：
+  + [[https://www.cnblogs.com/liufei1983/p/7152013.html][DevOps 简介 - 刘大飞 - 博客园]]
+
+* 本福特定律
+  本福特定律，也称为本福特法则，说明一堆从实际生活得出的数据中，以 1 为首位数字的数的出现概率约为总数的三成，接近直觉得出之期望值 1/9 的 3 倍。
+
+  + [[https://zh.wikipedia.org/wiki/%E6%9C%AC%E7%A6%8F%E7%89%B9%E5%AE%9A%E5%BE%8B][本福特定律 - 维基百科，自由的百科全书]]
+
+* 概率编程语言
+  概率编程语言（PPL）是一种编程语言，用于描述概率模型，然后在这些模型中进行推理。
+  
+  + [[https://en.wikipedia.org/wiki/Probabilistic_programming_language][Probabilistic programming language - Wikipedia]]
+
+* 图像重采样算法    
+  图像的 size 修改其实就是一个图像重新采样的过程，放大图像称为上采样/插值，缩小图像称为小采样。
+
+  + [[http://entropymine.com/imageworsener/resample/][Basics of Image Resampling]]
+  + [[https://clouard.users.greyc.fr/Pantheon/experiments/rescaling/index-en.html][TUTORIAL: IMAGE RESCALING]]
+  + [[https://www.cnblogs.com/wjgaas/p/3597095.html][关于图像重采样插值算法]]
+     
+* 快速傅里叶变换
+  *快速傅里叶变换(Fast Fourier Transform, FFT)*, 是快速计算序列的离散傅里叶变换或其逆变换的方法。
+  傅里叶分析将信号从原始域转换到频域的表示或者逆过来转换。
+
+  + [[https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2][维基百科 - 快速傅里叶变换]]
+
+* 马儿科夫链
+  *马尔可夫链* 为状态空间中经过从一个状态到另一个状态的转换的 *随机过程*.
+
+  + [[https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE][维基百科 - 马尔可夫链]]
+
+* 欧几里得-欧拉定理
+  *欧几里得-欧拉定理(Euclid–Euler theorem)* 是一条联系 *偶完全数* 与 *梅森质数* 的定理。
+
+  + [[https://zh.wikipedia.org/wiki/%E6%AD%90%E5%B9%BE%E9%87%8C%E5%BE%97-%E6%AD%90%E6%8B%89%E5%AE%9A%E7%90%86][维基百科 - 欧几里得-欧拉定理]]
+

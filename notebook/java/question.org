@@ -17,6 +17,7 @@
 - [[#带标签的-break-与-continue-的使用][带标签的 break 与 continue 的使用]]
 - [[#同名标识符的优先级][同名标识符的优先级]]
 - [[#数组长度允许为-0-的好处][数组长度允许为 0 的好处]]
+- [[#类初始化块的执行顺序][类初始化块的执行顺序]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -198,4 +199,9 @@
   #+END_SRC
 
   参考：[[https://stackoverflow.com/questions/4612471/why-does-java-allow-arrays-of-size-0][Why does Java allow arrays of size 0? - Stack Overflow]]
+
+* 类初始化块的执行顺序
+  类的静态初始化块在类 *加载* 时安装它们在类中的顺序执行。
+
+  类的初始化块在创建类实例是按照它们在类中的顺序执行。
 
