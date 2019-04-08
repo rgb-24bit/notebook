@@ -771,6 +771,8 @@
 
    #+HTML: <img src="https://docs.oracle.com/javase/tutorial/figures/java/generics-payloadListHierarchy.gif">
 
+   但是：Pair<Child> 是 Pair<? extends Super> 的子类
+
 ** 类型推断
    Java 编译器利用 *目标类型* 来推断泛型方法调用的类型参数，比如：
 
@@ -867,7 +869,10 @@
      3. 在可以使用 ~Object~ 类中定义的方法访问 ~in~ 变量的情况下，使用无界通配符
      4. 在变量即作为 ~in~ 变量也作为 ~out~ 变量的情况下，不使用通配符
 ** 类型擦除
-   + [[https://docs.oracle.com/javase/tutorial/java/generics/erasure.html][Type Erasure]]
+  + [[https://www.cnblogs.com/wuqinglong/p/9456193.html][Java 泛型类型擦除以及类型擦除带来的问题 - 蜗牛大师 - 博客园]]
+
+  问：既然存在类型擦除，那么泛型的类型检查是怎样完成的呢？
+  答：泛型的类型检查在 *编译前* 完成
 
 ** 泛型的限制
    1. 原始数据类型不能作为泛型的类型参数
@@ -890,7 +895,7 @@
           list.add(elem);
         }
       #+END_SRC
-
+      
    3. 无法声明类型为类型参数的静态字段
       #+BEGIN_SRC java
         public class MobileDevice<T> {
@@ -962,6 +967,16 @@
       #+BEGIN_SRC java
         List<Integer>[] arrayOfLists = new List<Integer>[2];  // compile-time error
       #+END_SRC
+
+      可以参考 [[https://github.com/exsourcode/jdk8u-jdk/blob/master/src/share/classes/java/util/ArrayList.java][jdk8u-jdk/ArrayList.java at master · exsourcode/jdk8u-jdk]]
+
+   8. 不能实例化参数化类型的数组：
+      #+BEGIN_SRC java
+        Pair<String>[] table = new Pair<>[10]; // error
+      #+END_SRC
+
+   9. 运行时类型查询（反射）只能获取原始类型（类型擦除之后）
+
 
 * Lambda 表达式
 ** Lambda 表达式语法

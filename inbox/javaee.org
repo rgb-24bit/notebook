@@ -1,0 +1,53 @@
+* Maven
+  + [[http://wiki.jikexueyuan.com/project/maven/web-application.html][Maven - Web 应用 - Maven 教程 - 极客学院Wiki]]
+  + [[https://dzone.com/articles/how-to-create-a-web-project-using-maven-in-eclipse-1][How to Create a Web Project Using Maven in Eclipse - DZone Java]]
+
+* 相关链接
+  + [[https://spring.io/understanding/POJO][Understanding POJO]]
+  + [[https://zh.wikipedia.org/wiki/EJB][EJB - 维基百科，自由的百科全书]]
+  + [[https://zh.wikipedia.org/wiki/JavaBeans][JavaBeans - 维基百科，自由的百科全书]]
+
+* 问题
+  + MIME
+  + Tomcat 的使用
+
+* IDEA
+  1. 通过 Maven 创建 web-app
+  2. 添加依赖项：
+     #+BEGIN_SRC xml
+       <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+       <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>javax.servlet-api</artifactId>
+         <version>3.1.0</version>
+         <scope>provided</scope>
+       </dependency>
+     #+END_SRC
+  3. 添加 Tomcat 插件：
+     #+BEGIN_SRC xml
+       <build>
+         <finalName>servletp</finalName>
+         <plugins>
+           <plugin>
+             <groupId>org.apache.tomcat.maven</groupId>
+             <artifactId>tomcat7-maven-plugin</artifactId>
+             <version>2.2</version>
+             <configuration>
+               <url>http://localhost:8080/servletp</url>
+               <server>tomcat</server>
+             </configuration>
+           </plugin>
+         </plugins>
+       </build>
+     #+END_SRC
+  4. 编译 - package
+  5. 运行 - tomcat7:run
+
+  相关的问题：
+  + Maven 插件配置
+  + Maven 镜像配置
+  + 插件 Tomcat7 的使用
+  + web-app 项目结构
+  + 编译属性
+  + 配置 Emacs 作为而外的编辑工具 - [[https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html][Using Emacs as an External Editor - Help | IntelliJ IDEA]]
+

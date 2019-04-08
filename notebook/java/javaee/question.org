@@ -1,0 +1,72 @@
+#+TITLE:      Java EE 问题集
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#怎样通过-maven-创建运行-webapp][怎样通过 Maven 创建运行 WebApp]]
+- [[#tomcat-网页中文乱码][Tomcat 网页中文乱码]]
+
+* 怎样通过 Maven 创建运行 WebApp
+  1) 运行如下指定创建基本的 WebApp 项目：
+     #+BEGIN_EXAMPLE
+       $ mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp 
+     #+END_EXAMPLE
+  2) 添加 Servlet API 依赖项：
+     #+BEGIN_SRC xml
+       <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+       <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>javax.servlet-api</artifactId>
+         <version>3.1.0</version>
+         <scope>provided</scope>
+       </dependency>
+     #+END_SRC
+  3) 添加 Tomcat 插件支持直接运行 WebApp：
+     #+BEGIN_SRC xml
+       <build>
+         <plugins>
+           <plugin>
+             <groupId>org.apache.tomcat.maven</groupId>
+             <artifactId>tomcat7-maven-plugin</artifactId>
+             <version>2.2</version>
+             <configuration>
+               <url>http://localhost:8080/servletp</url>
+               <server>tomcat</server>
+             </configuration>
+           </plugin>
+         </plugins>
+       </build>
+     #+END_SRC
+  4) 编译打包可以通过如下命令完成：
+     #+BEGIN_EXAMPLE
+       $ mvn package
+     #+END_EXAMPLE
+  5) 运行 WebApp 可以通过如下命令完成：
+     #+BEGIN_EXAMPLE
+       $ mvn tomcat7:run
+     #+END_EXAMPLE
+
+* Tomcat 网页中文乱码
+  文章 [[https://www.baeldung.com/tomcat-utf-8][Making Tomcat UTF-8-Ready | Baeldung]] 中的内容基本上足以解决相关问题：
+  1) Connector Configuration
+     #+BEGIN_SRC xml
+       <Connector ... URIEncoding="UTF-8" />
+     #+END_SRC
+
+     对应到 tomcat7 插件就是：
+     #+BEGIN_SRC xml
+       <configuration>
+         <url>http://localhost:8080/...</url>
+         <uriEncoding>UTF-8</uriEncoding>
+         <server>tomcat</server>
+       </configuration>
+     #+END_SRC
+
+  2) Server Page Encoding
+     #+BEGIN_SRC html
+       <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+     #+END_SRC
+
+  3) HTML Page Encoding
+     #+BEGIN_SRC html
+       <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+     #+END_SRC
+

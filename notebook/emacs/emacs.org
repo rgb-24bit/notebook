@@ -154,7 +154,7 @@
    #+END_SRC  
 
 ** emacs server
-   在 Windows 系统上可以通过 ~runemacs --deamon~ 的方式启动 ~emacs server~, 通过 ~emacsclient~ 连接服务器。
+   在 Windows 系统上可以通过 ~runemacs --daemon~ 的方式启动 ~emacs server~, 通过 ~emacsclient~ 连接服务器。
 
    关闭服务器可以通过如下方式：
    #+BEGIN_SRC bash

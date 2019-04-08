@@ -8,6 +8,7 @@
 - [[#怎样在程序中执行一个-python-文件][怎样在程序中执行一个 Python 文件]]
 - [[#怎样更新-pip][怎样更新 PIP]]
 - [[#怎样将字节对象转换为字符串][怎样将字节对象转换为字符串]]
+- [[#怎样更新-matplotlib-的字体缓存][怎样更新 matplotlib 的字体缓存]]
 
 * Python 运行速度为什么那么慢
   对于 ~C~ 和 ~C++~ 来说，它们会被编译为 *本机代码*, 因此执行速度很快。
@@ -53,5 +54,11 @@
   不考虑编码的话，可以这样：
   #+BEGIN_SRC python
     bytes.hex()
+  #+END_SRC
+
+* 怎样更新 matplotlib 的字体缓存
+  #+BEGIN_SRC python
+    >>> from matplotlib.font_manager import _rebuild
+    >>> _rebuild()
   #+END_SRC
 

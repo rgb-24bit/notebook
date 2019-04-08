@@ -1,0 +1,166 @@
+#+TITLE:      Servlet 基础笔记
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#servlet][Servlet]]
+  - [[#部署描述文件][部署描述文件]]
+  - [[#生命周期][生命周期]]
+  - [[#处理请求][处理请求]]
+  - [[#servletconfig--servletcontext][ServletConfig & ServletContext]]
+  - [[#session--cookie][Session & Cookie]]
+  - [[#属性][属性]]
+  - [[#监听者][监听者]]
+  - [[#注意事项][注意事项]]
+- [[#servlet-容器][Servlet 容器]]
+
+* Servlet
+** 部署描述文件
+   + Servlet 和 URL 之间的映射本质上是通过相同的 servlet-name 建立起 servlet-class 和 url-pattern 之间的映射：
+     #+BEGIN_SRC xml
+       <servlet>
+         <servlet-name>...</servlet-name>
+         <servlet-class>...</servlet-class>
+       </servlet>
+       <servlet-mapping>
+         <servlet-name>...</servlet-name>
+         <url-pattern>...</url-pattern>
+       </servlet-mapping>
+     #+END_SRC
+
+     所以为什么不直接建立 class 和 url 的映射呢？
+
+** 生命周期
+   1) 容器加载 Servlet 类
+   2) 容器创建 Servlet 实例 - 每个实例只会创建一次
+   3) 容器创建 ServletConfig 并调用 init 初始化 Servlet，此时的 Servlet 才算是 Servlet
+   4) 容器将请求与响应传递给 Servlet 的 service 方法，由它进行调度 - 每个请求对应一个线程
+   5) 容器调用 destory 方法销毁 Servlet
+
+** 处理请求
+   通常情况下自己编写的 Servlet 都是继承自 HttpServlet，编写时应该至少覆盖 doGet 和 doPost 方法中的一个（对于 REST 接口来说不一定）。
+
+   如果想让 doPost 的作用和 doGet 一样，就可以将 doPost 委托到 doGet：
+   #+BEGIN_SRC java
+     public void doPost(...) {
+       doGet(...);
+     }
+   #+END_SRC
+
+   假如希望当前的请求由其他的组件进行处理，那么就可以使用请求分派：
+   #+BEGIN_SRC java
+     RequestDispatcher view = request.getRequestDispatcher("result.jsp");
+
+     view.forward(request, response);
+   #+END_SRC
+   
+   需要注意的是：使用请求分派时如果已经提交（写）了响应，就不能在进行分派了。
+
+   但也可以通过 include 方法将请求和响应交给别人进行处理然后返回继续处理。JSP 标准动作 <jsp:include> 就是通过这个方式实现的。
+
+   RequestDispatcher 的获取可以通过请求对象和上下文对象完成，其中：
+   + 请求对象的 ~getRequestDispatcher~ 方法支持相对和绝对路径
+   + 上下文对象的 ~getRequestDispatcher~ 方法仅支持绝对路径
+
+   除了请求分派以外也可以使用重定向将请求转移到其他地方，但是需要注意重定向和请求分派之间的区别：
+   + 请求分派在服务器端完成，客户端并不知道是否进行了请求分派
+   + 重定向由客户端完成，重定向以为周将由客户端重新发起另一个请求
+
+   重定向和请求分派一样，提交响应后就不能进行重定向了！
+
+** ServletConfig & ServletContext
+   创建 Servlet 实例后为调用 init 方法前，Servlet 还不算真正的 Servlet，而调用 init 方法后 Servlet 将得到它的 ServletConfig 成为真正的 Servlet。
+   
+   init 方法存在两个重载：
+   #+BEGIN_SRC java
+     public void init() throws ServletException {}
+
+     public void init(ServletConfig config) throws ServletException {
+       this.config = config;
+       this.init();
+     }
+   #+END_SRC
+
+   我们在进行覆盖的使用覆盖无参的那个就足够了！
+
+   在 Servlet 内部，可以通过方法 getServletConfig 和 getServletContext 获取配置与上下文对象。
+
+   DD 文件中配置的初始化参数可以通过这两个对象获取（不能修改）。
+
+   ServletContext 对象的一些特性：
+   + 可以通过方法 getResourceAsStream 获取资源的输入流
+   + 可以设置属性（ServletConfig 是不可以设置属性的）
+
+** Session & Cookie
+   Session 可以通过请求对象的 getSession 方法获取，也可以通过和 Session 的事件获取。
+
+   当通过 getSession 方法获取 Session 时，如果参数为 false，那么将会在没有对应的 Session 时返回 null，
+   默认为 true，不存在时自动创建并返回。
+
+   和 Session 相关的事件与监听者：
+   + 创建撤销 Session - HttpSessionEvent/HttpSessionListener
+   + 属性增删改 - HttpSessionBindingEvent/HttpSessionAttributeListener
+   + 迁移 - HttpSessionEvent/HttpSessionActivationListener
+
+   Session 的超时设置可以通过三种方式完成：
+   1) 通过 DD 进行设置：
+      #+BEGIN_SRC xml
+        <session-config>
+          <session-timeout>15</session-timeout>  <!-- 单位：分 -->
+        </session-config>>
+      #+END_SRC
+   2) 通过 Session 对象的 setMaxInactiveInterval 方法设置，单位秒
+   3) 调用 invalidate() 直接干掉 session
+   
+   使用 Cookie 是需要注意：
+   + 在 JSP 中的隐式对象 Cookie 是请求中的 Cookie
+   + 响应对象只存在 addCookie() 方法不存在 setCookie() 方法，当 Cookie 名称相同时会直接覆盖
+   + 当 Cookie 的存活时间设置为 -1 时意味着当用户退出浏览器后该 Cookie 便失效
+   + Cookie 和 Session 中的属性不是一回事，一个在客户端而另一个在服务器端
+
+   Cookie 对象的接口可以参考：[[https://docs.oracle.com/javaee/7/api/javax/servlet/http/Cookie.html][Cookie (Java(TM) EE 7 Specification APIs)]]
+
+** 属性
+   可以设置属性的三个对象：ServletRequest、ServletContext、Session
+
+   其中，只有 ServletRequest 的属性是线程安全的，另外两个对象的属性在操作是应该注意线程安全。
+
+   简单点的操作方式是对上下文对象和 Session 对象加锁：
+   #+BEGIN_SRC java
+     synchronized(getServletContext()) {
+       ...
+     }
+
+     synchronized(getSession()) {
+       ...
+     }
+   #+END_SRC
+
+   在规范中存在 STM 模式，希望通过单线程/多实例的方式线程安全，然鹅并没有什么用。
+
+** 监听者
+   通过监听者可以设置全局通用的上下文属性，简单的实现 Session 计数，是一个很有用的功能。
+
+   其中：
+   1) 大部分监听者都需要在 DD 中进行注册，除了直接有属性对象本身实现的监听者
+   2) 容器通过检查监听者实现的接口类型判断它的类型
+   3) 监听者可以监听的事件类型：
+      + 上下文事件
+      + 上下文属性事件
+      + servlet 请求和属性事件
+      + Session 和 Session 属性事件
+   4) 似乎只有 Session 存在 BindingListener，允许监听属性被绑定/解绑到 Session，这个接口由属性本身实现，不需要进行注册
+
+** 注意事项
+   + 应该在获取响应对象的输出流之前调用 setContentType 方法
+
+* Servlet 容器
+  apache-tomcat 其实是服务器 apache 和容器 tomcat 的组合版，它们的运行流程（可能）为：
+  1) 启动 apache 服务器
+  2) 启动 tomcat 容器
+     + 容器在启动时会读取 webapp 的配置文件，根据配置文件创建 ServletContext 对象
+  3) 当客户端发起请求时，服务器将请求转发给容器
+  4) 容器根据请求创建 Servlet 实例
+     + 这里会读取配置文件创建相应的 ServletConfig 对象
+  5) 容器创建和请求相对应的 request 和 respone 对象，并将这两个对象交给 Servlet 处理
+  6) 容器将处理好的结果返回给服务器
+  7) 服务器将请求转发给客服端
+

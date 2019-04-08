@@ -8,6 +8,7 @@
   + [emacs](#emacs)
   + [front-end](#front-end)
   + [git](#git)
+  + [health](#health)
   + [java](#java)
   + [lang](#lang)
   + [linux](#linux)
@@ -90,9 +91,12 @@
   + [Git 问题集](notebook/git/question.org)
   + [Git 使用规范](notebook/git/style.org)
   + [Git 使用技巧](notebook/git/trick.org)
+## health
+  + [健康生活](notebook/health/health.org)
 ## java
-  + **servlet**
-    + [Servlet 基础笔记](notebook/java/servlet/servlet.org)
+  + **javaee**
+    + [Java EE 问题集](notebook/java/javaee/question.org)
+    + [Servlet 基础笔记](notebook/java/javaee/servlet.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
   + [Gradle](notebook/java/gradle.org)
   + [Java - I/O 操作](notebook/java/io.org)
