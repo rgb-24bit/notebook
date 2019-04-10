@@ -1,34 +1,28 @@
-#+TITLE:      Python - 基础笔记
+#+TITLE:      Python 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#函数相关][函数相关]]
-  - [[#函数默认参数][函数默认参数]]
+- [[#函数][函数]]
+  - [[#函数的默认参数][函数的默认参数]]
   - [[#内置函数][内置函数]]
-  - [[#函数对象的属性][函数对象的属性]]
-- [[#小整数对象池][小整数对象池]]
-- [[#语法上的问题][语法上的问题]]
-- [[#模块和包的导入与执行][模块和包的导入与执行]]
+  - [[#函数的属性][函数的属性]]
+- [[#模块和包][模块和包]]
+  - [[#模块的导入][模块的导入]]
   - [[#模块相关概念][模块相关概念]]
   - [[#包相关概念][包相关概念]]
   - [[#执行包与包内模块][执行包与包内模块]]
-- [[#异常执行顺序问题][异常执行顺序问题]]
-- [[#关键字使用][关键字使用]]
-- [[#类和实例相关][类和实例相关]]
+- [[#类与实例][类与实例]]
   - [[#限制实例属性][限制实例属性]]
   - [[#抽象类][抽象类]]
   - [[#获取对象属性][获取对象属性]]
   - [[#保护成员和私有成员][保护成员和私有成员]]
   - [[#内置成员][内置成员]]
   - [[#生命周期][生命周期]]
-- [[#数值运算相关][数值运算相关]]
 - [[#作用域问题][作用域问题]]
   - [[#修改全局变量][修改全局变量]]
-- [[#特殊属性][特殊属性]]
-- [[#dict__missing__][dict.__missing__]]
-- [[#字符映射][字符映射]]
+- [[#注意事项][注意事项]]
 
-* 函数相关
-** 函数默认参数
+* 函数
+** 函数的默认参数
    当函数的关键字参数为 *引用类型* 时需要注意不要在函数体内部对参数直接修改：
    #+BEGIN_SRC python
      In [1]: def func(lst=[]):
@@ -50,26 +44,19 @@
    #+END_SRC
 
 ** 内置函数
-   + super :: ~super~ 的一般使用方式为： ~super(class, self).xxx~.
+   + 内置函数 super 长用来调用父类的方法，一般形式为 ~super(class, self)~, 可以参考：[[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单 - Huang Huang 的博客]]
 
-     + [[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单]].
+   + 内置函数 staticmethod 通常作为装饰器使用，未被 ~staticmethod~ 装饰的方法， 如果没有绑定 ~self~ 变量，那么这个方法可以用类名访问， 但是不能用实例访问。
+     使用 ~staticmethod~ 来装饰方法， 那么这个方法既可以使用类名访问，也可以使用实例访问。
 
-   + staticmethod :: 通常作为装饰器使用，未被 ~staticmethod~ 装饰的方法， 如果没有绑定 ~self~ 变量，
-                     那么这个方法可以用类名访问， 但是不能用实例访问。
+   + 内置函数 iter 可以接受一个可调用对象和一个终止条件，当可调用对象的返回值等于终止条件时就结束迭代：
+     #+BEGIN_SRC python
+       iter(callable, sentinel) -> iterator
+     #+END_SRC
 
-                     使用 ~staticmethod~ 来装饰方法， 那么这个方法既可以使用类名访问， 
-                     也可以使用实例访问。
+   + 内置函数 dir 调用的是 *元类* 的 ~__dir__~, 因此 ~object.__dir__~ 和 ~dir~ 得到的结果不一样
 
-   + iter :: 函数 iter 可以接受一个可调用对象和一个终止条件，当可调用对象的返回值等于终止条件
-             时就结束迭代。
-
-             #+BEGIN_SRC python
-               iter(callable, sentinel) -> iterator
-             #+END_SRC
-
-   + dir :: 函数 dir 调用的是 *元类* 的 ~__dir__~, 因此 ~object.__dir__~ 和 ~dir~ 得到的结果不一样
-
-** 函数对象的属性
+** 函数的属性
    *函数* 作为 ~Python~ 对象自然也可以有属性：
    #+BEGIN_SRC python
      In [1]: def func():
@@ -86,43 +73,15 @@
    #+END_SRC
   
    这一特性的使用： [[https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses][Python function attributes - uses and abuses]].
+* 模块和包
+** 模块的导入
+  导入模块时 Python 会动态执行一遍模块中的内容，函数或类的定义的执行就只是定义了函数或类，而其他语句会直接执行，如果有输出还会直接进行输出。
 
-* 小整数对象池
-  Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例。
-
-  参考： [[https://foofish.net/python-int-mystery.html][Python 解惑：整数比较]]
-
-* 语法上的问题
-  和 [[file:../c-c++/c.org::语法相关][C - 语法相关]] 的对比。
-
-  + 赋值语句 :: 不能像 ~if x = func()~ 这样使用, 但是可以 ~func(x = 2)~, 最后传入的参数就是 ~2~.
-  + 连续赋值 :: 只要最右端的变量或字面值已定义即可
-  + 括号 :: 元组
-  + 逗号 :: 不能那样使用
-
-  作为动态语言， 如果像：
-  #+BEGIN_SRC python
-    def func():
-        pass
-
-    def func():
-        pass
-  #+END_SRC
-
-  定义同名的对象， 最后的对象以 *最后一次* 定义为准
-
-* 模块和包的导入与执行
-  导入 *模块* 或 *包* 时， ~Python~ 会动态执行一遍 *模块* 中的内容。
-
-  函数或类的定义的执行就只是定义了函数或类， 而其他语句会直接执行， 
-  如果有输出还会直接进行输出。
-
+  特别的，下面两行语句的效果是一样的：
   #+BEGIN_SRC python
     import spam
     spam = __import__('spam', globals(), locals(), [], 0)
   #+END_SRC  
-
-  这两行代码是等价的！
 
 ** 模块相关概念
    模块，在 ~Python~ 可理解为对应于一个文件。在创建了一个脚本文件后，定义了某些函数和变量。你在其他需要这些功能的文件中，导入这模块，就可重用这些函数和变量。
@@ -151,12 +110,12 @@
    3). 也可以直接导入模块中的函数或变量： ~from PackageA.SubPackageA.ModuleA import functionA~
 
    ~import~ 语句语法：
-   1. 当使用 ~from package import item~ 时, ~item~ 可以是 ~package~ 的子模块或子包，或是其他的定义在包中的名字（比如一个函数、类或变量）。
+   1) 当使用 ~from package import item~ 时, ~item~ 可以是 ~package~ 的子模块或子包，或是其他的定义在包中的名字（比如一个函数、类或变量）。
       首先检查 ~item~ 是否定义在包中，不过没找到，就认为 ~item~ 是一个模块并尝试加载它，失败时会抛出一个 ~ImportError~ 异常。
 
-   2. 当使用 ~import item.subitem.subsubitem~ 语法时，最后一个 ~item~ 之前的 ~item~ 必须是包，最后一个 ~item~ 可以是一个模块或包，但不能是类、函数和变量
+   2) 当使用 ~import item.subitem.subsubitem~ 语法时，最后一个 ~item~ 之前的 ~item~ 必须是包，最后一个 ~item~ 可以是一个模块或包，但不能是类、函数和变量
 
-   3. ~from pacakge import *~
+   3) ~from pacakge import *~
 
       如果包的 ~__init__.py~ 定义了一个名为 ~__all__~ 的列表变量，它包含的模块名字的列表将作为被导入的模块列表。
       如果没有定义 ~__all__~, 这条语句不会导入所有的 ~package~ 的子模块，它只保证包 ~package~ 被导入，然后导入定义在包中的所有名字。
@@ -173,23 +132,7 @@
 
    特别的， 对于包内的 *模块*, 如果使用了 *相对导入*, 那么可以使用 ~python -m pkg.module~ 指令执行模块.
 
-* 异常执行顺序问题
-  #+BEGIN_SRC python
-    try:
-        ...
-    except Exception:
-        raise
-  #+END_SRC
-
-  ~finally~ 代码块必然会执行， 哪怕 ~try/catch~ 中存在 ~return~.
-
-* 关键字使用
-  + with :: with 语句后不一定需要 as, 不过没有 as 会无法捕获上下文对象
-  + as :: as 可以在 import, except, with 语句后使用
-  + global :: 说明当前变量为全局变量
-  + nonlocal :: 说明当前变量不是局部变量， 会根据作用域逐层寻找变量（Python3）
-
-* 类和实例相关
+* 类与实例
 ** 限制实例属性
    在 ~Python~ 中，每个类都有实例属性。默认情况下 ~Python~ 用一个字典来保存一个对象的实例属性。这非常有用，因为它允许我们在运行时去 *设置任意的新属性*
 
@@ -221,12 +164,10 @@
    + 类属性不能用于为由 ~__slots__~ 定义的实例变量设置默认值
    + ~__slots__~ 声明的操作仅限于定义它的类， 子类将由一个 ~__dict__~, 除非定义 ~__slots__~
 
-
-   文档： [[https://docs.python.org/2/reference/datamodel.html?highlight=__slots__#slots][ __slots__]]
+   参考：[[https://docs.python.org/3/reference/datamodel.html?highlight=__slots__#slots][3. Data model — Python 3.7.3 documentation]]
 
 ** 抽象类
-   使用 ~abc~ 模块定义一个接口或抽象类，
-   并且通过执行类型检查来确保子类实现了某些特定的方法。
+   使用 ~abc~ 模块定义一个接口或抽象类，并且通过执行类型检查来确保子类实现了某些特定的方法。
 
    #+BEGIN_SRC python
      from abc import ABCMeta, abstractmethod
@@ -241,33 +182,30 @@
              pass
    #+END_SRC
 
-   *抽象类不能实例化*.
+   注意：
+   + 抽象类不能实例化
+   + 抽象类的子类必须实现特定的抽象方法
 
-   *抽象类* 的 *子类* 必须实现特定的 *抽象* 方法.
-
-   + [[http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p12_define_interface_or_abstract_base_class.html][定义接口或者抽象基类]].
+   参考：[[https://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p12_define_interface_or_abstract_base_class.html][8.12 定义接口或者抽象基类 — python3-cookbook 3.0.0 文档]]
 
 ** 获取对象属性  
    方法 ~__getattr__~ 和 ~__getattribute__~ 的使用：
    + __getattr__(self, attr)
-     - 触发时机： 获取不存在的对象成员时触发
-     - 作用： 为访问不存在的属性设置值
-     - 注意：__getattribute__() 无论何时都会在 __getattr__() 之前触发， 
-       触发了 __getattribute__() *有返回值* 就不会在触发 __getattr__() 了
+     - 触发时机：获取不存在的对象成员时触发
+     - 作用：为访问不存在的属性设置值
+     - 注意：__getattribute__() 无论何时都会在 __getattr__() 之前触发，触发了 __getattribute__() *有返回值* 就不会在触发 __getattr__() 了
 
    + __getattribute__(self, attr)
-     - 触发时机： 使用对象成员时触发， 无论成员是否存在
+     - 触发时机：使用对象成员时触发，无论成员是否存在
 
 ** 保护成员和私有成员
    + *单下划线* 开头的对象为 *保护成员*, 如 ~_obj~.
 
-     *保护成员* 不能通过 ~from module impport *~ 的方式导入， 但可以在使用
-     ~import module~ 导入模块后， 通过 ~module._obj~ 的形式访问。
+     *保护成员* 不能通过 ~from module impport *~ 的方式导入，但可以在使用 ~import module~ 导入模块后，通过 ~module._obj~ 的形式访问。
 
      除此之外， *保护成员* 的行为与一般成员的行为 *无区别*.
 
-   + *双下划线* 开头的对象为 *私有成员*, 只能由 *类对象* 自身进行访问。 但可以通过 ~_class__obj~ 的
-     形式强行访问。
+   + *双下划线* 开头的对象为 *私有成员*, 只能由 *类对象* 自身进行访问。但可以通过 ~_class__obj~ 的形式强行访问。
 
    #+BEGIN_SRC python
      In [1]: class Test(object):
@@ -310,11 +248,11 @@
    + ~__dict__~ 用来存储 *对象属性* 的一个字典， 其 *键* 为 *属性名*, *值* 为 *属性* 的值.
 
      需要注意的是：
-     1. 并不是所有对象都拥有 ~__dict__~ 属性， 许多内建类型就没有 ~__dict__~ 属性
+     1) 并不是所有对象都拥有 ~__dict__~ 属性， 许多内建类型就没有 ~__dict__~ 属性
 
-     2. 实例的 ~__dict__~ 仅存储与该实例相关的实例属性
+     2) 实例的 ~__dict__~ 仅存储与该实例相关的实例属性
 
-     3. 类的 ~__dict__~ 存储所有实例共享的变量和函数, 类的 ~__dict__~ 并不包含其父类的属性
+     3) 类的 ~__dict__~ 存储所有实例共享的变量和函数, 类的 ~__dict__~ 并不包含其父类的属性
 
    + ~__doc__~ 定义一个 *对象* 的 *文档字符串*.
 
@@ -323,37 +261,9 @@
    + ~__class__~ 当前对象的类
 
 ** 生命周期
-   ~Python~ 的垃圾回收是根据 *引用计数* 来判断的， 当一个对象的 *引用* 为 0 是，
-   该对象便会被回收。
-
-* 数值运算相关
-  + 乘方
-    #+BEGIN_SRC python
-      >>> 2 ** 2
-      4
-      >>> 2 ** 0.5
-      1.4142135623730951
-      >>> 2 ** .5
-      1.4142135623730951
-    #+END_SRC
-
-  + 正负无穷
-    #+BEGIN_SRC python
-      >>> float('inf')  # 正无穷
-      inf
-      >>> float('-inf')  # 负无穷
-      -inf
-      >>> 1 + float('inf')
-      inf
-      >>> 1 - float('inf')
-      -inf
-      >>> 0 * float('inf')
-      nan  #  not a number
-    #+END_SRC
-
+   ~Python~ 的垃圾回收是根据 *引用计数* 来判断的， 当一个对象的 *引用* 为 0 时，该对象便会被回收。
 * 作用域问题
-  ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量, 
-  外部也是可以访问的。局部作用域还是有的。
+  ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量，外部也是可以访问的。
 
   #+BEGIN_SRC python
     In [1]: for i in range(10):
@@ -363,14 +273,17 @@
     In [2]: i
     Out[2]: 9
   #+END_SRC
- 
-  + LEGB :: ~locals -> enclosing function -> globals -> __builtins__~
 
-            参考： [[https://segmentfault.com/a/1190000000640834][理解 Python 的 LEGB]]
+  LEGB 规则：
+  #+BEGIN_EXAMPLE
+    locals -> enclosing function -> globals -> __builtins__
+  #+END_EXAMPLE
+  
+  参考：[[https://segmentfault.com/a/1190000000640834][理解 Python 的 LEGB - Sunisdown - SegmentFault 思否]]
 
 ** 修改全局变量
-   1. 内部函数， *不修改* 全局变量可以访问全局变量
-   2. 内部函数， *修改* 同名全局变量，则 ~python~ 会认为它是一个局部变量
+   1) 内部函数， *不修改* 全局变量可以访问全局变量
+   2) 内部函数， *修改* 同名全局变量，则 ~python~ 会认为它是一个局部变量
 
    即： 如果在函数中对全局变量进行赋值修改， 就会出现 ~Unbound-LocalError~.
 
@@ -406,32 +319,30 @@
      UnboundLocalError: local variable 'name' referenced before assignment
    #+END_SRC
 
-* 特殊属性
-  + [[https://segmentfault.com/a/1190000005701971][Python 实例方法的特殊属性]]
-  + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性]]
-
-* dict.__missing__
-  访问字典不存在的键时会调用这个方法：
-  #+BEGIN_SRC python
-    >>> class Counter(dict):
-    ...     def __missing__(self, key):
-    ...         return 0
-    >>> c = Counter()
-    >>> c['red']
-    0
-    >>> c['red'] += 1
-    >>> c['red']
-    1
-  #+END_SRC
-
-* 字符映射
-  #+BEGIN_SRC python
-    new_file = old_file.translate(str.maketrans(' :', '--', '“”()'))
-
-    # >>> '“文件 A”: (测试用)'.translate(str.maketrans(' :', '--', '“”()'))
-    # '文件-A--测试用'
-  #+END_SRC
-  
-  + 前两个参数建立一对一的映射
-  + 第三个参数的字符会映射到 ''
+* 注意事项
+  + Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例
+  + 异常处理时，finally 子句是必然会执行的，哪怕 try/catch 语句中存在 return
+  + 关键字 with 后不一定需要 as 子句，不过没有 as 会无法捕获上下文对象
+  + 关键字 as 可以在 import、except、with 之后使用
+  + ~float('inf')~ 和 ~float('-inf')~ 分别为正负无穷，而 ~float('nan')~ 为非数
+  + 访问字典不存在的键时会调用方法 ~__missing__~:
+    #+BEGIN_SRC python
+      >>> class Counter(dict):
+      ...     def __missing__(self, key):
+      ...         return 0
+      >>> c = Counter()
+      >>> c['red']
+      0
+      >>> c['red'] += 1
+      >>> c['red']
+      1
+    #+END_SRC
+  + Python2 中的生成器不能有 return 语句：
+    #+BEGIN_SRC python
+      >>> def cr():
+      ...     return (yield 10)
+      ...
+        File "<stdin>", line 2
+      SyntaxError: 'return' with argument inside generator
+    #+END_SRC
 

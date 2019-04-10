@@ -1,0 +1,23 @@
+#+TITLE:      Python 使用技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#使用-strmaketrans-转换消除字符][使用 str.maketrans 转换消除字符]]
+- [[#python-中的浮点数字面量][Python 中的浮点数字面量]]
+
+* 使用 str.maketrans 转换消除字符
+  #+BEGIN_SRC python
+    new_file = old_file.translate(str.maketrans(' :', '--', '“”()'))
+
+    # >>> '“文件 A”: (测试用)'.translate(str.maketrans(' :', '--', '“”()'))
+    # '文件-A--测试用'
+  #+END_SRC
+
+  参考官方文档可以得知：第三个参数将会被映射为空字符串
+
+* Python 中的浮点数字面量
+  Python 中的浮点数字面量可以省略小数点前面的部分，使其默认为 0：
+  #+BEGIN_SRC python
+    >>> 2 ** .5
+    1.4142135623730951
+  #+END_SRC
+  

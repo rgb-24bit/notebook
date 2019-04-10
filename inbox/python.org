@@ -30,18 +30,20 @@
 
   + [[https://zh.wikipedia.org/wiki/Jupyter%E9%A1%B9%E7%9B%AE][Jupyter项目 - 维基百科，自由的百科全书]]
 
-* Py2.7
-  #+BEGIN_SRC python
-    >>> def cr():
-    ...     return (yield 10)
-    ...
-      File "<stdin>", line 2
-    SyntaxError: 'return' with argument inside generator
-  #+END_SRC
-
 * 事件驱动程序
   + [[https://github.com/rgb-24bit/python3-cookbook/blob/master/source/c11/p12_understanding_event_driven_io.rst][python3-cookbook/p12_understanding_event_driven_io.rst at master · rgb-24bit/python3-cookbook]]
 
 * 配置
   + [[https://hackernoon.com/4-ways-to-manage-the-configuration-in-python-4623049e841b][4 Ways to manage the configuration in Python – Hacker Noon]]
+
+* Flask
+  对于以/结尾的 route, 在浏览器中访问 url 时若不以/结尾, 会被 flask 重定向到与以/结尾的 endpoint 上
+
+  对于不以/结尾的 route, 在浏览器中访问 url 时若以/结尾, 则会返回 404 错误
+
+  和 Tomcat 的处理方式存在区别
+
+* 特殊属性
+  + [[https://segmentfault.com/a/1190000005701971][Python 实例方法的特殊属性]]
+  + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性]]
 

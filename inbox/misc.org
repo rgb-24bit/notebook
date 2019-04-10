@@ -21,3 +21,6 @@
 * 编码
   + [[https://dzone.com/articles/dont-waste-time-writing][Don't Waste Time Writing Perfect Code - DZone DevOps]]
 
+* 大数定律
+  + [[https://zh.wikipedia.org/zh-hans/%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B][大数定律 - 维基百科，自由的百科全书]]
+
