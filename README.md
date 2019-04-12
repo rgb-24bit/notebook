@@ -92,6 +92,7 @@
   + [Git 使用规范](notebook/git/style.org)
   + [Git 使用技巧](notebook/git/trick.org)
 ## health
+  + [八段锦](notebook/health/baduanjin.org)
   + [健康生活](notebook/health/health.org)
 ## java
   + **javaee**
@@ -143,6 +144,7 @@
   + [计算机网络 - 协议](notebook/network/protocol.org)
 ## os
   + [操作系统 - 基础内容](notebook/os/base.org)
+  + [并发操作](notebook/os/concurrent.org)
   + [操作系统 - 异常控制流](notebook/os/ecf.org)
   + [操作系统 - 程序的机器级表示](notebook/os/express.org)
   + [操作系统 - 信息的表示和处理](notebook/os/info.org)

@@ -7,17 +7,12 @@
 
   环境变量 USERNAME 是当前用户名
 
+  [[https://www.cnblogs.com/bmwchampion/archive/2010/08/21/autotimingexcutejob.html][Windows 自动定时执行任务的几种实现方法 - 博弈无涯 - 博客园]]
+
 * 访问 ftp 服务器
   + [[https://www.cnblogs.com/whseay/p/3456038.html][Windows命令行使用FTP - whseay - 博客园]]
   + [[https://linux.cn/article-6746-1.html][技术|如何在命令行中使用 ftp 命令上传和下载文件]]
   
 * 配置文件执行顺序
   #+HTML: <img src="http://cn.linux.vbird.org/linux_basic/0320bash_files/bashrc_1.gif">
-
-* make
-  使用环境变量：[[https://stackoverflow.com/questions/28890634/how-to-get-a-shell-environment-variable-in-a-makefile][How to get a shell environment variable in a makefile? - Stack Overflow]]
-  Shell 命令的输出：
-  #+BEGIN_SRC makefile
-    VAR = $(shell command...)
-  #+END_SRC
 

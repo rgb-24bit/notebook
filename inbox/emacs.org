@@ -1,7 +1,4 @@
-* 文学编程
-  + [[https://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]
-
-* 全角半角符号
-  + [[http://ergoemacs.org/emacs/elisp_convert_chinese_punctuation.html][Emacs: Convert Full-Width/Half-Width Punctuations]]
-
-    
+* 网页收藏
+  + [[https://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]] - 文学编程
+  + [[http://ergoemacs.org/emacs/elisp_convert_chinese_punctuation.html][Emacs: Convert Full-Width/Half-Width Punctuations]] - 全角半角符号转换
+   

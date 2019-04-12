@@ -1,3 +1,8 @@
+#+TITLE:      并发操作
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#进程同步问题][进程同步问题]]
+
 * 进程同步问题
   + *进程同步的基本概念*
     1. 两种形式的制约关系
@@ -256,20 +261,4 @@
         } while(true);
       }
     #+END_SRC
-* I/O 阻塞
-  + [[https://www.jianshu.com/p/b0b52e3d7ce8][二、文件IO，阻塞非阻塞 - 简书]]
-
-* 标准输入输出
-  #+BEGIN_SRC python
-    >>> open(0)
-    <_io.TextIOWrapper name=0 mode='r' encoding='utf-8'>
-    >>> open(0).readline()
-    asdasd
-    'asdasd\n'
-    >>> import sys
-    >>> sys.stdin.close()
-    >>> open(0).readline()
-    sad
-    'sad\n'
-  #+END_SRC
 

@@ -72,11 +72,13 @@
   | 声明      | ~<%! ... %>~      | 声明的内容将会成为 Servlet 的成员             |
   | 表达式    | ~<%= ... %>~      | 表达式的结果将作为隐式对象 out.println 的参数 |
   | 注释      | ~<%-- ... --%>~   |                                               |
-  | 动作      | ~<xxx:xxx ... />~ |                                               |
+  | 动作      | ~<xxx:xxx ... />~ | 标记库就是动作，只不过是自己定义的动作        |
   | scriptlet | ~<% ... %>~       | 将会被编译为 Java 代码                        |
   | EL 表达式 | ~${...}~          |                                               |
   |-----------+-----------------+-----------------------------------------------|
-  
+
+  三个指令：page、taglib、include
+
   JSP 隐式对象：
   + pageContext
   + out
@@ -86,6 +88,18 @@
   + application - ServletContext
   + config - 这个 JSP 实例的 ServletConfig
   + page - JSPServlet 实例
+  + exception - 只有错误页面可以使用
+
+  pageContext 获取属性时可以指定域：getAttribute(String name, int scope)，也可以通过 pageContext 获取其他隐式对象。
+
+  pageContext 的方法 findAttribute 可以寻找一个属性，查找顺序为：pageContext -> request -> session -> application.
+
+  常用动作：
+  #+BEGIN_EXAMPLE
+    <jsp:include>、<jsp:param>、<jsp:forward>、<jsp:plugin>、<jsp:useBean>、<jsp:setProperty>、<jsp:getProperty>
+  #+END_EXAMPLE
+
+  EL 表达式的第一个名称可以为：隐式对象和四大作用域中的属性。
 
   EL 隐式对象：
   + pageScope - pageContext
@@ -100,5 +114,213 @@
   + initParam
   + pageContext - Not Map
 
-  pageScope、requestScope、sessionScope、applicationScope 中的属性可以省略域直接获取，但是存在同名属性的话还是通过隐式域操作比较准确。
+  可以使用点号 ~.~ 和 ~[]~ 来访问属性或映射值，和 JavaScript 有点像。
 
+  ~[]~ 支持的对象：Map、Bean、List、Array。其中 List 和 Array 的索引会被自动转换为整数，因此可以使用字符串作为 List 和 Array 的索引。
+
+  如果中括号中的不是字符串，那么就会查找向匹配的属性，并替换为该属性的值。
+
+  嵌套表达式：
+  #+BEGIN_SRC html
+    ${mapa[mapb[attr]]}
+    ${mapa.mapb.attr} ?
+  #+END_SRC
+
+  EL 表达式会显示原始的文本，可以受到 XSS 注入攻击。
+
+  配置 JSP 的初始化参数：
+  #+BEGIN_SRC xml
+    <servlet>
+      <servlet-name>...</servlet-name>
+      <jsp-file>...</jsp-file>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>...</servlet-name>
+      <url-pattern>...</url-pattern>
+    </servlet-mapping>
+  #+END_SRC
+  
+* Java Bean
+  Bean 法则：
+  1) 必须有一个公共的无参构造函数
+  2) 按照命名约定来命名公共的设置和获取方法，属性只由方法名确定，也就是说，这是合法的：
+     #+BEGIN_SRC java
+       public class User {
+         private String _name;
+
+         ...
+
+         public String getName() {
+           return _name;
+         }
+
+         ...
+       }
+    #+END_SRC
+  3) 设置方法的参数类型必须和获取方法的返回值类型相同
+  4) 结合 JSP 使用时，属性的类型应该是 String，不然显示效果不好
+
+  在 JSP 中可以通过标准动作 <jsp:useBean> 和 <jsp:getProperty> 操作 Bean：
+  #+BEGIN_SRC html
+    <!-- 声明和初始化 bean 属性 -->
+    <jsp:useBean id="attributeName" class="package.class" scope="scope" />
+
+    <!-- 得到 bean 属性的值 -->
+    <jsp:getProperty name="beanId" property="name" />
+  #+END_SRC
+
+  假如 <jsp:useBean> 找不到相应的 bean，那么就会自动创建一个（参考编译生成的源码）。
+
+  同时可以使用 <jsp:setProperty> 来设置 bean 的属性，可以将 <jsp:setProperty> 置于 <jsp:useBean> 的内部，使得只在创建 bean 时才设置属性。
+  
+  <jsp:setProperty> 可以通过 param 属性获取请求的参数值，或者，请求参数可以自动和 bean 属性匹配。
+
+  可以通过 <jsp:useBean> 的 type 属性建立多态的 bean 引用，scope 默认为 page。
+
+  <jsp:getProperty> 不能嵌套访问。
+  
+  bean 可以自动转换基本类型。
+
+* 其他
+  禁用 JSP 脚本元素（<%...%>），没有禁用 EL 表达式，JSP 指令不受影响：
+  #+BEGIN_SRC xml
+    <web-app>
+      <jsp-config>
+        <jsp-property-group>
+          <url-pattern>*.jsp</url-pattern>
+          <scripting-invalid>true</scripting-invalid>
+        </jsp-property-group>
+      </jsp-config>
+    </web-app>
+  #+END_SRC
+
+  参考：[[https://stackoverflow.com/questions/5890192/what-are-the-effects-of-disabling-scripting-in-a-jsp][What are the effects of disabling scripting in a JSP? - Stack Overflow]]
+
+  禁用后存在脚本元素的话就会报错！
+ 
+  忽略 EL（默认是启动的）：
+  #+BEGIN_SRC xml
+    <web-app>
+      <jsp-config>
+        <jsp-property-group>
+          <url-pattern>*.jsp</url-pattern>
+          <el-ignored>true</el-ignored>
+        </jsp-property-group>
+      </jsp-config>
+    </web-app>
+  #+END_SRC
+  
+  或：
+  #+BEGIN_SRC html
+    <%@ page isELIgnored="true" %>
+  #+END_SRC
+  
+* MindMap
+  整书：
+  #+BEGIN_SRC plantuml
+    @startmindmap
+
+    title Header First Servlets & JSP
+
+    ,* JAVA EE
+
+    ,** Servlet
+    ,*** Servlet 生命周期
+    ,*** Servlet 请求和响应
+    ,*** ServletConfig & ServletContext
+    ,*** Session & Cookie
+    ,*** 属性 - 请求、上下文、Session
+    ,*** 监听者
+
+    ,** JSP
+    ,*** 指令
+    ,*** scriptlet
+    ,*** EL 表达式
+    ,*** 动作
+    ,**** 标准动作
+    ,**** JSTL
+    ,**** 定制标记
+
+    ,** Tomcat
+    ,*** 部署描述文件
+
+    @endmindmap
+  #+END_SRC
+
+  JSP:
+  #+BEGIN_SRC plantuml
+    @startmindmap
+
+    title JSP 思维导图
+
+    ,* JSP
+
+    ,** JSP 指令
+    ,*** page
+    ,*** taglib
+    ,*** include
+
+    ,** scriptlet
+    ,*** 语句 <% ... %>
+    ,*** 表达式 <%= ... %>
+    ,*** 声明 <%! ... %>
+    ,*** 隐式对象
+    ,**** out
+    ,**** request
+    ,**** response
+    ,**** session
+    ,**** application
+    ,**** config
+    ,**** exception
+    ,**** pageContext
+    ,**** page
+
+    ,** EL 表达式
+    ,*** 操作符 .
+    ,*** 操作符 []
+    ,*** 隐式对象
+    ,**** pageScope
+    ,**** requestScope
+    ,**** sessionScope
+    ,**** applicationScope
+    ,**** param
+    ,**** paramValues
+    ,**** header
+    ,**** headerValues
+    ,**** cookie
+    ,**** initParam
+    ,**** pageContext
+    ,*** EL 函数
+    ,*** null 的处理
+
+    left side
+
+    ,** 标记
+    ,*** 标准动作
+    ,**** <jsp:include>
+    ,**** <jsp:param>
+    ,**** <jsp:forward>
+    ,**** <jsp:useBean>
+    ,**** <jsp:setProperty>
+    ,**** <jsp:getProperty>
+
+    ,*** JSTL
+    ,**** <c:out>
+    ,**** <c:forEach>
+    ,**** <c:if>
+    ,**** <c:set>
+    ,**** <c:remove>
+    ,**** <c:choose>
+    ,**** <c:import>
+    ,**** <c:param>
+    ,**** <c:url>
+    ,**** <c:catch>
+
+    ,*** 定制标记
+
+    @endmindmap
+  #+END_SRC
+
+
+* 相关链接
+  + [[https://docs.oracle.com/cd/E17904_01/web.1111/e13712/web_xml.htm#WBAPP502][A web.xml Deployment Descriptor Elements]]
