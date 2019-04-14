@@ -10,6 +10,9 @@
 * 问题
   + MIME
   + Tomcat 的使用
+  + 过滤器调用顺序
+  + Java EE 1.5 & Servlet 2.5，新版本的东西需要补一下
+  + 6 - 3.0，7 - 3.1，8 - 4.0
 
 * IDEA
   1. 通过 Maven 创建 web-app
@@ -324,3 +327,5 @@
 
 * 相关链接
   + [[https://docs.oracle.com/cd/E17904_01/web.1111/e13712/web_xml.htm#WBAPP502][A web.xml Deployment Descriptor Elements]]
+  + [[https://stackoverflow.com/questions/1515190/relationship-between-jsp-and-java-ee][Relationship between JSP and Java EE - Stack Overflow]]
+

@@ -6,6 +6,7 @@
   - [[#org-导出为-html-时使用-css文件-中的样式高亮代码][Org 导出为 HTML 时使用 CSS文件 中的样式高亮代码]]
   - [[#使用-clocktable-进行时间统计][使用 clocktable 进行时间统计]]
   - [[#对齐文件中的所有标签][对齐文件中的所有标签]]
+  - [[#文学编程][文学编程]]
 - [[#问题集][问题集]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
   - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
@@ -35,6 +36,9 @@
 
 ** 对齐文件中的所有标签
    通过快捷键 ~C-u C-c C-q~ 可以很方便的完成这一工作。
+
+** 文学编程
+   可以通过 Org mode 进行文学编程，参考 [[https://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]。
 
 * 问题集
 ** 如何将 org-capture 捕获的内容插入当前光标位置

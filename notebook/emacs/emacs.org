@@ -164,7 +164,7 @@
    参考：[[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki: Emacs As Daemon]]
 
 ** 字体与字体集
-   + [[https://idiocy.org/emacs-fonts-and-fontsets.html][Emacs, fonts and fontsets]]
+   + [[https://archive.casouri.co.uk/note/2019/emacs-%E5%AD%97%E4%BD%93%E4%B8%8E%E5%AD%97%E4%BD%93%E9%9B%86/index.html][Emacs，字体与字符集]]
 
 * 休闲娱乐
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]
