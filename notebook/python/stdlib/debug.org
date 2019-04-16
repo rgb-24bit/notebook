@@ -1,0 +1,11 @@
+#+TITLE:      Debugging and Profiling
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#pdb--the-python-debugger][pdb — The Python Debugger]]
+
+* pdb — The Python Debugger
+  可以通过 ~python -m pdb script.py~ 的方式运行 pdb 调试 python 脚本，可以参考：
+  + [[https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/index.html][Python 代码调试技巧]]
+
+  官方文档链接：[[https://docs.python.org/3/library/pdb.html][pdb — The Python Debugger — Python 3.7.3 documentation]]
+

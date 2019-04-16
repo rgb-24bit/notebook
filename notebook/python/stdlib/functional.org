@@ -1,0 +1,22 @@
+#+TITLE:      Functional Programming Modules
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#itertools--functions-creating-iterators-for-efficient-looping][itertools — Functions creating iterators for efficient looping]]
+- [[#operator--standard-operators-as-functions][operator — Standard operators as functions]]
+- [[#functools--higher-order-functions-and-operations-on-callable-objects][functools — Higher-order functions and operations on callable objects]]
+
+* itertools — Functions creating iterators for efficient looping
+  这个模块可以为高效循环创建迭代器，个人感觉可以读一下源码，一个挺有意思的，参考教程：
+  + [[http://wklken.me/posts/2013/08/20/python-extra-itertools.html][Python-进阶-itertools 模块小结]]
+
+  官方文档链接：[[https://docs.python.org/3/library/itertools.html][itertools — Functions creating iterators for efficient looping]]
+
+* operator — Standard operators as functions
+  Python 之中一切皆是对象，这个模块中的对象可以将标准运算抽象出来使用，同时可以提供更加高级的功能。
+
+  官方文档链接：[[https://docs.python.org/3/library/operator.html][operator — Standard operators as functions — Python 3.7.3 documentation]]
+
+* functools — Higher-order functions and operations on callable objects
+  函数式编程自然少不了高阶函数的支持，官方文档链接：
+  + [[https://docs.python.org/3/library/functools.html][functools — Higher-order functions and operations on callable objects — Python 3.7.3 documentation]]
+

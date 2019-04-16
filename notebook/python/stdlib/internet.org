@@ -1,9 +1,9 @@
-#+TITLE:      urllib
+#+TITLE:      Internet Protocols and Support
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#自定义-opener][自定义 Opener]]
+- [[#urllibrequest--extensible-library-for-opening-urls][urllib.request — Extensible library for opening URLs]]
 
-* 自定义 Opener
+* urllib.request — Extensible library for opening URLs
   通过 build_opener() 方法返回的对象具有 open() 方法，与 urlopen() 函数的功能相同。
 
   我们可以通过自定义 opener 来支持更多的功能：
@@ -35,4 +35,6 @@
      #+END_SRC
   
   可以通过 install_opener 方法将 opener 对象作为全局默认的 opener 对象。
+
+  官方文档链接：[[https://docs.python.org/3/library/urllib.request.html][urllib.request — Extensible library for opening URLs — Python 3.7.3 documentation]]
 

@@ -141,3 +141,8 @@
 * OAuth
   + [[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html][理解 OAuth 2.0 - 阮一峰的网络日志]]
 
+* script
+  + [[https://stackoverflow.com/questions/4396849/does-the-script-tag-position-in-html-affects-performance-of-the-webpage][javascript - Does the <script> tag position in HTML affects performance of the webpage? - Stack Overflow]]
+
+* CSS 背景虚化
+  + filyter: blur(2px)

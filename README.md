@@ -151,6 +151,14 @@
   + [操作系统 - I/O](notebook/os/io.org)
   + [操作系统 - 链接](notebook/os/link.org)
 ## python
+  + **stdlib**
+    + [Generic Operating System Services](notebook/python/stdlib/allos.org)
+    + [Debugging and Profiling](notebook/python/stdlib/debug.org)
+    + [Development Tools](notebook/python/stdlib/development.org)
+    + [Functional Programming Modules](notebook/python/stdlib/functional.org)
+    + [Internet Protocols and Support](notebook/python/stdlib/internet.org)
+    + [Internet Data Handling](notebook/python/stdlib/netdata.org)
+    + [Python Runtime Services](notebook/python/stdlib/python.org)
   + [Python - 异步 I/O](notebook/python/async.org)
   + [Python 协程](notebook/python/coroutine.org)
   + [Python 爬虫笔记](notebook/python/crawler.org)
@@ -162,11 +170,9 @@
   + [Python 问题集](notebook/python/question.org)
   + [Python Setup](notebook/python/setup.org)
   + [socket](notebook/python/socket.org)
-  + [Python - 标准库](notebook/python/stdlib.org)
   + [Python - 并发编程](notebook/python/thread.org)
   + [Tkinter](notebook/python/tkinter.org)
   + [Python 使用技巧](notebook/python/trick.org)
-  + [urllib](notebook/python/urllib.org)
   + [Python - 弱引用](notebook/python/weakref.org)
 ## tools
   + [Chrome](notebook/tools/chrome.org)

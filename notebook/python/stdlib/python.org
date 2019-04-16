@@ -1,0 +1,27 @@
+#+TITLE:      Python Runtime Services
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#traceback--print-or-retrieve-a-stack-traceback][traceback — Print or retrieve a stack traceback]]
+
+* traceback — Print or retrieve a stack traceback
+  可以通过 ~traceback~ 模块打印或检索堆栈回溯，官网上的例子：
+  #+BEGIN_SRC python
+    import sys, traceback
+
+    def run_user_code(envdir):
+        source = input(">>> ")
+        try:
+            exec(source, envdir)
+        except Exception:
+            print("Exception in user code:")
+            print("-"*60)
+            traceback.print_exc(file=sys.stdout)
+            print("-"*60)
+
+    envdir = {}
+    while True:
+        run_user_code(envdir)
+  #+END_SRC
+
+  官方文档链接：[[https://docs.python.org/3/library/traceback.html][traceback — Print or retrieve a stack traceback — Python 3.7.3 documentation]]
+

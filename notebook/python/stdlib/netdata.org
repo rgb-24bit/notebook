@@ -1,0 +1,13 @@
+#+TITLE:      Internet Data Handling
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#json--json-encoder-and-decoder][json — JSON encoder and decoder]]
+
+* json — JSON encoder and decoder
+  json 模块的功能已经很强大了，但一点缺憾是无法直接完成 Python 对象和 JSON 对象之间的转换。
+
+  这个可以参考：
+  + [[https://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object][How to convert JSON data into a Python object - Stack Overflow]]
+
+  官方文档链接：[[https://docs.python.org/3/library/json.html][json — JSON encoder and decoder — Python 3.7.3 documentation]]
+

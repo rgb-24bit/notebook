@@ -1,0 +1,31 @@
+#+TITLE:      Generic Operating System Services
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#argparse--parser-for-command-line-options-arguments-and-sub-commands][argparse — Parser for command-line options, arguments and sub-commands]]
+- [[#logging--logging-facility-for-python][logging — Logging facility for Python]]
+- [[#io--core-tools-for-working-with-streams][io — Core tools for working with streams]]
+
+* argparse — Parser for command-line options, arguments and sub-commands
+  通过 ~argparse~ 进行命令行参数的解析，虽然存在更好用的第三方工具 ~click~, 但是简单脚本使用 ~argparse~ 也依然是一个很好的选择。
+
+  可以参考的教程：
+  + [[https://pymotw.com/2/argparse/][argparse – Command line option and argument parsing. - Python Module of the Week]]
+
+  官方文档链接：[[https://docs.python.org/3/library/argparse.html][argparse — Parser for command-line options, arguments and sub-commands — Python 3.7.3 documentation]]
+  
+* logging — Logging facility for Python
+  日志模块的设计是借鉴 Java 的日志模块设计的，因此日志模块的接口和一般的 Python 不一样。
+
+  可以参考的教程：
+  + [[http://python.jobbole.com/81666/][每个 Python 程序员都要知道的日志实践]]
+  + [[http://blog.jobbole.com/113413/][日志的艺术（The art of logging）]]
+  + [[https://www.cnblogs.com/yyds/p/6901864.html][Python之日志处理（logging模块）]]
+  + [[http://python.jobbole.com/86887/][Python 中的 logging 模块]]
+
+  官方文档链接：[[https://docs.python.org/3/library/logging.html][logging — Logging facility for Python — Python 3.7.3 documentation]]
+
+* io — Core tools for working with streams
+  io 模块包含的两个可以将数据写在内存的类：StringIO 和 BytesIO。
+
+  官方文档链接：[[https://docs.python.org/3/library/io.html][io — Core tools for working with streams — Python 3.7.3 documentation]]
+

@@ -1,0 +1,5 @@
+* 可见性
+  + [[https://orgmode.org/manual/Initial-visibility.html][The Org Manual: Initial visibility]]
+
+* 配置
+  有些配置是作用于当前缓冲区的

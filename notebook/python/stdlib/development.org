@@ -1,0 +1,48 @@
+#+TITLE:      Development Tools
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#doctest--test-interactive-python-examples][doctest — Test interactive Python examples]]
+- [[#unittest--unit-testing-framework][unittest — Unit testing framework]]
+
+* doctest — Test interactive Python examples
+  通过 Python 文档字符串进行测试的一种工具，作文档简洁命令，作测试方便高效：
+  #+BEGIN_SRC python
+    if __name__ == "__main__":
+        import doctest
+        doctest.testmod()
+  #+END_SRC
+
+  如果需要详细的测试用例信息，那么可以使用 ~-v~ 参数：
+  #+BEGIN_SRC python
+    python script.py -v
+  #+END_SRC
+
+  官方文档链接：[[https://docs.python.org/3/library/doctest.html][doctest — Test interactive Python examples — Python 3.7.3 documentation]]
+
+* unittest — Unit testing framework
+  对于单元测试来说更常用的应该是 pytest，但是 unittest 也还是不错的：
+  #+BEGIN_SRC python
+    import unittest
+
+    class TestStringMethods(unittest.TestCase):
+
+        def test_upper(self):
+            self.assertEqual('foo'.upper(), 'FOO')
+
+        def test_isupper(self):
+            self.assertTrue('FOO'.isupper())
+            self.assertFalse('Foo'.isupper())
+
+        def test_split(self):
+            s = 'hello world'
+            self.assertEqual(s.split(), ['hello', 'world'])
+            # check that s.split fails when the separator is not a string
+            with self.assertRaises(TypeError):
+                s.split(2)
+
+    if __name__ == '__main__':
+        unittest.main()
+  #+END_SRC
+  
+  官方文档链接：[[https://docs.python.org/3/library/unittest.html][unittest — Unit testing framework — Python 3.7.3 documentation]]
+

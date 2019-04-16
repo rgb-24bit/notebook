@@ -24,3 +24,9 @@
 
 * 大数定律
   + [[https://zh.wikipedia.org/zh-hans/%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B][大数定律 - 维基百科，自由的百科全书]]
+
+* 命令行参数语法
+  通常使用的语法形式：[[https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html][Argument Syntax (The GNU C Library)]]
+
+  Java 中可以使用虚拟机参数，这个更加容易获取：
+  + [[https://softwareengineering.stackexchange.com/questions/70357/command-line-options-style-posix-or-what][java - Command line options style - POSIX or what? - Software Engineering Stack Exchange]]

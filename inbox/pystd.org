@@ -1,10 +1,6 @@
 #+TITLE:      Python - 标准库
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#调试和分析][调试和分析]]
-- [[#通用操作系统服务][通用操作系统服务]]
-- [[#函数编程模块][函数编程模块]]
-- [[#开发工具][开发工具]]
 - [[#数据类型][数据类型]]
 - [[#文件和目录访问][文件和目录访问]]
 - [[#数据压缩和存档][数据压缩和存档]]
@@ -13,72 +9,6 @@
 - [[#程序框架][程序框架]]
 - [[#python-语言服务][Python 语言服务]]
 - [[#python-运行时服务][Python 运行时服务]]
-
-* 调试和分析
-  + pdb :: Python 调试器
-    + [[https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/index.html][Python 代码调试技巧]]
-
-  + traceback :: 打印或检索堆栈回溯
-
-* 通用操作系统服务
-  + argparse :: 命令行参数解析                
-    + [[https://pymotw.com/2/argparse/][argparse – Command line option and argument parsing. - Python Module of the Week]]
-
-  + logging :: 日志记录
-    + [[http://python.jobbole.com/81666/][每个 Python 程序员都要知道的日志实践]]
-    + [[http://blog.jobbole.com/113413/][日志的艺术（The art of logging）]]
-    + [[https://www.cnblogs.com/yyds/p/6901864.html][Python之日志处理（logging模块）]]
-    + [[http://python.jobbole.com/86887/][Python 中的 logging 模块]]
-  
-  + io :: 包含 ~StringIO~ 和 ~BytesIO~
-
-* 函数编程模块
-  + itertools ::  为高效循环创建迭代器
-    + [[https://docs.python.org/3/library/itertools.html][itertools — Functions creating iterators for efficient looping]]
-    + [[http://wklken.me/posts/2013/08/20/python-extra-itertools.html][PYTHON-进阶-ITERTOOLS 模块小结]]
-
-  + operator :: 标准运算符作为函数
-    + [[https://docs.python.org/3/library/operator.html][operator — Standard operators as functions]]
-
-  + functools :: 高阶函数和操作
-    + [[https://docs.python.org/3/library/functools.html][functools — Higher-order functions and operations on callable objects]]
-    + [[https://blog.theerrorlog.com/simple-lru-cache-in-python-3.html][Python3 中的傻瓜式 LRU 缓存实现]]
-
-* 开发工具
-  + doctest :: 通过 *文档字符串* 进行测试
-    + [[https://docs.python.org/2/library/doctest.html][doctest — Test interactive Python examples]]
-      #+BEGIN_SRC python
-        if __name__ == "__main__":
-            import doctest
-            doctest.testmod()
-      #+END_SRC
-
-      参数 ~-v~ 列出详细的测试用例: ~python script.py -v~
-
-  + unittest :: 单元测试框架
-    + [[https://docs.python.org/3.6/library/unittest.html][unittest — Unit testing framework]]
-      #+BEGIN_SRC python
-        import unittest
-
-        class TestStringMethods(unittest.TestCase):
-
-            def test_upper(self):
-                self.assertEqual('foo'.upper(), 'FOO')
-
-            def test_isupper(self):
-                self.assertTrue('FOO'.isupper())
-                self.assertFalse('Foo'.isupper())
-
-            def test_split(self):
-                s = 'hello world'
-                self.assertEqual(s.split(), ['hello', 'world'])
-                # check that s.split fails when the separator is not a string
-                with self.assertRaises(TypeError):
-                    s.split(2)
-
-        if __name__ == '__main__':
-            unittest.main()
-      #+END_SRC
 
 * 数据类型
   + heapq :: 为 ~Python~ 提供 *堆* 数据类型的支持
@@ -155,10 +85,12 @@
   + codecs :: 编解码器注册表和基类
     + [[https://docs.python.org/3/library/codecs.html][Codec registry and base classes]]
 
+
 * 互联网协议和支持
   + uuid :: 全局唯一标识符支持
     + [[https://docs.python.org/3/library/uuid.html][UUID objects according to RFC 4122]]
     + [[https://www.cnblogs.com/dkblog/archive/2011/10/10/2205200.html][Python 使用 UUID 库生成唯一 ID]]
+
 
 * 程序框架
   + turtle :: 海龟绘图库
