@@ -64,10 +64,10 @@
   + [.NET - 未分类](notebook/dotnet/misc.org)
   + [.NET - WinForm 相关笔记](notebook/dotnet/winforms.org)
 ## emacs
-  + [Elisp - 风格规范](notebook/emacs/code-style.org)
-  + [Emacs Lisp 笔记](notebook/emacs/elisp.org)
-  + [Emacs 使用笔记](notebook/emacs/emacs.org)
-  + [Emacs - 实用模式](notebook/emacs/minor-mode.org)
+  + [Emacs Lisp](notebook/emacs/elisp.org)
+  + [Emacs](notebook/emacs/emacs.org)
+  + [编程语言](notebook/emacs/lang.org)
+  + [minor mode](notebook/emacs/minor-mode.org)
   + [Org mode](notebook/emacs/org-mode.org)
   + [Emacs - 问题集](notebook/emacs/question.org)
   + [Emacs - 正则表达式](notebook/emacs/regex.org)
@@ -96,10 +96,13 @@
   + [健康生活](notebook/health/health.org)
 ## java
   + **javaee**
+    + [JSP](notebook/java/javaee/jsp.org)
     + [Java EE 问题集](notebook/java/javaee/question.org)
-    + [Servlet 基础笔记](notebook/java/javaee/servlet.org)
+    + [Servlet](notebook/java/javaee/servlet.org)
+  + **tools**
+    + [Gradle](notebook/java/tools/gradle.org)
+    + [IntelliJ IDEA](notebook/java/tools/idea.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
-  + [Gradle](notebook/java/gradle.org)
   + [Java - I/O 操作](notebook/java/io.org)
   + [Java 基础知识](notebook/java/java.org)
   + [JavaDoc](notebook/java/javadoc.org)
@@ -110,8 +113,7 @@
   + [Java - 流相关](notebook/java/stream.org)
   + [Java 编码规范](notebook/java/style.org)
   + [Swing](notebook/java/swing.org)
-  + [Java 使用技巧](notebook/java/tips.org)
-  + [Java 使用技巧](notebook/java/trick.org)
+  + [Java Tricks](notebook/java/tricks.org)
 ## lang
   + [Bash](notebook/lang/bash.org)
   + [Dot](notebook/lang/dot.org)

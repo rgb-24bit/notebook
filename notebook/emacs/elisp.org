@@ -1,27 +1,32 @@
-#+TITLE:     Emacs Lisp 笔记
+#+TITLE:     Emacs Lisp
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#列表相关][列表相关]]
+- [[#lisp-data-types][Lisp Data Types]]
   - [[#alist--plist][alist & plist]]
   - [[#quote--backquote][Quote & Backquote]]
-  - [[#cons-概念的理解][cons 概念的理解]]
-- [[#变量相关][变量相关]]
-  - [[#setq--setq-default][setq & setq-default]]
-  - [[#let--let][let & let*]]
-- [[#autoload][autoload]]
-- [[#启用-minor-mode][启用 minor-mode]]
-- [[#type-predicates][Type Predicates]]
-- [[#keyword][Keyword]]
-- [[#关于符号][关于符号]]
-- [[#hooks][Hooks]]
-- [[#macro][Macro]]
-- [[#timer][Timer]]
-- [[#函数相关][函数相关]]
+  - [[#cons][cons]]
+  - [[#type-predicates][Type Predicates]]
+- [[#loading][Loading]]
+  - [[#autoload][autoload]]
+- [[#major-and-minor-modes][Major and Minor Modes]]
+  - [[#minor-mode][minor-mode]]
+- [[#symbols][Symbols]]
+- [[#macros][Macros]]
+- [[#operating-system-interface][Operating System Interface]]
+  - [[#timer][Timer]]
+- [[#functions][Functions]]
   - [[#关键字参数][关键字参数]]
   - [[#interactive][interactive]]
   - [[#有用的函数][有用的函数]]
+- [[#风格规范][风格规范]]
+  - [[#package][Package]]
+  - [[#命名风格][命名风格]]
+- [[#问题集][问题集]]
+  - [[#setq-和-setq-defautl-的区别][setq 和 setq-defautl 的区别]]
+  - [[#let-和-let-的区别][let 和 let* 的区别]]
+  - [[#以--开头的参数是怎么一回事][以 : 开头的参数是怎么一回事]]
 
-* 列表相关
+* Lisp Data Types
 ** alist & plist
    alist 的常见的两种形式：
    #+BEGIN_SRC elisp
@@ -62,93 +67,62 @@
 
    + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Quoting.html][Quoting - GNU Emacs Lisp Reference Manual]]
    + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html#Backquote][Backquote - GNU Emacs Lisp Reference Manual]]
-** cons 概念的理解
+
+** cons
    任何非空的列表，都可以被视为一对由列表第一个元素及列表其余元素所组成的列表。
 
    Lisp 的惯例是使用 car 代表列表的第一个元素，而用 cdr 代表列表的其余的元素。
 
    + [[https://acl.readthedocs.io/en/latest/zhCN/ch3-cn.html#conses][第三章：列表 — ANSI Common Lisp 中文版]]
 
-* 变量相关
-** setq & setq-default
-   Emacs 中有些变量是 buffer-local 的，通过 setq 设置 buffer-local 变量时，
-   只会影响该缓冲区，而 setq-default 会设置全局的值。
-
-   简单的说，就是：
-   + setq：设置的值可能只影响当前缓冲区
-   + setq-default：设置的值是全局的，影响所有的缓冲区
-
-** let & let*
-   ~let~ 的参数列表中，后序的参数不能使用前面定义的参数，而 ~let*~ 可以：
+** Type Predicates
+   通过函数 ~type-of~ 判断一个对象的类型：
    #+BEGIN_SRC elisp
-     ELISP> (let ((num 10) (n num)))
-     ,*** Eval error ***  Symbol’s value as variable is void: num
-     ELISP> (let* ((num 10) (n num)))
-     nil
-   #+END_SRC  
-    
-* autoload
-  通过如下格式的注释声明某个函数为自动加载的：
-  #+BEGIN_SRC elisp
-    ;;;###autoload
-    (defun doctor ()
-      "Switch to *doctor* buffer and start giving psychotherapy."
-      (interactive)
-      (switch-to-buffer "*doctor*")
-      (doctor-mode))
-  #+END_SRC
+     (type-of '(1 2 3))  ; => cons
+   #+END_SRC
 
-* 启用 minor-mode
-  *概念：* ~Non-nil~ 指的是所有非 ~nil~ 的值，包括 ~0~ 和负数。
+   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Type-Predicates.html][Type Predicates - GNU Emacs Lisp Reference Manual]]
 
-  *Minor Modes*:
-  #+BEGIN_SRC elisp
-    (minor-mode &optional ARG)
-  #+END_SRC
+* Loading
+** autoload
+   通过如下格式的注释声明某个函数为自动加载的：
+   #+BEGIN_SRC elisp
+     ;;;###autoload
+     (defun doctor ()
+       "Switch to *doctor* buffer and start giving psychotherapy."
+       (interactive)
+       (switch-to-buffer "*doctor*")
+       (doctor-mode))
+   #+END_SRC
 
-  如果参数 ~ARG~ 存在，那么：
-  + 如果 ~ARG~ 为正，就启用 ~minor-mode~
-  + 其他情况就禁用 ~minor-mode~
-  
-  如果参数 ~ARG~ 不存在为 ~ARG~ 为 ~nil~, 也启动 ~minor-mode~.
+* Major and Minor Modes
+** minor-mode
+   *概念：* ~Non-nil~ 指的是所有非 ~nil~ 的值，包括 ~0~ 和负数。
 
-  #+BEGIN_SRC elisp
-    ;; enable
-    (blink-cursor-mode)           ; Omitted argument
-    (blink-cursor-mode 1)         ; Positive argument
-    (blink-cursor-mode t)         ; True argument
-    (blink-cursor-mode nil)       ; nil argument (don't use this)
+   *Minor Modes*:
+   #+BEGIN_SRC elisp
+     (minor-mode &optional ARG)
+   #+END_SRC
 
-    ;; disable
-    (blink-cursor-mode 0)         ; Non-positive argument
-    (blink-cursor-mode -1)        ; Negative argument
-  #+END_SRC
+   如果参数 ~ARG~ 存在，那么：
+   + 如果 ~ARG~ 为正，就启用 ~minor-mode~
+   + 其他情况就禁用 ~minor-mode~
 
-* Type Predicates
-  通过函数 ~type-of~ 判断一个对象的类型：
-  #+BEGIN_SRC elisp
-    (type-of '(1 2 3))  ; => cons
-  #+END_SRC
+   如果参数 ~ARG~ 不存在为 ~ARG~ 为 ~nil~, 也启动 ~minor-mode~.
 
-  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Type-Predicates.html][Type Predicates - GNU Emacs Lisp Reference Manual]]
+   #+BEGIN_SRC elisp
+     ;; enable
+     (blink-cursor-mode)           ; Omitted argument
+     (blink-cursor-mode 1)         ; Positive argument
+     (blink-cursor-mode t)         ; True argument
+     (blink-cursor-mode nil)       ; nil argument (don't use this)
 
-* Keyword
-  Elisp 中以符号 *:* 开头的符号属于 *关键字*, 声明一个 *:xxx* 形式的变量会主动出击关键字：
-  #+BEGIN_SRC elisp
-    ELISP> (intern-soft ":key-1")
-    nil
-    ELISP> :key-1
-    :key-1
-    ELISP> (intern-soft ":key-1")
-    :key-1
-  #+END_SRC
+     ;; disable
+     (blink-cursor-mode 0)         ; Non-positive argument
+     (blink-cursor-mode -1)        ; Negative argument
+   #+END_SRC
 
-  可以通 ~keywordp~ 判断一个符号是否是关键字：
-  #+BEGIN_SRC elisp
-    (keywordp :key-1)  ; => t
-  #+END_SRC
-
-* 关于符号
+* Symbols
   #+BEGIN_SRC elisp
     ;; 符号列表
     (setq lst '(symbolA symbolB symbolC))
@@ -160,12 +134,7 @@
     'symbol              ;; => 符号
   #+END_SRC
 
-* Hooks  
-  Hook 是 Emacs 中重要的扩展机制，是一个函数列表，会在执行某些操作后执行这个列表中的函数。
-
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]
-
-* Macro
+* Macros
   宏是一种可以生成代码的代码。类比与 C 语言中的宏以及 C++中的模板：
   #+BEGIN_SRC elisp
     (defmacro inc (var)
@@ -186,25 +155,26 @@
   + 宏的参数并不会被马上求值，解释器会先展开宏，宏展开之后解释器才会执行宏展开的结果
   + 宏的执行结果是一个表达式，该表达式会立即被解释器执行
 
-* Timer
-  可以通过函数 run-with-timer 创建定时任务：
-  #+BEGIN_SRC elisp
-    (run-with-timer SECS REPEAT FUNCTION &rest ARGS)
-  #+END_SRC
+* Operating System Interface
+** Timer
+   可以通过函数 run-with-timer 创建定时任务：
+   #+BEGIN_SRC elisp
+     (run-with-timer SECS REPEAT FUNCTION &rest ARGS)
+   #+END_SRC
 
-  参数含义：
-  + SECS: 间隔多少秒执行 FUNCTION
-  + REPEAT: 非空便重复执行
-    
-  可以通过函数 cancel-timer 取消一个 Timer:
-  #+BEGIN_SRC elisp
-    (cancel-timer TIMER)
-  #+END_SRC
-  
-  TIMER 是由函数 run-with-timer 创建的。
-  
-* 函数相关
-  两种新式及展开后的形式：
+   参数含义：
+   + SECS: 间隔多少秒执行 FUNCTION
+   + REPEAT: 非空便重复执行
+
+   可以通过函数 cancel-timer 取消一个 Timer:
+   #+BEGIN_SRC elisp
+     (cancel-timer TIMER)
+   #+END_SRC
+
+   TIMER 是由函数 run-with-timer 创建的。
+
+* Functions
+  两种形式的函数引用及展开后的形式：
   #+BEGIN_SRC elisp
     #'foo  ; => (function foo)
     'foo   ; => (quote foo)
@@ -219,6 +189,7 @@
    #+END_SRC
 
    + [[https://www.emacswiki.org/emacs/KeywordArguments][EmacsWiki: Keyword Arguments]]
+
 ** interactive
    ~Emacs~ 中存在 *两种函数*:
    1) 可以作为命令执行的函数
@@ -239,6 +210,7 @@
               (read-string "value"))
         (insert (format "%s = %s" name value)))
    #+END_SRC
+
 ** 有用的函数
    + 获取 Emacs 已启动时间长度：
      #+BEGIN_SRC elisp
@@ -253,3 +225,77 @@
 
      参考：[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Checksum_002fHash.html][Checksum/Hash - GNU Emacs Lisp Reference Manual]]
 
+* 风格规范
+** Package
+   #+BEGIN_SRC elisp
+     ;;; superfrobnicator.el --- Frobnicate and bifurcate flanges
+
+     ;; Copyright (C) 2011 Free Software Foundation, Inc.
+
+     ;; Author: J. R. Hacker <jrh@example.com>
+     ;; Version: 1.3
+     ;; Package-Requires: ((flange "1.0"))
+     ;; Keywords: multimedia, frobnicate
+     ;; URL: http://example.com/jrhacker/superfrobnicate
+
+     ...
+
+          ;;; Commentary:
+
+     ;; This package provides a minor mode to frobnicate and/or
+     ;; bifurcate any flanges you desire.  To activate it, just type
+     ...
+
+          ;;;###autoload
+     (define-minor-mode superfrobnicator-mode
+       ...
+   #+END_SRC
+
+   + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html][Simple Packages - GNU Emacs Lisp Reference Manual]]
+
+** 命名风格  
+   #+BEGIN_SRC elisp
+     ;; define custom variable
+     (setq rgb-24bit/variable-name)
+
+     ;; define mode
+     (define-minor-mode name-mode)
+
+     ;; define mode variable
+     (setq name-mode-variable-name)
+   #+END_SRC
+
+   可以参考：[[https://github.com/bbatsov/emacs-lisp-style-guide][A community-driven Emacs Lisp style guide]]
+
+* 问题集
+** setq 和 setq-defautl 的区别
+   Emacs 中有些变量是 buffer-local 的，通过 setq 设置 buffer-local 变量时，只会影响该缓冲区，而 setq-default 会设置全局的值。
+
+   简单的说，就是：
+   + setq：设置的值可能只影响当前缓冲区
+   + setq-default：设置的值是全局的，影响所有的缓冲区
+
+** let 和 let* 的区别
+   ~let~ 的参数列表中，后序的参数不能使用前面定义的参数，而 ~let*~ 可以：
+   #+BEGIN_SRC elisp
+     ELISP> (let ((num 10) (n num)))
+     ,*** Eval error ***  Symbol’s value as variable is void: num
+     ELISP> (let* ((num 10) (n num)))
+     nil
+   #+END_SRC
+
+** 以 : 开头的参数是怎么一回事
+   Elisp 中以符号 *:* 开头的符号属于 *关键字*, 声明一个 *:xxx* 形式的变量会自动变为关键字：
+   #+BEGIN_SRC elisp
+     ELISP> (intern-soft ":key-1")
+     nil
+     ELISP> :key-1
+     :key-1
+     ELISP> (intern-soft ":key-1")
+     :key-1
+   #+END_SRC
+
+   可以通 ~keywordp~ 判断一个符号是否是关键字：
+   #+BEGIN_SRC elisp
+     (keywordp :key-1)  ; => t
+   #+END_SRC

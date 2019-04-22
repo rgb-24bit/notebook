@@ -7,6 +7,7 @@
   - [[#使用-clocktable-进行时间统计][使用 clocktable 进行时间统计]]
   - [[#对齐文件中的所有标签][对齐文件中的所有标签]]
   - [[#文学编程][文学编程]]
+  - [[#时间操作][时间操作]]
 - [[#问题集][问题集]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
   - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
@@ -16,6 +17,7 @@
 ** Agenda Views 相关
    + Agenda Views 默认会显示每个条目的 ~CATEGORY~ 属性，该属性可以通过快捷键 ~C-c C-x p~ 进行插入
    + Agenda Views 中可以通过快捷键 ~C-k~ 删除条目，也可以通过 ~B f org-agenda-kill~ 批量删除标记的条目
+   + 在 Agenda Views 中可以通过快捷键 ~J~ 跳转到处于活动状态的条目
 
 ** Org 导出为 HTML 时使用 CSS文件 中的样式高亮代码
    通过将 ~org-html-htmlize-output-type~ 设置为 ~css~ 来让导出的 ~HTML~ 中的代码部分使用 ~CSS~ 文件中的高亮样式。
@@ -38,7 +40,12 @@
    通过快捷键 ~C-u C-c C-q~ 可以很方便的完成这一工作。
 
 ** 文学编程
-   可以通过 Org mode 进行文学编程，参考 [[https://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]。
+   借助 Org mode 的 Babel 功能可以很方便的进行文学编程，具体可以参考：
+   + [[https://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]
+
+** 时间操作
+   + 连续的 ~C-c .~ 可以用于创建时间段，而 ~C-c C-y~ 可以用于计算时间段的间隔
+   + 设置距离 DEADLINE 还有几天时进行显示： ~DEADLINE -nd~
 
 * 问题集
 ** 如何将 org-capture 捕获的内容插入当前光标位置
@@ -66,3 +73,4 @@
    #+END_SRC
 
    + [[https://emacs.stackexchange.com/questions/46988/easy-templates-in-org-9-2][org mode - Easy Templates in Org 9.2 - Emacs Stack Exchange]]
+

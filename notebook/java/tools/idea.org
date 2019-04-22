@@ -1,0 +1,39 @@
+#+TITLE:      IntelliJ IDEA
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#通过-maven-创建-web-app][通过 Maven 创建 Web App]]
+- [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
+
+* 通过 Maven 创建 Web App
+  1) 选择 maven-archetype-webapp 创建项目
+  2) 添加依赖项：
+     #+BEGIN_SRC xml
+       <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+       <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>javax.servlet-api</artifactId>
+         <version>3.1.0</version>
+         <scope>provided</scope>
+       </dependency>
+     #+END_SRC
+  3) 添加 Tomcat 插件：
+     #+BEGIN_SRC xml
+       <build>
+         <finalName>servletp</finalName>
+         <plugins>
+           <plugin>
+             <groupId>org.apache.tomcat.maven</groupId>
+             <artifactId>tomcat7-maven-plugin</artifactId>
+             <version>2.2</version>
+             <configuration>
+               <url>http://localhost:8080/servletp</url>
+               <server>tomcat</server>
+             </configuration>
+           </plugin>
+         </plugins>
+       </build>
+     #+END_SRC
+
+* 配置 Emacs 作为而外的编辑工具
+  + [[https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html][Using Emacs as an External Editor]]
+

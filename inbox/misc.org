@@ -30,3 +30,13 @@
 
   Java 中可以使用虚拟机参数，这个更加容易获取：
   + [[https://softwareengineering.stackexchange.com/questions/70357/command-line-options-style-posix-or-what][java - Command line options style - POSIX or what? - Software Engineering Stack Exchange]]
+
+* live2d
+  + [[https://haremu.com/p/205][Live2D！把可爱的看板娘捕捉到你的博客去吧 – 后宫学长]]
+  + pio 皮肤获取 
+    - https://haremu.com/
+    - pio/png
+
+* idea
+  + [[https://github.com/florinpop17/app-ideas][florinpop17/app-ideas: A Collection of application ideas which can be used to improve your coding skills.]]
+

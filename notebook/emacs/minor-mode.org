@@ -1,4 +1,4 @@
-#+TITLE:      Emacs - 实用模式
+#+TITLE:      minor mode
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#abbrev-mode][Abbrev Mode]]

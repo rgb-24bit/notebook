@@ -1,0 +1,80 @@
+#+TITLE:      JSP
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#jsp-编码配置][JSP 编码配置]]
+- [[#配置-jsp-的初始化参数][配置 JSP 的初始化参数]]
+- [[#bean][Bean]]
+- [[#注意事项][注意事项]]
+
+* JSP 编码配置
+  在 DD 中添加如下配置：
+  #+BEGIN_SRC xml
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+  #+END_SRC
+
+* 配置 JSP 的初始化参数
+  #+BEGIN_SRC xml
+    <servlet>
+      <servlet-name>...</servlet-name>
+      <jsp-file>...</jsp-file>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>...</servlet-name>
+      <url-pattern>...</url-pattern>
+    </servlet-mapping>
+  #+END_SRC
+
+* Bean
+  Bean 法则：
+  1) 必须有一个公共的无参构造函数
+  2) 按照命名约定来命名公共的设置和获取方法，属性只由方法名确定，也就是说，这是合法的：
+     #+BEGIN_SRC java
+       public class User {
+         private String _name;
+
+         ...
+
+         public String getName() {
+           return _name;
+         }
+
+         ...
+       }
+    #+END_SRC
+  3) 设置方法的参数类型必须和获取方法的返回值类型相同
+  4) 结合 JSP 使用时，属性的类型应该是 String，不然显示效果不好
+
+  在 JSP 中可以通过标准动作 <jsp:useBean> 和 <jsp:getProperty> 操作 Bean：
+  #+BEGIN_SRC html
+    <!-- 声明和初始化 bean 属性 -->
+    <jsp:useBean id="attributeName" class="package.class" scope="scope" />
+
+    <!-- 得到 bean 属性的值 -->
+    <jsp:getProperty name="beanId" property="name" />
+  #+END_SRC
+
+  假如 <jsp:useBean> 找不到相应的 bean，那么就会自动创建一个。
+
+  同时可以使用 <jsp:setProperty> 来设置 bean 的属性，可以将 <jsp:setProperty> 置于 <jsp:useBean> 的内部，使得只在创建 bean 时才设置属性。
+  
+  <jsp:setProperty> 可以通过 param 属性获取请求的参数值，或者，请求参数可以自动和 bean 属性匹配。
+
+  可以通过 <jsp:useBean> 的 type 属性建立多态的 bean 引用，scope 默认为 page。
+
+  <jsp:getProperty> 不能嵌套访问。
+  
+  bean 可以自动转换基本类型。
+
+* 注意事项
+  pageContext 的方法 findAttribute 可以寻找一个属性，查找顺序为：
+  + pageContext -> request -> session -> application.
+
+  EL 表达式的第一个名称可以为：隐式对象和四大作用域中的属性。
+
+  EL 表达式会显示原始的文本，可以受到 XSS 注入攻击。
+

@@ -144,5 +144,8 @@
 * script
   + [[https://stackoverflow.com/questions/4396849/does-the-script-tag-position-in-html-affects-performance-of-the-webpage][javascript - Does the <script> tag position in HTML affects performance of the webpage? - Stack Overflow]]
 
-* CSS 背景虚化
+* CSS 背景
   + filyter: blur(2px)
+  + [[https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x][background-position-x - CSS: Cascading Style Sheets | MDN]]
+
+

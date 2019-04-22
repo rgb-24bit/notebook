@@ -28,3 +28,27 @@
     </dependency>
   #+END_SRC
 
+* maven
+  + [[https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html][Maven – Introduction to the Build Lifecycle]]
+
+* spring
+  + [[https://www.baeldung.com/spring-with-maven][Spring with Maven | Baeldung]]
+
+* json
+  + javax.json
+
+* groupid
+  + [[https://mirrors.163.com/.help/maven.html][Maven 镜像使用帮助]]
+  + [[https://zhidao.baidu.com/question/6079442.html][.io域名后缀是什么意思？_百度知道]]
+  + com.github.rgb-24bit
+  + com.github.rgbit
+  + org.rgbit
+  + io.rgbit
+* resource
+  + [[https://www.cnblogs.com/pixy/p/4798089.html][maven资源文件的相关配置 - XRacoon - 博客园]]
+
+* 问题
+  + spring xml 过滤器
+  + 获取 bean 时指定过滤器
+  + 不同配置的执行顺序
+  + XML 配置中的 bean 必然会创建，而 Java 代码中的回根据模式，似乎

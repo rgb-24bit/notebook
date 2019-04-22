@@ -1,4 +1,4 @@
-#+TITLE:      Servlet 基础笔记
+#+TITLE:      Servlet
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#servlet][Servlet]]

@@ -1,5 +1,7 @@
-* 可见性
-  + [[https://orgmode.org/manual/Initial-visibility.html][The Org Manual: Initial visibility]]
+* Future
+  + 配置打开 Org 文件时 Headline 的可见性 - [[https://orgmode.org/manual/Initial-visibility.html][The Org Manual: Initial visibility]]
+  + 配置的作用域：全局/缓冲区
+  + SEXP
+    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html][Sexp Diary Entries - GNU Emacs Manual]]
+    + [[https://emacs.stackexchange.com/questions/31683/schedule-org-task-for-last-day-of-every-month/31708][org mode - Schedule org task for last day of every month? - Emacs Stack Exchange]]
 
-* 配置
-  有些配置是作用于当前缓冲区的

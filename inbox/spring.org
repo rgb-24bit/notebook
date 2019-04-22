@@ -1,0 +1,5 @@
+* bean
+  + 条件化创建 Bean 时，单例模式下，如果创建失败就无法获取实例了
+  + Condition 可以和 Compent 一起使用
+  + 没有使用 AOP 的 Bean 获取是返回的就是它的实例，而使用了 AOP 的 Bean 返回的就是它的动态代理
+  + 环绕 Advice 的返回值需要和被环绕的方法相同，传递给 Advice 的参数名称和 args 定义的相同

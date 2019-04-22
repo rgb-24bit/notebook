@@ -1,10 +1,11 @@
-#+TITLE:      Emacs 使用笔记
+#+TITLE:      Emacs
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简单使用][简单使用]]
   - [[#文本编辑][文本编辑]]
   - [[#窗口操作][窗口操作]]
   - [[#查看帮助][查看帮助]]
+  - [[#缓冲区操作][缓冲区操作]]
   - [[#自定义快捷键][自定义快捷键]]
 - [[#使用技巧][使用技巧]]
   - [[#批量修改文件名称][批量修改文件名称]]
@@ -21,6 +22,7 @@
   - [[#编码问题][编码问题]]
   - [[#emacs-server][emacs server]]
   - [[#字体与字体集][字体与字体集]]
+  - [[#hooks][Hooks]]
 - [[#休闲娱乐][休闲娱乐]]
 
 * 简单使用
@@ -42,6 +44,9 @@
    + 快捷键 ~C-h C-h~ 查看关于帮助的帮助
    + 快捷键 ~C-h r~ 在 Emacs 类阅读 Emacs manual
    + 快捷键 ~C-h l~ 查看最近输入了什么按键以及对应的命令
+
+** 缓冲区操作
+   + 保存所有缓冲区 - ~C-u C-x s~
 
 ** 自定义快捷键
    通过函数 ~global-set-key~ 来设置全局的快捷键：
@@ -165,6 +170,11 @@
 
 ** 字体与字体集
    + [[https://archive.casouri.co.uk/note/2019/emacs-%E5%AD%97%E4%BD%93%E4%B8%8E%E5%AD%97%E4%BD%93%E9%9B%86/index.html][Emacs，字体与字符集]]
+
+** Hooks
+   Hook 是 Emacs 中重要的扩展机制，是一个函数列表，会在执行某些操作后执行这个列表中的函数。
+  
+   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]o
 
 * 休闲娱乐
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]

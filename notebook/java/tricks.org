@@ -1,0 +1,156 @@
+#+TITLE:      Java Tricks
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#将-priorityqueue-作为最小堆][将 PriorityQueue 作为最小堆]]
+- [[#双括号初始化操作][双括号初始化操作]]
+- [[#runtime-shutdown-hook][Runtime Shutdown Hook]]
+- [[#使用-proxy-对象][使用 Proxy 对象]]
+- [[#泛型通配符捕获][泛型通配符捕获]]
+- [[#常用的异常][常用的异常]]
+- [[#常用的接口][常用的接口]]
+
+* 将 PriorityQueue 作为最小堆
+  可以将 PriorityQueue 作为最小堆来使用：
+  #+BEGIN_SRC java
+    PriorityQueue minHeap = new PriorityQueue();
+  #+END_SRC
+
+  同时，只需要简单的变化就可以当做最大对来使用：
+  #+BEGIN_SRC java
+    Queue maxHeap = new PriorityQueue(Collections.reverseOrder());
+  #+END_SRC
+
+* 双括号初始化操作
+  可以通过类似如下的方式初始化集合：
+  #+BEGIN_SRC java
+    new ArrayList<>() {{
+      add(1);
+      add(2);
+    }}
+  #+END_SRC
+
+  这种方式的原理：
+  1. 外层大括号创建 ArrayList 的匿名子类
+  2. 内存大括号是该匿名子类的初始化块
+
+* Runtime Shutdown Hook
+  可以通过 ~Runtime.addShutdownHook~ 添加可以在虚拟机关闭时要执行的动作。
+
+* 使用 Proxy 对象
+  动态创建实现了指定接口的类，调用这个类的方法的时候实际上是调用内部包装的对象的方法。
+
+  创建：
+  #+BEGIN_SRC java
+    Proxy.newProxyInstance(null, new Class<?>[] { Comparable.class }, InvocationHandler);
+  #+END_SRC
+
+  需要实现的方法：
+  #+BEGIN_SRC java
+    public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {}
+  #+END_SRC
+
+  Timer:
+  #+BEGIN_SRC java
+    class TimerHandler implements InvocationHandler {
+      private Object target;
+
+      public TimerHandler(Object target) {
+        this.target = target;
+      }
+
+      public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        long start = System.currentTimeMillis();
+        method.invoke(target, args);
+        long end = System.currentTimeMillis();
+        System.out.printf("Runtime: %ldms\n", end - start);
+      }
+    }
+  #+END_SRC
+
+* 泛型通配符捕获
+  #+BEGIN_SRC java
+    public static <T> void helper(Pair<T> p) {
+      ...;
+    }
+
+    public static void swap(Pair<?> p) {
+      helper(p);
+    }
+  #+END_SRC
+  
+* 常用的异常
+  |-------------------------------+---------------------------------------|
+  | 异常                          | 使用场合                              |
+  |-------------------------------+---------------------------------------|
+  | IllegalArgumentException      | 参数值不正确                          |
+  | IllegalStateException         | 对于方法调用而言，对象的状态不合适    |
+  | NullPointerException          | 在禁止使用 null 的情况下参数值为 null |
+  | IndexOutOfBoundsException     | 下标参数值越界                        |
+  | UnsupportedOperationException | 对象不支持用户请求的方法              |
+  |-------------------------------+---------------------------------------|
+
+* 常用的接口
+  可用于 ~try-with-resource~ 语句：
+  #+BEGIN_SRC java
+    public interface AutoCloseable {
+      public void close();
+    }
+
+    public interface Closeable extends AutoCloseable {
+      public void close();
+    }
+  #+END_SRC
+
+  用于比较：
+  #+BEGIN_SRC java
+    public interface Comparable<T> {
+      /**
+       * 返回值小于、等于、大于零，此对象小于、等于、大于指定对象
+       */
+      public int compareTo(T o);
+    }
+  #+END_SRC
+
+  另外可参考： [[https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html][Interface Comparator<T>]]
+
+  可用于 ~for-each~ 语句：
+  #+BEGIN_SRC java
+    public interface Iterable<T> {
+      public default void	forEach(Consumer<? super T> action);
+      public default Spliterator<T>	spliterator();
+
+      public Iterator<T>	iterator();
+    }
+  #+END_SRC
+
+  ~Iterator<T>~ 接口：
+  #+BEGIN_SRC java
+    // java.util.Iterator<E>
+    public interface Iterator<E> {
+      public default void	forEachRemaining(Consumer<? super E> action);
+      public default void remove();
+
+      public boolean hasNext();
+      public E next();
+    }
+  #+END_SRC
+
+  常见的实现方式：
+  #+BEGIN_SRC java
+    public class Test implements Iterable<Integer> {
+      public Iterator<Integer> iterator() {
+        return new Iterator<Integer>() {
+          public boolean hasNext() {}
+          public Integer next() {}
+        };
+      }
+    }
+  #+END_SRC
+
+  用于线程：
+  #+BEGIN_SRC java
+    public interface Runnable {
+      public void	run();
+    }
+  #+END_SRC
+

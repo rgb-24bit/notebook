@@ -4,6 +4,7 @@
 - [[#regular-expression-syntax][Regular Expression Syntax]]
 - [[#idiosyncrasies-of-emacs-regular-expressions][Idiosyncrasies of Emacs Regular Expressions]]
 - [[#replace-regexp-with-lisp-expressions][Replace Regexp With Lisp Expressions]]
+- [[#环视][环视]]
 - [[#tips][Tips]]
 
 * Regular Expression Syntax
@@ -83,6 +84,11 @@
   #+END_SRC
 
   其中， ~,(capitalize \1)~ 会执行 ~(capitalize)~ 来替换字符串。
+
+* 环视
+  环视只进行子表达式的匹配，不占有字符，匹配到的内容不保存到最终的匹配结果，是零宽度的。
+
+  Emacs 不支持这一特性。
 
 * Tips
   + \Cc - 所有非中文字符
