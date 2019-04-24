@@ -62,7 +62,7 @@
       \s\   escape character            
   #+END_EXAMPLE
 
-  #+HTML: You can see the current syntax table by typing <kbd>C-h s<kbd>.
+  #+HTML: You can see the current syntax table by typing <kbd>C-h s</kbd>.
 
 * Idiosyncrasies of Emacs Regular Expressions
   + 在交互式搜索环境中，空格字符可以选择是否代表任意数量的空白，默认为是，通过快捷键 ~M-s SPC~ 切换。

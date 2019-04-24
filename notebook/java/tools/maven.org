@@ -1,0 +1,68 @@
+#+TITLE:      Maven
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#maven-基础][Maven 基础]]
+  - [[#标准目录结构][标准目录结构]]
+- [[#问题集][问题集]]
+  - [[#怎样通过-maven-创建运行-webapp][怎样通过 Maven 创建运行 WebApp]]
+
+* Maven 基础
+** 标准目录结构
+   |------------------------------------+----------------------------------------------------------------------------|
+   | 目录                               | 目的                                                                       |
+   |------------------------------------+----------------------------------------------------------------------------|
+   | ${basedir}                         | 存放 pom.xml 和所有的子目录                                                |
+   | ${basedir}/src/main/java           | 项目的 java 源代码                                                         |
+   | ${basedir}/src/main/resources      | 项目的资源，比如说 property 文件，springmvc.xml                            |
+   | ${basedir}/src/test/java           | 项目的测试类，比如说 Junit 代码                                            |
+   | ${basedir}/src/test/resources      | 测试用的资源                                                               |
+   | ${basedir}/src/main/webapp/WEB-INF | web 应用文件目录，web 项目的信息，比如存放 web.xml、本地图片、jsp 视图页面 |
+   | ${basedir}/target                  | 打包输出目录                                                               |
+   | ${basedir}/target/classes          | 编译输出目录                                                               |
+   | ${basedir}/target/test-classes     | 测试编译输出目录                                                           |
+   | Test.java                          | Maven 只会自动运行符合该命名规则的测试类                                   |
+   | ~/.m2/repository                   | Maven 默认的本地仓库目录位置                                               |
+   |------------------------------------+----------------------------------------------------------------------------|
+
+
+* 问题集
+** 怎样通过 Maven 创建运行 WebApp
+   1) 运行如下指定创建基本的 WebApp 项目：
+      #+BEGIN_EXAMPLE
+        $ mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp 
+      #+END_EXAMPLE
+   2) 添加 Servlet API 依赖项：
+      #+BEGIN_SRC xml
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+          <scope>provided</scope>
+        </dependency>
+      #+END_SRC
+   3) 添加 Tomcat 插件支持直接运行 WebApp：
+      #+BEGIN_SRC xml
+        <build>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.tomcat.maven</groupId>
+              <artifactId>tomcat7-maven-plugin</artifactId>
+              <version>2.2</version>
+              <configuration>
+                <url>http://localhost:8080/servletp</url>
+                <server>tomcat</server>
+              </configuration>
+            </plugin>
+          </plugins>
+        </build>
+      #+END_SRC
+   4) 编译打包可以通过如下命令完成：
+      #+BEGIN_EXAMPLE
+        $ mvn package
+      #+END_EXAMPLE
+   5) 运行 WebApp 可以通过如下命令完成：
+      #+BEGIN_EXAMPLE
+        $ mvn tomcat7:run
+      #+END_EXAMPLE
+   

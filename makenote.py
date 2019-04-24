@@ -30,7 +30,8 @@ def walk(walker):
                 notes.append({subdir: subnotes})
 
         for subfile in subfiles:
-            notes.append(pathlib.Path(dirpath, subfile).as_posix())
+            if subfile.endswith('.org'):
+                notes.append(pathlib.Path(dirpath, subfile).as_posix())
 
         return notes
     except StopIteration:

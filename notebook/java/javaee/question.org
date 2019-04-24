@@ -1,48 +1,9 @@
 #+TITLE:      Java EE 问题集
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#怎样通过-maven-创建运行-webapp][怎样通过 Maven 创建运行 WebApp]]
 - [[#tomcat-网页中文乱码][Tomcat 网页中文乱码]]
-
-* 怎样通过 Maven 创建运行 WebApp
-  1) 运行如下指定创建基本的 WebApp 项目：
-     #+BEGIN_EXAMPLE
-       $ mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp 
-     #+END_EXAMPLE
-  2) 添加 Servlet API 依赖项：
-     #+BEGIN_SRC xml
-       <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-       <dependency>
-         <groupId>javax.servlet</groupId>
-         <artifactId>javax.servlet-api</artifactId>
-         <version>3.1.0</version>
-         <scope>provided</scope>
-       </dependency>
-     #+END_SRC
-  3) 添加 Tomcat 插件支持直接运行 WebApp：
-     #+BEGIN_SRC xml
-       <build>
-         <plugins>
-           <plugin>
-             <groupId>org.apache.tomcat.maven</groupId>
-             <artifactId>tomcat7-maven-plugin</artifactId>
-             <version>2.2</version>
-             <configuration>
-               <url>http://localhost:8080/servletp</url>
-               <server>tomcat</server>
-             </configuration>
-           </plugin>
-         </plugins>
-       </build>
-     #+END_SRC
-  4) 编译打包可以通过如下命令完成：
-     #+BEGIN_EXAMPLE
-       $ mvn package
-     #+END_EXAMPLE
-  5) 运行 WebApp 可以通过如下命令完成：
-     #+BEGIN_EXAMPLE
-       $ mvn tomcat7:run
-     #+END_EXAMPLE
+- [[#java-bean-的相关概念是怎么一回事][Java Bean 的相关概念是怎么一回事]]
+- [[#java-ee-的组成有哪些][Java EE 的组成有哪些]]
 
 * Tomcat 网页中文乱码
   文章 [[https://www.baeldung.com/tomcat-utf-8][Making Tomcat UTF-8-Ready | Baeldung]] 中的内容基本上足以解决相关问题：
@@ -69,4 +30,39 @@
      #+BEGIN_SRC html
        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
      #+END_SRC
+
+* Java Bean 的相关概念是怎么一回事
+  和 Java Bean 相关的概念有：POJO、EJB、JavaBeans，其中：
+  + POJO 是指不受框架困扰的 Java 类，不继承类或实现接口
+  + EJB 是指企业版 Java Bean，在 Bean 的基础上增加了很多功能，但也让开发变得复杂
+  + JavaBeans 指的是符合 [[https://zh.wikipedia.org/wiki/JavaBeans#JavaBeans%E8%A7%84%E8%8C%83][JavaBeans 规范]] 的 Java 类
+
+  Java Bean 相关的概念确实还是有点绕的。
+
+  参考：
+  + [[https://stackoverflow.com/questions/1612334/difference-between-dto-vo-pojo-javabeans][java - Difference between DTO, VO, POJO, JavaBeans? - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/1394265/what-is-the-difference-between-a-javabean-and-a-pojo][java - What is the difference between a JavaBean and a POJO? - Stack Overflow]]
+  + [[https://www.cnblogs.com/Ghost-Draw-Sign/articles/1801476.html][JavaBean 规范 - 鬼话符 - 博客园]]
+
+* Java EE 的组成有哪些
+  Java EE 的 13 种核心技术规范：
+  1) JDBC - 数据库连接
+  2) JNDI - Java 的命名和目录接口
+  3) EJB
+  4) RMI - 远程方法调用
+  5) Java IDL/CORBA - Java 接口定义语言/公用对象请求代理程序体系结构
+  6) JSP
+  7) Servlet
+  8) XML
+  9) JMS - Java 消息服务
+  10) JTA - Java 事务 API
+  11) JTS - Java 事务服务
+  12) JavaMail
+  13) JAF
+      
+  可以看到，要学的东西还真的不少，更别提还有 Spring！
+
+  参考：
+  + [[https://segmentfault.com/a/1190000007090110#articleHeader5][Java EE 完整体系架构]]
+  + [[https://www.infoq.cn/article/where-is-java-ee-going][Java EE 未来路在何方]]
 

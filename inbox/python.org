@@ -47,3 +47,73 @@
   + [[https://segmentfault.com/a/1190000005701971][Python 实例方法的特殊属性]]
   + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性]]
 
+* 随机生成和为 100 的序列
+  #+BEGIN_SRC python
+    def random_nums():
+        nums = [random.randint(0, 101) for i in range(9)]
+        nums.extend([0, 100])
+        nums.sort()
+
+        result = []
+        for i in range(1, 11):
+            result.append(nums[i] - nums[i - 1])
+
+        return result
+  #+END_SRC
+
+  频率统计：
+  #+BEGIN_SRC python
+    counter = defaultdict(int)
+
+    for i in range(1000):
+        for num in random_nums():
+            counter[num] += 1
+
+    total = sum(counter.keys())
+    for i in range(101):
+        print('%d: %f' % (i, counter[i] / total))
+
+    print(random_nums())
+  #+END_SRC
+
+* 其他
+  #+BEGIN_SRC python
+    class Condition(object):
+        def __init__(self, obj=None, predicate=None):
+            if obj is not None:
+                if callable(predicate):
+                    self.o = obj
+                    self.p = predicate
+                else:
+                    self.o = obj
+                    self.p = lambda x: x
+            else:
+                self.o = True
+                self.p = lambda x: x
+            self.t = True
+
+        def __bool__(self):
+            return self.t and self.p(self.o)
+
+    class RangeValue(object):
+        def __init__(self):
+            self.t = True
+            self.v = None
+
+
+    def prange(iterable):
+        value = RangeValue()
+        for v in iterable:
+            value.v = v
+            yield value
+            if not value.t:
+                break
+
+
+    for i in prange(100):
+        for j in prange(100):
+            for k in prange(100):
+                print(1)
+                i.t = j.t = k.t = False
+  #+END_SRC
+

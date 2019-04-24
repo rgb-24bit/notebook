@@ -1,3 +1,0 @@
-* 问题
-  + [[https://tug.org/pracjourn/2005-3/asknelly/nelly-sty-&-cls.pdf][What are .cls and .sty files? How are they different?]]
-

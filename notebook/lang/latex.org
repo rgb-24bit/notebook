@@ -8,6 +8,7 @@
   - [[#怎样安装更新-latex-宏包][怎样安装更新 Latex 宏包]]
   - [[#怎样编译-tex-文件][怎样编译 Tex 文件]]
   - [[#tex-引擎格式发行版之间的关系][Tex 引擎、格式、发行版之间的关系]]
+  - [[#cls-和-sty-文件的区别][cls 和 sty 文件的区别]]
 
 * 简单使用
 ** Tex Live 安装
@@ -44,3 +45,19 @@
 ** Tex 引擎、格式、发行版之间的关系
    + [[https://tex.stackexchange.com/questions/296616/questions-regarding-the-distinction-between-xetex-and-xelatex-and-how-they-relat][Questions regarding the distinction between XeTeX and XeLaTeX and how they relate to TeX and LaTeX? - TeX - LaTeX Stack Exchange]]
    + [[https://liam.page/2018/11/26/introduction-to-TeX-engine-format-and-distribution/][TeX 引擎、格式、发行版之介绍 | 始终]]
+
+** cls 和 sty 文件的区别
+   .cls 和 .sty 文件都是增加 LaTeX 功能的补足文件。在排版文章时使用 \documentclass{} 和 \usepackage{} 进行加载。
+
+   通常将 .cls 文件称之为类文件，将 .sty 文件称之为风格文件或者包。
+
+   虽然它们都可以包含任意的 TeX 和 LaTeX 代码，但是它们的使用方式不同。必须通过 \documentclass 加载一个类文件，并且在一个 LaTeX 文件中只能出现一次，通常也是第一个出现的命令。
+   而另一方面，包是一个可选项，它可以根据需求加载任意多个（在开始文档之前）。
+
+   编写原则：
+   + 如果一个命令是用来控制文档结构的，则应该放到类文件中；否则应该放到包文件中
+   + 如果一个命令可以被其他所有的文档使用，那么将这个命令放置到一个包中；如果不是，则将它放到一个类文件中
+   + 当一个命令使上述两条规则冲突的时候，优先考虑第一条规则。如 \section 命令几乎在所有的文档中都使用，但因为其是用来控制文档结构的，我们将其放置到类文件中
+
+   参考：[[https://www.jianshu.com/p/12b4a4b3afce][latex 中 cls 和 sty 文件 - 简书]]
+

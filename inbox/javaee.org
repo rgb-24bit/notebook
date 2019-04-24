@@ -2,14 +2,9 @@
   + [[https://docs.oracle.com/cd/E17904_01/web.1111/e13712/web_xml.htm#WBAPP543][A web.xml Deployment Descriptor Elements]]
   + [[https://stackoverflow.com/questions/1515190/relationship-between-jsp-and-java-ee][Relationship between JSP and Java EE - Stack Overflow]]
 
-* Maven
-  + [[http://wiki.jikexueyuan.com/project/maven/web-application.html][Maven - Web 应用 - Maven 教程 - 极客学院Wiki]]
-  + [[https://dzone.com/articles/how-to-create-a-web-project-using-maven-in-eclipse-1][How to Create a Web Project Using Maven in Eclipse - DZone Java]]
-
 * 问题
   + MIME
   + Tomcat 的使用
-  + 过滤器调用顺序 - 声明顺序
   + Java EE 1.5 & Servlet 2.5，新版本的东西需要补一下
   + 6 - 3.0，7 - 3.1，8 - 4.0
   + 过滤器中分派或不继续传递
@@ -20,12 +15,7 @@
   + Maven 镜像配置
   + 插件 Tomcat7 的使用
   + web-app 项目结构
-  + 编译属性
-
-* Java Bean
-  + [[https://spring.io/understanding/POJO][Understanding POJO]]
-  + [[https://zh.wikipedia.org/wiki/EJB][EJB - 维基百科，自由的百科全书]]
-  + [[https://zh.wikipedia.org/wiki/JavaBeans][JavaBeans - 维基百科，自由的百科全书]]
+  + 编译属性 - 字符编码之类的
 
 * MindMap
   #+BEGIN_SRC plantuml
@@ -58,23 +48,12 @@
     @endmindmap
   #+END_SRC
 
-* 组成
-  + [[https://segmentfault.com/a/1190000007090110][从懵逼到再入门——JavaEE完整体系架构 - 后端开发 - SegmentFault 思否]]
-  + [[https://www.infoq.cn/article/where-is-java-ee-going][Java EE未来路在何方？]]
-  + [[https://www.zhihu.com/question/19773379/answer/18307751][Java bean 是个什么概念？ - 文朋的回答 - 知乎]]
-  + [[https://segmentfault.com/a/1190000011334873#articleHeader0][Spring 体系常用项目一览 - QueenKing - SegmentFault 思否]]
-  + Servlet、JSP、JNDI……
 
 * 生态
   + [[https://www.zhihu.com/question/263954669][Java的生态系统为什么好？好在哪里？ - 知乎]]
   + [[https://github.com/aalansehaiyang/technology-talk][aalansehaiyang/technology-talk: 汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识]]
   + [[https://juejin.im/post/5c07d0a36fb9a04a0955d4cd][Java简单介绍及Java生态 - 掘金]]
   + [[https://www.zhihu.com/question/19730582][中间件是什么？如何解释比较通俗易懂？ - 知乎]]
-
-* bean
-  + [[https://stackoverflow.com/questions/1394265/what-is-the-difference-between-a-javabean-and-a-pojo][java - What is the difference between a JavaBean and a POJO? - Stack Overflow]]
-  + [[https://docstore.mik.ua/orelly/java-ent/jnut/ch06_02.htm][JavaBeans Conventions (Java in a Nutshell)]]
-  + [[https://www.cnblogs.com/Ghost-Draw-Sign/articles/1801476.html][JavaBean规范 - 鬼话符 - 博客园]]
 
 * 书籍
   + Java EE without EJB

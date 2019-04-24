@@ -1,39 +1,61 @@
 #+TITLE:      IntelliJ IDEA
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#通过-maven-创建-web-app][通过 Maven 创建 Web App]]
-- [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
+- [[#简单使用][简单使用]]
+- [[#使用技巧][使用技巧]]
+  - [[#通过-maven-创建-web-app][通过 Maven 创建 Web App]]
+  - [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
 
-* 通过 Maven 创建 Web App
-  1) 选择 maven-archetype-webapp 创建项目
-  2) 添加依赖项：
-     #+BEGIN_SRC xml
-       <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-       <dependency>
-         <groupId>javax.servlet</groupId>
-         <artifactId>javax.servlet-api</artifactId>
-         <version>3.1.0</version>
-         <scope>provided</scope>
-       </dependency>
-     #+END_SRC
-  3) 添加 Tomcat 插件：
-     #+BEGIN_SRC xml
-       <build>
-         <finalName>servletp</finalName>
-         <plugins>
-           <plugin>
-             <groupId>org.apache.tomcat.maven</groupId>
-             <artifactId>tomcat7-maven-plugin</artifactId>
-             <version>2.2</version>
-             <configuration>
-               <url>http://localhost:8080/servletp</url>
-               <server>tomcat</server>
-             </configuration>
-           </plugin>
-         </plugins>
-       </build>
-     #+END_SRC
+* 简单使用
+  + 通过快捷键 ~Ctrl+Shift+A~ 查看某操作的快捷键
+  + 通过快捷键 ~Ctrl+Shift+F12~ 显示/隐藏所有工具窗口
+  + 在大多数窗口键入内容可以进行搜索
+  + 编辑器中的一些快捷键：
+    - 移动当前行：Ctrl+Shift+Up/DOWN
+    - 复制当前行：Ctrl+D
+    - 移除当前行：Ctrl+Y
+    - 当前文件中查找：Ctrl+F
+    - 当前文件中查找并替换：Ctrl+R
+    - 前一个/下一个：F3/Shift+F3
+    - 突出显示符号：Ctrl+F7
+    - 创建构造方法等：Alt+Insert
+  + 重命名：Shift+F6
+  + 格式化代码：Ctrl+Alt+L
+  + 自动缩进行：Ctrl+Alt+I
+  + 优化导入内容：Ctrl+Alt+O
+  + [[https://www.jetbrains.com/help/idea/discover-intellij-idea.html][Discover IntelliJ IDEA - Help | IntelliJ IDEA]]
 
-* 配置 Emacs 作为而外的编辑工具
-  + [[https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html][Using Emacs as an External Editor]]
+* 使用技巧
+** 通过 Maven 创建 Web App
+   1) 选择 maven-archetype-webapp 创建项目
+   2) 添加依赖项：
+      #+BEGIN_SRC xml
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+          <scope>provided</scope>
+        </dependency>
+      #+END_SRC
+   3) 添加 Tomcat 插件：
+      #+BEGIN_SRC xml
+        <build>
+          <finalName>servletp</finalName>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.tomcat.maven</groupId>
+              <artifactId>tomcat7-maven-plugin</artifactId>
+              <version>2.2</version>
+              <configuration>
+                <url>http://localhost:8080/servletp</url>
+                <server>tomcat</server>
+              </configuration>
+            </plugin>
+          </plugins>
+        </build>
+      #+END_SRC
+
+** 配置 Emacs 作为而外的编辑工具
+   + [[https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html][Using Emacs as an External Editor]]
 

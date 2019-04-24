@@ -99,9 +99,12 @@
     + [JSP](notebook/java/javaee/jsp.org)
     + [Java EE 问题集](notebook/java/javaee/question.org)
     + [Servlet](notebook/java/javaee/servlet.org)
+  + **spring**
+    + [Spring 问题集](notebook/java/spring/question.org)
   + **tools**
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
+    + [Maven](notebook/java/tools/maven.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
   + [Java - I/O 操作](notebook/java/io.org)
   + [Java 基础知识](notebook/java/java.org)
@@ -127,7 +130,6 @@
   + [Linux 问题集](notebook/linux/question.org)
 ## math
   + **discrete**
-    + [离散数学 - 基本结构](notebook/math/discrete/basic)
     + [离散数学 - 逻辑和证明](notebook/math/discrete/logic.org)
   + **linear**
     + [线性代数 - 矩阵和方程组](notebook/math/linear/matrix.org)

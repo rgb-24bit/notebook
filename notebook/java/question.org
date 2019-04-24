@@ -18,6 +18,9 @@
 - [[#同名标识符的优先级][同名标识符的优先级]]
 - [[#数组长度允许为-0-的好处][数组长度允许为 0 的好处]]
 - [[#类初始化块的执行顺序][类初始化块的执行顺序]]
+- [[#java-的命令行参数形式][Java 的命令行参数形式]]
+- [[#java-集合中移除原始数据类型的包装对象时是按值还是按对象][Java 集合中移除原始数据类型的包装对象时是按值还是按对象]]
+- [[#java-中方法匹配的优先级][Java 中方法匹配的优先级]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -204,4 +207,51 @@
   类的静态初始化块在类 *加载* 时安装它们在类中的顺序执行。
 
   类的初始化块在创建类实例是按照它们在类中的顺序执行。
+
+* Java 的命令行参数形式
+  常常可以看见这样相信的命令行参数：
+  #+BEGIN_EXAMPLE
+    $ java -Dxxx=xxx ...
+  #+END_EXAMPLE
+
+  这样类型的参数其实是 JVM 参数，可以通过 ~System.getProperty~ 获取：
+  #+BEGIN_SRC java
+    System.getProperty("xxx");
+  #+END_SRC
+
+* Java 集合中移除原始数据类型的包装对象时是按值还是按对象
+  #+BEGIN_SRC java :results output :classname Test
+    import java.util.*;
+
+    public class Test {
+      public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+
+        list.add(1000);
+        list.remove(new Integer(1000));
+
+        System.out.println(list);  // []
+      }
+    }
+  #+END_SRC
+
+* Java 中方法匹配的优先级
+  当类型都符合时，选择那个类型宽度的方法呢：
+  #+BEGIN_SRC java
+    public class Meno {
+      public static void m(int... a) {
+        System.out.println("int");
+      }
+
+      public static void m(short... a) {
+        System.out.println("short");
+      }
+
+      public static void main(String[] args) {
+        m();   // short
+      }
+    }
+  #+END_SRC
+
+  参考：[[https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.12.2.5][Chapter 15. Expressions]]
 
