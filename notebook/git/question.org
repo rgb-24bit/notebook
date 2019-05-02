@@ -9,6 +9,9 @@
 - [[#怎样创建-git-扩展][怎样创建 Git 扩展]]
 - [[#怎样在存储库中保存本地配置][怎样在存储库中保存本地配置]]
 - [[#git-checkout-reset-revert-的区别][git checkout, reset, revert 的区别]]
+- [[#怎样查看存储库的大小][怎样查看存储库的大小]]
+- [[#怎样批量删除过去提交中的文件][怎样批量删除过去提交中的文件]]
+- [[#怎样批量更改过去提交中的邮箱和用户名][怎样批量更改过去提交中的邮箱和用户名]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -96,4 +99,38 @@
                         ^
                        HEAD
   #+END_EXAMPLE
+
+* 怎样查看存储库的大小
+  可以通过如下方式进行查看：
+  #+BEGIN_EXAMPLE
+    $ git bundle create tmp.bundle --all
+    $ du -sh tmp.bundle
+    $ rm tmp.bundle
+  #+END_EXAMPLE
+
+* 怎样批量删除过去提交中的文件
+  使用 ~filter-branch~ 可以很好的完成这一任务，只不过需要强制推送：
+  #+BEGIN_EXAMPLE
+    $ git filter-branch --tree-filter "rm -f ..." HEAD
+  #+END_EXAMPLE
+
+* 怎样批量更改过去提交中的邮箱和用户名
+  参考 [[https://stackoverflow.com/questions/750172/how-to-change-the-author-and-committer-name-and-e-mail-of-multiple-commits-in-gi][stackoverflow]] 中的回答，可以通过如下脚本完成这一任务：
+  #+BEGIN_SRC sh
+    git filter-branch --env-filter '
+    OLD_EMAIL="your-old-email@example.com"
+    CORRECT_NAME="Your Correct Name"
+    CORRECT_EMAIL="your-correct-email@example.com"
+    if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+    then
+        export GIT_COMMITTER_NAME="$CORRECT_NAME"
+        export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+    fi
+    if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+    then
+        export GIT_AUTHOR_NAME="$CORRECT_NAME"
+        export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+    fi
+    ' --tag-name-filter cat -- --branches --tags
+  #+END_SRC
 

@@ -219,6 +219,8 @@
     System.getProperty("xxx");
   #+END_SRC
 
+  可以参考：[[https://stackoverflow.com/questions/44745261/why-do-jvm-arguments-start-with-d][java - Why do JVM arguments start with "-D"? - Stack Overflow]]
+
 * Java 集合中移除原始数据类型的包装对象时是按值还是按对象
   #+BEGIN_SRC java :results output :classname Test
     import java.util.*;

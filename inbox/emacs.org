@@ -5,3 +5,6 @@
     + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html][Sexp Diary Entries - GNU Emacs Manual]]
     + [[https://emacs.stackexchange.com/questions/31683/schedule-org-task-for-last-day-of-every-month/31708][org mode - Schedule org task for last day of every month? - Emacs Stack Exchange]]
 
+* module
+  + 可以参考 IDEA 这种 module 的思路
+

@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#基本程序设计结构][基本程序设计结构]]
   - [[#primitive-types][Primitive Types]]
+  - [[#布尔运算][布尔运算]]
   - [[#类型转换][类型转换]]
   - [[#数组][数组]]
     - [[#数组的类型判断][数组的类型判断]]
@@ -68,6 +69,14 @@
      |---------+-----------------+--------------------------|
 
    + Java 作为强类型语言，需要布尔值的地方就只能使用 boolean 类型的值，布尔表达式可以自动转换为布尔值（自动装箱）。
+
+** 布尔运算
+   Java 中的部分位运算符也可以用于布尔类型：
+   #+BEGIN_SRC java
+     System.out.println(true | false);
+     System.out.println(true & false);
+     System.out.println(true ^ false);
+   #+END_SRC
 
 ** 类型转换
    由与所有的非 ~Object~ 对象都继承了 ~Object~, 因此这些对象在 *堆* 上的实例上， 内部也包括了一个 ~Object~ 实例。

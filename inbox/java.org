@@ -54,8 +54,7 @@
 
 * mock
   + [[https://waylau.com/mockito-quick-start/][Mockito 简明教程 | waylau.com]]
-
-
+    
 * javap
   javap class
   javap -c class
@@ -64,4 +63,21 @@
   + 图形处理
   + URLConnection
 
+* idea
+  + [[https://www.jetbrains.org/intellij/sdk/docs/basics/virtual_file_system.html][Virtual File System / IntelliJ Platform SDK DevGuide]]
+
+* IO
+  ByteArrayStream
+
+  #+BEGIN_SRC java
+    public static byte[] StringToByteArray(string hex) {
+      return Enumerable.Range(0, hex.Length)
+          .Where(x => x % 2 == 0)
+          .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+          .ToArray();
+    }
+  #+END_SRC
+
+* 问题
+  + 二维数组和 Comparator.comparing
 

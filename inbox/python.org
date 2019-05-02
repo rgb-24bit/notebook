@@ -117,3 +117,8 @@
                 i.t = j.t = k.t = False
   #+END_SRC
 
+* mmap
+  + [[https://www.cnblogs.com/zhoujinyi/p/6062907.html][Python之mmap内存映射模块（大文本处理）说明 - jyzhou - 博客园]]
+
+* math
+  + [[https://stackoverflow.com/questions/18646477/why-is-sin180-not-zero-when-using-python-and-numpy][Why is sin(180) not zero when using python and numpy? - Stack Overflow]]

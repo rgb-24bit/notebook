@@ -123,7 +123,7 @@
   + [Latex](notebook/lang/latex.org)
   + [Plantuml](notebook/lang/plantuml.org)
   + [UML](notebook/lang/uml.org)
-  + [XML 笔记](notebook/lang/xml.org)
+  + [XML](notebook/lang/xml.org)
 ## linux
   + [Debian 系统使用](notebook/linux/debian.org)
   + [Linux 基础笔记](notebook/linux/linux.org)

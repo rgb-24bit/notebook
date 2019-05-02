@@ -11,13 +11,6 @@
   + [[https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/index.html][URL编码的奥秘 | Aotu.io「凹凸实验室」]]
   + [[https://tools.ietf.org/html/rfc3986][RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax]]
 
-* 循环数组
-  #+BEGIN_SRC js
-    function get(arr, x, offset) {
-      return arr[(arr.length + x + offset) % arr.length];
-    }
-  #+END_SRC
-
 * HTML & CSS
   + 有几种默认的字体是所有浏览器都可用的，包括 Monospace、Serif 和 Sans-Serif。
   + 表单输入元素的 required 属性：
@@ -143,9 +136,4 @@
 
 * script
   + [[https://stackoverflow.com/questions/4396849/does-the-script-tag-position-in-html-affects-performance-of-the-webpage][javascript - Does the <script> tag position in HTML affects performance of the webpage? - Stack Overflow]]
-
-* CSS 背景
-  + filyter: blur(2px)
-  + [[https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x][background-position-x - CSS: Cascading Style Sheets | MDN]]
-
 

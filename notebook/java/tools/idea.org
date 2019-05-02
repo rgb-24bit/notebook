@@ -5,6 +5,8 @@
 - [[#使用技巧][使用技巧]]
   - [[#通过-maven-创建-web-app][通过 Maven 创建 Web App]]
   - [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
+- [[#相关问题][相关问题]]
+  - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
 
 * 简单使用
   + 通过快捷键 ~Ctrl+Shift+A~ 查看某操作的快捷键
@@ -23,6 +25,8 @@
   + 格式化代码：Ctrl+Alt+L
   + 自动缩进行：Ctrl+Alt+I
   + 优化导入内容：Ctrl+Alt+O
+  + 创建测试：Ctrl+Shift+T
+  + 运行当前：Ctrl+Shift+F10
   + [[https://www.jetbrains.com/help/idea/discover-intellij-idea.html][Discover IntelliJ IDEA - Help | IntelliJ IDEA]]
 
 * 使用技巧
@@ -58,4 +62,8 @@
 
 ** 配置 Emacs 作为而外的编辑工具
    + [[https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html][Using Emacs as an External Editor]]
+
+* 相关问题
+** 怎样添加静态导入到补全列表
+   在 ~Settings -> Code Style -> Java -> Imports~ 处进行设置就可以了。
 

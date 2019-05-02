@@ -4,6 +4,7 @@
 - [[#整数分解][整数分解]]
 - [[#base64-编码][Base64 编码]]
 - [[#lru-cache][LRU Cache]]
+- [[#循环数组索引][循环数组索引]]
 
 * 整数分解
   *整数分解(integer factorization)* 将一个正整数写成几个约数的乘积，这样的分解结果应该是独一无二的。
@@ -191,3 +192,10 @@
 
   参考：[[https://yikun.github.io/2015/04/03/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AALRU-Cache%EF%BC%9F/][如何设计实现一个 LRU Cache | Yikun]]
 
+* 循环数组索引
+  #+BEGIN_SRC js
+    function get(arr, x, offset) {
+      return arr[(arr.length + x + offset) % arr.length];
+    }
+  #+END_SRC
+  

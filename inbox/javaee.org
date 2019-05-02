@@ -7,7 +7,8 @@
   + Tomcat 的使用
   + Java EE 1.5 & Servlet 2.5，新版本的东西需要补一下
   + 6 - 3.0，7 - 3.1，8 - 4.0
-  + 过滤器中分派或不继续传递
+  + 过滤器中分派或不继续传递 - 就分派到目标 Servlet 或无响应
+  + [[http://wiki.jikexueyuan.com/project/tomcat/default-servlet.html][默认 Servlet - Tomcat 8 权威指南 - 极客学院 Wiki]]
 
 * IDEA
   相关的问题：
@@ -16,6 +17,7 @@
   + 插件 Tomcat7 的使用
   + web-app 项目结构
   + 编译属性 - 字符编码之类的
+  + 模块
 
 * MindMap
   #+BEGIN_SRC plantuml
@@ -48,7 +50,6 @@
     @endmindmap
   #+END_SRC
 
-
 * 生态
   + [[https://www.zhihu.com/question/263954669][Java的生态系统为什么好？好在哪里？ - 知乎]]
   + [[https://github.com/aalansehaiyang/technology-talk][aalansehaiyang/technology-talk: 汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识]]
@@ -59,4 +60,13 @@
   + Java EE without EJB
   + Dependency Injection
   + AspectJ in Action
+
+
+* Servlet 3.0
+  + [[https://www.ibm.com/developerworks/cn/java/j-lo-servlet30/index.html][Servlet 3.0 新特性详解]]
+  + [[http://www.oracle.com/technetwork/cn/community/4-servlet-3-324302-zhs.pdf][JavaEE 6 Servlet 3.0 中的新特性 - Oracle]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types][MIME 类型 - HTTP | MDN]]
+  + [[https://www.infoq.cn/article/2013/11/use-asynchronous-servlet-improve][使用异步 Servlet 改进应用性能]]
+  + [[https://www.cnblogs.com/davenkin/p/async-servlet.html][Servlet 3.0/3.1 中的异步处理 - 无知者云 - 博客园]]
+  + [[https://segmentfault.com/a/1190000012318350][Servlet 3.0 异步处理详解 - 颇忒脱 - SegmentFault 思否]]
 
