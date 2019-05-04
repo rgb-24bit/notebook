@@ -13,16 +13,6 @@
     + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
     + [[https://www.cnblogs.com/Qian123/p/5710533.html][Java提高篇——对象克隆（复制） - 萌小Q - 博客园]]
 
-* wait
-  + 子类和父类同名的字段
-  + [[https://stackoverflow.com/questions/11720288/is-an-interface-a-class][java - Is an interface a class? - Stack Overflow]]
-  + int.class, Integer.class, Integer.TYPE
-
-* Tomcat
-  + [[https://stackoverflow.com/questions/1153521/setting-default-locale-for-tomcat-service-in-windows-xp][java - Setting default locale for Tomcat Service in Windows XP - Stack Overflow]]
-  + [[https://stackoverflow.com/questions/9361623/catalina-home-environmental-variable-is-not-defined-correctly][tomcat6 - CATALINA_HOME environmental variable is not defined correctly - Stack Overflow]]
-  + [[https://stackoverflow.com/questions/6623161/javac-option-to-compile-all-java-files-under-a-given-directory-recursively][javac option to compile all java files under a given directory recursively - Stack Overflow]]
-
 * 集合
   + 自定义集合时可以继承 AbstractXXX
   + 迭代器位于两个元素之间
@@ -63,9 +53,6 @@
   + 图形处理
   + URLConnection
 
-* idea
-  + [[https://www.jetbrains.org/intellij/sdk/docs/basics/virtual_file_system.html][Virtual File System / IntelliJ Platform SDK DevGuide]]
-
 * IO
   ByteArrayStream
 
@@ -80,4 +67,7 @@
 
 * 问题
   + 二维数组和 Comparator.comparing
+
+* String
+  + [[https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html][深入解析String#intern - 美团技术团队]]
 

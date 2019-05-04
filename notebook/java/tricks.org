@@ -8,6 +8,7 @@
 - [[#泛型通配符捕获][泛型通配符捕获]]
 - [[#常用的异常][常用的异常]]
 - [[#常用的接口][常用的接口]]
+- [[#通过-javac-编译一个目录下的所有-java-文件][通过 javac 编译一个目录下的所有 Java 文件]]
 
 * 将 PriorityQueue 作为最小堆
   可以将 PriorityQueue 作为最小堆来使用：
@@ -153,4 +154,12 @@
       public void	run();
     }
   #+END_SRC
+
+* 通过 javac 编译一个目录下的所有 Java 文件
+  #+BEGIN_SRC sh
+    $ find -name "*.java" > sources.txt
+    $ javac @sources.txt
+  #+END_SRC
+
+  参考：[[https://stackoverflow.com/questions/6623161/javac-option-to-compile-all-java-files-under-a-given-directory-recursively][javac option to compile all java files under a given directory recursively - Stack Overflow]]
 

@@ -105,6 +105,7 @@
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
     + [Maven](notebook/java/tools/maven.org)
+    + [Tomcat](notebook/java/tools/tomcat.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
   + [Java - I/O 操作](notebook/java/io.org)
   + [Java 基础知识](notebook/java/java.org)

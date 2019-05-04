@@ -21,6 +21,9 @@
 - [[#java-的命令行参数形式][Java 的命令行参数形式]]
 - [[#java-集合中移除原始数据类型的包装对象时是按值还是按对象][Java 集合中移除原始数据类型的包装对象时是按值还是按对象]]
 - [[#java-中方法匹配的优先级][Java 中方法匹配的优先级]]
+- [[#integerclass-和-intclass][Integer.class 和 int.class]]
+- [[#interface-是类吗][Interface 是类吗]]
+- [[#子类和父类存在同名的字段][子类和父类存在同名的字段]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -257,3 +260,33 @@
 
   参考：[[https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.12.2.5][Chapter 15. Expressions]]
 
+* Integer.class 和 int.class
+  通过 ~java.lang.Class.isPrimitive~ 方法可以判断一个 ~Class~ 是不是 ~Primitive~, 其中：
+  + int.class 和 Integer.TYPE 是相同的，都是 Primitive
+  + Integer.class 不是 Primitive
+    
+  参考：[[https://stackoverflow.com/questions/22470985/integer-class-vs-int-class][java - Integer.class vs int.class - Stack Overflow]]
+
+* Interface 是类吗
+  #+BEGIN_QUOTE
+  An interface isn't a class, but you could say that both interfaces and classes are types.
+  #+END_QUOTE
+
+  容易让人迷惑的一点是 Class<T> 可以引用接口或类，容易让人认为 Interface 也是类，但只是名字上的问题。
+
+  #+BEGIN_QUOTE
+  In the Java programming language, every variable and every expression has a type that can be determined at compile-time. The type may be a primitive type or a reference type. Reference types include class types and interface types.
+  #+END_QUOTE
+
+  参考：[[https://stackoverflow.com/questions/11720288/is-an-interface-a-class][java - Is an interface a class? - Stack Overflow]]
+
+* 子类和父类存在同名的字段
+  首先，字段是不会被覆盖的，所以这时子类就存在两个名称相同的字段。
+
+  通过子类引用访问字段时会获取子类的字段，通过父类引用访问字段时会获取父类的字段。
+
+  参考：[[https://stackoverflow.com/questions/3501060/can-parent-and-child-class-in-java-have-same-instance-variable][Can parent and child class in Java have same instance variable? - Stack Overflow]]
+
+
+
+  

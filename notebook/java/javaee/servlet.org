@@ -12,6 +12,7 @@
   - [[#注意事项][注意事项]]
 - [[#servlet-容器][Servlet 容器]]
 - [[#filter][Filter]]
+- [[#defaultsevelet][DefaultSevelet]]
 
 * Servlet
 ** 部署描述文件
@@ -167,3 +168,33 @@
 
 * Filter
   + 过滤器的调用顺序就是他在 DD 中的声明顺序
+
+* DefaultSevelet
+  DefaultSevelet 在 ~$CATALINA_HOME/conf/web.xml~ 中被全局声明，通常用于处理静态资源。
+
+  默认形式的声明：
+  #+BEGIN_SRC xml
+    <servlet>
+      <servlet-name>default</servlet-name>
+      <servlet-class>
+        org.apache.catalina.servlets.DefaultServlet
+      </servlet-class>
+      <init-param>
+        <param-name>debug</param-name>
+        <param-value>0</param-value>
+      </init-param>
+      <init-param>
+        <param-name>listings</param-name>
+        <param-value>false</param-value>
+      </init-param>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>default</servlet-name>
+      <url-pattern>/</url-pattern>
+    </servlet-mapping>
+  #+END_SRC
+
+  参考：[[http://wiki.jikexueyuan.com/project/tomcat/default-servlet.html][默认 Servlet - Tomcat 8 权威指南 - 极客学院Wiki]]
+

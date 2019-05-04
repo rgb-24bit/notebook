@@ -7,6 +7,7 @@
   - [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
+  - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
 
 * 简单使用
   + 通过快捷键 ~Ctrl+Shift+A~ 查看某操作的快捷键
@@ -66,4 +67,8 @@
 * 相关问题
 ** 怎样添加静态导入到补全列表
    在 ~Settings -> Code Style -> Java -> Imports~ 处进行设置就可以了。
+
+** 怎样清理同步 VSF
+   可以通过菜单栏的同步选项进行操作，更多的内容可以参考：
+   + [[https://www.jetbrains.org/intellij/sdk/docs/basics/virtual_file_system.html][Virtual File System / IntelliJ Platform SDK DevGuide]]
 

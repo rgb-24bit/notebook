@@ -122,3 +122,6 @@
 
 * math
   + [[https://stackoverflow.com/questions/18646477/why-is-sin180-not-zero-when-using-python-and-numpy][Why is sin(180) not zero when using python and numpy? - Stack Overflow]]
+
+* profile
+  + [[https://docs.python.org/3.7/library/profile.html][The Python Profilers — Python 3.7.3 documentation]]
