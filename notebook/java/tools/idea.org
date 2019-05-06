@@ -5,6 +5,7 @@
 - [[#使用技巧][使用技巧]]
   - [[#通过-maven-创建-web-app][通过 Maven 创建 Web App]]
   - [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
+  - [[#快速的创建多级目录][快速的创建多级目录]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
@@ -63,6 +64,9 @@
 
 ** 配置 Emacs 作为而外的编辑工具
    + [[https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html][Using Emacs as an External Editor]]
+
+** 快速的创建多级目录
+   创建目录时通过 ~a/b/c~ 的方式就可以直接创建多级目录 ~a/b/c~ 了，算是一个很方便的功能。
 
 * 相关问题
 ** 怎样添加静态导入到补全列表

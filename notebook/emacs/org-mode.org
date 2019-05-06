@@ -18,6 +18,8 @@
    + Agenda Views 默认会显示每个条目的 ~CATEGORY~ 属性，该属性可以通过快捷键 ~C-c C-x p~ 进行插入
    + Agenda Views 中可以通过快捷键 ~C-k~ 删除条目，也可以通过 ~B f org-agenda-kill~ 批量删除标记的条目
    + 在 Agenda Views 中可以通过快捷键 ~J~ 跳转到处于活动状态的条目
+   + 通过设置 org-agenda-start-day 的方式修改 Agenda 视图的显示，周视图会显示 start-day 所在的那一周，参考：
+     - [[https://emacs.stackexchange.com/questions/13075/agenda-span-of-last-7-days][org mode - Agenda span of "last 7 days" - Emacs Stack Exchange]]
 
 ** Org 导出为 HTML 时使用 CSS文件 中的样式高亮代码
    通过将 ~org-html-htmlize-output-type~ 设置为 ~css~ 来让导出的 ~HTML~ 中的代码部分使用 ~CSS~ 文件中的高亮样式。

@@ -287,6 +287,3 @@
 
   参考：[[https://stackoverflow.com/questions/3501060/can-parent-and-child-class-in-java-have-same-instance-variable][Can parent and child class in Java have same instance variable? - Stack Overflow]]
 
-
-
-  

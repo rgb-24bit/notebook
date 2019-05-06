@@ -22,6 +22,7 @@
   + [位运算](notebook/algorithm/bitop.org)
   + [消息摘要算法](notebook/algorithm/digest.org)
   + [加密算法](notebook/algorithm/encrypt.org)
+  + [数学问题](notebook/algorithm/math.org)
   + [Misc](notebook/algorithm/misc.org)
   + [算法问题集](notebook/algorithm/question.org)
   + [随机数相关](notebook/algorithm/random.org)
@@ -104,6 +105,7 @@
   + **tools**
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
+    + [JDK Tools](notebook/java/tools/jdk.org)
     + [Maven](notebook/java/tools/maven.org)
     + [Tomcat](notebook/java/tools/tomcat.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)

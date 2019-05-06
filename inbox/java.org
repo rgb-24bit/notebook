@@ -21,10 +21,6 @@
 * 并发
   + 理解原子性时需要记住：读取、计算、写入是可能被分开的
 
-* 环境变量
-  + 运行库路径会默认加载，不许要自己设置，如果没有其他需要，就可以省略 CLASSPATH
-  + JAVA_HOME 貌似没什么用
-
 * net
   + [[https://blog.csdn.net/dabing69221/article/details/17351881][Java TCP/IP Socket — close()/shutdownOutput()/shutdownInput() 分析 - 开挂的程序猿 - CSDN博客]]
   + [[https://www.cnblogs.com/amosli/p/3821474.html][Java--使用多线程下载,断点续传技术原理(RandomAccessFile) - Hi_Amos - 博客园]]
@@ -35,9 +31,6 @@
   + 调用 getXXX 方法后会发起请求
   + 单个实例只能发起一个请求，因此，调用 getXXX 方法后就不能设置请求属性了
 
-* 分形
-  + http://paulbourke.net/fractals/
-
 * SPI
   + [[https://cxis.me/2017/04/17/Java%E4%B8%ADSPI%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%85%A5%E5%8F%8A%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/][Java 中 SPI 机制深入及源码解析 | 大程熙]]
   + [[https://www.baeldung.com/java-spi][Java Service Provider Interface | Baeldung]]
@@ -45,10 +38,6 @@
 * mock
   + [[https://waylau.com/mockito-quick-start/][Mockito 简明教程 | waylau.com]]
     
-* javap
-  javap class
-  javap -c class
-
 * 博客
   + 图形处理
   + URLConnection

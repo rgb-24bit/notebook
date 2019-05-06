@@ -11,6 +11,7 @@
 - [[#怎样创建交换分区][怎样创建交换分区]]
 - [[#怎样搭建-ftp-服务器][怎样搭建 FTP 服务器]]
 - [[#怎样合并两个目录][怎样合并两个目录]]
+- [[#怎样创建需要定时执行的任务][怎样创建需要定时执行的任务]]
 
 * 如何快速删除文件
   + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
@@ -103,4 +104,10 @@
   #+END_SRC
 
   参考：[[https://unix.stackexchange.com/questions/149965/how-to-copy-merge-two-directories][ubuntu - How to copy-merge two directories? - Unix & Linux Stack Exchange]]
+
+* 怎样创建需要定时执行的任务
+  通过 crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script 脚本。
+
+  参考：
+  + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html][19. crontab 定时任务 — Linux Tools Quick Tutorial]]
 

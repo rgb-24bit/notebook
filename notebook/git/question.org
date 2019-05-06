@@ -12,6 +12,8 @@
 - [[#怎样查看存储库的大小][怎样查看存储库的大小]]
 - [[#怎样批量删除过去提交中的文件][怎样批量删除过去提交中的文件]]
 - [[#怎样批量更改过去提交中的邮箱和用户名][怎样批量更改过去提交中的邮箱和用户名]]
+- [[#怎样撤销一个已经成功合并的-merge][怎样撤销一个已经成功合并的 merge]]
+- [[#怎样指定子模块的分支][怎样指定子模块的分支]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -133,4 +135,17 @@
     fi
     ' --tag-name-filter cat -- --branches --tags
   #+END_SRC
+
+* 怎样撤销一个已经成功合并的 merge
+  直接的操作方式：
+  1. 首先通过 git relog 获得合并前的 commit sha
+  2. 然后使用 git reset 重置 HEAD 指针就可以了
+     
+  参考：[[https://stackoverflow.com/questions/2389361/undo-a-git-merge-that-hasnt-been-pushed-yet][Undo a Git merge that hasn't been pushed yet - Stack Overflow]]
+
+* 怎样指定子模块的分支
+  可以通过 git submodule add -b 的方式指定分支，但是似乎存在一个问题：
+  #+BEGIN_QUOTE
+  只有将存储库克隆到本地后在添加才能在指定分支时不出错？
+  #+END_QUOTE
 

@@ -13,6 +13,7 @@
 - [[#servlet-容器][Servlet 容器]]
 - [[#filter][Filter]]
 - [[#defaultsevelet][DefaultSevelet]]
+- [[#相关资料][相关资料]]
 
 * Servlet
 ** 部署描述文件
@@ -168,6 +169,7 @@
 
 * Filter
   + 过滤器的调用顺序就是他在 DD 中的声明顺序
+  + 过滤器中分派或不继续传递 - 就分派到目标 Servlet 或无响应
 
 * DefaultSevelet
   DefaultSevelet 在 ~$CATALINA_HOME/conf/web.xml~ 中被全局声明，通常用于处理静态资源。
@@ -197,4 +199,7 @@
   #+END_SRC
 
   参考：[[http://wiki.jikexueyuan.com/project/tomcat/default-servlet.html][默认 Servlet - Tomcat 8 权威指南 - 极客学院Wiki]]
+
+* 相关资料
+  + 部署描述文件的官方文档：[[https://docs.oracle.com/cd/E17904_01/web.1111/e13712/web_xml.htm#WBAPP503][A web.xml Deployment Descriptor Elements]]
 

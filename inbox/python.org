@@ -47,35 +47,6 @@
   + [[https://segmentfault.com/a/1190000005701971][Python 实例方法的特殊属性]]
   + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性]]
 
-* 随机生成和为 100 的序列
-  #+BEGIN_SRC python
-    def random_nums():
-        nums = [random.randint(0, 101) for i in range(9)]
-        nums.extend([0, 100])
-        nums.sort()
-
-        result = []
-        for i in range(1, 11):
-            result.append(nums[i] - nums[i - 1])
-
-        return result
-  #+END_SRC
-
-  频率统计：
-  #+BEGIN_SRC python
-    counter = defaultdict(int)
-
-    for i in range(1000):
-        for num in random_nums():
-            counter[num] += 1
-
-    total = sum(counter.keys())
-    for i in range(101):
-        print('%d: %f' % (i, counter[i] / total))
-
-    print(random_nums())
-  #+END_SRC
-
 * 其他
   #+BEGIN_SRC python
     class Condition(object):

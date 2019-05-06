@@ -1,9 +1,6 @@
 * 守护进程
   + [[https://askubuntu.com/questions/903354/difference-between-systemctl-and-service-commands][Difference between systemctl and service commands - Ask Ubuntu]]
 
-* 定时任务
-  + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html][19. crontab 定时任务 — Linux Tools Quick Tutorial]]
-
 * I/O 模型
   + [[https://woshijpf.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html][Linux I/O 模型详解]]
   + [[https://notes.shichao.io/unp/ch6/][Chapter 6. I/O Multiplexing: The select and poll Functions - Shichao's Notes]]

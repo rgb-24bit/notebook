@@ -1,0 +1,16 @@
+#+TITLE:      数学问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#三点共线问题][三点共线问题]]
+
+* 三点共线问题
+  三点共线问题可以通过判断三个点围成的三角形的面积来判断，其中使用的三角形面积公式为：
+  #+HTML: <img src="https://i.loli.net/2019/05/06/5ccfd667adb67.png">
+
+  C 语言代码：
+  #+BEGIN_SRC C
+    int func(int x1, int y1, int x2, int y2, int x3, int y3) {
+      return (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) == 0;
+    }
+  #+END_SRC
+  
