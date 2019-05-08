@@ -130,6 +130,7 @@
   + Junit
   + Maven
   + Gradle
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html][Web on Servlet Stack]]
 
 * mybatis
   + [[http://www.mybatis.org/spring/zh/getting-started.html][mybatis-spring – MyBatis-Spring | 入门]]
@@ -138,4 +139,34 @@
 * 编码设置
   + [[https://stackoverflow.com/questions/5928046/spring-mvc-utf-8-encoding][java - Spring MVC UTF-8 Encoding - Stack Overflow]]
   + 通过 jsp-config 设置也行
+
+
+* SpringMVC
+  Handler 方法：支持灵活的方法签名，同时支持 java 8 Optional 作为具有 require 属性的注解参数，require 默认为 false。
+
+  参数和返回值：
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-arguments][Web on Servlet Stack - Handler Methods - Method Arguments]]
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-return-types][Web on Servlet Stack - Handler Methods - Return Values]]
+
+  类型转换：对于部分字符串形式的参数，Spring 支持自动将它们转换为其他类型，比如int、long、Date
+
+  可以通过 @RequestBody 将请求主题转换为对象，还可以和 @Valid 配合使用。
+
+  可以通过 @ResponseBody 将返回对象转为为响应主体。
+
+* recent
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html][Core Technologies]]
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html][Testing]]
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html][Data Access]]
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html][Web on Servlet Stack]]
+
+* structure
+  + [[https://stackoverflow.com/questions/12397940/spring-and-mvc-proper-project-structure][java - Spring and MVC proper project structure - Stack Overflow]]
+
+
+* 静态资源和 CLASSPATH
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-config-static-resources][mvc-config-static-resources]]
+  + [[https://segmentfault.com/a/1190000015802324][java项目中的classpath到底是什么 - mmmming - SegmentFault 思否]]
+
+  静态页面的映射的配置是需要的吗？
 

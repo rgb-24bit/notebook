@@ -3,9 +3,14 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#maven-基础][Maven 基础]]
   - [[#标准目录结构][标准目录结构]]
+  - [[#插件][插件]]
+    - [[#插件的概念][插件的概念]]
+    - [[#插件的添加][插件的添加]]
 - [[#问题集][问题集]]
   - [[#怎样通过-maven-创建运行-webapp][怎样通过 Maven 创建运行 WebApp]]
   - [[#maven-的版本号命名规则是怎样的][Maven 的版本号命名规则是怎样的]]
+  - [[#maven-的镜像和存储库配置][Maven 的镜像和存储库配置]]
+  - [[#maven-中编译时字符编码的设置][Maven 中编译时字符编码的设置]]
 
 * Maven 基础
 ** 标准目录结构
@@ -25,6 +30,43 @@
    | ~/.m2/repository                   | Maven 默认的本地仓库目录位置                                               |
    |------------------------------------+----------------------------------------------------------------------------|
 
+** 插件
+*** 插件的概念
+    Maven 本质上是一个插件框架，它的核心并不执行任何具体的构建任务，所有这些任务都交给插件来完成，例如编译源代码是由 ~maven-compiler-plugin~ 完成的。
+
+    进一步说，每个任务对应了一个插件目标（goal），每个插件会有一个或者多个目标，例如 ~maven-compiler-plugin~ 的 ~compile~ 目标用来编译位于 ~src/main/java/~ 目录下的主源码，
+    ~testCompile~ 目标用来编译位于 ~src/test/java/~ 目录下的测试源码。
+
+    用户可以通过两种方式调用 Maven 插件目标：
+    1) 第一种方式是将插件目标与生命周期阶段（lifecycle phase）绑定，这样用户在命令行只需要输入生命周期阶段就可以了。
+
+       例如 Maven 默认将 maven-compiler-plugin 的 compile 目标与 compile 生命周期阶段绑定，因此命令 mvn compile 实际上是先定位到 compile 这一生命周期阶段，
+       然后再根据绑定关系调用 maven-compiler-plugin 的 compile 目标。
+
+    2) 第二种方式是直接在命令行指定要执行的插件目标，例如 mvn archetype:generate 就表示调用 maven-archetype-plugin 的 generate 目标，这种带冒号的调用方式与生命周期无关。
+
+    参考文章：
+    + [[http://www.cnblogs.com/crazy-fox/archive/2012/02/09/2343722.html][常用 Maven 插件介绍 - 种菜得瓜 - 博客园]]
+
+*** 插件的添加
+    添加插件只需要在 POM 中在 ~<build>~ 中添加 ~<plugins>~ 就可以了：
+    #+BEGIN_SRC xml
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-myquery-plugin</artifactId>
+            <version>1.0</version>
+          </plugin>
+        </plugins>
+      </build>
+    #+END_SRC
+
+    不过需要注意 ~pluginManagement~ 和 ~plugins~ 的区别：
+    + pluginManagement 是表示插件声明，即你在项目中的 pluginManagement 下声明了插件，Maven 不会加载该插件
+    + plugins 就是直接引入一个 plugin，而且可以绑定到 Maven 相关的生命周期上
+
+    参考文章：
+    + [[https://maven.apache.org/guides/mini/guide-configuring-plugins.html][Maven – Guide to Configuring Plug-ins]]
 
 * 问题集
 ** 怎样通过 Maven 创建运行 WebApp
@@ -87,4 +129,26 @@
   参考：
   + [[https://segmentfault.com/a/1190000011368506][版本命名及限定规则详解 - 个人文章 - SegmentFault 思否]]
   + [[https://liyixing1.iteye.com/blog/2171254][版本号规范，镜像版本SNAPSHOT，LATEST 和 RELEASE 版本 - 李义星 - ITeye博客]]
+
+** Maven 的镜像和存储库配置
+   当 Maven 的依赖不在本地仓库时, 就需要到远程仓库下载，这个时候如果配置了镜像，而且镜像配置的规则中匹配到目标仓库时，
+   Maven 认为目标仓库被镜像了，不会再去被镜像仓库下载依赖，而是直接去镜像仓库下载。
+
+   其中，镜像通常在 setting.xml 中进行配置，而存储库在 POM 中进行配置，阿里云镜像配置如下：
+   #+BEGIN_SRC xml
+     <mirrors>
+       <mirror>
+         <id>aliyunmaven</id>
+         <mirrorOf>*</mirrorOf>
+         <name>aliyunmaven</name>
+         <url>https://maven.aliyun.com/repository/public</url>
+       </mirror>
+     </mirrors>
+   #+END_SRC
+
+** Maven 中编译时字符编码的设置
+   通常情况下用 ~archetype~ 创建项目时已经帮我们设置好了：
+   #+BEGIN_SRC xml
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   #+END_SRC
 

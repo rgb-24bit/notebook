@@ -137,3 +137,6 @@
 * script
   + [[https://stackoverflow.com/questions/4396849/does-the-script-tag-position-in-html-affects-performance-of-the-webpage][javascript - Does the <script> tag position in HTML affects performance of the webpage? - Stack Overflow]]
 
+* base tag
+  + [[https://www.w3schools.com/tags/tag_base.asp][HTML base tag]]
+
