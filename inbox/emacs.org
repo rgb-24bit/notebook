@@ -5,3 +5,13 @@
     + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html][Sexp Diary Entries - GNU Emacs Manual]]
     + [[https://emacs.stackexchange.com/questions/31683/schedule-org-task-for-last-day-of-every-month/31708][org mode - Schedule org task for last day of every month? - Emacs Stack Exchange]]
 
+* Solarized
+  + [[https://github.com/sellout/emacs-color-theme-solarized/blob/master/solarized-definitions.el][emacs-color-theme-solarized/solarized-definitions.el at master · sellout/emacs-color-theme-solarized]]
+  + [[https://github.com/bbatsov/solarized-emacs][bbatsov/solarized-emacs: The Solarized colour theme, ported to Emacs.]]
+  + [[https://github.com/purcell/color-theme-sanityinc-solarized/blob/master/color-theme-sanityinc-solarized.el][color-theme-sanityinc-solarized/color-theme-sanityinc-solarized.el at master · purcell/color-theme-sanityinc-solarized]]
+  + [[https://github.com/altercation/solarized][altercation/solarized: precision color scheme for multiple applications (terminal, vim, etc.) with both dark/light modes]]
+
+  颜色好像都是一样的，就是配置有点区别。
+  
+  IDEA 当前行高亮。
+

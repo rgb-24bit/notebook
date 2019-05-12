@@ -14,6 +14,7 @@
 - [[#怎样批量更改过去提交中的邮箱和用户名][怎样批量更改过去提交中的邮箱和用户名]]
 - [[#怎样撤销一个已经成功合并的-merge][怎样撤销一个已经成功合并的 merge]]
 - [[#怎样指定子模块的分支][怎样指定子模块的分支]]
+- [[#怎样更新远程分支的名称][怎样更新远程分支的名称]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -148,4 +149,13 @@
   #+BEGIN_QUOTE
   只有将存储库克隆到本地后在添加才能在指定分支时不出错？
   #+END_QUOTE
+
+* 怎样更新远程分支的名称
+  更新本地分支名称和远程分支名称的指令：
+  #+BEGIN_EXAMPLE
+    $ git branch -m old-name new-name
+    $ git push origin :old-name new-name
+  #+END_EXAMPLE
+
+  参考：[[https://www.w3docs.com/snippets/git/how-to-rename-git-local-and-remote-branches.html][How to rename git local and remote branches]]
 

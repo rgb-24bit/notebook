@@ -13,3 +13,5 @@
 * resource
   + [[https://www.cnblogs.com/pixy/p/4798089.html][maven资源文件的相关配置 - XRacoon - 博客园]]
 
+* wrapper
+  + [[https://juejin.im/post/5b5c742751882508603d005e][maven-wrapper介绍 - 掘金]]

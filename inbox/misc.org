@@ -31,12 +31,6 @@
   Java 中可以使用虚拟机参数，这个更加容易获取：
   + [[https://softwareengineering.stackexchange.com/questions/70357/command-line-options-style-posix-or-what][java - Command line options style - POSIX or what? - Software Engineering Stack Exchange]]
 
-* live2d
-  + [[https://haremu.com/p/205][Live2D！把可爱的看板娘捕捉到你的博客去吧 – 后宫学长]]
-  + pio 皮肤获取 
-    - https://haremu.com/
-    - pio/png
-
 * idea
   + [[https://github.com/florinpop17/app-ideas][florinpop17/app-ideas: A Collection of application ideas which can be used to improve your coding skills.]]
 
@@ -51,4 +45,11 @@
   [ ] square brackets 或 brackets 方括号
   < > angled brackets 尖括号
   ( ) parentheses 圆括号
+
+* 文件数量对性能的影响
+  + [[https://segmentfault.com/q/1010000000644754][服务器 - 文件和文件夹的个数是否对磁盘的IO有影响？ - SegmentFault 思否]]
+  + 可以考虑通过 Hash 或时间日期创建目录索引
+
+* rsc
+  + [[https://github.com/freedombird9/how-to-read-source-code/blob/master/how-to-read-code.md][how-to-read-source-code/how-to-read-code.md at master · freedombird9/how-to-read-source-code]]
 

@@ -1,53 +1,55 @@
 #+TITLE:      Org mode
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#使用技巧][使用技巧]]
-  - [[#agenda-views-相关][Agenda Views 相关]]
-  - [[#org-导出为-html-时使用-css文件-中的样式高亮代码][Org 导出为 HTML 时使用 CSS文件 中的样式高亮代码]]
-  - [[#使用-clocktable-进行时间统计][使用 clocktable 进行时间统计]]
-  - [[#对齐文件中的所有标签][对齐文件中的所有标签]]
-  - [[#文学编程][文学编程]]
-  - [[#时间操作][时间操作]]
+- [[#agenda-views][Agenda Views]]
+- [[#dates-and-times][Dates and Times]]
+- [[#markup-for-rich-contents][Markup for Rich Contents]]
 - [[#问题集][问题集]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
   - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
   - [[#怎样在-org-92-中使用旧的模板引擎][怎样在 Org 9.2 中使用旧的模板引擎]]
+  - [[#怎样在导出-html-使用-css-样式高亮代码][怎样在导出 HTML 使用 CSS 样式高亮代码]]
+  - [[#怎样对齐文件中的所有标签][怎样对齐文件中的所有标签]]
 
-* 使用技巧
-** Agenda Views 相关
-   + Agenda Views 默认会显示每个条目的 ~CATEGORY~ 属性，该属性可以通过快捷键 ~C-c C-x p~ 进行插入
-   + Agenda Views 中可以通过快捷键 ~C-k~ 删除条目，也可以通过 ~B f org-agenda-kill~ 批量删除标记的条目
-   + 在 Agenda Views 中可以通过快捷键 ~J~ 跳转到处于活动状态的条目
-   + 通过设置 org-agenda-start-day 的方式修改 Agenda 视图的显示，周视图会显示 start-day 所在的那一周，参考：
-     - [[https://emacs.stackexchange.com/questions/13075/agenda-span-of-last-7-days][org mode - Agenda span of "last 7 days" - Emacs Stack Exchange]]
+* Agenda Views
+  + Agenda Views 默认会显示每个条目的 ~CATEGORY~ 属性，该属性可以通过快捷键 ~C-c C-x p~ 进行插入
 
-** Org 导出为 HTML 时使用 CSS文件 中的样式高亮代码
-   通过将 ~org-html-htmlize-output-type~ 设置为 ~css~ 来让导出的 ~HTML~ 中的代码部分使用 ~CSS~ 文件中的高亮样式。
+  + Agenda Views 中可以通过快捷键 ~C-k~ 删除条目，也可以通过 ~B f org-agenda-kill~ 批量删除标记的条目
 
-** 使用 clocktable 进行时间统计
-   可以通过快捷键 ~C-c C-x C-r~ 插入 clock table 来进行时间统计，其中：
-   + 通过用双引号包围的 tag 来过滤条目，不同的 tag 用 ~|~ 进行分隔
+  + 在 Agenda Views 中可以通过快捷键 ~J~ 跳转到处于活动状态的条目
+
+  + 通过设置 org-agenda-start-day 的方式修改 Agenda 视图的显示，周视图会显示 start-day 所在的那一周。
+
+    参考问题：[[https://emacs.stackexchange.com/questions/13075/agenda-span-of-last-7-days][org mode - Agenda span of "last 7 days" - Emacs Stack Exchange]]
+
+  + 设置距离 DEADLINE 还有几天时进行显示： ~DEADLINE -nd~
+
+* Dates and Times
+  可以通过快捷键 ~C-c C-x C-r~ 插入 clock table 来进行时间统计，其中：
+  + 通过用双引号包围的 tag 来过滤条目，不同的 tag 用 ~|~ 进行分隔：
      #+BEGIN_SRC org
        ,#+BEGIN: clocktable :tags "tag1|tag2"
 
        ,#+END:
      #+END_SRC
 
-   + 通过 tstart 指定起始时间：
-     #+BEGIN_SRC org
-       ,#+BEGIN: clocktable :scope tree :maxlevel 1 :tstart "<2019-01-21>"
-     #+END_SRC
+  + 通过 tstart 指定起始时间：
+    #+BEGIN_SRC org
+      ,#+BEGIN: clocktable :scope tree :maxlevel 1 :tstart "<2019-01-21>"
+    #+END_SRC
 
-** 对齐文件中的所有标签
-   通过快捷键 ~C-u C-c C-q~ 可以很方便的完成这一工作。
+  可以通过连续的 ~C-c .~ 创建时间段，而 ~C-c C-y~ 可以用于计算时间段的间隔
 
-** 文学编程
-   借助 Org mode 的 Babel 功能可以很方便的进行文学编程，具体可以参考：
-   + [[https://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]]
+* Markup for Rich Contents
+  Org-mode 中可以之间插入 latex 内容，行内公式可以通过 ~$~ 包围插入，而环境则可以通过 ~\begin~ 插入。
 
-** 时间操作
-   + 连续的 ~C-c .~ 可以用于创建时间段，而 ~C-c C-y~ 可以用于计算时间段的间隔
-   + 设置距离 DEADLINE 还有几天时进行显示： ~DEADLINE -nd~
+  可以参考：[[https://orgmode.org/manual/LaTeX-fragments.html#LaTeX-fragments][The Org Manual: LaTeX fragments]]
+
+  特别的：
+  + 插入公式时，环境 ~equation*~ 和 ~align*~ 是无编号的
+  + Latex 的预览需要同时安装 latex 和 dvipng
+    
+  更多的 Latex 技巧可以参考：[[https://linux.cn/article-10269-1.html][技术|如何使用 Emacs 创建 LaTeX 文档]]
 
 * 问题集
 ** 如何将 org-capture 捕获的内容插入当前光标位置
@@ -75,4 +77,10 @@
    #+END_SRC
 
    + [[https://emacs.stackexchange.com/questions/46988/easy-templates-in-org-9-2][org mode - Easy Templates in Org 9.2 - Emacs Stack Exchange]]
+
+** 怎样在导出 HTML 使用 CSS 样式高亮代码
+   通过将 ~org-html-htmlize-output-type~ 设置为 ~css~ 来让导出的 ~HTML~ 中的代码部分使用 ~CSS~ 文件中的高亮样式。
+
+** 怎样对齐文件中的所有标签
+   通过快捷键 ~C-u C-c C-q~ 可以很方便的完成这一工作。
 

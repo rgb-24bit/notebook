@@ -1,0 +1,18 @@
+#+TITLE:      深入 Java
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#stringintern][String#intern]]
+
+* String#intern
+  Java 语言中为 8 种基本类型和 ~String~ 提供了常量池缓存，使它们在运行过程中速度更快，更节省内存。
+
+  ~String~ 类型的常量池的使用方式有两种：
+  + 直接使用双引号声明出来的 String 对象会直接存储在常量池中
+  + 如果不是用双引号声明的 String 对象，可以使用 String 提供的 intern 方法。intern 方法会从字符串常量池中查询当前字符串是否存在，
+    若不存在就会将当前字符串放入常量池中
+
+  要注意的是，String 的 String Pool 是一个固定大小的 Hashtable，默认值大小长度是 1009，如果放进 String Pool 的 String 非常多，就会造成 Hash 冲突严重，
+  从而导致链表会很长，而链表长了后直接会造成的影响就是当调用 String.intern 时性能会大幅下降。
+
+  参考文章：[[https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html][深入解析 String#intern - 美团技术团队]]
+

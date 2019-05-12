@@ -105,3 +105,6 @@
   + [[https://segmentfault.com/q/1010000007137721][求解释一下python中bytearray和memoryview 的使用 以及适用的场景 - SegmentFault 思否]]
   + 不能修改 memoryview 对象的大小
 
+* 设计模式
+  + [[https://zhuanlan.zhihu.com/p/27619451][Python还需要设计模式吗？ - 知乎]]
+

@@ -134,6 +134,7 @@
 
 * mybatis
   + [[http://www.mybatis.org/spring/zh/getting-started.html][mybatis-spring – MyBatis-Spring | 入门]]
+  + 配置上挺简单的
 
 
 * 编码设置
@@ -154,6 +155,8 @@
 
   可以通过 @ResponseBody 将返回对象转为为响应主体。
 
+  DispatcherServlet 上下文是 ContextLoaderListener 的子上下文，它找不到的 Bean 会委托给 ContextLoaderListener 上下文。
+
 * recent
   + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html][Core Technologies]]
   + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html][Testing]]
@@ -169,4 +172,36 @@
   + [[https://segmentfault.com/a/1190000015802324][java项目中的classpath到底是什么 - mmmming - SegmentFault 思否]]
 
   静态页面的映射的配置是需要的吗？
+
+
+* springcore
+  Bean 的属性包括：Class、Name、Scope、构造器参数、属性、自动注入模式、延迟初始化模式、
+  初始化方法、销毁方法。
+
+  + [[https://blog.csdn.net/aitangyong/article/details/50629525][spring配置文件中的id和name属性区别，以及identifier和aliases - aty - CSDN博客]]
+
+  自动注入可以获取 Spring 上下文中的对象，比如 ApplicationContext。
+
+  ComponentScan 的 Filter：
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-scanning-filters][beans-scanning-filters]]
+
+
+* myblog
+  + [[https://github.com/jwtk/jjwt][jwtk/jjwt: Java JWT: JSON Web Token for Java and Android]]
+  + [[https://github.com/auth0/java-jwt][auth0/java-jwt: Java implementation of JSON Web Token (JWT)]]
+  + [[http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html][全文搜索引擎 Elasticsearch 入门教程 - 阮一峰的网络日志]]
+  + [[https://juejin.im/post/5b00517cf265da0ba0636d4b][Java效率工具之Lombok - 掘金]]
+  + [[https://jwt.io/][JSON Web Tokens - jwt.io]]
+  + [[https://www.baeldung.com/spring-boot-devtools][Overview of Spring-Boot Dev Tools | Baeldung]]
+  + [[https://juejin.im/post/5af02571f265da0b9e64fcfd#heading-39][消息队列之 RocketMQ - 掘金]]
+
+
+* spring-boot
+  + [[https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/documentation-overview.html#boot-documentation][Spring Boot Documentation]]
+* token
+  + [[https://stackoverflow.com/questions/48171199/generating-one-time-only-security-tokens-from-uuid-or-hmac-jwt-hash][authentication - Generating one-time-only security tokens from UUID or HMAC/JWT/hash? - Stack Overflow]]
+
+* documentation
+  + [[http://articles.kevinz.cn/2017/12/19/restdoc/][Spring Cloud构建RESTful API文档 - 星燃处 | Kriz' Blog]]
+  + [[https://juejin.im/entry/5b0d7066f265da08cd0e176b][单元测试——工程师 Style 的测试方法 - 后端 - 掘金]]
 

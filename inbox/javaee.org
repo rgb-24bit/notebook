@@ -17,11 +17,6 @@
   + [[https://www.zhihu.com/question/37155807][Apache和Apache Tomcat的区别是什么？ - 知乎]]
   + Tomcat 配置和 Webapp 的配置
 
-* 图片存储方案
-  + [[https://www.cnblogs.com/edisonchou/p/4137134.html][【大型网站技术实践】初级篇：海量图片的分布式存储设计与实现 - Edison Chou - 博客园]]
-  + [[https://segmentfault.com/q/1010000000121448][图片存储 - 图片服务器应该如何设计文件结构？ - SegmentFault 思否]]
-  + [[https://www.oschina.net/question/855998_78136][服务器如何保存图片信息？ - OSCHINA]]
-
 * nginx & tomcat
   应用收到的请求就是完整的请求，那么应该怎样转换为本地的路径呢，怎样去除前面的前缀。
 

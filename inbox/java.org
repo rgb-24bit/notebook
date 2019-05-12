@@ -57,9 +57,3 @@
 * 问题
   + 二维数组和 Comparator.comparing
 
-* String
-  + [[https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html][深入解析String#intern - 美团技术团队]]
-
-* Void
-  + [[https://www.baeldung.com/java-void-type][Void Type in Java | Baeldung]]
-
