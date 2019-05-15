@@ -1,26 +1,5 @@
-* bean
-  + 条件化创建 Bean 时，单例模式下，如果创建失败就无法获取实例了
-  + Condition 可以和 Compent 一起使用
-  + 没有使用 AOP 的 Bean 获取是返回的就是它的实例，而使用了 AOP 的 Bean 返回的就是它的动态代理
-  + 环绕 Advice 的返回值需要和被环绕的方法相同，传递给 Advice 的参数名称和 args 定义的相同
-  + 当自动装配和 JavaConfig 同时存在是，会优先使用自动装配
-  + Profile、Qualifier、Scope 都可以用于自动装配、JavaConfig、XMLConfig
-  + 配置的处理顺序：AutoWired、JavaConfig、XMLConfig，其中，如果自动装配已创建 Bean，那么 JavaConfig 中的便无效。
-  + 原型作用域会在需要 bean 的时候创建，单例会在启动时创建
-
-* 问题
-  + spring xml 过滤器
-  + 获取 bean 时指定过滤器
-  + 不同配置的执行顺序
-  + XML 配置中的 bean 必然会创建
-  + [[https://www.cnblogs.com/zrtqsk/p/3735273.html][Spring Bean的生命周期（非常详细） - Chandler Qian - 博客园]]
-
-    
 * 模式
-  Spring 中的表单验证方式和 Flask 中的验证方式：
-  + Python 中缺少进行依赖注入的方式，因此只能创建相应的类型
-  + Java 中可以通过注解的的方式进行验证
-  + [[https://blog.tonyseek.com/post/notes-about-ioc-and-di/][控制反转 (IoC) 和依赖注入 (DI)]]
+  [[https://blog.tonyseek.com/post/notes-about-ioc-and-di/][控制反转 (IoC) 和依赖注入 (DI)]]
 
 * 自我装配
   + [[https://stackoverflow.com/questions/5152686/self-injection-with-spring][java - Self injection with Spring - Stack Overflow]]
@@ -120,7 +99,7 @@
 
    估计默认情况下使用的是 XmlWebApplicationContext。
 
-
+   
 * 教程
   + Spring 官方教程
   + Servlet 3.0
@@ -132,16 +111,11 @@
   + Gradle
   + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html][Web on Servlet Stack]]
 
-* mybatis
-  + [[http://www.mybatis.org/spring/zh/getting-started.html][mybatis-spring – MyBatis-Spring | 入门]]
-  + 配置上挺简单的
-
-
 * 编码设置
   + [[https://stackoverflow.com/questions/5928046/spring-mvc-utf-8-encoding][java - Spring MVC UTF-8 Encoding - Stack Overflow]]
   + 通过 jsp-config 设置也行
 
-
+    
 * SpringMVC
   Handler 方法：支持灵活的方法签名，同时支持 java 8 Optional 作为具有 require 属性的注解参数，require 默认为 false。
 
@@ -195,13 +169,50 @@
   + [[https://www.baeldung.com/spring-boot-devtools][Overview of Spring-Boot Dev Tools | Baeldung]]
   + [[https://juejin.im/post/5af02571f265da0b9e64fcfd#heading-39][消息队列之 RocketMQ - 掘金]]
 
-
 * spring-boot
   + [[https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/documentation-overview.html#boot-documentation][Spring Boot Documentation]]
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/index.html][Spring Framework Documentation]]
+
 * token
   + [[https://stackoverflow.com/questions/48171199/generating-one-time-only-security-tokens-from-uuid-or-hmac-jwt-hash][authentication - Generating one-time-only security tokens from UUID or HMAC/JWT/hash? - Stack Overflow]]
 
-* documentation
+* documentation & Test
   + [[http://articles.kevinz.cn/2017/12/19/restdoc/][Spring Cloud构建RESTful API文档 - 星燃处 | Kriz' Blog]]
   + [[https://juejin.im/entry/5b0d7066f265da08cd0e176b][单元测试——工程师 Style 的测试方法 - 后端 - 掘金]]
+  + [[https://www.jianshu.com/p/eb31911dbc7b][测试替身Test double - 简书]]
+    
+* 几大组件注解的区别
+  + [[https://stackoverflow.com/questions/6827752/whats-the-difference-between-component-repository-service-annotations-in][java - What's the difference between @Component, @Repository & @Service annotations in Spring? - Stack Overflow]]
+
+* 事务
+  + [[https://juejin.im/post/5b00c52ef265da0b95276091][可能是最漂亮的Spring事务管理详解 - 掘金]]
+
+* security
+  security 这一块用到的东西有点多，主要有：
+  + HTTP 身份验证
+    - [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication][HTTP 身份验证 - HTTP | MDN]]
+    - [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Authorization][Authorization - HTTP | MDN]]
+    - [[http://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml][Hypertext Transfer Protocol (HTTP) Authentication Scheme Registry]]
+  + 非 BASIC 验证方式
+    - [[https://www.cnblogs.com/XiongMaoMengNan/p/6785155.html][OAuth 2.0: Bearer Token Usage - 熊猫猛男 - 博客园]]
+  + Spring security 框架
+    - [[https://juejin.im/post/58c29e0b1b69e6006bce02f4][重拾后端之Spring Boot（四）：使用JWT和Spring Security保护REST API - 掘金]]
+    - [[https://www.ibm.com/developerworks/cn/web/wa-spring-security-web-application-and-fingerprint-login/index.html][Spring Security 的 Web 应用和指纹登录实践]]
+  + 前端的验证
+    - [[https://stackoverflow.com/questions/51506579/sending-authorization-token-bearer-through-javascript][jquery - Sending Authorization Token Bearer through Javascript - Stack Overflow]]
+    #+BEGIN_SRC js
+      fetch(‘https://api.twitter.com/1.1/search/tweets.json', {
+            headers: {
+              authorization: ‘Bearer your-access-token’
+            }
+           }).then(response => {
+             if (response.status === 401) {
+               // try getting the new access token and repeat the same request
+             }
+             // otherwise carry on
+           })
+    #+END_SRC
+  + Token 的获取与生成：[[https://developer.github.com/v3/oauth_authorizations/][Authorizations | GitHub Developer Guide]]
+  + realm [[https://stackoverflow.com/questions/12701085/what-is-the-realm-in-basic-authentication][http - What is the "realm" in basic authentication - Stack Overflow]]
+  + 401 响应头中好像没有标准字段给出获取 Token 的位置与方法，好像需要自己设计
 

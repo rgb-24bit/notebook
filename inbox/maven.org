@@ -15,3 +15,6 @@
 
 * wrapper
   + [[https://juejin.im/post/5b5c742751882508603d005e][maven-wrapper介绍 - 掘金]]
+* scope
+  + [[https://www.baeldung.com/maven-dependency-scopes][Maven Dependency Scopes | Baeldung]]
+

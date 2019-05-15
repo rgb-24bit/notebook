@@ -12,6 +12,15 @@
   + [[https://github.com/altercation/solarized][altercation/solarized: precision color scheme for multiple applications (terminal, vim, etc.) with both dark/light modes]]
 
   颜色好像都是一样的，就是配置有点区别。
+
+  考虑自己进行配置维护 @_@
   
-  IDEA 当前行高亮。
+* 当前行高亮
+  + [[https://oracleyue.github.io/2018/05/31/upgrade-to-Emacs26/][关于Emacs更新到26之后的配置更新汇总 | Icarus's wings]]
+  + [[https://github.com/targzeta/linum-highlight-current-line-number/blob/master/linum-highlight-current-line-number.el][linum-highlight-current-line-number/linum-highlight-current-line-number.el at master · targzeta/linum-highlight-current-line-number]]
+  + [[https://github.com/bbatsov/solarized-emacs/blob/master/solarized.el#L1392][solarized-emacs/solarized.el at master · bbatsov/solarized-emacs]]
+
+
+* scimax
+  + [[https://github.com/jkitchin/ox-ipynb/issues/13][Error on basic file · Issue #13 · jkitchin/ox-ipynb]]
 

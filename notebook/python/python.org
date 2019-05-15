@@ -17,8 +17,9 @@
   - [[#保护成员和私有成员][保护成员和私有成员]]
   - [[#内置成员][内置成员]]
   - [[#生命周期][生命周期]]
-- [[#作用域问题][作用域问题]]
+- [[#作用域][作用域]]
   - [[#修改全局变量][修改全局变量]]
+- [[#语法特性][语法特性]]
 - [[#注意事项][注意事项]]
 
 * 函数
@@ -262,7 +263,7 @@
 
 ** 生命周期
    ~Python~ 的垃圾回收是根据 *引用计数* 来判断的， 当一个对象的 *引用* 为 0 时，该对象便会被回收。
-* 作用域问题
+* 作用域
   ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量，外部也是可以访问的。
 
   #+BEGIN_SRC python
@@ -318,6 +319,9 @@
 
      UnboundLocalError: local variable 'name' referenced before assignment
    #+END_SRC
+
+* 语法特性
+  + Python 现在支持形如 ~1_000_000_000~ 的数字字面量，参考：[[https://www.python.org/dev/peps/pep-0515/][PEP 515 -- Underscores in Numeric Literals | Python.org]]
 
 * 注意事项
   + Python 中存在一个小整数对象池， 这使得这些小整数在内存中只存在唯一的一个实例

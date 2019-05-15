@@ -99,12 +99,16 @@
   + [八段锦](notebook/health/baduanjin.org)
   + [健康生活](notebook/health/health.org)
 ## java
+  + **database**
+    + [JDBC](notebook/java/database/jdbc.org)
+    + [mybatis](notebook/java/database/mybatis.org)
   + **javaee**
     + [JSP](notebook/java/javaee/jsp.org)
     + [Java EE 问题集](notebook/java/javaee/question.org)
     + [Servlet](notebook/java/javaee/servlet.org)
   + **spring**
     + [Spring 问题集](notebook/java/spring/question.org)
+    + [Spring Core](notebook/java/spring/spring-core.org)
   + **tools**
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
@@ -116,7 +120,6 @@
   + [Java - I/O 操作](notebook/java/io.org)
   + [Java 基础知识](notebook/java/java.org)
   + [JavaDoc](notebook/java/javadoc.org)
-  + [JDBC](notebook/java/jdbc.org)
   + [Java Misc](notebook/java/misc.org)
   + [Java 问题集](notebook/java/question.org)
   + [Java - 反射](notebook/java/reflection.org)
@@ -141,14 +144,16 @@
   + **linear**
     + [线性代数 - 矩阵和方程组](notebook/math/linear/matrix.org)
 ## misc
-  + [编程相关](notebook/misc/coding.org)
   + [概念了解](notebook/misc/concept.org)
   + [开源协议](notebook/misc/liscense.org)
   + [日本麻将](notebook/misc/mahjong.org)
   + [技术了解](notebook/misc/noun.org)
+  + [编程范式相关](notebook/misc/paradigm.org)
+  + [心理学](notebook/misc/psychology.org)
   + [问题集](notebook/misc/question.org)
   + [REST API](notebook/misc/rest-api.org)
   + [结构化编程](notebook/misc/se.org)
+  + [思维火花](notebook/misc/spark.org)
   + [Unicode](notebook/misc/unicode.org)
 ## network
   + [计算机网络 - 五层模型](notebook/network/five-layer-model.org)

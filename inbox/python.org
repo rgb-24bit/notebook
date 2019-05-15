@@ -108,3 +108,6 @@
 * 设计模式
   + [[https://zhuanlan.zhihu.com/p/27619451][Python还需要设计模式吗？ - 知乎]]
 
+* 2to3
+  + [[https://docs.python.org/3/library/2to3.html][2to3 - Automated Python 2 to 3 code translation — Python 3.7.3 documentation]]
+

@@ -1,0 +1,41 @@
+#+TITLE:      思维火花
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#spring-中和-flask-中自动化表单验证方式的不同][Spring 中和 Flask 中自动化表单验证方式的不同]]
+- [[#单字节字符集的一种用处不大的用法][单字节字符集的一种用处不大的用法]]
+
+* Spring 中和 Flask 中自动化表单验证方式的不同
+  Spring 中表单验证和 Flask 中表单验证是两种形式：
+  + Spring 中通过为表单类添加注解的方式自动验证
+  + Flask 中通过在定义表单字段类型时添加限制实现自动验证
+
+  可以说，Spring 中的方式要更加方便，那么，为什么 Python 没有实现相似的方式呢？
+
+  猜测：Python 中没有像 Java 中可以通过注解的方式为字段添加限制的方式
+
+  但是，我们应该还是可以利用 @property 装饰器来实现这一方式，主不过，需要多几个装饰器。
+
+* 单字节字符集的一种用处不大的用法
+  单字节字符集如 ~latin-1~ 的一种使用：
+  #+BEGIN_SRC python
+    def convert_single(data, encoding='utf-8'):
+        return data.encode(encoding).decode('latin-1')
+
+
+    def convert_multi(data, encoding='utf-8'):
+        return data.encode('latin-1').decode(encoding)
+  #+END_SRC
+
+  实际例子：
+  #+BEGIN_SRC python
+    In [1]: from charset import *
+
+    In [2]: s = convert_single('单字节字符集abcdef')
+
+    In [3]: s
+    Out[3]: 'å\x8d\x95å\xad\x97è\x8a\x82å\xad\x97ç¬¦é\x9b\x86abcdef'
+
+    In [4]: convert_multi(s)
+    Out[4]: '单字节字符集abcdef'
+  #+END_SRC
+

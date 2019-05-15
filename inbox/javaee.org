@@ -26,3 +26,10 @@
   + [[https://www.cnblogs.com/z-sm/p/4705701.html][tomcat Host及Context 配置 - March On - 博客园]]
   + [[https://stackoverflow.com/questions/18967441/add-a-prefix-to-all-flask-routes][python - Add a prefix to all Flask routes - Stack Overflow]]
 
+* IDEA
+  + 代码折叠：C-+/-
+
+* 安全
+  + 四要素：认证、授权、机密性和数据完整性
+
+

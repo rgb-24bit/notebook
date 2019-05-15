@@ -140,3 +140,8 @@
 * base tag
   + [[https://www.w3schools.com/tags/tag_base.asp][HTML base tag]]
 
+* amp
+  + [[https://zh.wikipedia.org/wiki/Accelerated_Mobile_Pages][Accelerated Mobile Pages - 维基百科，自由的百科全书]]
+
+* header
+  + [[https://itbilu.com/other/relate/EJ3fKUwUx.html][HTTP消息头（HTTP headers）－常用的HTTP请求头与响应头 - IT笔录]]

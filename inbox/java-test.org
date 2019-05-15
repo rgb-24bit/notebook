@@ -1,0 +1,145 @@
+* JUnit5
+  常用的测试注解，注解的测试方法都是可以继承的，这为测试类的编写带来了更多的可能：
+  |-------------+------------------------------------|
+  | 注解        | 描述                               |
+  |-------------+------------------------------------|
+  | @Test       | 声明当前方法为测试方法             |
+  | @BeforeEach | 当前方法会在每个测试方法调用前调用 |
+  | @AfterEach  | 当前方法会在每个测试方法调用后调用 |
+  | @BeforeAll  | 当前方法会在所有测试方法调用前调用 |
+  | @AfterAll   | 当前方法会在所有测试方法调用后调用 |
+  |-------------+------------------------------------|
+
+  可以通过自定义 DisplayName 来生成更好看的测试报告，比如这样的：
+  #+BEGIN_EXAMPLE
+    +-- DisplayNameGeneratorDemo [OK]
+      +-- A year is not supported [OK]
+      | +-- A negative value for year is not supported by the leap year computation. [OK]
+      | | +-- For example, year -1 is not supported. [OK]
+      | | '-- For example, year -4 is not supported. [OK]
+      | '-- if it is zero() [OK]
+      '-- A year is a leap year... [OK]
+        +-- A year is a leap year if it is divisible by 4 but not by 100. [OK]
+        '-- A year is a leap year if it is one of the following years. [OK]
+          +-- Year 2016 is a leap year. [OK]
+          +-- Year 2020 is a leap year. [OK]
+          '-- Year 2048 is a leap year. [OK]
+  #+END_EXAMPLE
+
+  JUnit 中除了断言以外还支持使用假设，只在满足某种假设的情况下进行测试：
+  #+BEGIN_SRC java
+    class AssumptionsDemo {
+
+        private final Calculator calculator = new Calculator();
+
+        @Test
+        void testOnlyOnCiServer() {
+            assumeTrue("CI".equals(System.getenv("ENV")));
+            // remainder of test
+        }
+
+        @Test
+        void testOnlyOnDeveloperWorkstation() {
+            assumeTrue("DEV".equals(System.getenv("ENV")),
+                () -> "Aborting test: not on developer workstation");
+            // remainder of test
+        }
+
+        @Test
+        void testInAllEnvironments() {
+            assumingThat("CI".equals(System.getenv("ENV")),
+                () -> {
+                    // perform these assertions only on the CI server
+                    assertEquals(2, calculator.divide(4, 2));
+                });
+
+            // perform these assertions in all environments
+            assertEquals(42, calculator.multiply(6, 7));
+        }
+
+    }
+  #+END_SRC
+
+  可以通过 @Disabled 注解禁止测试，这在某些情况下会很有用（也可以通过条件测试进行更有针对性的测试）：
+  #+BEGIN_SRC java
+    @Disabled("Disabled until bug #99 has been fixed")
+    class DisabledClassDemo {
+
+      @Test
+      void testWillBeSkipped() {
+      }
+
+    }
+  #+END_SRC
+
+  可以指定测试方法的执行顺序：
+  #+BEGIN_SRC java
+    @TestMethodOrder(OrderAnnotation.class)
+    class OrderedTestsDemo {
+
+      @Test
+      @Order(1)
+      void nullValues() {
+        // perform assertions against null values
+      }
+
+      @Test
+      @Order(2)
+      void emptyValues() {
+        // perform assertions against empty values
+      }
+
+      @Test
+      @Order(3)
+      void validValues() {
+        // perform assertions against valid values
+      }
+  
+    }
+  #+END_SRC
+
+  可以通过 @RepeatedTest 进行重复测试，通过 @ParameterizedTest 指定测试参数进行测试。
+
+  注意事项：
+  + 测试方法、测试类、测试声明周期方法不能是私有的
+
+  官方文档：
+  + [[https://junit.org/junit5/docs/current/user-guide/][JUnit 5 User Guide]]
+
+* JUnit4 
+  |--------------------+--------------+------------------------------------|
+  | JUnit5             | JUnit4       | 描述                               |
+  |--------------------+--------------+------------------------------------|
+  | @BeforeEach        | @Before      | 当前方法会在每个测试方法调用前调用 |
+  | @AfterEach         | @After       | 当前方法会在每个测试方法调用后调用 |
+  | @BeforeAll         | @BeforeClass | 当前方法会在所有测试方法调用前调用 |
+  | @AfterAll          | @AfterClass  | 当前方法会在所有测试方法调用后调用 |
+  | @Disabled          | @Ignore      | 忽略当前的测试                     |
+  | @Tag               | @Category    |                                    |
+  | @ExtendWith        | @RunWith     |                                    |
+  | @ExtendWith        | @Rule        |                                    |
+  | @RegisterExtension | @ClassRule   |                                    |
+  |--------------------+--------------+------------------------------------|
+
+* Spring-Test
+  对于普通的 Spring 项目的测试
+  #+BEGIN_SRC java
+    @RunWith(SpringJunit4ClassRunner.class)
+    @ContextConfiguration(classes = BeanConfig.class)
+    public class TestFunctionService {
+      // ....
+    }
+  #+END_SRC
+
+  对于普通的 Spring-Boot 项目的测试：
+  #+BEGIN_SRC java
+    @RunWith(SpringJUnit4ClassRunner.class)
+    @SpringBootTest
+    public class TestFunctionService {
+      // ...
+    }
+  #+END_SRC
+
+  对于 Spring-Web 项目的测试：
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html#testing][Testing]]
+

@@ -21,6 +21,10 @@
 
   使用时，需要先通过 ~Class.forName()~ 加载驱动，然后在通过 ~DriverManager.getConnection~ 获取连接。
 
+  注：高版本的 JDBC 可以通过 SPI 机制根据数据库 URI 自动注册驱动，因此可以省略 Class.forName 这一步。
+
+  进行注册的方式：应该是通过静态初始化其进行的注册操作，因此加载类时便完成了注册。
+
 * 关系数据库概述
   1. *Integrity Rules* - 实体完整性
   2. SELECT *Statements* - 语句

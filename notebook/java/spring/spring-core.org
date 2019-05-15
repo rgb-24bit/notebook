@@ -1,0 +1,47 @@
+#+TITLE:      Spring Core
+
+* 目录                                                    :TOC_2_gh:noexport:
+- [[#spring-bean][Spring Bean]]
+  - [[#生命周期][生命周期]]
+  - [[#相关问题][相关问题]]
+  - [[#注意事项][注意事项]]
+- [[#spring-aop][Spring AOP]]
+  - [[#注意事项-1][注意事项]]
+
+* Spring Bean
+** 生命周期
+   单独从 Bean 本身来看的话，它的生命周期包括，其中，初始化方法和销毁方法可以通过注解配置：
+   1) 创建 Bean 实例
+   2) 调用 Bean 的初始化方法
+   3) 调用 Bean 的销毁方法
+
+   参考：
+   + [[https://www.cnblogs.com/zrtqsk/p/3735273.html][Spring Bean的生命周期（非常详细） - Chandler Qian - 博客园]]
+
+** 相关问题
+*** 怎样在 XML 配置文件中指定 Qualifier
+    在 XML 中指定 Bean 的 Qualifier 是很简单的：
+    #+BEGIN_SRC xml
+      <bean class="xxx">
+        <qualifier value = "xxx" />
+      </bean>
+    #+END_SRC
+
+*** 怎样在获取 Bean 的时候指定 Qualifier
+    可以使用 ~BeanFactoryAnnotationUtils~ 完成这一操作：
+    #+BEGIN_SRC java
+      BeanFactoryAnnotationUtils.qualifiedBeanOfType(ctx.getBeanFactory(), Service.class, "Wanted")
+    #+END_SRC
+
+** 注意事项
+   + 通过 @Condition 创建 Bean 时，如果创建失败就无法获取实例了（单例作用域是这样的）
+   + 没有使用 AOP 的 Bean 获取是返回的就是它的实例，而使用了 AOP 的 Bean 返回的就是它的动态代理
+   + 当自动装配和 JavaConfig 同时存在时，会优先使用自动装配
+   + 配置的处理顺序：AutoWired、JavaConfig、XMLConfig，其中，如果自动装配已创建 Bean，那么 JavaConfig 中的便无效
+   + XML 中的配置是必然会执行的，那怕是单例作用域
+   + 原型作用域会在需要 bean 的时候创建，单例会在启动时创建
+   + 自动装配、JavaConfig 和 XML 配置都可以使用大多数装配技术，如 @Condition
+
+* Spring AOP 
+** 注意事项
+   + 环绕 Advice 的返回值需要和被环绕的方法相同，传递给 Advice 的参数名称和 args 定义的相同
