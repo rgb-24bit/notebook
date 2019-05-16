@@ -161,3 +161,6 @@
 * 文件签名列表
   + [[https://en.wikipedia.org/wiki/List_of_file_signatures][List of file signatures]]
 
+* 信息传播
+  + [[https://www.meltingasphalt.com/interactive/going-critical/][Going Critical — Melting Asphalt]]
+

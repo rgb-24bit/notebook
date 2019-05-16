@@ -1,0 +1,14 @@
+#+TITLE:      Spring 资源收集
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#官方文档][官方文档]]
+
+* 官方文档
+  Spring 官方文档还是有点分散的，有些需要借助搜索引擎才找的出来：
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html][Web on Servlet Stack]] - MVC、REST、WebSocket 的简单教程
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html][Core Technologies]] - Spring 核心技术的官方教程
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html][Testing]] - Spring Test 的官方教程
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html][Data Access]] - Spring Data 的官方教程
+  + [[https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/index.html][Spring Boot Reference Documentation]] - Spring Boot 的官方参考文档
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/index.html][Spring Framework Documentation]] - Spring Framework 的官方参考文档
+

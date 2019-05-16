@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#spring-大家族都有些什么东西][Spring 大家族都有些什么东西]]
+- [[#spring-的项目结构是怎样的][Spring 的项目结构是怎样的]]
 
 * Spring 大家族都有些什么东西
   Spring 核心容器、Spring 上下文、Spring AOP、Spring DAO、Spring ORM、Spring Web、Spring MVC……
@@ -9,4 +10,22 @@
   #+HTML: <img src="https://segmentfault.com/img/bVVxKs?w=555&h=288">
 
   参考：[[https://segmentfault.com/a/1190000011334873#articleHeader0][Spring 体系常用项目一览]]
+
+* Spring 的项目结构是怎样的
+  这是一个没有标准答案的问题，但还是有一些有用的经验可以学习：
+  #+BEGIN_EXAMPLE
+    + -- app
+    + -- model
+    + -- mapper
+    + -- controller
+    + -- service
+         + -- base
+         + -- impl
+         + -- support
+    + -- exception
+    + -- listener
+    + -- repository
+         + -- base
+    + -- utils
+  #+END_EXAMPLE
 

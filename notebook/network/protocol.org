@@ -65,3 +65,8 @@
   + application/pdf - PDF文档
   + multipart/form-data - 同上，但主要用于表单提交时伴随文件上传的场合
 
+  #+BEGIN_QUOTE
+  浏览器通常使用 MIME 类型来确定如何处理 URL，因此 Web 服务器在响应头中添加正确的 MIME 类型非常重要。
+  如果配置不正确，浏览器可能会曲解文件内容，网站将无法正常工作，并且下载的文件也会被错误处理。
+  #+END_QUOTE
+

@@ -108,7 +108,9 @@
     + [Servlet](notebook/java/javaee/servlet.org)
   + **spring**
     + [Spring 问题集](notebook/java/spring/question.org)
+    + [Spring 资源收集](notebook/java/spring/resources.org)
     + [Spring Core](notebook/java/spring/spring-core.org)
+    + [Spring MVC](notebook/java/spring/spring-mvc.org)
   + **tools**
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
@@ -155,6 +157,7 @@
   + [结构化编程](notebook/misc/se.org)
   + [思维火花](notebook/misc/spark.org)
   + [Unicode](notebook/misc/unicode.org)
+  + [单元测试](notebook/misc/unit-test.org)
 ## network
   + [计算机网络 - 五层模型](notebook/network/five-layer-model.org)
   + [计算机网络 - 协议](notebook/network/protocol.org)

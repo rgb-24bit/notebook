@@ -9,10 +9,12 @@
   - [[#session--cookie][Session & Cookie]]
   - [[#属性][属性]]
   - [[#监听者][监听者]]
+  - [[#defaultsevelet][DefaultSevelet]]
   - [[#注意事项][注意事项]]
 - [[#servlet-容器][Servlet 容器]]
-- [[#filter][Filter]]
-- [[#defaultsevelet][DefaultSevelet]]
+- [[#servlet-30][Servlet 3.0]]
+- [[#相关问题][相关问题]]
+  - [[#过滤器的调用顺序是怎样的][过滤器的调用顺序是怎样的]]
 - [[#相关资料][相关资料]]
 
 * Servlet
@@ -152,6 +154,35 @@
       + Session 和 Session 属性事件
    4) 似乎只有 Session 存在 BindingListener，允许监听属性被绑定/解绑到 Session，这个接口由属性本身实现，不需要进行注册
 
+** DefaultSevelet
+   DefaultSevelet 在 ~$CATALINA_HOME/conf/web.xml~ 中被全局声明，通常用于处理静态资源。
+
+   默认形式的声明：
+   #+BEGIN_SRC xml
+     <servlet>
+       <servlet-name>default</servlet-name>
+       <servlet-class>
+         org.apache.catalina.servlets.DefaultServlet
+       </servlet-class>
+       <init-param>
+         <param-name>debug</param-name>
+         <param-value>0</param-value>
+       </init-param>
+       <init-param>
+         <param-name>listings</param-name>
+         <param-value>false</param-value>
+       </init-param>
+       <load-on-startup>1</load-on-startup>
+     </servlet>
+
+     <servlet-mapping>
+       <servlet-name>default</servlet-name>
+       <url-pattern>/</url-pattern>
+     </servlet-mapping>
+   #+END_SRC
+
+   参考：[[http://wiki.jikexueyuan.com/project/tomcat/default-servlet.html][默认 Servlet - Tomcat 8 权威指南 - 极客学院Wiki]]
+
 ** 注意事项
    + 应该在获取响应对象的输出流之前调用 setContentType 方法
 
@@ -167,38 +198,26 @@
   6) 容器将处理好的结果返回给服务器
   7) 服务器将请求转发给客服端
 
-* Filter
-  + 过滤器的调用顺序就是他在 DD 中的声明顺序
-  + 过滤器中分派或不继续传递 - 就分派到目标 Servlet 或无响应
+* Servlet 3.0
+  Servlet 3.0 添加了不少的新特性，主要包括：
+  1) 通过注解的方式配置 Servlet 的路由
+  2) 动态进行 Servlet 的配置
+  3) 异步处理支持
+  4) MultipartConfig
 
-* DefaultSevelet
-  DefaultSevelet 在 ~$CATALINA_HOME/conf/web.xml~ 中被全局声明，通常用于处理静态资源。
+  详情可参考：
+  + [[https://www.ibm.com/developerworks/cn/java/j-lo-servlet30/index.html][Servlet 3.0 新特性详解]]
+  + [[http://www.oracle.com/technetwork/cn/community/4-servlet-3-324302-zhs.pdf][JavaEE 6 Servlet 3.0 中的新特性 - Oracle]]
 
-  默认形式的声明：
-  #+BEGIN_SRC xml
-    <servlet>
-      <servlet-name>default</servlet-name>
-      <servlet-class>
-        org.apache.catalina.servlets.DefaultServlet
-      </servlet-class>
-      <init-param>
-        <param-name>debug</param-name>
-        <param-value>0</param-value>
-      </init-param>
-      <init-param>
-        <param-name>listings</param-name>
-        <param-value>false</param-value>
-      </init-param>
-      <load-on-startup>1</load-on-startup>
-    </servlet>
+  和异步处理相关的一些文章：
+  + [[https://www.infoq.cn/article/2013/11/use-asynchronous-servlet-improve][使用异步 Servlet 改进应用性能]]
+  + [[https://www.cnblogs.com/davenkin/p/async-servlet.html][Servlet 3.0/3.1 中的异步处理 - 无知者云 - 博客园]]
+  + [[https://segmentfault.com/a/1190000012318350][Servlet 3.0 异步处理详解 - 颇忒脱 - SegmentFault 思否]]
 
-    <servlet-mapping>
-      <servlet-name>default</servlet-name>
-      <url-pattern>/</url-pattern>
-    </servlet-mapping>
-  #+END_SRC
-
-  参考：[[http://wiki.jikexueyuan.com/project/tomcat/default-servlet.html][默认 Servlet - Tomcat 8 权威指南 - 极客学院Wiki]]
+* 相关问题
+** 过滤器的调用顺序是怎样的
+   过滤器的调用顺序就是它在 DD 中的声明顺序，如果在过滤器中请求分派或停止传递请求，
+   那么请求就不会到达原本的目标。
 
 * 相关资料
   + 部署描述文件的官方文档：[[https://docs.oracle.com/cd/E17904_01/web.1111/e13712/web_xml.htm#WBAPP503][A web.xml Deployment Descriptor Elements]]
