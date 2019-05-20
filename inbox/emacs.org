@@ -4,7 +4,7 @@
   + SEXP
     + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html][Sexp Diary Entries - GNU Emacs Manual]]
     + [[https://emacs.stackexchange.com/questions/31683/schedule-org-task-for-last-day-of-every-month/31708][org mode - Schedule org task for last day of every month? - Emacs Stack Exchange]]
-
+      
 * Solarized
   + [[https://github.com/sellout/emacs-color-theme-solarized/blob/master/solarized-definitions.el][emacs-color-theme-solarized/solarized-definitions.el at master · sellout/emacs-color-theme-solarized]]
   + [[https://github.com/bbatsov/solarized-emacs][bbatsov/solarized-emacs: The Solarized colour theme, ported to Emacs.]]
@@ -20,10 +20,18 @@
   + [[https://github.com/targzeta/linum-highlight-current-line-number/blob/master/linum-highlight-current-line-number.el][linum-highlight-current-line-number/linum-highlight-current-line-number.el at master · targzeta/linum-highlight-current-line-number]]
   + [[https://github.com/bbatsov/solarized-emacs/blob/master/solarized.el#L1392][solarized-emacs/solarized.el at master · bbatsov/solarized-emacs]]
 
-
 * scimax
   + [[https://github.com/jkitchin/ox-ipynb/issues/13][Error on basic file · Issue #13 · jkitchin/ox-ipynb]]
 
 * 卡死
   + [[http://m.newsmth.net/article/Emacs/96532][写给所有emacs经常卡住的人]]
+
+* 禁用 minor-mode
+  + [[https://stackoverflow.com/questions/29169210/how-to-disable-global-minor-mode-in-a-specified-major-mode][emacs - How to disable global minor mode in a specified major mode - Stack Overflow]]
+
+* Theme
+  + [[https://github.com/purcell/color-theme-sanityinc-solarized/commit/d4cfd08e54b34b2e3e2d34747b82c3490744e16b][Change interface colour selection to more closely match tomorrow themes · purcell/color-theme-sanityinc-solarized@d4cfd08]]
+  + [[https://emacs.stackexchange.com/questions/38888/howto-include-a-local-theme-in-spacemacs][Howto include a local theme in spacemacs - Emacs Stack Exchange]]
+  + [[https://emacs.stackexchange.com/questions/28835/setting-up-a-theme-using-use-package][Setting up a theme using use-package - Emacs Stack Exchange]]
+
 

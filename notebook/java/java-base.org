@@ -1,0 +1,459 @@
+#+TITLE:      Java 基础
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#基本数据类型][基本数据类型]]
+- [[#类型转换][类型转换]]
+- [[#数组][数组]]
+  - [[#数组的类型][数组的类型]]
+  - [[#数组的克隆][数组的克隆]]
+- [[#面向对象][面向对象]]
+  - [[#继承][继承]]
+  - [[#抽象][抽象]]
+  - [[#封装][封装]]
+  - [[#多态][多态]]
+- [[#static--final][static & final]]
+- [[#对象][对象]]
+- [[#枚举][枚举]]
+- [[#异常][异常]]
+- [[#作用域][作用域]]
+- [[#tips][Tips]]
+
+* 基本数据类型
+  Primitive Type 的取值范围：
+  |---------+-----------------+--------------------------|
+  | 类型    |            位数 | 值域                     |
+  |---------+-----------------+--------------------------|
+  | boolean | Java 虚拟机决定 | true or false            |
+  | char    |              16 | 0 ~ 65535                |
+  | byte    |               8 | -128 ~ 127               |
+  | short   |              16 | -32768 ~ 32767           |
+  | int     |              32 | -2147483648 ~ 2147483647 |
+  | long    |              64 | -很大 ~ +很大            |
+  | float   |              32 | 范围规模可变             |
+  | double  |              64 | 范围规模可变             |
+  |---------+-----------------+--------------------------|
+
+  Java 中布尔类型支持部位运算符操作：
+  #+BEGIN_SRC java
+    System.out.println(true | false);
+    System.out.println(true & false);
+    System.out.println(true ^ false);
+  #+END_SRC
+
+* 类型转换
+  由与所有的非 ~Object~ 对象都继承了 ~Object~, 因此这些对象在 *堆* 上的实例上， 内部也包括了一个 ~Object~ 实例。
+
+  即：后代的实例内部包含父类的实例。
+
+  因此父类类型的引用相当于只能操作子类实例内部的父类实例。
+
+  通过强制类型转换可以将父类引用转换为子类引用，转换前应该使用关键字 ~instanceof~ 来判断该对象是否是对应类型的实例。
+
+  #+BEGIN_SRC java
+    if (obj instanceof Dog) {
+      Dog d = (Dog)obj;
+    }
+  #+END_SRC
+
+  如果类型转换失败会抛出 ~ClassCastException~ 异常。
+
+  *向上向下转型：*
+  #+BEGIN_SRC java
+    // 向上转型
+    SuperClass ref = new SubClass();
+
+    // 向下转型
+    SubClass ref = (SubClass) SuperClassRef;
+  #+END_SRC
+
+  注意：null isinstanceof xxx 会返回 false
+
+* 数组
+  数组的声明和初始化方式都存在多种：
+  #+BEGIN_SRC java
+    // 声明数组
+    dataType[] arrayRefVar;   // 首选的方法
+
+    dataType arrayRefVar[];  // 效果相同，但不是首选方法
+
+    // 创建数组
+    dataType[] arrayRefVar = new dataType[arraySize];
+
+    dataType[] arrayRefVar = {value0, value1, ..., valuek};  // 只能在声明的同时使用
+
+    dataType[] arrayRefVar = new dataType[]{value0, value1, ..., valuek};
+  #+END_SRC
+
+  数组的 *成员* 包括：
+  1. ~public final length~
+  2. ~public T[] clone()~
+  3. ~Object method~
+
+  需要注意的是，Java 数组会保存存储的元素的类型信息，虽然父类型的数组引用可以引用子类型的数组的实例，
+  而且往该引用中存入父类型实例的操作可以通过编译器的检查，但是会在运行期间抛出异常。
+
+  也就是说，下面的写法会出错：
+  #+BEGIN_SRC java
+    Child[] arr = new Child[10];
+    Parent[] parr = arr;
+    parr[0] = new Parent();
+  #+END_SRC
+
+** 数组的类型
+   #+BEGIN_QUOTE
+   Primitive arrays are instance of Object and self type. e.g. int[] is type of Object and int[]. Both comparison returns true.
+
+   Object arrays are types of Object, Object array, classtype array, parent class type array.
+   e.g. Integer[] is type of Object, Object[], Integer[] and Number[] (Integer extends Number).
+   #+END_QUOTE
+
+   + [[https://howtodoinjava.com/oops/java-instanceof/][Java instanceof - Java type comparison operator - HowToDoInJava]]
+
+   特别的， int[][] 是 Object[] 的实例。
+
+   这也就是为什么 ~asList~ 不要使用 ~int[]~ 参数的原因。
+
+** 数组的克隆
+   数组对象的 ~clone()~ 方法会返回一个新的数组对象，这个数组对象包含和原数组中相同的元素。
+
+   对于 Primitive 数据类型的数组来说，由于数组元素是值，因此，克隆出来的数组和原数组互不干扰。
+
+   对于其他类型的数组，克隆出来的数组和原数组中的对象是一样的，修改一个就会影响另一个。
+
+   #+BEGIN_SRC java
+     int[] a = {1, 2, 3};
+     int[] b = a.clone();
+
+     System.out.println(a == b ? "Same Instance":"Different Instance");
+     //Outputs different instance
+
+     System.out.println(myDogs[0] == myDogsClone[0] ? "Same":"Different");
+     System.out.println(myDogs[1] == myDogsClone[1] ? "Same":"Different");
+     System.out.println(myDogs[2] == myDogsClone[2] ? "Same":"Different");
+     System.out.println(myDogs[3] == myDogsClone[3] ? "Same":"Different");
+     //Outputs Same (4 Times)
+   #+END_SRC
+
+* 面向对象
+** 继承
+   Java 中 Object 类是所有类的基类，没有继承其他类的类会隐式继承这个类，可以被实例化。
+
+   Object 类的一些方法：
+   |------------------+----------------------------------------|
+   | 方法             | 作用                                   |
+   |------------------+----------------------------------------|
+   | ~equals(Object o)~ | 判断两个对象的值是否相等               |
+   | ~getClass()~       | 获取对象的类型                         |
+   | ~hashCode()~       | 列出对象的哈希代码， 这是对象的唯一 id |
+   | ~toString()~       | 列出类的名字和一个我们不关心的数字     |
+   | ~finalize()~       | 析构函数                               |
+   | ~getClass()~       | 获取类                                 |
+   |------------------+----------------------------------------|
+
+   子类覆盖父类方法时需要注意：
+   1. 方法在覆盖时的可见性不能低于父类
+   2. 子类方法抛出的异常不能比父类的更通用，如果父类方法没有抛出异常那么子类的也不能抛出
+
+** 抽象
+   使用抽象类和抽象方法时需要注意：
+   1. 抽象类与抽象方法使用关键字 abstract 修饰
+   2. 抽象类不能被实例化
+   3. 抽象方法在具体类中必须被实现，但可以在抽象类中传递
+   4. 抽象方法只能在抽象类中定义
+   5. 抽象方法没有方法体
+
+   使用接口时需要注意：
+   1. 接口不能被实例化， 但是可以被实现
+   2. 接口没有构造方法
+   3. 接口中所有的方法默认(必须)为 ~public abstract~
+
+** 封装
+   私有字段可以在内部直接访问，不管是不是当前实例：
+   #+BEGIN_SRC java
+     public class TestP {
+       private int val = 10;
+
+       public static void main(String[] args) {
+         TestP t = new TestP();
+         t.val = 100;
+         System.out.println(t.val);
+       }
+     }
+   #+END_SRC
+
+   私有类只是针对内部类而言的，外部类没有这种说法。
+
+** 多态
+   方法的重载有时会和多态搞混，但是需要明白的是，方法的重载和多态并没有关系：
+   + 重载是指两个方法名称相同但方法签名不同
+   + 多态是可以利用父类型的引用引用子类型的实例
+
+   对于重载来说：
+   + 方法签名由参数类型与顺序决定
+   + 不能只修改返回值类型
+   + 可以更改存取权限
+
+   对于多态来说：
+   + 编译器根据 *引用类型* 来判断有哪些 ~method~ 可以调用，而不是 ~Object~ 确实的类型
+
+* static & final
+  静态变量的初始化是指类被加载时完成的，会在任何类的对象创建之前完成初始化。也会在任何类的静态方法执行之前完成初始化。
+
+  如果没有为静态变量赋初值， 那么静态变量会被设定为对应类型的默认值。
+
+  使用 ~static final~ 修饰的变量作为常量，常量的初始化只能声明时或静态初始化块中，但是不能同时在声明与静态初始化程序中赋值。
+
+  如果常量没有初始化，那么就会出错。
+
+  单独使用 ~final~ 修饰的变量是常量，不能被改动。可以在声明或构造函数中初始化。不能同时进行。
+
+  类的 private 方法会隐式地被指定为 final 方法。
+
+* 对象
+  对象的构造函数是不会被继承的，定义自己的构造函数时尽可能的编写一个没有参数的构造函数。
+
+  抽象类也是由构造函数的，绘制创建具体类实例的时候执行。
+
+  构造函数是先执行父类的，然后执行自身的。
+
+  在构造函数中使用 ~super()~ 调用父类构造函数（唯一方法）。如果没有手动调用 ~super()~, 编译器会默认进行调用（包括每一个构造函数）。
+
+  默认调用的是父类的无参构造函数。super() 的调用必须是在构造函数的 *第一个语句*.
+
+  如果不能向父类的带参构造函数传参， 那么就不能继承没有无参构造函数的类。
+
+  使用 ~this()~ 来从某个构造函数调用同一个类的另外一个构造函数。
+
+  ~this()~ 只能用在 *构造函数*, 且必须是 *第一个语句*.
+
+  ~super()~ 和 ~this()~ 不能兼得。
+
+  + 栈与堆中保存的对象
+    + 栈空间中保存： 方法调用与局部变量
+    + 堆空间中保存： 对象与实例变量
+    + 实例变量是被声明在类而不是方法里面的变量
+    + 实例变量可以在声明时赋初值， 否则会被设置为默认值（局部变量没有默认值）
+    + 实例变量的默认值为： 0/0.0/false/null
+
+* 枚举
+  枚举类型的声明可以在 *类外部* 或 *类内部*, 但是不能再 *方法内部*.
+
+  枚举类型的简单声明和使用：
+  #+BEGIN_SRC java
+    public enum Members {JOB, ALICE, PHIL}
+
+    Members member = Members.ALICE;  // default is null
+  #+END_SRC
+
+  枚举类型自动继承 ~java.lang.Enum~, 即： 所有枚举类型都是 ~Enum~ 的子类。
+
+  不同枚举变量之间的比较可以用 ~==~ 或 ~equals~, 但 ~==~ 是一个更好的方式。
+
+  枚举类型中定义的的每个值都是该枚举类型的 *实例*, 可以为这些实例定义属性和方法。
+
+  #+BEGIN_SRC java
+    public enum Names {
+      JERRY("lead guitar") {
+        public String sings() {
+          return "JERRY";
+        }
+      },
+
+      BOBBY("bass");
+
+      private String instrument;
+
+      Names(String instrument) {
+        this.instrument = instrument;
+      }
+
+      public String getInstrument() {
+        return this.instrument;
+      }
+
+      public String sings() {
+        return "Default";
+      }
+    }
+  #+END_SRC
+
+  ~BOBBY("bass")~ 调用构造函数 ~Names~.
+
+  如下代码定义之自己的 ~sings~ 方法。
+  #+BEGIN_SRC java
+    JERRY("lead guitar") {
+      public String sings() {
+        return "JERRY";
+      }
+    }
+  #+END_SRC
+
+  #+BEGIN_SRC java
+    for (Names name : Names.value()) {  // Enum.value()
+      System.out.println(name.sing());
+    }
+  #+END_SRC
+
+* 异常
+  异常分为：检查型异常和非检查型（运行时）异常。
+
+  其中，如果抛出的异常类型为 *检查型异常*, 那么就必需在方法声明时通过 ~throws~ 声明可能抛出的异常，
+  同时在调用该方法时，使用 ~try/catch~ 或 ~ducking~ 处理异常。
+
+  如果抛出的异常类型为 *非检查型异常*, 那么可以不声明或包含在 ~try/catch~ 代码块中。当然，做了也没影响。
+
+  其中， 非检查型异常是 ~RuntimeException~ 类型或其子类类型的异常， 而检查型异常是除了 ~RuntimeException~ 以外的所有异常。
+
+  其中， ~RuntimeException~ 也是 ~Exception~ 的子类， 不过比较特殊。
+
+  使用 ~finally~ 代码块来存放无论如何都要执行的部分。 既是在 ~try/catch~ 代码块中存在 ~return~ 语句， ~finally~ 代码块也依然会执行！
+  流程会跳到 ~finally~ 然后在回到 ~return~ 语句。finally 子句的返回值也会覆盖原本的返回值。
+
+  通过如下方式声明多个异常：
+  #+BEGIN_SRC java
+    public int function() throws IOException, InterruptedException {
+      // ...
+    }
+  #+END_SRC
+
+  通过多个 ~catch~ 块捕获多个异常， 也可以通过多个异常的父类同时捕获多个异常（声明异常也一样， 通过异常父类同时声明多个异常）
+
+  异常也是对象， 因此也支持多态， 所以应该：
+  + 以异常的父型来声明会抛出的远程
+  + 以所抛出的异常父型来捕获异常
+  + 可以用 ~Exception~ 捕获所有异常， 但不代表应该这么做
+  + 为每个需要单独处理的异常编写不同的 catch 块
+  + 有多个 catch 块时， 要从小排到大（子类到父类）， 否则会无法通过编译
+
+  如果不想处理异常， 那么只需要在方法声明时 *再次 throws* 可能的异常即可：
+  #+BEGIN_SRC java
+    public int functionA() throws Exception {
+      // ...
+    }
+
+    public int functionB() throws Exception {  // 再次 throws
+      functionA();
+    }
+  #+END_SRC
+
+  如果连 ~main~ 函数也 duck 调异常， 那么当遇到异常时， Java 虚拟机会当场去世。
+
+  因此， 对于 *检查型异常*, 有两种处理方式：
+  1. 使用 ~try/catch~ 处理异常
+  2. 使用 ~duck~ 逃避异常
+
+  异常处理规则：
+  1. catch 与 finally 不能没有 try
+  2. try 与 catch 之间不能有程序
+  3. try 一定要有 catch 或 finally
+  4. 只带有 finally 的 try 必须声明异常 - duck
+
+  异常的使用规则：
+  + 早抛出晚捕获
+
+  Throwable 是所有异常的父类，它拥有的构造函数和方法：
+  #+BEGIN_SRC java
+    Throwable()
+    Throwable(String message);
+    String getMessage();
+  #+END_SRC
+
+  创建自己的异常可以通过如下方式实现：
+  #+BEGIN_SRC java
+    public class MyException extends Exception {
+      public MyException() {}
+      public MyException(String message) {
+        super(message);
+      }
+    }
+  #+END_SRC
+
+  捕获多个异常是异常变量隐含为 final 变量：
+  #+BEGIN_SRC java
+    catch (E1 | E2 e)
+  #+END_SRC
+
+  可以在创建异常时指定导致该异常的原因，形成异常链：
+  #+BEGIN_SRC java
+    catch (Exception e) {
+      throws new Exception(e);
+    }
+  #+END_SRC
+
+  可以通过如下方式解耦 finally 和 catch：
+  #+BEGIN_SRC java
+    try {
+      try {} finally {}
+    } catch (Throwable e) {
+      e.printStackTrace();
+    }
+  #+END_SRC
+
+  从 JDK 7 开始支持，实现 ~AutoCloseable~ 和 ~CloseAble~ 接口的对象都可以使用带资源的 try 语句。
+
+  其中 ~io.CloseAble~ 是 ~lang.AutoCloseable~ 的子接口。
+
+  + 通过 Thread.dumpStack 获取堆栈情况
+  + 通过 java -verbose 观察类的加载过程
+  + 通过 -Xlint 选项对常见问题进行检查
+
+* 作用域
+  块作用域是由大括号确定的作用域：
+  #+BEGIN_SRC java
+    public class Test {
+      public static void main(String[] args) {
+        {
+          int num = 10;  // ok
+        }
+
+        int num = 10;    // ok
+
+        {
+          int num = 10;  // error
+        }
+      }
+    }
+  #+END_SRC
+
+* Tips
+  + Java 没有无符号数
+  + 定义 ~float~ 的数值需要加 ~f~ 后缀， 如： ~float f = 32.45f~, 否则小数会默认当做 ~double~ 处理
+  + 隐式类型转换只允许在不会有数据丢失的情况下进行， 即: ~int~ 不能和 ~float~ 直接转换。
+    也不能使用类似 ~byte x = 128~ 的语句。
+  + 除基本数据类型之外的类型的变量都是对一个对象的 *引用*, *对象* 实例保存在可回收垃圾的堆上
+  + 所有引用变量的大小都一样，不一样的是内存中的实例大小
+  + 数组也是对象，数组名是引用类型变量
+  + String 不是 Java 关键字
+  + 没有初始化的数值类型（包括 char） 默认为 0, 布尔类型默认为 false, 引用默认为 null.
+  + 局部变量没有默认值， 使用前必须初始化
+  + 根据 Java 语言规范，main 方法必须声明为 public
+  + 字符 $ 在 Java 中虽然合法，但是只用在 Java 编译器工具生成的名字中
+  + const 是 Java 保留的关键字，但目前并没有使用，因此必须使用 final 关键字定义常量
+  + Java 不使用逗号运算符
+  + 格式化字符串时，s 转换符对于实现了 Formattable 接口的对象会调用 formatTo 方法，否则调用 toString
+  + 命令行参数中，程序名并没有保存在 args 数组中
+  + 打印二维数组 Arrays.deepToString()
+  + 编译器在编译源文件是不检查目录结构，但是不合适的目录结构会导致找不到类
+  + 未指定访问修饰符的域可以被包内所有成员访问
+  + 覆盖方法时，子类方法不能低于超类方法的可见性
+  + 将超类转换为子类之前应该用 instanceof 进行检查
+  + null instanceof type 返回 false
+  + 抽象类可以包含具体数据和具体方法
+  + 默认访问级别对子类不可见
+  + 比较枚举值使用 == 就可以了
+  + 接口中的所有方法自动为 public
+  + 接口中的域自动设为 public static final
+  + 伴随类 - Path/Paths，伴随类包含静态方法
+  + 默认方法冲突 - 超类优先，接口冲突就必须手动覆盖
+  + 所有数组类型都有一个 public 的 clone 方法，可以建立一个新数组，包含源数组所有元素的副本
+  + 函数式接口注释 - FunctionalInterface
+  + 非静态内部类不能有 static 方法
+  + 内部类的所有静态域都必须是 final
+  + 局部类不能用访问修饰符修饰
+  + 内部类访问的局部变量必须为事实上的 final
+  + 静态内部类可以有静态域和静态方法
+  + 声明在接口中的内部类自动成为 static 和 public 类
+  + user.dir 是 java 运行环境的启动路径
+  + 默认类路径包含当前目录，设置后就不一定了
+  + 在使用和 Java 相关的工具的时候，常常会要求设置一些环境变量，虽然有时不设置也可以用，但是还是设置了比较好
+

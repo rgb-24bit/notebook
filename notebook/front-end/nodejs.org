@@ -1,0 +1,15 @@
+#+TITLE:      Node.js
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关问题][相关问题]]
+  - [[#怎样执行本地包中的命令][怎样执行本地包中的命令]]
+
+* 相关问题
+** 怎样执行本地包中的命令
+   通过下面这种方式执行就可以了：
+   #+BEGIN_EXAMPLE
+     $ ./node_modules/.bin command
+   #+END_EXAMPLE
+   
+   参考：[[https://stackoverflow.com/questions/9679932/how-to-use-package-installed-locally-in-node-modules][node.js - How to use package installed locally in node_modules? - Stack Overflow]]
+

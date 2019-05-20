@@ -29,6 +29,7 @@
   + 优化导入内容：Ctrl+Alt+O
   + 创建测试：Ctrl+Shift+T
   + 运行当前：Ctrl+Shift+F10
+  + 代码折叠：Ctrl-+/-
   + [[https://www.jetbrains.com/help/idea/discover-intellij-idea.html][Discover IntelliJ IDEA - Help | IntelliJ IDEA]]
 
 * 使用技巧

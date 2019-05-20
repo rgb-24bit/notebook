@@ -35,3 +35,38 @@
   + realm [[https://stackoverflow.com/questions/12701085/what-is-the-realm-in-basic-authentication][http - What is the "realm" in basic authentication - Stack Overflow]]
   + 401 响应头中好像没有标准字段给出获取 Token 的位置与方法，好像需要自己设计
 
+* logger
+  + [[https://www.baeldung.com/spring-boot-logging][Logging in Spring Boot | Baeldung]]
+
+* find class
+  + [[https://www.jetbrains.com/help/idea/searching-everywhere.html][Search for a target by name - Help | IntelliJ IDEA]]
+
+* 自动配置原理
+  + [[http://tengj.top/2017/03/09/springboot3/#%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2SpringApplication%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B][Spring Boot干货系列：（三）启动原理解析 | 嘟嘟独立博客]]
+  + [[https://github.com/spring-projects/spring-framework/blob/master/spring-core/src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java][spring-framework/SpringFactoriesLoader.java at master · spring-projects/spring-framework]]
+  + [[https://www.baeldung.com/spring-boot-custom-auto-configuration][A Custom Auto-Configuration with Spring Boot | Baeldung]]
+  + [[https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories][spring-boot/spring.factories at master · spring-projects/spring-boot]]
+  + [[https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-using-springbootapplication-annotation.html][18. Using the @SpringBootApplication Annotation]]
+  + [[https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-configuration-classes.html][15. Configuration Classes]]
+
+  #+BEGIN_SRC java
+    import java.net.URL;
+    import java.util.Enumeration;
+
+    public class Test {
+      public static void main(String[] args) throws Exception {
+        Enumeration<URL> urls = Test.class.getClassLoader().getResources("META-INF/spring.factories");
+        while (urls.hasMoreElements()) {
+          System.out.println(urls.nextElement());
+        }
+      }
+    }
+  #+END_SRC
+  
+  无参的 ComponentScan 会自动扫描所有子包，似乎会自动加载 Configuration……
+
+  测试：
+  + 移动 SpringApplication 类的位置
+  + 修改 ComponentScan 的参数
+
+

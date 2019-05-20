@@ -39,6 +39,10 @@
   + 高斯衰减
   + 交叉验证
   + 数据集范围的缩小
+  + [[https://www.jianshu.com/p/48d391dab189][KNN算法实现及其交叉验证 - 简书]]
+  + [[https://www.cnblogs.com/bigmonkey/p/7387943.html][k最邻近算法——加权kNN - 我是8位的 - 博客园]]
+  + [[https://www.jianshu.com/p/0feba11bcf82][十折交叉验证 - 简书]]
+  + [[https://www.cnblogs.com/itdyb/p/5735911.html][Python合并两个numpy矩阵 - 波比12 - 博客园]]
 
 * com
   + 标称型数据
@@ -55,7 +59,3 @@
   + 集成学习，通过多个算法分类，按结果中多的算数
   + log 的使用，避免溢出，还可以将乘法变为加法 log(AB) = log(A) + log(B)
 
-* 距离公式
-  高斯距离：\sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2 + \dots + (x_n - y_n)^2}
-  曼哈顿距离：|x_1 - y_1| + |x_2 - y_2| + \dots + |x_n - y_n|
-  闵： \Bigg(\sum\limits_{i=1}^n|x_i - y_i|^p \Bigg)^\frac{1}{p}

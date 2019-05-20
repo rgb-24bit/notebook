@@ -24,6 +24,8 @@
 - [[#integerclass-和-intclass][Integer.class 和 int.class]]
 - [[#interface-是类吗][Interface 是类吗]]
 - [[#子类和父类存在同名的字段][子类和父类存在同名的字段]]
+- [[#java-中常用的内置异常有哪些][Java 中常用的内置异常有哪些]]
+- [[#javax-开头的包是怎么一回事][javax 开头的包是怎么一回事]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -286,4 +288,18 @@
   通过子类引用访问字段时会获取子类的字段，通过父类引用访问字段时会获取父类的字段。
 
   参考：[[https://stackoverflow.com/questions/3501060/can-parent-and-child-class-in-java-have-same-instance-variable][Can parent and child class in Java have same instance variable? - Stack Overflow]]
+
+* Java 中常用的内置异常有哪些
+  |-------------------------------+---------------------------------------|
+  | 异常                          | 使用场合                              |
+  |-------------------------------+---------------------------------------|
+  | IllegalArgumentException      | 参数值不正确                          |
+  | IllegalStateException         | 对于方法调用而言，对象的状态不合适    |
+  | NullPointerException          | 在禁止使用 null 的情况下参数值为 null |
+  | IndexOutOfBoundsException     | 下标参数值越界                        |
+  | UnsupportedOperationException | 对象不支持用户请求的方法              |
+  |-------------------------------+---------------------------------------|
+
+* javax 开头的包是怎么一回事
+  javax 开头的函数库曾经是扩展，后来虽然并入标准库，但是为了兼容程序没有修改名称。
 

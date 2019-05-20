@@ -1,10 +1,9 @@
-* KNN
-  + [[https://zhuanlan.zhihu.com/p/23191325][机器学习实战 之 kNN 分类 - 知乎]]
-  + [[https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html][sklearn.neighbors.KNeighborsClassifier — scikit-learn 0.21.0 documentation]]
-
 * 协同过滤
   + [[http://www.woshipm.com/pd/934582.html][三分钟了解协同过滤算法 | 人人都是产品经理]]
 
 * BitMap
   + [[http://www.javasoso.com/articles/2019/03/11/1552290434026.html][最简单理解位图BitMap和布隆过滤器BloomFilter - 不过如此]]
+
+* 排序
+  + [[https://www.cnblogs.com/onepixel/p/7674659.html][十大经典排序算法（动图演示） - 一像素 - 博客园]]
 

@@ -83,11 +83,11 @@
   + [CSS 问题集](notebook/front-end/css-question.org)
   + [CSS 使用技巧](notebook/front-end/css-trick.org)
   + [CSS](notebook/front-end/css.org)
-  + [HTML 使用技巧](notebook/front-end/html-trick.org)
   + [HTML](notebook/front-end/html.org)
   + [JavaScript 问题集](notebook/front-end/js-question.org)
   + [JavaScript 使用技巧](notebook/front-end/js-trick.org)
   + [JavaScript](notebook/front-end/js.org)
+  + [Node.js](notebook/front-end/nodejs.org)
   + [前端相关技术了解](notebook/front-end/technology.org)
 ## git
   + [Git 笔记](notebook/git/git.org)
@@ -120,7 +120,9 @@
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
   + [深入 Java](notebook/java/depth.org)
   + [Java - I/O 操作](notebook/java/io.org)
-  + [Java 基础知识](notebook/java/java.org)
+  + [Java 基础](notebook/java/java-base.org)
+  + [Java 函数式编程](notebook/java/java-fp.org)
+  + [Java 泛型](notebook/java/java-generic.org)
   + [JavaDoc](notebook/java/javadoc.org)
   + [Java Misc](notebook/java/misc.org)
   + [Java 问题集](notebook/java/question.org)
@@ -160,6 +162,7 @@
   + [单元测试](notebook/misc/unit-test.org)
 ## network
   + [计算机网络 - 五层模型](notebook/network/five-layer-model.org)
+  + [HTTP 协议](notebook/network/http.org)
   + [计算机网络 - 协议](notebook/network/protocol.org)
 ## os
   + [操作系统 - 基础内容](notebook/os/base.org)

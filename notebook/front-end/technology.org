@@ -5,6 +5,7 @@
 - [[#web-components][Web Components]]
 - [[#websocket][WebSocket]]
 - [[#短网址][短网址]]
+- [[#amp][AMP]]
 
 * WebAssembly
   WebAssembly 提供了一条途径， 以使得以各种语言编写的代码都可以以接近原生的速度在
@@ -13,12 +14,12 @@
   + [[https://developer.mozilla.org/zh-CN/docs/WebAssembly][MDN - WebAssembly]]
   + [[http://www.ruanyifeng.com/blog/2017/09/asmjs_emscripten.html][阮一峰 - asm.js 和 Emscripten 入门教程]]
   + [[https://www.ibm.com/developerworks/cn/web/wa-lo-webassembly-status-and-reality/index.html][WebAssembly 现状与实战]]
-
+    
 * Web Components
   Web Components 允许创建可重用的定制元素。
 
   + [[https://developer.mozilla.org/zh-CN/docs/Web/Web_Components][MDN - Web Components]]
-
+    
 * WebSocket
   ~WebSocket~ 和 ~Socket~, 它是一个完整的应用层 *协议*, 包含一套标准的 API.
 
@@ -32,4 +33,8 @@
 
   短址的长度一般设为 6 位，而每一位是由 [a - z, A - Z, 0 - 9] 总共 62 个字母组成的，所以 6 位的话，
   总共会有 62^6 ~= 568 亿种组合，基本上够用了。
+
+* AMP
+  Accelerated Mobile Pages 是 Google 带领开发的开源项目，目的是为提升移动设备对网站的访问速度：
+  + [[https://zh.wikipedia.org/wiki/Accelerated_Mobile_Pages][Accelerated Mobile Pages - 维基百科，自由的百科全书]]
 

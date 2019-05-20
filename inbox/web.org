@@ -1,8 +1,3 @@
-* 本地化
-  + [[https://www.w3schools.com/jsref/obj_navigator.asp][Navigator Object]]
-  + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
-  + [[https://stackoverflow.com/questions/673905/best-way-to-determine-users-locale-within-browser][javascript - Best way to determine user's locale within browser - Stack Overflow]]
-
 * jsonp
   + [[https://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html][【原创】说说JSON和JSONP，也许你会豁然开朗，含jQuery用例 - 随它去吧 - 博客园]]
   + [[https://www.jb51.net/article/17992.htm][JS 动态加载脚本的4种方法_javascript技巧_脚本之家]]
@@ -137,11 +132,6 @@
 * script
   + [[https://stackoverflow.com/questions/4396849/does-the-script-tag-position-in-html-affects-performance-of-the-webpage][javascript - Does the <script> tag position in HTML affects performance of the webpage? - Stack Overflow]]
 
-* base tag
-  + [[https://www.w3schools.com/tags/tag_base.asp][HTML base tag]]
+* HTTP 认证
+  + [[https://coolshell.cn/articles/19395.html][HTTP API 认证授权术 | | 酷 壳 - CoolShell]]
 
-* amp
-  + [[https://zh.wikipedia.org/wiki/Accelerated_Mobile_Pages][Accelerated Mobile Pages - 维基百科，自由的百科全书]]
-
-* header
-  + [[https://itbilu.com/other/relate/EJ3fKUwUx.html][HTTP消息头（HTTP headers）－常用的HTTP请求头与响应头 - IT笔录]]
