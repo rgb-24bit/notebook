@@ -1,0 +1,101 @@
+#+TITLE:      Spring Boot
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#自动配置原理][自动配置原理]]
+- [[#springbootapplication][@SpringBootApplication]]
+- [[#spring-boot-starter][spring-boot-starter]]
+- [[#webapplicationtype][WebApplicationType]]
+- [[#相关问题][相关问题]]
+  - [[#在配置文件中使用环境变量][在配置文件中使用环境变量]]
+
+* 自动配置原理
+  通过 ~SpringApplication~ 的 ~run~ 方法开始运行程序时，会创建 ~SpringApplication~ 的实例时调用 ~SpringFactoriesLoader~ 加载工厂：
+  + [[https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java#L434][spring-boot/SpringApplication.java at master · spring-projects/spring-boot]]
+
+  ~SpringFactoriesLoader~ 加载工厂是会寻找类路径下的 ~META-INF/spring.factories~ 文件：
+  + [[https://github.com/spring-projects/spring-framework/blob/master/spring-core/src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java][spring-framework/SpringFactoriesLoader.java at master · spring-projects/spring-framework]]
+
+  寻找 ~META-INF/spring.factories~ 文件是通过 Java 内置的接口完成的：
+  #+BEGIN_SRC java
+    import java.net.URL;
+    import java.util.Enumeration;
+
+    public class Test {
+      public static void main(String[] args) throws Exception {
+        Enumeration<URL> urls = Test.class.getClassLoader().getResources("META-INF/spring.factories");
+        while (urls.hasMoreElements()) {
+          System.out.println(urls.nextElement());
+        }
+      }
+    }
+  #+END_SRC  
+
+  而 ~spring-boot-autoconfigure~ 的 [[https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories][spring.factories]] 文件包含了相关的配置类，这些配置类帮助我们完成了配置。
+
+  这些配置类的配置广泛应用了的条件配置：
+  + [[https://www.baeldung.com/spring-boot-custom-auto-configuration][A Custom Auto-Configuration with Spring Boot | Baeldung]]
+
+  参考：[[http://tengj.top/2017/03/09/springboot3/#%E6%B7%B1%E5%85%A5%E6%8E%A2%E7%B4%A2SpringApplication%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B][Spring Boot干货系列：（三）启动原理解析 | 嘟嘟独立博客]]
+
+  也就是说，自动配置其实就是使用其他人预定义好的配置，这意味着自动配置就如同一个黑箱，其中的具体内容有什么我们并不清楚。因此，
+  使用自动配置时可以翻阅相关文档查阅具体的配置项。
+
+* @SpringBootApplication
+  通过注解 ~@SpringBootApplication~ 可以启用组件扫描，允许自动配置，允许注册额外的 Bean 和加载更多的配置。
+
+  它包含了 ~@ComponentScan~ 注解，无参的 ~@ComponentScan~ 注解会自动扫描所有子包中的 Bean，并自动加载遇到的 ~@Configuration~ 配置。
+
+  这也就是为什么一般将 ~SpringApplication.java~ 放在所有子包外面的原因，这样一来就可以很方便的扫描组件加载配置了。
+
+  参考：
+  + [[https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-using-springbootapplication-annotation.html][18. Using the @SpringBootApplication Annotation]]
+  + [[https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-configuration-classes.html][15. Configuration Classes]]
+
+* spring-boot-starter
+  |-------------------------------+-------------------------------------+------------------------------------------------------------------------|
+  | starter                       | 作用                                | 相关                                                                   |
+  |-------------------------------+-------------------------------------+------------------------------------------------------------------------|
+  | spring-boot-starter-thymeleaf | 使得 Spring-Boot 可以返回 HTML 视图 | 如果只有 Spring Web 的话，返回的视图名会直接当做 URL 路径              |
+  | spring-boot-starter-tomcat    | 使得 Spring-Boot 启动内嵌的 Tomcat  | Spring-Boot 会判断是否存在 ~javax.servlet.Servlet~ 来决定是否启动 Tomcat |
+  |-------------------------------+-------------------------------------+------------------------------------------------------------------------|
+
+  + [[https://www.baeldung.com/spring-boot-custom-starter][Creating a Custom Starter with Spring Boot | Baeldung]]
+
+* WebApplicationType
+  SpringApplication 启动时会根据 ~WebApplicationType.deduceFromClasspath~ 方法判断当前应用所处的应用环境：
+  + [[https://github.com/spring-projects/spring-boot/blob/1de6f6823850845f0fa6da0cf44c14d1aca31ea2/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/WebApplicationType.java#L63][spring-boot/WebApplicationType.java at 1de6f6823850845f0fa6da0cf44c14d1aca31ea2 · spring-projects/spring-boot]]
+
+  我们可以将主类写成如下模式：
+  #+BEGIN_SRC java
+    @SpringBootApplication
+    public class Application extends SpringBootServletInitializer {
+      public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+      }
+
+      @Override
+      protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+      }
+    }
+  #+END_SRC
+
+  添加 ~spring-boot-starter-tomcat~ 会引入 ~Tomcat~ 依赖，使得类路径下存在 ~javax.servlet.Servlet~, 判断当前环境为 Servlet 环境。
+
+  参考：
+  + [[https://stackoverflow.com/questions/32758996/intellij-process-finished-with-exit-code-0-when-spring-boot-run][java - IntelliJ Process finished with exit code 0 when spring-boot run - Stack Overflow]]
+  + [[https://www.baeldung.com/spring-boot-configure-tomcat][How to Configure Spring Boot Tomcat | Baeldung]]
+
+* 相关问题
+** 在配置文件中使用环境变量
+   SpringBoot 的配置文件中可以直接使用系统环境变量：
+   #+BEGIN_SRC conf
+     spring.datasource.url = ${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/"nameofDB"
+     spring.datasource.username = ${OPENSHIFT_MYSQL_DB_USERNAME}
+     spring.datasource.password = ${OPENSHIFT_MYSQL_DB_PASSWORD}
+   #+END_SRC
+
+   参考：
+   + [[https://stackoverflow.com/questions/35531661/using-env-variable-in-spring-boots-application-properties][java - Using env variable in Spring Boot's application.properties - Stack Overflow]]
+   + [[https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html][24. Externalized Configuration]]
+

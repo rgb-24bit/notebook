@@ -33,3 +33,11 @@
   + 四要素：认证、授权、机密性和数据完整性
 
 
+* 问题
+  + [[https://stackoverflow.com/questions/21083170/how-to-configure-port-for-a-spring-boot-application][java - How to configure port for a Spring Boot application - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/5871053/difference-between-jar-and-war-in-java][Difference between jar and war in Java - Stack Overflow]]
+  + [[https://mdbootstrap.com/docs/jquery/forms/validation/][Bootstrap form validation - examples & tutorial. Basic & advanced usage - Material Design for Bootstrap]]
+  + [[https://getbootstrap.com/docs/4.0/components/forms/?][Forms · Bootstrap]]
+  + [[https://www.cnblogs.com/zengguowang/p/8261695.html][nginx:负载均衡的session共享 - ^小七 - 博客园]]
+
+

@@ -55,7 +55,14 @@
 
   协程。
 
+  + [[https://www.cnblogs.com/pinard/p/6053344.html][决策树算法原理(下) - 刘建平Pinard - 博客园]]
+  + [[https://blog.csdn.net/zjsghww/article/details/51638126][C4.5算法详解（非常仔细） - 张张的专栏 - CSDN博客]]
+  + [[https://www.cnblogs.com/pinard/p/6053344.html][决策树算法原理(下) - 刘建平Pinard - 博客园]]
+
 * 技巧
   + 集成学习，通过多个算法分类，按结果中多的算数
   + log 的使用，避免溢出，还可以将乘法变为加法 log(AB) = log(A) + log(B)
+
+* 贝叶斯
+  + [[https://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html][算法杂货铺——分类算法之朴素贝叶斯分类(Naive Bayesian classification) - T2噬菌体 - 博客园]]
 

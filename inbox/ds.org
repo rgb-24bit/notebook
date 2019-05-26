@@ -4,5 +4,10 @@
   3. 多用组合，少用继承
   4. 为交换对象之间的松耦合设计而努力
   5. 类应该对扩展开发，对修改关闭
-  6. 
+  6. 要依赖抽象，不要依赖具体类
+
+* Spring
+  + [[https://www.quora.com/What-are-the-design-patterns-for-the-spring-framework][What are the design patterns for the spring framework? - Quora]]
+  + [[https://stackoverflow.com/questions/755563/what-design-patterns-are-used-in-spring-framework][What design patterns are used in Spring framework? - Stack Overflow]]
+  + [[https://blog.eduonix.com/java-programming-2/learn-design-patterns-used-spring-framework/][Learn about Design Patterns used in Spring Framework]]
 
