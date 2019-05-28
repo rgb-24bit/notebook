@@ -41,12 +41,3 @@
 * mybatis
   + [[https://segmentfault.com/a/1190000017211657][基于 SpringBoot2.0+优雅整合 SpringBoot+Mybatis - JavaGuide - SegmentFault 思否]]
 
-* qa
-  + [[http://www.alloyteam.com/2014/12/editor-config/][【译】EditorConfig介绍 | AlloyTeam]]
-  + image hash
-
-* filter
-  + [[https://stackoverflow.com/questions/35856454/difference-between-interceptor-and-filter-in-spring-mvc][java - Difference between Interceptor and Filter in Spring MVC - Stack Overflow]]
-  + [[http://einverne.github.io/post/2017/08/spring-interceptor-vs-filter.html][Spring Interceptor vs Filter 拦截器和过滤器区别 | Verne in GitHub]]
-  + [[https://stackoverflow.com/questions/45837529/what-is-difference-between-spring-interceptor-and-aop][What is difference between Spring interceptor and AOP? - Stack Overflow]]
-

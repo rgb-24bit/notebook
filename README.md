@@ -150,6 +150,7 @@
     + [线性代数 - 矩阵和方程组](notebook/math/linear/matrix.org)
 ## misc
   + [概念了解](notebook/misc/concept.org)
+  + [EditorConfig](notebook/misc/editorconfig.org)
   + [开源协议](notebook/misc/liscense.org)
   + [日本麻将](notebook/misc/mahjong.org)
   + [技术了解](notebook/misc/noun.org)

@@ -6,6 +6,7 @@
   - [[#插件][插件]]
     - [[#插件的概念][插件的概念]]
     - [[#插件的添加][插件的添加]]
+- [[#注意事项][注意事项]]
 - [[#问题集][问题集]]
   - [[#怎样通过-maven-创建运行-webapp][怎样通过 Maven 创建运行 WebApp]]
   - [[#maven-的版本号命名规则是怎样的][Maven 的版本号命名规则是怎样的]]
@@ -67,6 +68,9 @@
 
     参考文章：
     + [[https://maven.apache.org/guides/mini/guide-configuring-plugins.html][Maven – Guide to Configuring Plug-ins]]
+
+* 注意事项
+  + Maven 总是会用最近的依赖，也就是说，你在项目的构建说明文件里增加的这个依赖，会覆盖传递依赖引入的另一个依赖。
 
 * 问题集
 ** 怎样通过 Maven 创建运行 WebApp

@@ -1,0 +1,47 @@
+#+TITLE:      EditorConfig
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#属性][属性]]
+- [[#模板][模板]]
+
+* 属性
+  |--------------------------+------------------------------------------+------------------------|
+  | 配置属性                 | 值域                                     | 含义                   |
+  |--------------------------+------------------------------------------+------------------------|
+  | indent_style             | tab/space                                |                        |
+  | indent_size              | -                                        |                        |
+  | tab_width                | -                                        |                        |
+  | end_of_line              | lf/crlf/cr                               | 行结束符类型           |
+  | charset                  | latin1/utf-8/utf-16be/utf-16le/utf-8-bom |                        |
+  | trim_trailing_whitespace | true/false                               | 行尾是否允许空格       |
+  | insert_final_newline     | true/false                               | 文件是否应以换行符结尾 |
+  |--------------------------+------------------------------------------+------------------------|
+  
+  更多属性可参考：
+  + [[https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties][EditorConfig Properties · editorconfig/editorconfig Wiki]]
+
+* 模板
+  #+BEGIN_SRC conf
+    # EditorConfig is awesome: http://editorconfig.org
+
+    root = true
+
+    [*]
+
+    charset = utf-8
+    end_of_line = lf
+    indent_size = 2
+    indent_style = space
+    insert_final_newline = true
+    trim_trailing_whitespace = true
+
+    [*.py]
+
+    indent_size = 4
+    insert_final_newline = false
+
+    [Makefile]
+
+    indent_style = tab
+  #+END_SRC
+

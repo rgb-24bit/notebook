@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#spring-大家族都有些什么东西][Spring 大家族都有些什么东西]]
 - [[#spring-的项目结构是怎样的][Spring 的项目结构是怎样的]]
+- [[#spring-中-interceptorfilter-和-aop-的区别][Spring 中 Interceptor、Filter 和 AOP 的区别]]
 
 * Spring 大家族都有些什么东西
   Spring 核心容器、Spring 上下文、Spring AOP、Spring DAO、Spring ORM、Spring Web、Spring MVC……
@@ -28,4 +29,14 @@
          + -- base
     + -- utils
   #+END_EXAMPLE
+
+* Spring 中 Interceptor、Filter 和 AOP 的区别
+  Interceptor 链会在处理匹配的每个请求时执行，是由 Spring 提供的功能。而 Filter 同样会在处理匹配的每个请求时执行，
+  是由容器提供的功能。
+
+  AOP 是 Spring 提供的在不修改目标代码的情况下为目标增加功能的功能。
+
+  参考：
+  + [[https://stackoverflow.com/questions/35856454/difference-between-interceptor-and-filter-in-spring-mvc][java - Difference between Interceptor and Filter in Spring MVC - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/45837529/what-is-difference-between-spring-interceptor-and-aop][What is difference between Spring interceptor and AOP? - Stack Overflow]]
 
