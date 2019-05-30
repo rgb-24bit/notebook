@@ -15,17 +15,6 @@
 
   考虑自己进行配置维护 @_@
   
-* 当前行高亮
-  + [[https://oracleyue.github.io/2018/05/31/upgrade-to-Emacs26/][关于Emacs更新到26之后的配置更新汇总 | Icarus's wings]]
-  + [[https://github.com/targzeta/linum-highlight-current-line-number/blob/master/linum-highlight-current-line-number.el][linum-highlight-current-line-number/linum-highlight-current-line-number.el at master · targzeta/linum-highlight-current-line-number]]
-  + [[https://github.com/bbatsov/solarized-emacs/blob/master/solarized.el#L1392][solarized-emacs/solarized.el at master · bbatsov/solarized-emacs]]
-
-* scimax
-  + [[https://github.com/jkitchin/ox-ipynb/issues/13][Error on basic file · Issue #13 · jkitchin/ox-ipynb]]
-
-* 卡死
-  + [[http://m.newsmth.net/article/Emacs/96532][写给所有emacs经常卡住的人]]
-
 * 禁用 minor-mode
   + [[https://stackoverflow.com/questions/29169210/how-to-disable-global-minor-mode-in-a-specified-major-mode][emacs - How to disable global minor mode in a specified major mode - Stack Overflow]]
 

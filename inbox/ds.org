@@ -11,3 +11,6 @@
   + [[https://stackoverflow.com/questions/755563/what-design-patterns-are-used-in-spring-framework][What design patterns are used in Spring framework? - Stack Overflow]]
   + [[https://blog.eduonix.com/java-programming-2/learn-design-patterns-used-spring-framework/][Learn about Design Patterns used in Spring Framework]]
 
+* 适配器模式
+  接口 -> 提供默认实现的抽象类 -> 具体类
+

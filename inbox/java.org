@@ -38,32 +38,6 @@
 * mock
   + [[https://waylau.com/mockito-quick-start/][Mockito 简明教程 | waylau.com]]
     
-* 博客
-  + 图形处理
-  + URLConnection
-
-* IO
-  ByteArrayStream
-
-  #+BEGIN_SRC java
-    public static byte[] StringToByteArray(string hex) {
-      return Enumerable.Range(0, hex.Length)
-          .Where(x => x % 2 == 0)
-          .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-          .ToArray();
-    }
-  #+END_SRC
-
 * 问题
   + 二维数组和 Comparator.comparing
-
-* 接口设计
-  接口 -> 提供默认实现的抽象类 -> 具体类
-
-
-* maven
-  依赖树：
-  #+BEGIN_EXAMPLE
-    mvn dependency:tree -DoutputFile=filename
-  #+END_EXAMPLE
 

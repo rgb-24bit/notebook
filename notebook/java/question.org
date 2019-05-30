@@ -26,6 +26,7 @@
 - [[#子类和父类存在同名的字段][子类和父类存在同名的字段]]
 - [[#java-中常用的内置异常有哪些][Java 中常用的内置异常有哪些]]
 - [[#javax-开头的包是怎么一回事][javax 开头的包是怎么一回事]]
+- [[#java-中为什么不存在-hashable-接口][Java 中为什么不存在 Hashable 接口]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -302,4 +303,9 @@
 
 * javax 开头的包是怎么一回事
   javax 开头的函数库曾经是扩展，后来虽然并入标准库，但是为了兼容程序没有修改名称。
+
+* Java 中为什么不存在 Hashable 接口
+  可能的原因在于 Java 存在很好的默认的 hashcode 方法来计算任何对象的 hashcode，参考：
+  + [[https://stackoverflow.com/questions/12132880/why-there-is-no-hashable-interface-in-java][Why there is no Hashable interface in Java - Stack Overflow]]
+
 

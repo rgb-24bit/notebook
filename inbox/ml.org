@@ -55,9 +55,9 @@
 
   协程。
 
+  + [[https://www.cnblogs.com/pinard/p/6050306.html][决策树算法原理(上) - 刘建平Pinard - 博客园]]
   + [[https://www.cnblogs.com/pinard/p/6053344.html][决策树算法原理(下) - 刘建平Pinard - 博客园]]
   + [[https://blog.csdn.net/zjsghww/article/details/51638126][C4.5算法详解（非常仔细） - 张张的专栏 - CSDN博客]]
-  + [[https://www.cnblogs.com/pinard/p/6053344.html][决策树算法原理(下) - 刘建平Pinard - 博客园]]
 
 * 技巧
   + 集成学习，通过多个算法分类，按结果中多的算数
