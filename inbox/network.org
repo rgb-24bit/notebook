@@ -20,4 +20,9 @@
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Session][典型的 HTTP 会话 - HTTP | MDN]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x][HTTP/1.x 的连接管理 - HTTP | MDN]]
   + [[https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/][How Browsers Work: Behind the scenes of modern web browsers - HTML5 Rocks]]
+  + 缓存控制 - Cache-Control
+
+
+* TCP/IP
+  + [[https://github.com/Snailclimb/JavaGuide/blob/master/docs/network/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md][JavaGuide/计算机网络.md at master · Snailclimb/JavaGuide]]
 

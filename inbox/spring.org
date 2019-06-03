@@ -41,3 +41,16 @@
 * mybatis
   + [[https://segmentfault.com/a/1190000017211657][基于 SpringBoot2.0+优雅整合 SpringBoot+Mybatis - JavaGuide - SegmentFault 思否]]
 
+* question
+  + [[https://www.cnblogs.com/think-in-java/p/5474740.html][Spring注解@Resource和@Autowired区别对比 - 陈其苗 - 博客园]]
+  + [[https://github.com/spring-projects/spring-framework/blob/master/spring-webmvc/src/main/java/org/springframework/web/servlet/DispatcherServlet.java][spring-framework/DispatcherServlet.java at master · spring-projects/spring-framework]]
+
+* Bean
+  + AbstractBeanFactory
+  + AbstractAutowireCapableBeanFactory
+  + P75
+* 代理
+  + [[http://www.importnew.com/27772.html][Java Proxy 和 CGLIB 动态代理原理 - ImportNew]]
+  + JDK原生动态代理是Java原生支持的，不需要任何外部依赖，但是它只能基于接口进行代理
+  + CGLIB通过继承的方式进行代理，无论目标对象有没有实现接口都可以代理，但是无法处理final的情况
+

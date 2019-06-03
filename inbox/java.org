@@ -40,4 +40,18 @@
     
 * 问题
   + 二维数组和 Comparator.comparing
+  + StringBuilder 的实现 - [[https://github.com/exsourcode/jdk8u-jdk/blob/master/src/share/classes/java/lang/AbstractStringBuilder.java#L427][jdk8u-jdk/AbstractStringBuilder.java at master · exsourcode/jdk8u-jdk]]
+    1. 将要添加的对象转换为字符串
+    2. 检查容量确保足够
+    3. 将目标字符串复制到字符数组
+    4. [[https://www.runoob.com/java/java-string-getchars.html][Java getChars() 方法 | 菜鸟教程]]
+  + System.arraycopy 和 Arrays.copyof 的区别 - [[https://www.programcreek.com/2015/03/system-arraycopy-vs-arrays-copyof-in-java/][System.arraycopy() vs. Arrays.copyOf() in Java]]
+    + 主要在于一个创建新的数组，一个不会
+
+* 同步
+  + 静态方法 - 类对象
+  + 实例方法 - 对象本身
+
+* 注解
+  如果要通过反射使用注解，那么应该将其配置为 RUNTIME
 
