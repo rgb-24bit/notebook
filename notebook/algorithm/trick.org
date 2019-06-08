@@ -1,17 +1,17 @@
 #+TITLE:      算法技巧
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#快速求取两个整数的最大公约数][快速求取两个整数的最大公约数]]
 - [[#求解动态规划问题][求解动态规划问题]]
-
-* 快速求取两个整数的最大公约数
-  #+BEGIN_SRC python
-    def gcd(x, y):
-        while not y == 0:
-            x, y = y, x % y
-        return x
-  #+END_SRC
+- [[#循环数组索引][循环数组索引]]
 
 * 求解动态规划问题
   求解动态规划问题时，如果可以的话可以将状态转移方程写出来，有了状态转移方程，代码就好写多了。
 
+* 循环数组索引
+  借助循环数组索引可以避免边界值的判断问题：
+  #+BEGIN_SRC js
+    function get(arr, x, offset) {
+      return arr[(arr.length + x + offset) % arr.length];
+    }
+  #+END_SRC
+  

@@ -27,3 +27,6 @@
   + [[https://stackoverflow.com/questions/4021162/users-table-one-table-or-two?rq=1][mysql - Users table - one table or two? - Stack Overflow]]
   + [[https://softwareengineering.stackexchange.com/questions/241089/keep-user-and-user-profile-in-different-tables][database - Keep user and user profile in different tables? - Software Engineering Stack Exchange]]
 
+* 事务隔离
+  + [[https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB(%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3).md][JavaGuide/事务隔离级别(图文详解).md at master · Snailclimb/JavaGuide]]
+

@@ -4,6 +4,7 @@
 * 安全
   + [[http://sec.sangfor.com.cn/attacks/3.html][XSS 注入攻击介绍]]
   + 端口扫描
+  + XSS 注入攻击比想象的更危险，特别是在 REST 架构中
 
 * 编码
   + [[https://dzone.com/articles/dont-waste-time-writing][Don't Waste Time Writing Perfect Code - DZone DevOps]]

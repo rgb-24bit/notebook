@@ -22,7 +22,30 @@
   + [[https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/][How Browsers Work: Behind the scenes of modern web browsers - HTML5 Rocks]]
   + 缓存控制 - Cache-Control
 
-
 * TCP/IP
   + [[https://github.com/Snailclimb/JavaGuide/blob/master/docs/network/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md][JavaGuide/计算机网络.md at master · Snailclimb/JavaGuide]]
+  + [[https://blog.51cto.com/11859650/1917938][TCP-------为什么会有TIME_WAIT状态 ?-11849650-51CTO博客]]
+  + [[https://hit-alibaba.github.io/interview/basic/network/TCP.html][TCP 协议 · 笔试面试知识整理]]
+
+  #+BEGIN_SRC plantuml
+    @startuml
+    participant 客户端
+    participant 服务器
+    @enduml
+  #+END_SRC
+
+  发起关闭的一份：停止数据发送。
+
+  三次握手：交换双方的初始序列号。
+
+  客户端发起连接请求，将初始序列号发送给服务器。
+
+  服务器受到客户端初始序列号，确认号置为初始序列号 + 1，并发送自身的初始序列号。
+
+  客户端受到服务器的初始序列号，发送确认号确认。
+
+  四次挥手：关闭各自的输出流。
+
+  + [[https://www.zhihu.com/question/24853633][TCP 为什么是三次握手，而不是两次或四次？ - 知乎]]
+  + [[https://blog.csdn.net/qzcsu/article/details/72861891][TCP的三次握手与四次挥手（详解+动图） - qzcsu的博客 - CSDN博客]]
 

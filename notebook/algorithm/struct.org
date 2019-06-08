@@ -1,4 +1,4 @@
-#+TITLE:      表、树、图
+#+TITLE:      数据结构
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#表][表]]
@@ -8,6 +8,7 @@
   - [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]
   - [[#获取二叉树的高度][获取二叉树的高度]]
   - [[#bk-tree][BK-Tree]]
+  - [[#b-树和-b-树][B 树和 B+ 树]]
 - [[#图][图]]
   - [[#迪杰斯特拉算法][迪杰斯特拉算法]]
   - [[#斐波那契堆][斐波那契堆]]
@@ -115,6 +116,20 @@
 ** BK-Tree
    BK 树通常用于拼写检查，是比 Tries 树更好的选择：
    + [[https://en.wikipedia.org/wiki/BK-tree][BK-tree - Wikipedia]]
+
+** B 树和 B+ 树
+   B 树和 B+ 树是十分经典的数据结构，两者都是平衡的书结构，B+ 树常用于数据库的索引建立。
+
+   B 树要求：
+   + 根节点要么是树叶，要么子节点的数量在 2 到 M 之间
+   + 除根以外，所有非树叶节点的子节点数在 M/2 和 M 之间
+   + 所有树叶都在相同的深度上
+
+   其中，M 指的是树的阶：所有节点的孩子节点的最大数量。
+   
+   可以参考的文章：
+   + [[https://www.cnblogs.com/wade-luffy/p/6292784.html][B+ 树介绍 - wade&luffy - 博客园]]
+   + [[https://www.cnblogs.com/nullzx/p/8729425.html][B 树和 B+ 树的插入、删除图文详解 - nullzx - 博客园]]
 
 * 图
 ** 迪杰斯特拉算法

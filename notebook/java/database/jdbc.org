@@ -4,6 +4,7 @@
 - [[#概要][概要]]
 - [[#关系数据库概述][关系数据库概述]]
 - [[#执行-sql-语句][执行 SQL 语句]]
+- [[#相关技巧][相关技巧]]
 
 * 概要
   + [[https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html][Lesson: JDBC Introduction]]
@@ -47,7 +48,7 @@
   #+BEGIN_SRC java
     DriverManager.getConnection(...)
   #+END_SRC
-
+  
   语句对象类型及创建它们的方法：
   |-------------------+-----------------------------+------------------------------------------|
   | 语句对象类型      | 创建方法                    | 描述                                     |
@@ -80,4 +81,7 @@
         if (stmt != null) { stmt.close(); }
       }
   #+END_SRC
+
+* 相关技巧
+  + PreparedStatement 会自动对语句中的危险字符进行转义
 

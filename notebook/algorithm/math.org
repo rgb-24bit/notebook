@@ -2,15 +2,34 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#三点共线问题][三点共线问题]]
+- [[#求取最大公约数][求取最大公约数]]
+- [[#整数分解][整数分解]]
 
 * 三点共线问题
   三点共线问题可以通过判断三个点围成的三角形的面积来判断，其中使用的三角形面积公式为：
   #+HTML: <img src="https://i.loli.net/2019/05/06/5ccfd667adb67.png">
 
-  C 语言代码：
+  C 语言实现代码：
   #+BEGIN_SRC C
     int func(int x1, int y1, int x2, int y2, int x3, int y3) {
       return (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) == 0;
     }
   #+END_SRC
-  
+
+* 求取最大公约数  
+  求取最大公约数可以通过 [[https://zh.wikipedia.org/wiki/%25E8%25BC%25BE%25E8%25BD%2589%25E7%259B%25B8%25E9%2599%25A4%25E6%25B3%2595][辗转相除法]] 实现，即：两数相除，取余数重复进行相除，直到余数为 0 时，前一个除数即为最大公约数：
+  #+BEGIN_SRC python
+    def gcd(x, y):
+        while not y == 0:
+            x, y = y, x % y
+        return x
+  #+END_SRC
+
+* 整数分解
+  *整数分解(integer factorization)* 将一个正整数写成几个约数的乘积，这样的分解结果应该是独一无二的。
+
+  给出两个大约数，很容易就能将它们两个相乘。但是，给出它们的乘积，找出它们的因子就显得不是那么容易了。
+  这就是许多现代密码系统的关键所在。
+
+  + [[https://zh.wikipedia.org/wiki/%E6%95%B4%E6%95%B0%E5%88%86%E8%A7%A3][整数分解 - 维基百科，自由的百科全书]]
+

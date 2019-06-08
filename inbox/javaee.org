@@ -40,4 +40,8 @@
   + [[https://getbootstrap.com/docs/4.0/components/forms/?][Forms · Bootstrap]]
   + [[https://www.cnblogs.com/zengguowang/p/8261695.html][nginx:负载均衡的session共享 - ^小七 - 博客园]]
 
+* Tomcat 最大连接数
+  + [[http://www.importnew.com/27309.html][详解 Tomcat 的连接数与线程池 - ImportNew]]
+  + [[https://www.cnblogs.com/doit8791/p/8831442.html][Tomcat的最大并发数 - 时间朋友 - 博客园]]
+  + [[https://tomcat.apache.org/tomcat-7.0-doc/config/http.html][Apache Tomcat 7 Configuration Reference (7.0.94) - The HTTP Connector]]
 
