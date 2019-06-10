@@ -1,0 +1,31 @@
+#+TITLE:      Stopic for database
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#版本控制][版本控制]]
+
+* 版本控制
+  对于在开发阶段，以及内部部署或部署到生产服务器时的数据库变更管理，有四种通用的管理方式：
+  1) 建立开发阶段生成的 SQL 变更脚本：管理数据库变更的最基本方式，就是将所有变更命令保存在一个或一系列脚本中，
+     并且在基于文件的版本控制系统中对它们进行管理
+
+  2) 建立一个变更日志的跟踪系统：使用 XML 文件作为一种抽象的语言，对变更进行描述并对执行过程进行追踪
+
+  3) 建立简单的比较与同步机制：通过将源环境与目标环境进行比较，由此自动生成数据库变更脚本
+
+  4) 建立一个数据库执行变更管理解决方案
+
+  详细的教程可以参考：
+  + [[https://www.infoq.cn/article/Database-Version-Control][数据库版本控制完全指南]]
+
+  对数据库进行版本控制的必要性可以参考：
+  + [[https://stackoverflow.com/questions/115369/do-you-use-source-control-for-your-database-items][Do you use source control for your database items? - Stack Overflow]]
+  + [[https://blog.codinghorror.com/get-your-database-under-version-control/][Get Your Database Under Version Control]]
+
+  可以使用的工具：
+  |---------------+----------------------------------------------|
+  | 名称          | 适用于                                       |
+  |---------------+----------------------------------------------|
+  | Flyway        | 针对 Java，可由 Gradle、Maven 等构建工具使用 |
+  | Flask-Migrate | 针对 Flask，胜在方便，可自动管理             |
+  |---------------+----------------------------------------------|
+

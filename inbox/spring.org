@@ -54,3 +54,11 @@
   + JDK原生动态代理是Java原生支持的，不需要任何外部依赖，但是它只能基于接口进行代理
   + CGLIB通过继承的方式进行代理，无论目标对象有没有实现接口都可以代理，但是无法处理final的情况
 
+* 事件机制
+  + [[http://www.importnew.com/26782.html][浅析 Spring 中的事件驱动机制 - ImportNew]]
+
+  这是不是意味着创建 Publisher 的时候会自动将响应的 Listener 传递进去。
+
+* scan
+  扫描机制的实现可以了解一下。
+

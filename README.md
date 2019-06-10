@@ -58,9 +58,9 @@
   + [MySQL](notebook/database/mysql.org)
   + [通用问题集](notebook/database/question.org)
   + [Redis](notebook/database/redis.org)
-  + [SQL](notebook/database/sql.org)
   + [SQLite3](notebook/database/sqlite3.org)
-  + [数据库版本控制](notebook/database/vc.org)
+  + [Standard SQL](notebook/database/standsql.org)
+  + [Stopic for database](notebook/database/stopic.org)
 ## dotnet
   + [.NET - C# 高级特性](notebook/dotnet/csharp-feature.org)
   + [.NET - C# 基础](notebook/dotnet/csharp-note.org)

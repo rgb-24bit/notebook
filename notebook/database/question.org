@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#为什么要使用自增的-id-主键][为什么要使用自增的 ID 主键]]
+- [[#用户表的设计问题][用户表的设计问题]]
 
 * 为什么要使用自增的 ID 主键
   1. 可以节省存储
@@ -13,4 +14,12 @@
   参考链接：
   + [[https://stackoverflow.com/questions/15777142/why-we-should-have-an-id-column-in-the-table-of-users][mysql - Why we should have an ID column in the table of users? - Stack Overflow]]
   + [[https://softwareengineering.stackexchange.com/questions/328458/is-it-good-practice-to-always-have-an-autoincrement-integer-primary-key][design - Is it good practice to always have an autoincrement integer primary key? - Software Engineering Stack Exchange]]
+
+* 用户表的设计问题
+  主要的问题便是是否需要将用户和用户的个人信息保存在不同的表中，查阅相关资料可以发现，这个问题没有固定的答案。
+
+  当用户表比较小的时候，可以考虑就用一张表保存所有信息反之，当表很大的时候可以考虑分割用户表。
+
+  参考链接：
+  + [[https://softwareengineering.stackexchange.com/questions/241089/keep-user-and-user-profile-in-different-tables][database - Keep user and user profile in different tables? - Software Engineering Stack Exchange]]
 

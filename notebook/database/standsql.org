@@ -1,4 +1,4 @@
-#+TITLE:      SQL
+#+TITLE:      Standard SQL
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#sql-注意事项][SQL 注意事项]]
