@@ -1,271 +1,18 @@
 #+TITLE:      JavaScript
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#语法和数据类型][语法和数据类型]]
-- [[#循环和迭代][循环和迭代]]
-- [[#函数][函数]]
-- [[#等值判断][等值判断]]
-- [[#使用对象][使用对象]]
-- [[#入口函数][入口函数]]
 - [[#定时器][定时器]]
 - [[#json][JSON]]
-- [[#相关链接][相关链接]]
-
-* 语法和数据类型
-  *JavaScript* 的标识符必须以字母、下划线（_）或者美元符号（$）开头， 其后的字符可以
-  为大部分 ISO 8859-1 或 Unicode 编码的字符。
-
-  代码示例：
-  #+BEGIN_SRC javascript
-    var Früh = "foobar";
-  #+END_SRC
-
-  *JavaScript* 有三种声明变量的方式：
-  + var :: 声明一个变量，可赋一个初始化值
-  + let :: 声明一个块作用域的局部变量，可赋一个初始化值
-  + const :: 声明一个块作用域的只读的命名常量
-
-  变量声明未赋值为 *undefined*, 变量声明可赋值 *null*, *null != undefined*.
-
-  *变量提升* 后的值为 *undefined*, *let* 变量不会提升， *函数提升* 只提升 *声明*, 但是可以直接用。
-
-  *JavaScript* 语言可以识别下面 7 种不同类型的值：
-  + 六种 *原型* 数据类型： *Boolean*, *null*, *undefined*, *Number*, *String*, *Symbol*
-  + *Object* 对象
-
-  *对象字面量形式*:
-  #+BEGIN_SRC javascript
-    var car = { manyCars: {a: "Saab", "b": "Jeep"}, 7: "Mazda" };
-
-    console.log(car.manyCars.b); // Jeep
-    console.log(car[7]); // Mazda
-  #+END_SRC
-
-  对象属性名如果不合法便可以用符号 *[]* 进行访问：
-  #+BEGIN_SRC javascript
-    var unusualPropertyNames = {
-        "": "An empty string",
-        "!": "Bang!"
-    }
-    console.log(unusualPropertyNames."");   // 语法错误: Unexpected string
-    console.log(unusualPropertyNames[""]);  // An empty string
-    console.log(unusualPropertyNames.!);    // 语法错误: Unexpected token !
-    console.log(unusualPropertyNames["!"]); // Bang!
-  #+END_SRC
-
-  *正则表达式字面量形式*:
-  #+BEGIN_SRC javascript
-    var re = /ab+c/;
-  #+END_SRC
-
-  *多行字符串*:
-  #+BEGIN_SRC javascript
-    // Basic literal string creation
-    `In JavaScript '\n' is a line-feed.`
-
-    // Multiline strings
-    `In JavaScript this is
-     not legal.`
-
-    // String interpolation
-    var name = "Bob", time = "today";
-    `Hello ${name}, how are you ${time}?`
-  #+END_SRC
-
-* 循环和迭代 
-  #+BEGIN_SRC javascript
-    // for 循环
-    for (var i = 0; i < 10; ++i) {
-        console.log(i);
-    }
-
-    // do...while 循环
-    do {
-        i += 1;
-        console.log(i);
-    } while(i < 5);
-
-    // while 循环
-    while (i < 5) {
-        console.log(i);
-        i++;
-    }
-
-    // for...in 循环(不适合迭代数组)
-    function dump_props(obj, obj_name) {
-        var result = "";
-        for (var i in obj) {
-            result += obj_name + "." + i + " = " + obj[i] + "<br>";
-        }
-        result += "<hr>";
-        return result;
-    }
-
-
-    // for...of 循环
-    let arr = [3, 5, 7];
-    arr.foo = "hello";
-
-    for (let i in arr) {
-        console.log(i); // logs "0", "1", "2", "foo"
-    }
-
-    for (let i of arr) {
-        console.log(i); // logs "3", "5", "7" // 注意这里没有 hello
-    }
-  #+END_SRC
-
-* 函数
-  *定义函数的两种方式*:
-  #+BEGIN_SRC javascript
-    // 函数声明
-    function square(number) {
-        return number * number;
-    }
-
-    // 函数表达式(匿名)
-    var square = function(number) {
-        return number * number;
-    };
-
-    // 函数表达式(具名)
-    var factorial = function fac(n) {
-        return n < 2 ? 1 : n * fac(n-1);
-    };
-  #+END_SRC
-
-  三种递归调用方式：
-  1. 函数名
-  2. arguments.callee
-  3. 作用域下的一个指向该函数的变量名
-
-  对于如下函数定义：
-  #+BEGIN_SRC javascript
-    var foo = function bar() {
-        // statements go here
-    };
-  #+END_SRC
-
-  在这个函数体内，以下的语句是等价的：
-  #+BEGIN_SRC javascript
-    bar()
-    arguments.callee()
-    foo()
-  #+END_SRC
-
-  函数参数 *arguments* 对象：
-  #+BEGIN_SRC javascript
-    function myConcat(separator) {
-        var result = ''; // 把值初始化成一个字符串，这样就可以用来保存字符串了！！
-        var i;
-        // iterate through arguments
-        for (i = 1; i < arguments.length; i++) {
-            result += arguments[i] + separator;
-        }
-        return result;
-    }
-
-    // returns "red, orange, blue, "
-    myConcat(", ", "red", "orange", "blue");
-  #+END_SRC
-
-* 等值判断
-  #+BEGIN_SRC javascript
-    // == 两边操作数相等时返回 true
-    3 == val
-
-    // != 两边操作数不相等时返回 true
-    val != 4
-
-    // === 两边操作数相等且类型相同时返回 true
-    3 === val
-
-    // !== 两边操作数不相等或类型不同时返回 true
-    val !== 3
-  #+END_SRC
-
-* 使用对象
-  *访问对象属性*:
-  #+BEGIN_SRC javascript
-    objectName.propertyName
-    objectName[propertyName]
-  #+END_SRC
-
-  对象中为赋值的属性的值为 *undefined*.
-
-  *枚举一个对象的所有属性*:
-  #+BEGIN_SRC javascript
-    var obj = {name: "job", age: 18};
-
-    for (attr in obj) {
-      console.log(attr);
-    }  // => job, 18
-
-    Object.keys(obj)  // => ["name", "age"]
-    Object.getOwnPropertyNames(obj)  // => ["name", "age"]
-  #+END_SRC
-
-  *创造新对象*:
-  #+BEGIN_SRC javascript
-    // 使用字面量
-    var obj = {name: "job", age: 18};
-
-    // 使用构造函数 & new
-    function Car(make, model, year) {
-        this.make = make;
-        this.model = model;
-        this.year = year;
-    }
-
-    var mycar = new Car("Eagle", "Talon TSi", 1993);
-
-    // 使用 Object.create 方法
-    // Animal properties and method encapsulation
-    var Animal = {
-        type: "Invertebrates", // Default value of properties
-        displayType : function() {  // Method which will display type of Animal
-            console.log(this.type);
-        }
-    }
-
-    // Create new animal type called animal1 
-    var animal1 = Object.create(Animal);
-    animal1.displayType(); // Output:Invertebrates
-
-    // Create new animal type called Fishes
-    var fish = Object.create(Animal);
-    fish.type = "Fishes";
-    fish.displayType(); // Output:Fishes
-  #+END_SRC
-
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Details_of_the_Object_Model][对象模型的细节]]
-
-  *继承*:
-  #+BEGIN_SRC javascript
-    function Employee () {
-        this.name = "";
-        this.dept = "general";
-    }
-
-    function Manager() {
-        Employee.call(this);
-        this.reports = [];
-    }
-    Manager.prototype = Object.create(Employee.prototype);
-  #+END_SRC
-
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain][继承与原型链]]
-
-  #+HTML: <img src="https://wx4.sinaimg.cn/large/7ed42f5cly1fqguw4y1zej20ge0e8wes.jpg">
-
-* 入口函数
-  #+BEGIN_SRC javascript
-    window.onload = function () {
-      // 执行代码
-    }
-  #+END_SRC
-
-  等到所有内容，包括外部图片之类的文件加载完后，才会执行。
+- [[#相关技巧][相关技巧]]
+  - [[#javascript-变量的命名][JavaScript 变量的命名]]
+  - [[#让返回值变成-undefined][让返回值变成 undefined]]
+  - [[#显示所有元素的-outline][显示所有元素的 outline]]
+  - [[#iife][IIFE]]
+- [[#相关问题][相关问题]]
+  - [[#通过-innerhtml-的方式为-table-添加行失败][通过 innerHTML 的方式为 table 添加行失败]]
+  - [[#浏览器中-es6-模块化的语法不能使用][浏览器中 ES6 模块化的语法不能使用]]
+  - [[#怎样获取用户使用的语言][怎样获取用户使用的语言]]
+  - [[#不使用-jquery-的入口函数][不使用 jQuery 的入口函数]]
 
 * 定时器  
   可以通过函数 ~setInterval()~ 执行需要循环定时执行的代码：
@@ -283,8 +30,84 @@
     "{"id":123456,"name":"rgb-24bit"}"
   #+END_SRC
 
-* 相关链接
-  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-create.html][AJAX - 创建 XMLHttpRequest 对象]]
-  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-send.html][AJAX - 向服务器发送请求请求]]
-  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-response.html][AJAX - 服务器 响应]]
-  + [[http://www.runoob.com/ajax/ajax-xmlhttprequest-onreadystatechange.html][AJAX - onreadystatechange 事件]]
+* 相关技巧
+** JavaScript 变量的命名
+   JavaScript 的标识符允许大多数的 Unicode 字符，因此，你甚至可以使用颜文字来编写程序。
+** 让返回值变成 undefined
+   在浏览器地址栏执行函数时这个技巧挺有用的，可以避免因为函数返回值进行跳转：
+   #+BEGIN_SRC js
+     javascript:void window.prompt("Copy to clipboard: Ctrl+C, Enter", `[[${window.location.href}][${document.title}]]`)
+   #+END_SRC  
+
+   直接通过关键字 void 将值覆盖。
+
+** 显示所有元素的 outline
+   控制台中 $$ 相当于 document.querySelectorAll
+   #+BEGIN_SRC js
+     $$("*").forEach(
+       e => e.style.outline = "1px solid #" + (~~(Math.random() * (1<<24))).toString(16)
+     )
+   #+END_SRC
+
+** IIFE
+   IIFE（立即调用函数表达式）是一个在定义时就会立即执行的 JavaScript 函数。
+
+   这是一个被称为自执行匿名函数的设计模式，主要包含两部分:
+   + 第一部分是包围在圆括号运算符 () 里的一个匿名函数，这个匿名函数拥有独立的词法作用域。
+     这不仅避免了外界访问此 IIFE 中的变量，而且又不会污染全局作用域。
+   + 第二部分再一次使用 () 创建了一个立即执行函数表达式，JavaScript 引擎到此将直接执行函数。
+
+   #+BEGIN_SRC javascript
+     (function () { 
+       var name = "Barry";
+     })();
+   #+END_SRC
+
+* 相关问题
+** 通过 innerHTML 的方式为 table 添加行失败
+   通过 innerHTML 属性设置 HTML 时，底层引擎会自动关闭未关闭的标签，并修复其他错误的 HTML。
+
+   而单独的 <tr> 标签将被视作为关闭的标签，因此，通过 innerHTML 的方式为 table 添加行会失败。
+
+   解决方案：
+   #+BEGIN_SRC js
+     let table = document.createElement('table');
+     for (let i = 0; i < 3; ++i) {
+       let row = table.insertRow(i);
+       let text = document.createTextNode(i.toString());
+       let cell = row.insertCell(0);
+       cell.appendChild(text);
+     }
+   #+END_SRC
+
+** 浏览器中 ES6 模块化的语法不能使用
+   需要使用如下形式的 script 标签：
+   #+BEGIN_SRC html
+     <script type="module" src="...">
+   #+END_SRC
+
+   参考：[[http://es6.ruanyifeng.com/#docs/module][Module 的语法 - ECMAScript 6入门]]
+
+** 怎样获取用户使用的语言
+   在 ~Firefox~ 和 ~Chrome~ 中可以使用如下方式获取：
+   #+BEGIN_SRC js
+     var language;
+     if (window.navigator.languages) {
+       language = window.navigator.languages[0];
+     } else {
+       language = window.navigator.userLanguage || window.navigator.language;
+     }
+   #+END_SRC
+
+   参考：
+   + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
+   + [[https://www.w3schools.com/jsref/obj_navigator.asp][Navigator Object]]
+
+** 不使用 jQuery 的入口函数
+   在所有内容，包括外部图片之类的文件加载完后，才会执行的函数：
+   #+BEGIN_SRC javascript
+     window.onload = function () {
+       // ...
+     }
+   #+END_SRC
+

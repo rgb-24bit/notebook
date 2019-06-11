@@ -7,15 +7,7 @@
   + [[https://tools.ietf.org/html/rfc3986][RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax]]
 
 * HTML & CSS
-  + 有几种默认的字体是所有浏览器都可用的，包括 Monospace、Serif 和 Sans-Serif。
-  + 表单输入元素的 required 属性：
-    #+BEGIN_SRC html
-      <input type="text" placeholder="example" required>
-    #+END_SRC
-  + 表单输入元素的 checked 属性：
-    #+BEGIN_SRC html
-      <input type="radio" name="test-name" checked>
-    #+END_SRC
+  + 
     
 * DOM
   #+BEGIN_SRC plantuml
@@ -129,9 +121,4 @@
 * OAuth
   + [[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html][理解 OAuth 2.0 - 阮一峰的网络日志]]
 
-* script
-  + [[https://stackoverflow.com/questions/4396849/does-the-script-tag-position-in-html-affects-performance-of-the-webpage][javascript - Does the <script> tag position in HTML affects performance of the webpage? - Stack Overflow]]
-
-* HTTP 认证
-  + [[https://coolshell.cn/articles/19395.html][HTTP API 认证授权术 | | 酷 壳 - CoolShell]]
 

@@ -77,14 +77,9 @@
   + [scimax](notebook/emacs/scimax.org)
   + [Emacs - 实用功能](notebook/emacs/utils.org)
 ## front-end
-  + **libraries**
-    + [jQuery 相关笔记](notebook/front-end/libraries/jquery.org)
-  + [CSS 问题集](notebook/front-end/css-question.org)
-  + [CSS 使用技巧](notebook/front-end/css-trick.org)
   + [CSS](notebook/front-end/css.org)
   + [HTML](notebook/front-end/html.org)
-  + [JavaScript 问题集](notebook/front-end/js-question.org)
-  + [JavaScript 使用技巧](notebook/front-end/js-trick.org)
+  + [jQuery 相关笔记](notebook/front-end/jquery.org)
   + [JavaScript](notebook/front-end/js.org)
   + [Node.js](notebook/front-end/nodejs.org)
   + [前端相关技术了解](notebook/front-end/technology.org)

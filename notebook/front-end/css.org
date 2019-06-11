@@ -1,142 +1,126 @@
 #+TITLE:     CSS
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#css-基础][CSS 基础]]
-  - [[#基本语法][基本语法]]
-  - [[#简单选择器][简单选择器]]
-  - [[#伪类和伪元素][伪类和伪元素]]
-  - [[#盒子模型][盒子模型]]
-  - [[#媒体类型][媒体类型]]
+- [[#相关技巧][相关技巧]]
+  - [[#通过-transform-实现网页翻转镜像][通过 transform 实现网页翻转镜像]]
+  - [[#子元素居中效果的实现][子元素居中效果的实现]]
+  - [[#通过-filter-实现网页雾化效果][通过 filter 实现网页雾化效果]]
+  - [[#所有浏览器通用的字体][所有浏览器通用的字体]]
+- [[#相关问题][相关问题]]
+  - [[#css-属性中类似--webkit-的前缀是怎么一回事][CSS 属性中类似 -webkit 的前缀是怎么一回事]]
+  - [[#怎样让-div-的高度为-100-的屏幕高度][怎样让 div 的高度为 100% 的屏幕高度]]
+  - [[#css-样式使用的优先级怎么判断][CSS 样式使用的优先级怎么判断]]
+  - [[#盒子模型的宽度和高度包含-padding-吗][盒子模型的宽度和高度包含 padding 吗]]
+  - [[#怎样让超出范围的文本显示为省略号][怎样让超出范围的文本显示为省略号]]
+  - [[#怎样让文本居中显示][怎样让文本居中显示]]
 
-* CSS 基础
-** 基本语法
-   *CSS* 规则主要由 *选择器* 和 *声明* 两个部分组成：
-
-   #+HTML: <img src="//www.runoob.com/wp-content/uploads/2013/07/632877C9-2462-41D6-BD0E-F7317E4C42AC.jpg">
-
-   注释形式如下：
-   #+BEGIN_SRC css
-     /* This is a comment */
+* 相关技巧
+** 通过 transform 实现网页翻转镜像
+   实现原理是通过 *transform* 属性翻转 *iframe* 元素：
+   #+BEGIN_SRC html
+     <html>
+       <head>
+         <title>...</title>
+         <style>
+           .mirror_ifrom {
+             -webkit-transform: scaleX(-1);
+             animation: mirror forwards 0s;
+             -moz-animation: mirror forwards 0s;
+             -webkit-animation: mirror forwards 0s;
+             -o-animation: mirror forwards 0s;
+           }
+         </style>
+       </head>
+       <body>
+         <iframe src="https://www.bilibili.com/" frameborder="0" width="100%" height="100%" class="mirror_ifrom"></iframe>
+       </body>
+     </html>
    #+END_SRC
+
+   更多有关于 *transform* 属性的内容：[[https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform][transform | MDN]]
+
+** 子元素居中效果的实现
+   子元素的类型可以分为行内元素和块级元素，其中，行内元素可以通过如下方式实现居中：
+   #+BEGIN_SRC css
+     text-align: center;
+   #+END_SRC
+
+   而块级元素需要区分定宽和不定宽两种情况，定宽块级元素可以通过如下方式实现居中：
+   #+BEGIN_SRC css
+     width: 500px;
+     margin-left: auto;
+     margin-right: auto;
+   #+END_SRC
+
+   对于不定宽块级元素来说，较为简单的方式是让其变为行内元素：
+   #+BEGIN_SRC css
+     display: inline;
+   #+END_SRC
+
+   其他方式可以参考：[[https://segmentfault.com/a/1190000003110179][CSS 实现元素水平居中 - 总总 - SegmentFault 思否]]
+
+** 通过 filter 实现网页雾化效果
+   可以通过如下的方式实现网页的雾化效果，值越大雾化越明显：
+   #+BEGIN_SRC css
+     filter: blur(5px);
+   #+END_SRC
+
+** 所有浏览器通用的字体
+   有几种默认的字体是所有浏览器都可用的，包括 Monospace、Serif 和 Sans-Serif。
    
-** 简单选择器
-   + *元素选择器* 通过 HTML 元素进行选择：
-     #+BEGIN_SRC css
-       html {color:black;}
-     #+END_SRC
+* 相关问题
+** CSS 属性中类似 -webkit 的前缀是怎么一回事
+   这些是相关渲染引擎提供的供应商前缀属性：
+   #+BEGIN_QUOTE
+   These are the vendor-prefixed properties offered by the relevant rendering engines (-webkit for Chrome, Safari; -moz for Firefox, -o for Opera, -ms for Internet Explorer). 
+   #+END_QUOTE
 
-   + 可以将任意多个 *选择器* 可以分组在一起， 每个选择器之间使用 *逗号* 分隔：
-     #+BEGIN_SRC css
-       body, h2, p, table, th, td, pre, strong, em {color:gray;}
-     #+END_SRC
-
-     可以使用 *通配符选择器* 匹配所有元素：
-     #+BEGIN_SRC css
-       * {color:red;}
-     #+END_SRC
-
-   + *类选择器* 可以根据 *HTML* 元素的 *class* 属性进行匹配：
-     #+BEGIN_SRC css
-       *.important {color:red;}
-       .important {color:red;}
-       p.important {color:red;}
-     #+END_SRC
-
-     **.import* 和 *.import* 的效果是一样的，而 *p.import* 只匹配 *class* 的值为 *import* 的 *p* 元素。
-
-     通过把两个类选择器链接在一起， 仅可以选择 *同时包含这些类名* 的元素(类名的顺序不限)：
-     #+BEGIN_SRC css
-       .important.urgent {background:silver;}
-     #+END_SRC
-
-     可以匹配以下元素：
-     #+BEGIN_SRC html
-       <p class="important urgent warning">
-         This paragraph is a very important and urgent warning.
-       </p>
-     #+END_SRC
-
-   + *ID 选择器* 可以根据 *HTML* 元素的 *id* 属性进行匹配：
-     #+BEGIN_SRC css
-       *#intro {font-weight:bold;}
-       #intro {font-weight:bold;}
-     #+END_SRC
-
-     *注：* *类选择器* 和 *ID 选择器* 区分大小写
-
-** 伪类和伪元素
-   伪类和伪元素的语法形式基本相同：
+** 怎样让 div 的高度为 100% 的屏幕高度
+   很简单，使用 ~vh~ 作为高度的单位就可以了：
    #+BEGIN_SRC css
-     selector:pseudo-class {property:value;}
-     selector:pseudo-element {property:value;}
+     div {
+       height: 100vh;
+     }
    #+END_SRC
 
-   + 常用伪类有：
-     |--------------+----------------------------------------|
-     | 伪类         | 描述                                   |
-     |--------------+----------------------------------------|
-     | :active      | 向被激活的元素添加样式                 |
-     | :focus       | 向拥有键盘输入焦点的元素添加样式       |
-     | :hover       | 当鼠标悬浮在元素上方时，向元素添加样式 |
-     | :link        | 向未被访问的链接添加样式               |
-     | :visited     | 向已被访问的链接添加样式               |
-     | :first-child | 向元素的第一个子元素添加样式           |
-     | :lang        | 向带有指定 lang 属性的元素添加样式     |
-     |--------------+----------------------------------------|
-
-   + 常用的伪元素有：
-     |---------------+--------------------------------|
-     | 伪元素        | 描述                           |
-     |---------------+--------------------------------|
-     | :first-letter | 向文本的第一个字母添加特殊样式 |
-     | :first-line   | 向文本的首行添加特殊样式       |
-     | :before       | 在元素之前添加内容             |
-     | :after        | 在元素之后添加内容             |
-     |---------------+--------------------------------|
-
-** 盒子模型
-   *CSS 盒子模型* 本质上是一个盒子，封装周围的 HTML 元素，它包括：边距、边框、填充和实际内容：
-
-   #+HTML: <img src="http://www.runoob.com/images/box-model.gif">
-
-   + *Margin(外边距)* - 清除边框外的区域，外边距是透明的。
-   + *Border(边框)* - 围绕在内边距和内容外的边框。
-   + *Padding(内边距)* - 清除内容周围的区域，内边距是透明的。
-   + *Content(内容)* - 盒子的内容，显示文本和图像。
-
-   *CSS 轮廓(outline)* 可以在 *边框* 的边缘外围绘制一条线。
-
-** 媒体类型
-   媒体类型允许你指定文件将如何在不同媒体呈现：
-   #+BEGIN_SRC css
-     @media screen {
-         p.test {font-family:verdana,sans-serif;font-size:14px;}
-     }
-
-     @media print {
-         p.test {font-family:times,serif;font-size:10px;}
-     }
-
-     @media screen, print {
-         p.test {font-weight:bold;}
-     }
-   #+END_SRC
+** CSS 样式使用的优先级怎么判断
+   1. 后声明的样式会覆盖先声明的样式
+   2. 通过 ID 指定的样式总是比通过类指定的优先级高
+   3. 内联样式的优先级是最高的
+   4. 通过为样式添加 ~!important~ 声明使得它必然具有某种样式，如果都有就按照之前的优先级来
   
-   部分媒体类型：
-   |------------+--------------------------------------------------------|
-   | 媒体类型   | 描述                                                   |
-   |------------+--------------------------------------------------------|
-   | all        | 用于所有的媒体设备。                                   |
-   | aural      | 用于语音和音频合成器。                                 |
-   | braille    | 用于盲人用点字法触觉回馈设备。                         |
-   | embossed   | 用于分页的盲人用点字法打印机。                         |
-   | handheld   | 用于小的手持的设备。                                   |
-   | print      | 用于打印机。                                           |
-   | projection | 用于方案展示，比如幻灯片。                             |
-   | screen     | 用于电脑显示器。                                       |
-   | tty        | 用于使用固定密度字母栅格的媒体，比如电传打字机和终端。 |
-   | tv         | 用于电视机类型的设备。                                 |
-   |------------+--------------------------------------------------------|
+** 盒子模型的宽度和高度包含 padding 吗
+   这一点受到属性 ~box-sizing~ 的值的影响，当它的值为 ~border-box~ 时，包含。
 
+   可以参考：
+   + [[https://stackoverflow.com/questions/4698054/css-does-the-width-include-the-padding][CSS does the width include the padding? - Stack Overflow]]
+   + [[https://developer.mozilla.org/zh-CN/docs/Web/CSS/box-sizing][box-sizing - CSS：层叠样式表 | MDN]]
 
+** 怎样让超出范围的文本显示为省略号
+   + Single line text overflow shows ellipsis.
+     #+BEGIN_SRC css
+       div {
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+       }
+     #+END_SRC
+
+   + Multi-line text overflow showing ellipsis.
+     #+BEGIN_SRC css
+       div {
+         display: -webkit-box;
+         -webkit-box-orient: vertical;
+         -webkit-line-clamp: 3;
+         overflow: hidden;
+       }
+     #+END_SRC
+
+** 怎样让文本居中显示
+   #+BEGIN_SRC css
+     div {
+       height: 20px;
+       line-height: 20px;
+     }
+   #+END_SRC
 

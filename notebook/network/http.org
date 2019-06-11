@@ -2,8 +2,12 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#常用-http-请求头和响应头][常用 HTTP 请求头和响应头]]
+- [[#http-api-认证授权][HTTP API 认证授权]]
 
 * 常用 HTTP 请求头和响应头
   HTTP 消息头支持自定义，自定义的专用消息头一般会添加 ~X-~ 前缀，常用的 HTTP 请求头和响应头可以参考：
   + [[https://itbilu.com/other/relate/EJ3fKUwUx.html][HTTP 消息头 － 常用的 HTTP 请求头与响应头 - IT 笔录]]
+
+* HTTP API 认证授权
+  + [[https://coolshell.cn/articles/19395.html][HTTP API 认证授权术 || 酷 壳 - CoolShell]]
 
