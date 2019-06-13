@@ -55,3 +55,8 @@
 * 注解
   如果要通过反射使用注解，那么应该将其配置为 RUNTIME
 
+* IDEA
+  只要遵循经典的项目结构，IDEA 还是可以直接加载非 IDEA 项目的。
+
+  + [[https://www.jetbrains.com/help/idea/creating-and-editing-live-templates.html?keymap=primary_emacs][Creating live templates - Help | IntelliJ IDEA]]
+

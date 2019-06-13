@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#配合-spring-的简单使用][配合 Spring 的简单使用]]
+- [[#配合-spring-boot-的简单使用][配合 Spring Boot 的简单使用]]
 - [[#相关链接][相关链接]]
 
 * 配合 Spring 的简单使用
@@ -62,6 +63,40 @@
       }
     }
   #+END_SRC
+
+* 配合 Spring Boot 的简单使用
+  配合 Spring Boot 使用的话，只需要添加 Spring Boot Starter 就可以了：
+  #+BEGIN_SRC xml
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+    </dependency>
+  #+END_SRC
+  
+  mybatis-spring-boot-starter 包含了 JDBC 的依赖，因此需要在配置文件中配置数据源：
+  #+BEGIN_SRC conf
+    spring.datasource.url=
+    spring.datasource.username=
+    spring.datasource.password=
+    spring.datasource.driver-class-name=
+  #+END_SRC
+
+  其中，驱动的配置是可以省略的，因为高版本的环境下驱动可以通过 SPI 机制自动加载。
+
+  通过注解配置的时候需要注意标注 ~@Mapper~ 注解和 ~@MapperScan~ 注解，方便让 MyBatis 自动完成映射工作。
+
+  而使用 XML 配置的话就需要在配置文件中指明映射文件的路径：
+  #+BEGIN_SRC conf
+    mybatis.mapper-locations=classpath:mapper/*.xml
+  #+END_SRC
+
+  另外，使用 Mapper 注解可能会让 IDEA 无法识别出 Bean，这时可以使用 Repository 注解并修改 MapperScan 的参数：
+  #+BEGIN_SRC java
+    @MapperScan(annotationClass = Repository.class)
+  #+END_SRC
+
+  参考：
+  + [[https://segmentfault.com/a/1190000017211657#articleHeader0][基于 SpringBoot2.0+ 优雅整合 SpringBoot+Mybatis - JavaGuide - SegmentFault 思否]]
 
 * 相关链接
   + [[http://www.mybatis.org/mybatis-3/zh/getting-started.html][mybatis – MyBatis 3 | 入门]]

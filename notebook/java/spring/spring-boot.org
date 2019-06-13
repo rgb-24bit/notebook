@@ -6,7 +6,8 @@
 - [[#spring-boot-starter][spring-boot-starter]]
 - [[#webapplicationtype][WebApplicationType]]
 - [[#配置文件与属性来源][配置文件与属性来源]]
-- [[#注意事项][注意事项]]
+- [[#数据库版本控制][数据库版本控制]]
+- [[#日志操作][日志操作]]
 - [[#相关问题][相关问题]]
   - [[#在配置文件中使用环境变量][在配置文件中使用环境变量]]
 
@@ -43,6 +44,8 @@
   使用自动配置时可以翻阅相关文档查阅具体的配置项。
 
   这也意味着，一旦使用自动配置，那么应用程序启动时就会执行数百次判断，判断类和 Bean 是否存在。
+
+  当然了，我们自己的配置是可以覆盖默认的配置的，这通过了 ~@ConditionOnMissBean~ 实现。
 
 * @SpringBootApplication
   通过注解 ~@SpringBootApplication~ 可以启用组件扫描，允许自动配置，允许注册额外的 Bean 和加载更多的配置。
@@ -116,12 +119,57 @@
 
   而遵循 application-{profile}.properties 这种命名格式，这能提供特定于 Profile 的属性。
 
-* 注意事项
-  + Spring Boot 配置的加载顺序为：应用即配置 -> 自动配置，这就意味着，如果在应用级配置了相关的 Bean，自动配置就不会生效。
-    这样一来我们便覆盖了自动配置。
+* 数据库版本控制
+  Spring Boot 集成了高级的数据库版本控制工具，因此可以通过 Flyway 来进行数据库的版本控制：
+  + [[https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html][85. Database Initialization]]  
 
-    这是通过注解 @ConditionalOnMissingBean 实现的。
+  简单的使用的话其实就只需要添加 ~flyway-core~ 的依赖，并在 ~resources/db/migration~ 目录中创建 SQL 脚本就可以了。
 
+  但也可以通过 ~spring.flyway.locations~ 属性配置脚本目录位置：
+  #+BEGIN_SRC conf
+    spring.flyway.locations=classpath:/db/migration
+  #+END_SRC
+
+  Maven 的依赖添加：
+  #+BEGIN_SRC xml
+    <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>5.2.4</version>
+    </dependency>
+  #+END_SRC
+
+* 日志操作
+  简单的日志操作直接调用相关的类就可以了：
+  #+BEGIN_SRC java
+    @RestController
+    public class LoggingController {
+
+      Logger logger = LoggerFactory.getLogger(LoggingController.class);
+
+      @RequestMapping("/")
+      public String index() {
+        logger.trace("A TRACE Message");
+        logger.debug("A DEBUG Message");
+        logger.info("An INFO Message");
+        logger.warn("A WARN Message");
+        logger.error("An ERROR Message");
+
+        return "Howdy! Check out the Logs to see the output...";
+      }
+    }
+  #+END_SRC
+
+  可以参考：[[https://www.baeldung.com/spring-boot-logging][Logging in Spring Boot | Baeldung]]
+
+  另外，在 IDEA 中可以使用 Live Templates 代码模板快速创建 logger，常用模板：
+  #+BEGIN_SRC java
+    private static final Logger logger = LoggerFactory.getLogger($CLASS_NAME$.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+  #+END_SRC
+
+  参考：
+  + [[https://www.cnblogs.com/waterystone/p/6738154.html][Idea Live Templates 代码模板 - waterystone - 博客园]]
 
 * 相关问题
 ** 在配置文件中使用环境变量

@@ -2,7 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简单使用][简单使用]]
-- [[#使用技巧][使用技巧]]
+- [[#相关技巧][相关技巧]]
   - [[#通过-maven-创建-web-app][通过 Maven 创建 Web App]]
   - [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
   - [[#快速的创建多级目录][快速的创建多级目录]]
@@ -12,29 +12,23 @@
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
 
 * 简单使用
-  + 通过快捷键 ~Ctrl+Shift+A~ 查看某操作的快捷键
-  + 通过快捷键 ~Ctrl+Shift+F12~ 显示/隐藏所有工具窗口
-  + 在大多数窗口键入内容可以进行搜索
-  + 编辑器中的一些快捷键：
-    - 移动当前行：Ctrl+Shift+Up/DOWN
-    - 复制当前行：Ctrl+D
-    - 移除当前行：Ctrl+Y
-    - 当前文件中查找：Ctrl+F
-    - 当前文件中查找并替换：Ctrl+R
-    - 前一个/下一个：F3/Shift+F3
-    - 突出显示符号：Ctrl+F7
-    - 创建构造方法等：Alt+Insert
-  + 重命名：Shift+F6
-  + 格式化代码：Ctrl+Alt+L
-  + 自动缩进行：Ctrl+Alt+I
-  + 优化导入内容：Ctrl+Alt+O
-  + 创建测试：Ctrl+Shift+T
-  + 运行当前：Ctrl+Shift+F10
-  + 代码折叠：Ctrl-+/-
-  + [[https://www.jetbrains.com/help/idea/discover-intellij-idea.html][Discover IntelliJ IDEA - Help | IntelliJ IDEA]]
-  + 通过快捷键 M-x(Emacs) 查找类文件
+  在 Emacs 键位下的一些常用快捷键：
+  |--------------+--------------------+----------+-----------------------|
+  | 快捷键       | 作用               | 快捷键   | 作用                  |
+  |--------------+--------------------+----------+-----------------------|
+  | ~C-S-A~        | 查看某操作的快捷键 | ~C-S-F12~  | 显示/隐藏所有工具窗口 |
+  | ~C-S-up/down~  | 移动当前行         | ~M-insert~ | 创建构造函数等        |
+  | ~C-M-L~        | 格式化代码         | ~C-M-I~    | 自动缩进行            |
+  | ~C-M-O~        | 优化导入内容       | ~C-S-T~    | 创建测试              |
+  | ~C-S-F10~      | 运行当前类         | ~C-+/-~    | 展开/折叠代码         |
+  | ~M-Num~        | 跳转窗口           | ~M-return~ | 快速修复              |
+  | ~C-o~          | 覆盖父类方法       | ~C-S-/~    | 块注释代码            |
+  | ~M-left/right~ | 在 tab 间跳转      | ~C-M-T~    | 环绕代码块            |
+  |--------------+--------------------+----------+-----------------------|
 
-* 使用技巧
+  + [[https://www.jetbrains.com/help/idea/discover-intellij-idea.html?keymap=primary_emacs][Discover IntelliJ IDEA - Help | IntelliJ IDEA]]
+
+* 相关技巧
 ** 通过 Maven 创建 Web App
    1) 选择 maven-archetype-webapp 创建项目
    2) 添加依赖项：
