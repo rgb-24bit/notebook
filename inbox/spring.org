@@ -5,7 +5,6 @@
   + [[https://juejin.im/post/5af02571f265da0b9e64fcfd#heading-39][消息队列之 RocketMQ - 掘金]]
   + [[https://juejin.im/post/5b00c52ef265da0b95276091][可能是最漂亮的 Spring 事务管理详解 - 掘金]]
   + [[https://commons.apache.org/][Apache Commons – Apache Commons]]
-  
 * security
   security 这一块用到的东西有点多，主要有：
   + HTTP 身份验证
@@ -59,4 +58,27 @@
 
 * scan
   扫描机制的实现可以了解一下。
+
+* mybatis
+  + [[http://blog.didispace.com/mybatisinfo/][Spring Boot中使用MyBatis注解配置详解 | 程序猿DD]]
+  + MyBatis 会获取结果中返回的列名并在 Java 类中查找相同名字的属性
+  #+BEGIN_SRC xml
+    resultMap id="userResultMap" type="User">
+      <id property="id" column="user_id" />
+      <result property="username" column="user_name"/>
+      <result property="password" column="hashed_password"/>
+    </resultMap>
+  #+END_SRC
+
+* gralbum
+  问题：
+  1. 数据库的设计存在问题
+  2. mybatis 的使用不熟练
+  3. 测试不知道怎么操作
+  4. SQL 语句不熟练
+  5. 规范不明确
+  6. 内存不够用
+
+* 测试
+  SpringApplicationConfiguration 通过 SpringBootTest 替代。
 

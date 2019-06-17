@@ -10,3 +10,9 @@
 * 角色
   + [[https://www.cnblogs.com/sdusrz/p/6340365.html][经典角色权限系统设计五张表及拓展应用 - sduSRZ - 博客园]]
 
+* 规范
+  + [[https://www.sqlstyle.guide/zh/][SQL样式指南 · SQL style guide by Simon Holywell]]
+
+* mysql
+  + 主写从读，主应该要InnoDB
+

@@ -1,0 +1,24 @@
+#+TITLE:      Spring Test
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#简单使用][简单使用]]
+
+* 简单使用
+  对于普通的 Spring 项目的测试：
+  #+BEGIN_SRC java
+    @RunWith(SpringJunit4ClassRunner.class)
+    @ContextConfiguration(classes = BeanConfig.class)
+    public class TestFunctionService {
+      // ....
+    }
+  #+END_SRC
+
+  对于普通的 Spring-Boot 项目的测试：
+  #+BEGIN_SRC java
+    @RunWith(SpringJUnit4ClassRunner.class)
+    @SpringBootTest(classes = Application.class)
+    public class TestFunctionService {
+      // ...
+    }
+  #+END_SRC
+

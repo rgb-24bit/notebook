@@ -106,10 +106,12 @@
     + [Spring Boot](notebook/java/spring/spring-boot.org)
     + [Spring Core](notebook/java/spring/spring-core.org)
     + [Spring MVC](notebook/java/spring/spring-mvc.org)
+    + [Spring Test](notebook/java/spring/spring-test.org)
   + **tools**
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
     + [JDK Tools](notebook/java/tools/jdk.org)
+    + [JUnit](notebook/java/tools/junit.org)
     + [Maven](notebook/java/tools/maven.org)
     + [Tomcat](notebook/java/tools/tomcat.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)

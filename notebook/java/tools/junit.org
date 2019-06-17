@@ -1,3 +1,11 @@
+#+TITLE:      JUnit
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#junit5][JUnit5]]
+- [[#junit4][JUnit4]]
+- [[#相关问题][相关问题]]
+  - [[#怎样同时执行多个测试][怎样同时执行多个测试]]
+
 * JUnit5
   常用的测试注解，注解的测试方法都是可以继承的，这为测试类的编写带来了更多的可能：
   |-------------+------------------------------------|
@@ -100,13 +108,13 @@
 
   可以通过 @RepeatedTest 进行重复测试，通过 @ParameterizedTest 指定测试参数进行测试。
 
-  注意事项：
-  + 测试方法、测试类、测试声明周期方法不能是私有的
+  需要注意的是：测试方法、测试类、测试声明周期方法不能是私有的
 
   官方文档：
   + [[https://junit.org/junit5/docs/current/user-guide/][JUnit 5 User Guide]]
 
 * JUnit4 
+  目前来说也许更常用的版本是 JUnit4，其常用注解和 JUnit5 之间的区别：
   |--------------------+--------------+------------------------------------|
   | JUnit5             | JUnit4       | 描述                               |
   |--------------------+--------------+------------------------------------|
@@ -121,25 +129,17 @@
   | @RegisterExtension | @ClassRule   |                                    |
   |--------------------+--------------+------------------------------------|
 
-* Spring-Test
-  对于普通的 Spring 项目的测试
-  #+BEGIN_SRC java
-    @RunWith(SpringJunit4ClassRunner.class)
-    @ContextConfiguration(classes = BeanConfig.class)
-    public class TestFunctionService {
-      // ....
-    }
-  #+END_SRC
+* 相关问题
+** 怎样同时执行多个测试
+   指定运行类为 ~org.junit.runners.Suite~ 并指定相应的 ~org.junit.runners.Suite.SuiteClasses~ 就可以了。
 
-  对于普通的 Spring-Boot 项目的测试：
-  #+BEGIN_SRC java
-    @RunWith(SpringJUnit4ClassRunner.class)
-    @SpringBootTest
-    public class TestFunctionService {
-      // ...
-    }
-  #+END_SRC
+   假如指定的 ~SuiteClasses~ 的运行类也是 Suite，那么就会递归执行集成测试：
+   #+BEGIN_SRC java
+     import org.junit.runner.RunWith;
+     import org.junit.runners.Suite;
 
-  对于 Spring-Web 项目的测试：
-  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html#testing][Testing]]
+     @RunWith(Suite.class)
+     @Suite.SuiteClasses({MapperSuiteTest.class, UtilSuiteTest.class})
+     public class ApplicationSuiteTest {}
+   #+END_SRC
 

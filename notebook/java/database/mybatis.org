@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#配合-spring-的简单使用][配合 Spring 的简单使用]]
 - [[#配合-spring-boot-的简单使用][配合 Spring Boot 的简单使用]]
+- [[#相关问题][相关问题]]
+  - [[#mybatis-是不是不支持重载][mybatis 是不是不支持重载]]
 - [[#相关链接][相关链接]]
 
 * 配合 Spring 的简单使用
@@ -97,6 +99,11 @@
 
   参考：
   + [[https://segmentfault.com/a/1190000017211657#articleHeader0][基于 SpringBoot2.0+ 优雅整合 SpringBoot+Mybatis - JavaGuide - SegmentFault 思否]]
+
+* 相关问题
+** mybatis 是不是不支持重载
+   是的，mybatis 不支持重载，相关 issue 链接：
+   + [[https://github.com/mybatis/mybatis-3/issues/511][not support overload? · Issue #511 · mybatis/mybatis-3]]
 
 * 相关链接
   + [[http://www.mybatis.org/mybatis-3/zh/getting-started.html][mybatis – MyBatis 3 | 入门]]
