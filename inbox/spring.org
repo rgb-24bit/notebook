@@ -63,12 +63,16 @@
   + [[http://blog.didispace.com/mybatisinfo/][Spring Boot中使用MyBatis注解配置详解 | 程序猿DD]]
   + MyBatis 会获取结果中返回的列名并在 Java 类中查找相同名字的属性
   #+BEGIN_SRC xml
-    resultMap id="userResultMap" type="User">
+    <resultMap id="userResultMap" type="User">
       <id property="id" column="user_id" />
       <result property="username" column="user_name"/>
       <result property="password" column="hashed_password"/>
     </resultMap>
   #+END_SRC
+  
+  + XML 配置中，如果返回值是 List<XXX>，那么只需要指定 XXX 类型就可以了
+  + https://github.com/mybatis/typehandlers-jsr310
+
 
 * gralbum
   问题：
@@ -81,4 +85,15 @@
 
 * 测试
   SpringApplicationConfiguration 通过 SpringBootTest 替代。
+
+* 收获
+  + 配置属性注入
+  + Mybatis 使用
+  + 测试
+  + 数据库版本控制
+  + Apache Common
+  + EditorConfig
+  + ConfigurationProperties
+  + [[https://www.baeldung.com/configuration-properties-in-spring-boot][Guide to @ConfigurationProperties in Spring Boot | Baeldung]]
+
 

@@ -185,6 +185,7 @@
 * 元循环
 * 应用领域
   + 学习有时候不需要太功利的
+  + [[https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6][计算机科学 - 维基百科，自由的百科全书]]
 
 * jit & aot
   JIT (Just-In-Time - 实时编译) 和 AOT (Ahead-Of-Time - 预先编译)

@@ -10,6 +10,7 @@
   + [front-end](#front-end)
   + [git](#git)
   + [health](#health)
+  + [hobby](#hobby)
   + [java](#java)
   + [lang](#lang)
   + [linux](#linux)
@@ -92,6 +93,8 @@
 ## health
   + [八段锦](notebook/health/baduanjin.org)
   + [健康生活](notebook/health/health.org)
+## hobby
+  + [日本麻将](notebook/hobby/mahjong.org)
 ## java
   + **database**
     + [JDBC](notebook/java/database/jdbc.org)
@@ -148,7 +151,6 @@
   + [概念了解](notebook/misc/concept.org)
   + [EditorConfig](notebook/misc/editorconfig.org)
   + [开源协议](notebook/misc/liscense.org)
-  + [日本麻将](notebook/misc/mahjong.org)
   + [技术了解](notebook/misc/noun.org)
   + [编程范式相关](notebook/misc/paradigm.org)
   + [心理学](notebook/misc/psychology.org)

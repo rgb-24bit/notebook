@@ -22,4 +22,6 @@
   + [[https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/][How Browsers Work: Behind the scenes of modern web browsers - HTML5 Rocks]]
   + 缓存控制 - Cache-Control
 
+* HTTPS
+  + [[http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html][SSL/TLS协议运行机制的概述 - 阮一峰的网络日志]]
 
