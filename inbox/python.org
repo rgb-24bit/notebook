@@ -111,7 +111,5 @@
 * 2to3
   + [[https://docs.python.org/3/library/2to3.html][2to3 - Automated Python 2 to 3 code translation — Python 3.7.3 documentation]]
 
-
-* Anaconda
-  + [[https://repo.continuum.io/archive/][Anaconda installer archive]]
-
+* pip 临时镜像
+  + pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package

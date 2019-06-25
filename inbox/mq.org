@@ -1,0 +1,5 @@
+* 教程
+  + [[https://www.javatpoint.com/jms-tutorial][JMS Tutorial - javatpoint]]
+  + [[https://juejin.im/post/5af02571f265da0b9e64fcfd][消息队列之 RocketMQ - 掘金]]
+  + [[https://rocketmq.apache.org/docs/quick-start/][Quick Start - Apache RocketMQ]]
+

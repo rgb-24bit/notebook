@@ -72,7 +72,7 @@
   SpringApplication 启动时会根据 ~WebApplicationType.deduceFromClasspath~ 方法判断当前应用所处的应用环境：
   + [[https://github.com/spring-projects/spring-boot/blob/1de6f6823850845f0fa6da0cf44c14d1aca31ea2/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/WebApplicationType.java#L63][spring-boot/WebApplicationType.java at 1de6f6823850845f0fa6da0cf44c14d1aca31ea2 · spring-projects/spring-boot]]
 
-  我们可以将主类写成如下模式：
+  当应用程序需要部署到 Tomcat 容器时，可以将主类写成如下模式：
   #+BEGIN_SRC java
     @SpringBootApplication
     public class Application extends SpringBootServletInitializer {

@@ -1,0 +1,52 @@
+* Spring IOC
+** IOC 容器的基本概念
+   IOC 的全名是 Inversion of Control，即控制反转，还有别名叫做依赖注入。
+
+   IOC 容器注入依赖的方式主要有三种：
+   1. 构造方法注入
+   2. setter 方法注入
+   3. 接口注入 - 根据对象实现的接口来进行注入，现在不提倡
+
+   IOC 对于 TDD 来说是一种很好的方式。
+
+   IOC 容器的职责为：业务对象的构建管理和业务对象的依赖绑定。
+
+   依赖管理的方式主要有：
+   1. 直接编码
+   2. 配置文件
+   3. 元数据 - 注解，其实也算是特殊的直接编码方式
+
+** BeanFactory
+   BeanFactory 内部通过三部分来管理 Bean，包括：
+   + BeanDefine - 保存 Bean 的定义
+   + BeanDefineRegistry - 注册 Bean 的逻辑
+   + BeanFactory - 访问容器类管理的 Bean
+
+   具体的 BeanFactory 通常会同时实现 BeanFactory 和 BeanDefineRegistry，这意味着同时实现了管理访问和注册逻辑的功能。
+
+   Spring 的 IOC 容器同时支持直接编码、配置文件和元数据的依赖管理方式。
+
+   Spring IOC 容器加载配置元数据和组装的过程可以分为两个阶段：
+   1. 容器的启动阶段，这时通过某种途径加载配置元数据，这时不会创建 Bean 的实例，更注重于对象管理信息的收集。
+
+      这个阶段可以通过 BeanFactoryPostProcessor 在实例化相应对象之前对注册到容器的 BeanDefine 所保存的信息做出相应的修改。
+      Bean 的 AutoWired 依赖信息就是通过 BeanFactoryPostProcessor 进行处理的。
+
+      Spring IOC 通过这个机制实现了配置信息中占位符的处理、自动类型转换……
+
+   2. 第二阶段便是 Bean 的创建和管理了，Bean 的实例化过程为：
+      实例化 Bean 对象、设置对象属性、检查 Aware 接口、BeanPostProcessor 前置处理、检查是否为 InitializingBean、检查是否配置 init-method、
+      BeanPostProcessor 后置处理、注册必要的 Destruction 回调接口、使用、是否实现 DisposableBean 接口、是否配置 destory 方法
+
+      这个阶段可以通过 BeanWrapper 来方便操作 Bean，避免直接使用 Java 反射接口。
+
+      而 BeanPostProcessor 是我们可以插足 Bean 创建过程的一种机制。
+
+** ApplicationContext
+   ApplicationContext 也属于 BeanFactory，但实现了更多的接口，包括：ResourcePatternLoader、MessageSource、ApplicationEventPublisher。
+
+   这样一来就为 ApplicationContext 提供了：统一资源加载策略、国际化信息支持、容器内部事件发布的功能。
+
+   而通过统一资源加载策略可以更方便的加载多个配置文件。
+
+
