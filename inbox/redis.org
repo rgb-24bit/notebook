@@ -1,7 +1,0 @@
-* key
-  + [[https://redis.io/topics/data-types-intro][An introduction to Redis data types and abstractions – Redis]]
-
-* 命令
-  + incr 是原子操作，可以用于不存在的键
-  + expire 设置超时时间。TTL 查看，SET 会重置 TTL
-

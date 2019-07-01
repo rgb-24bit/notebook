@@ -69,3 +69,10 @@
       redis 127.0.0.1:6379[3]>                      # 提示符从 [1] 改变成了 [3]
     #+END_SRC
 
+  + Redis 中 Key 可以是任何安全的二进制序列，这意味着用图片做键也是可以的，因此，可以有如下形式的键：
+    #+BEGIN_EXAMPLE
+      user:1000
+    #+END_EXAMPLE
+
+    参考：[[https://redis.io/topics/data-types-intro][An introduction to Redis data types and abstractions – Redis]]
+

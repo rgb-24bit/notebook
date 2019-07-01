@@ -15,6 +15,3 @@
 
 * mysql
   + 主写从读，主应该要InnoDB
-* redis
-  + [[https://www.cnblogs.com/tuyile006/p/6382062.html][Redis、Memcache和MongoDB的区别 - 小y - 博客园]]
-

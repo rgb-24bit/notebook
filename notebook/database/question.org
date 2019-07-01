@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#为什么要使用自增的-id-主键][为什么要使用自增的 ID 主键]]
 - [[#用户表的设计问题][用户表的设计问题]]
+- [[#redismongodb-和-memcache-的区别][Redis、MongoDB 和 Memcache 的区别]]
 
 * 为什么要使用自增的 ID 主键
   1. 可以节省存储
@@ -22,4 +23,8 @@
 
   参考链接：
   + [[https://softwareengineering.stackexchange.com/questions/241089/keep-user-and-user-profile-in-different-tables][database - Keep user and user profile in different tables? - Software Engineering Stack Exchange]]
+
+* Redis、MongoDB 和 Memcache 的区别
+  参考链接：
+  + [[https://www.cnblogs.com/tuyile006/p/6382062.html][Redis、Memcache 和 MongoDB 的区别 - 小y - 博客园]]
 
