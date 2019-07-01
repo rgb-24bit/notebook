@@ -86,3 +86,16 @@
 
   标准化和归一化：标准化更常用。
 
+* 特征工程
+  + [[https://www.zhihu.com/question/29316149][特征工程到底是什么？ - 知乎]]
+  + 特征选取 - 可以通过模型选取 SelectFromModel
+  + 降维
+
+* 神经网络
+  + [[https://segmentfault.com/q/1010000014818306][机器学习 - 神经网络如何设置隐藏层层数和节点个数，是否越多就会越精确？ - SegmentFault 思否]]
+  + [[http://sofasofa.io/forum_main_post.php?postid=1000320][前馈神经网络如何选择隐藏层的数量-SofaSofa]]
+  + [[http://cn.voidcc.com/question/p-frwvjyjo-ss.html][在scikit-learn的MLP中设置输出节点的数量 - VoidCC]]
+  + MLP：输入层和输出层大小：
+    + 输入层为维度（+1）
+    + 输出层为标签数
+

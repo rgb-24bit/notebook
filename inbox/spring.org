@@ -101,3 +101,7 @@
   + [[https://dzone.com/articles/logger-injection-with-springs-injectionpoint][Logger Injection With Spring’s InjectionPoint - DZone Java]]
   + [[https://moelholm.com/2016/10/09/spring-4-3-introducing-the-injectionpoint/][Spring 4.3: Introducing the InjectionPoint class | moelholm.com]]
 
+* cache
+  + [[https://www.concretepage.com/spring-boot/spring-boot-redis-cache#RedisCacheManager][Spring Boot Redis Cache]]
+
+

@@ -113,3 +113,12 @@
 
 * pip 临时镜像
   + pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+* datetime
+  + datetime.timedelta: 表示时间的持续时间
+  + 获取某一周的第一天：
+    #+BEGIN_SRC python
+      def isoweek2date(year, isoweek):
+          weekday = '%s %s 1' % (year, isoweek)
+          return datetime.datetime.strptime(weekday, '%G %V %u').date()
+    #+END_SRC
+

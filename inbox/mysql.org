@@ -1,4 +1,3 @@
 * JDBC
-  + [[https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-usagenotes-tomcat.html][MySQL :: MySQL Connector/J 8.0 Developer Guide :: 11 Using Connector/J with Tomcat]]
-  + [[https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-usagenotes-spring-config.html][MySQL :: MySQL Connector/J 8.0 Developer Guide :: 13 Using Connector/J with Spring]]
+  + [[https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html][MySQL Connector/J 8.0 Developer Guide - 6.3 Configuration Properties]]
 
