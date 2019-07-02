@@ -151,6 +151,7 @@
   + [概念了解](notebook/misc/concept.org)
   + [EditorConfig](notebook/misc/editorconfig.org)
   + [开源协议](notebook/misc/liscense.org)
+  + [机器学习](notebook/misc/ml.org)
   + [技术了解](notebook/misc/noun.org)
   + [编程范式相关](notebook/misc/paradigm.org)
   + [心理学](notebook/misc/psychology.org)
