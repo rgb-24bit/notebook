@@ -1,0 +1,7 @@
+* 插入后返回主键 ID
+  + [[https://chenzhou123520.iteye.com/blog/1849881][MyBatis+MySQL 返回插入的主键ID - 青葱岁月 - ITeye博客]]
+  + [[https://www.cnblogs.com/nuccch/p/9069644.html][深入浅出mybatis之useGeneratedKeys参数用法 - 2Simple - 博客园]]
+
+  #+begin_src sql
+  
+  #+end_src

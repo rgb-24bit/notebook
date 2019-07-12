@@ -1,0 +1,4 @@
+* 简单使用
+  + [[https://juejin.im/post/5afe490ff265da0b8c253411][Java效率工具之Swagger2 - 掘金]]
+
+  访问地址：host:/swagger-ui.html
