@@ -3,5 +3,18 @@
   + [[https://www.cnblogs.com/nuccch/p/9069644.html][深入浅出mybatis之useGeneratedKeys参数用法 - 2Simple - 博客园]]
 
   #+begin_src sql
-  
+    UPDATE `organization`
+       SET organization_name = #{organizationName},
+           organization_account = #{organizationAccount},
+           organization_password = #{organizationPassword},
+           edit_date = CURRENT_TIMESTAMP(3)
+     WHERE organization_code = #{organizationCode}
   #+end_src
+
+* 使用中的问题
+  通过 ~include~ 的方式包含 SQL 语句时，应该注意逗号，否则可能出现 ~A B~ 的情况，是的 A 易名为 B.
+
+* 相关链接
+  + [[https://www.cnblogs.com/EasonJim/p/7066717.html][MyBatis3-传递多个参数（Multiple Parameters） - EasonJim - 博客园]]
+  + [[https://www.cnblogs.com/nuccch/p/9069644.html][深入浅出mybatis之useGeneratedKeys参数用法 - 2Simple - 博客园]]
+

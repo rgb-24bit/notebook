@@ -73,7 +73,6 @@
   + XML 配置中，如果返回值是 List<XXX>，那么只需要指定 XXX 类型就可以了
   + https://github.com/mybatis/typehandlers-jsr310
 
-
 * gralbum
   问题：
   1. 数据库的设计存在问题
@@ -104,4 +103,8 @@
 * cache
   + [[https://www.concretepage.com/spring-boot/spring-boot-redis-cache#RedisCacheManager][Spring Boot Redis Cache]]
 
+
+* spring mvc
+  + [[https://examples.javacodegeeks.com/enterprise-java/spring/mvc/spring-mvc-interceptor-tutorial/][Spring MVC Interceptor Tutorial | Examples Java Code Geeks - 2019]]
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-requestparam][Web on Servlet Stack]]
 
