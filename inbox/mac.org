@@ -1,0 +1,4 @@
+* MacOS
+  + [[https://zhuanlan.zhihu.com/p/32326941][写给小白看的 Mac 入门教程 - 知乎]]
+  + 恢复最小化的窗口：用 CMD + TAB 切换到需要的应用图标上，放开 TAB 键，然后再按 ALT 键，放开 CMD
+  + 切换同一个程序的不同窗口：CMD + `

@@ -4,6 +4,7 @@
 - [[#spring-大家族都有些什么东西][Spring 大家族都有些什么东西]]
 - [[#spring-的项目结构是怎样的][Spring 的项目结构是怎样的]]
 - [[#spring-中-interceptorfilter-和-aop-的区别][Spring 中 Interceptor、Filter 和 AOP 的区别]]
+- [[#注解-resource-和-autowired-的区别][注解 @Resource 和 @Autowired 的区别]]
 
 * Spring 大家族都有些什么东西
   Spring 核心容器、Spring 上下文、Spring AOP、Spring DAO、Spring ORM、Spring Web、Spring MVC……
@@ -39,4 +40,20 @@
   参考：
   + [[https://stackoverflow.com/questions/35856454/difference-between-interceptor-and-filter-in-spring-mvc][java - Difference between Interceptor and Filter in Spring MVC - Stack Overflow]]
   + [[https://stackoverflow.com/questions/45837529/what-is-difference-between-spring-interceptor-and-aop][What is difference between Spring interceptor and AOP? - Stack Overflow]]
+
+* 注解 @Resource 和 @Autowired 的区别
+  @Resource 和 @Autowired 都是在 Bean 的注入时使用，而 @Resource 并不是 Spring 的注解，它的包是 javax.annotation.Resource，需要导入，但是 Spring 支持该注解的注入。
+
+  两者的共同点为：两者都可以写在字段和 setter 方法上。两者如果都写在字段上，那么就不需要再写 setter 方法。
+
+  两者的不同点如下：
+  + @Autowired 注解是按照类型装配依赖对象，默认情况下它要求依赖对象必须存在，如果允许 null 值，可以设置它的 required 属性为 false。如果我们想使用按照名称来装配，可以结合 @Qualifier 注解一起使用
+  + @Resource 默认按照名称自动注入，由 J2EE 提供，需要导入包 javax.annotation.Resource。@Resource 有两个重要的属性：name 和 type，而 Spring 将 @Resource 注解的 name 属性解析为 bean 的名字，而 type 属性则解析为 bean 的类型。
+    所以，如果使用 name 属性，则使用按名称的自动注入策略，而使用 type 属性时则使用按类型自动注入策略。如果既不指定 name 也不指定 type 属性，这时将通过反射机制使用按照名称自动注入策略。
+
+  @Resource 注解的装配顺序如下：
+  1) 如果同时指定了 name 和 type，则从 Spring 上下文中找到唯一匹配的 bean 进行装配，找不到则抛出异常
+  2) 如果指定了 name，则从上下文中查找名称匹配的 bean 进行装配，找不到则抛出异常
+  3) 如果指定了 type，则从上下文中找到类似匹配的唯一 bean 进行装配，找不到或是找到多个，都会抛出异常
+  4) @Resource 默认按名称装配，如果不到与名称匹配的 bean，会按类型装配
 

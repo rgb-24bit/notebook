@@ -1,3 +1,8 @@
 + [[https://www.infoq.cn/article/MOtXJJOF_zwDuiBur5Wb][7个常见的Git相关的问题]]
 + [[https://dev.to/unseenwizzard/learn-git-concepts-not-commands-4gjc][Learn git concepts, not commands - DEV Community]]
 
+* 快速合并
+  [[https://git-scm.com/docs/git-merge][Git - git-merge Documentation]]
+  [[https://stackoverflow.com/questions/173919/is-there-a-theirs-version-of-git-merge-s-ours][Is there a "theirs" version of "git merge -s ours"? - Stack Overflow]]
+
+

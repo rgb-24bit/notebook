@@ -121,4 +121,12 @@
 * OAuth
   + [[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html][理解 OAuth 2.0 - 阮一峰的网络日志]]
 
+* promise
+  + [[https://www.cnblogs.com/lvdabao/p/es6-promise-1.html][大白话讲解Promise（一） - 吕大豹 - 博客园]]
+
+* JavaScript
+  + 构找函数和普通函数：
+    - [[https://segmentfault.com/a/1190000008615288][普通函数和构造函数的区别 - 前端学习之路 - SegmentFault 思否]]
+    - Function.call(this, ...) 指定 this 值
+  + [[https://wangdoc.com/javascript/oop/prototype.html][对象的继承 - JavaScript 教程 - 网道]]
 
