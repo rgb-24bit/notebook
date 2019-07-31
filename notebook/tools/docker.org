@@ -1,0 +1,75 @@
+#+TITLE:      Docker
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#docker-架构][Docker 架构]]
+- [[#docker-镜像与-linux-unionfs][Docker 镜像与 Linux UnionFS]]
+- [[#常用容器的创建][常用容器的创建]]
+  - [[#mysql][mysql]]
+  - [[#redis][redis]]
+  - [[#elasticsearch][elasticsearch]]
+- [[#相关链接][相关链接]]
+
+* Docker 架构
+  Docker 使用客户端 - 服务器架构模式，使用远程 API 来管理和创建 Docker 容器。
+
+  Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。
+
+  需要注意的是，当我们通过 docker 命令进行操作时，其实是通过 docker 命令发出相应的请求给运行的 Docker 主机，
+  所有的操作都是有 Docker 主机完成的。
+
+* Docker 镜像与 Linux UnionFS
+  因为镜像包含操作系统完整的 root 文件系统，其体积往往是庞大的，因此在 Docker 设计时，就充分利用 Union FS 的技术，将其设计为分层存储的架构。
+  
+  所以严格来说，Docker 镜像并非是像一个 ISO 那样的打包文件，镜像只是一个虚拟的概念，其实际体现并非由一个文件组成，而是由一组文件系统组成，或者说，由多层文件系统联合组成。
+
+  镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，
+  而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。
+
+  因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。
+
+  参考链接：
+  + [[https://www.jianshu.com/p/e3a4b69f649c][Docker 镜像分层存储与镜像精简 - 简书]]
+  + [[https://coolshell.cn/articles/17061.html][Docker 基础技术：AUFS | | 酷 壳 - CoolShell]]
+
+
+* 常用容器的创建
+** mysql
+   创建 MySQL 容器，使用最新镜像：
+   #+begin_src bash
+     docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=yourassword -d mysql
+   #+end_src
+
+   进入容器：
+   #+begin_src bash
+     docker exec -it mysql bash
+   #+end_src
+
+** redis
+   创建 redis 容器，使用最新镜像：
+   #+begin_src bash
+     docker run --name redis -p 6379:6379 -d redis
+   #+end_src
+
+   进入容器：
+   #+begin_src bash
+     docker exec -it redis bash
+   #+end_src
+
+** elasticsearch
+   创建 elasticsearch 容器：
+   #+begin_src bash
+     docker run --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.4.3
+   #+end_src
+
+   进入容器：
+   #+begin_src bash
+     docker exec -it es bash
+   #+end_src
+
+   必要的配置：
+   #+begin_src bash
+     # grep vm.max_map_count /etc/sysctl.conf
+     sysctl -w vm.max_map_count=262144
+   #+end_src
+* 相关链接
+  + [[https://yeasy.gitbooks.io/docker_practice/content/][Docker —— 从入门到实践]]

@@ -19,15 +19,3 @@
 
   考虑自己进行配置维护 @_@
 
-* Org-mode
-  + 通过快捷键 j 跳转到指定日期的视图
-
-* ledger
-  + [[https://c-tan.com/zh/post/ledger-org-babel-example/][在 Emacs Org-mode 中使用 Ledger 来记账 | 句末双空格]]
-  + [[https://zero4drift.github.io/posts/ledger--ledger-mode-xue-xi-zhi-shi-dian-zong-jie/#fn:fn-5][Ledger & ledger-mode 学习知识点总结 - 找一个吃麦旋风的理由]]
-
-* magit
-  + [[https://linux.cn/article-10564-1.html][分享|如何在 Emacs 中使用 Magit 管理 Git 项目]]
-
-* spacemacs
-  C-y	Automatically indenting after pasting. With prefix argument, paste text as it is

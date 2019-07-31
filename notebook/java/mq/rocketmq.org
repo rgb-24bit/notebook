@@ -1,0 +1,39 @@
+#+TITLE:      RocketMQ
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#环境搭建][环境搭建]]
+- [[#基本概念][基本概念]]
+- [[#java-使用][Java 使用]]
+
+* 环境搭建
+  在本机上搭建时 [[https://rocketmq.apache.org/docs/quick-start/][官方教程]] 上的说明基本上就足够了，但是，在高版本的 JDK 上可能出现问题，解决方案有两种：
+  1) 安装 JDK 1.8，最为简单直接的方式，也是最推荐的方式
+  2) 参考 [[https://www.cnblogs.com/wintersoft/p/10881601.html][RocketMQ 官方启动脚本不支持 JDK 11 的修改 - wintersoft - 博客园]] 对启动脚本进行修改
+
+  当然，还可以选择通过 Docker 搭建，目前的 [[https://github.com/apache/rocketmq-docker][apache/rocketmq-docker]] 对 ~JAVA_HOME~ 的配置存在问题，因此，可以使用修改版 [[https://github.com/rgb-24bit/rocketmq-docker][rgb-24bit/rocketmq-docker]].
+
+  可以参考：[[https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users][java - How to set JAVA_HOME in Linux for all users - Stack Overflow]]
+
+* 基本概念
+  
+
+* Java 使用
+  RocketMQ 由四大核心组件组成：Name Server、Broker、Producer、Consumer。
+
+  通过 Java 使用 RocketMQ 时，我们往往是扮演 Producer 和 Consumer 的角色与 Name Server 和 Broker 进行交互。
+
+  扮演 Producer 时，我们直接发送消息，扮演 Consumer 时，我们需要注册监听者，Consumer 获取到消息后就会将消息发给监听者进行处理。
+
+  各种消息中，较难理解的应该是事务消息，事务消息的参与方可以抽象为：本地事务、消息的发送方、消息服务、消息的订阅方。
+
+  消息的发送方发送消息时，会通过本地事务监听者执行本地事务，然后根据事务的执行结果判断是否需要将消息提交。当消息服务没有收到发送方的反馈时，
+  就会调用本地事务监听者的回查方法，判断是否需要提交消息。
+
+  通过 Spring 集成时，@RocketMQTransactionListener 的 ~txProducerGroup~ 参数已经废弃了，因此，使用默认值就可以了，参考：[[https://github.com/apache/rocketmq-spring/blob/master/rocketmq-spring-boot/src/main/java/org/apache/rocketmq/spring/annotation/RocketMQTransactionListener.java#L48][RocketMQTransactionListener.java]].
+
+  参考链接：
+  + [[https://juejin.im/post/5af02571f265da0b9e64fcfd][消息队列之 RocketMQ - 掘金]]
+  + [[http://silence.work/2018/08/22/RocketMQ-4-3%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%86%E6%9E%90/][RocketMQ 事务消息的使用与原理分析 | Silence's Blog]]
+  + [[https://github.com/apache/rocketmq-spring/blob/master/README_zh_CN.md][rocketmq-spring/README_zh_CN.md at master · apache/rocketmq-spring]]
+  + [[https://www.cnblogs.com/chenpi/p/5559349.html][JMS(Java消息服务)入门教程 - 风一样的码农 - 博客园]]
+

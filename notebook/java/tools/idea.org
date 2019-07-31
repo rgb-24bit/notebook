@@ -4,12 +4,15 @@
 - [[#简单使用][简单使用]]
 - [[#相关技巧][相关技巧]]
   - [[#通过-maven-创建-web-app][通过 Maven 创建 Web App]]
-  - [[#配置-emacs-作为而外的编辑工具][配置 Emacs 作为而外的编辑工具]]
+  - [[#配置-emacs-作为额外的编辑工具][配置 Emacs 作为额外的编辑工具]]
   - [[#快速的创建多级目录][快速的创建多级目录]]
   - [[#配置环境变量][配置环境变量]]
+  - [[#import-project-from-external-model][Import project from external model]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
+  - [[#解决-cant-reslove-symbol-问题][解决 Can't reslove symbol 问题]]
+  - [[#idea-集成-mybatis-时可能遇到的问题][Idea 集成 Mybatis 时可能遇到的问题]]
 
 * 简单使用
   在 Emacs 键位下的一些常用快捷键：
@@ -59,7 +62,7 @@
         </build>
       #+END_SRC
 
-** 配置 Emacs 作为而外的编辑工具
+** 配置 Emacs 作为额外的编辑工具
    + [[https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html][Using Emacs as an External Editor]]
 
 ** 快速的创建多级目录
@@ -69,6 +72,12 @@
    可以在 IDEA 中单独为项目或全局环境配置环境变量，不用污染系统环境变量：
    + [[https://stackoverflow.com/questions/45696203/intellij-idea-global-environment-variable-configuration?rq=1][IntelliJ IDEA global environment variable configuration - Stack Overflow]]   
 
+** Import project from external model
+   在导入已有的项目时，除非是简单的项目，否则都应该通过 ~Import project from external model~ 的方式进行导入，不然可能出现问题。
+
+   参考链接：
+   + [[https://stackoverflow.com/questions/11258321/idea-import-from-external-model-vs-create-from-existing-source][android - IDEA - "Import from external model" vs "Create from existing source"? - Stack Overflow]]
+
 * 相关问题
 ** 怎样添加静态导入到补全列表
    在 ~Settings -> Code Style -> Java -> Imports~ 处进行设置就可以了。
@@ -76,4 +85,19 @@
 ** 怎样清理同步 VSF
    可以通过菜单栏的同步选项进行操作，更多的内容可以参考：
    + [[https://www.jetbrains.org/intellij/sdk/docs/basics/virtual_file_system.html][Virtual File System / IntelliJ Platform SDK DevGuide]]
+
+** 解决 Can't reslove symbol 问题
+   简单直接粗暴的解决方案：File | Invalidate Caches，参考链接：
+   + [[https://stackoverflow.com/questions/5905896/intellij-inspection-gives-cannot-resolve-symbol-but-still-compiles-code][java - IntelliJ inspection gives "Cannot resolve symbol" but still compiles code - Stack Overflow]]
+
+   但是，这对通过 ~Create project from existing source~ 方式打开的 Maven 项目不生效，需要改变打开方式。
+
+** Idea 集成 Mybatis 时可能遇到的问题
+   问题：自动注入 ~Mapper~ 对象时报错，提示找不到相应的 Bean，但是实际运行没有问题
+
+   解决：安装 ~MyBatis plugin~ 插件就可以解决这个问题
+
+   问题：mapper 文件提示：No data sources are configured to run this sql
+
+   解决：在右侧的 Datasource 中配置相应的数据源即可
 

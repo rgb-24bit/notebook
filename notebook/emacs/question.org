@@ -11,6 +11,7 @@
 - [[#怎样对齐-org-mode-中的标签][怎样对齐 Org-mode 中的标签]]
 - [[#怎样在某个模式下禁用全局的-minor-mode][怎样在某个模式下禁用全局的 minor-mode]]
 - [[#怎样通过-use-package-加载使用主题][怎样通过 use-package 加载使用主题]]
+- [[#spacemacs-中进行粘贴时怎样保留内容缩进格式][Spacemacs 中进行粘贴时怎样保留内容缩进格式]]
 
 * 怎样在 org-mode 的表格中插入竖线
   使用符号 ~\vert~ 代替，导出时会显示为竖线，参考：
@@ -72,4 +73,7 @@
       :ensure t
       :config (load-theme 'theme t))
   #+END_SRC
+
+* Spacemacs 中进行粘贴时怎样保留内容缩进格式
+  C-y	Automatically indenting after pasting. With prefix argument, paste text as it is.
 

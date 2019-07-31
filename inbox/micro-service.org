@@ -1,0 +1,11 @@
+* 架构
+  + [[http://dockone.io/article/3687][一篇文章快速理解微服务架构 - DockOne.io]]
+  + [[https://www.cnblogs.com/savorboard/p/api-gateway.html][谈谈微服务中的 API 网关（API Gateway） - Savorboard - 博客园]]
+
+* 工具
+  + [[https://springcloud.cc/spring-cloud-dalston.html][Spring Cloud Dalston 中文文档 参考手册 中文版]]
+
+* 分布式系统
+  + [[https://www.cnblogs.com/xybaby/p/7787034.html][什么是分布式系统，如何学习分布式系统 - xybaby - 博客园]]
+  + [[https://www.cnblogs.com/xybaby/p/8544715.html][分布式学习最佳实践：从分布式系统的特征开始（附思维导图） - xybaby - 博客园]]
+

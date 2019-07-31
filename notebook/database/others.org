@@ -1,4 +1,4 @@
-#+TITLE:      Stopic for database
+#+TITLE:      Others
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#版本控制][版本控制]]

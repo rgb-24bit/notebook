@@ -1,0 +1,33 @@
+#+TITLE:      开发相关
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#怎样在-mac-上安装-java-8][怎样在 Mac 上安装 Java 8]]
+- [[#如何配置-mac-的-java_home][如何配置 Mac 的 JAVA_HOME]]
+
+* 怎样在 Mac 上安装 Java 8
+  首先安装工具 Homebrew，通过如下指令完成：
+  #+begin_src bash
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  #+end_src
+
+  然后通过如下指令安装指定版本的 Java：
+  #+begin_src bash
+    brew tap adoptopenjdk/openjdk
+
+    brew cask install adoptopenjdk8
+    brew cask install adoptopenjdk9
+    brew cask install adoptopenjdk10
+    brew cask install adoptopenjdk11
+  #+end_src
+
+  参考链接：
+  + [[https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac][macos - How to install Java 8 on Mac - Stack Overflow]]
+
+* 如何配置 Mac 的 JAVA_HOME
+  下载安装 Java 后通过如下指令获取到虚假的 JAVA_HOME 路径：
+  #+begin_src bash
+    /usr/libexec/java_home
+  #+end_src
+  
+  然后进入 ~/Library/Java/JavaVirtualMachines~ 路径，再次调用该指令就可以获取到真实的路径了。
+

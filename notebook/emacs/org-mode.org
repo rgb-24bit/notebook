@@ -24,6 +24,8 @@
 
   + 设置距离 DEADLINE 还有几天时进行显示： ~DEADLINE -nd~
 
+  + 可以通过快捷键 ~j~ 跳转到指定日期，方便的显示该日所在的周视图
+
 * Dates and Times
   可以通过快捷键 ~C-c C-x C-r~ 插入 clock table 来进行时间统计，其中：
   + 通过用双引号包围的 tag 来过滤条目，不同的 tag 用 ~|~ 进行分隔：

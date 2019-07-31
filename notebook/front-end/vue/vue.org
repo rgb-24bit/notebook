@@ -1,0 +1,23 @@
+#+TITLE:      Vue.JS
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关问题][相关问题]]
+  - [[#vue-中-import-时的--符号的含义][Vue 中 Import 时的 @ 符号的含义]]
+
+* 相关问题
+** Vue 中 Import 时的 @ 符号的含义
+   这是 Vue 对 Webpack 进行的配置，代表 ~src~ 目录：
+   #+begin_src json
+     resolve: {
+         // 自动补全的扩展名
+         extensions: ['.js', '.vue', '.json'],
+         // 默认路径代理
+         // 例如 import Vue from 'vue'，会自动到 'vue/dist/vue.common.js'中寻找
+         alias: {
+             '@': resolve('src'),
+             '@config': resolve('config'),
+             'vue$': 'vue/dist/vue.common.js'
+         }
+     }
+   #+end_src
+

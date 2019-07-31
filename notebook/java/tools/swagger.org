@@ -1,0 +1,28 @@
+#+TITLE:      Swagger
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#在-spring-boot-项目中使用-swagger-文档][在 Spring Boot 项目中使用 Swagger 文档]]
+
+* 在 Spring Boot 项目中使用 Swagger 文档
+  #+begin_src java
+    @Api(tags = "该接口的总体描述")
+    @Slf4j
+    @Validated
+    @RestController
+    @RequestMapping("v1/orders")
+    public class OrderController {
+      @ApiOperation(value = "获取指定订单")
+      @ApiResponses({
+          @ApiResponse(code = 200, message = "获取订单成功", response = OrderModel.class),
+          @ApiResponse(code = 404, message = "订单不存在")
+      })
+      @GetMapping("/{orderId}")
+      @Security(auth = true)
+      public ResponseEntity<?> getOrder(@PathVariable Long orderId) {
+        // ...
+      }
+    }
+  #+end_src
+
+  + [[https://www.ibm.com/developerworks/cn/java/j-using-swagger-in-a-spring-boot-project/index.html][在 Spring Boot 项目中使用 Swagger 文档]]
+
