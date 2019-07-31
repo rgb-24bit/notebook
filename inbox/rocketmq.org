@@ -4,9 +4,15 @@
   3. 可以去掉日志文件
   4. [[https://rocketmq.apache.org/docs/quick-start/][Quick Start - Apache RocketMQ]]
 
+  PS: 还是装一个 Java8 比较方便，直接就可以运行了，还不会有奇怪的 BUG
+ 
 * 相关教程
   + [[https://juejin.im/post/5af02571f265da0b9e64fcfd][消息队列之 RocketMQ - 掘金]]
   + [[http://silence.work/2018/08/22/RocketMQ-4-3%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%86%E6%9E%90/][RocketMQ 事务消息的使用与原理分析 | Silence's Blog]]
   + [[https://github.com/apache/rocketmq-spring/blob/master/README_zh_CN.md][rocketmq-spring/README_zh_CN.md at master · apache/rocketmq-spring]]
   + [[https://www.cnblogs.com/chenpi/p/5559349.html][JMS(Java消息服务)入门教程 - 风一样的码农 - 博客园]]
+
+* docker
+  + [[https://github.com/apache/rocketmq-docker/blob/master/image-build/Dockerfile][rocketmq-docker/Dockerfile at master · apache/rocketmq-docker]]
+  + [[https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users][java - How to set JAVA_HOME in Linux for all users - Stack Overflow]]
 

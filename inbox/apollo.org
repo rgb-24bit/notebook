@@ -1,0 +1,26 @@
+* 简单的使用
+  需要添加的依赖：
+  #+begin_src xml
+    <dependency>
+      <groupId>com.ctrip.framework.apollo</groupId>
+      <artifactId>apollo-client</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+  #+end_src
+
+  可以参考的项目：[[https://github.com/ctripcorp/apollo-use-cases/tree/master/spring-boot-logger][apollo-use-cases/spring-boot-logger at master · ctripcorp/apollo-use-cases]]
+
+* 配置结构
+  包含关系：项目 -> 环境 -> 集群 -> 名称空间
+
+  其中，关联公共名称空间时，创建该名称空间的应用为父名称空间，关联该名称根据的应用为子名称空间。
+
+  关联时，关联的是 环境 -> 集群 -> 名称空间的关系，保证一一对应。
+
+* 相关的问题
+  + Mybatis 日志的动态配置，需要配置日志管理器为 STDOUT_LOGGING 以外的日志器
+
+* 教程
+  + [[https://github.com/ctripcorp/apollo/wiki/Java%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97][Java 客户端使用指南 · ctripcorp/apollo Wiki]]
+
+

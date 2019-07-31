@@ -42,3 +42,8 @@
     sysctl -w vm.max_map_count=262144
   #+end_src
 
+* 教程
+  + [[https://yeasy.gitbooks.io/docker_practice/][前言 · Docker —— 从入门到实践]]
+  + [[https://www.jianshu.com/p/e3a4b69f649c][Docker 镜像分层存储与镜像精简 - 简书]]
+  + [[https://www.runoob.com/docker/docker-tutorial.html][Docker 教程 | 菜鸟教程]]
+
