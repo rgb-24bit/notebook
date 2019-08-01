@@ -5,6 +5,7 @@
 - [[#日期和时间][日期和时间]]
 - [[#vector--stack][Vector & Stack]]
 - [[#collectiontoarray][Collection.toArray]]
+- [[#datatypeconverter][DatatypeConverter]]
 
 * 序列化
   实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
@@ -97,4 +98,9 @@
   #+BEGIN_SRC java
     list.toArray(new Integer[0]);
   #+END_SRC
+
+* DatatypeConverter
+  ~javax.xml.bind.DatatypeConverter~ 是一个挺有用的工具类，包括将字节数组转化为 16 进制字符串这样的方法。
+
+  官方文档：[[https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/DatatypeConverter.html#printHexBinary-byte:A-][DatatypeConverter (Java Platform SE 8 )]]
 

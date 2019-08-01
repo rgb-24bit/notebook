@@ -8,6 +8,7 @@
   - [[#快速的创建多级目录][快速的创建多级目录]]
   - [[#配置环境变量][配置环境变量]]
   - [[#import-project-from-external-model][Import project from external model]]
+  - [[#create-live-templates][Create Live Templates]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
@@ -77,6 +78,11 @@
 
    参考链接：
    + [[https://stackoverflow.com/questions/11258321/idea-import-from-external-model-vs-create-from-existing-source][android - IDEA - "Import from external model" vs "Create from existing source"? - Stack Overflow]]
+
+** Create Live Templates
+   具体可以参考：
+   + [[https://www.jetbrains.com/help/idea/creating-and-editing-live-templates.html?keymap=primary_emacs][Creating live templates - Help | IntelliJ IDEA]]
+   + [[https://www.jetbrains.com/help/idea/template-variables.html?keymap=primary_emacs][Live template variables - Help | IntelliJ IDEA]]
 
 * 相关问题
 ** 怎样添加静态导入到补全列表

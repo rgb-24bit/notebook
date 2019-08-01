@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#基本的使用][基本的使用]]
+- [[#注意事项][注意事项]]
 
 * 基本的使用
   定义注解类的方式：
@@ -36,4 +37,8 @@
   对定义自己的注解类很有帮助的包： [[https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/package-summary.html][java.lang.annotation]]
 
   + [[https://docs.oracle.com/javase/tutorial/java/annotations/index.html][Lesson: Annotations (The Java™ Tutorials > Learning the Java Language)]]
+
+* 注意事项
+  + 如果需要通过反射的方式获取注解，那么注解应该声明为 RUNTIME 类型
+  + 在获取注解后，调用相应的方法就可以获取到相应参数的值了
 

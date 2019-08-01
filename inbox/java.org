@@ -49,19 +49,4 @@
     + 主要在于一个创建新的数组，一个不会
   + [[https://stackoverflow.com/questions/47747199/why-does-hashmap-allow-a-null-key][java - Why does Hashmap allow a null key? - Stack Overflow]]
 
-* 同步
-  + 静态方法 - 类对象
-  + 实例方法 - 对象本身
-
-* 注解
-  如果要通过反射使用注解，那么应该将其配置为 RUNTIME
-
-* IDEA
-  只要遵循经典的项目结构，IDEA 还是可以直接加载非 IDEA 项目的。
-
-  + [[https://www.jetbrains.com/help/idea/creating-and-editing-live-templates.html?keymap=primary_emacs][Creating live templates - Help | IntelliJ IDEA]]
-
-* MD5
-  + [[https://www.baeldung.com/java-md5][MD5 Hashing in Java | Baeldung]]
-  + [[https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/DatatypeConverter.html#printHexBinary-byte:A-][DatatypeConverter (Java Platform SE 8 )]]
 
