@@ -113,3 +113,13 @@
   + [[https://www.cnblogs.com/dennyzhangdd/p/9602673.html][spring事务详解（三）源码详解 - 只会一点java - 博客园]]
   + 事务可以有名称
 
+* 事务原理
+  1. 通过 ThreadLocal 将连接绑定到当前线程
+  2. 获取连接时获取 ThreadLocal 中的连接对象
+  3. 调用方法前开启事务
+  4. 调用方法后提交回退事务，其他数据库的事务可以在获取连接时挂上
+
+  关键：SqlSessionFactoryBean
+  + [[https://my.oschina.net/fifadxj/blog/785621][mybatis-spring事务处理机制分析 - fifadxj的个人空间 - OSCHINA]]
+
+

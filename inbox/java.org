@@ -50,3 +50,29 @@
   + [[https://stackoverflow.com/questions/47747199/why-does-hashmap-allow-a-null-key][java - Why does Hashmap allow a null key? - Stack Overflow]]
 
 
+* JDBC
+  #+begin_example
+    MySQL Type      Java Type
+    ----------      ---------
+    CHAR            String
+    VARCHAR         String
+    LONGVARCHAR     String
+    NUMERIC         java.math.BigDecimal
+    DECIMAL         java.math.BigDecimal
+    BIT             boolean
+    TINYINT         byte
+    SMALLINT        short
+    INTEGER         int
+    BIGINT          long
+    REAL            float
+    FLOAT           double
+    DOUBLE          double
+    BINARY          byte[]
+    VARBINARY       byte[]
+    LONGVARBINARY   byte[]
+    DATE            java.sql.Date
+    TIME            java.sql.Time
+    TIMESTAMP       java.sql.Tiimestamp
+  #+end_example
+  
+  数据库中 DECIMAL 类型默认是不带小数位的，需要注意。
