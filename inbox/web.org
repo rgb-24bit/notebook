@@ -6,9 +6,6 @@
   + [[https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/index.html][URL编码的奥秘 | Aotu.io「凹凸实验室」]]
   + [[https://tools.ietf.org/html/rfc3986][RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax]]
 
-* HTML & CSS
-  + 
-    
 * DOM
   #+BEGIN_SRC plantuml
     @startuml
@@ -130,3 +127,5 @@
     - Function.call(this, ...) 指定 this 值
   + [[https://wangdoc.com/javascript/oop/prototype.html][对象的继承 - JavaScript 教程 - 网道]]
 
+* 组件
+  + [[http://www.ruanyifeng.com/blog/2019/08/web_components.html][Web Components 入门实例教程 - 阮一峰的网络日志]]

@@ -122,3 +122,6 @@
           return datetime.datetime.strptime(weekday, '%G %V %u').date()
     #+END_SRC
 
+* typing
+  + [[https://docs.python.org/3/library/typing.html][typing — Support for type hints — Python 3.7.4 documentation]]
+
