@@ -27,3 +27,7 @@
 
 * sudo
   sudo::/file
+* ledger
+  + [[https://c-tan.com/zh/post/ledger-org-babel-example/][在 Emacs Org-mode 中使用 Ledger 来记账 | 句末双空格]]
+  + [[https://flysands.github.io/blog/2017-12-27-%E4%BD%BF%E7%94%A8emacs%E5%92%8Cledger%E8%AE%B0%E8%B4%A6.html][使用emcas+ledger记账 | Flysands Blog]]
+
