@@ -52,3 +52,7 @@
   MySQL 事务中的查询语句会立即执行，而 Redis 的只是添加到应该对列中，因此，Redis 事务的只读操作只能和写操作分开，不然会阻塞。
 
 
+* Misc
+  + [[https://zhuanlan.zhihu.com/p/52988696][浅谈数据库执行计划 - 知乎]]
+  + [[https://www.cnblogs.com/CareySon/p/DifferenceBetweenCountStarAndCount1.html][Select count(*)和Count（1）的区别和执行方式 - CareySon - 博客园]]
+  + 

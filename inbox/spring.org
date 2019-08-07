@@ -122,4 +122,9 @@
   关键：SqlSessionFactoryBean
   + [[https://my.oschina.net/fifadxj/blog/785621][mybatis-spring事务处理机制分析 - fifadxj的个人空间 - OSCHINA]]
 
+* Misc
+  + 数据的校验
+  + Sentry
+  + [[http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html][mybatis – MyBatis 3 | 动态 SQL]]
+
 

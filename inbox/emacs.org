@@ -19,3 +19,11 @@
 
   考虑自己进行配置维护 @_@
 
+* magit
+  + 撤销修改：discard
+  + 窗口分割位置：
+    + [[https://emacs.stackexchange.com/questions/2513/how-to-get-org-agenda-to-prefer-split-window-right][org mode - How to get org-agenda to prefer split-window-right - Emacs Stack Exchange]]
+    + [[https://github.com/syl20bnr/spacemacs/issues/5140][How to make spacemacs split window right automatically? · Issue #5140 · syl20bnr/spacemacs]]
+
+* sudo
+  sudo::/file
