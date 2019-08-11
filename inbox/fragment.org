@@ -11,3 +11,10 @@
    + [[https://www.cnblogs.com/jabnih/p/7157921.html][Redis Pipeline原理分析 - Jabnih - 博客园]]
    + [[https://www.cnblogs.com/liunanjava/p/4401089.html][Spring(三)Bean继续入门 - 森林森 - 博客园]]
 
+* Misc
+  + [[https://www.jianshu.com/p/6428b6852f88][mac 查找被占用的8080端口并关闭 - 简书]]
+  + [[https://github.com/BurntSushi/erd][BurntSushi/erd: Translates a plain text description of a relational database schema to a graphical entity-relationship diagram.]]
+  + [[https://www.baeldung.com/configuration-properties-in-spring-boot][Guide to @ConfigurationProperties in Spring Boot | Baeldung]]
+  + [[https://juejin.im/post/5c1a1a3c5188254a4313c7a3][Spring boot 注解 ConfigurationProperties 的使用 - 掘金]]
+    
+

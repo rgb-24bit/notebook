@@ -5,4 +5,6 @@
   [[https://git-scm.com/docs/git-merge][Git - git-merge Documentation]]
   [[https://stackoverflow.com/questions/173919/is-there-a-theirs-version-of-git-merge-s-ours][Is there a "theirs" version of "git merge -s ours"? - Stack Overflow]]
 
+* remote
+  + [[https://gist.github.com/bjmiller121/f93cd974ff709d2b968f][Add multiple push URLs to a single git remote]]
 

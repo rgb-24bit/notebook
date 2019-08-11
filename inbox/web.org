@@ -129,3 +129,12 @@
 
 * 组件
   + [[http://www.ruanyifeng.com/blog/2019/08/web_components.html][Web Components 入门实例教程 - 阮一峰的网络日志]]
+
+* 语法
+  + [[https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/rest_spread.html][展开运算符与其余运算符· 从ES6开始的JavaScript学习生活]]
+
+* 部署
+  + [[https://segmentfault.com/q/1010000009971022][node.js - 如何部署nodejs应用到服务器？ - SegmentFault 思否]]
+  + PM2
+  + app.js
+

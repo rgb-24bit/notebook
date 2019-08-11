@@ -30,4 +30,23 @@
 * ledger
   + [[https://c-tan.com/zh/post/ledger-org-babel-example/][在 Emacs Org-mode 中使用 Ledger 来记账 | 句末双空格]]
   + [[https://flysands.github.io/blog/2017-12-27-%E4%BD%BF%E7%94%A8emacs%E5%92%8Cledger%E8%AE%B0%E8%B4%A6.html][使用emcas+ledger记账 | Flysands Blog]]
+  + ledger -b -e bal
 
+* search
+  + [[https://github.com/manateelazycat/snails][manateelazycat/snails: A modern, easy-to-expand fuzzy search framework]]
+  + [[https://github.com/sharkdp/fd][sharkdp/fd: A simple, fast and user-friendly alternative to 'find']]
+  + [[https://github.com/BurntSushi/ripgrep][BurntSushi/ripgrep: ripgrep recursively searches directories for a regex pattern]]
+  + [[http://ergoemacs.org/emacs/emacs_grep_find.html][Emacs: Search Text in Directory]]
+  + [[https://www.emacswiki.org/emacs/CategorySearchAndReplace][EmacsWiki: Category Search And Replace]]
+  + [[https://github.com/dajva/rg.el][dajva/rg.el: Emacs search tool based on ripgrep]]
+  + [[https://github.com/Wilfred/ag.el][Wilfred/ag.el: An Emacs frontend to The Silver Searcher]]
+  + [[https://github.com/bling/pt.el][bling/pt.el: An emacs front-end for Pt, the Platinum Searcher]]
+  + [[https://www.the5fire.com/about-ack-grep-in-linux.html][linux下的高效代码搜索工具-ack | the5fire的技术博客]]
+  + [[https://man.linuxde.net/grep][grep命令_Linux grep 命令用法详解：强大的文本搜索工具]]
+  + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#searching][spacemacs/DOCUMENTATION.org at develop · syl20bnr/spacemacs]]
+  + [[https://learnku.com/articles/7337/a-programmers-command-line-search-tool][程序员的命令行搜索工具 | Laravel China 社区]]
+  + [[https://juejin.im/entry/5b70f7705188256137187ffe][推荐一款比 Find 快 10 倍的搜索工具 FD - 阅读 - 掘金]]
+
+* jump
+  + [[https://emacs-china.org/t/topic/2376][如何实现 左侧括号 之间快速跳转 - Emacs-general - Emacs China]]
+  

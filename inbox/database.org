@@ -55,4 +55,6 @@
 * Misc
   + [[https://zhuanlan.zhihu.com/p/52988696][浅谈数据库执行计划 - 知乎]]
   + [[https://www.cnblogs.com/CareySon/p/DifferenceBetweenCountStarAndCount1.html][Select count(*)和Count（1）的区别和执行方式 - CareySon - 博客园]]
-  + 
+  + [[http://www.sqlservertutorial.net/sql-server-basics/sql-server-offset-fetch/][SQL Server OFFSET FETCH: Limit The Number of Rows Returned]]
+  + [[http://zhiheng.me/149][SQL Server 数据库的分页查询 | zhiheng]]
+
