@@ -1,0 +1,12 @@
+#+TITLE:      JavaScript Library
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#axios][Axios]]
+- [[#lodash][Lodash]]
+
+* Axios
+  + [[https://www.kancloud.cn/yunye/axios/234845][使用说明 · Axios 中文说明 · 看云]]
+
+* Lodash
+  + [[https://www.lodashjs.com/][Lodash 中文文档 | Lodash 中文网]]
+

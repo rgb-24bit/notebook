@@ -1,0 +1,10 @@
+#+TITLE:      认证
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#常用的几种认证方式][常用的几种认证方式]]
+
+* 常用的几种认证方式
+  + [[https://www.cnblogs.com/fengzheng/p/8416393.html][说一说几种常用的登录认证方式，你用的哪种 - 风的姿态 - 博客园]]
+  + [[http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html][JSON Web Token 入门教程 - 阮一峰的网络日志]]
+  + [[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html][理解 OAuth 2.0 - 阮一峰的网络日志]]
+

@@ -76,3 +76,24 @@
   #+end_example
   
   数据库中 DECIMAL 类型默认是不带小数位的，需要注意。
+* 正则表达式
+  通过如下的正则表单式去除查询条件中的通配符：
+  #+begin_src java
+    String.replaceAll("([\\\\_%])", "\\\\$1");
+  #+end_src
+  
+  实际效果：
+  #+begin_src java
+    jshell> String str = "l%k_e\\";
+    str ==> "l%k_e\\"
+
+    jshell> str.replaceAll("([\\\\_%])", "\\\\$1");
+    $5 ==> "l\\%k\\_e\\\\"
+  #+end_src
+
+* 异步
+  + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
+
+* solution
+  + [[https://www.cnblogs.com/rjzheng/p/9041659.html][【原创】分布式之数据库和缓存双写一致性方案解析 - 孤独烟 - 博客园]]
+

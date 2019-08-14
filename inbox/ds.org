@@ -70,4 +70,6 @@
 
 * 相关问题
   + [[https://www.nowcoder.com/discuss/66230][为什么半透明装饰模式不能实现对同一个对象的多次装饰？_技术交流_牛客网]]
+  + [[https://stackoverflow.com/questions/18618779/differences-between-proxy-and-decorator-pattern][oop - Differences between Proxy and Decorator Pattern - Stack Overflow]]
+
 

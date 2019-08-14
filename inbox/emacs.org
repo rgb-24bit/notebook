@@ -50,3 +50,19 @@
 * jump
   + [[https://emacs-china.org/t/topic/2376][如何实现 左侧括号 之间快速跳转 - Emacs-general - Emacs China]]
   
+* bookmark
+  + [[https://www.emacswiki.org/emacs/BookmarkPlus][EmacsWiki: Bookmark Plus]]
+
+* keybinding
+  + hydra
+
+
+* 标签
+  etags、ctags、gtags……
+
+* advice
+  + [[https://nullprogram.com/blog/2013/01/22/][The Limits of Emacs Advice « null program]]
+
+* lockfile
+  + [[https://www.emacswiki.org/emacs/LockFiles][EmacsWiki: Lock Files]]
+

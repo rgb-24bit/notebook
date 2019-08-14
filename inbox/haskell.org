@@ -1,0 +1,5 @@
+* Mac
+  #+begin_src bash
+    brew install haskell-stack
+  #+end_src
+

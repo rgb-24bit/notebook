@@ -1,1 +1,19 @@
-如果您在滚动浏览应用时改变主意而不想切换应用，请按下 Esc (Escape) 或句点键，然后松开 Command 键。
+* 应用切换
+  如果您在滚动浏览应用时改变主意而不想切换应用，请按下 Esc (Escape) 或句点键，然后松开 Command 键。
+
+* brew
+  + [[https://www.raydbg.com/2019/Homebrew-Update-Slow/][解决Homebrew下载更新极慢的问题 | RayDBG]]
+
+* 命令行工具
+  MacOS 中 XCode IDE 的子集：Command Line Tools。
+
+  安装：
+  #+begin_src bash
+    xcode-select --install
+  #+end_src
+
+  安装位置：
+  #+begin_example
+    /Library/Developer/CommandLineTools/
+  #+end_example
+  

@@ -1,3 +1,9 @@
 * JDBC
   + [[https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html][MySQL Connector/J 8.0 Developer Guide - 6.3 Configuration Properties]]
 
+* 自增 ID
+  插入时，如果插入的 ID 值为 NULL，那么 ID 值会通过自增自动生成，如果不是 NULL，具直接使用该值。
+
+* 插入更新
+  + [[https://lobert.iteye.com/blog/1604122][ON DUPLICATE KEY UPDATE重复插入时更新 - 知知为知知 - ITeye博客]]
+
