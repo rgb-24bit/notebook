@@ -1,10 +1,11 @@
 #+TITLE:      MySQL
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#安装与配置][安装与配置]]
-- [[#事务相关][事务相关]]
+- [[#install][Install]]
+- [[#事务][事务]]
   - [[#事务的隔离级别][事务的隔离级别]]
-- [[#sql-语句][SQL 语句]]
+- [[#执行计划][执行计划]]
+- [[#sql][SQL]]
 - [[#相关问题][相关问题]]
   - [[#mysql-中-schema-和-database-的区别是什么][MySQL 中 Schema 和 Database 的区别是什么]]
   - [[#时区陷阱问题][时区陷阱问题]]
@@ -13,43 +14,16 @@
   - [[#怎样在数据存在时更新不存在时插入][怎样在数据存在时更新不存在时插入]]
   - [[#怎样显示-table-的元数据信息][怎样显示 Table 的元数据信息]]
 
-* 安装与配置
-  MySQL 的安装指令如下：
+* Install
+  目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
   #+BEGIN_SRC bash
     apt-get install mariadb-server
   #+END_SRC
-
-  配置 MySQL 允许外网进行访问：
-  1) root 用户密码配置：
-       #+BEGIN_SRC bash
-         # 执行安全配置向导 - root 密码
-         mysql_secure_installation
-       #+END_SRC
-
-  2) 更改配置项中的 ~bind-address~ 为 ~0.0.0.0~:
-     #+BEGIN_SRC bash
-       vim /etc/mysql/mariadb.conf.d/50-server.cnf
-     #+END_SRC
-
-  3) 创建拥有所有权限可远程访问的用户：
-     #+BEGIN_SRC sql
-       CREATE USER 'user'@'%' IDENTIFIED BY 'password';
-       GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
-       FLUSH PRIVILEGES;
-     #+END_SRC
-
-  4) 允许某用户进行远程主机访问：
-     #+BEGIN_SRC sql
-       > use mysql;
-       > UPDATE USER SET HOST='%' WHERE user='user_name';
-     #+END_SRC
-       
-  5) 重启服务
-     #+BEGIN_SRC bash
-       service mysql restart
-     #+END_SRC
-
-* 事务相关
+  
+  安装完成后，可以通过 ~mysql_secure_installation~ 配置 root 用户的密码，参考：
+  + [[https://mariadb.com/kb/en/library/mysql_secure_installation/][mysql_secure_installation - MariaDB Knowledge Base]]
+  
+* 事务
   事务的基本要素为：
   + 原子性：事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用
   + 一致性：执行事务前后，数据保持一致，多个事务对同一个数据读取的结果是相同的
@@ -91,7 +65,50 @@
    + [[https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB(%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3).md#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB][事务隔离级别(图文详解)]]
    + [[https://www.cnblogs.com/huanongying/p/7021555.html][MySQL 的四种事务隔离级别 - 花弄影 - 博客园]]
 
-* SQL 语句
+* 执行计划
+  MySQL 数据库索引使用的是 B+ 树结构，我们查询数据时，查询条件命中索引时，查询效率会特别高，如果没有命中索引，此时，则会全表扫描，耗时且消耗性能。
+
+  通过执行计划，我们可以得知一条 SQL 语句执行下来，这个 SQL 分别查询了哪些表，先查询的哪张表后查询的哪张表，以及是否使用了索引，使用了哪些索引，
+  当前 SQL 语句查询效率是否高效，这些数据从哪获取到。
+
+  通过在 SQL 语句前，添加 explain 关键字，MySQL 会在查询上设置一个标记，执行查询时，会返回执行计划的信息，而不是执行这一条 SQL 语句。
+
+  返回的执行计划的信息格式如下：
+  #+begin_example
+    +----+-------------+-------+------------+-------+---------------+---------+---------+--------+------+----------+-------------+
+    | id | select_type | table | partitions | type  | possible_keys | key     | key_len | ref    | rows | filtered | Extra       |
+    +----+-------------+-------+------------+-------+---------------+---------+---------+--------+------+----------+-------------+
+    | 1  | SIMPLE      | order | <null>     | index | <null>        | PRIMARY | 8       | <null> | 51   | 100.0    | Using index |
+    +----+-------------+-------+------------+-------+---------------+---------+---------+--------+------+----------+-------------+
+  #+end_example
+
+  其中，各字段的含义如下：
+  + id：查询 SQL 语句 id，当有多个查询时，将拆分为多个执行计划，每个执行计划都有一个 id，id是 SQL 执行成功的标识，SQL 从大到小的执行，id 越大越先执行。
+    当 id 相同的情况时，执行顺序由上至下。
+  + select_type：查询类型，MYSQL 中一共有 8 中查询类型，主要作用是用来标记查询类型，比如：普通查询、关联查询、子查询、左查询等
+  + table：当前执行计划查询的表，如果给表起别名了，则显示别名信息
+  + partitions:：访问的分区表信息
+  + type：查询方式，即 MYSQL 如何去查找的表中的行，查询方式是 SQL 优化中一个很重要的指标，结果值从好到坏依次是：system > const > eq_ref > ref > fulltext > ref_or_null > index_merge > unique_subquery > index_subquery > range > index > ALL。
+    |--------+--------------------------------------------------------------------------------------------------------------|
+    | 类型   | 含义                                                                                                         |
+    |--------+--------------------------------------------------------------------------------------------------------------|
+    | system | 表中只有一行数据，此时根据索引查询一次就能找到                                                               |
+    | const  | SQL 查询时根据索引一次就找到了，此时会显示为 const                                                           |
+    | eq_ref | 唯一索引扫描，常见于主键和唯一索引扫描，索引在表中只对应一条记录                                             |
+    | ref    | 与 eq_ref 相比，ref 常见于非唯一索引扫描，通常能扫描到多条记录，还可见于唯一索引最左原则匹配扫描也会出现 ref |
+    | range  | 通常见于范围扫描，比如：in、大于小于等。索引根据给定范围进行检索                                             |
+    | index  | 索引全表扫描，此时扫描只扫描索引树，非数据库表                                                               |
+    | All    | 全表扫描                                                                                                     |
+    |--------+--------------------------------------------------------------------------------------------------------------|
+  + possible_keys：可能使用到的索引
+  + key：实际使用到的索引
+  + key_len：当前使用的索引的长度
+  + ref：关联 id 等信息
+  + rows：查找到记录所扫描的行数
+  + filtered：查找到所需记录所占总扫描记录数比例
+  + Extra：额外的信息
+
+* SQL
   + 在 MySQL 中 LIMIT 不是子句，因此需要放在 ORDER BY 子句后面
 
 * 相关问题
@@ -101,24 +118,28 @@
    参考：[[https://stackoverflow.com/questions/11618277/difference-between-schema-database-in-mysql][Difference Between Schema / Database in MySQL - Stack Overflow]]
 
 ** 时区陷阱问题
-    ~mysql~ 6.0 以上的版本需要在链接字符串中假设参数 ~serverTimezone~ 指定时区：
-    #+BEGIN_SRC xml
-      <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=UTC"/>
-    #+END_SRC
+   ~mysql~ 6.0 以上的版本需要在链接字符串中假设参数 ~serverTimezone~ 指定时区：
+   #+BEGIN_SRC xml
+     <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=UTC"/>
+   #+END_SRC
 
-    但是设置 ~UTC~ 时区可能导致时间精度的问题， 因此可以设置为中国标准时间：
-    #+BEGIN_SRC xml
-      <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=Asia/Shanghai"/>
-    #+END_SRC
+   但是设置 ~UTC~ 时区可能导致时间精度的问题， 因此可以设置为中国标准时间：
+   #+BEGIN_SRC xml
+     <property name="url" value="jdbc:mysql://localhost:3306/springdatastudy?serverTimezone=Asia/Shanghai"/>
+   #+END_SRC
 
 ** 怎样执行 SQL 脚本
-    #+BEGIN_SRC bash
-      mysql> source /path/to/script
-    #+END_SRC
+   #+BEGIN_SRC bash
+     mysql> source /path/to/script
+   #+END_SRC
 
 ** 怎样通过远程主机进行访问
    + 更改配置文件中的 ~bind-address~ 为 ~0.0.0.0~, 配置文件在 ~/etc/mysql/~, 使得允许远程主机访问
    + 更改用户的 ~host~ 为 ~%~, 允许该用户进行远程访问
+      #+BEGIN_SRC sql
+        > use mysql;
+        > UPDATE USER SET HOST='%' WHERE user='user_name';
+      #+END_SRC     
    + 通过如下方式创建拥有所有权限可远程访问的用户
      #+BEGIN_SRC sql
        CREATE USER 'user'@'%' IDENTIFIED BY 'password';
@@ -136,6 +157,5 @@
        INSERT INTO tbl(name) VALUES('john');
    #+END_SRC
 
-** 怎样显示 Table 的元数据信息   
+** 怎样显示 Table 的元数据信息
    通过 ~SHOW COLUMNS FROM tblName~ 可以显示表的元数据信息，但是也可以通过 ~DESCRIBE tblName~ 快速查询。
-

@@ -66,3 +66,9 @@
 * lockfile
   + [[https://www.emacswiki.org/emacs/LockFiles][EmacsWiki: Lock Files]]
 
+* find-file
+  + [[https://man.linuxde.net/locate_slocate][locate/slocate命令_Linux locate/slocate 命令用法详解：查找文件或目录]]
+  + [[https://stackoverflow.com/questions/4340949/how-to-find-a-file-in-emacs-without-known-exact-directory][How to find a file in Emacs without known exact directory? - Stack Overflow]]
+  + [[https://blog.csdn.net/yaomingyang/article/details/74852361][MAC终端搜索文件find mdfind操作命令 - 明洋的专栏 - CSDN博客]]
+  + [[https://www.emacswiki.org/emacs/LocateFilesAnywhere][EmacsWiki: Locate Files Anywhere]]
+

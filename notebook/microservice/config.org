@@ -1,0 +1,85 @@
+#+TITLE:      配置中心
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#apollo][Apollo]]
+  - [[#spring-日志等级的动态配置][Spring 日志等级的动态配置]]
+  - [[#相关文档][相关文档]]
+
+* Apollo
+  Apollo 配置中心的使用还是很简单的，基本上可以无缝地和 Spring 项目一起使用，相对难一点的是配置结构的理解。
+
+  Apollo 配置中心的配置结构分为四个层次：应用 -> 环境 -> 集群 -> 名称空间。这四个层次属于包含关系，即：一个应用可以包含多个环境，
+  一个环境可以包含多个集群，一个集群可以包含多个名称空间。
+
+  配置最终是保存在名称空间中的，使用时，由应用 -> 环境 -> 集群 -> 名称空间指定。
+
+  当名称空间属于公共名称空间时，可以被其他的名称空间关联，创建该名称空间的应用为父名称空间，关联该名称空间的名称空间为子名称空间。
+
+  关联时，关联的是 环境 -> 集群 -> 名称空间的关系，保证一一对应。
+
+** Spring 日志等级的动态配置
+   Apollo 为 Java 提供了很好的支持，需要添加的依赖：
+   #+begin_src xml
+     <dependency>
+       <groupId>com.ctrip.framework.apollo</groupId>
+       <artifactId>apollo-client</artifactId>
+       <version>1.1.0</version>
+     </dependency>
+   #+end_src
+
+   核心代码：
+   #+begin_src java
+     /**
+      ,* 日志等级的动态配置
+      ,*
+      ,* @author rgb-24bit
+      ,*/
+     @Service
+     public class LoggerConfiguration {
+       private static final Logger logger = LoggerFactory.getLogger(LoggerConfiguration.class);
+       private static final String LOGGER_TAG = "logging.level.";
+
+       @Autowired
+       private LoggingSystem loggingSystem;
+
+       @ApolloConfig
+       private Config config;
+
+       /**
+        ,* 配置产生变化时更新日志等级的配置
+        ,*
+        ,* @param changeEvent 产生变化的配置
+        ,*/
+       @ApolloConfigChangeListener
+       private void onChange(ConfigChangeEvent changeEvent) {
+         changeEvent.changedKeys().forEach(this::refreshLoggingLevel);
+       }
+
+       /**
+        ,* 启动时从 Apollo 配置中心获取日志等级的配置
+        ,*/
+       @PostConstruct
+       private void logLevelConfigFromApollo() {
+         if (config != null) {
+           config.getPropertyNames().forEach(this::refreshLoggingLevel);
+         }
+       }
+
+       private void refreshLoggingLevel(String key) {
+         if (StringUtils.containsIgnoreCase(key, LOGGER_TAG)) {
+           // 默认日志输出等级为 INFO
+           LogLevel logLevel = LogLevel.valueOf(config.getProperty(key, "info").toUpperCase());
+           loggingSystem.setLogLevel(key.replace(LOGGER_TAG, ""), logLevel);
+           logger.info("Logging level config - key: {}, level: {}", key, logLevel);
+         }
+       }
+     }
+   #+end_src
+   
+   注意事项：
+   + 需用通过 ~@EnableApolloConfig~ 注解启用 Apollo 配置
+   + Mybatis 日志的动态配置，需要配置日志管理器为 STDOUT_LOGGING 以外的日志器
+
+** 相关文档
+   + [[https://github.com/ctripcorp/apollo/wiki][Home · Apollo Wiki]]
+
