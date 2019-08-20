@@ -49,7 +49,6 @@
     + 主要在于一个创建新的数组，一个不会
   + [[https://stackoverflow.com/questions/47747199/why-does-hashmap-allow-a-null-key][java - Why does Hashmap allow a null key? - Stack Overflow]]
 
-
 * JDBC
   #+begin_example
     MySQL Type      Java Type
@@ -97,3 +96,5 @@
 * solution
   + [[https://www.cnblogs.com/rjzheng/p/9041659.html][【原创】分布式之数据库和缓存双写一致性方案解析 - 孤独烟 - 博客园]]
 
+* java
+  Maven - SNAPSHOST - RELEASE

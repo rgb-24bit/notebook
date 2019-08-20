@@ -190,3 +190,7 @@
 * jit & aot
   JIT (Just-In-Time - 实时编译) 和 AOT (Ahead-Of-Time - 预先编译)
 
+* 领域模型
+  + [[https://www.google.com/search?q=%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B&oq=%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B&aqs=chrome..69i57.5168j0j4&sourceid=chrome&ie=UTF-8][领域模型 - Google 搜索]]
+  + 面向数据/事件编程
+
