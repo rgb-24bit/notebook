@@ -1,2 +1,2 @@
 all:
-	python makenote.py
+	python3 makenote.py
