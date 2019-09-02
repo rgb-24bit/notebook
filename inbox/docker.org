@@ -1,0 +1,2 @@
+* 限制内存
+  + [[https://k8smeetup.github.io/docs/tasks/administer-cluster/cpu-memory-limit/][设置 Pod CPU 和内存限制 | Kubernetes]]

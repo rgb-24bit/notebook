@@ -1,0 +1,12 @@
+#+TITLE:      数据库连接池
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#druid][Druid]]
+
+* Druid
+  Druid 是由阿里开发并开源的一款数据库连接池，文档和其他阿里项目一样混乱，但是库本身还是很强大的。
+
+  在 Spring 中使用时，可以通过 ~druid-spring-boot-starter~ 简化配置难度，可以很方便的配置连接池的使用，并开启监控。
+
+  + [[https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter][druid/druid-spring-boot-starter at master · alibaba/druid]]
+

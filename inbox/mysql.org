@@ -11,3 +11,14 @@
   + [[https://www.w3schools.com/sql/func_mysql_cast.asp][MySQL CAST() Function]]
   + [[https://lobert.iteye.com/blog/1604122][ON DUPLICATE KEY UPDATE重复插入时更新 - 知知为知知 - ITeye博客]]
 
+* 索引
+  + [[https://tech.meituan.com/2014/06/30/mysql-index.html][MySQL索引原理及慢查询优化 - 美团技术团队]]
+  + [[https://juejin.im/post/5b55b842f265da0f9e589e79#heading-8][数据库两大神器【索引和锁】 - 掘金]]
+  + [[https://www.jianshu.com/p/6446c0118427][数据库索引创建与优化 - 简书]]
+
+* 字段长度
+  + [[https://blog.csdn.net/u012491783/article/details/78339269][mysql varchar(50)到底能存多少个汉字 - 稻草人的格子衫 - CSDN博客]]
+
+* 分页查询
+  + [[https://www.cnblogs.com/youyoui/p/7851007.html][MySQL分页查询优化 - 悠悠i - 博客园]]
+

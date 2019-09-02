@@ -72,3 +72,9 @@
   + [[https://blog.csdn.net/yaomingyang/article/details/74852361][MAC终端搜索文件find mdfind操作命令 - 明洋的专栏 - CSDN博客]]
   + [[https://www.emacswiki.org/emacs/LocateFilesAnywhere][EmacsWiki: Locate Files Anywhere]]
 
+* mac
+  + [[https://www.emacswiki.org/emacs/EmacsForMacOS#toc22][EmacsWiki: Emacs For Mac OS]]
+
+* delete space
+  + [[http://ergoemacs.org/emacs/emacs_shrink_whitespace.html][Emacs: Delete Whitespace around Cursor]]
+

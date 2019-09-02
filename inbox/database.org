@@ -1,60 +1,10 @@
-* 关系数据库概述
-  1. *Integrity Rules* - 实体完整性
-  2. SELECT *Statements* - 语句
-  3. WHERE *Clauses* - 条件
-  4. *Joins* - 连接
-  5. *Result Sets and Cursors* - 结果集和游标
-  6. *Transactions* - 事务
-  7. *Stored Procedures* - 存储过程
-  8. *Metadata* - 元数据
 * 角色
   + [[https://www.cnblogs.com/sdusrz/p/6340365.html][经典角色权限系统设计五张表及拓展应用 - sduSRZ - 博客园]]
 
-* 规范
-  + [[https://www.sqlstyle.guide/zh/][SQL样式指南 · SQL style guide by Simon Holywell]]
-
-* mysql
-  + 主写从读，主应该要InnoDB
 * redis
-** 客户端的选择：
-   概念：
-   + Jedis: 是Redis 的 Java 实现客户端，提供了比较全面的 Redis 命令的支持
-   + Redisson: 实现了分布式和可扩展的 Java 数据结构
-   + Lettuce: 高级 Redis 客户端，用于线程安全同步，异步和响应使用，支持集群，Sentinel，管道和编码器
-
-   优点：
-   + Jedis: 比较全面的提供了 Redis 的操作特性
-   + Redisson: 促使使用者对 Redis 的关注分离，提供很多分布式相关操作服务，例如，分布式锁，分布式集合，可通过 Redis 支持延迟队列
-   + Lettuce: 主要在一些分布式缓存框架上使用比较多
-     
-   可伸缩性：
-   + Jedis: 使用阻塞的 I/O，且其方法调用都是同步的，程序流需要等到 sockets 处理完I/O才能执行，不支持异步。Jedis 客户端实例不是线程安全的，所以需要通过连接池来使用 Jedis
-   + Redisson: 基于 Netty 框架的事件驱动的通信层，其方法调用是异步的。Redisson 的 API 是线程安全的，所以可以操作单个 Redisson 连接来完成各种操作
-   + Lettuce: 基于 Netty 框架的事件驱动的通信层，其方法调用是异步的。Lettuce 的 API 是线程安全的，所以可以操作单个 Lettuce 连接来完成各种操作
-
-   参考：
-   + [[https://github.com/spring-projects/spring-session/issues/789][Why is Lettuce the default Redis client used in Spring Session Redis? · Issue #789 · spring-projects/spring-session]]
-   + [[https://stackoverflow.com/questions/42250951/redisson-vs-jedis-for-redis][java - Redisson vs Jedis for redis - Stack Overflow]]
-
-** 使用教程
-   + [[https://www.baeldung.com/jedis-java-redis-client-library][Intro to Jedis - the Java Redis Client Library | Baeldung]]
-   + [[https://www.baeldung.com/java-redis-lettuce][Introduction to Lettuce - the Java Redis Client | Baeldung]]
-   + [[https://www.baeldung.com/redis-redisson][A Guide to Redis with Redisson | Baeldung]]
-
 ** 分布式锁
    + [[https://juejin.im/post/5b737b9b518825613d3894f4][redis系列：分布式锁 - 掘金]]
    + [[https://www.cnblogs.com/zeng1994/p/03303c805731afc9aa9c60dbbd32a323.html][SpringBoot整合Redis及Redis工具类撰写 - zeng1994 - 博客园]]
    + [[https://juejin.im/post/5d26266de51d454f71439d70][面试不懂分布式锁？那得多吃亏。。。 - 掘金]]
    + [[https://juejin.im/post/5bf3f15851882526a643e207][拜托，面试请不要再问我Redis分布式锁的实现原理！【石杉的架构笔记】 - 掘金]]
-
-
-* 事务
-  MySQL 事务中的查询语句会立即执行，而 Redis 的只是添加到应该对列中，因此，Redis 事务的只读操作只能和写操作分开，不然会阻塞。
-
-
-* Misc
-  + [[https://zhuanlan.zhihu.com/p/52988696][浅谈数据库执行计划 - 知乎]]
-  + [[https://www.cnblogs.com/CareySon/p/DifferenceBetweenCountStarAndCount1.html][Select count(*)和Count（1）的区别和执行方式 - CareySon - 博客园]]
-  + [[http://www.sqlservertutorial.net/sql-server-basics/sql-server-offset-fetch/][SQL Server OFFSET FETCH: Limit The Number of Rows Returned]]
-  + [[http://zhiheng.me/149][SQL Server 数据库的分页查询 | zhiheng]]
 

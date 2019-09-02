@@ -91,3 +91,14 @@
 * 缓存
   + [[https://tech.meituan.com/2018/01/19/mybatis-cache.html][聊聊MyBatis缓存机制 - 美团技术团队]]
 
+* 动态 SQL
+  + [[https://www.jianshu.com/p/bbeff97d41eb][mybatis中${}、 #{}区别及应用场景 - 简书]]
+
+* json
+  + [[https://www.cnblogs.com/rollenholt/p/3365866.html][Mybatis的ResultMap的使用 - Rollen Holt - 博客园]]
+  + [[https://www.cnblogs.com/muscleape/p/10064031.html][MySQL JSON 类型数据操作 - Muscleape - 博客园]]
+
+* generater
+  + [[https://mapperhelper.github.io/docs/3.usembg/][3. MyBatis Generator 插件]]
+
+

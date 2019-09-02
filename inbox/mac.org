@@ -17,3 +17,10 @@
     /Library/Developer/CommandLineTools/
   #+end_example
   
+  + [[https://cnbin.github.io/blog/2015/06/19/mac-xia-de-top-he-htop-zhi-ling/][Mac 下的 Top 和 Htop 指令 - 陈斌彬的技术博客]]
+
+* 快捷键
+  + [[https://apple.stackexchange.com/questions/285113/is-there-a-mac-keyboard-shortcut-to-select-current-line][macos - Is there a Mac keyboard shortcut to "Select Current Line"? - Ask Different]]
+
+* 聚集
+  + [[https://support.apple.com/zh-cn/HT204014][在 Mac 上使用“聚焦” - Apple 支持]]

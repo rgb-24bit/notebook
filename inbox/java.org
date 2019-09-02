@@ -98,3 +98,10 @@
 
 * java
   Maven - SNAPSHOST - RELEASE
+
+* repl
+  + [[https://www.infoq.cn/article/jshell-java-repl][JShell：Java REPL综合指南-InfoQ]]
+
+* 日志
+  在 CompletableFuture 中执行的任务，MyBatis 的日志好像没有打印出来
+

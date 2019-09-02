@@ -16,6 +16,8 @@
 
   缓冲区可能会溢出。
 
+  [[https://segmentfault.com/a/1190000014044351#articleHeader4][一篇搞懂TCP、HTTP、Socket、Socket连接池 - 个人文章 - SegmentFault 思否]]
+
 * HTTP
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Session][典型的 HTTP 会话 - HTTP | MDN]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x][HTTP/1.x 的连接管理 - HTTP | MDN]]

@@ -10,10 +10,11 @@
   - [[#dataset-类][DataSet 类]]
   - [[#简单使用总结][简单使用总结]]
 - [[#t-sql-使用][T-SQL 使用]]
-- [[#问题集][问题集]]
+- [[#相关问题][相关问题]]
   - [[#通过-t-sql-语句备份还原数据库][通过 T-SQL 语句备份还原数据库]]
   - [[#删除已存在的数据库][删除已存在的数据库]]
   - [[#通过-t-sql-语句创建数据库][通过 T-SQL 语句创建数据库]]
+  - [[#怎样在-sql-server-中进行分页查询][怎样在 SQL Server 中进行分页查询]]
 
 * 使用 C# 操作 SQL Server
   + [[http://www.cnblogs.com/rainman/archive/2012/03/13/2393975.html][C# 操作 SQL Server 数据库]]
@@ -193,7 +194,7 @@
       ALTER LOGIN sa ENABLE;
     #+END_SRC
 
-* 问题集
+* 相关问题
 ** 通过 T-SQL 语句备份还原数据库
    + Back up the database to disk.
      #+BEGIN_SRC sql
@@ -234,4 +235,16 @@
          filename = '/path/to/db_log.ldf'
        );
    #+END_SRC
+
+** 怎样在 SQL Server 中进行分页查询
+   在 SQL Server 2012 以上的版本中，可以使用如下的方式：
+   #+begin_src sql
+     SELECT * FROM TABLE ORDER BY ? OFFSET (@pageSize * (@pageIndex - 1)) ROWS FETCH NEXT @pageSize ROWS ONLY
+   #+end_src
+
+   需要注意的是，OFFSET 是 ORDER BY 的字句，必须在 ORDER BY 之后使用，可以参考：
+   + [[http://www.sqlservertutorial.net/sql-server-basics/sql-server-offset-fetch/][SQL Server OFFSET FETCH: Limit The Number of Rows Returned]]
+
+   在 SQL Server 2012 以前的版本，可以参考：
+   + [[http://zhiheng.me/149][SQL Server 数据库的分页查询 | zhiheng]]
 

@@ -138,3 +138,32 @@
   + PM2
   + app.js
 
+* Vue
+  + [[https://www.cnblogs.com/xumqfaith/p/7743387.html][vue中的 ref 和 $refs - 伊优 - 博客园]]
+  + [[https://blog.csdn.net/p930318/article/details/82767401][vue样式加scoped后不能覆盖组件的原有样式解决方法 - 小耳朵晨晨 - CSDN博客]]
+
+* React
+  + [[https://zh-hans.reactjs.org/docs/add-react-to-a-website.html][在网站中添加 React – React]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script][<script> - HTML（超文本标记语言） | MDN]]
+  + [[https://www.babeljs.cn/][Babel 中文网 · Babel - 下一代 JavaScript 语法的编译器]]
+  + [[https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Code_snippets/Rosetta][Rosetta - Archive of obsolete content | MDN]]
+
+* css
+  + [[https://www.cnblogs.com/wangpenghui522/p/5467560.html][sass/scss 和 less的区别 - 孤舟蓑翁 - 博客园]]
+  + [[https://www.cnblogs.com/fozero/p/6959828.html][通过!important设置css样式优先级 - fozero - 博客园]]
+
+* npm
+  + [[https://javascript.ruanyifeng.com/nodejs/packagejson.html][package.json文件 -- JavaScript 标准参考教程（alpha）]]
+
+* Chrome 打印时去除 href
+  + [[https://stackoverflow.com/questions/7301989/need-to-remove-href-values-when-printing-in-chrome][css - Need to remove href values when printing in Chrome - Stack Overflow]]
+  #+begin_src html
+    <style media="print">
+        @media print {
+            a[href]:after {
+                content: none !important;
+            }
+        }
+    </style>
+  #+end_src
+

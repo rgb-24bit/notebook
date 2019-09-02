@@ -2,8 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#apollo][Apollo]]
+  - [[#spring-中的使用][Spring 中的使用]]
   - [[#spring-日志等级的动态配置][Spring 日志等级的动态配置]]
-  - [[#相关文档][相关文档]]
 
 * Apollo
   Apollo 配置中心的使用还是很简单的，基本上可以无缝地和 Spring 项目一起使用，相对难一点的是配置结构的理解。
@@ -16,6 +16,19 @@
   当名称空间属于公共名称空间时，可以被其他的名称空间关联，创建该名称空间的应用为父名称空间，关联该名称空间的名称空间为子名称空间。
 
   关联时，关联的是 环境 -> 集群 -> 名称空间的关系，保证一一对应。
+
+** Spring 中的使用
+   通过 Spring 使用 Apollo 时，Apollo 提供了多种配置方式，其中，可以通过 Java 注解 ~@EnableApolloConfig~ 来启动配置，也可以在配置文件中进行配置：
+   #+begin_src conf
+     apollo.bootstrap.enabled = true
+   #+end_src
+
+   在 Apollo 和 Spring 的集成中，有两个比较关键的类：ApolloConfigRegistrar 和 ApolloAnnotationProcessor，一个会将 Apollo 配置中心的配置注入到容器中，
+   而另一个，则会处理 Apollo 本身的一些注解，比如 ApolloConfigChangeListener。
+
+   参考链接：
+   + [[https://www.cnblogs.com/stateis0/p/9247967.html][Apollo 2 如何支持 @Value 注解自动更新 - 莫那-鲁道 - 博客园]]
+   + [[https://www.cnblogs.com/yejg1212/p/10232871.html][Apollo源码阅读笔记（一） - yejg1212 - 博客园]]
 
 ** Spring 日志等级的动态配置
    Apollo 为 Java 提供了很好的支持，需要添加的依赖：
@@ -79,7 +92,4 @@
    注意事项：
    + 需用通过 ~@EnableApolloConfig~ 注解启用 Apollo 配置
    + Mybatis 日志的动态配置，需要配置日志管理器为 STDOUT_LOGGING 以外的日志器
-
-** 相关文档
-   + [[https://github.com/ctripcorp/apollo/wiki][Home · Apollo Wiki]]
 

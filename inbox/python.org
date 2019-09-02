@@ -125,3 +125,12 @@
 * typing
   + [[https://docs.python.org/3/library/typing.html][typing — Support for type hints — Python 3.7.4 documentation]]
 
+* poetry
+  + [[https://github.com/EmilyQiRabbit/gold-miner/blob/58c3b7dcd653ebccb5b5c1a18f36f170b76eb698/TODO1/current-status-of-python-packaging.md][gold-miner/current-status-of-python-packaging.md at 58c3b7dcd653ebccb5b5c1a18f36f170b76eb698 · EmilyQiRabbit/gold-miner]]
+  + [[http://www.dalbll.com/Group/Topic/Python/5900][Pipenv: 吹嘘自己无所不能，实际上没什么卵用-博客-dalbll]]
+
+* sys.argv
+  #+begin_src python
+    prog, *args = sys.argv
+  #+end_src
+
