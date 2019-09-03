@@ -4,22 +4,25 @@
 - [[#网络面板过滤请求][网络面板过滤请求]]
 - [[#puppeteer][puppeteer]]
 - [[#user-agent][User-Agent]]
+- [[#chrome-扩展][Chrome 扩展]]
 
 * 网络面板过滤请求
-  过滤请求的关键字：
-  + ~domain~. 根据域名过滤，可使用通配符 ~*~, 如 ~*.com~
-  + ~has-response-header~. 显示包含指定 HTTP 响应标头的资源
-  + ~is~. 使用 ~is:running~ 可以查找 ~WebSocket~ 资源
-  + ~larger-than~. 显示大于指定大小的资源，以字节为单位
-  + ~method~. 显示通过指定 HTTP 方法类型检索的资源
-  + ~mime-type~. 显示指定 MIME 类型的资源
-  + ~mixed-content~. 显示所有混合内容资源 (mixed-content:all)，
-    或者仅显示当前显示的资源 (mixed-content:displayed)
-  + ~scheme~. 显示通过未保护 HTTP (scheme:http) 或受保护 HTTPS (scheme:https) 检索的资源
-  + ~set-cookie-domain~. 显示具有 Set-Cookie 标头并带有与指定值匹配的 Domain 属性的资源
-  + ~set-cookie-name~. 显示具有 Set-Cookie 标头并且名称与指定值匹配的资源
-  + ~set-cookie-value~. 显示具有 Set-Cookie 标头并且值与指定值匹配的资源
-  + ~status-code~. 仅显示 HTTP 状态代码与指定代码匹配的资源
+  |---------------------+----------------------------------------------------------------------------------------------|
+  | 关键字              | 作用                                                                                         |
+  |---------------------+----------------------------------------------------------------------------------------------|
+  | ~domain~              | 根据域名过滤，可使用通配符 ~*~, 如 ~*.com~                                                       |
+  | ~has-response-header~ | 显示包含指定 HTTP 响应标头的资源                                                             |
+  | ~is~                  | 使用 ~is:running~ 可以查找 ~WebSocket~ 资源                                                      |
+  | ~larger-than~         | 显示大于指定大小的资源，以字节为单位                                                         |
+  | ~method~              | 显示通过指定 HTTP 方法类型检索的资源                                                         |
+  | ~mime-type~           | 显示指定 MIME 类型的资源                                                                     |
+  | ~mixed-content~       | 显示所有混合内容资源 (mixed-content:all)，或者仅显示当前显示的资源 (mixed-content:displayed) |
+  | ~scheme~              | 显示通过未保护 HTTP (scheme:http) 或受保护 HTTPS (scheme:https) 检索的资源                   |
+  | ~set-cookie-domain~   | 显示具有 Set-Cookie 标头并带有与指定值匹配的 Domain 属性的资源                               |
+  | ~set-cookie-name~     | 显示具有 Set-Cookie 标头并且名称与指定值匹配的资源                                           |
+  | ~set-cookie-value~    | 显示具有 Set-Cookie 标头并且值与指定值匹配的资源                                             |
+  | ~status-code~         | 仅显示 HTTP 状态代码与指定代码匹配的资源                                                     |
+  |---------------------+----------------------------------------------------------------------------------------------|
   
 * puppeteer
   中国区使用需要换源： ~PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors~
@@ -31,4 +34,7 @@
   #+BEGIN_EXAMPLE
     Mozilla/2.0 (compatible; MSIE Version; Operating System)
   #+END_EXAMPLE
+
+* Chrome 扩展
+  + [[https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8][Chrome插件(扩展)开发全攻略 - 我是小茗同学 - 博客园]]
 

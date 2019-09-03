@@ -1,8 +1,10 @@
-#+TITLE:      其他算法
+#+TITLE:      Others
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#base64-编码][Base64 编码]]
 - [[#lru-cache][LRU Cache]]
+- [[#bitmap][BitMap]]
+- [[#bloomfilter][BloomFilter]]
 
 * Base64 编码
   *Base64* 是一种基于 64 个可打印字符来表示二进制数据的表示方法。由于 2 ** 6 = 64，所以每 6 个比特为一个单元，对应某个可打印字符。
@@ -184,4 +186,31 @@
   #+END_SRC
 
   参考：[[https://yikun.github.io/2015/04/03/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AALRU-Cache%EF%BC%9F/][如何设计实现一个 LRU Cache | Yikun]]
+
+* BitMap
+  BitMap 算法通过一个 Bit 数组来标识一个值是否存在，如果该值存在，就将该值所在的 Bit 位置为 1，反之置为 0。
+
+  因为 BitMap 算法中用来标识一个值是否存在只需要一个 Bit 位，因此，相较于直接使用 HashSet 之类的数据结构可以节约很多内存。
+
+  在 Java 中使用时，可以通过 BitSet 直接使用：
+  #+begin_src java
+    public BitSet fromArray(int[] array) {
+      BitSet bs = new BitSet(4_000_000_000);
+
+      for (int i = 0; i < array.length; ++i) {
+        bs.set(array[i], true);
+      }
+
+      return bs;
+    }
+  #+end_src
+  
+  可以说，使用 BitMap 来处理整数值是很简单的，但是，对于其他类型的对象就不是那么好处理了。
+
+* BloomFilter
+  布隆过滤器的原理是：当一个元素被加入集合时，通过 K 个散列函数将这个元素映射成一个位数组中的 K 个点，把它们置为 1。检索时，我们只要看看这些点是不是都是 1 就（大约）知道集合中有没有它了。
+
+  如果这些点有任何一个 0，则被检元素一定不在，如果都是 1，则被检元素很可能在。这就是布隆过滤器的基本思想。
+
+  可以发现，布隆过滤器就是 BitMap 算法的升级版，虽然存在一定的误差，但是，效率上还是很不错的。
 

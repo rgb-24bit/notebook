@@ -1,0 +1,20 @@
+#+TITLE:      Android Tools
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#adb][ADB]]
+
+* ADB
+  在 Mac OS X 上的安装，参考：[[https://stackoverflow.com/questions/17901692/set-up-adb-on-mac-os-x][android - Set up adb on Mac OS X - Stack Overflow]]
+  #+begin_src bash
+    brew cask install android-platform-tools
+  #+end_src
+
+  安装 ADB 后可以通过 ADB 来操作连接的安装模拟器或真机，常见的一个需求就是复制文件，可以通过如下命令完成：
+  #+begin_src bash
+    adb pull /path/emulator /path/computer
+  #+end_src
+
+  也可以通过 ~adb shell~ 命令连接安卓内置的 Shell，某些情况下会很有用。
+
+  参考链接：[[https://juejin.im/post/5b5683bcf265da0f9b4dea96#heading-110][ADB 操作命令详解及用法大全 - 掘金]]
+

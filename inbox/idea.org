@@ -2,3 +2,6 @@
   + 括号 C-S-M
   + 代码块 C-[ C-]
 
+* debug
+  + [[https://www.cnblogs.com/chiangchou/p/idea-debug.html][在Intellij IDEA中使用Debug - bojiangzhou - 博客园]]
+

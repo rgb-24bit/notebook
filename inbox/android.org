@@ -1,3 +1,0 @@
-+ [[https://stackoverflow.com/questions/17901692/set-up-adb-on-mac-os-x][android - Set up adb on Mac OS X - Stack Overflow]]
-+ [[https://juejin.im/post/5b5683bcf265da0f9b4dea96#heading-110][ADB 操作命令详解及用法大全 - 掘金]]
-

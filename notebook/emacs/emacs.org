@@ -182,6 +182,8 @@
 ** emacs server
    在 Windows 系统上可以通过 ~runemacs --daemon~ 的方式启动 ~emacs server~, 通过 ~emacsclient~ 连接服务器。
 
+   连接 ~emacs server~ 的时候，可以通过 ~c~ 参数创建一个新的 Frame，通过参数 ~n~ 不用等待服务器返回。
+
    关闭服务器可以通过如下方式：
    #+BEGIN_SRC bash
      $ emacsclient -e "(kill-emacs)"
@@ -195,7 +197,7 @@
 ** Hooks
    Hook 是 Emacs 中重要的扩展机制，是一个函数列表，会在执行某些操作后执行这个列表中的函数。
   
-   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]o
+   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]
 
 * 休闲娱乐
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]

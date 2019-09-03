@@ -28,8 +28,10 @@
   + [Unicode](notebook/misc/unicode.org)
   + [结构化编程](notebook/misc/se.org)
   + [单元测试](notebook/misc/unit-test.org)
+  + [Debug](notebook/misc/debug.org)
   + [思维火花](notebook/misc/spark.org)
   + [概念了解](notebook/misc/concept.org)
+  + [计算机图形学](notebook/misc/computer-graphics.org)
   + [心理学](notebook/misc/psychology.org)
   + [Ledger - 复式记账](notebook/misc/ledger.org)
   + [开源协议](notebook/misc/liscense.org)
@@ -147,12 +149,12 @@
   + [算法问题集](notebook/algorithm/question.org)
   + [查找 Search](notebook/algorithm/search.org)
   + [消息摘要与加密算法](notebook/algorithm/digest-encrypt.org)
+  + [Others](notebook/algorithm/others.org)
   + [算法技巧](notebook/algorithm/trick.org)
   + [排序 Sort](notebook/algorithm/sort.org)
   + [位运算](notebook/algorithm/bitop.org)
   + [随机数相关](notebook/algorithm/random.org)
   + [数学问题](notebook/algorithm/math.org)
-  + [其他算法](notebook/algorithm/zother.org)
   + [数据结构](notebook/algorithm/struct.org)
 ## math
   + **linear**
@@ -195,6 +197,7 @@
   + [Linux 基础笔记](notebook/linux/linux.org)
   + [Debian 系统使用](notebook/linux/debian.org)
 ## android
+  + [Android Tools](notebook/android/tools.org)
   + [Android - 内容提供器](notebook/android/content-provider.org)
   + [Android - Service](notebook/android/service.org)
   + [Android - Activity](notebook/android/activity.org)

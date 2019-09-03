@@ -1,7 +1,16 @@
 #+TITLE:      排序 Sort
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#经典排序算法][经典排序算法]]
 - [[#归并排序][归并排序]]
+- [[#相关问题][相关问题]]
+  - [[#为什么快速排序要优于归并排序][为什么快速排序要优于归并排序]]
+
+* 经典排序算法
+  十大经典排序算法复杂度：
+  #+HTML: <img src="https://images2018.cnblogs.com/blog/849589/201804/849589-20180402133438219-1946132192.png">
+
+  参考链接：[[https://www.cnblogs.com/onepixel/p/7674659.html][十大经典排序算法（动图演示） - 一像素 - 博客园]]
 
 * 归并排序
   归并排序是一个比较容易理解的排序方式，主要利用了递归的思想实现：
@@ -26,7 +35,7 @@
             return merge(na, nb)
         return nums[left:right+1]
 
-    nums = [1,23,4,5,6,2,6,7,3,45,3456,23,546,3,53,634,63,534,3]
+    nums = [1, 23, 4, 5, 6, 2, 6, 7, 3, 45, 3456, 23, 546, 3, 53, 634, 63, 534, 3]
     print(merge_sort(nums, 0, len(nums)))
   #+END_SRC
 
@@ -34,4 +43,16 @@
   : [1, 2, 3, 3, 3, 4, 5, 6, 6, 7, 23, 23, 45, 53, 63, 534, 546, 634, 3456]
 
   这也许是写的最丑的归并排序 @_@
+
+* 相关问题
+** 为什么快速排序要优于归并排序
+   尽管两个排序算法的时间复杂度时相同的，但是，在存在很多影响算法运行时间的因数时，
+   快速排序的表现往往要比归并排序的要好。
+
+   #+begin_quote
+   However, it’s superior to merge sort in many scenarios because many factors influence an algorithm’s runtime, and, when taking them all together, quicksort wins out.
+   #+end_quote
+
+   参考链接：
+   + [[https://stackoverflow.com/questions/70402/why-is-quicksort-better-than-mergesort][algorithm - Why is quicksort better than mergesort? - Stack Overflow]]
 
