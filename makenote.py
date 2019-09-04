@@ -1,11 +1,32 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pathlib
 import re
+
+from pathlib import Path
+from typing import List, Tuple, Dict, Generator
 
 
 EXCLUDE_DIR = 'image', 'assets', 'static'
+NOTE_FILE_SUFFIX = '.org'
+
+
+def make_walker(basedir: str) -> Generator[Tuple[Path, List[Path], List[Path]], None, None]:
+    """Simple directory file walker."""
+    dirpath, subdirs, subfiles = Path(basedir), [], []
+
+    # Sorted directories and files
+    for subitem in sorted(os.listdir(dirpath)):
+        curr_path = Path(dirpath, subitem)
+        if curr_path.is_dir():
+            subdirs.append(curr_path)
+        else:
+            subfiles.append(curr_path)
+
+    yield dirpath, subdirs, subfiles
+
+    for subdir in subdirs:
+        yield from make_walker(subdir.as_posix())
 
 
 def get_note_name(note):
@@ -14,10 +35,10 @@ def get_note_name(note):
         match = re.search(r'#\+TITLE:\s*(.+)', fp.readline())
         if match:
             return match.group(1)
-    return pathlib.Path(note).stem
+    return Path(note).stem
 
 
-def walk(walker):
+def walk(walker: Generator[Tuple[Path, List[Path], List[Path]], None, None]) -> List:
     """Traverse the specified directory to get the note files in it."""
     try:
         dirpath, subdirs, subfiles = next(walker)
@@ -26,12 +47,12 @@ def walk(walker):
 
         for subdir in subdirs:
             subnotes = walk(walker)
-            if not (subdir in EXCLUDE_DIR or len(subnotes) == 0):
-                notes.append({subdir: subnotes})
+            if not (subdir.name in EXCLUDE_DIR or len(subnotes) == 0):
+                notes.append({subdir.name: subnotes})
 
         for subfile in subfiles:
-            if subfile.endswith('.org'):
-                notes.append(pathlib.Path(dirpath, subfile).as_posix())
+            if subfile.suffix == NOTE_FILE_SUFFIX:
+                notes.append(subfile.as_posix())
 
         return notes
     except StopIteration:
@@ -69,7 +90,7 @@ def makecontent(fd, notes, level=0):
 
 def make(fn, basedir):
     """Generate note index."""
-    notes = walk(os.walk(basedir))
+    notes = walk(make_walker(basedir))
 
     with open(fn, 'w', encoding='utf-8') as fd:
         fd.write('## Table of contents\n')
