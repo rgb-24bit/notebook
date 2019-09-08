@@ -93,7 +93,8 @@
   + [Git - Github](notebook/git/github.org)
   + [Git 问题集](notebook/git/question.org)
   + [Git 使用规范](notebook/git/style.org)
-  + [Git 使用技巧](notebook/git/trick.org)
+  + [Git
+  使用技巧](notebook/git/trick.org)
 ## health
   + [八段锦](notebook/health/baduanjin.org)
   + [健康生活](notebook/health/health.org)

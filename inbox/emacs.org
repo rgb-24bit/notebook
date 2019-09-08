@@ -86,3 +86,9 @@
 * window
   + [[https://www.cnblogs.com/robertzml/archive/2010/03/24/1692737.html][学习Emacs系列教程（十）：多窗口 - 下下签 - 博客园]]
 
+* 日志查看
+  + [[https://writequit.org/articles/working-with-logs-in-emacs.html][Working with log files in Emacs]]
+
+* leder
+  + [[https://rolfschr.github.io/gswl-book/latest.html][Getting Started With Ledger - August 28, 2019 201f047]]
+

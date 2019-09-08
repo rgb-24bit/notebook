@@ -134,3 +134,6 @@
     prog, *args = sys.argv
   #+end_src
 
+* misc
+  + [[https://laisky.com/p/python-road/][laisky-blog: Python 之路]]
+

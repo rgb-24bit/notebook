@@ -1,0 +1,64 @@
+#+TITLE:      Java 日志框架
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#java-日志系统概览][Java 日志系统概览]]
+- [[#slf4j-mdc][SLF4J MDC]]
+
+* Java 日志系统概览
+  Java 的日志系统大概可以分为门面和具体的实现两个部分，就目前的状况来说，Java 中常用的门面大概就是 SLF4J 了，
+  而实现则有：JDKLog、Log4J、Log4J2、Logback 等。
+
+  使用时，通常会选择一个门面和一个具体实现的组合，目前最常用的组合为 SLF4J + Logback。
+
+  参考链接：
+  + [[https://www.cnblogs.com/chanshuyi/p/something_about_java_log_framework.html][Java 日志框架那些事儿 - 陈树义 - 博客园]]
+
+* SLF4J MDC
+  在分布式系统中，将相关的日志分类标记能够极大地简化日志分析的难度，为了实现这一点，我们可以在日志中添加一个标志，根据标志对日志进行分类标记。
+
+  在具体的实现中，这一个标志的名称通常叫做 TraceId，而 SLF4J 可以将这个 TraceId 放在一个 ThreadLocal 中，打印日志时由日志框架自动获取并输出。
+
+  在执行异步任务时，由于任务时跨线程执行的，因此，我们需要在异步任务进入另外的线程上下文之前将当前线程的 TraceId 保存，然后在进入另外的线程上下文后取出放到 ThreadLocal 中，
+  这可以通过一个封装类来完成这样过程：
+  #+begin_src java
+    public class AsyncTaskWrapper implements Runnable {
+      /**
+       ,* 调用异步任务的线程上下文中的 TraceId
+       ,*/
+      private String traceId;
+
+      /**
+       ,* 封装的异步任务
+       ,*/
+      private Runnable asyncTask;
+
+      private AsyncTaskWrapper(String traceId, Runnable asyncTask) {
+        this.traceId = traceId;
+        this.asyncTask = asyncTask;
+      }
+
+      /**
+       ,* 封装异步任务并创建实例，执行时和该次请求位于同一线程
+       ,*
+       ,* @param asyncTask 异步任务实例
+       ,* @return AsyncTaskWrapper 实例
+       ,*/
+      public static AsyncTaskWrapper wrapAsyncTask(Runnable asyncTask) {
+        return new AsyncTaskWrapper(MdcUtil.getGlobalMsgId(), asyncTask);
+      }
+
+      /**
+       ,* 执行异步任务，执行时位于异步任务线程
+       ,*/
+      @Override
+      public void run() {
+        MdcUtil.setGlobalMsgId(traceId);
+        asyncTask.run();
+        MdcUtil.removeGlobalMsgId();
+      }
+    }
+
+  #+end_src
+
+  参考链接：[[https://ketao1989.github.io/2015/04/29/LogBack-Implemention-And-Slf4j-Mdc][Slf4j MDC 使用和基于 Logback 的实现分析]]
+

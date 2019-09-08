@@ -18,7 +18,9 @@
   - [[#managing-metadata][Managing Metadata]]
   - [[#reading-writing-and-creating-files][Reading, Writing, and Creating Files]]
   - [[#walking-the-file-tree][Walking the File Tree]]
-- [[#字符回退][字符回退]]
+- [[#相关问题][相关问题]]
+  - [[#java-io-流中怎样进行字符回退][Java I/O 流中怎样进行字符回退]]
+  - [[#怎样将-inputstream-转换为字符串][怎样将 InputStream 转换为字符串]]
 
 * Refrence
   + [[https://docs.oracle.com/javase/tutorial/essential/io/index.html][Lesson: Basic I/O]]
@@ -316,6 +318,11 @@
 
    + [[https://docs.oracle.com/javase/tutorial/essential/io/walk.html][Walking the File Tree]]
 
-* 字符回退
-  Java 提供了 [[https://docs.oracle.com/javase/8/docs/api/java/io/PushbackInputStream.html][PushbackInputStream]] 和 [[https://docs.oracle.com/javase/8/docs/api/java/io/PushbackReader.html][PushbackReader]] 以支持读取流的同时回退字符。
-  
+* 相关问题
+** Java I/O 流中怎样进行字符回退
+   Java 提供了 [[https://docs.oracle.com/javase/8/docs/api/java/io/PushbackInputStream.html][PushbackInputStream]] 和 [[https://docs.oracle.com/javase/8/docs/api/java/io/PushbackReader.html][PushbackReader]] 以支持读取流的同时回退字符。
+
+** 怎样将 InputStream 转换为字符串
+   最简单直接的方式，使用 ~Apache Commons~ 中的 ~IOUtols.toString(InputStream, CharSet)~, 参考：
+   + [[https://stackoverflow.com/questions/309424/how-do-i-read-convert-an-inputstream-into-a-string-in-java][How do I read / convert an InputStream into a String in Java? - Stack Overflow]]
+

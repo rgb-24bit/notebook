@@ -1,0 +1,14 @@
+#+TITLE:      DHCP · DNS
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关问题][相关问题]]
+  - [[#如何在-windowslinuxmacos-中快速的切换-dns][如何在 Windows、Linux、MacOS 中快速的切换 DNS]]
+
+* 相关问题
+** 如何在 Windows、Linux、MacOS 中快速的切换 DNS
+   Windows 中可以通过命令 ~netsh~ 进行 DNS 切换，具体操作可以参考：
+   + [[http://www.moguf.com/post/modifydns][快速修改设置 DNS，适应不同工作环境 | 蘑菇房-技术的菌种,思想的暖房]]
+   
+   MacOS 中有两种方式可以选择：
+   1. 在网络设置项中设置多个位置，一个位置用一个 DNS，然后在系统菜单处切换位置。缺点是每次切换位置都会从新连接网络。
+   2. 

@@ -206,3 +206,9 @@
 * durid
   + https://www.cnblogs.com/tgzhu/p/6077846.html
 
+* 提案
+  + Python - PEP
+  + Java - JSR
+  + JavaScript - TC39
+  + C - 标准委员会
+
