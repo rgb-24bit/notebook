@@ -1,8 +1,18 @@
 #+TITLE:      DHCP · DNS
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#动态-dns-和静态-dns][动态 DNS 和静态 DNS]]
 - [[#相关问题][相关问题]]
   - [[#如何在-windowslinuxmacos-中快速的切换-dns][如何在 Windows、Linux、MacOS 中快速的切换 DNS]]
+  - [[#首选-dns-和备选-dns-的区别][首选 DNS 和备选 DNS 的区别]]
+  - [[#dhcp-和-dns-之间的关系][DHCP 和 DNS 之间的关系]]
+
+* 动态 DNS 和静态 DNS
+  一般情况下，当我们的主机接入网络后，可以得到由 DHCP 主机分配的本地 DNS 服务器地址，这就是动态 DNS。
+
+  动态 DNS 很多时候可能会无法解析目标域名，这时，它就会将解析请求传递给它的上游服务器，使得 DNS 解析有点慢。
+
+  而指定静态 DNS 往往可以省略本地 DNS 查询这一步，提高 DNS 的解析速度，缺点就是无法解析本地网络下的域名。
 
 * 相关问题
 ** 如何在 Windows、Linux、MacOS 中快速的切换 DNS
@@ -11,4 +21,40 @@
    
    MacOS 中有两种方式可以选择：
    1. 在网络设置项中设置多个位置，一个位置用一个 DNS，然后在系统菜单处切换位置。缺点是每次切换位置都会从新连接网络。
-   2. 
+   2. 另一种方式是选择通过 ~networksetup~ 进行设置
+
+   参考：[[http://osxdaily.com/2015/06/02/change-dns-command-line-mac-os-x/][How to Change DNS from Command Line of Mac OS X]]
+
+   至于 Linux，我选择放弃……
+
+** 首选 DNS 和备选 DNS 的区别
+   曾经我以为备选 DNS 的意思就是在首选 DNS 解析不了指定域名时会使用的 DNS，结果，备选 DNS 只会在首选 DNS 死机或者断网时使用……
+
+** DHCP 和 DNS 之间的关系
+   当我们的主机接入网络时，会向 DHCP 主机申请 IP 地址，同时 DHCP 主机还会返回该网络下的 DNS 主机的 IP。
+
+   因此，DHCP 可以用来获取 IP 地址和本地 DNS 服务器。
+
+   而一个网络下的 DHCP 主机和 DNS 服务器，常常就是该网络的路由器。
+   
+   通过查看 Linux 下的 DHCP 租约文件可以看出来这一点：
+   #+begin_example
+     lease {
+       interface "eth0";
+       fixed-address 172.27.0.10;
+       option subnet-mask 255.255.240.0;
+       option routers 172.27.0.1;
+       option dhcp-lease-time 4294967295;
+       option dhcp-message-type 5;
+       option domain-name-servers 183.60.83.19,183.60.82.98;
+       option dhcp-server-identifier 172.27.0.1;
+       option rfc3442-classless-static-routes 0,172,27,0,1;
+       option broadcast-address 172.27.15.255;
+       renew 2 2019/04/30 01:12:27;
+       rebind 2 2019/04/30 01:12:27;
+       expire 2 2019/04/30 01:12:27;
+     }
+   #+end_example
+
+   参考：[[https://feisky.gitbooks.io/sdn/basic/dhcp.html][DHCP/DNS · SDN指南]]
+   

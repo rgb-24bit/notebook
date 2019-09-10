@@ -24,3 +24,7 @@
 
 * 聚集
   + [[https://support.apple.com/zh-cn/HT204014][在 Mac 上使用“聚焦” - Apple 支持]]
+
+* awk
+  + [[https://stackoverflow.com/questions/24332942/why-awk-script-does-not-work-on-mac-os-but-works-on-linux][macos - Why awk script does not work on Mac OS but works on Linux? - Stack Overflow]]
+

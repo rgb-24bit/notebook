@@ -218,3 +218,9 @@
 * sso
   + [[https://zh.wikipedia.org/wiki/%E5%96%AE%E4%B8%80%E7%99%BB%E5%85%A5][单点登录 - 维基百科，自由的百科全书]]
 
+* cron
+  + [[https://www.jianshu.com/p/6b8341cf3311][cron 表达式详解 - 简书]]
+
+* dns
+  + [[https://www.moewah.com/archives/738.html][Linux自建DNS服务器：DNSmasq安装与配置 - 喵斯基部落]]
+

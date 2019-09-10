@@ -93,8 +93,7 @@
   + [Git - Github](notebook/git/github.org)
   + [Git 问题集](notebook/git/question.org)
   + [Git 使用规范](notebook/git/style.org)
-  + [Git
-  使用技巧](notebook/git/trick.org)
+  + [Git 使用技巧](notebook/git/trick.org)
 ## health
   + [八段锦](notebook/health/baduanjin.org)
   + [健康生活](notebook/health/health.org)
@@ -134,6 +133,7 @@
   + [Java 并发操作](notebook/java/java-concurrent.org)
   + [Java 函数式编程](notebook/java/java-fp.org)
   + [Java 泛型](notebook/java/java-generic.org)
+  + [Java 日志框架](notebook/java/java-log.org)
   + [JavaDoc](notebook/java/javadoc.org)
   + [Java Misc](notebook/java/misc.org)
   + [Java 问题集](notebook/java/question.org)
@@ -180,8 +180,9 @@
   + [Unicode](notebook/misc/unicode.org)
   + [单元测试](notebook/misc/unit-test.org)
 ## network
-  + [计算机网络 - 五层模型](notebook/network/five-layer-model.org)
+  + [DHCP · DNS](notebook/network/dhcp-dns.org)
   + [HTTP 协议](notebook/network/http.org)
+  + [计算机网络 - 分层模型](notebook/network/layer-mode.org)
   + [计算机网络 - 协议](notebook/network/protocol.org)
 ## os
   + [操作系统 - 基础内容](notebook/os/base.org)
@@ -218,6 +219,7 @@
 ## solution
   + [接口设计](notebook/solution/api.org)
   + [认证](notebook/solution/auth.org)
+  + [分布式系统](notebook/solution/distributed.org)
   + [其他解决方案](notebook/solution/misc.org)
   + [存储](notebook/solution/storage.org)
 ## tools
