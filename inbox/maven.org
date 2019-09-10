@@ -18,3 +18,12 @@
 * scope
   + [[https://www.baeldung.com/maven-dependency-scopes][Maven Dependency Scopes | Baeldung]]
 
+* 依赖管理
+  当依赖存在冲突时，Maven 自动选择依赖树中离根节点最近的依赖。
+
+  比如：A -> B -> C -> D[1.0], A -> C -> D[2.0]，此时，Maven 会选择 D[2.0]。
+
+  最直接的解决方法就是在 pom 中直接指定版本。
+
+  参考：[[http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management][Maven – Introduction to the Dependency Mechanism]]
+

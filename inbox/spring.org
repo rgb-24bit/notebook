@@ -138,3 +138,37 @@
   + ……
   + [[https://segmentfault.com/a/1190000006922799][BeanCopier 与 BeanUtils 及 人工setter之间的比较 - zhuguowei - SegmentFault 思否]]
 
+* mvc
+  过滤器 -> DispactchServlet -> 拦截器 -> Controller -> 拦截器 -> DispactchServlet -> 过滤器
+
+* 事件
+  从 ~SpringApplication~ 的源码可以发现，他妈的就只发布了 Refresh 事件，没有发布 Started 事件……
+
+  + [[https://www.jianshu.com/p/ce83ebca5d9d][Spring 事件监听 - 简书]]
+  + [[https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java#L298][spring-boot/SpringApplication.java at master · spring-projects/spring-boot]]
+  + [[http://www.iocoder.cn/Spring/ApplicationContextEvent/][Spring 5 源码解析 —— Spring 框架中的事件和监听器 | 芋道源码 —— 纯源码解析博客]]
+
+  本来以为事件没有多少用，结果，用的地方还很多……
+
+  Spring Cloud 和 LoggingSystem 都会监听事件，其中，SpringCloud 会创建一个没有配置的 SpringApplication 上下文，
+  LoggingSystem 会使用上下文中的配置。
+
+  + [[https://www.jianshu.com/p/8b8aa9a51c4e][spring boot 启动源码阅读(二) - 简书]]
+  + [[https://www.cnblogs.com/larryzeal/p/5799633.html][Spring Boot 官方文档学习（二）特点 - LarryZeal - 博客园]]
+    
+  需要注意的是，SpringApplication.run 方法执行时，自动配置已经完成了！
+
+  由于 SpringCloud 会自己创建一个 SpringApplication 上下文，因此，在调试 SpringApplication 初始化过程的时候需要注意，当前栈时属于 SpringCloud 还是属于自己。
+
+  Logback LoggingSystem 初始化时，会解析相关的日志配置文件，并使用 Spring 配置替换日志配置文件中的占位符。
+
+  + [[https://www.cnblogs.com/jianliang-Wu/p/8945343.html][SpringBoot中logback.xml使用application.yml中属性 - 吴建良 - 博客园]]
+
+* uri
+  noop - 自定义，表示空操作
+
+* servlet
+  + [[http://loveshisong.cn/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/2016-11-19-Spring-boot%E4%B8%8EServlet%E7%BB%84%E4%BB%B6.html][逆水行舟]]
+  + [[https://www.cnblogs.com/lodor/p/7568765.html][【spring boot】FilterRegistrationBean介绍 - 码农阿当lodor - 博客园]]
+  + [[https://juejin.im/post/5cdcdaf7f265da038f7767d0][@DependsOn或depends-on配置的使用 - 掘金]]
+

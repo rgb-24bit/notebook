@@ -1,0 +1,5 @@
+* 数字证书和数字签名
+  + [[https://www.zhihu.com/question/24294477][数字证书的原理是什么？ - 知乎]]
+  + [[https://www.ruanyifeng.com/blog/2014/02/ssl_tls.html][SSL/TLS协议运行机制的概述 - 阮一峰的网络日志]]
+  + [[http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html][数字签名是什么？ - 阮一峰的网络日志]]
+

@@ -212,3 +212,9 @@
   + JavaScript - TC39
   + C - 标准委员会
 
+* 字符编码
+  通过 Java 生成乱码
+
+* sso
+  + [[https://zh.wikipedia.org/wiki/%E5%96%AE%E4%B8%80%E7%99%BB%E5%85%A5][单点登录 - 维基百科，自由的百科全书]]
+

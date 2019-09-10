@@ -105,6 +105,8 @@
 * 日志
   在 CompletableFuture 中执行的任务，MyBatis 的日志好像没有打印出来
 
+  log.infoEnabled - 性能考虑
+
 * 协程
   + [[https://www.v2ex.com/t/598693#reply13][用 Java 撸了一个 yield 的玩具 - V2EX]]
   + [[https://www.v2ex.com/t/459387][天哪，看我竟然在 Java 语言里撸出了什么 - V2EX]]

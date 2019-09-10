@@ -5,3 +5,6 @@
 * debug
   + [[https://www.cnblogs.com/chiangchou/p/idea-debug.html][在Intellij IDEA中使用Debug - bojiangzhou - 博客园]]
 
+* JDK
+  + [[https://segmentfault.com/a/1190000014202363][An Introduction to Intellij IDEA Scratches - 个人文章 - SegmentFault 思否]]
+
