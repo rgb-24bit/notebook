@@ -8,8 +8,6 @@
   + [emacs](#emacs)
   + [front-end](#front-end)
   + [git](#git)
-  + [health](#health)
-  + [hobby](#hobby)
   + [java](#java)
   + [lang](#lang)
   + [linux](#linux)
@@ -94,11 +92,6 @@
   + [Git 问题集](notebook/git/question.org)
   + [Git 使用规范](notebook/git/style.org)
   + [Git 使用技巧](notebook/git/trick.org)
-## health
-  + [八段锦](notebook/health/baduanjin.org)
-  + [健康生活](notebook/health/health.org)
-## hobby
-  + [日本麻将](notebook/hobby/mahjong.org)
 ## java
   + **database**
     + [数据库连接池](notebook/java/database/connection-pool.org)
