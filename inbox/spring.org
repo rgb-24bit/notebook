@@ -172,3 +172,19 @@
   + [[https://www.cnblogs.com/lodor/p/7568765.html][【spring boot】FilterRegistrationBean介绍 - 码农阿当lodor - 博客园]]
   + [[https://juejin.im/post/5cdcdaf7f265da038f7767d0][@DependsOn或depends-on配置的使用 - 掘金]]
 
+* resttemplate
+  + [[https://www.jianshu.com/p/88b77d011c8a][springboot学习记录之RestTemplate - 简书]]
+
+* ImportBeanDefinitionRegistrar
+  + [[https://zhuanlan.zhihu.com/p/30123517][动态注册bean，Spring官方套路：使用ImportBeanDefinitionRegistrar - 知乎]]
+  + [[https://segmentfault.com/a/1190000012461362][Spring核心接口之InitializingBean - java乐园 - SegmentFault 思否]]
+  + [[https://www.jianshu.com/p/b9439edb8408][使用FactoryBean自定义实例化逻辑 - 简书]]
+
+
+* ServletWebServerApplicationContext
+  全面解析时间成本太高，暂时选择放弃。
+
+  重点还是放在 SpringBootApplication 的启动流程上好了。
+
+  不要急，慢慢来，现在了解的太少了，感觉就像大一强行写安卓一样……
+

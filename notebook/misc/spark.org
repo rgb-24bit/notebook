@@ -1,4 +1,4 @@
-#+TITLE:      思维火花
+#+TITLE:      一点想法
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#spring-中和-flask-中自动化表单验证方式的不同][Spring 中和 Flask 中自动化表单验证方式的不同]]

@@ -1,0 +1,5 @@
++ [[https://zhuanlan.zhihu.com/p/43996780][一文教你看懂mobi、azw3、 epub格式电子书的区 - 知乎]]
++ [[https://www.ibm.com/developerworks/cn/xml/tutorials/x-epubtut/index.html][使用 EPUB 制作数字图书]]
++ [[https://pandoc.org/epub.html][Pandoc - Creating an ebook with pandoc]]
++ [[https://pandoc.org/MANUAL.html#epub-metadata][Pandoc - Pandoc User’s Guide]]
+

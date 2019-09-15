@@ -1,44 +1,37 @@
 #+TITLE:      Git - Github
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#github-使用][Github 使用]]
-  - [[#代码搜索][代码搜索]]
+- [[#github-搜索][Github 搜索]]
 - [[#问题集][问题集]]
   - [[#怎样同步-fork-的上游存储库][怎样同步 fork 的上游存储库]]
+- [[#footnotes][Footnotes]]
 
-* Github 使用
-** 代码搜索
-   由于搜索代码的复杂性，对搜索的执行方式有一些限制：
-   + 需要登录 Github 账号才能进行搜索
-   + 如果 fork 具有比父存储库更多的收藏，则只能搜索 fork 中的代码。收藏数量少于父存储库的 fork 不会被编入索引以进行代码搜索
-   + 只有默认分支的代码会被搜索
-   + 只能搜索小于 384 KB 的文件
-   + 搜索结果最多可以显示同一文件中的两个片段，但文件中可能会有更多结果
-   + 不能将以下通配符用作搜索查询的一部分： ~. , : ; / \ ` ' " = * ! ? # $ & + ^ | ~ < > ( ) { } [ ].~ 搜索将忽略这些符号
+* Github 搜索
+  Github 提供了非常强大的搜索功能，让我们可以对 repositories、topics、code、commits、issues、pull requests、users、forks 等进行搜索。
 
-   匹配文件中的内容或匹配路径：
-   #+BEGIN_EXAMPLE
-     code in:file
-     code in:path
-     code in:file,path
-   #+END_EXAMPLE
+  默认情况下，Github 使用的搜索方式是全文搜索[fn:1]，在需要时，我们还可以通过额外的语法对搜索结果进行限制，从而得到更为精确的搜索结果。
 
-   指定语言：
-   #+BEGIN_EXAMPLE
-     language:LANGUAGE
-   #+END_EXAMPLE
+  比如说，现阶段对于我来说比较重要的需求是对 repositories 的搜索，而 Github 提供了很多相关的搜索限定符来辅助查询：
+  + 通过 ~in~ 限定符指定搜索范围，默认为存储库的名称和描述
+  + 通过 ~repo~ 限定符搜索指定的存储库
+  + 通过 ~user~ 和 ~org~ 限定符指定用户和组织机构
+  + 通过 ~size~ 限定符指定存储库的大小，单位是千字节
+  + 通过 ~followers~ 限定符指定关注者数量
+  + 通过 ~forks~ 限定符指定 fork 的数量
+  + 通过 ~stars~ 限定符指定 star 的数量
+  + 通过 ~created~ 和 ~pushed~ 限定符指定创建和推送时间
+  + 通过 ~language~ 限定符指定语言
+  + 通过 ~topic~ 限定符指定 topic
+  + 通过 ~topics~ 限定符指定 topic 的数量
+  + 通过 ~license~ 限定符指定存储库使用的 License
+  + 通过 ~is:public~ 和 ~is:private~ 指定存储库的类型
+  + 通过 ~mirror:boolean~ 指定存储库是否是镜像
+  + 通过 ~archived:boolean~ 指定存储库是否归档    
+  + 更多的内容可以参考：[[https://help.github.com/en/articles/searching-for-repositories][Searching for repositories - GitHub Help]]
 
-   指定文件名：
-   #+BEGIN_EXAMPLE
-     filename:FILENAME
-   #+END_EXAMPLE
-
-   指定文件扩展名：
-   #+BEGIN_EXAMPLE
-     extension:EXTENSION
-   #+END_EXAMPLE
-
-   + [[https://help.github.com/categories/searching-for-information-on-github/][Searching for information on GitHub]]
+  而 Github 还提供了更多的搜索功能，可以参考：[[https://help.github.com/en/categories/searching-for-information-on-github][Searching for information on GitHub - GitHub Help]]
+  
+  至于搜索语法的问题，可以说，很有 [[https://lucene.apache.org/core/2_9_4/queryparsersyntax.html][Apache Lucene - Query Parser Syntax]] 的既视感，不知道 Github 搜索用的是不是 ES。
 
 * 问题集
 ** 怎样同步 fork 的上游存储库
@@ -48,3 +41,6 @@
      $ git merge upstream/<branch>
    #+END_EXAMPLE
 
+* Footnotes
+
+[fn:1] 计算机索引程序通过扫描文章中的每一个词，对每一个词建立一个索引，指明该词在文章中出现的次数和位置，当用户查询时，检索程序就根据事先建立的索引进行查找，并将查找的结果反馈给用户的检索方式 
