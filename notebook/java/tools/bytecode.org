@@ -1,0 +1,31 @@
+#+TITLE:      字节码操作
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#cglib][CGLib]]
+  - [[#beancopier][BeanCopier]]
+
+* CGLib
+  CGLIB 建立在 ASM 的基础上极大地简化了字节码的操作难度，Java 的许多框架都使用了它提供的功能，比较著名的应该就是 Spring AOP 了。
+
+  参考：[[https://www.cnblogs.com/xrq730/p/6661692.html][CGlib 及其基本使用 - 五月的仓颉 - 博客园]]
+
+** BeanCopier
+   CGlib 中除了提供了强大的字节码操作功能以外，还提供了一个性能极佳的拷贝工具 BeanCopier。我们可以通过方法 ~BeanCopier.create(Class source, Class target, boolean useConverter)~ 来创建 Copier。
+
+   并可以通过缓存 Copier 的方式进一步降低创建 BeanCopier 的性能消耗。
+
+   但是，BeanCopier 默认只会对名称及类型都相同的字段进行拷贝，因此，可以考虑自定义 Converter 来转换字段值：
+   #+begin_src java
+     public interface Converter {
+       /**
+        ,* @param value   源字段值
+        ,* @param target  目标字段类型
+        ,* @param context 目标字段的 setter 方法
+        ,* @return 返回值将会被赋值给目标字段
+        ,*/
+       Object convert(Object value, Class target, Object context);
+     }
+   #+end_src
+   
+   参考：[[https://www.cnblogs.com/winner-0715/p/10117282.html][使用 CGlib 实现 Bean 拷贝(BeanCopier) - winner_0715 - 博客园]]
+

@@ -132,12 +132,6 @@
   + [[http://www.ityouknow.com/springcloud/2017/05/10/springcloud-eureka.html][springcloud(二)：注册中心Eureka - 纯洁的微笑博客]]
   + [[http://www.ityouknow.com/spring-cloud.html][spring-cloud - 纯洁的微笑博客]]
 
-* mro
-  + 多数据源
-  + BeanCopier
-  + ……
-  + [[https://segmentfault.com/a/1190000006922799][BeanCopier 与 BeanUtils 及 人工setter之间的比较 - zhuguowei - SegmentFault 思否]]
-
 * mvc
   过滤器 -> DispactchServlet -> 拦截器 -> Controller -> 拦截器 -> DispactchServlet -> 过滤器
 

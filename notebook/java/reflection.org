@@ -8,6 +8,10 @@
 - [[#members][Members]]
 - [[#arrays][Arrays]]
 - [[#enumerated][Enumerated]]
+- [[#泛型][泛型]]
+- [[#hierarchy][Hierarchy]]
+- [[#相关问题][相关问题]]
+  - [[#如果通过反射获取一个包下的所有类][如果通过反射获取一个包下的所有类]]
 
 * Classes
   对于每种类型对象，Java 虚拟机都实例化 ~java.lang.Class~ 的不可变实例，该实例提供了检查对象的运行时属性的方法，包括其成员和类型信息。
@@ -312,7 +316,7 @@
   + [[https://docs.oracle.com/javase/tutorial/reflect/member/field.html][Fileds]]
   + [[https://docs.oracle.com/javase/tutorial/reflect/member/method.html][Methods]]
   + [[https://docs.oracle.com/javase/tutorial/reflect/member/ctor.html][Constructors]]
-
+    
 * Arrays
   和数组有关的反射接口由类 ~java.lang.reflect.Array~ 提供。
 
@@ -334,3 +338,90 @@
 
   和枚举有关的操作可以通过类 [[https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html][java.lang.Enum]] 完成。
   
+* 泛型
+  Java 泛型是一个很重要也很常用的一个功能，但是在编写相关的具有解析泛型类的功能的工具时问题就出现了：
+  + 由于类型擦除的原因，我们无法直接获取一个泛型对象的类型参数，比如：List<String> 类型的对象我们只能拿到 List 这个类型，而无法获取重要的类型参数 String
+  + List<String, String>.class 是行不通的，语法都不正确
+  + 直接的 Class 对象只能拿到当前类型参数的名称，比如：T、K、E 什么的，是拿不到实际的类型的
+
+  为了解决这个问题，只能绕一些远路：
+  + 如果目标对象是一个类的字段或者方法的参数或返回值，那么，我们可以通过 Field 和 Method 对象的接口拿到 ParameterizedType 从而拿到泛型类型
+  + 或者创建目标类型的子类，通过 Class.getGenericSuperclass 拿到 ParameterizedType 从而拿到泛型类型
+
+  比如说，Gson 中的 TypeToken 采用的方式（简化的代码）：
+  #+begin_src java
+    public abstract class TypeToken<T> {
+      private final Type type;
+
+      /**
+       ,* Automatically get generic parameters when a subclass instance is created.
+       ,*/
+      protected TypeToken() {
+        this.type = getSuperclassTypeParameter(getClass());
+      }
+
+      /**
+       ,* Get the type parameter of the generic parent class.
+       ,*/
+      private static Type getSuperclassTypeParameter(Class<?> subclass) {
+        Type superclass = subclass.getGenericSuperclass();
+        if (superclass instanceof Class) {
+          throw new RuntimeException("Missing type parameter.");
+        }
+        ParameterizedType parameterized = (ParameterizedType) superclass;
+        return parameterized.getActualTypeArguments()[0];
+      }
+
+      public Type getType() {
+        return type;
+      }
+    }
+  #+end_src
+  
+  使用的时候：
+  #+begin_src java
+    new TypeToken<List<String>>() {}.getType();
+  #+end_src
+
+* Hierarchy
+  部分类的继承结构：
+  #+begin_example
+    + java.lang.Object
+      + java.lang.reflect.AccessibleObject
+        + java.lang.reflect.Executable        # 可执行
+          + java.lang.reflect.Constructor<T>  # 构造方法
+          + java.lang.reflect.Method          # 方法
+        + java.lang.reflect.Field             # 字段
+      + java.lang.reflect.Array               # 数组
+      + java.lang.reflect.Modifier            # 访问修饰符
+      + java.lang.reflect.Parameter           # 参数c
+  #+end_example
+
+  部分接口的继承结构：
+  #+begin_example
+    + java.lang.reflect.AnnotatedElement
+      + java.lang.reflect.AnnotatedType                  # 带注解的类型，当包装的类型没有注解时返回的注解为空
+        + java.lang.reflect.AnnotatedArrayType
+        + java.lang.reflect.AnnotatedParameterizedType
+        + java.lang.reflect.AnnotatedTypeVariable
+        + java.lang.reflect.AnnotatedWildcardType
+      + java.lang.reflect.GenericDeclaration
+      + java.lang.reflect.TypeVariable<D>                # 类型变量，Class<K, V> 中的 K, V 
+    + java.lang.reflect.Member
+    + java.lang.reflect.Type
+      + java.lang.reflect.GenericArrayType
+      + java.lang.reflect.ParameterizedType
+      + java.lang.reflect.TypeVariable<D>
+      + java.lang.reflect.WildcardType
+  #+end_example
+
+  简单来看的话，包 ~java.lang.reflect~ 下提供的功能主要就是各种类信息的访问操作和 Proxy 动态代理了。
+
+* 相关问题
+** 如果通过反射获取一个包下的所有类
+   虽然确实存在 ~Package~ 这个类型，但是，这个类型时无法拿来获取包下的类的，要获取一个包下的类只有一种办法：遍历读取……
+
+   简单除暴直接的处理方式，比如 Spring，直接用 ASM 读取字节码里面的元数据……
+
+   简直幻灭了……一直以为有反射接口的啊……
+

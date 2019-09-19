@@ -112,6 +112,7 @@
     + [Spring MVC](notebook/java/spring/spring-mvc.org)
     + [Spring Test](notebook/java/spring/spring-test.org)
   + **tools**
+    + [字节码操作](notebook/java/tools/bytecode.org)
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
     + [JDK Tools](notebook/java/tools/jdk.org)
@@ -167,7 +168,8 @@
   + [编程范式相关](notebook/misc/paradigm.org)
   + [问题集](notebook/misc/question.org)
   + [结构化编程](notebook/misc/se.org)
-  + [思维火花](notebook/misc/spark.org)
+  + [搜索引擎](notebook/misc/search.org)
+  + [一点想法](notebook/misc/spark.org)
   + [Unicode](notebook/misc/unicode.org)
   + [单元测试](notebook/misc/unit-test.org)
 ## network

@@ -8,3 +8,7 @@
    + [[https://juejin.im/post/5d26266de51d454f71439d70][面试不懂分布式锁？那得多吃亏。。。 - 掘金]]
    + [[https://juejin.im/post/5bf3f15851882526a643e207][拜托，面试请不要再问我Redis分布式锁的实现原理！【石杉的架构笔记】 - 掘金]]
 
+* sql
+  + [[https://www.infoq.cn/article/ARMb2yZMYrGNv92Jz8MH][10个不为人知的SQL技巧-InfoQ]]
+
+

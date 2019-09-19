@@ -126,6 +126,7 @@
     - [[https://segmentfault.com/a/1190000008615288][普通函数和构造函数的区别 - 前端学习之路 - SegmentFault 思否]]
     - Function.call(this, ...) 指定 this 值
   + [[https://wangdoc.com/javascript/oop/prototype.html][对象的继承 - JavaScript 教程 - 网道]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object][Object - JavaScript | MDN]]
 
 * 组件
   + [[http://www.ruanyifeng.com/blog/2019/08/web_components.html][Web Components 入门实例教程 - 阮一峰的网络日志]]
