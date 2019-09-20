@@ -1,0 +1,25 @@
+#+TITLE:      Java Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#spi][SPI]]
+
+* SPI
+  SPI 的全称为 (Service Provider Interface) ，是 JDK 内置的一种服务提供发现机制。主要由工具类 ~java.util.ServiceLoader~ 提供相应的支持。
+
+  其中的两个角色为：
+  + Service - 服务，通常为一个接口或一个抽象类，具体类虽然也可以，但是一般不建议那样做
+  + Service Provider - 服务提供者，服务的具体实现类
+
+  使用时，需要在 ~META-INF/services~ 下创建和服务的全限定名相同的文件，然后在该文件中写入服务提供者的全限定名，可以用 ~#~ 作为注释。
+
+  然后，就可以通过 ~ServiceLoader~ 来获取这些服务提供者。由于 ServiceLoader 并没有提供直接获取服务提供者的方法，因此，只能通过迭代的方式获取：
+  #+begin_src java
+    ServiceLoader<Service> loader = (Service.class, getClassLoader());
+
+    for (Service service : loader) {
+      // ...
+    }
+  #+end_src
+  
+  参考：[[https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html][ServiceLoader (Java Platform SE 8 )]]
+

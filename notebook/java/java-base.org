@@ -1,9 +1,9 @@
 #+TITLE:      Java 基础
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#基本数据类型][基本数据类型]]
+- [[#数据类型][数据类型]]
 - [[#类型转换][类型转换]]
-- [[#数组][数组]]
+- [[#数组相关][数组相关]]
   - [[#数组的类型][数组的类型]]
   - [[#数组的克隆][数组的克隆]]
 - [[#面向对象][面向对象]]
@@ -11,14 +11,12 @@
   - [[#抽象][抽象]]
   - [[#封装][封装]]
   - [[#多态][多态]]
-- [[#static--final][static & final]]
-- [[#对象][对象]]
 - [[#枚举][枚举]]
 - [[#异常][异常]]
-- [[#作用域][作用域]]
+- [[#其他][其他]]
 - [[#tips][Tips]]
 
-* 基本数据类型
+* 数据类型
   Primitive Type 的取值范围：
   |---------+-----------------+--------------------------|
   | 类型    |            位数 | 值域                     |
@@ -39,6 +37,9 @@
     System.out.println(true & false);
     System.out.println(true ^ false);
   #+END_SRC
+
+  Java 中 byte 进行移位运算时会自动升为 int，这有可能会导致一些意料之外的结果，参考：
+  + [[https://stackoverflow.com/questions/3948220/behaviour-of-unsigned-right-shift-applied-to-byte-variable#][java - Behaviour of unsigned right shift applied to byte variable - Stack Overflow]]
 
 * 类型转换
   由与所有的非 ~Object~ 对象都继承了 ~Object~, 因此这些对象在 *堆* 上的实例上， 内部也包括了一个 ~Object~ 实例。
@@ -68,31 +69,25 @@
 
   注意：null isinstanceof xxx 会返回 false
 
-* 数组
+* 数组相关
   数组的声明和初始化方式都存在多种：
   #+BEGIN_SRC java
     // 声明数组
     dataType[] arrayRefVar;   // 首选的方法
-
-    dataType arrayRefVar[];  // 效果相同，但不是首选方法
+    dataType arrayRefVar[];   // 效果相同，但不是首选方法
 
     // 创建数组
     dataType[] arrayRefVar = new dataType[arraySize];
-
     dataType[] arrayRefVar = {value0, value1, ..., valuek};  // 只能在声明的同时使用
-
-    dataType[] arrayRefVar = new dataType[]{value0, value1, ..., valuek};
+    dataType[] arrayRefVar = new dataType[] {value0, value1, ..., valuek};
   #+END_SRC
 
-  数组的 *成员* 包括：
-  1. ~public final length~
-  2. ~public T[] clone()~
-  3. ~Object method~
+  数组对象除了拥有 ~Object~ 对象的所有方法以外，还拥有 ~length~ 字段和 ~T[] clone()~ 方法。
 
   需要注意的是，Java 数组会保存存储的元素的类型信息，虽然父类型的数组引用可以引用子类型的数组的实例，
   而且往该引用中存入父类型实例的操作可以通过编译器的检查，但是会在运行期间抛出异常。
 
-  也就是说，下面的写法会出错：
+  也就是说，下面的写法能够通过编译器的检查，但是会在运行期间抛出异常：
   #+BEGIN_SRC java
     Child[] arr = new Child[10];
     Parent[] parr = arr;
@@ -100,18 +95,12 @@
   #+END_SRC
 
 ** 数组的类型
-   #+BEGIN_QUOTE
-   Primitive arrays are instance of Object and self type. e.g. int[] is type of Object and int[]. Both comparison returns true.
+   + *Primitive arrays* are instance of Object and self type. e.g. int[] is type of Object and int[]. Both comparison returns true.
+   + *Object arrays* are types of Object, Object array, classtype array, parent class type array. e.g. Integer[] is type of Object,
+     Object[], Integer[] and Number[] (Integer extends Number).
 
-   Object arrays are types of Object, Object array, classtype array, parent class type array.
-   e.g. Integer[] is type of Object, Object[], Integer[] and Number[] (Integer extends Number).
-   #+END_QUOTE
-
-   + [[https://howtodoinjava.com/oops/java-instanceof/][Java instanceof - Java type comparison operator - HowToDoInJava]]
-
-   特别的， int[][] 是 Object[] 的实例。
-
-   这也就是为什么 ~asList~ 不要使用 ~int[]~ 参数的原因。
+   也就是说，int[] 仅仅只是 int[] 和 Object 的实例，而 int[][] 才是 Object[] 的实例，当 int[] 作为 Arrays.asList 方法的参数时，
+   将其类型擦除为 Object 后，Object 就是 int[] 了，而不是我们想要的 int.
 
 ** 数组的克隆
    数组对象的 ~clone()~ 方法会返回一个新的数组对象，这个数组对象包含和原数组中相同的元素。
@@ -153,6 +142,9 @@
    子类覆盖父类方法时需要注意：
    1. 方法在覆盖时的可见性不能低于父类
    2. 子类方法抛出的异常不能比父类的更通用，如果父类方法没有抛出异常那么子类的也不能抛出
+      
+   子类的一些行为：
+   + 实例化子类时，会自动调用父类的构造方法，因此，定义一个无参的构造方法时很有用的
 
 ** 抽象
    使用抽象类和抽象方法时需要注意：
@@ -196,47 +188,8 @@
    对于多态来说：
    + 编译器根据 *引用类型* 来判断有哪些 ~method~ 可以调用，而不是 ~Object~ 确实的类型
 
-* static & final
-  静态变量的初始化是指类被加载时完成的，会在任何类的对象创建之前完成初始化。也会在任何类的静态方法执行之前完成初始化。
-
-  如果没有为静态变量赋初值， 那么静态变量会被设定为对应类型的默认值。
-
-  使用 ~static final~ 修饰的变量作为常量，常量的初始化只能声明时或静态初始化块中，但是不能同时在声明与静态初始化程序中赋值。
-
-  如果常量没有初始化，那么就会出错。
-
-  单独使用 ~final~ 修饰的变量是常量，不能被改动。可以在声明或构造函数中初始化。不能同时进行。
-
-  类的 private 方法会隐式地被指定为 final 方法。
-
-* 对象
-  对象的构造函数是不会被继承的，定义自己的构造函数时尽可能的编写一个没有参数的构造函数。
-
-  抽象类也是由构造函数的，绘制创建具体类实例的时候执行。
-
-  构造函数是先执行父类的，然后执行自身的。
-
-  在构造函数中使用 ~super()~ 调用父类构造函数（唯一方法）。如果没有手动调用 ~super()~, 编译器会默认进行调用（包括每一个构造函数）。
-
-  默认调用的是父类的无参构造函数。super() 的调用必须是在构造函数的 *第一个语句*.
-
-  如果不能向父类的带参构造函数传参， 那么就不能继承没有无参构造函数的类。
-
-  使用 ~this()~ 来从某个构造函数调用同一个类的另外一个构造函数。
-
-  ~this()~ 只能用在 *构造函数*, 且必须是 *第一个语句*.
-
-  ~super()~ 和 ~this()~ 不能兼得。
-
-  + 栈与堆中保存的对象
-    + 栈空间中保存： 方法调用与局部变量
-    + 堆空间中保存： 对象与实例变量
-    + 实例变量是被声明在类而不是方法里面的变量
-    + 实例变量可以在声明时赋初值， 否则会被设置为默认值（局部变量没有默认值）
-    + 实例变量的默认值为： 0/0.0/false/null
-
 * 枚举
-  枚举类型的声明可以在 *类外部* 或 *类内部*, 但是不能再 *方法内部*.
+  枚举类型的声明可以在 *类外部* 或 *类内部*, 但是不能在 *方法内部*.
 
   枚举类型的简单声明和使用：
   #+BEGIN_SRC java
@@ -397,7 +350,7 @@
   + 通过 java -verbose 观察类的加载过程
   + 通过 -Xlint 选项对常见问题进行检查
 
-* 作用域
+* 其他
   块作用域是由大括号确定的作用域：
   #+BEGIN_SRC java
     public class Test {
@@ -456,4 +409,5 @@
   + user.dir 是 java 运行环境的启动路径
   + 默认类路径包含当前目录，设置后就不一定了
   + 在使用和 Java 相关的工具的时候，常常会要求设置一些环境变量，虽然有时不设置也可以用，但是还是设置了比较好
+  + 声明后要使用的局部变量必须初始化，否则可以留空
 

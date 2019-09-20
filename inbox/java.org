@@ -143,34 +143,4 @@
 
   至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
 
-* 局部变量
-  声明后要使用的局部变量必须初始化，否则可以留空。
-
-* 数组操作
-  #+begin_src java
-    /**
-     ,* Conveniently convert arrays of primitive types and wrapper classes types.
-     ,* <p>
-     ,* <p>
-     ,* Use like:
-     ,*
-     ,* <code>
-     ,*   Integer[] integerArr = (Integer[]) arrayConvert(new int[] {1, 2, 3}, Integer.class);
-     ,*   int[] intArr = (int[]) arrayConvert(new Integer[] {1, 2, 3}, int.class);
-     ,* </code>
-     ,*
-     ,* @param array The array to be converted
-     ,* @param clazz type to be converted to
-     ,* @result Converted array
-     ,*/
-    public static Object arrayConvert(Object array, Class<?> clazz) {
-      Object newArray = Array.newInstance(clazz, Array.getLength(array));
-
-      for (int i = 0; i < Array.getLength(array); ++i) {
-        Array.set(newArray, i, Array.get(array, i));
-      }
-
-      return newArray;
-    }
-  #+end_src
 

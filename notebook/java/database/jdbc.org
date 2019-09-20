@@ -5,6 +5,8 @@
 - [[#各数据库][各数据库]]
   - [[#mysql][MySQL]]
 - [[#数据库连接池][数据库连接池]]
+- [[#相关问题][相关问题]]
+  - [[#driver-时如何通过-classforname-的方式进行注册的][Driver 时如何通过 Class.forName 的方式进行注册的]]
 
 * 简单使用
   JDBC 帮助管理三种编程活动：连接数据库、将查询和更新语句发送到数据库和检索并处理从数据库接收的结果。
@@ -85,4 +87,32 @@
   而 JDBC 也提供了对数据库连接池规范的支持，这一点可以通过查阅 [[http://download.oracle.com/otn-pub/jcp/jdbc-4_1-mrel-spec/jdbc4.1-fr-spec.pdf][JDBC 4.1 Specification]] 证明。
 
   可以参考的文章：[[https://juejin.im/post/5af026a06fb9a07ac47ff282][数据库连接池的实现及原理 - 掘金]]
+
+* 相关问题
+** Driver 时如何通过 Class.forName 的方式进行注册的
+   通过静态代码块完成注册，比如 MySQL Driver 中的静态代码块：
+   #+begin_src java
+     public class Driver extends NonRegisteringDriver implements java.sql.Driver {
+       //
+       // Register ourselves with the DriverManager
+       //
+       static {
+         try {
+           java.sql.DriverManager.registerDriver(new Driver());
+         } catch (SQLException E) {
+           throw new RuntimeException("Can't register driver!");
+         }
+       }
+
+       /**
+        ,* Construct a new driver and register it with DriverManager
+        ,*
+        ,* @throws SQLException
+        ,*             if a database error occurs.
+        ,*/
+       public Driver() throws SQLException {
+         // Required for Class.forName().newInstance()
+       }
+     }
+   #+end_src
 

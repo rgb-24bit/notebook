@@ -27,6 +27,7 @@
 - [[#java-中常用的内置异常有哪些][Java 中常用的内置异常有哪些]]
 - [[#javax-开头的包是怎么一回事][javax 开头的包是怎么一回事]]
 - [[#java-中为什么不存在-hashable-接口][Java 中为什么不存在 Hashable 接口]]
+- [[#在程序中获取-classpath-和指定类的路径][在程序中获取 CLASSPATH 和指定类的路径]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -308,4 +309,12 @@
   可能的原因在于 Java 存在很好的默认的 hashcode 方法来计算任何对象的 hashcode，参考：
   + [[https://stackoverflow.com/questions/12132880/why-there-is-no-hashable-interface-in-java][Why there is no Hashable interface in Java - Stack Overflow]]
 
+
+* 在程序中获取 CLASSPATH 和指定类的路径
+  获取 CLASSPATH 通过 ~System.getProperty("java.class.path")~ 即可完成，而获取指定类的路径可以通过如下方式获取：
+  #+begin_src java
+    ClassLoader.getResource("package/class.class");
+  #+end_src
+
+  说起来，获取包下的所有类不就是类似的方式吗……
 

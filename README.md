@@ -109,6 +109,7 @@
     + [Spring 资源收集](notebook/java/spring/resources.org)
     + [Spring Boot](notebook/java/spring/spring-boot.org)
     + [Spring Core](notebook/java/spring/spring-core.org)
+    + [Spring Data](notebook/java/spring/spring-data.org)
     + [Spring MVC](notebook/java/spring/spring-mvc.org)
     + [Spring Test](notebook/java/spring/spring-test.org)
   + **tools**
@@ -128,6 +129,7 @@
   + [Java 函数式编程](notebook/java/java-fp.org)
   + [Java 泛型](notebook/java/java-generic.org)
   + [Java 日志框架](notebook/java/java-log.org)
+  + [Java Misc](notebook/java/java-misc.org)
   + [JavaDoc](notebook/java/javadoc.org)
   + [Java Misc](notebook/java/misc.org)
   + [Java 问题集](notebook/java/question.org)

@@ -1,0 +1,25 @@
+#+TITLE:      Spring Data
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#多数据源的管理与操作][多数据源的管理与操作]]
+  - [[#mybatis][mybatis]]
+
+* 多数据源的管理与操作
+  Spring 中的多数据源可以通过 ~AbstractRoutingDataSource~ 的实现类来进行管理和操作，基础思路如下：
+  1. 通过 AbstractRoutingDataSource 获取数据源时，会调用实现类的 ~determineCurrentLookupKey~ 方法获取当前数据源的键，如果为空就返回默认数据源
+  2. 为了保证多个线程中的数据源配置不受干扰，因此，可以将当前线程上下文的数据源键保存在一个 ~ThreadLocal~ 变量中
+  3. 可以通过注解和 AOP 的方式，在需要使用特定数据源的方法上通过注解指定数据源，然后通过 AOP 在进入方法之前设置数据源，在离开方法后销毁数据源配置
+     
+  需要注意的是，使用多数据源意味着事务可能难以生效，同时，Advice 的执行顺序应该在 @Transactional 之前。
+
+  参考实现：
+  + [[https://github.com/rgb-24bit/expractice/tree/master/spractice/spractice-dynamic-datasource][expractice/spractice/spractice-dynamic-datasource at master · rgb-24bit/expractice]]
+
+** mybatis
+   通过 mybatis 使用多数据源时，可以通过如下的方式制定不同的包下的 ~sqlSessionFactory~, 并为不同的 ~sqlSessionFactory~ 指定不同的数据源：
+   #+begin_src java
+     @MapperScan(basePackages = DataSourceConfig.PACKAGE_NAME, sqlSessionFactoryRef = "sqlSessionFactory")
+   #+end_src
+
+   同样，也可以通过嵌套动态数据源的方式来进行管理。
+
