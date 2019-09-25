@@ -1,2 +1,6 @@
 * 限制内存
   + [[https://k8smeetup.github.io/docs/tasks/administer-cluster/cpu-memory-limit/][设置 Pod CPU 和内存限制 | Kubernetes]]
+
+* 镜像配置
+  + [[https://yeasy.gitbooks.io/docker_practice/install/mirror.html][镜像加速器 · Docker —— 从入门到实践]]
+

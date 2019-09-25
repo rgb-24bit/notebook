@@ -23,6 +23,12 @@
    1. 在网络设置项中设置多个位置，一个位置用一个 DNS，然后在系统菜单处切换位置。缺点是每次切换位置都会从新连接网络。
    2. 另一种方式是选择通过 ~networksetup~ 进行设置
 
+   #+begin_src bash
+     networksetup -setdnsservers Wi-Fi 114.114.114.114
+     networksetup -setdnsservers Wi-Fi empty
+     networksetup -getdnsservers Wi-Fi
+   #+end_src
+
    参考：[[http://osxdaily.com/2015/06/02/change-dns-command-line-mac-os-x/][How to Change DNS from Command Line of Mac OS X]]
 
    至于 Linux，我选择放弃……

@@ -1,0 +1,49 @@
+#+TITLE:      Mockito
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#简单使用][简单使用]]
+- [[#相关问题][相关问题]]
+  - [[#和-spring-test-之间的集成][和 Spring Test 之间的集成]]
+
+* 简单使用
+  Mockito 时 Java 中的一个非常好用的 Mock 测试框架，其常用的两个注解为：
+  + @Mock - 要求 Mockito 生成该类型的 Mock 对象
+  + @InjectMocks - 要求 Mockito 将 Mock 对象注入到该对象中
+
+  其中，当被 @InjectMocks 注解的对象实例不存在时，Mockito 会自动创建实例。
+
+  实际使用时，除了注解以外，可能还需要调用 ~MockitoAnnotations.initMocks~ 来进行初始化：
+  #+begin_src java
+    public class CustomerServiceTest {
+      @Mock
+      private CustomerDao daoMock;
+
+      @InjectMocks
+      private CustomerService service;
+
+      @Before
+      public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+      }
+
+      @Test
+      public void test() {
+        //assertion here
+      }
+    }
+  #+end_src
+
+  参考：
+  + [[https://javacodehouse.com/blog/mockito-tutorial/][Mockito Tutorial (A comprehensive guide with examples)]]
+  + [[https://github.com/hehonghui/mockito-doc-zh][Mockito 框架中文文档]]
+
+* 相关问题
+** 和 Spring Test 之间的集成
+   Mockito 为 JUnit 提供了 MockitoJUnitRunner 类，通过这个 Runner 类可以省略 MockitoAnnotations.initMocks 这一步。
+
+   但是，如果需要和 Spring Test 集成，我们更愿意使用的是 SpringJunit4ClassRunner 类，因此，Mockito 还是需要使用 MockitoAnnotations 来初始化。
+
+   在测试类内部，需要在测试方法开始执行前调用 MockitoAnnotations 的 initMocks 方法来创建 Mock 对象并注入依赖，而 Mockito 时可以识别 @Autowired 注解的。
+
+   参考：[[https://blog.gmem.cc/ut-with-spring-and-mockito][绿色记忆:基于 Spring Test 和 Mockito 进行单元测试]]
+

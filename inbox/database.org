@@ -11,4 +11,9 @@
 * sql
   + [[https://www.infoq.cn/article/ARMb2yZMYrGNv92Jz8MH][10个不为人知的SQL技巧-InfoQ]]
 
+* cancat
+  + 参数存在 NULL 时结果为 NULL
+
+* QA
+  + [[https://stackoverflow.com/questions/212939/how-do-i-modify-a-mysql-column-to-allow-null][syntax - How do I modify a MySQL column to allow NULL? - Stack Overflow]]
 

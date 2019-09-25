@@ -11,5 +11,11 @@
   + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html][Linux工具快速教程 — Linux Tools Quick Tutorial]]
   + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html][19. crontab 定时任务 — Linux Tools Quick Tutorial]]
   + [[https://www.cnblogs.com/peida/archive/2013/02/26/2932972.html][每天一个linux命令（51）：lsof命令 - peida - 博客园]]
+  + [[https://wangchujiang.com/linux-command/c/dig.html][dig 命令，Linux dig 命令详解：域名查询工具 - Linux 命令搜索引擎]]
+
+* shell
+  + [[https://www.cnblogs.com/Bob-wei/p/5056685.html][mac中的echo颜色输出 - Bob-wei - 博客园]]
+  + [[https://www.cnblogs.com/lr-ting/archive/2013/02/28/2936792.html][shell脚本中echo显示内容带颜色 - lr_ting - 博客园]]
+
 
 

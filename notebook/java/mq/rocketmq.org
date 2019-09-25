@@ -2,7 +2,6 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#环境搭建][环境搭建]]
-- [[#基本概念][基本概念]]
 - [[#java-使用][Java 使用]]
 
 * 环境搭建
@@ -13,9 +12,6 @@
   当然，还可以选择通过 Docker 搭建，目前的 [[https://github.com/apache/rocketmq-docker][apache/rocketmq-docker]] 对 ~JAVA_HOME~ 的配置存在问题，因此，可以使用修改版 [[https://github.com/rgb-24bit/rocketmq-docker][rgb-24bit/rocketmq-docker]].
 
   可以参考：[[https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users][java - How to set JAVA_HOME in Linux for all users - Stack Overflow]]
-
-* 基本概念
-  
 
 * Java 使用
   RocketMQ 由四大核心组件组成：Name Server、Broker、Producer、Consumer。

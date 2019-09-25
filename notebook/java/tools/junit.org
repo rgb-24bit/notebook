@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#junit5][JUnit5]]
 - [[#junit4][JUnit4]]
+- [[#assertions][Assertions]]
 - [[#相关问题][相关问题]]
   - [[#怎样同时执行多个测试][怎样同时执行多个测试]]
 
@@ -67,7 +68,7 @@
 
     }
   #+END_SRC
-
+  
   可以通过 @Disabled 注解禁止测试，这在某些情况下会很有用（也可以通过条件测试进行更有针对性的测试）：
   #+BEGIN_SRC java
     @Disabled("Disabled until bug #99 has been fixed")
@@ -114,7 +115,7 @@
   + [[https://junit.org/junit5/docs/current/user-guide/][JUnit 5 User Guide]]
 
 * JUnit4 
-  目前来说也许更常用的版本是 JUnit4，其常用注解和 JUnit5 之间的区别：
+  目前来说更常用的版本是 JUnit4，其常用注解和 JUnit5 之间的区别：
   |--------------------+--------------+------------------------------------|
   | JUnit5             | JUnit4       | 描述                               |
   |--------------------+--------------+------------------------------------|
@@ -128,6 +129,50 @@
   | @ExtendWith        | @Rule        |                                    |
   | @RegisterExtension | @ClassRule   |                                    |
   |--------------------+--------------+------------------------------------|
+
+* Assertions
+  JUnit 老的断言机制是将相关的断言需求封装为一个函数直接调用，十分方便：
+  #+begin_src java
+    org.junit.Assert.assertArrayEquals
+    org.junit.Assert.assertEquals
+    org.junit.Assert.assertFalse
+    org.junit.Assert.assertNotNull
+    org.junit.Assert.assertNotSame
+    org.junit.Assert.assertNull
+    org.junit.Assert.assertSame
+    org.junit.Assert.assertTrue
+  #+end_src
+  
+  但是 JUnit 也提供了新的断言机制来应对更为复杂的测试，新的机制某种程度上来说没有老机制方便，但是，新的机制提供了更加清晰的语义和更加强大的功能：
+  #+begin_src java
+    org.junit.Assert.assertThat
+  #+end_src
+
+  新的机制依赖于 assertThat 函数和 hamcrest coreMatchers，使用时的关键在于 hamcrest coreMatchers 的使用：
+  #+begin_src java
+    @Test
+    public void testAssetThatExamples() {
+
+      // 'theString' should contain 'S' and 'r'
+      assertThat("theString", both(containsString("S")).and(containsString("r")));
+
+      List<String> items = Arrays.asList("John", "James", "Julia", "Jim");
+
+      // items list should have James and Jim
+      assertThat(items, hasItems("James", "Jim"));
+
+      // Every item in the list should have the character 'J'
+      assertThat(items, everyItem(containsString("J")));
+
+      // check all of the matchers
+      assertThat("Once", allOf(equalTo("Once"), startsWith("O")));
+
+      // negation of all of the matchers
+      assertThat("Once", not(allOf(equalTo("test"), containsString("test"))));
+    }
+  #+end_src
+
+  参考：[[https://javacodehouse.com/blog/junit-tutorial/][How to unit test with JUnit 4 (Junit 4 tutorial with examples)]]
 
 * 相关问题
 ** 怎样同时执行多个测试

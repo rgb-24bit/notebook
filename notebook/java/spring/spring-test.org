@@ -2,6 +2,9 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简单使用][简单使用]]
+- [[#相关问题][相关问题]]
+  - [[#如何进行和-dao-层相关的单元测试][如何进行和 DAO 层相关的单元测试]]
+- [[#相关链接][相关链接]]
 
 * 简单使用
   对于普通的 Spring 项目的测试：
@@ -13,7 +16,7 @@
     }
   #+END_SRC
 
-  对于普通的 Spring-Boot 项目的测试：
+  对于普通的 Spring Boot 项目的测试：
   #+BEGIN_SRC java
     @RunWith(SpringJUnit4ClassRunner.class)
     @SpringBootTest(classes = Application.class)
@@ -21,4 +24,21 @@
       // ...
     }
   #+END_SRC
+
+* 相关问题
+** 如何进行和 DAO 层相关的单元测试
+   在进行和 DAO 层相关的单元测试时常常会顾虑一件事情：测试数据的数据库中的数据造成的影响。
+
+   一种可以考虑的办法是：
+   + 进行 DAO 层以上的层的单元测试时，使用 Mock 的 DAO 对象，避免真实的数据库操作
+   + 进行集成测试时使用真实的 DAO 对象
+   
+   另一种办法是使用 Spring Test 对事务的支持，在测试上下文中，事务会默认回滚，这就避免了测试数据进入数据库。
+   
+   参考：
+   + [[https://stackoverflow.com/questions/52255896/proper-way-of-using-and-testing-generated-mapper][java - Proper way of using and testing generated mapper - Stack Overflow]]
+   + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testcontext-tx][Spring Test - Transaction Management]]
+
+* 相关链接
+  + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/testing.html][Spring Test Documentation]]
 

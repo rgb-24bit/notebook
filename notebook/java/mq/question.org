@@ -1,0 +1,14 @@
+#+TITLE:      相关问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#jms-和-mq-之间的关系][JMS 和 MQ 之间的关系]]
+
+* JMS 和 MQ 之间的关系
+  JMS 是一个用于提供消息服务的技术规范，它制定了在整个消息服务提供过程中的所有数据结构和交互流程。而 MQ 则是消息队列服务，是面向消息中间件（MOM）的最终实现，是真正的消息服务提供者。
+
+  MQ 的实现可以基于 JMS，也可以基于其他规范或标准，其中 ActiveMQ 就是基于 JMS 规范实现的消息队列。
+
+  参考：
+  + [[https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol][Advanced Message Queuing Protocol - Wikipedia]]
+  + [[https://www.javatpoint.com/jms-tutorial][JMS Tutorial - javatpoint]]
+

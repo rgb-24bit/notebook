@@ -8,3 +8,6 @@
 * JDK
   + [[https://segmentfault.com/a/1190000014202363][An Introduction to Intellij IDEA Scratches - 个人文章 - SegmentFault 思否]]
 
+* 注释
+  + [[https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes][intellij idea - Indentation of line comments’ slashes - Stack Overflow]]
+

@@ -1,0 +1,95 @@
+#+TITLE:      Java 日志工具
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#sentry][Sentry]]
+  - [[#spring--logback][Spring & Logback]]
+
+* Sentry
+  Sentry 是一个实时事件日志记录和聚合平台，相较于 ELK，Sentry 能够更加容易的从日志记录中找到错误日志，然后在错误日志中找到 TraceId 后转到 ELK 查看详细日志。
+
+  而 Sentry 在 Java 中的使用也是极其简单的，只需要配置好 DSN 就可以了，剩下了可以交由 Sentry 自己处理。
+
+  配置 DSN 的方式：
+  1. 使用 sentry.properties 配置文件：
+     #+begin_example
+       dsn=https://public:private@host:port/1
+     #+end_example
+  2. 使用 Java System Properties：
+     #+begin_example
+       java -Dsentry.dsn=https://public:private@host:port/1 -jar app.jar
+     #+end_example
+  3. 使用环境变量：
+     #+begin_src java
+       SENTRY_DSN=https://public:private@host:port/1 java -jar app.jar
+     #+end_src
+  4. 使用代码：
+     #+begin_example
+       Sentry.init("https://public:private@host:port/1");
+     #+end_example
+
+** Spring & Logback
+   Sentry 提供了默认的 LogBack Appender 实现 io.sentry.logback.SentryAppender，当 LogBack 调用 SentryAppender 的 append 方法时，
+   会调用 Sentry.capture 方法初始化 Sentry 并捕获日志：
+   #+begin_src java
+     public class SentryAppender extends AppenderBase<ILoggingEvent> {
+       @Override
+       protected void append(ILoggingEvent iLoggingEvent) {
+         // Do not log the event if the current thread is managed by sentry
+         if (isNotLoggable(iLoggingEvent) || SentryEnvironment.isManagingThread()) {
+           return;
+         }
+
+         SentryEnvironment.startManagingThread();
+         try {
+           if (minLevel != null && !iLoggingEvent.getLevel().isGreaterOrEqual(minLevel)) {
+             return;
+           }
+
+           EventBuilder eventBuilder = createEventBuilder(iLoggingEvent);
+           Sentry.capture(eventBuilder);
+         } catch (Exception e) {
+           addError("An exception occurred while creating a new event in Sentry", e);
+         } finally {
+           SentryEnvironment.stopManagingThread();
+         }
+       }
+     }
+   #+end_src
+
+   而在 ~Sentry.capture~ 方法中，只有在获取 ~SentryClient~ 为空时才会进行初始化，因此，我们可以手动初始化 SentryClient 来覆盖默认的初始化行为。
+
+   比如说，不想用 Sentry 默认提供的配置方式，我想将 DSN 的配置放到 ~logback-spring.xml~ 中，并通过 Apollo 将配置注入，这时，由于 SentryAppender 并没有实现 ~start~ 方法，
+   因此就可以选择继承 SentryAppender 并在自己实现的 ~start~ 方法中初始化 Sentry：
+   #+begin_src java
+     @Setter
+     public class CustomSentryAppender extends SentryAppender {
+       private String dsn;
+
+       @Override
+       public void start() {
+         Sentry.init(Optional.ofNullable(dsn).orElse(Dsn.DEFAULT_DSN));
+         super.start();
+       }
+     }
+   #+end_src
+
+   配置文件中的配置方式：
+   #+begin_src xml
+     <configuration scan="true" scanPeriod="60 seconds" debug="true">
+       <springProperty scope="context" name="sentryDsn" source="log.sentry.dsn" />
+
+       <appender name="SENTRY" class="CustomSentryAppender">
+         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+           <level>WARN</level>
+         </filter>
+         <dsn>${sentryDsn}</dsn>
+       </appender>
+
+       <root level="INFO">
+         <appender-ref ref="SENTRY" />
+       </root>
+     </configuration>
+   #+end_src
+
+   参考：[[https://www.baeldung.com/custom-logback-appender][Creating a Custom Logback Appender | Baeldung]]
+

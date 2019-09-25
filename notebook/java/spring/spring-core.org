@@ -52,7 +52,8 @@
   + 自动注入可以获得应用上下文对象：
     #+BEGIN_SRC java
       public class Example {
-        @Au
+        @AutoWired
+        ApplicationContext context;
       }
     #+END_SRC
 

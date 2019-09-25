@@ -223,4 +223,11 @@
 
 * dns
   + [[https://www.moewah.com/archives/738.html][Linux自建DNS服务器：DNSmasq安装与配置 - 喵斯基部落]]
+  + [[https://baike.baidu.com/item/Punycode][Punycode_百度百科]]
+
+* nexus
+  + [[https://help.sonatype.com/repomanager3][Repository Manager 3]]
+
+* github action
+  + [[http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html][GitHub Actions 入门教程 - 阮一峰的网络日志]]
 
