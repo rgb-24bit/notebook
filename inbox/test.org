@@ -1,0 +1,3 @@
+* 测试方法
+  + [[https://insights.thoughtworks.cn/about-contract-test/][聊一聊契约测试 – ThoughtWorks洞见]]
+

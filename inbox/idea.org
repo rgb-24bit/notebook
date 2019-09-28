@@ -11,3 +11,6 @@
 * 注释
   + [[https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes][intellij idea - Indentation of line comments’ slashes - Stack Overflow]]
 
+* Run...
+  M-S-F10
+

@@ -92,6 +92,7 @@
 
 * 异步
   + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
+  + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
 
 * solution
   + [[https://www.cnblogs.com/rjzheng/p/9041659.html][【原创】分布式之数据库和缓存双写一致性方案解析 - 孤独烟 - 博客园]]

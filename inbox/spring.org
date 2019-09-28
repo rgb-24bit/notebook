@@ -127,7 +127,6 @@
   + Sentry
   + [[http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html][mybatis – MyBatis 3 | 动态 SQL]]
 
-
 * spring cloud
   + [[http://www.ityouknow.com/springcloud/2017/05/10/springcloud-eureka.html][springcloud(二)：注册中心Eureka - 纯洁的微笑博客]]
   + [[http://www.ityouknow.com/spring-cloud.html][spring-cloud - 纯洁的微笑博客]]
@@ -176,3 +175,4 @@
   + [[https://www.jianshu.com/p/b9439edb8408][使用FactoryBean自定义实例化逻辑 - 简书]]
 
 
+* FactoryBean

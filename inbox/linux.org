@@ -16,6 +16,5 @@
 * shell
   + [[https://www.cnblogs.com/Bob-wei/p/5056685.html][mac中的echo颜色输出 - Bob-wei - 博客园]]
   + [[https://www.cnblogs.com/lr-ting/archive/2013/02/28/2936792.html][shell脚本中echo显示内容带颜色 - lr_ting - 博客园]]
-
-
+  + [[https://segmentfault.com/a/1190000016129862][命令行界面 (CLI)、终端 (Terminal)、Shell、TTY，傻傻分不清楚？ - Blessing Studio - SegmentFault 思否]]
 
