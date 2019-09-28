@@ -14,3 +14,6 @@
 * Run...
   M-S-F10
 
+* M-F1
+  + [[https://stackoverflow.com/questions/28189560/is-there-a-shortcut-to-delete-the-currently-open-file-in-phpstorm][intellij idea - Is there a shortcut to delete the currently open file in PHPStorm? - Stack Overflow]]
+

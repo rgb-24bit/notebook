@@ -21,4 +21,9 @@
 
 * 分页查询
   + [[https://www.cnblogs.com/youyoui/p/7851007.html][MySQL分页查询优化 - 悠悠i - 博客园]]
+* UPDATE
+  + [[https://www.yiibai.com/mysql/update-join.html][MySQL update join语句 - MySQL教程™]]
+
+* function  
+  + [[https://www.cnblogs.com/ggjucheng/p/3352280.html][MySQL：日期函数、时间函数总结 - ggjucheng - 博客园]]
 

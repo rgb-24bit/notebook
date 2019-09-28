@@ -231,3 +231,7 @@
 * github action
   + [[http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html][GitHub Actions 入门教程 - 阮一峰的网络日志]]
 
+* VPN
+  检查网络流量时发现的进程：
+  + [[https://blog.jiayx.net/archives/274.html][Mac 下禁用开机自启软件 - JIAYX]]
+

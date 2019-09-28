@@ -27,3 +27,6 @@
 * HTTPS
   + [[http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html][SSL/TLS协议运行机制的概述 - 阮一峰的网络日志]]
 
+* TCP
+  + [[https://www.cnkirito.moe/tcp-talk/][聊聊 TCP 长连接和心跳那些事 | 徐靖峰|个人博客]]
+  

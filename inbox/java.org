@@ -151,3 +151,15 @@
 * log
   + [[http://www.itjc5.com/post/8.html][vip教程分享-小结开发程序员的日志规则有那些呢？]]
 
+* 注解
+  组合注解，lombok 中的注解处理器由于会检查是否是类，因此无法直接当做组合注解……
+
+  + [[https://juejin.im/post/5a619f886fb9a01c9f5b7e4f][Java中的注解-自定义注解 - 掘金]]
+  + [[https://stackoverflow.com/questions/41243018/create-custom-annotation-for-lombok][java - Create custom annotation for Lombok - Stack Overflow]]
+
+* 日期格式化
+  + [[http://tutorials.jenkov.com/java-internationalization/simpledateformat.html][Java SimpleDateFormat]]
+
+* 教程
+  + [[http://tutorials.jenkov.com/][Jenkov.com]]
+
