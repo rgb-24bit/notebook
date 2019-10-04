@@ -6,6 +6,7 @@
   - [[#插件][插件]]
     - [[#插件的概念][插件的概念]]
     - [[#插件的添加][插件的添加]]
+- [[#多模块项目][多模块项目]]
 - [[#使用技巧][使用技巧]]
   - [[#查看项目依赖树][查看项目依赖树]]
 - [[#注意事项][注意事项]]
@@ -70,6 +71,57 @@
 
     参考文章：
     + [[https://maven.apache.org/guides/mini/guide-configuring-plugins.html][Maven – Guide to Configuring Plug-ins]]
+
+* 多模块项目
+  Maven 多模块项目通常分为一个父模块和多个子模块，父模块的 POM 通常具有如下格式：
+  #+begin_src xml
+    <!-- 父模块的打包类型需要为 POM -->
+    <packaging>pom</packaging>
+
+    <!-- 声明子模块 -->
+    <modules>
+      <module>module-a</module>
+      <module>module-b</module>
+      <module>module-c</module>
+    </modules>
+
+    <!-- 声明通用的属性值 -->
+    <properties>
+      ...
+    </properties>
+
+    <!-- 管理通用的依赖项 -->
+    <dependencyManagement>
+      <dependencies>
+        ...
+      </dependencies>
+    </dependencyManagement>
+
+    <!-- 管理通用的插件 -->
+    <build>
+      <pluginManagement>
+        <plugins>
+          ...
+        </plugins>
+      </pluginManagement>
+    </build>
+  #+end_src
+
+  而子模块需要集成父模块：
+  #+begin_src xml
+    <parent>
+      <groupId>...</groupId>
+      <artifactId>...</artifactId>
+      <version>...</version>
+    </parent>
+  #+end_src
+
+  Maven 默认认为父模块是在当前项目 pom.xml 所在的目录的上一级目录中，如果项目结构并不是这样，就必须通过 <relativepath> 节点来指定父模块 pom.xml 所在的路径：
+  #+begin_src xml
+    <relativePath>../</relativePath>
+  #+end_src
+
+  子模块需要使用其他子模块的功能时，需要在 ~dependencies~ 中声明依赖才行。
 
 * 使用技巧
 ** 查看项目依赖树

@@ -10,11 +10,12 @@
   - [[#属性][属性]]
   - [[#监听者][监听者]]
   - [[#defaultsevelet][DefaultSevelet]]
-  - [[#注意事项][注意事项]]
+  - [[#misc][Misc]]
 - [[#servlet-容器][Servlet 容器]]
 - [[#servlet-30][Servlet 3.0]]
 - [[#相关问题][相关问题]]
   - [[#过滤器的调用顺序是怎样的][过滤器的调用顺序是怎样的]]
+  - [[#servlet-版本和-jdk-版本之间的关系][Servlet 版本和 JDK 版本之间的关系]]
 - [[#相关资料][相关资料]]
 
 * Servlet
@@ -183,8 +184,9 @@
 
    参考：[[http://wiki.jikexueyuan.com/project/tomcat/default-servlet.html][默认 Servlet - Tomcat 8 权威指南 - 极客学院Wiki]]
 
-** 注意事项
+** Misc
    + 应该在获取响应对象的输出流之前调用 setContentType 方法
+   + 安全的四要素：认证、授权、机密性和数据完整性
 
 * Servlet 容器
   apache-tomcat 其实是服务器 apache 和容器 tomcat 的组合版，它们的运行流程（可能）为：
@@ -218,6 +220,16 @@
 ** 过滤器的调用顺序是怎样的
    过滤器的调用顺序就是它在 DD 中的声明顺序，如果在过滤器中请求分派或停止传递请求，
    那么请求就不会到达原本的目标。
+
+** Servlet 版本和 JDK 版本之间的关系
+   |--------------+----------|
+   | Servlet 版本 | JDK 版本 |
+   |--------------+----------|
+   | Servlet 2.5  | JDK 1.5  |
+   | Servlet 3.0  | JDK 6    |
+   | Servlet 3.1  | JDK 7    |
+   | Servlet 4.0  | JDK 8    |
+   |--------------+----------|
 
 * 相关资料
   + 部署描述文件的官方文档：[[https://docs.oracle.com/cd/E17904_01/web.1111/e13712/web_xml.htm#WBAPP503][A web.xml Deployment Descriptor Elements]]

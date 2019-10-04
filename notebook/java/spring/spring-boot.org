@@ -12,10 +12,13 @@
   - [[#在配置文件中使用环境变量][在配置文件中使用环境变量]]
 
 * 自动配置原理
-  通过 ~SpringApplication~ 的 ~run~ 方法开始运行程序时，会创建 ~SpringApplication~ 的实例时调用 ~SpringFactoriesLoader~ 加载工厂：
-  + [[https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/SpringApplication.java#L434][spring-boot/SpringApplication.java at master · spring-projects/spring-boot]]
+  ~@SpringBootApplication~ 注解集成了 ~@EnableAutoConfiguration~ 注解，该注解会导入 ~AutoConfigurationImportSelector~ 进行自动配置：
+  #+begin_src java
+    @Import(AutoConfigurationImportSelector.class)
+    public @interface EnableAutoConfiguration {}
+  #+end_src
 
-  ~SpringFactoriesLoader~ 加载工厂是会寻找类路径下的 ~META-INF/spring.factories~ 文件：
+  ~AutoConfigurationImportSelector~ 会通过 ~SpringFactoriesLoader~ 寻找类路径下的 ~META-INF/spring.factories~ 文件中的自动配置类：
   + [[https://github.com/spring-projects/spring-framework/blob/master/spring-core/src/main/java/org/springframework/core/io/support/SpringFactoriesLoader.java][spring-framework/SpringFactoriesLoader.java at master · spring-projects/spring-framework]]
 
   寻找 ~META-INF/spring.factories~ 文件是通过 Java 内置的接口完成的：

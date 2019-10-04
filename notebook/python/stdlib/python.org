@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#traceback--print-or-retrieve-a-stack-traceback][traceback — Print or retrieve a stack traceback]]
+- [[#inspect--inspect-live-objects][inspect — Inspect live objects]]
 
 * traceback — Print or retrieve a stack traceback
   可以通过 ~traceback~ 模块打印或检索堆栈回溯，官网上的例子：
@@ -24,4 +25,7 @@
   #+END_SRC
 
   官方文档链接：[[https://docs.python.org/3/library/traceback.html][traceback — Print or retrieve a stack traceback — Python 3.7.3 documentation]]
+
+* inspect — Inspect live objects
+  感觉比较有价值的是官方文档中的那个表格：[[https://docs.python.org/3/library/inspect.html][inspect — Inspect live objects — Python 3.7.5rc1 documentation]]
 

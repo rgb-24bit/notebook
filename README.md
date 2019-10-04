@@ -4,6 +4,7 @@
   + [c-c++](#c-c++)
   + [compile](#compile)
   + [database](#database)
+  + [devops](#devops)
   + [dotnet](#dotnet)
   + [emacs](#emacs)
   + [front-end](#front-end)
@@ -61,6 +62,9 @@
   + [Redis](notebook/database/redis.org)
   + [SQLite3](notebook/database/sqlite3.org)
   + [Standard SQL](notebook/database/standsql.org)
+## devops
+  + [相关概念](notebook/devops/concept.org)
+  + [Nginx](notebook/devops/nginx.org)
 ## dotnet
   + [.NET - C# 高级特性](notebook/dotnet/csharp-feature.org)
   + [.NET - C# 基础](notebook/dotnet/csharp-note.org)
@@ -100,9 +104,13 @@
     + [Redis](notebook/java/database/redis.org)
   + **javaee**
     + [JSP](notebook/java/javaee/jsp.org)
+    + [Java EE Misc](notebook/java/javaee/misc.org)
     + [Java EE 问题集](notebook/java/javaee/question.org)
     + [Servlet](notebook/java/javaee/servlet.org)
+  + **jvm**
+    + [内存管理相关](notebook/java/jvm/ram.org)
   + **mq**
+    + [相关问题](notebook/java/mq/question.org)
     + [RocketMQ](notebook/java/mq/rocketmq.org)
   + **spring**
     + [Spring 问题集](notebook/java/spring/question.org)
@@ -118,7 +126,9 @@
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
     + [JDK Tools](notebook/java/tools/jdk.org)
     + [JUnit](notebook/java/tools/junit.org)
+    + [Java 日志工具](notebook/java/tools/logging.org)
     + [Maven](notebook/java/tools/maven.org)
+    + [Mockito](notebook/java/tools/mockito.org)
     + [Swagger](notebook/java/tools/swagger.org)
     + [Tomcat](notebook/java/tools/tomcat.org)
   + [Java 注解类的定义与使用](notebook/java/annotations.org)
@@ -159,10 +169,12 @@
     + [线性代数 - 矩阵和方程组](notebook/math/linear/matrix.org)
 ## microservice
   + [配置中心](notebook/microservice/config.org)
+  + [远程过程调用](notebook/microservice/rpc.org)
 ## misc
   + [计算机图形学](notebook/misc/computer-graphics.org)
   + [概念了解](notebook/misc/concept.org)
   + [Debug](notebook/misc/debug.org)
+  + [设计模式](notebook/misc/ds.org)
   + [EditorConfig](notebook/misc/editorconfig.org)
   + [开源协议](notebook/misc/liscense.org)
   + [机器学习](notebook/misc/ml.org)
@@ -171,7 +183,6 @@
   + [问题集](notebook/misc/question.org)
   + [结构化编程](notebook/misc/se.org)
   + [搜索引擎](notebook/misc/search.org)
-  + [一点想法](notebook/misc/spark.org)
   + [Unicode](notebook/misc/unicode.org)
   + [单元测试](notebook/misc/unit-test.org)
 ## network
@@ -186,17 +197,21 @@
   + [操作系统 - 程序的机器级表示](notebook/os/express.org)
   + [操作系统 - 信息的表示和处理](notebook/os/info.org)
   + [操作系统 - I/O](notebook/os/io.org)
+  + [操作系统内核](notebook/os/kernel.org)
   + [操作系统 - 链接](notebook/os/link.org)
 ## python
   + **stdlib**
     + [Generic Operating System Services](notebook/python/stdlib/allos.org)
+    + [Data Types](notebook/python/stdlib/datatype.org)
     + [Debugging and Profiling](notebook/python/stdlib/debug.org)
     + [Development Tools](notebook/python/stdlib/development.org)
     + [Functional Programming Modules](notebook/python/stdlib/functional.org)
     + [Internet Protocols and Support](notebook/python/stdlib/internet.org)
+    + [Python Language Services](notebook/python/stdlib/language.org)
     + [Internet Data Handling](notebook/python/stdlib/netdata.org)
     + [Python Runtime Services](notebook/python/stdlib/python.org)
   + [Python - 异步 I/O](notebook/python/async.org)
+  + [Binary Data Services](notebook/python/binary.org)
   + [Python 协程](notebook/python/coroutine.org)
   + [Python 爬虫笔记](notebook/python/crawler.org)
   + [框架 - Flask 笔记](notebook/python/flask.org)

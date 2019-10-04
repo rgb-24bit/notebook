@@ -49,4 +49,6 @@
 
    而通过统一资源加载策略可以更方便的加载多个配置文件。
 
+* Spring Boot
+  自动配置：BeanDefinitionRegistryPostProcessor、ConfigurationClassPostProcessor
 

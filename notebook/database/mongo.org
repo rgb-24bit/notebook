@@ -4,6 +4,7 @@
 - [[#debian-安装][Debian 安装]]
 - [[#概念解析][概念解析]]
 - [[#远程连接][远程连接]]
+- [[#安全配置][安全配置]]
 
 * Debian 安装
   Debian 上 mongodb 的安装还是很方便的，基本上就是一条命令的事：
@@ -33,4 +34,21 @@
   3) 连接 mongo ip:27017，这里应该在安全组中开放该端口
 
   参考：[[https://www.cnblogs.com/jinxiao-pu/p/7121307.html][mongodb 远程连接配置 - 今孝 - 博客园]]
+
+* 安全配置
+  MongoDB 权限介绍：
+  1. MongoDB 安装时不添加任何参数，默认是没有权限验证的，登录的用户可以对数据库任意操作而且可以远程访问数据库，开启权限验证需以 --auth 参数启动
+  2. 在刚安装完毕的时候 MongoDB 都默认有一个 admin 数据库，此时 admin 数据库是空的，没有记录权限相关的信息。当 admin.system.users 一个用户都没有时，
+     即使 mongod 启动时添加了 --auth 参数，如果没有在 admin 数据库中添加用户，此时不进行任何认证还是可以做任何操作(不管是否是以 --auth 参数启动)，直到在 admin.system.users 中添加了一个用户
+  3. MongoDB 的访问分为连接和权限验证，即使以 --auth 参数启动还是可以不使用用户名连接数据库，但是不会有任何的权限进行任何操作
+  4. admin 数据库中的用户名可以管理所有数据库，其他数据库中的用户只能管理其所在的数据库。
+  5. 在 2.4 之前版本中，用户的权限分为只读和拥有所有权限。2.4 版本的权限管理主要分为：数据库的操作权限、数据库用户的管理权限、集群的管理权限
+
+  用户的添加方式：
+  #+begin_src bash
+    db.addUser("test", "test")        # 默认拥有读写权限
+    db.addUser("test", "test", True)  # 拥有读取权限
+  #+end_src
+
+  参考：[[https://wooyun.js.org/drops/MongoDB%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE.html][MongoDB 安全配置 - zhangsan]]
 

@@ -2,9 +2,20 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#常用的几种认证方式][常用的几种认证方式]]
+- [[#负载均衡下的状态同步][负载均衡下的状态同步]]
 
 * 常用的几种认证方式
   + [[https://www.cnblogs.com/fengzheng/p/8416393.html][说一说几种常用的登录认证方式，你用的哪种 - 风的姿态 - 博客园]]
   + [[http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html][JSON Web Token 入门教程 - 阮一峰的网络日志]]
   + [[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html][理解 OAuth 2.0 - 阮一峰的网络日志]]
+
+* 负载均衡下的状态同步
+  和业务相关的数据往往会直接保存到数据库，不同数据库之间可以通过主从的方式完成数据同步，但是对于认证数据来说，如果保存到数据库的话成本就太高了。
+
+  因此，需要一些更为低成本且高效的同步方案，常见的就是：将状态写到 Memcached 或 Redis 里面去。
+
+  使用 Nginx 的话也可以考虑使用 ip_hash 的方式让同一个客户端访问固定的后端服务器。
+
+  参考：
+  + [[https://www.cnblogs.com/zengguowang/p/8261695.html][Nginx:负载均衡的 session 共享 - ^小七 - 博客园]]
 

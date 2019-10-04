@@ -15,6 +15,11 @@
 * 配置
   通过 Java 配置时，鉴于初始化会获取所有实现 WebApplicationInitializer 的类，那么我们可以实现这一接口，在这个接口的 onStartup 方法中借助 Servlet 3.0 进行动态配置。
 
+  #+begin_src java
+    @HandlesTypes(WebApplicationInitializer.class)
+    public class SpringServletContainerInitializer implements ServletContainerInitializer {}
+  #+end_src
+
   特别的：
   + AbstractAnnotationConfigDispatcherServletInitializer 的子类可以覆盖 customRegistrantion 进行额外的配置
   + 过滤器的配置可以通过覆盖 getServletFilters 方法完成
@@ -25,6 +30,8 @@
   并指定配置类。
 
   估计默认情况下使用的是 XmlWebApplicationContext。
+
+  相关链接：[[https://github.com/rgb-24bit/blog/blob/master/2019/javaee-servlet30-springmvc.org][Java EE - Servlet 3.0 和 Spring MVC]]
 
 * 控制器和视图解析器
   控制器：

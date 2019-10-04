@@ -1,0 +1,31 @@
+#+TITLE:      Nginx
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关问题][相关问题]]
+  - [[#单个-ip-怎样部署多个网站][单个 IP 怎样部署多个网站]]
+
+* 相关问题
+** 单个 IP 怎样部署多个网站
+   各个网站跑不同的端口，然后通过域名反向代理到各个端口：
+   #+begin_src conf
+     server {
+         listen 80 default_server;
+         server_name _;
+         return 444;                           # 过滤其他域名的请求，返回 444 状态码
+     }
+     server {
+         listen 80;
+         server_name www.aaa.com;              # www.aaa.com 域名
+         location / {
+             proxy_pass http://localhost:8080; # 对应端口号 8080
+         }
+     }
+     server {
+         listen 80;
+         server_name www.bbb.com;              # www.bbb.com 域名
+         location / {
+             proxy_pass http://localhost:8081; # 对应端口号 8081
+         }
+     }
+   #+end_src
+

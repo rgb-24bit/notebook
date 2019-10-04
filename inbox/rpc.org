@@ -1,3 +1,0 @@
-+ [[https://waylau.com/remote-procedure-calls/][远程过程调用(RPC)详解 | waylau.com]]
-+ [[https://www.infoq.cn/article/ujea*5ch0HjW2racClC9][RPC协议之争和选型要点]]
-

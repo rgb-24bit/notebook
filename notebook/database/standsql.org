@@ -7,6 +7,7 @@
   - [[#通过-select-语句进行简单的测试][通过 SELECT 语句进行简单的测试]]
   - [[#通过-truncate-语句来删除表中的所有行][通过 TRUNCATE 语句来删除表中的所有行]]
   - [[#通过-insert-select-语句快速插入数据][通过 INSERT SELECT 语句快速插入数据]]
+  - [[#通过-update-case-语句进行批量更新][通过 UPDATE CASE 语句进行批量更新]]
 - [[#sql-问题集][SQL 问题集]]
   - [[#sql-查询语句的子句顺序][SQL 查询语句的子句顺序]]
   - [[#等值连接和内连接之间的关系][等值连接和内连接之间的关系]]
@@ -95,6 +96,22 @@
    #+END_SRC
 
    只不过不同的数据库支持不一样。
+
+** 通过 UPDATE CASE 语句进行批量更新
+   使用 UPDATE CASE 语句时，数据库会将扫描到的行代入条件进行判断，满足后进行更新，无条件满足时则设为 NULL：
+   #+begin_src sql
+     UPDATE students
+        SET LASTNAME =
+            CASE
+              WHEN LASTNAME = 'AAA' THEN 'BBB'
+              WHEN LASTNAME = 'CCC' THEN 'DDD'
+              WHEN LASTNAME = 'EEE' THEN 'FFF'
+              ELSE LASTNAME
+            END
+      WHERE LASTNAME IN ('AAA', 'CCC', 'EEE')
+   #+end_src
+
+   由于需要进行大量的判断，因此，最好通过 WHERE 子句限制记录条数。
 
 * SQL 问题集
 ** SQL 查询语句的子句顺序

@@ -1,0 +1,65 @@
+#+TITLE:      Data Types
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#heapq--heap-queue-algorithm][heapq — Heap queue algorithm]]
+- [[#collectionsabc--abstract-base-classes-for-containers][collections.abc — Abstract Base Classes for Containers]]
+- [[#bisect--array-bisection-algorithm][bisect — Array bisection algorithm]]
+- [[#enum--support-for-enumerations][enum — Support for enumerations]]
+
+* heapq — Heap queue algorithm
+  为 ~Python~ 提供 *堆* 数据类型的支持：
+  #+BEGIN_SRC python
+    >>> def heapsort(iterable):
+    ...     h = []
+    ...     for value in iterable:
+    ...         heappush(h, value)
+    ...     return [heappop(h) for i in range(len(h))]
+    ...
+    >>> heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  #+END_SRC
+
+  堆数据结构最重要的特征是 ~heap[0]~ 永远是最小的元素。
+
+  官方文档：[[https://docs.python.org/3/library/heapq.html][heapq — Heap queue algorithm — Python 3.7.5rc1 documentation]]
+
+* collections.abc — Abstract Base Classes for Containers
+  #+BEGIN_SRC python
+    isinstance(obj, class collections.abc.Iterable)
+  #+END_SRC  
+
+  官方文档：[[https://docs.python.org/3/library/collections.abc.html][collections.abc — Abstract Base Classes for Containers — Python 3.7.5rc1 documentation]]
+
+* bisect — Array bisection algorithm
+  #+BEGIN_SRC python
+    In [1]: import bisect
+
+    In [2]: data = [1, 2, 3]
+
+    In [3]: bisect.insort(data, 2)
+
+    In [4]: data
+    Out[4]: [1, 2, 2, 3]
+  #+END_SRC
+
+  官方文档：[[https://docs.python.org/3/library/bisect.html][bisect — Array bisection algorithm — Python 3.7.5rc1 documentation]]
+
+* enum — Support for enumerations
+  #+BEGIN_SRC python
+    >>> class Shake(Enum):
+    ...     VANILLA = 7
+    ...     CHOCOLATE = 4
+    ...     COOKIES = 9
+    ...     MINT = 3
+    ...
+    >>> for shake in Shake:
+    ...     print(shake)
+    ...
+    Shake.VANILLA
+    Shake.CHOCOLATE
+    Shake.COOKIES
+    Shake.MINT
+  #+END_SRC
+
+  官方文档：[[https://docs.python.org/3/library/enum.html][enum — Support for enumerations — Python 3.7.5rc1 documentation]]
+

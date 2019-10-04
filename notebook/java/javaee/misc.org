@@ -1,0 +1,11 @@
+#+TITLE:      Java EE Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#jndi][JNDI]]
+
+* JNDI
+  就目前来说，还没有在实际的开发中实际接触过 JNDI 的使用，因此，这里就简单的记录一下好了。
+
+  Tomcat 中的 JNDI 配置：
+  + [[https://www.cnblogs.com/xdp-gacl/p/3951952.html][JNDI 数据源的配置 - 孤傲苍狼 - 博客园]]
+

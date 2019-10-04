@@ -1,0 +1,15 @@
+#+TITLE:      Binary Data Services
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#codecs--codec-registry-and-base-classes][codecs — Codec registry and base classes]]
+
+* codecs — Codec registry and base classes
+  一般情况下，使用 encode 和 decode 时如果出错就会抛异常，但是，可以通过 codecs 来避免这样情况的发生：
+  #+begin_src python
+    >>> str = '测试字符串'
+    >>> codecs.decode(codecs.encode(str, 'utf-8'), 'gbk', errors='ignore')
+    '娴嬭瘯瀛楃︿覆'
+  #+end_src
+
+  官方文档：[[https://docs.python.org/3/library/codecs.html][codecs — Codec registry and base classes — Python 3.7.5rc1 documentation]]
+

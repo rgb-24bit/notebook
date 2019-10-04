@@ -10,6 +10,8 @@
 - [[#部署][部署]]
   - [[#iis-部署][IIS 部署]]
   - [[#debian--nginx-部署][Debian + Nginx 部署]]
+- [[#相关问题][相关问题]]
+  - [[#如何为所有-route-添加前缀][如何为所有 ROUTE 添加前缀]]
 
 * 基本使用
 ** Flask
@@ -389,3 +391,8 @@
      #+BEGIN_SRC bash
        $ python -c "import socket as s; sock = s.socket(s.AF_UNIX); sock.bind('/tmp/somesocket')"
      #+END_SRC
+* 相关问题
+** 如何为所有 ROUTE 添加前缀
+   通过 ~app.config["APPLICATION_ROOT"] = PREFIX~ 就可以了，参考：
+   + [[https://stackoverflow.com/questions/18967441/add-a-prefix-to-all-flask-routes][python - Add a prefix to all Flask routes - Stack Overflow]]
+
