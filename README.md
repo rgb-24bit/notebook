@@ -13,7 +13,6 @@
   + [lang](#lang)
   + [linux](#linux)
   + [mac](#mac)
-  + [math](#math)
   + [microservice](#microservice)
   + [misc](#misc)
   + [network](#network)
@@ -162,11 +161,6 @@
 ## mac
   + [日常使用](notebook/mac/daily.org)
   + [开发相关](notebook/mac/develop.org)
-## math
-  + **discrete**
-    + [离散数学 - 逻辑和证明](notebook/math/discrete/logic.org)
-  + **linear**
-    + [线性代数 - 矩阵和方程组](notebook/math/linear/matrix.org)
 ## microservice
   + [配置中心](notebook/microservice/config.org)
   + [远程过程调用](notebook/microservice/rpc.org)
