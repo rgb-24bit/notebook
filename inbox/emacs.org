@@ -106,3 +106,7 @@
   + user-emacs-directory
   + 临时缓冲区 C-x b NAME RET
 
+* bookmark
+  + [[https://www.emacswiki.org/emacs/BookmarkPlus][EmacsWiki: Bookmark Plus]]
+  + [[https://www.emacswiki.org/emacs/BookMarks][EmacsWiki: Book Marks]]
+

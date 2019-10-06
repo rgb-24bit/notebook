@@ -181,10 +181,15 @@
        INSERT INTO tbl(name) VALUES('john');
    #+END_SRC
 
+   如果存在键约束的话，也可以选择使用：
+   #+begin_src sql
+     INSERT ... ON DUPLICATE KEY UPDATE ...
+   #+end_src
+
 ** 怎样显示 Table 的元数据信息
    通过 ~SHOW COLUMNS FROM tblName~ 可以显示表的元数据信息，但是也可以通过 ~DESCRIBE tblName~ 快速查询。
-** COUNT(*) 和 COUNT(1)
 
+** COUNT(*) 和 COUNT(1)
    常见的一个需求就是通过 ~COUNT~ 函数来统计行数，其中一个问题就是 ~COUNT(*)~ 和 ~COUNT(1)~ 这两种写法的性能问题。
 
    这在 ~5.7~ 的文档中有相应的描述，对于 InnoDB 引擎来说，两种写法没有区别：

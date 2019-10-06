@@ -63,7 +63,7 @@
 * 获取输出程序运行过程中的错误信息
   在标准库 <stdio.h> 中存在函数 ~perror~ 可以用来输出程序运行过程中的错误信息：
   #+BEGIN_SRC C
-    rror(const char* s);  // "%s: " % s
+    perror(const char* s);  // "%s: " % s
   #+END_SRC
 
 * 通过 memset 函数快速初始化数组

@@ -89,7 +89,7 @@
   + [[https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/Base64][Algorithm Implementation/Miscellaneous/Base64 - Wikibooks, open books for an open world]]
 
 * LRU Cache
-  LRU Cache 需要保证最近访问的节点保持在限定容量的Cache中，如果超过容量则应该把近期最少使用的节点删除掉。
+  LRU Cache 需要保证最近访问的节点保持在限定容量的 Cache 中，如果超过容量则应该把近期最少使用的节点删除掉。
 
   LRU Cache 可以借助散列表和链表实现，基本思路如下：
   1. 通过双向链表来存储所有的 *值*
@@ -175,6 +175,7 @@
       private int maxSize;
 
       public LRUCache(int initialCapacity, float loadFactor, int maxSize) {
+        // 参数 true 表示按照访问对链表排序
         super(initialCapacity, loadFactor, true);
         this.maxSize = maxSize;
       }

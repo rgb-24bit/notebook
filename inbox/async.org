@@ -1,0 +1,19 @@
+* 异步编程模型的理解
+  撇开 I/O 的异步编程模型理解：
+  1. 在主线程上存在一个耗时的 Task，为了不让这个 Task 阻塞主线程，于是，可以考虑安排它到另一个线程执行
+  2. 我们需要这个 Task 执行的结果，所以说，我看可以用一个 Future 来保存这个 Task 的引用，当 Task 执行完成后就将结果保存到 Future
+  3. 为了不影响后续的任务的执行，我们可以将一个回调函数和 Task 关联，当 Task 执行完成就调用回调函数
+  4. 回调函数的调用肯定不能由主线程来完成，于是，可以通过一个事件系统来管理这些 Task，执行完 Task 就调用相应的回到函数
+
+  扩展的理解：
+  + 可以将事件系统作为主线程，每个 Task 是一个协程，类似 Python 的模式
+    
+  参考：
+  + [[https://woshijpf.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html][Linux I/O 模型详解]]
+  + [[https://rgb-24bit.github.io/blog/2019/python-coroutine-event-loop.html][Python 协程和事件循环]]
+  + [[https://rgb-24bit.github.io/blog/2019/python-selectors.html][Python 高级 I/O 多路复用]]
+  + [[https://segmentfault.com/a/1190000013039660][JavaScript同步和异步 - aincrad - SegmentFault 思否]]
+  + [[https://www.zhihu.com/question/19732473][怎样理解阻塞非阻塞与同步异步的区别？ - 知乎]]
+  + [[https://juejin.im/post/5c0f1739f265da616c65724e][linux的IO模型 - 掘金]]
+  + [[https://www.cnkirito.moe/future-and-promise/][JAVA 拾遗 --Future 模式与 Promise 模式 | 徐靖峰|个人博客]]
+

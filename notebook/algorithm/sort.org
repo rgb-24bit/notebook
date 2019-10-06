@@ -46,8 +46,9 @@
 
 * 相关问题
 ** 为什么快速排序要优于归并排序
-   尽管两个排序算法的时间复杂度时相同的，但是，在存在很多影响算法运行时间的因数时，
-   快速排序的表现往往要比归并排序的要好。
+   尽管两个排序算法的时间复杂度时相同的，但是，在存在很多影响算法运行时间的因数时，快速排序的表现往往要比归并排序的要好。
+
+   并且，归并往往需要一个临时的缓冲区，而快排不需要。
 
    #+begin_quote
    However, it’s superior to merge sort in many scenarios because many factors influence an algorithm’s runtime, and, when taking them all together, quicksort wins out.

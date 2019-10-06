@@ -217,7 +217,7 @@
 
 * sso
   + [[https://zh.wikipedia.org/wiki/%E5%96%AE%E4%B8%80%E7%99%BB%E5%85%A5][单点登录 - 维基百科，自由的百科全书]]
-
+    
 * cron
   + [[https://www.jianshu.com/p/6b8341cf3311][cron 表达式详解 - 简书]]
 
@@ -235,3 +235,10 @@
   检查网络流量时发现的进程：
   + [[https://blog.jiayx.net/archives/274.html][Mac 下禁用开机自启软件 - JIAYX]]
 
+* ffmpeg
+  + [[https://github.com/FFmpeg/FFmpeg][FFmpeg/FFmpeg: Mirror of git://source.ffmpeg.org/ffmpeg.git]]
+  + [[https://colin1994.github.io/2017/11/11/OpenGLES-Lesson04/#6-_%E9%99%90%E5%AE%9A%E7%AC%A6][GLSL 详解（基础篇） · Colin's Nest]]
+  + [[https://github.com/bloc97/Anime4K][bloc97/Anime4K: A High-Quality Real Time Upscaler for Anime Video]]
+
+* chrome
+  + [[https://baike.baidu.com/item/Punycode][Punycode_百度百科]]

@@ -1,0 +1,6 @@
+* fuzzy
+  + [[https://github.com/cireu/fuz.el][cireu/fuz.el: Fast and precise fuzzy scoring/matching utils for Emacs, powered by rust]]
+
+* heap
+  + [[https://www.cnblogs.com/vamei/archive/2013/03/20/2966612.html][纸上谈兵: 堆 (heap) - Vamei - 博客园]]
+
