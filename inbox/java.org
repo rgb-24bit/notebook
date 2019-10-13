@@ -140,10 +140,6 @@
 
   至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
 
-
-* lombok
-  + [[https://tech.kujiale.com/customize-lombok-annotation/][自定义Lombok注解]]
-
 * log
   + [[http://www.itjc5.com/post/8.html][vip教程分享-小结开发程序员的日志规则有那些呢？]]
 
@@ -158,4 +154,9 @@
 
 * 教程
   + [[http://tutorials.jenkov.com/][Jenkov.com]]
+
+* AST
+  + [[https://www.baeldung.com/lombok-custom-annotation][Implementing a Custom Lombok Annotation | Baeldung]]
+  + [[https://www.race604.com/annotation-processing/][Java注解处理器]]
+
 

@@ -27,3 +27,7 @@
 * function  
   + [[https://www.cnblogs.com/ggjucheng/p/3352280.html][MySQL：日期函数、时间函数总结 - ggjucheng - 博客园]]
 
+* SELECT form update
+  + [[https://tojohnonly.github.io/106-MySql%20For%20Update%20%E7%94%A8%E6%B3%95.html][MySql For Update 用法]]
+  + [[https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-reads.html][MySQL :: MySQL 8.0 Reference Manual :: 15.7.2.4 Locking Reads]]
+  
