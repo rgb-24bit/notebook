@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#install][Install]]
+- [[#innodb-锁][InnoDB 锁]]
 - [[#事务][事务]]
   - [[#事务的隔离级别][事务的隔离级别]]
 - [[#执行计划][执行计划]]
@@ -28,6 +29,23 @@
   安装完成后，可以通过 ~mysql_secure_installation~ 配置 root 用户的密码，参考：
   + [[https://mariadb.com/kb/en/library/mysql_secure_installation/][mysql_secure_installation - MariaDB Knowledge Base]]
   
+* InnoDB 锁
+  MySQL 中的锁大致可以分为两类：
+  + 共享锁：当一个事务 T1 持有共享锁时，另一个事务 T2 请求共享锁可以成功，请求排它锁会阻塞
+  + 排它锁：当一个事务 T1 持有排它锁时，另一个事务 T2 请求任意的锁类型都会阻塞
+
+  通常，执行数据库操作时，可以通过 ~SELECT ... LOCK IN SHARE MODE~ 添加共享锁，通过 ~SELECT ... FOR UPDATE~ 添加排它锁，需要注意的是：
+  + 当查询语句命中索引时添加的是行锁，没有命中索引时添加的是表锁
+  + 当查询语句查询索引范围时会添加间隙锁，即锁住该索引范围下的行
+  + 对于 UPDATE、DELETE 和 INSERT 语句，InnoDB 会自动给涉及数据集加排他锁
+
+  然而，官方文档中似乎没有行锁和表锁这种说法，但大致上的意思还是差不多的……
+
+  参考文档：
+  + [[https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html][MySQL 5.7 Reference Manual - 14.7.1 InnoDB Locking]]
+  + [[https://juejin.im/post/5b82e0196fb9a019f47d1823#comment][全面了解 MySQL 锁机制（InnoDB）与问题排查 - 掘金]]
+  + [[https://www.cnblogs.com/chenpingzhao/p/9642732.html][不可不知的 Metadata Lock - 踏雪无痕SS - 博客园]]
+
 * 事务
   事务的基本要素为：
   + 原子性：事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用
@@ -67,7 +85,7 @@
    MySQL InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重复读）。
 
    参考链接：
-   + [[https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB(%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3).md#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB][事务隔离级别(图文详解)]]
+   + [[https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB(%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3).md][事务隔离级别(图文详解)]]
    + [[https://www.cnblogs.com/huanongying/p/7021555.html][MySQL 的四种事务隔离级别 - 花弄影 - 博客园]]
 
 * 执行计划

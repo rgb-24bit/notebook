@@ -12,6 +12,7 @@
 - [[#怎样搭建-ftp-服务器][怎样搭建 FTP 服务器]]
 - [[#怎样合并两个目录][怎样合并两个目录]]
 - [[#怎样创建需要定时执行的任务][怎样创建需要定时执行的任务]]
+- [[#x11gtkgnome-等之间的关系][X11、GTK、GNOME 等之间的关系]]
 
 * 如何快速删除文件
   + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
@@ -110,4 +111,16 @@
 
   参考：
   + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html][19. crontab 定时任务 — Linux Tools Quick Tutorial]]
+
+* X11、GTK、GNOME 等之间的关系
+  X11 是 X Window System Protocol, Version 11（RFC1013），是 X server 和 X client 之间的通信协议。X server 是 xfree86/xorg 驱动下的显示设备鼠标键盘统称，
+  X client 通过 X11 协议和 xfree86/xorg 实现的 X server通信。
+
+  为了方便开发人员编写 X clients，就有了 Xlib 来封装协议。Xlib 不够方便，于是就有了 QT 和 GTK，提供了很多窗口控件（widgets）。
+
+  为了方便用户，就出现了 GNOME 和 KDE 等桌面管理系统。GNOME 用的是 GTK 库，KDE 用的是 QT 库。
+
+  参考：
+  + [[https://blog.csdn.net/chenglian_999/article/details/4927459][X11,GTK,QT,GNOME 的区别与联系 - chenglian_999的专栏 - CSDN博客]]
+  + [[https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1][X 窗口系统 - 维基百科，自由的百科全书]]
 

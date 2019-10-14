@@ -110,3 +110,6 @@
   + [[https://www.emacswiki.org/emacs/BookmarkPlus][EmacsWiki: Bookmark Plus]]
   + [[https://www.emacswiki.org/emacs/BookMarks][EmacsWiki: Book Marks]]
 
+* vscode
+  + 协议 - LSP、DAP
+

@@ -1,4 +1,4 @@
-#+TITLE:      Shell 命令使用
+#+TITLE:      Shell
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网络操作相关][网络操作相关]]
@@ -11,8 +11,11 @@
 - [[#系统管理相关][系统管理相关]]
   - [[#系统进程管理][系统进程管理]]
   - [[#环境变量管理][环境变量管理]]
-- [[#其他命令][其他命令]]
+- [[#其他相关命令][其他相关命令]]
+- [[#标准输出][标准输出]]
 - [[#使用技巧][使用技巧]]
+- [[#相关问题][相关问题]]
+  - [[#terminalttyshell-等的区别][Terminal、TTY、Shell 等的区别]]
 
 * 网络操作相关
 ** 网络诊断相关
@@ -224,7 +227,7 @@
        env bash
      #+END_EXAMPLE
 
-* 其他命令
+* 其他相关命令
    + 命令 ~seq~ 可以生成某个数字到另一个数字之间的所有整数：
      + ~seq~ 支持 *首数*, *尾数* 和 *增量* 三个参数
        #+BEGIN_EXAMPLE
@@ -254,6 +257,19 @@
        11
      #+END_SRC
 
+* 标准输出
+  常用于进行标准输出的指令 echo 其实有两个版本，其中一个是 ~bash~ 内置的指令，而另一个是 ~/bin/echo~ 这个指令。
+
+  通常情况下，如果使用的是 bash 中的内置指令 echo 的话，可以通过如下方式输出带颜色的文本：
+  #+begin_src bash
+    echo -e "\033[字背景颜色；文字颜色m字符串\033[0m" 
+  #+end_src
+
+  参考：
+  + [[https://www.cnblogs.com/lr-ting/archive/2013/02/28/2936792.html][shell 脚本中 echo 显示内容带颜色 - lr_ting - 博客园]]
+  + [[https://www.cnblogs.com/Bob-wei/p/5056685.html][mac 中的 echo 颜色输出 - Bob-wei - 博客园]]
+  + [[https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97][ANSI 转义序列 - 维基百科，自由的百科全书]]
+
 * 使用技巧
   + 通过快捷键 C-l 可以清屏
   + 通过快捷键 C-u 可以清楚当前输入
@@ -263,3 +279,14 @@
     #+END_SRC
   + 通过 alias 命令定义别名，通过 unalias 删除别名
   + 通过 bash 函数可以修改当前的位置，在 CMD 中不行
+
+* 相关问题
+** Terminal、TTY、Shell 等的区别
+   简单来说就是下面这样：
+   + 终端 (Terminal) = TTY = 文本输入/输出环境
+   + 控制台 (Console) = 一种特殊的终端
+   + Shell = 命令行解释器，执行用户输入的命令并返回结果   
+
+   详情可以参考
+   + [[https://segmentfault.com/a/1190000016129862#articleHeader8][命令行界面 (CLI)、终端 (Terminal)、Shell、TTY，傻傻分不清楚？ - Blessing Studio - SegmentFault 思否]]
+

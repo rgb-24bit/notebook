@@ -4,6 +4,8 @@
 - [[#github-搜索][Github 搜索]]
 - [[#问题集][问题集]]
   - [[#怎样同步-fork-的上游存储库][怎样同步 fork 的上游存储库]]
+  - [[#怎样创建镜像存储库][怎样创建镜像存储库]]
+  - [[#怎样解决访问慢的问题][怎样解决访问慢的问题]]
 - [[#footnotes][Footnotes]]
 
 * Github 搜索
@@ -40,6 +42,25 @@
      $ git fetch upstream
      $ git merge upstream/<branch>
    #+END_EXAMPLE
+
+** 怎样创建镜像存储库
+   #+begin_example
+     $ git clone --bare https://github.com/exampleuser/old-repository.git
+     $ cd old-repository.git
+     $ git push --mirror https://github.com/exampleuser/new-repository.git
+     $ cd ..
+     $ rm -rf old-repository.git
+   #+end_example
+
+   参考：[[https://help.github.com/en/articles/duplicating-a-repository][Duplicating a repository - GitHub Help]]
+
+** 怎样解决访问慢的问题
+   其实 git clone 或者 git push 特别慢，并不是因为 http://github.com 的这个域名被限制了。而是 http://github.global.ssl.fastly.Net 这个域名被限制了。
+   那么首先查到这个域名的 ip，然后在 hosts 文件中进行 ip -> 域名 映射就可以了。
+
+   然而，考虑到 github 的 ip 地址会变的这个问题，这种方案不是很持久啊……
+
+   参考：[[https://github.com/ly2011/blog/issues/126][完美解决 github 访问速度慢 · Issue #126 · ly2011/blog]]
 
 * Footnotes
 
