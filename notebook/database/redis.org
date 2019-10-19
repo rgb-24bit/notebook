@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#redis-安装与配置][Redis 安装与配置]]
 - [[#redis-数据类型概览][Redis 数据类型概览]]
+- [[#redis-分布式锁][Redis 分布式锁]]
 - [[#redis-tips][Redis Tips]]
 
 * Redis 安装与配置
@@ -45,6 +46,15 @@
   | Zset     | ZADD     | ZADD key score member                      | 有序集合根据 score 进行排序       |
   |----------+----------+--------------------------------------------+-----------------------------------|
   
+* Redis 分布式锁
+  Redis 分布式锁的基本思想其实很简单，就是借助 Redis 执行 Lua 脚本时的原子性，当一个服务来获取锁时，就执行一段 Lua 脚本，
+  取锁成功就设置一个值到 Redis 中，取锁失败返回空值。
+
+  这是对于单个 Redis 服务来说的，但要是 Redis 集群呢？那我们可以遍历集群中的每一个 Redis 服务！
+
+  参考：
+  + [[https://juejin.im/post/5b737b9b518825613d3894f4#heading-15][Redis 系列：分布式锁 - 掘金]]
+
 * Redis Tips  
   + 通过指令 ~SELECT~ 切换数据库，默认为 ~0~
     #+BEGIN_SRC bash

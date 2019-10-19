@@ -24,6 +24,7 @@
   + 窗口分割位置：
     + [[https://emacs.stackexchange.com/questions/2513/how-to-get-org-agenda-to-prefer-split-window-right][org mode - How to get org-agenda to prefer split-window-right - Emacs Stack Exchange]]
     + [[https://github.com/syl20bnr/spacemacs/issues/5140][How to make spacemacs split window right automatically? · Issue #5140 · syl20bnr/spacemacs]]
+  + [[https://stackoverflow.com/questions/39863277/in-magit-how-do-i-see-a-diff-what-a-branch-adds-to-my-current-branch][emacs - In magit, how do I see a diff what a branch adds to my current branch? - Stack Overflow]]
 
 * sudo
   sudo::/file

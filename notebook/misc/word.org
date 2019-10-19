@@ -1,0 +1,15 @@
+#+TITLE:      常用编程单词
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#noop][noop]]
+
+* noop
+  在自定义协议的时候，常常可以用 ~noop~ 这个单词来代表无，比如：
+  #+begin_example
+    # Sentry
+    noop://localhost?async=false
+
+    # Spring Security
+    {noop}secret
+  #+end_example
+

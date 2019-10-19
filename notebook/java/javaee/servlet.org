@@ -10,9 +10,9 @@
   - [[#属性][属性]]
   - [[#监听者][监听者]]
   - [[#defaultsevelet][DefaultSevelet]]
-  - [[#misc][Misc]]
 - [[#servlet-容器][Servlet 容器]]
 - [[#servlet-30][Servlet 3.0]]
+- [[#servlet-安全][Servlet 安全]]
 - [[#相关问题][相关问题]]
   - [[#过滤器的调用顺序是怎样的][过滤器的调用顺序是怎样的]]
   - [[#servlet-版本和-jdk-版本之间的关系][Servlet 版本和 JDK 版本之间的关系]]
@@ -184,10 +184,6 @@
 
    参考：[[http://wiki.jikexueyuan.com/project/tomcat/default-servlet.html][默认 Servlet - Tomcat 8 权威指南 - 极客学院Wiki]]
 
-** Misc
-   + 应该在获取响应对象的输出流之前调用 setContentType 方法
-   + 安全的四要素：认证、授权、机密性和数据完整性
-
 * Servlet 容器
   apache-tomcat 其实是服务器 apache 和容器 tomcat 的组合版，它们的运行流程（可能）为：
   1) 启动 apache 服务器
@@ -215,6 +211,22 @@
   + [[https://www.infoq.cn/article/2013/11/use-asynchronous-servlet-improve][使用异步 Servlet 改进应用性能]]
   + [[https://www.cnblogs.com/davenkin/p/async-servlet.html][Servlet 3.0/3.1 中的异步处理 - 无知者云 - 博客园]]
   + [[https://segmentfault.com/a/1190000012318350][Servlet 3.0 异步处理详解 - 颇忒脱 - SegmentFault 思否]]
+
+* Servlet 安全
+  Servlet 中的安全四要素：
+  + 身份认证 - 表示通信实体彼此证明他们具体身份的行为是被授权访问的
+  + 资源访问控制 - 表示和资源的交互是受限于集合的用户或为了强制完整性、保密性、或可用性约束的程序
+  + 机密性 - 用来保证信息只对已授权访问的用户可用
+  + 数据完整性 - 用来证明信息在传输过程中没有被第三方修改
+
+  HTTP Basic 认证方式中的 ~realm~ 领域在 Servlet 中表示存储认证信息的地方，这就是说，可以通过多种方式来获取用户的认证信息。
+
+  参考：
+  + [[https://examples.javacodegeeks.com/enterprise-java/servlet/java-servlet-security-example/][Java Servlet Security Example | Examples Java Code Geeks - 2019]]
+  + [[https://javapipe.com/blog/tomcat-realm/][How to Use Tomcat Realm: Tutorial with Examples]]
+
+  可以看到，Servlet 本身提供的和安全相关的特性的使用好像并不多，但是本身的特性其实已经很完善了，无论是在理念上还是在接口的设计上，
+  现在的一些框架中依然能够看到这些影子。
 
 * 相关问题
 ** 过滤器的调用顺序是怎样的

@@ -7,6 +7,7 @@
 - [[#webapplicationtype][WebApplicationType]]
 - [[#配置文件与属性来源][配置文件与属性来源]]
 - [[#数据库版本控制][数据库版本控制]]
+- [[#事件机制][事件机制]]
 - [[#日志操作][日志操作]]
 - [[#相关问题][相关问题]]
   - [[#在配置文件中使用环境变量][在配置文件中使用环境变量]]
@@ -142,6 +143,20 @@
     </dependency>
   #+END_SRC
   
+* 事件机制
+  Spring Boot 中的事件机制是极为重要的一环，按照 [[https://github.com/rgb-24bit/read-source-code/blob/master/spring/spring-application-refresh-context.org#%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6][事件机制]] 笔记可以了解到，通过 Bean 方式定义的事件监听器只能接收到：
+  + ContextRefreshedEvent - 上下文刷新事件
+  + ContextStartedEvent - 上下文启动事件
+  + ContextStoppedEvent - 上下文停止事件
+  + ContextClosedEvent - 上下文关闭事件
+
+  如果想要接受更多的事件，就需要将相应的类注册到 ~spring.factories~ 文件中才行。
+
+  当然，我们也可以自定义事件和监听器进行消费，这个对于不同逻辑之间的解耦时很有帮助的。
+
+  参考：
+  + [[http://www.iocoder.cn/Spring/ApplicationContextEvent/][Spring 5 源码解析 —— Spring 框架中的事件和监听器 | 芋道源码 —— 纯源码解析博客]]
+
 * 日志操作
   简单的日志操作直接调用相关的类就可以了：
   #+BEGIN_SRC java

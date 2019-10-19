@@ -3,12 +3,13 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#install][Install]]
 - [[#innodb-锁][InnoDB 锁]]
-- [[#事务][事务]]
+- [[#事务相关][事务相关]]
   - [[#事务的隔离级别][事务的隔离级别]]
 - [[#执行计划][执行计划]]
 - [[#sql-语法][SQL 语法]]
 - [[#主从复制][主从复制]]
-- [[#分区][分区]]
+- [[#分区相关][分区相关]]
+- [[#函数使用][函数使用]]
 - [[#相关技巧][相关技巧]]
   - [[#通过-sql-语句获取-mysql-的版本][通过 SQL 语句获取 MySQL 的版本]]
 - [[#相关问题][相关问题]]
@@ -18,7 +19,8 @@
   - [[#怎样通过远程主机进行访问][怎样通过远程主机进行访问]]
   - [[#怎样在数据存在时更新不存在时插入][怎样在数据存在时更新不存在时插入]]
   - [[#怎样显示-table-的元数据信息][怎样显示 Table 的元数据信息]]
-  - [[#count-和-count1][COUNT(*) 和 COUNT(1)]]
+  - [[#countast-和-count1][COUNT(\ast) 和 COUNT(1)]]
+  - [[#怎样修改列值为允许为空][怎样修改列值为允许为空]]
 
 * Install
   目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
@@ -46,7 +48,7 @@
   + [[https://juejin.im/post/5b82e0196fb9a019f47d1823#comment][全面了解 MySQL 锁机制（InnoDB）与问题排查 - 掘金]]
   + [[https://www.cnblogs.com/chenpingzhao/p/9642732.html][不可不知的 Metadata Lock - 踏雪无痕SS - 博客园]]
 
-* 事务
+* 事务相关
   事务的基本要素为：
   + 原子性：事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用
   + 一致性：执行事务前后，数据保持一致，多个事务对同一个数据读取的结果是相同的
@@ -137,7 +139,7 @@
 * 主从复制
   主写从读，主库的数据库引擎应该为 InnoDB，从库为 MyISAM。
 
-* 分区
+* 分区相关
   MySQL 分区可以通过将表中的数据按照某些特征分到多个区块中。分区后，单个分区中的数据量会减少，索引的层级也会缩减，单个分区的查询的速度也可以得到相应的提高。
 
   参考文章 [[https://www.vertabelo.com/blog/everything-you-need-to-know-about-mysql-partitions/][Vertabelo Database Modeler]] 前面几节，可以了解到分区的好处：
@@ -148,6 +150,9 @@
 
   而 MySQL 也提供了多种方式来进行分区，可以参考：
   + [[https://learnku.com/articles/22947][MySQL 分区表探索 | MySQL 技术社区]]
+
+* 函数使用
+  + 函数 ~CONCAT~ 的参数中存在 ~NULL~ 时得出的值也是 ~NULL~
 
 * 相关技巧
 ** 通过 SQL 语句获取 MySQL 的版本
@@ -207,8 +212,8 @@
 ** 怎样显示 Table 的元数据信息
    通过 ~SHOW COLUMNS FROM tblName~ 可以显示表的元数据信息，但是也可以通过 ~DESCRIBE tblName~ 快速查询。
 
-** COUNT(*) 和 COUNT(1)
-   常见的一个需求就是通过 ~COUNT~ 函数来统计行数，其中一个问题就是 ~COUNT(*)~ 和 ~COUNT(1)~ 这两种写法的性能问题。
+** COUNT(\ast) 和 COUNT(1)
+   常见的一个需求就是通过 ~COUNT~ 函数来统计行数，其中一个问题就是 ~COUNT(\ast)~ 和 ~COUNT(1)~ 这两种写法的性能问题。
 
    这在 ~5.7~ 的文档中有相应的描述，对于 InnoDB 引擎来说，两种写法没有区别：
    #+begin_quote
@@ -227,4 +232,12 @@
    如果继续查阅文档，可以发现，即使在更早的版本 ~5.5~ 中，关于 COUNT 函数的描述也是一样的，因此，用 ~COUNT(*)~ 就可以了。
 
    但是，在实际的使用中，我们编写的 SQL 语句在到达数据库之前，可能会将 * 转换为列名，因此，在这种情况下，使用 ~COUNT(1)~ 更好。
+
+** 怎样修改列值为允许为空
+   #+begin_src sql
+     ALTER TABLE mytable MODIFY mycolumn VARCHAR(255);
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/212939/how-do-i-modify-a-mysql-column-to-allow-null][syntax - How do I modify a MySQL column to allow NULL? - Stack Overflow]]
 

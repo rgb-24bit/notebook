@@ -1,0 +1,42 @@
+#+TITLE:      Spring Utils
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#resttemplate][RestTemplate]]
+
+* RestTemplate
+  Spring 中 RestTemplate 是一个非常好用的 REST 客户端，简单的使用的话可以通过默认的构造方法创建实例，但是如果需要进行更多的定制的话，
+  就可以选择带有 ~ClientHttpRequestFactory~ 参数的构造方法，常用的实现为 SimpleClientHttpRequestFactory。
+
+  简单的使用：
+  #+begin_src java
+    // Get Plain JSON
+    ResponseEntity<String> response = restTemplate.getForEntity(url);
+
+    // Retrieving POJO Instead of JSON
+    Foo foo = restTemplate.getForObject(url, Foo.class);
+
+    // Use POST to Create a Resource
+    HttpHeaders headers = new HttpHeaders();
+
+    headers.add("X-Auth-Token", "e348bc22-5efa-4299-9142-529f07a18ac9");
+
+    MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
+
+    postParameters.add("owner", "11");
+    postParameters.add("subdomain", "aoa");
+    postParameters.add("comment", "");
+
+    HttpEntity<MultiValueMap<String, String>> requestEntity  = new HttpEntity<MultiValueMap<String, String>>(postParameters, headers);
+
+    ParseResultVo exchange = restTemplate.postForObject(url,  requestEntity, ParseResultVo.class);
+  #+end_src
+
+  值得一提的是，RestTemplate 的兄弟类 AsyncRestTemplate 是支持异步请求的。
+
+  参考：
+  + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/client/SimpleClientHttpRequestFactory.html][SimpleClientHttpRequestFactory (Spring Framework 5.2.0.RELEASE API)]]
+  + [[https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/AsyncRestTemplate.html][AsyncRestTemplate (Spring Framework 5.2.0.RELEASE API)]]
+  + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html][RestTemplate (Spring Framework 5.2.0.RELEASE API)]]
+  + [[https://www.jianshu.com/p/88b77d011c8a][Spring Boot 学习记录之 RestTemplate - 简书]]
+  + [[https://www.baeldung.com/rest-template][A Guide to the RestTemplate | Baeldung]]
+

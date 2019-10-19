@@ -1,10 +1,26 @@
 #+TITLE:      Spring Data
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#多数据源的管理与操作][多数据源的管理与操作]]
+- [[#使用-redis][使用 Redis]]
+- [[#多数据源][多数据源]]
   - [[#mybatis][mybatis]]
+- [[#使用事务][使用事务]]
 
-* 多数据源的管理与操作
+* 使用 Redis
+  Spring Boot 中整合 Redis 是一件很容易的事情，简单的操作的话，可以通过 RedisTemplate 来完成：
+  #+begin_src java
+    @Bean
+    public RedisTemplate<Object, Object> redisTemplate(
+      RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
+      RedisTemplate<Object, Object> template = new RedisTemplate<>();
+      template.setConnectionFactory(redisConnectionFactory);
+      return template;
+    }
+  #+end_src
+  
+  参考：[[https://www.cnblogs.com/zeng1994/p/03303c805731afc9aa9c60dbbd32a323.html][SpringBoot 整合 Redis 及 Redis 工具类撰写 - zeng1994 - 博客园]]
+
+* 多数据源
   Spring 中的多数据源可以通过 ~AbstractRoutingDataSource~ 的实现类来进行管理和操作，基础思路如下：
   1. 通过 AbstractRoutingDataSource 获取数据源时，会调用实现类的 ~determineCurrentLookupKey~ 方法获取当前数据源的键，如果为空就返回默认数据源
   2. 为了保证多个线程中的数据源配置不受干扰，因此，可以将当前线程上下文的数据源键保存在一个 ~ThreadLocal~ 变量中
@@ -22,4 +38,8 @@
    #+end_src
 
    同样，也可以通过嵌套动态数据源的方式来进行管理。
+
+* 使用事务
+  要在 Spring 中使用事务的话其实是很简单的，一般来说，注解 ~@Transactional~ 就能够满足大多数需求了，详细可以参考：
+  + [[https://www.cnblogs.com/dennyzhangdd/p/9549535.html][Spring 事务详解（一）初探事务 - 只会一点java - 博客园]]
 

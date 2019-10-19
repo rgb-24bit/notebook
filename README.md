@@ -115,10 +115,11 @@
     + [Spring 问题集](notebook/java/spring/question.org)
     + [Spring 资源收集](notebook/java/spring/resources.org)
     + [Spring Boot](notebook/java/spring/spring-boot.org)
-    + [Spring Core](notebook/java/spring/spring-core.org)
     + [Spring Data](notebook/java/spring/spring-data.org)
+    + [Spring IOC](notebook/java/spring/spring-ioc.org)
     + [Spring MVC](notebook/java/spring/spring-mvc.org)
     + [Spring Test](notebook/java/spring/spring-test.org)
+    + [Spring Utils](notebook/java/spring/spring-utils.org)
   + **tools**
     + [字节码操作](notebook/java/tools/bytecode.org)
     + [Gradle](notebook/java/tools/gradle.org)
@@ -165,6 +166,7 @@
   + [配置中心](notebook/microservice/config.org)
   + [远程过程调用](notebook/microservice/rpc.org)
 ## misc
+  + [字符编码](notebook/misc/character-encoding.org)
   + [计算机图形学](notebook/misc/computer-graphics.org)
   + [概念了解](notebook/misc/concept.org)
   + [Debug](notebook/misc/debug.org)
@@ -177,8 +179,8 @@
   + [问题集](notebook/misc/question.org)
   + [结构化编程](notebook/misc/se.org)
   + [搜索引擎](notebook/misc/search.org)
-  + [Unicode](notebook/misc/unicode.org)
   + [单元测试](notebook/misc/unit-test.org)
+  + [常用编程单词](notebook/misc/word.org)
 ## network
   + [DHCP · DNS](notebook/network/dhcp-dns.org)
   + [HTTP 协议](notebook/network/http.org)
@@ -186,7 +188,7 @@
   + [计算机网络 - 协议](notebook/network/protocol.org)
 ## os
   + [操作系统 - 基础内容](notebook/os/base.org)
-  + [并发操作](notebook/os/concurrent.org)
+  + [并发编程](notebook/os/concurrent.org)
   + [操作系统 - 异常控制流](notebook/os/ecf.org)
   + [操作系统 - 程序的机器级表示](notebook/os/express.org)
   + [操作系统 - 信息的表示和处理](notebook/os/info.org)
@@ -232,7 +234,7 @@
   + [Windows CMD 命令](notebook/tools/cmd.org)
   + [curl](notebook/tools/curl.org)
   + [Docker](notebook/tools/docker.org)
-  + [Shell 命令使用](notebook/tools/shell.org)
+  + [Shell](notebook/tools/shell.org)
   + [SSH](notebook/tools/ssh.org)
   + [实用开源工具收集](notebook/tools/utils.org)
   + [Vim 笔记](notebook/tools/vim.org)

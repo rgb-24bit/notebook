@@ -1,0 +1,259 @@
+#+TITLE:      Spring IOC
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#基本概念][基本概念]]
+- [[#beanfactory][BeanFactory]]
+- [[#applicationcontext][ApplicationContext]]
+- [[#spring-bean][Spring Bean]]
+  - [[#autowired-和-factorybean][AutoWired 和 FactoryBean]]
+  - [[#bean-属性][Bean 属性]]
+  - [[#自动注入][自动注入]]
+  - [[#依赖关系][依赖关系]]
+  - [[#注意事项][注意事项]]
+- [[#spring-配置][Spring 配置]]
+  - [[#思维导图][思维导图]]
+  - [[#configuration][@Configuration]]
+  - [[#configurationproperties][@ConfigurationProperties]]
+- [[#类元数据][类元数据]]
+- [[#相关技巧][相关技巧]]
+- [[#相关问题][相关问题]]
+  - [[#怎样在-xml-配置文件中指定-qualifier][怎样在 XML 配置文件中指定 Qualifier]]
+  - [[#怎样在获取-bean-的时候指定-qualifier][怎样在获取 Bean 的时候指定 Qualifier]]
+  - [[#spring-低版本下自我装配失败的问题][Spring 低版本下自我装配失败的问题]]
+  - [[#bean-name-和-id-的区别][Bean Name 和 ID 的区别]]
+
+* 基本概念
+  IOC 的全名是 Inversion of Control，即控制反转，还有别名叫做依赖注入。
+
+  IOC 容器注入依赖的方式主要有三种：
+  1. 构造方法注入
+  2. setter 方法注入
+  3. 接口注入 - 根据对象实现的接口来进行注入，现在不提倡
+
+  IOC 对于 TDD 来说是一种很好的方式。
+
+  IOC 容器的职责为：业务对象的构建管理和业务对象的依赖绑定。
+
+  依赖管理的方式主要有：
+  1. 直接编码
+  2. 配置文件
+  3. 元数据 - 注解，其实也算是特殊的直接编码方式
+
+* BeanFactory
+  BeanFactory 内部通过三部分来管理 Bean，包括：
+  + BeanDefine - 保存 Bean 的定义
+  + BeanDefineRegistry - 注册 Bean 的逻辑
+  + BeanFactory - 访问容器类管理的 Bean
+
+  具体的 BeanFactory 通常会同时实现 BeanFactory 和 BeanDefineRegistry，这意味着同时实现了管理访问和注册逻辑的功能。
+
+  Spring 的 IOC 容器同时支持直接编码、配置文件和元数据的依赖管理方式。
+
+  Spring IOC 容器加载配置元数据和组装的过程可以分为两个阶段：
+  1. 容器的启动阶段，这时通过某种途径加载配置元数据，这时不会创建 Bean 的实例，更注重于对象管理信息的收集。
+
+     这个阶段可以通过 BeanFactoryPostProcessor 在实例化相应对象之前对注册到容器的 BeanDefine 所保存的信息做出相应的修改。
+     Bean 的 AutoWired 依赖信息就是通过 BeanFactoryPostProcessor 进行处理的。
+
+     Spring IOC 通过这个机制实现了配置信息中占位符的处理、自动类型转换……
+
+  2. 第二阶段便是 Bean 的创建和管理了，Bean 的实例化过程为：
+     实例化 Bean 对象、设置对象属性、检查 Aware 接口、BeanPostProcessor 前置处理、检查是否为 InitializingBean、检查是否配置 init-method、
+     BeanPostProcessor 后置处理、注册必要的 Destruction 回调接口、使用、是否实现 DisposableBean 接口、是否配置 destory 方法
+
+     这个阶段可以通过 BeanWrapper 来方便操作 Bean，避免直接使用 Java 反射接口。
+
+     而 BeanPostProcessor 是我们可以插足 Bean 创建过程的一种机制。
+
+* ApplicationContext
+  ApplicationContext 也属于 BeanFactory，但实现了更多的接口，包括：ResourcePatternLoader、MessageSource、ApplicationEventPublisher。
+
+  这样一来就为 ApplicationContext 提供了：统一资源加载策略、国际化信息支持、容器内部事件发布的功能。
+
+  而通过统一资源加载策略可以更方便的加载多个配置文件。
+
+* Spring Bean
+** AutoWired 和 FactoryBean
+   默认情况下，Spring 按 *类型* 解析 @Autowired 的，如果找不到该类型的 Bean 就会出错，如果找到多个该类型的 Bean，就会尝试用默认的限定符进行匹配。
+   匹配失败就会报错，此时应该考虑通过 @Qualifier 进行限定。
+
+   而 ~FactoryBean~ 是一种特殊的 Bean，它代表的 Bean 类型不是其本身的类型，而是其 ~getObjectType()~ 方法返回的类型：
+   #+begin_src java
+     public interface FactoryBean<T> {
+       T getObject() throws Exception;
+       Class<?> getObjectType();
+       boolean isSingleton();
+     }
+   #+end_src
+
+   当上下文中存在某类型的 FactoryBean 时，自动注入该类型的 Bean 时，就会调用该 FactoryBean 的 ~getObject()~ 方法注入对象。
+
+   参考：
+   + [[https://www.baeldung.com/spring-factorybean][How to use the Spring FactoryBean? | Baeldung]]
+   + [[https://spring.io/blog/2011/08/09/what-s-a-factorybean][What's a FactoryBean?]]
+   + [[https://www.baeldung.com/spring-autowire][Guide to Spring @Autowired | Baeldung]]
+
+   PS：网上好多 FactoryBean 的教程中都是用的 XML 配置，然而，自动注入是可行的
+
+** Bean 属性
+   Bean 的定义包括如下属性：
+   #+BEGIN_QUOTE
+   Class、Name、Scope、Constructor arguments、Properties、Autowiring mode、Lazy initialization mode、Initialization method、Destruction method
+   #+END_QUOTE
+
+   其中，初始化方法和销毁方法可以通过注解配置。
+   
+   参考：
+   + [[https://www.cnblogs.com/zrtqsk/p/3735273.html][Spring Bean 的生命周期 - Chandler Qian - 博客园]]
+   + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-definition][Core Technologies - Bean Overview]]
+
+** 自动注入
+   使用 @ComponentScan 定义扫描范围的时候，可以通过 ~includeFilters~ 和 ~excludeFilters~ 更详细的设置扫描范围。
+
+   Filter 的类型可以是：annotation、assignable、aspectj、regex 和 custom。
+
+   参考：
+   + [[https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-scanning-filters][Core Technologies - Using Filters to Customize Scanning]]
+
+** 依赖关系
+   Spring 中各个 Bean 的依赖关系可以通过 ~@DependsOn~ 这个注解来定义，该注解可以声明在一个 ~@Bean~ 方法或 ~@Component~ 类上。
+
+   参考：
+   + [[https://www.baeldung.com/spring-depends-on][Controlling Bean Creation Order with @DependsOn | Baeldung]]
+   + [[https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/DependsOn.html][DependsOn (Spring Framework 5.2.0.RELEASE API)]]
+
+** 注意事项
+   + 通过 @Condition 创建 Bean 时，如果创建失败就无法获取实例了（单例作用域是这样的）
+   + 没有使用 AOP 的 Bean 获取是返回的就是它的实例，而使用了 AOP 的 Bean 返回的就是它的动态代理
+   + 当自动装配和 JavaConfig 同时存在时，会优先使用自动装配
+   + 配置的处理顺序：AutoWired、JavaConfig、XMLConfig，其中，如果自动装配已创建 Bean，那么 JavaConfig 中的便无效
+   + XML 中的配置是必然会执行的，那怕是单例作用域
+   + 原型作用域会在需要 bean 的时候创建，单例会在启动时创建
+   + 自动装配、JavaConfig 和 XML 配置都可以使用大多数装配技术，如 @Condition
+
+* Spring 配置
+** 思维导图
+   #+begin_src plantuml
+     @startmindmap
+
+     ,* Spring Config
+     ,** Spring Bean Config
+     ,*** @Configuration
+     ,**** @Import
+     ,***** @Configuration
+     ,***** @ImportSelector
+     ,***** @ImportBeanDefinitionRegistrar
+     ,**** @ImportResource
+     ,*** ComponentScan
+     ,**** @Component
+     ,***** @Configuration
+     ,***** @Repository
+     ,***** @Controller
+     ,***** @Service
+     ,** Externalized values
+     ,*** Envirement
+     ,*** @PropertySource
+     ,*** @Value
+     ,*** @ConfigurationProperties
+     @endmindmap
+   #+end_src
+
+   #+HTML: <img src="https://i.loli.net/2019/10/15/nIU1LKFaZxlRvVX.png">
+
+** @Configuration
+   注解 ~@Configuration~ 除了让被注解的类成为一个配置类以外，还可以通过 ~@Import~ 和 ~@ImportResource~ 这两个注解导入其他配置。
+
+   其中，@ImportResource 主要用于导入 XML 配置，而 @Import 则可以导入：
+   + @Configuration - 另一个配置类
+   + @ImportBeanDefinitionRegistrar - 用于添加额外的 Bean 的配置类
+   + @ImportSelector - 用于选择其他配置类的配置类
+
+   其中，@ImportSelector 被用于实现 Spring Boot 的自动配置，详情可见 AutoConfigurationImportSelector。
+
+   而 @ImportBeanDefinitionRegistrar 则提供了注册额外的 Bean 的扩展接口，当需要自己动态创建 Bean 的时候可以考虑使用这个注解。
+
+   通过这几个注解，单个 @Configuration 起点就可以串联起来很多的配置，而 ComponentScan 扫描到的 @Configuration 注解还会进行自动装配，这样一来，
+   大量配置便可以通过这个看似简单实则无比强大的方式载入。
+
+   其中，这些注解的处理是在调用 ~BeanFactoryPostProcessor~ 时调用的 ~ConfigurationClassPostProcessor~ 进行处理的，详情可见源码。
+
+   NOTE：@Configuration 配置类中可以嵌套配置类，从而避免使用 @Import 注解。
+
+   参考：
+   + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html][Configuration (Spring Framework 5.2.0.RELEASE API)]]
+
+** @ConfigurationProperties
+   虽然 @Configuration 注解解决了 Bean 配置的问题，但是，在配置时往往还需要外部的值，这时，可以选择使用 ~Environment~ 获取外部配置的值，可以通过 ~@PropertySource~ 指定外部属性来源。
+
+   简单的使用的话，还可以通过 ~@Value~ 注解直接注入外部属性值。
+
+   但是，对于需要在不同的地方使用的外部属性，想要通过统一的命名空间进行管理的时候，就可以考虑使用 ~@ConfigurationProperties~ 来进行配置。
+
+   通常情况下，@ConfigurationProperties 被用于类上，将外部属性注入该类，但是，@ConfigurationProperties 注解还可以用在 @Bean 方法上，当 @Bean 方法返回创建的 Bean 后，
+   就可以使用 @ConfigurationProperties 中的值设置 Bean 的属性。
+
+   参考：
+   + [[https://www.baeldung.com/configuration-properties-in-spring-boot][Guide to @ConfigurationProperties in Spring Boot | Baeldung]]
+   + [[https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html][ConfigurationProperties (Spring Boot Docs 2.1.9.RELEASE API)]]
+
+* 类元数据
+  Spring IOC 容器中至关重要的一环就是类元数据的加载，由于 Spring IOC 容器中需要读取元数据的地方太多，使用 Java 反射的性能代价也许过大，
+  因此，Spring 选择了通过 ASM 字节码操作的方式来读取类的元数据。
+
+  这可以参考 ~ClassPathScanningCandidateComponentProvider~ 的源码，一路看下去就明白了。
+
+  在读取元数据的过程中，Spring IOC 容器会递归的读取注解之上的注解，以获取注解上所有的元信息。通过这种方式，使得 Spring 中注解的处理仿佛就是会自动继承一样，
+  可以很轻松的组合多个注解。
+
+  这让我曾经以为这就是 Java 反射原生自带的功能，知道在实际尝试后发现并不是那样的。
+
+  参考：
+  + [[https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ClassPathScanningCandidateComponentProvider.html][ClassPathScanningCandidateComponentProvider (Spring Framework 5.2.0.RELEASE API)]]
+  + [[https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/type/AnnotationMetadata.html][AnnotationMetadata (Spring Framework 5.2.0.RELEASE API)]]
+  + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/annotation/AliasFor.html][AliasFor (Spring Framework 5.2.0.RELEASE API)]]
+
+* 相关技巧
+  BeanFactory 和 ApplicationContext 这些对象会被 Spring 自动注册为 Bean，因此可以通过自动注入获取这些对象。
+
+* 相关问题
+** 怎样在 XML 配置文件中指定 Qualifier
+   在 XML 中指定 Bean 的 Qualifier 是很简单的：
+   #+BEGIN_SRC xml
+     <bean class="xxx">
+       <qualifier value = "xxx" />
+     </bean>
+   #+END_SRC
+
+** 怎样在获取 Bean 的时候指定 Qualifier
+   可以使用 ~BeanFactoryAnnotationUtils~ 完成这一操作：
+   #+BEGIN_SRC java
+     BeanFactoryAnnotationUtils.qualifiedBeanOfType(ctx.getBeanFactory(), Service.class, "Wanted")
+   #+END_SRC
+
+** Spring 低版本下自我装配失败的问题
+   Spring 低版本下自我装配会出现错误，官方对此的支持从 4.3 版本开始：
+   #+BEGIN_SRC java
+     public class Test {
+       @AutoWired
+       private Test test;
+     }
+   #+END_SRC
+
+   参考： [[https://stackoverflow.com/questions/5152686/self-injection-with-spring][java - Self injection with Spring - Stack Overflow]]
+
+** Bean Name 和 ID 的区别
+   ID 和 Name 的本质区别：Id 只能定义 1 个 Identifier，而 Name 可以定义多个 Aliases。
+
+   1. 配置一个 bean 的时候，我们可以不设置 id，也可以不设置 name，spring 默认会使用类的全限定名作为 bean 的标识符
+   2. 如果使用 id 属性来设置 bean 的标识符，那么 id 在 spring 容器中必需唯一
+   3. 如果使用 name 属性来设置，那么设置的其实就是 bean 的标识符，必需在容器中唯一
+   4. 如果同时设置 id 和 name，那么 id 设置的是标识符，name 设置的是别名
+   5. 如果 id 和 name 的值相同，那么 spring 容器会自动检测并消除冲突：让这个 bean 只有标识符，而没有别名
+   6. name 属性设置多个值。不设置 id，那么第一个被用作标识符，其他的被视为别名。如果设置了 id，那么 name 的所有值都是别名
+   7. 使用 <alias> 标签指定别名，别名也必须在 IoC 容器中唯一
+
+   #+BEGIN_SRC java
+     context.getAliases()
+     context.getBean()
+   #+END_SRC
+

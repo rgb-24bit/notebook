@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#sentry][Sentry]]
   - [[#spring--logback][Spring & Logback]]
+- [[#spring-logback][Spring-Logback]]
 
 * Sentry
   Sentry 是一个实时事件日志记录和聚合平台，相较于 ELK，Sentry 能够更加容易的从日志记录中找到错误日志，然后在错误日志中找到 TraceId 后转到 ELK 查看详细日志。
@@ -92,4 +93,21 @@
    #+end_src
 
    参考：[[https://www.baeldung.com/custom-logback-appender][Creating a Custom Logback Appender | Baeldung]]
+
+* Spring-Logback
+  Logback 提供了和 Spring 之间的集成，可以在 logback 配置文件中使用 Spring 属性：
+  #+begin_src xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration scan="true">
+      <!-- 首先需要定义属性 -->
+      <springProperty scope="context" name="logfile" source="spring.application.name" defaultValue="localhost.log" />
+
+      <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logfile}</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+          <level>DEBUG</level>
+        </filter>
+      </appender>
+    </configuration>
+  #+end_src
 

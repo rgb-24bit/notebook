@@ -32,4 +32,6 @@
   
 * 自定义协议
   + [[https://juejin.im/post/5b67902f6fb9a04fc67c1a24][Netty(三) 什么是 TCP 拆、粘包？如何解决？ - 掘金]]
+  + [[https://github.com/protocolbuffers/protobuf][protocolbuffers/protobuf: Protocol Buffers - Google's data interchange format]]
+  + [[https://en.wikipedia.org/wiki/Type-length-value][Type-length-value - Wikipedia]]
 

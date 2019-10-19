@@ -1,0 +1,5 @@
+* 权限设计
+  + [[https://www.cnblogs.com/sdusrz/p/6340365.html][经典角色权限系统设计五张表及拓展应用 - sduSRZ - 博客园]]
+  + [[https://www.uisdc.com/100-solutions-for-character-permission-design][网易高手：角色权限设计的100种解法 - 优设网 - UISDC]]
+
+

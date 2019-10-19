@@ -245,3 +245,6 @@
 * 一万小时定律
   + [[https://wiki.mbalib.com/wiki/%E4%B8%80%E4%B8%87%E5%B0%8F%E6%97%B6%E5%AE%9A%E5%BE%8B][一万小时定律 - MBA智库百科]]
 
+* Windows
+  + [[https://support.microsoft.com/zh-cn/help/17878/visualizations-for-windows-media-player][Windows Media Player 可视化效果 - Windows Help]]
+
