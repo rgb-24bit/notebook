@@ -17,13 +17,13 @@
   + console.dir(element)
   + 实时表达式
   + console.log('%c...', style)
+
 * Source
   + 右击行号或断点可以设置条件断点
   + 可以通过在条件断点中调用 console.log 的方式打印内容
-  + 
 
 * Element
   + h 隐藏 DOM 节点
   + C-方向键 - 移到节点
   + 展开所有子节点
-  + 
+

@@ -169,3 +169,9 @@
     </style>
   #+end_src
 
+* 浏览器指纹
+  + [[https://wzyboy.im/post/1130.html][浏览器指纹 | wzyboy’s blog]]
+  + [[https://paper.seebug.org/229/][Web客户端追踪（下）—浏览器指纹追踪]]
+
+* fp
+  + [[https://juejin.im/post/5d6a3e9751882505877272a7][神奇的lambda表达式——函数式编程必学 - 掘金]]
