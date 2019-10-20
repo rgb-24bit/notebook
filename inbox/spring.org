@@ -115,8 +115,6 @@
   + 官方文档 & 译文 & 例子
     - [[https://github.com/spring-projects/spring-security/tree/5.1.2.RELEASE/samples/boot][spring-security/samples/boot at 5.1.2.RELEASE · spring-projects/spring-security]]
     - [[https://www.docs4dev.com/docs/zh/spring-security/5.1.2.RELEASE/reference][Spring Security 5.1.2.RELEASE 中文文档 | Docs4dev]]
-  + RFC
-    + [[https://tools.ietf.org/html/rfc6749][RFC 6749 - The OAuth 2.0 Authorization Framework]]
 
 * Spring Cloud
   + [[https://www.cnblogs.com/fengzheng/p/10603672.html][Spring Cloud 系列之 Eureka 实现服务注册与发现 - 风的姿态 - 博客园]]
