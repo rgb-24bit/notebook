@@ -3,6 +3,9 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#怎样在-mac-上安装-java-8][怎样在 Mac 上安装 Java 8]]
 - [[#如何配置-mac-的-java_home][如何配置 Mac 的 JAVA_HOME]]
+- [[#解决-homebrew-下载更新极慢的问题][解决 Homebrew 下载更新极慢的问题]]
+- [[#command-line-tools][Command Line Tools]]
+- [[#命令的区别][命令的区别]]
 
 * 怎样在 Mac 上安装 Java 8
   首先安装工具 Homebrew，通过如下指令完成：
@@ -30,4 +33,41 @@
   #+end_src
   
   然后进入 ~/Library/Java/JavaVirtualMachines~ 路径，再次调用该指令就可以获取到真实的路径了。
+
+* 解决 Homebrew 下载更新极慢的问题
+  直接使用清华镜像就可以了，简单直接：
+  #+begin_src bash
+    git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+
+    git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+
+    git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+
+    brew update
+
+    echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles' >> ~/.bash_profile
+  #+end_src
+
+  参考：
+  + [[https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/][Homebrew | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror]]
+  + [[https://mirrors.tuna.tsinghua.edu.cn/help/homebrew-bottles/][Homebrew Bottles | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror]]
+
+* Command Line Tools
+  MacOS 中的 Command Line Tools 是 XCode IDE 的子集，包含了一些常用的命令行工具，安装方式：
+  #+begin_src bash
+    xcode-select --install
+  #+end_src
+
+  安装的位置位于：
+  #+begin_example
+    /Library/Developer/CommandLineTools/
+  #+end_example
+
+* 命令的区别
+  MacOS 中的一些命令虽然和 Linux 上的一样，但是它们还是存在一些区别的。这时，可以考虑 [[https://www.gnu.org/software/coreutils/][Coreutils - GNU core utilities]]。
+
+  + [[https://stackoverflow.com/questions/24332942/why-awk-script-does-not-work-on-mac-os-but-works-on-linux][macos - Why awk script does not work on Mac OS but works on Linux? - Stack Overflow]]
+    #+begin_src bash
+      brew install gawk
+    #+end_src
 

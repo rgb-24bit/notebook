@@ -160,3 +160,29 @@
   + [[https://www.race604.com/annotation-processing/][Java注解处理器]]
 
 
+* maven
+  多镜像配置：
+  #+begin_src xml
+    <mirror>
+      <id>Local</id>
+      <name>Nexus Mirror.</name>
+      <url>...</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+
+    <mirror>
+      <id>nexus-aliyun</id>
+      <name>nexus-aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  #+end_src
+
+  在 Local 中找不到的包就会去 central 下。
+
+  参考：[[https://maven.apache.org/guides/mini/guide-mirror-settings.html][Maven – Guide to Mirror Settings]]
+
+  理解：当镜像的 ~mirrorOf~ 配置是 ~*~ 时，配置在项目中的存储库也会走这个镜像，这时，要么修改 ~mirrorOf~ 的配置，要么添加镜像配置。
+
+  其实，最好的还是在本地配置一个 ~central~ 的，项目中指定另外的 ~repository~ 比较安逸。
+

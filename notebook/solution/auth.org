@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#常用的几种认证方式][常用的几种认证方式]]
 - [[#负载均衡下的状态同步][负载均衡下的状态同步]]
+- [[#sso-单点登录][SSO 单点登录]]
 
 * 常用的几种认证方式
   + [[https://www.cnblogs.com/fengzheng/p/8416393.html][说一说几种常用的登录认证方式，你用的哪种 - 风的姿态 - 博客园]]
@@ -18,4 +19,7 @@
 
   参考：
   + [[https://www.cnblogs.com/zengguowang/p/8261695.html][Nginx:负载均衡的 session 共享 - ^小七 - 博客园]]
+
+* SSO 单点登录
+  + [[https://zh.wikipedia.org/wiki/%E5%96%AE%E4%B8%80%E7%99%BB%E5%85%A5][单点登录 - 维基百科，自由的百科全书]]
 

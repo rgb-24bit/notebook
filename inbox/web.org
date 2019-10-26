@@ -156,6 +156,7 @@
 
 * npm
   + [[https://javascript.ruanyifeng.com/nodejs/packagejson.html][package.json文件 -- JavaScript 标准参考教程（alpha）]]
+  + [[https://stackoverflow.com/questions/32633678/is-there-any-way-to-configure-multiple-registries-in-a-single-npmrc-file][node.js - Is there any way to configure multiple registries in a single npmrc file - Stack Overflow]]
 
 * Chrome 打印时去除 href
   + [[https://stackoverflow.com/questions/7301989/need-to-remove-href-values-when-printing-in-chrome][css - Need to remove href values when printing in Chrome - Stack Overflow]]
@@ -176,4 +177,9 @@
 * fp
   + [[https://juejin.im/post/5d6a3e9751882505877272a7][神奇的lambda表达式——函数式编程必学 - 掘金]]
   + [[http://www.unicornsummer.com/blog/2014-08/lambda.html][Lambda 算子]]
+  + [[https://juejin.im/post/5af13664f265da0ba266efcf][大佬，JavaScript 柯里化，了解一下？ - 掘金]]
+  + [[https://www.baeldung.com/java-currying][Currying in Java | Baeldung]]
+
+* ES6
+  + [[https://segmentfault.com/q/1010000009623068][javascript - 如何将变量做为一个对象的key，push进一个数组？ - SegmentFault 思否]]
 

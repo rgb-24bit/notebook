@@ -20,6 +20,7 @@
   + [python](#python)
   + [solution](#solution)
   + [tools](#tools)
+  + [windows](#windows)
 ## algorithm
   + [位运算](notebook/algorithm/bitop.org)
   + [消息摘要与加密算法](notebook/algorithm/digest-encrypt.org)
@@ -88,6 +89,7 @@
   + [JavaScript](notebook/front-end/js.org)
   + [JavaScript Library](notebook/front-end/lib.org)
   + [Node.js](notebook/front-end/nodejs.org)
+  + [Security](notebook/front-end/security.org)
   + [前端相关技术了解](notebook/front-end/technology.org)
 ## git
   + [Git 笔记](notebook/git/git.org)
@@ -158,12 +160,14 @@
 ## linux
   + [Debian 系统使用](notebook/linux/debian.org)
   + [Linux 基础笔记](notebook/linux/linux.org)
+  + [Misc](notebook/linux/misc.org)
   + [Linux 问题集](notebook/linux/question.org)
 ## mac
   + [日常使用](notebook/mac/daily.org)
   + [开发相关](notebook/mac/develop.org)
 ## microservice
   + [配置中心](notebook/microservice/config.org)
+  + [日志记录与分析](notebook/microservice/log.org)
   + [远程过程调用](notebook/microservice/rpc.org)
 ## misc
   + [字符编码](notebook/misc/character-encoding.org)
@@ -173,6 +177,7 @@
   + [设计模式](notebook/misc/ds.org)
   + [EditorConfig](notebook/misc/editorconfig.org)
   + [开源协议](notebook/misc/liscense.org)
+  + [Misc](notebook/misc/misc.org)
   + [机器学习](notebook/misc/ml.org)
   + [技术了解](notebook/misc/noun.org)
   + [编程范式相关](notebook/misc/paradigm.org)
@@ -184,6 +189,7 @@
 ## network
   + [DHCP · DNS](notebook/network/dhcp-dns.org)
   + [HTTP 协议](notebook/network/http.org)
+  + [HTTPS](notebook/network/https.org)
   + [计算机网络 - 分层模型](notebook/network/layer-mode.org)
   + [计算机网络 - 协议](notebook/network/protocol.org)
 ## os
@@ -238,3 +244,5 @@
   + [SSH](notebook/tools/ssh.org)
   + [实用开源工具收集](notebook/tools/utils.org)
   + [Vim 笔记](notebook/tools/vim.org)
+## windows
+  + [Misc](notebook/windows/misc.org)

@@ -1,0 +1,13 @@
+#+TITLE:      日志记录与分析
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#elk][ELK]]
+
+* ELK
+  常用的日志开源框架 Elasticsearch + Logstash + Kibana (ELK)，各个部分分别负责：
+  + Logstash：负责日志的收集，处理和储存
+  + Elasticsearch：负责日志检索和分析
+  + Kibana：负责日志的可视化
+    
+  使用 ELK 的过程中，还常常可以使用 KAFKA 消息队列来作为传输日志的工具。
+

@@ -1,4 +1,0 @@
-* ELK
-  + ES + Logstash + Kibana
-  + [[https://es.xiaoleilu.com/052_Mapping_Analysis/35_Inverted_index.html][倒排索引 | Elasticsearch权威指南（中文版）]]
-

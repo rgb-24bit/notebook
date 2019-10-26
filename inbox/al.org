@@ -4,3 +4,5 @@
 * heap
   + [[https://www.cnblogs.com/vamei/archive/2013/03/20/2966612.html][纸上谈兵: 堆 (heap) - Vamei - 博客园]]
 
+* timsort
+  + [[https://sikasjc.github.io/2018/07/25/timsort/][Timsort原理学习 · Sika]]

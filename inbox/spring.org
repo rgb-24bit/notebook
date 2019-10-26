@@ -3,6 +3,24 @@
   + [[https://www.baeldung.com/spring-boot-devtools][Overview of Spring-Boot Dev Tools | Baeldung]]
   + [[https://commons.apache.org/][Apache Commons – Apache Commons]]
 
+* Spring Cloud
+  + [[https://www.cnblogs.com/fengzheng/p/10603672.html][Spring Cloud 系列之 Eureka 实现服务注册与发现 - 风的姿态 - 博客园]]
+  + [[http://blog.didispace.com/springcloud1/][Spring Cloud构建微服务架构（一）服务注册与发现 | 程序猿DD]]
+  + [[https://www.jianshu.com/p/f6db3117864f][@EnableDiscoveryClient与@EnableEurekaClient区别 - 简书]]
+  + [[http://blog.didispace.com/springcloud5/][Spring Cloud构建微服务架构（五）服务网关 | 程序猿DD]]
+  + [[https://juejin.im/post/5adee863f265da0b7527c26e][Spring Cloud Ribbon 客户端负载均衡 - 掘金]]
+  + [[https://www.jianshu.com/p/3e11ac385c73][Hystrix技术解析 - 简书]]
+  + [[https://cloud.spring.io/spring-cloud-static/Greenwich.SR3/single/spring-cloud.html#_spring_cloud_commons_common_abstractions][Spring Cloud 官方文档]]
+
+* Spring WebFlux
+  + [[https://www.ibm.com/developerworks/cn/java/spring5-webflux-reactive/index.html][使用 Spring 5 的 WebFlux 开发反应式 Web 应用]]
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html][Web on Reactive Stack]]
+
+* JDBC
+  + [[https://www.baeldung.com/spring-jdbc-jdbctemplate][Spring JDBC Tutorial | Baeldung]] - 异常相关需要看一下
+
+
+
 * Spring Security
   Spring Security 框架是一个较为复杂的框架，可以先通过以下两篇文章进行了解：
   + [[https://www.ibm.com/developerworks/cn/web/wa-spring-security-web-application-and-fingerprint-login/index.html][Spring Security 的 Web 应用和指纹登录实践]]
@@ -115,17 +133,68 @@
   + 官方文档 & 译文 & 例子
     - [[https://github.com/spring-projects/spring-security/tree/5.1.2.RELEASE/samples/boot][spring-security/samples/boot at 5.1.2.RELEASE · spring-projects/spring-security]]
     - [[https://www.docs4dev.com/docs/zh/spring-security/5.1.2.RELEASE/reference][Spring Security 5.1.2.RELEASE 中文文档 | Docs4dev]]
+    - [[https://spring.io/guides/topicals/spring-security-architecture][Topical Guide · Spring Security Architecture]]
 
-* Spring Cloud
-  + [[https://www.cnblogs.com/fengzheng/p/10603672.html][Spring Cloud 系列之 Eureka 实现服务注册与发现 - 风的姿态 - 博客园]]
-  + [[http://blog.didispace.com/springcloud1/][Spring Cloud构建微服务架构（一）服务注册与发现 | 程序猿DD]]
-  + [[https://www.jianshu.com/p/f6db3117864f][@EnableDiscoveryClient与@EnableEurekaClient区别 - 简书]]
-  + [[http://blog.didispace.com/springcloud5/][Spring Cloud构建微服务架构（五）服务网关 | 程序猿DD]]
-  + [[https://juejin.im/post/5adee863f265da0b7527c26e][Spring Cloud Ribbon 客户端负载均衡 - 掘金]]
-  + [[https://www.jianshu.com/p/3e11ac385c73][Hystrix技术解析 - 简书]]
-  + [[https://cloud.spring.io/spring-cloud-static/Greenwich.SR3/single/spring-cloud.html#_spring_cloud_commons_common_abstractions][Spring Cloud 官方文档]]
+* OAuth2.0
+  #+begin_src java
+    http.getSharedObject(AuthenticationManagerBuilder.class)
+    .userDetailsService(clientDetailsUserDetailsService)
+    .passwordEncoder(passwordEncoder());
+  #+end_src
 
-* Spring WebFlux
-  + [[https://www.ibm.com/developerworks/cn/java/spring5-webflux-reactive/index.html][使用 Spring 5 的 WebFlux 开发反应式 Web 应用]]
-  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html][Web on Reactive Stack]]
+  + ClientCredentialsTokenEndpointFilter - 客户端 Secret 验证
+  + org.springframework.security.oauth2.provider
+
+  授权服务器：
+  + 用户和客户端的认证是放在 Spring Security 层的，客户端认证数据的获取由 ClientCredentialsTokenEndpointFilter 完成，
+    然后由 AuthenticationManager 完成客户端认证
+  + 进入授权端点后效验请求的 scope
+  + 进入 Token 端点效验授权类型，而 Token 由 TokenGranter 生成，TokenGranter 调用 TokenServices 生成 Token，并将 Token 保存到 TokenStore
+  + 密码模式可以不要 client_secret
+    
+  资源服务器：
+  + 在 OAuth2AuthenticationProcessingFilter 提取请求中的 Token 进行验证
+  + OAuth2AuthenticationManager 中会通过 TokenServices 和 Token 获得 OAuth2Authentication 来判断是否可以通过验证
+
+  JWT 扮演 TokenStore 和 TokenServices 的角色。
+
+  参考：
+  + [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/Security/OAuth.html#authorization-server][9.10. OAuth — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.3.0.RELEASE documentation]]
+  + [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/Security/Authentication.html#springsecurityauthentication][9.2. Authentication — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.3.0.RELEASE documentation]]
+  + [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/Security/Authorization.html#id15][9.3. Authorization — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.3.0.RELEASE documentation]]
+  + [[https://projects.spring.io/spring-security-oauth/docs/oauth2.html][Spring Security OAuth]]
+
+  认证和授权：
+  + 用户认证(Authentication)就是“你是谁？”，网站需要对判断你是否是有效用户，需要对你的登录进行信息验证，这个过程就是用户认证。
+  + 授权管理(Authorization)就是“你被允许做什么？”，对于网站中不同的用户，管理员用户可以进入后台页面，而普通用户只能访问前台页面，两者的权限不同，所能访问的结果也不同。
+  + 权限判断
+
+  问题：
+  + [[https://stackoverflow.com/questions/19525380/difference-between-role-and-grantedauthority-in-spring-security][java - Difference between Role and GrantedAuthority in Spring Security - Stack Overflow]]
+    
+    Role 可以看做是 GrantedAuthority 的子集，是特殊的 GrantedAuthority。
+
+  + [[https://stackoverflow.com/questions/3375307/how-to-disable-code-formatting-for-some-part-of-the-code-using-comments][intellij idea - How to disable code formatting for some part of the code using comments? - Stack Overflow]]
+
+    需要配置打开才行。
+
+* Spring Security Q
+  + 多个过滤器之间，一个成功以后剩下的怎么处理
+  + 需要同时处理 用户和客户端 认证？
+  + Spring Security 和 OAUTH2 的关系
+  + 取不到正确的 AuthenticationManager
+  + 过滤器链
+
+  文档：
+  + [[https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html/index.html][OAuth2 Boot]] - 点开看好多了
+  + [[https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html/boot-features-security-oauth2-resource-server.html#specifying-a-token-verification-strategy][2. Resource Server]] - 配置可以看一下
+  + ResourceOwnerPasswordTokenGranter - 内部使用的 UsernamePasswordToken，因此自定义的 Provider 应该支持这个 Token 才行
+  + AuthenticationManagerBuilder - 通过这个进行配置？
+  + 配置类中的 Bean 方法要可以继承
+  + IDEA 编辑技巧:
+    + Recent file - 跳转到原来的窗口
+    + Find file - 在当前窗口打开
+
+  Note:
+  + 密码模式可以自己定义不要 client_id，不一定不需要要走 spring security oauth 那一套
 

@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#noop][noop]]
+- [[#括号][括号]]
 
 * noop
   在自定义协议的时候，常常可以用 ~noop~ 这个单词来代表无，比如：
@@ -12,4 +13,14 @@
     # Spring Security
     {noop}secret
   #+end_example
+
+* 括号
+  |----------+--------------------------|
+  | 括号形式 | 对应的单词               |
+  |----------+--------------------------|
+  | ~{}~       | braces/curly brackets    |
+  | ~[]~       | brackets/square brackets |
+  | ~<>~       | angled brackets          |
+  | ~()~       | parentheses              |
+  |----------+--------------------------|
 

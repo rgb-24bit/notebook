@@ -1,0 +1,13 @@
+#+TITLE:      Security
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#xss-注入攻击][XSS 注入攻击]]
+
+* XSS 注入攻击
+  XSS 全称是 Cross Site Scripting 即跨站脚本，当目标网站目标用户浏览器渲染 HTML 文档的过程中，出现了不被预期的脚本指令并执行时，XSS 就发生了。
+  
+  XSS 攻击大体分为两类，一类是反射型跨站脚本（XSS），又称非持久型，参数型 XSS；另一类是存储型 XSS。
+
+  参考：
+  + [[https://sec.sangfor.com.cn/attacks/3][XSS 注入攻击介绍 - 深信服安全中心]]
+
