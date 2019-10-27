@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#使用-strmaketrans-转换消除字符][使用 str.maketrans 转换消除字符]]
 - [[#python-中的浮点数字面量][Python 中的浮点数字面量]]
+- [[#获取命令行参数][获取命令行参数]]
+- [[#获取某一周的第一天][获取某一周的第一天]]
 
 * 使用 str.maketrans 转换消除字符
   #+BEGIN_SRC python
@@ -21,3 +23,15 @@
     1.4142135623730951
   #+END_SRC
   
+* 获取命令行参数
+  #+begin_src python
+    prog, *args = sys.argv
+  #+end_src  
+
+* 获取某一周的第一天
+  #+BEGIN_SRC python
+    def isoweek2date(year, isoweek):
+        weekday = '%s %s 1' % (year, isoweek)
+        return datetime.datetime.strptime(weekday, '%G %V %u').date()
+  #+END_SRC
+

@@ -12,6 +12,7 @@
   - [[#debian--nginx-部署][Debian + Nginx 部署]]
 - [[#相关问题][相关问题]]
   - [[#如何为所有-route-添加前缀][如何为所有 ROUTE 添加前缀]]
+  - [[#flask-对路由的处理策略][Flask 对路由的处理策略]]
 
 * 基本使用
 ** Flask
@@ -395,4 +396,11 @@
 ** 如何为所有 ROUTE 添加前缀
    通过 ~app.config["APPLICATION_ROOT"] = PREFIX~ 就可以了，参考：
    + [[https://stackoverflow.com/questions/18967441/add-a-prefix-to-all-flask-routes][python - Add a prefix to all Flask routes - Stack Overflow]]
+
+** Flask 对路由的处理策略
+   对于以 / 结尾的 route, 在浏览器中访问 url 时若不以 / 结尾, 会被 flask 重定向到与以 / 结尾的 endpoint 上。
+
+   对于不以 / 结尾的 route, 在浏览器中访问 url 时若以 / 结尾, 则会返回 404 错误。
+
+   和常规的处理模式存在区别。
 

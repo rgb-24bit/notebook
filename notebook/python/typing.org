@@ -1,0 +1,13 @@
+#+TITLE:      typing - Support for type hints
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#简介][简介]]
+
+* 简介
+  Python 作为动态语言，缺少合适的类型检查工具一直是一个问题，及时静态类型检查工具可以提供一些帮助，但也十分有限。
+
+  不过，现在高版本的 Python 开始支持类型注解了，为类型检查提供了更多的支持。
+
+  参考：
+  + [[https://docs.python.org/3/library/typing.html][typing — Support for type hints — Python 3.8.0 documentation]]
+

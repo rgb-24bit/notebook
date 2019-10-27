@@ -58,6 +58,25 @@
   + Unicode - 宽字符的实现
 
 * 错误编码出现原因
+  #+begin_src python
+    from codecs import encode, decode
+
+    def convert(string, *encodings):
+        for i in range(len(encodings) - 1):
+            string = decode(encode(string, encodings[i]), encodings[i + 1], errors='ignore')
+        print(' -> '.join(encodings), string)
+
+    string = '测试字符串'
+
+    convert(string, 'utf-8', 'gbk')
+    convert(string, 'gbk', 'utf-8')
+    convert(string, 'utf-8', 'iso8859-1')
+    convert(string, 'gbk', 'iso8859-1')
+    convert(string, 'utf-8', 'gbk', 'utf-8')
+    convert(string, 'gbk', 'utf-8', 'gbk')
+  #+end_src
+  
+  详情的可以看图片：
   #+HTML: <img src="https://i.loli.net/2019/09/03/hyHxNGtP18glXaO.jpg">
 
 * 单字节字符集

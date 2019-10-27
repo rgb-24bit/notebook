@@ -1,0 +1,59 @@
+#+TITLE:      Python Packaging
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#通过-setuppy-打包][通过 setup.py 打包]]
+  - [[#list_classifiers][list_classifiers]]
+- [[#使用-pipenv-或者-poetry][使用 Pipenv 或者 Poetry]]
+- [[#使用-pip][使用 Pip]]
+
+* 通过 setup.py 打包
+  通过 setup.py 打包项目是一个即传统但是有古老的方式，使用起来并不是那么方便，参考：
+  + [[https://github.com/navdeep-G/setup.py][A Human's Ultimate Guide to setup.py.]]
+  + [[http://wsfdl.com/python/2015/09/06/Python%E5%BA%94%E7%94%A8%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E4%B8%8A.html][Python application 的打包和发布]]
+    
+** list_classifiers
+   + 常用的 License：
+     #+BEGIN_EXAMPLE
+       License :: OSI Approved :: MIT License
+       License :: OSI Approved :: BSD License
+       License :: OSI Approved :: Apache Software License
+       License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+       License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
+       License :: OSI Approved :: Mozilla Public License 1.0 (MPL)
+     #+END_EXAMPLE
+
+   + 常用的 Programming Language：
+     #+BEGIN_EXAMPLE
+       Programming Language :: Python
+       Programming Language :: Python :: 2
+       Programming Language :: Python :: 2.3
+       Programming Language :: Python :: 2.4
+       Programming Language :: Python :: 2.5
+       Programming Language :: Python :: 2.6
+       Programming Language :: Python :: 2.7
+       Programming Language :: Python :: 2 :: Only
+       Programming Language :: Python :: 3
+       Programming Language :: Python :: 3.0
+       Programming Language :: Python :: 3.1
+       Programming Language :: Python :: 3.2
+       Programming Language :: Python :: 3.3
+       Programming Language :: Python :: 3.4
+       Programming Language :: Python :: 3.5
+       Programming Language :: Python :: 3.6
+       Programming Language :: Python :: 3.7
+       Programming Language :: Python :: 3 :: Only
+     #+END_EXAMPLE
+
+   完整的列表可以参考：[[https://pypi.org/pypi?:action=list_classifiers][list_classifiers]]
+
+* 使用 Pipenv 或者 Poetry
+  参考：
+  + [[https://www.python.org/dev/peps/pep-0518/][PEP 518 -- Specifying Minimum Build System Requirements for Python Projects | Python.org]]
+  + [[https://github.com/EmilyQiRabbit/gold-miner/blob/58c3b7dcd653ebccb5b5c1a18f36f170b76eb698/TODO1/current-status-of-python-packaging.md][Python 的打包现状]]
+
+* 使用 Pip
+  可以通过如下方式指定临时的镜像：
+  #+begin_example
+    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+  #+end_example
+

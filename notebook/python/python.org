@@ -74,6 +74,11 @@
    #+END_SRC
   
    这一特性的使用： [[https://stackoverflow.com/questions/338101/python-function-attributes-uses-and-abuses][Python function attributes - uses and abuses]].
+   
+   参考：
+   + [[https://segmentfault.com/a/1190000005701971][Python 实例方法的特殊属性]]
+   + [[https://segmentfault.com/a/1190000005685090][Python 自定义函数的特殊属性]]
+
 * 模块和包
 ** 模块的导入
   导入模块时 Python 会动态执行一遍模块中的内容，函数或类的定义的执行就只是定义了函数或类，而其他语句会直接执行，如果有输出还会直接进行输出。

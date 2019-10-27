@@ -5,6 +5,7 @@
 - [[#collectionsabc--abstract-base-classes-for-containers][collections.abc — Abstract Base Classes for Containers]]
 - [[#bisect--array-bisection-algorithm][bisect — Array bisection algorithm]]
 - [[#enum--support-for-enumerations][enum — Support for enumerations]]
+- [[#datetime--basic-date-and-time-types][datetime — Basic date and time types]]
 
 * heapq — Heap queue algorithm
   为 ~Python~ 提供 *堆* 数据类型的支持：
@@ -62,4 +63,8 @@
   #+END_SRC
 
   官方文档：[[https://docs.python.org/3/library/enum.html][enum — Support for enumerations — Python 3.7.5rc1 documentation]]
+
+* datetime — Basic date and time types
+  日期时间，常用的东西，其中，datetime.timedelta 可以用来表示时间差，参考：
+  + [[https://docs.python.org/3/library/datetime.html][datetime — Basic date and time types — Python 3.8.0 documentation]]
 

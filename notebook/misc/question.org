@@ -7,6 +7,7 @@
 - [[#中间件是什么][中间件是什么]]
 - [[#域名后缀为-io-通常是什么意思][域名后缀为 io 通常是什么意思]]
 - [[#什么是开源精神][什么是开源精神]]
+- [[#windows-media-player-可视化效果][Windows Media Player 可视化效果]]
 
 * 怎样设定软件版本号
   + [[https://zh.wikipedia.org/wiki/%E8%BB%9F%E4%BB%B6%E7%89%88%E6%9C%AC%E8%99%9F][软件版本号 - 维基百科，自由的百科全书]]
@@ -36,4 +37,10 @@
 
   参考链接：
   + [[https://github.com/lifesinger/blog/issues/167][什么是开源精神]]
+
+* Windows Media Player 可视化效果
+  可视化效果是在 Windows Media Player 的正在播放模式下随着音乐而变化的颜色、形状和样式。
+
+  下载：
+  + [[https://support.microsoft.com/zh-cn/help/17878/visualizations-for-windows-media-player][Windows Media Player 可视化效果 - Windows Help]]
 

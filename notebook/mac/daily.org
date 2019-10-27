@@ -10,6 +10,7 @@
   - [[#如何切换同一个程序的不同窗口][如何切换同一个程序的不同窗口]]
   - [[#windows-office-套件的替代产品][Windows Office 套件的替代产品]]
   - [[#怎样取消-command--tab-应用切换][怎样取消 Command + Tab 应用切换]]
+  - [[#easymonitor-这个进程是怎么回事][EasyMonitor 这个进程是怎么回事]]
 
 * 使用入门
   Mac 的菜单栏位于桌面的最上上，从左到右分别为：苹果菜单、应用菜单和系统功能图标区。
@@ -93,4 +94,18 @@
 
 ** 怎样取消 Command + Tab 应用切换
    只需要在切换时按下 ~ESC~ 或者 ~.~ 键就可以了，很简单。
+
+** EasyMonitor 这个进程是怎么回事
+   EasyMonitor 这个进程是 EasyConnect 的残留进程，常驻内存，日常有 2k/s 的流量，不知道在干什么，关掉的方法：
+   #+begin_src bash
+     sudo launchctl unload /Library/LaunchDaemons/com.sangfor.EasyMonitor.plist
+   #+end_src
+
+   但关掉后会导致 EasyConnect 无法使用，重新加载的方法：
+   #+begin_src bash
+     sudo launchctl load /Library/LaunchDaemons/com.sangfor.EasyMonitor.plist
+   #+end_src
+
+   参考：
+   + [[https://blog.jiayx.net/archives/274.html][Mac 下禁用开机自启软件 - JIAYX]]
 
