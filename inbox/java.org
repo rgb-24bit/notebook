@@ -19,6 +19,7 @@
   + 轻量级集合包装器
 
 * 并发
+  + [[https://www.cnblogs.com/dolphin0520/p/3920397.html][Java并发编程：CountDownLatch、CyclicBarrier和Semaphore - Matrix海子 - 博客园]]
   + 理解原子性时需要记住：读取、计算、写入是可能被分开的
 
 * net
@@ -158,7 +159,6 @@
 * AST
   + [[https://www.baeldung.com/lombok-custom-annotation][Implementing a Custom Lombok Annotation | Baeldung]]
   + [[https://www.race604.com/annotation-processing/][Java注解处理器]]
-
 
 * maven
   多镜像配置：

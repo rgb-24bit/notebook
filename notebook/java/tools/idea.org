@@ -10,11 +10,14 @@
   - [[#配置环境变量][配置环境变量]]
   - [[#import-project-from-external-model][Import project from external model]]
   - [[#create-live-templates][Create Live Templates]]
+  - [[#使用-scratch-文件][使用 Scratch 文件]]
+  - [[#常用的快捷键][常用的快捷键]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
   - [[#解决-cant-reslove-symbol-问题][解决 Can't reslove symbol 问题]]
   - [[#idea-集成-mybatis-时可能遇到的问题][Idea 集成 Mybatis 时可能遇到的问题]]
+  - [[#怎样设置单行注释的对其方式][怎样设置单行注释的对其方式]]
 
 * 简单使用
   在 Emacs 键位下的一些常用快捷键：
@@ -34,7 +37,8 @@
   + [[https://www.jetbrains.com/help/idea/discover-intellij-idea.html?keymap=primary_emacs][Discover IntelliJ IDEA - Help | IntelliJ IDEA]]
 
 * 调试程序
-  
+  + [[https://www.cnblogs.com/chiangchou/p/idea-debug.html][在 Intellij IDEA 中使用 Debug - bojiangzhou - 博客园]]
+
   
 * 相关技巧
 ** 通过 Maven 创建 Web App
@@ -88,6 +92,18 @@
    + [[https://www.jetbrains.com/help/idea/creating-and-editing-live-templates.html?keymap=primary_emacs][Creating live templates - Help | IntelliJ IDEA]]
    + [[https://www.jetbrains.com/help/idea/template-variables.html?keymap=primary_emacs][Live template variables - Help | IntelliJ IDEA]]
 
+** 使用 Scratch 文件
+   通过 Scratch 可以很方便的创建用于临时测试的代码，而不是需要单独编写一个测试类。
+
+** 常用的快捷键
+   |---------+--------------------------------------------------|
+   | 快捷键  | 作用                                             |
+   |---------+--------------------------------------------------|
+   | M-S-F10 | 选择运行目标，在项目中存在多个可执行目标时很有用 |
+   | M-F1    | Select In，可以快速的在目录中选中当前文件        |
+   | C-S-m   | 括号跳转                                         |
+   |---------+--------------------------------------------------|
+
 * 相关问题
 ** 怎样添加静态导入到补全列表
    在 ~Settings -> Code Style -> Java -> Imports~ 处进行设置就可以了。
@@ -111,3 +127,7 @@
 
    解决：在右侧的 Datasource 中配置相应的数据源即可
 
+** 怎样设置单行注释的对其方式
+   设置项位于 ~Go to File > Settings > Editor > Code Style > Java > Code Generation~ 下，参考：
+   + [[https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes][intellij idea - Indentation of line comments’ slashes - Stack Overflow]]
+   
