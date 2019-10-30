@@ -39,3 +39,5 @@
 
   构建提交对象后，可以考虑为提交对象打一个 tag 进行保存。
 
+* gitignore
+  + core.excludesFile

@@ -17,6 +17,7 @@
   - [[#maven-的镜像和存储库配置][Maven 的镜像和存储库配置]]
   - [[#maven-中编译时字符编码的设置][Maven 中编译时字符编码的设置]]
   - [[#maven-怎样解决依赖冲突的问题的][Maven 怎样解决依赖冲突的问题的]]
+  - [[#ga-版本是什么意思][GA 版本是什么意思]]
 
 * Maven 基础
 ** 标准目录结构
@@ -193,7 +194,7 @@
 ** Maven 的版本号命名规则是怎样的
    Maven 版本号命名规则中主要需要注意两点：
    1) 语义化版本命名规则
-   2) 镜像版本 SNAPSHOT
+   2) 快照版本 SNAPSHOT
 
    其中，语义化版本命名规则核心规则如下：
    |------+----------+---------------------------------------------------------------|
@@ -241,3 +242,7 @@
    最直接的解决方法就是在 pom 中直接指定版本。
 
    参考：[[http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management][Maven – Introduction to the Dependency Mechanism]]
+** GA 版本是什么意思 
+   GA 是单词 General Availability 的缩写，即一般可用性，可以参考：
+   + [[https://stackoverflow.com/questions/2140010/what-does-ga-means-in-hibernate-versions][software lifecycle - What does GA means in hibernate versions? - Stack Overflow]]
+   + [[https://en.wikipedia.org/wiki/Software_release_life_cycle][Software release life cycle - Wikipedia]]

@@ -21,6 +21,7 @@
   - [[#怎样显示-table-的元数据信息][怎样显示 Table 的元数据信息]]
   - [[#countast-和-count1][COUNT(\ast) 和 COUNT(1)]]
   - [[#怎样修改列值为允许为空][怎样修改列值为允许为空]]
+  - [[#语句-on-duplicate-key-update-的受影响行数][语句 ON DUPLICATE KEY UPDATE 的受影响行数]]
 
 * Install
   目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
@@ -240,4 +241,12 @@
 
    参考：
    + [[https://stackoverflow.com/questions/212939/how-do-i-modify-a-mysql-column-to-allow-null][syntax - How do I modify a MySQL column to allow NULL? - Stack Overflow]]
+
+** 语句 ON DUPLICATE KEY UPDATE 的受影响行数
+   #+begin_quote
+   With ON DUPLICATE KEY UPDATE, the affected-rows value per row is 1 if the row is inserted as a new row and 2 if an existing row is updated.
+   #+end_quote
+
+   参考：
+   + [[https://stackoverflow.com/questions/3747314/why-are-2-rows-affected-in-my-insert-on-duplicate-key-update][mysql - Why are 2 rows affected in my `INSERT ... ON DUPLICATE KEY UPDATE`? - Stack Overflow]]
 

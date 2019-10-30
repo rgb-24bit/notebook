@@ -1,0 +1,23 @@
+#+TITLE:      Spring Security
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#spring-security-core][Spring Security Core]]
+- [[#spring-security-web][Spring Security Web]]
+- [[#spring-boot][Spring Boot]]
+
+* Spring Security Core
+  Spring Security 是一个多模块的项目，其基础功能由 Spring Security Core 这个模块提供，这个核心模块中的主要对象就是 Authentication、UserDetails、AuthenticationManager 这些，可以参考：
+  + [[https://github.com/spring-guides/top-spring-security-architecture][Spring Security Architecture:: Topical guide to Spring Security, how the bits fit together and how they interact with Spring Boot]]
+  + [[https://spring.io/guides/topicals/spring-security-architecture][Topical Guide · Spring Security Architecture]]
+  + [[https://rgb-24bit.github.io/blog/2019/spring-security-certification-process.html][Spring Security 认证流程梳理]]
+
+* Spring Security Web
+  Spring Security Web 模块为 Servlet 程序提供了 Security 支持，通过一系列的 Filter 组装实现了强大的安全功能。
+
+  参考：
+  + [[https://spring.io/guides/topicals/spring-security-architecture][Topical Guide · Spring Security Architecture]]
+
+* Spring Boot
+  相关自动配置类的位置：
+  + [[https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/security][spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/security at master · spring-projects/spring-boot]]
+

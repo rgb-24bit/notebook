@@ -19,8 +19,6 @@
 * JDBC
   + [[https://www.baeldung.com/spring-jdbc-jdbctemplate][Spring JDBC Tutorial | Baeldung]] - 异常相关需要看一下
 
-
-
 * Spring Security
   Spring Security 框架是一个较为复杂的框架，可以先通过以下两篇文章进行了解：
   + [[https://www.ibm.com/developerworks/cn/web/wa-spring-security-web-application-and-fingerprint-login/index.html][Spring Security 的 Web 应用和指纹登录实践]]
@@ -197,4 +195,19 @@
 
   Note:
   + 密码模式可以自己定义不要 client_id，不一定不需要要走 spring security oauth 那一套
+
+* Filter
+  + SpringSecurityFilterChain
+  + DelegatingFilterProxyRegistrationBean
+  + FilterChainProxy
+  + ProviderManager 中的 List，会依照次序去认证，认证成功则立即返回，若认证失败则返回 null，下一个 AuthenticationProvider 会继续尝试认证，
+    如果所有认证器都无法认证成功，则 ProviderManager 会抛出一个 ProviderNotFoundException 异常
+  + 当前过滤器持有的 AuthenticationManager 认证失败，下一个过滤器会进行认证，最后是怎么判断是否认证成功的
+  + 拦截器
+  + 好像是在 FilterSecurityInterceptor 完成最后的判断，即：前面的过滤器尝试验证，不管是否成功，最后进行权限判断的时候进行处理，那么，
+    存在多个认证的时候是怎样处理的？有一个认证成功后后续又怎么处理的？
+
+
+* util
+  assertutil，业务本身的（业务异常），库本身的（库异常），通用的（内置异常）
 
