@@ -3,21 +3,244 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#spring-security-core][Spring Security Core]]
 - [[#spring-security-web][Spring Security Web]]
-- [[#spring-boot][Spring Boot]]
+  - [[#过滤器链的构建][过滤器链的构建]]
+  - [[#过滤器链的使用][过滤器链的使用]]
+  - [[#abstractauthenticationprocessingfilter][AbstractAuthenticationProcessingFilter]]
+  - [[#相关问题][相关问题]]
+    - [[#当存在多个认证过滤器时会怎么样][当存在多个认证过滤器时会怎么样]]
+- [[#spring-security-oauth2][Spring Security OAuth2]]
+  - [[#授权码模式][授权码模式]]
+  - [[#密码模式][密码模式]]
+  - [[#资源服务器][资源服务器]]
+  - [[#相关问题-1][相关问题]]
+    - [[#密码模式的自定义][密码模式的自定义]]
+- [[#参考资料][参考资料]]
+- [[#相关问题-2][相关问题]]
+  - [[#使用-spring-security5-时出现的问题][使用 Spring Security5 时出现的问题]]
+  - [[#sping-security-中-role-和-grantedauthority-的区别][Sping Security 中 Role 和 GrantedAuthority 的区别]]
+  - [[#前端对-oauth2-协议的操作][前端对 OAuth2 协议的操作]]
+  - [[#认证授权鉴权和权限控制][认证、授权、鉴权和权限控制]]
 
 * Spring Security Core
   Spring Security 是一个多模块的项目，其基础功能由 Spring Security Core 这个模块提供，这个核心模块中的主要对象就是 Authentication、UserDetails、AuthenticationManager 这些，可以参考：
-  + [[https://github.com/spring-guides/top-spring-security-architecture][Spring Security Architecture:: Topical guide to Spring Security, how the bits fit together and how they interact with Spring Boot]]
   + [[https://spring.io/guides/topicals/spring-security-architecture][Topical Guide · Spring Security Architecture]]
+  + [[https://leer.moe/2019/03/26/spring-security-architecture/][Spring Security 架构 | LeeReindeer's blog]]
   + [[https://rgb-24bit.github.io/blog/2019/spring-security-certification-process.html][Spring Security 认证流程梳理]]
 
 * Spring Security Web
   Spring Security Web 模块为 Servlet 程序提供了 Security 支持，通过一系列的 Filter 组装实现了强大的安全功能。
 
-  参考：
-  + [[https://spring.io/guides/topicals/spring-security-architecture][Topical Guide · Spring Security Architecture]]
+** 过滤器链的构建
+   其中，Spring Security Web 过滤器链构建相关源码的阅读笔记：
+   + [[https://github.com/rgb-24bit/read-source-code/blob/master/spring/spring-security-web-filter-chain-build.org][Spring Security Web 过滤器链的构建]]
 
-* Spring Boot
-  相关自动配置类的位置：
-  + [[https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/security][spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/security at master · spring-projects/spring-boot]]
+   大致流程就是：WebSecurity 通过上下文中的 WebSecurityConfigurerAdapter 进行过滤器链的构建，其中，WebSecurityConfigurerAdapter 会创建配置 HttpSecurity，
+   并将 HttpSecurity 保存到 WebSecurity，使得 WebSecurity 在执行最后的构建时调用 HttpSecurity 的构建逻辑，创建出过滤器链。
+
+   通过对过滤器链构建过程的了解，似乎对 Spring Security 的理解没有多少帮助？？？
+
+** 过滤器链的使用
+   Spring Security Web 中的 FilterChainProxy 可以持有多个过滤器链，每个过滤器链都匹配一定的路径，当请求通过 FilterChainProxy 时，会被 FilterChainProxy 分派到第一个匹配该请求的过滤器链。
+
+   过滤器链通常由标准过滤器和自定义过滤器组成，自定义的过滤器逻辑不需要多说，主要需要理解的还是标准过滤器：
+   |-----------------------------------------+---------------------------------------------------------------------------------------------|
+   | 标准过滤器                              | 作用                                                                                        |
+   |-----------------------------------------+---------------------------------------------------------------------------------------------|
+   | ~WebAsyncManagerIntegrationFilter~        | 获取/注册 SecurityContextCallableProcessingInterceptor                                      |
+   | ~SecurityContextPersistenceFilter~        | 从 Session 中取出已认证用户的信息                                                           |
+   | ~HeaderWriterFilter~                      | 往该请求的 Header 中添加相应的信息                                                          |
+   | ~CsrfFilter~                              | 对需要验证的请求验证是否包含 csrf 的 token 信息                                             |
+   | ~LogoutFilter~                            | 匹配成功后则用户退出，清除认证信息                                                          |
+   | ~RequestCacheAwareFilter~                 | 通过 HttpSessionRequestCache 内部维护了一个 RequestCache，用于缓存 HttpServletRequest       |
+   | ~SecurityContextHolderAwareRequestFilter~ | 针对 ServletRequest 进行了一次包装，使得 request 具有更加丰富的 API                         |
+   | ~AnonymousAuthenticationFilter~           | 当 SecurityContextHolder 中认证信息为空,则会创建一个匿名用户存入到 SecurityContextHolder 中 |
+   | ~SessionManagementFilter~                 | 限制同一用户开启多个会话的数量                                                              |
+   | ~ExceptionTranslationFilter~              | 处理 FilterSecurityInterceptor 中抛出的异常                                                 |
+   | ~FilterSecurityInterceptor~               | 根据 SecurityContextHolder 中存储的用户信息来决定其是否有权限                               |
+   |-----------------------------------------+---------------------------------------------------------------------------------------------|
+
+   除了这些默认的过滤器以外，还有常用的过滤器如 ~UsernamePasswordAuthenticationFilter~ 用来效验用户的账号密码等信息。
+
+   用于认证的过滤器通常会位于 ~SecurityContextPersistenceFilter~ 这个过滤器的后面，更多的顺序可以参考：
+   + [[https://www.docs4dev.com/docs/en/spring-security/5.1.2.RELEASE/reference/web-app-security.html#filter-ordering][Spring Security 5.1.2.RELEASE Reference - 10. Web Application Security | Docs4dev]]
+
+   整体流程梳理：
+   1. 请求被分派到指定的过滤器链后如果是已验证的用户就可以在 ~SecurityContextPersistenceFilter~ 处从 Session 中取出 SecurityContext
+   2. 请求来到用于认证的过滤器后，比如 UsernamePasswordAuthenticationFilter，可以根据请求携带的信息进行认证，成功就将 SecurityContext 放到 SecurityContextHolder
+   3. 当请求来到最后的过滤器 FilterSecurityInterceptor 后，就可以根据其权限信息进行判断，无权限就抛出异常
+   4. ExceptionTranslationFilter 可以捕获异常进行重定向或者返回特定的响应
+
+** AbstractAuthenticationProcessingFilter
+   自定义的认证过滤器常常继承 ~AbstractAuthenticationProcessingFilter~ 这个过滤器，它的逻辑为：
+   #+begin_src java
+     public abstract class AbstractAuthenticationProcessingFilter {
+       public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+         HttpServletRequest request = (HttpServletRequest) req;
+         HttpServletResponse response = (HttpServletResponse) res;
+
+         if (!requiresAuthentication(request, response)) {
+           chain.doFilter(request, response);
+           return;
+         }
+
+         Authentication authResult;
+
+         try {
+           authResult = attemptAuthentication(request, response);
+           // 认证得不到结果就直接返回了，剩下的过滤器都不管了
+           if (authResult == null) {
+             return;
+           }
+           sessionStrategy.onAuthentication(authResult, request, response);
+         }
+         catch (InternalAuthenticationServiceException failed) {
+           unsuccessfulAuthentication(request, response, failed);
+           return;
+         }
+         catch (AuthenticationException failed) {
+           unsuccessfulAuthentication(request, response, failed);
+           return;
+         }
+
+         // 判断认证成功后是否需要继续往过滤器链下面走
+         if (continueChainBeforeSuccessfulAuthentication) {
+           chain.doFilter(request, response);
+         }
+
+         successfulAuthentication(request, response, chain, authResult);
+       }
+
+       protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
+         throws IOException, ServletException {
+         // 认证成功后会将结果保存到上下文
+         SecurityContextHolder.getContext().setAuthentication(authResult);
+
+         rememberMeServices.loginSuccess(request, response, authResult);
+
+         // Fire event
+         if (this.eventPublisher != null) {
+           eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(authResult, this.getClass()));
+         }
+
+         successHandler.onAuthenticationSuccess(request, response, authResult);
+       }
+
+       protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
+         throws IOException, ServletException {
+         SecurityContextHolder.clearContext();
+
+         rememberMeServices.loginFail(request, response);
+
+         failureHandler.onAuthenticationFailure(request, response, failed);
+       }
+     }
+   #+end_src
+   
+   可以看到，认证成功和失败后，会调用相应的 Handler 进行处理，一般情况下会进行重定向，返回错误之类的操作。
+
+** 相关问题
+*** 当存在多个认证过滤器时会怎么样
+    这就需要看这些认证过滤器的内部逻辑了，如果不判断 SecurityContextHolder 中是否存在 SecurityContext 就往里面放的话，由于 SecurityContextHolder 是通过 ThreadLocal 实现的，
+    后放进去的 SecurityContext 就会覆盖前面的 SecurityContext。
+
+    说起来，一般也不会存在多个认证过滤器吧……
+
+* Spring Security OAuth2
+  理解 Spring Security OAuth2 的关键其实还是在 OAuth2 这个协议上，Spring Security OAuth2 通过 Spring Security Core 和 Spring Security Web 提供的功能实现了这个协议。
+
+  OAuth2 认证中的两个对象：客户端和用户本身，用户本身的认证可以通过 Spring Security Web 过滤器链完成，而客户端的认证，Spring Security OAuth2 提供了 ClientDetails 和 ClientDetailsService 这两个扩展接口，
+  我们可以实现自己的 AuthenticationProvider 使用 ClientDetailsService，也可通过 ClientDetailsUserDetailsService 将 ClientDetailsService 转换为 UserDetailsService。
+
+  在 Spring Security OAuth2 中，不同端点的过滤器链时不同的，其中：
+  + AuthorizationEndpoint 的过滤器链会对用户进行验证，进入端点后会对客户端请求的领域进行验证
+  + TokenEndpoint 的过滤器链会对客户端进行验证，进入端点后会对用户（授权码）进行验证，然后通过 TokenGranter 进行授权
+
+  由于在 OAuth2 中访问令牌是一个极为重要的角色，因此，Spring Security OAuth2 也通过 TokenServices 和 TokenStore 对 Token 进行创建和管理。
+
+  资源服务器的过滤器链中的 OAuth2AuthenticationProcessingFilter 可以对 Token 进行效验生成 Authentication 数据。
+
+  使用 JWT 时，JWT 就可以扮演 TokenServices 和 TokenStore 的角色。
+
+  可以参考：[[https://projects.spring.io/spring-security-oauth/docs/oauth2.html][Spring Security OAuth]]
+
+** 授权码模式
+   授权码模式在授权服务器端主要有两个端点：AuthorizationEndpoint 和 TokenEndpoint，这两个端点归属于不同的过滤器链：
+   + AuthorizationEndpoint 的过滤器链会对用户进行认证，认证通过后进入端点内部逻辑，会效验客户端申请的 Scope，合法的话就会生成授权码，
+     这一步主要是征得用户的同意，因此没有效验客户端。
+   + TokenEndpoint 的过滤器链会对客户端进行认证，认证通过后进入端点内部逻辑，这里同样会对客户端申请的 Scope 和授权码进行效验，根据效验结果使用 TokenGranter 进行授权。
+     
+   access_token 最终由 TokenGranter 调用 TokenServices 进行生成，可能会保存到 TokenStore 中。
+
+   注意：AuthorizationEndpoint 端点要求通过认证的用户，因此，应该用过滤器链将 AuthorizationEndpoint 端点保护起来。
+
+** 密码模式
+   密码模式需要的端点只有一个，即 TokenEndpoint 这个端点，因此，由于这个端点的过滤器链只对客户端进行效验，因此，当模式为密码模式时，端点内部就会使用 AuthenticationManager 对用户进行认证。
+
+   用户认证客户端的可以是 ~ClientCredentialsTokenEndpointFilter~ 这个过滤器，测试时常常也用 ~BasicAuthenticationFilter~ 来完成认证，当然，也可以自定义。
+
+   也就是说，密码模式将通常在过滤器链中完成的用户认证移到了端点内部逻辑中。
+
+** 资源服务器
+   授权服务器对客户端和用户进行认证，而资源服务器则需要对 access_token 进行认证，这个认证通常时发生在 OAuth2AuthenticationProcessingFilter 这个过滤器中的，这个过滤器取出 Token 后便可以通过 OAuth2AuthenticationManager 完成 Token 的认证。
+
+   而 OAuth2AuthenticationManager 内部则会通过 TokenServices 对 Token 继进行效验，最后得到结果。
+
+   效验过后得到的 Authentication 会在 FilterSecurityInterceptor 进行权限控制。
+
+** 相关问题
+*** 密码模式的自定义
+    Spring Security OAuth2 中默认的密码模式实现是必须通过客户端认证的，但是，为了通过 OAuth2 授权中心进行自己的用户登录，也可以考虑自己实现……
+
+    那样的话其实也不算是 OAuth2 了 @_@
+
+* 参考资料
+  Spring Security 整体相关的资料：
+  + [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/index.html][TERASOLUNA Server Framework for Java (5.x) Development Guideline]]
+  + [[https://leer.moe/2019/03/26/spring-security-architecture/][Spring Security 架构 | LeeReindeer's blog]]
+
+  Spring Security Web 相关的资料：
+  + [[https://www.cnblogs.com/xz816111/p/8528896.html][Spring Security验证流程剖析及自定义验证方法 - Decouple - 博客园]]
+  + [[https://www.ibm.com/developerworks/cn/web/wa-spring-security-web-application-and-fingerprint-login/index.html][Spring Security 的 Web 应用和指纹登录实践]]
+  + [[https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/htmlsingle/#servlet-applications][Spring Security Reference]]
+
+  Spring Security OAuth2 相关的资料：
+  + [[http://www.iocoder.cn/Spring-Security/OAuth2-learning/?vip][芋道 Spring Security OAuth2 入门 | 芋道源码 —— 纯源码解析博客]]
+  + [[https://projects.spring.io/spring-security-oauth/docs/oauth2.html][Spring Security OAuth]]
+  + [[https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html/index.html][OAuth2 Boot]] - 点开详细文档后容易阅读得多
+
+* 相关问题
+** 使用 Spring Security5 时出现的问题
+   + 报异常 There is no PasswordEncoder mapped for the id "null"：
+
+     在 Spring Security 中密码的存储格式是 "{id}......"。前面的 id 是加密方式，id 可以是 bcrypt、sha256 等，后面跟着的是加密后的密码。也就是说，程序拿到传过来的密码的时候，
+     会首先查找被 { 和 } 包括起来的 id，来确定后面的密码是被怎么样加密的，如果找不到就认为 id 是 null。
+     
+     此时，可以将设置为 ~{noop}password~ 的形式。
+
+** Sping Security 中 Role 和 GrantedAuthority 的区别
+   Role 可以看做是 GrantedAuthority 的子集，是特殊的 GrantedAuthority，参考：
+   + [[https://stackoverflow.com/questions/19525380/difference-between-role-and-grantedauthority-in-spring-security][java - Difference between Role and GrantedAuthority in Spring Security - Stack Overflow]]
+
+** 前端对 OAuth2 协议的操作
+   #+begin_src js
+     fetch(‘https://api.twitter.com/1.1/search/tweets.json', {
+           headers: {
+             authorization: ‘Bearer your-access-token’
+           }
+          }).then(response => {
+            if (response.status === 401) {
+              // try getting the new access token and repeat the same request
+            }
+            // otherwise carry on
+          })
+   #+end_src
+** 认证、授权、鉴权和权限控制
+   + 认证：根据声明者所特有的识别信息，确认声明者的身份
+   + 授权：资源所有者委派执行者，赋予执行者指定范围的资源操作权限，以便执行者代理执行对资源的相关操作
+   + 鉴权：对于一个声明者所声明的身份权利，对其所声明的真实性进行鉴别确认的过程
+   + 权限控制：对可执行的各种操作组合配置为权限列表，然后根据执行者的权限，若其操作在权限范围内，则允许执行，否则禁止
+
+   过程：认证-->授权-->鉴权-->权限控制
+
+   参考：[[https://www.cnblogs.com/badboyh2o/p/11068779.html][认证、授权、鉴权和权限控制 - badboyh2o - 博客园]]
 

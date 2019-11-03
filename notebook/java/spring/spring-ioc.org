@@ -179,6 +179,8 @@
 
    NOTE：@Configuration 配置类中可以嵌套配置类，从而避免使用 @Import 注解。
 
+   NOTE：@Configuration 配置类中的 Bean 方法应该是可以被继承的，即：不是 private 和 final 的
+
    参考：
    + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/Configuration.html][Configuration (Spring Framework 5.2.0.RELEASE API)]]
 

@@ -150,9 +150,6 @@
   + [[https://juejin.im/post/5a619f886fb9a01c9f5b7e4f][Java中的注解-自定义注解 - 掘金]]
   + [[https://stackoverflow.com/questions/41243018/create-custom-annotation-for-lombok][java - Create custom annotation for Lombok - Stack Overflow]]
 
-* 日期格式化
-  + [[http://tutorials.jenkov.com/java-internationalization/simpledateformat.html][Java SimpleDateFormat]]
-
 * 教程
   + [[http://tutorials.jenkov.com/][Jenkov.com]]
 

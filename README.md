@@ -92,8 +92,9 @@
   + [Security](notebook/front-end/security.org)
   + [前端相关技术了解](notebook/front-end/technology.org)
 ## git
-  + [Git 笔记](notebook/git/git.org)
+  + [Git Command](notebook/git/command.org)
   + [Git - Github](notebook/git/github.org)
+  + [Git 内部原理](notebook/git/principle.org)
   + [Git 问题集](notebook/git/question.org)
   + [Git 使用规范](notebook/git/style.org)
   + [Git 使用技巧](notebook/git/trick.org)
@@ -119,7 +120,9 @@
     + [Spring Boot](notebook/java/spring/spring-boot.org)
     + [Spring Data](notebook/java/spring/spring-data.org)
     + [Spring IOC](notebook/java/spring/spring-ioc.org)
+    + [Sping Misc](notebook/java/spring/spring-misc.org)
     + [Spring MVC](notebook/java/spring/spring-mvc.org)
+    + [Spring Security](notebook/java/spring/spring-security.org)
     + [Spring Test](notebook/java/spring/spring-test.org)
     + [Spring Utils](notebook/java/spring/spring-utils.org)
   + **tools**
@@ -232,7 +235,7 @@
   + [Python - 弱引用](notebook/python/weakref.org)
 ## solution
   + [接口设计](notebook/solution/api.org)
-  + [认证](notebook/solution/auth.org)
+  + [认证和授权](notebook/solution/auth.org)
   + [分布式系统](notebook/solution/distributed.org)
   + [其他解决方案](notebook/solution/misc.org)
   + [存储](notebook/solution/storage.org)
@@ -242,6 +245,7 @@
   + [Windows CMD 命令](notebook/tools/cmd.org)
   + [curl](notebook/tools/curl.org)
   + [Docker](notebook/tools/docker.org)
+  + [Enhance Tools](notebook/tools/enhance.org)
   + [Shell](notebook/tools/shell.org)
   + [SSH](notebook/tools/ssh.org)
   + [实用开源工具收集](notebook/tools/utils.org)

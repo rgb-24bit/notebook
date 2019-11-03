@@ -11,6 +11,7 @@
   + [[https://juejin.im/post/5adee863f265da0b7527c26e][Spring Cloud Ribbon 客户端负载均衡 - 掘金]]
   + [[https://www.jianshu.com/p/3e11ac385c73][Hystrix技术解析 - 简书]]
   + [[https://cloud.spring.io/spring-cloud-static/Greenwich.SR3/single/spring-cloud.html#_spring_cloud_commons_common_abstractions][Spring Cloud 官方文档]]
+  + Spring Cloud Security 和 Spring Security 之间的关系
 
 * Spring WebFlux
   + [[https://www.ibm.com/developerworks/cn/java/spring5-webflux-reactive/index.html][使用 Spring 5 的 WebFlux 开发反应式 Web 应用]]
@@ -19,195 +20,14 @@
 * JDBC
   + [[https://www.baeldung.com/spring-jdbc-jdbctemplate][Spring JDBC Tutorial | Baeldung]] - 异常相关需要看一下
 
-* Spring Security
-  Spring Security 框架是一个较为复杂的框架，可以先通过以下两篇文章进行了解：
-  + [[https://www.ibm.com/developerworks/cn/web/wa-spring-security-web-application-and-fingerprint-login/index.html][Spring Security 的 Web 应用和指纹登录实践]]
-  + [[http://www.iocoder.cn/Spring-Security/laoxu/Architecture-Overview/][Spring Security(一) —— Architecture Overview | 芋道源码 —— 纯源码解析博客]]
-
-  通过这两篇文档在结合一些其他的资料可以了解到 Spring Security 认证流程大概是：
-  1. 客户端发送自身的账户和密码等信息，Spring Security 过滤器拿到这些信息后会将它们封装到 Authentication 对象中，并调用 AuthenticationManager 进行认证
-  2. AuthenticationManager 的一般实现为 ProviderManager，这个会调用我们自己实现的 AuthenticationProvider 对 Authentication 进行认证
-  3. AuthenticationProvider 依赖于 UserDetail 和 UserDetailService，通过 UserDetailService 获取 UserDetail，然后验证 UserDetail 和 Authentication 中的信息，
-     验证通过后返回携带 UserDetail 的 Authentication
-  4. 过滤器得到验证通过的 Authentication 后会将 Authentication 放到 SecurityContext 中，再将 SecurityContext 放到 SecurityContextHolder 中
-
-  Spring Security 进行鉴权时，可以通过 Session 等方式判断该客户端是否已通过认证，如果是已通过认证的客户端，就可以取出 SecurityContext 放到 SecurityContextHolder(ThreadLocal) 中，
-  用于后续其他的权限认证。
-
-  Spring Security 中的认证流程主要是在 *过滤器* 中完成的，而 Spring Security OAuth 存在一些区别。
-  
-  Spring Security OAuth 中授权服务器在不同的授权模式中的认证流程是存在一些区别的，这里需要关注的主要是授权码模式和密码模式：
-  + 授权码模式：授权码模式需要暴露 ~/oauth/authorize~ 这个端点，在这个端点的内部逻辑中，会首先验证该用户 *是否已经通过了 Spring Security* 的认证，即：是否已经登录。
-    如果用户已登录，就会判断用户申请的权限、用户的客户端是否合法，判断通过就会返回 *授权码* 给客户端。
-
-    这时，客户端可以拿着这个授权码到 ~/oauth/token~ 去申请 ~access_token~ 来访问资源。
-
-  + 密码模式：密码模式直接到 ~/oauth/token~ 这个端点申请 access_token 就可以了，这时端点内部逻辑会通过 ~AuthenticationManager~ 效验用户的账号密码是否正确，
-    正确的话就对用户申请的权限进行进一步的判断。
-    
-    参考 ~AuthorizationServerEndpointsConfigurer#getDefaultTokenGranters~ 的源码。
-
-  可以看到的一点是，Spring Security OAuth 中的授权更多的是在通过 ~Spring Security~ 验证后进行的进一步验证。
-
-  而资源服务器，则会在 ~OAuth2AuthenticationProcessingFilter~ 这个过滤器中对 Token 进行效验。
-
-  如果是使用单点 OAuth 服务器的方式的话，资源服务器的 Token 效验会麻烦一些，但是我们目前的选择是 JWT 方式，这样一来，资源服务器只需要拿到 ~secret-key~ 就可以对 Token 进行效验了，
-  而 ~secret-key~ 的配置时可以放到配置中心的。
-
-  相关的参考资料：
-  + HTTP 身份验证
-    - [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication][HTTP 身份验证 - HTTP | MDN]]
-    - [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Authorization][Authorization - HTTP | MDN]]
-    - [[http://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml][Hypertext Transfer Protocol (HTTP) Authentication Scheme Registry]]
-    - [[https://stackoverflow.com/questions/12701085/what-is-the-realm-in-basic-authentication][http - What is the "realm" in basic authentication - Stack Overflow]]
-  + OAuth 2.0 验证
-    - [[https://www.cnblogs.com/XiongMaoMengNan/p/6785155.html][OAuth 2.0: Bearer Token Usage - 熊猫猛男 - 博客园]]
-    - [[https://deepzz.com/post/what-is-oauth2-protocol.html][10 分钟理解什么是 OAuth 2.0 协议 | Deepzz's Blog]]
-    - [[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html][理解 OAuth 2.0 - 阮一峰的网络日志]]
-    - [[http://www.ruanyifeng.com/blog/2019/04/oauth_design.html][OAuth 2.0 的一个简单解释 - 阮一峰的网络日志]]
-    - [[http://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html][OAuth 2.0 的四种方式 - 阮一峰的网络日志]]
-    - [[http://www.ruanyifeng.com/blog/2019/04/github-oauth.html][GitHub OAuth 第三方登录示例教程 - 阮一峰的网络日志]]
-    - [[http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html][JSON Web Token 入门教程 - 阮一峰的网络日志]]
-  + Spring security 框架
-    - [[https://juejin.im/post/58c29e0b1b69e6006bce02f4][重拾后端之Spring Boot（四）：使用JWT和Spring Security保护REST API - 掘金]]
-    - [[http://www.iocoder.cn/Spring-Security/laoxu/Architecture-Overview/][Spring Security(一) —— Architecture Overview | 芋道源码 —— 纯源码解析博客]]
-    - [[https://www.cnblogs.com/xz816111/p/8528896.html][Spring Security验证流程剖析及自定义验证方法 - Decouple - 博客园]]
-    - [[https://www.ibm.com/developerworks/cn/web/wa-spring-security-web-application-and-fingerprint-login/index.html][Spring Security 的 Web 应用和指纹登录实践]]
-  + Spring security oauth
-    - [[https://segmentfault.com/a/1190000018771279][Spring Boot Security OAuth2 实现支持 JWT 令牌的授权服务器 - - SegmentFault 思否]]
-    - [[https://segmentfault.com/a/1190000012384850][聊聊 spring security oauth2 的几个 endpoint 的认证 - code-craft - SegmentFault 思否]]
-    - [[http://www.iocoder.cn/Spring-Security/OAuth2-learning/?vip][芋道 Spring Security OAuth2 入门 | 芋道源码 —— 纯源码解析博客]]
-    - [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/Security/OAuth.html][9.10. OAuth — TERASOLUNA Server Framework]]
-    - [[https://juejin.im/post/5c44ab616fb9a049b34849d7][SpringSecurity OAuth2 流程分析 - 掘金]]
-    - [[https://projects.spring.io/spring-security-oauth/docs/oauth2.html][Spring Security OAuth]]
-  + Spring Security5 中的问题
-    - [[https://www.cnblogs.com/bjlhx/p/9878450.html][005-SpringBoot2.x 整合 Security5（解决 There is no PasswordEncoder mapped for the id "null"） - bjlhx15 - 博客园]]
-    - Spring Security OAuth 中的密码模式需要注册 ~AuthenticationManager~ 来验证用户信息，在使用下面这个传统方式的时候出现了栈溢出异常，原因未知：
-      #+begin_src java
-        @Configuration
-        @EnableWebSecurity
-        @EnableGlobalMethodSecurity(prePostEnabled = true)
-        public class SecurityConfig extends WebSecurityConfigurerAdapter {
-          @Bean
-          @Override
-          public AuthenticationManager authenticationManagerBean() throws Exception {
-            return super.authenticationManagerBean();
-          }
-        }
-      #+end_src      
-
-      因此，后来根据官方的例子采用了如下方式来获取 AuthenticationManager：
-      #+begin_src java
-        @Configuration
-        @EnableAuthorizationServer
-        public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdapter {
-          private AuthenticationManager authenticationManager;
-
-          @Autowired
-          public OAuth2AuthorizationServer(AuthenticationConfiguration authenticationConfiguration) {
-            try {
-              this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
-            } catch (Exception e) {
-              e.printStackTrace();
-            }
-          }
-        }
-      #+end_src
-
-  + 前端的验证
-    - [[https://stackoverflow.com/questions/51506579/sending-authorization-token-bearer-through-javascript][jquery - Sending Authorization Token Bearer through Javascript - Stack Overflow]]
-      #+begin_src js
-        fetch(‘https://api.twitter.com/1.1/search/tweets.json', {
-              headers: {
-                authorization: ‘Bearer your-access-token’
-              }
-             }).then(response => {
-               if (response.status === 401) {
-                 // try getting the new access token and repeat the same request
-               }
-               // otherwise carry on
-             })
-      #+end_src
-  + 官方文档 & 译文 & 例子
-    - [[https://github.com/spring-projects/spring-security/tree/5.1.2.RELEASE/samples/boot][spring-security/samples/boot at 5.1.2.RELEASE · spring-projects/spring-security]]
-    - [[https://www.docs4dev.com/docs/zh/spring-security/5.1.2.RELEASE/reference][Spring Security 5.1.2.RELEASE 中文文档 | Docs4dev]]
-    - [[https://spring.io/guides/topicals/spring-security-architecture][Topical Guide · Spring Security Architecture]]
-
-* OAuth2.0
-  #+begin_src java
-    http.getSharedObject(AuthenticationManagerBuilder.class)
-    .userDetailsService(clientDetailsUserDetailsService)
-    .passwordEncoder(passwordEncoder());
-  #+end_src
-
-  + ClientCredentialsTokenEndpointFilter - 客户端 Secret 验证
-  + org.springframework.security.oauth2.provider
-
-  授权服务器：
-  + 用户和客户端的认证是放在 Spring Security 层的，客户端认证数据的获取由 ClientCredentialsTokenEndpointFilter 完成，
-    然后由 AuthenticationManager 完成客户端认证
-  + 进入授权端点后效验请求的 scope
-  + 进入 Token 端点效验授权类型，而 Token 由 TokenGranter 生成，TokenGranter 调用 TokenServices 生成 Token，并将 Token 保存到 TokenStore
-  + 密码模式可以不要 client_secret
-    
-  资源服务器：
-  + 在 OAuth2AuthenticationProcessingFilter 提取请求中的 Token 进行验证
-  + OAuth2AuthenticationManager 中会通过 TokenServices 和 Token 获得 OAuth2Authentication 来判断是否可以通过验证
-
-  JWT 扮演 TokenStore 和 TokenServices 的角色。
-
-  参考：
-  + [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/Security/OAuth.html#authorization-server][9.10. OAuth — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.3.0.RELEASE documentation]]
-  + [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/Security/Authentication.html#springsecurityauthentication][9.2. Authentication — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.3.0.RELEASE documentation]]
-  + [[http://terasolunaorg.github.io/guideline/5.3.0.RELEASE/en/Security/Authorization.html#id15][9.3. Authorization — TERASOLUNA Server Framework for Java (5.x) Development Guideline 5.3.0.RELEASE documentation]]
-  + [[https://projects.spring.io/spring-security-oauth/docs/oauth2.html][Spring Security OAuth]]
-
-  认证和授权：
-  + 用户认证(Authentication)就是“你是谁？”，网站需要对判断你是否是有效用户，需要对你的登录进行信息验证，这个过程就是用户认证。
-  + 授权管理(Authorization)就是“你被允许做什么？”，对于网站中不同的用户，管理员用户可以进入后台页面，而普通用户只能访问前台页面，两者的权限不同，所能访问的结果也不同。
-  + 权限判断
-
-  问题：
-  + [[https://stackoverflow.com/questions/19525380/difference-between-role-and-grantedauthority-in-spring-security][java - Difference between Role and GrantedAuthority in Spring Security - Stack Overflow]]
-    
-    Role 可以看做是 GrantedAuthority 的子集，是特殊的 GrantedAuthority。
-
-  + [[https://stackoverflow.com/questions/3375307/how-to-disable-code-formatting-for-some-part-of-the-code-using-comments][intellij idea - How to disable code formatting for some part of the code using comments? - Stack Overflow]]
-
-    需要配置打开才行。
-
 * Spring Security Q
-  + 多个过滤器之间，一个成功以后剩下的怎么处理
-  + 需要同时处理 用户和客户端 认证？
-  + Spring Security 和 OAUTH2 的关系
   + 取不到正确的 AuthenticationManager
-  + 过滤器链
-
-  文档：
-  + [[https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html/index.html][OAuth2 Boot]] - 点开看好多了
-  + [[https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html/boot-features-security-oauth2-resource-server.html#specifying-a-token-verification-strategy][2. Resource Server]] - 配置可以看一下
-  + ResourceOwnerPasswordTokenGranter - 内部使用的 UsernamePasswordToken，因此自定义的 Provider 应该支持这个 Token 才行
-  + AuthenticationManagerBuilder - 通过这个进行配置？
-  + 配置类中的 Bean 方法要可以继承
-  + IDEA 编辑技巧:
-    + Recent file - 跳转到原来的窗口
-    + Find file - 在当前窗口打开
-
-  Note:
-  + 密码模式可以自己定义不要 client_id，不一定不需要要走 spring security oauth 那一套
-
-* Filter
-  + SpringSecurityFilterChain
-  + DelegatingFilterProxyRegistrationBean
-  + FilterChainProxy
-  + ProviderManager 中的 List，会依照次序去认证，认证成功则立即返回，若认证失败则返回 null，下一个 AuthenticationProvider 会继续尝试认证，
-    如果所有认证器都无法认证成功，则 ProviderManager 会抛出一个 ProviderNotFoundException 异常
-  + 当前过滤器持有的 AuthenticationManager 认证失败，下一个过滤器会进行认证，最后是怎么判断是否认证成功的
-  + 拦截器
-  + 好像是在 FilterSecurityInterceptor 完成最后的判断，即：前面的过滤器尝试验证，不管是否成功，最后进行权限判断的时候进行处理，那么，
-    存在多个认证的时候是怎样处理的？有一个认证成功后后续又怎么处理的？
-
 
 * util
   assertutil，业务本身的（业务异常），库本身的（库异常），通用的（内置异常）
 
+
+* tool
+  + IDEA 编辑技巧:
+    + Recent file - 跳转到原来的窗口
+    + Find file - 在当前窗口打开

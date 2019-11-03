@@ -10,4 +10,5 @@
 
 * HTTP API 认证授权
   + [[https://coolshell.cn/articles/19395.html][HTTP API 认证授权术 || 酷 壳 - CoolShell]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication][HTTP 身份验证 - HTTP | MDN]]
 

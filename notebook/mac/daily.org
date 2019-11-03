@@ -5,6 +5,7 @@
 - [[#spotlight][Spotlight]]
 - [[#相关技巧][相关技巧]]
   - [[#快速的选中某一行][快速的选中某一行]]
+  - [[#在-spotlight-中快速查看词义][在 Spotlight 中快速查看词义]]
 - [[#相关问题][相关问题]]
   - [[#怎样在通过-command--tab-切换应用时恢复最小化的窗口][怎样在通过 Command + Tab 切换应用时恢复最小化的窗口]]
   - [[#如何切换同一个程序的不同窗口][如何切换同一个程序的不同窗口]]
@@ -75,6 +76,18 @@
    |---------------------+------------|
 
    光标在一行的任意一个位置时，执行两个快捷键各一次就可以选中该行了。
+
+** 在 Spotlight 中快速查看词义
+   在 Spotlight 输入要查询的单词，然后通过快捷键 Command-L 就可以快速跳转到词义项，通过 Command-D 可以在词典中打开。
+
+   + [[https://apple.stackexchange.com/questions/22897/how-to-place-dictionary-definitions-higher-up-in-spotlight-results][lion - How to place Dictionary definitions higher up in spotlight results - Ask Different]]
+
+   但也可以选择通过命令行进行查询，只要有 curl 就可以，只不过没有中文解释：
+   #+begin_src bash
+     curl dict://dict.org/d:<word>
+   #+end_src
+
+   + [[https://tools.ietf.org/html/rfc2229][RFC 2229 - A Dictionary Server Protocol]]
 
 * 相关问题
 ** 怎样在通过 Command + Tab 切换应用时恢复最小化的窗口

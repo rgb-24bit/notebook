@@ -18,6 +18,7 @@
   - [[#解决-cant-reslove-symbol-问题][解决 Can't reslove symbol 问题]]
   - [[#idea-集成-mybatis-时可能遇到的问题][Idea 集成 Mybatis 时可能遇到的问题]]
   - [[#怎样设置单行注释的对其方式][怎样设置单行注释的对其方式]]
+  - [[#怎样关闭某段代码的自动格式化][怎样关闭某段代码的自动格式化]]
 
 * 简单使用
   在 Emacs 键位下的一些常用快捷键：
@@ -131,3 +132,14 @@
    设置项位于 ~Go to File > Settings > Editor > Code Style > Java > Code Generation~ 下，参考：
    + [[https://stackoverflow.com/questions/32342682/indentation-of-line-comments-slashes][intellij idea - Indentation of line comments’ slashes - Stack Overflow]]
    
+** 怎样关闭某段代码的自动格式化
+   这在进行很长的链式调用时是很有用的一个功能，可以在 ~Preferences > Editor > Code Style > Formatter Control~ 开启这样功能：
+   + [[https://stackoverflow.com/questions/3375307/how-to-disable-code-formatting-for-some-part-of-the-code-using-comments][intellij idea - How to disable code formatting for some part of the code using comments? - Stack Overflow]]
+
+   使用：
+   #+begin_src java
+     // @formatter:off
+     ...
+     // @formatter:on 
+   #+end_src
+

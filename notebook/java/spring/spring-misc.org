@@ -1,0 +1,41 @@
+#+TITLE:      Sping Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#spring-表达式语言-spel][Spring 表达式语言 (SpEL)]]
+
+* Spring 表达式语言 (SpEL)
+  在 Spring 中经常会在使用 @Value 注解时使用 SpEL，而 SpEL 本身也依赖 Spring 提供了强大的特性，虽然很多都用不到……
+
+  常用或很有用的特性：
+  + 字面量，SpEL 支持字符串、数字、布尔和 NULL 等值的字面量：
+    #+begin_src java
+      ExpressionParser parser = new SpelExpressionParser();
+
+      // evals to "Hello World"
+      String helloWorld = (String) parser.parseExpression("'Hello World'").getValue();
+
+      double avogadrosNumber = (Double) parser.parseExpression("6.0221415E+23").getValue();
+
+      // evals to 2147483647
+      int maxValue = (Integer) parser.parseExpression("0x7FFFFFFF").getValue();
+
+      boolean trueValue = (Boolean) parser.parseExpression("true").getValue();
+
+      Object nullValue = parser.parseExpression("null").getValue();
+    #+end_src
+
+  + Bean 引用，可以通过 ~@~ 操作符合 Bean 的名称来引用 Bean：
+    #+begin_src java
+      ExpressionParser parser = new SpelExpressionParser();
+      StandardEvaluationContext context = new StandardEvaluationContext();
+      context.setBeanResolver(new MyBeanResolver());
+
+      // This will end up calling resolve(context,"something") on MyBeanResolver during evaluation
+      Object bean = parser.parseExpression("@something").getValue(context);
+    #+end_src
+
+  + 表达式模板，通过 ~#{}~ 包围起来的表达式，用于注入时可以通过 ~:~ 指定默认值
+
+  参考文档：
+  + [[https://docs.spring.io/spring/docs/5.2.1.RELEASE/spring-framework-reference/core.html#expressions-language-ref][SpEL - Language Reference]]
+

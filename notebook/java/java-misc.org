@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#spi][SPI]]
+- [[#simpledateformat][SimpleDateFormat]]
 
 * SPI
   SPI 的全称为 (Service Provider Interface) ，是 JDK 内置的一种服务提供发现机制。主要由工具类 ~java.util.ServiceLoader~ 提供相应的支持。
@@ -22,4 +23,7 @@
   #+end_src
   
   参考：[[https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html][ServiceLoader (Java Platform SE 8 )]]
+
+* SimpleDateFormat
+  Java 以前的版本中提供了 SimpleDateFormat 这个方便的日期格式化类，但是这个类是线程不安全的，因此，考虑使用 Java8 中的 DateTimeFormatter 替换。
 

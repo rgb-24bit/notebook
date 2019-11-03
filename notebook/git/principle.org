@@ -1,0 +1,107 @@
+#+TITLE:      Git 内部原理
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#git-对象][Git 对象]]
+  - [[#数据对象][数据对象]]
+  - [[#树对象][树对象]]
+  - [[#提交对象][提交对象]]
+  - [[#参考资料][参考资料]]
+- [[#引用规格][引用规格]]
+- [[#数据恢复][数据恢复]]
+- [[#相关技巧][相关技巧]]
+  - [[#将文件保存在提交历史之外][将文件保存在提交历史之外]]
+- [[#相关问题][相关问题]]
+  - [[#克隆下来的存储库的引用文件保存在什么地方的][克隆下来的存储库的引用文件保存在什么地方的]]
+
+* Git 对象
+** 数据对象
+   Git 内部通过数据对象的方式来保存数据，数据对象可以通过底层命令 ~hash-object~ 创建，创建得到的数据对象会存放在 ~.git/objects~ 目录下，
+   使用计算得到的 ~40~ 为 SHA-1 哈希值的前两位作为目录名，剩下的 38 位作为文件名。
+
+   计算时，Git 会将对象的头部信息和原始数据组合起来计算得到 SHA-1 哈希值，头部内容的格式为：
+   #+begin_example
+     数据类型+空格+数据内容的长度+空字节
+   #+end_example
+
+   可以通过命令 ~cat-file~ 来获取数据对象的内容：
+   #+begin_src bash
+     $ git cat-file -p <sha-1 hash>
+   #+end_src
+
+** 树对象
+   Git 通过树对象来保存数据对象对应的文件名，同时也通过树对象来组织文件结构，某种程度上来说，就是一个轻量级的文件系统。
+
+   Git 通过 ~index~ 文件来生成树对象，我们可以通过 ~git update-index --add~ 命令将文件添加到 ~index~ 中，然后使用 ~git write-tree~ 命令来创建树对象。
+
+   相应的，可以通过命令 ~git read-tree~ 来读取树对象放到 ~index~ 中。
+
+** 提交对象
+   Git 中的提交对象是树对象的一个引用，树对象是多个数据对象和树对象的引用，通过这种方式，只需要提交对象引用了顶层的树对象，既可以通过提交对象得到当时的文件结构及数据。
+
+   提交对象可以通过命令 ~git commit-tree~ 创建，创建时需要制定引用的树对象，可以选择指定父提交对象，同时需要输入提交消息：
+   #+begin_src bash
+     echo 'second commit' | git commit-tree 0155eb -p fdf4fc3
+   #+end_src
+  
+   可以通过 ~git log --stat <commit-hash>~ 来查看提交历史。
+
+** 参考资料
+   + [[https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1][Git 内部原理 - Git 对象]]
+
+* 引用规格
+  通过 ~git remote add~ 命令添加了一个远程引用后，会在 ~.git/config~ 文件中创建一个小节，该小节包含了一个引用规格：
+  #+begin_src conf
+    [remote "origin"]
+      url = git@github.com:rgb-24bit/notebook.git
+      fetch = +refs/heads/*:refs/remotes/origin/*
+  #+end_src
+  
+  引用规格的格式由一个可选的 ~+~ 号和紧随其后的 ~<src>:<dst>~ 组成，其中 ~<src>~ 是一个 pattern，代表 *远程版本库* 中的引用，而 ~<dst>~ 是那些远程引用在 *本地* 所对应的位置。
+  可选的 ~+~ 号告诉 Git 即使在不能快进的情况下也要（强制）更新引用。
+
+  其中，通配符不能部分匹配，即不能如下方式使用：
+  #+begin_example
+    +refs/heads/ma*:refs/remotes/origin/ma*
+  #+end_example
+  
+  可以在配置文件中指定多个引用规格：
+  #+begin_src conf
+    [remote "origin"]
+      url = https://github.com/schacon/simplegit-progit
+      fetch = +refs/heads/master:refs/remotes/origin/master
+      fetch = +refs/heads/experiment:refs/remotes/origin/experiment
+  #+end_src
+
+  而通过 ~git push origin :topic~ 的方式删除远程分支的时候，利用的就是将 ~<src>~ 置为空的原理。
+
+  参考：
+  + [[https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E5%BC%95%E7%94%A8%E8%A7%84%E6%A0%BC][Git 内部原理 - 引用规格]]
+
+* 数据恢复
+  通过实验发现，使用 ~git add~ 目录添加过的文件都会创建相应的数据对象，这意味着，只要是 ~git add~ 添加过的文件，大概率都是可以找回来的。
+
+  最简单的数据恢复方式就是，提交记录找不到了，但是在 ~reflog~ 中还找得到，那么，就可以通过 ~reflog~ 找到提交对象的哈希值。
+
+  最麻烦的就是，提交对象的哈希值找不到了，或者干脆林提交对象都不存在，这时，就可以考虑通过 ~git fsck --lost-found~ 命令找到 dangling blob，
+  然后通过 ~git show <sha_id>~ 查看文件内容看看是不是自己丢失的。
+
+  #+begin_src bash
+    for object in $(git fsck --full | awk '{print $3}'); do git show $object ; done
+  #+end_src
+
+* 相关技巧
+** 将文件保存在提交历史之外
+  #+begin_src bash
+    $ rm .git/index                # 移除 index 文件
+    $ git update-index --add file  # 添加文件
+    $ git write-tree               # 构建树对象
+    $ git commit-tree              # 构建提交对象
+  #+end_src
+
+  构建提交对象后，可以考虑为提交对象打一个 tag 进行保存。
+
+* 相关问题
+** 克隆下来的存储库的引用文件保存在什么地方的
+   Git 也会将引用文件保存在 ~.git/packed-refs~ 中，可以参考：
+   + [[https://stackoverflow.com/questions/5503773/where-does-git-store-tags][Where does Git store tags? - Stack Overflow]]
+

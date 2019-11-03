@@ -116,3 +116,13 @@
 
 * org
   子标题 - M-S-Left
+
+* mac
+  + railwaycat/emacsmacport/emacs-mac
+
+* dired
+  + [[https://www.emacswiki.org/emacs/DiredOmitMode][EmacsWiki: Dired Omit Mode]]
+
+* project
+  + [[https://phenix3443.github.io/notebook/emacs/modes/projectile-mode.html][projectile]]
+
