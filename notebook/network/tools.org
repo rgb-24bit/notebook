@@ -1,0 +1,15 @@
+#+TITLE:      Network Tools
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#iproute2--net-tools][iproute2 & net-tools]]
+
+* iproute2 & net-tools
+  以前 Linux 中常用 net-tools 工具箱来配置网络，但是 net-tools 自 2001 年起，Linux 社区已经对其停止维护。新的网络工具是 iproute2。
+
+  但是相对来说，net-tools 是更多的 Linux 发行版内置的工具……
+
+  参考：
+  + [[https://linux.cn/article-4326-1.html][技术|iproute2 对决 net-tools]]
+
+  PS：一台设备是能够连接多个网络的，以前一直没注意到这一点。喝酒意味着一台设备可能同时拥有多个 IP……
+

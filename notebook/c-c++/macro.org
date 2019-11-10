@@ -1,0 +1,54 @@
+#+TITLE:      强大的宏
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#offsetof][offsetof]]
+- [[#container_of][container_of]]
+
+* offsetof
+  宏 ~offsetof~ 位于头文件 ~stddef.h~ 中，用来判断结构体中成员的偏移位置，定义为：
+  #+begin_src c
+    #define offsetof(type, member) (size_t)&(((type*)0)->member)
+  #+end_src
+
+  原理：将地址 0 强制转换为 type 类型的指针，从而定位到 member 在结构体中偏移位置。
+
+  使用：
+  #+begin_src C
+    #include <stdio.h>
+    #include <stddef.h>
+
+    struct foo {
+      char a;
+      char b[10];
+      char c;
+    };
+
+    int main(int argc, char* argv[]) {
+      printf("offsetof(struct foo, a) is %d\n", (int) offsetof(struct foo, a));
+      printf("offsetof(struct foo, b) is %d\n", (int) offsetof(struct foo, b));
+      printf("offsetof(struct foo, c) is %d\n", (int) offsetof(struct foo, c));
+      return 0;
+    }
+  #+end_src
+
+* container_of
+  宏 ~container_of~ 位于头文件 ~linux/kernel.h~ 中，用来根据成员的地址来获取结构体的地址，定义近似为：
+  #+begin_src C
+    /**
+     ,* container_of - cast a member of a structure out to the containing structure
+     ,* @ptr:	the pointer to the member.
+     ,* @type:	the type of the container struct this is embedded in.
+     ,* @member:	the name of the member within the struct.
+     ,*
+     ,*/
+    #define container_of(ptr, type, member) ({ ((type *)((void*) (ptr) - offsetof(type, member)));})
+  #+end_src
+
+  原理：通过 ~ptr~ 得到成员的地址后在减去通过 ~offsetof~ 得到的偏移地址便是 ~container~ 的起始地址了。
+
+  参考：[[https://github.com/torvalds/linux/blob/master/include/linux/kernel.h#L992][linux/kernel.h at master · torvalds/linux]]
+
+  关于 ~({})~ 这种语法形式可以参考：
+  + [[https://stackoverflow.com/questions/1635549/in-what-versions-of-c-is-a-block-inside-parenthesis-used-to-return-a-value-valid][In what versions of C is a block inside parenthesis used to return a value valid? - Stack Overflow]]
+
+

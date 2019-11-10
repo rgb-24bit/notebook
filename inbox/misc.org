@@ -1,0 +1,12 @@
+* Serialization
+  Serialization 这个单词在计算机科学中存在两种含义：
+  + 序列化 - 保存对象以便可以重新创建的过程，比如转换对象为二进制串、JSON、XML 等
+  + 同步化 - 线程和进程之间的同步
+
+  参考：
+  + [[https://en.wikipedia.org/wiki/Synchronization_(computer_science)#Thread_or_process_synchronization][Synchronization (computer science) - Wikipedia]]
+  + [[https://en.wikipedia.org/wiki/Serialization_(disambiguation)][Serialization (disambiguation) - Wikipedia]]
+  + [[https://en.wikipedia.org/wiki/Serialization][Serialization - Wikipedia]]
+
+  一词多义的情况好像不是很常见……
+

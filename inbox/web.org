@@ -150,25 +150,9 @@
   + [[https://www.babeljs.cn/][Babel 中文网 · Babel - 下一代 JavaScript 语法的编译器]]
   + [[https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Code_snippets/Rosetta][Rosetta - Archive of obsolete content | MDN]]
 
-* css
-  + [[https://www.cnblogs.com/wangpenghui522/p/5467560.html][sass/scss 和 less的区别 - 孤舟蓑翁 - 博客园]]
-  + [[https://www.cnblogs.com/fozero/p/6959828.html][通过!important设置css样式优先级 - fozero - 博客园]]
-
 * npm
   + [[https://javascript.ruanyifeng.com/nodejs/packagejson.html][package.json文件 -- JavaScript 标准参考教程（alpha）]]
   + [[https://stackoverflow.com/questions/32633678/is-there-any-way-to-configure-multiple-registries-in-a-single-npmrc-file][node.js - Is there any way to configure multiple registries in a single npmrc file - Stack Overflow]]
-
-* Chrome 打印时去除 href
-  + [[https://stackoverflow.com/questions/7301989/need-to-remove-href-values-when-printing-in-chrome][css - Need to remove href values when printing in Chrome - Stack Overflow]]
-  #+begin_src html
-    <style media="print">
-        @media print {
-            a[href]:after {
-                content: none !important;
-            }
-        }
-    </style>
-  #+end_src
 
 * 浏览器指纹
   + [[https://wzyboy.im/post/1130.html][浏览器指纹 | wzyboy’s blog]]
@@ -179,7 +163,4 @@
   + [[http://www.unicornsummer.com/blog/2014-08/lambda.html][Lambda 算子]]
   + [[https://juejin.im/post/5af13664f265da0ba266efcf][大佬，JavaScript 柯里化，了解一下？ - 掘金]]
   + [[https://www.baeldung.com/java-currying][Currying in Java | Baeldung]]
-
-* ES6
-  + [[https://segmentfault.com/q/1010000009623068][javascript - 如何将变量做为一个对象的key，push进一个数组？ - SegmentFault 思否]]
 

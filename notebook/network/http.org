@@ -1,12 +1,59 @@
-#+TITLE:      HTTP 协议
+#+TITLE:      HTTP Protocol
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#常用-http-请求头和响应头][常用 HTTP 请求头和响应头]]
+- [[#multipart][MultiPart]]
 - [[#http-api-认证授权][HTTP API 认证授权]]
 
 * 常用 HTTP 请求头和响应头
   HTTP 消息头支持自定义，自定义的专用消息头一般会添加 ~X-~ 前缀，常用的 HTTP 请求头和响应头可以参考：
   + [[https://itbilu.com/other/relate/EJ3fKUwUx.html][HTTP 消息头 － 常用的 HTTP 请求头与响应头 - IT 笔录]]
+
+* MultiPart
+  MultiPart 类型的请求常用于文件的上传，是一种基于 POST 请求的请求格式。对于 MultiPart 类型的请求，需要指定 ~Content-Type~ 为如下格式：
+  #+begin_example
+    Content-Type: multipart/form-data; boundary=MjkyMTI5NjktMUVCNy00NENELUFFMTctREQ1Q0YzREM3NUY5Cg
+  #+end_example
+  
+  请求体中的每一部分以 ~--boundary~ 开始，最后一个部分以 ~--boundary--~ 结束，每个部分需要通过 ~Content-Disposition~ 指定该部分对应的字段名称：
+  #+begin_example
+    Content-Disposition: form-data; name="user";
+    Content-Disposition: form-data; name="user"; filename="hello.txt"
+  #+end_example
+
+  每个部分可以拥有自己的请求头，然后空一行跟请求体：
+  #+begin_example
+    POST /t2/upload.do HTTP/1.1
+    User-Agent: SOHUWapRebot
+    Accept-Language: zh-cn,zh;q=0.5
+    Accept-Charset: GBK,utf-8;q=0.7,*;q=0.7
+    Connection: keep-alive
+    Content-Length: 60408
+    Content-Type:multipart/form-data; boundary=ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Host: w.sohu.com
+
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Content-Disposition: form-data; name="city"
+
+    Santa colo
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Content-Disposition: form-data;name="desc"
+    Content-Type: text/plain; charset=UTF-8
+    Content-Transfer-Encoding: 8bit
+ 
+    ...
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Content-Disposition: form-data;name="pic"; filename="photo.jpg"
+    Content-Type: application/octet-stream
+    Content-Transfer-Encoding: binary
+ 
+    ... binary data of the jpg ...
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC--
+  #+end_example
+  
+  参考：
+  + [[https://stackoverflow.com/questions/16958448/what-is-http-multipart-request][What is http multipart request? - Stack Overflow]]
+  + [[https://www.jianshu.com/p/29e38bcc8a1d][深入解析 multipart/form-data - 简书]]
 
 * HTTP API 认证授权
   + [[https://coolshell.cn/articles/19395.html][HTTP API 认证授权术 || 酷 壳 - CoolShell]]

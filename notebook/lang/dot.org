@@ -1,45 +1,59 @@
 #+TITLE:      Dot
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#dot][dot]]
-- [[#绘制-erd-图][绘制 ERD 图]]
+- [[#语法][语法]]
+- [[#相关问题][相关问题]]
+  - [[#如何解决中文乱码问题][如何解决中文乱码问题]]
 
-* dot
-  解决中文乱码问题:
-  #+BEGIN_SRC dot
-    /* 添加这些代码即可(保证文件编码为utf-8) */
-    edge [fontname="FangSong"];    /*set the edge's font*/
-    node [shape=box, fontname="FangSong"];    /*set the node's font and shape*/
-    graph[fontname="FangSong"];    /*set the subgraph's font*/
-  #+END_SRC
+* 语法
+  Dot 主要由图、节点、连线三种结构组成，每个图可以包含多个节点和子图，节点和节点之间可以通过连线连接起来。
 
-  + [[https://github.com/uolcano/blog/issues/13][DOT 语言学习笔记]]
+  Dot 中的关键字：
+  |----------+------------------------------------|
+  | 关键字   | 作用                               |
+  |----------+------------------------------------|
+  | ~node~     | 定义全局节点属性                   |
+  | ~edge~     | 定义全局连线属性                   |
+  | ~graph~    | 定义全局图属性或者声明一个无向图   |
+  | ~digraph~  | 声明一个有向图                     |
+  | ~subgraph~ | 声明一个子图                       |
+  | ~strict~   | 防止相同的两个节点间使用重复的连线 |
+  |----------+------------------------------------|
 
-* 绘制 ERD 图
-  #+BEGIN_SRC dot
-    digraph erd {
-      graph[rankdir=LR, overlap=false, splines=true];
-      node [shape=record, fontsize=9, fontname="Verdana"];
-      edge [style=dashed];
+  我们可以通过定义图、节点和连线的属性来控制它们的表现形式，常用的属性包括：
+  |-------+------------------------------|
+  | 属性  | 作用                         |
+  |-------+------------------------------|
+  | ~label~ | 定义图、节点、连线显示的文本 |
+  | ~color~ | 定义节点、连线的颜色         |
+  | ~shape~ | 定义节点的形状               |
+  |-------+------------------------------|
 
-      labelloc=t;
-      label="Example";
+  注意：DOT 中的属性可以多次定义，后面定义的会覆盖前面的定义。
 
-      tbl0 [shape=none, margin=0, label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-        <tr><td bgcolor="#66CCFF">Table 0</td></tr>
-        <tr><td port="0" align="left">uid: integer</td></tr>
-        <tr><td port="1" align="left">name: char(12)</td></tr>
-        </table>>];
+  每个节点都隐藏自带方位端口，包括八个方向：北 n、东北 ne、东 e、东南 se、南 s、西南 sw、西 w 和西北 nw。
 
-      tbl1 [shape=none, margin=0, label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-        <tr><td bgcolor="#66CCFF">Table 1</td></tr>
-        <tr><td port="0" align="left">email: char(10)</td></tr>
-        <tr><td port="1" align="left">uid: integer</td></tr>
-        </table>>];
-
-      tbl0:0 -> tbl1: 1;
+  使用方位端口可以指定连线的位置：
+  #+begin_src dot
+    digraph {
+      a:e -> b:n;
+      a:nw -> c:n;
+      c:w -> d:sw;
+      b:sw -> d;
     }
-  #+END_SRC
+  #+end_src
+
+  参考：
+  + [[https://github.com/uolcano/blog/issues/13#dot%E8%AF%AD%E6%B3%95][DOT 语言学习笔记 · uolcano/blog]]
+  + [[https://graphviz.gitlab.io/_pages/doc/info/lang.html][The DOT Language]]
+
+* 相关问题
+** 如何解决中文乱码问题
+   指定中文字体就可以了，包括图、节点和连线数据结构：
+   #+BEGIN_SRC dot
+     // 添加这些代码即可(保证文件编码为 utf-8)
+     edge  [fontname="FangSong"];    // set the edge's font
+     node  [fontname="FangSong"];    // set the node's font and shape
+     graph [fontname="FangSong"];    // set the graph's font
+   #+END_SRC
 

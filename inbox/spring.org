@@ -31,3 +31,7 @@
   + IDEA 编辑技巧:
     + Recent file - 跳转到原来的窗口
     + Find file - 在当前窗口打开
+* 测试
+  + [[https://spring.io/guides/gs/testing-web/][Getting Started · Testing the Web Layer]]
+  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testing-tx][Testing]]
+

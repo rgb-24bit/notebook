@@ -2,7 +2,21 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#git-pull-时使用存储库的链接][git pull 时使用存储库的链接]]
+- [[#git-ignore][git ignore]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
+
+* git ignore
+  git 可以从多个来源读取 ignore 配置，这些来源从高到低的优先级为：
+  1. 从命令行参数中读取的配置，通常由底层命令使用
+  2. 从项目目录下的 ~.gitignore~ 文件中读取的配置，子目录中的 ~.gitignore~ 文件优先级高于父目录
+  3. 从 ~$GIT_DIR/info/exclude~ 文件中读取的配置
+  4. 从通过 ~core.excludesFile~ 配置指定的文件中读取的配置
+
+  其中，我们应该讲项目共享的忽略规则放到项目目录下的 ~.gitignore~ 文件中，将项目中私人的忽略规则放到 ~$GIT_DIR/info/exclude~ 文件中，
+  将全局的忽略规则放到 ~core.excludesFile~ 配置项指定的文件中。
+
+  参考：
+  + [[https://git-scm.com/docs/gitignore][Git - gitignore Documentation]]
 

@@ -10,6 +10,7 @@
 - [[#不同语言标准提案][不同语言标准提案]]
 - [[#repository-manager][Repository Manager]]
 - [[#目录服务][目录服务]]
+- [[#bug-的等级][BUG 的等级]]
 
 * 命令行参数语法
   我们在使用 Linux 上的命令时，使用的语法通常为 [[https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html][Argument Syntax (The GNU C Library)]]，但是，不同的平台上语法还是会有些区别。
@@ -74,4 +75,14 @@
   + [[https://zh.wikipedia.org/wiki/%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1][目录服务 - 维基百科，自由的百科全书]]
   + [[https://www.cnblogs.com/wilburxu/p/9174353.html][LDAP 概念和原理介绍 - WilburXu - 博客园]]
   + [[https://zhuanlan.zhihu.com/p/32732045][LDAP 基础学习笔记（概念 & 快速安装） - 知乎]]
+
+* BUG 的等级
+  为 BUG 划分等级来更加有效的衡量 BUG 的影响和开发人员的能力：
+  + critical 是崩溃的 BUG，比如说一个服务直接不可用了，微信不能发消息，支付宝不能付款这种，打开直接报错
+  + block 是指某个流程的中间环节被卡住，无法进行下一步，比如说，注册的时候手不到验证码，购物的时候添加不到购物车
+  + major 就是影响业务功能或者是用户体验的环节。 比如说知乎里的回答不是我的却显示成我的，本来只能回答一次却允许我回答十次等
+  + noamal 是指非核心业务流程产生的问题，比如说知乎无法变更头像，昵称等。这个要看自己的定义
+  + minor 就是指各种影响体验，但不影响使用的内容
+    
+  参考：[[https://www.zhihu.com/question/348196899/answer/842222196][公司领导说，个人写的代码超过十个bug就开除是一种什么体验？ - 暗灭的回答 - 知乎]]
 

@@ -15,6 +15,7 @@
 - [[#怎样撤销一个已经成功合并的-merge][怎样撤销一个已经成功合并的 merge]]
 - [[#怎样指定子模块的分支][怎样指定子模块的分支]]
 - [[#怎样更新远程分支的名称][怎样更新远程分支的名称]]
+- [[#如何删除已提交但是位于-gitignore-的文件][如何删除已提交但是位于 .gitignore 的文件]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -158,4 +159,8 @@
   #+END_EXAMPLE
 
   参考：[[https://www.w3docs.com/snippets/git/how-to-rename-git-local-and-remote-branches.html][How to rename git local and remote branches]]
+
+* 如何删除已提交但是位于 .gitignore 的文件
+  使用 ~git rm --cached <file>~ 就可以了，目录可以通过 ~git rm -r --cached <folder>~ 删除，参考：
+  + [[https://stackoverflow.com/questions/1274057/how-to-make-git-forget-about-a-file-that-was-tracked-but-is-now-in-gitignore][How to make Git "forget" about a file that was tracked but is now in .gitignore? - Stack Overflow]]
 

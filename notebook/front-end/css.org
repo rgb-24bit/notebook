@@ -13,6 +13,8 @@
   - [[#盒子模型的宽度和高度包含-padding-吗][盒子模型的宽度和高度包含 padding 吗]]
   - [[#怎样让超出范围的文本显示为省略号][怎样让超出范围的文本显示为省略号]]
   - [[#怎样让文本居中显示][怎样让文本居中显示]]
+  - [[#怎样在打印时去除-href][怎样在打印时去除 href]]
+  - [[#scsssass-和-less-之间的区别][SCSS/Sass 和 Less 之间的区别]]
 
 * 相关技巧
 ** 通过 transform 实现网页翻转镜像
@@ -123,4 +125,31 @@
        line-height: 20px;
      }
    #+END_SRC
+
+** 怎样在打印时去除 href
+   #+begin_src html
+     <style media="print">
+       @media print {
+       a[href]:after {
+       content: none !important;
+       }
+       }
+     </style>
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/7301989/need-to-remove-href-values-when-printing-in-chrome][css - Need to remove href values when printing in Chrome - Stack Overflow]]
+
+** SCSS/Sass 和 Less 之间的区别
+   Sass 是一种动态样式语言，语法属于缩排语法，比 CSS 多出好些功能，更容易阅读。
+
+   Sass 的缩排语法，对于写惯 CSS 前端的 WEB 开发者来说很不直观，也不能将 CSS 代码加入到 Sass 里面，因此 Sass 语法进行了改良，
+   Sass 3 就变成了 SCSS。与原来的语法兼容，只是用 {} 取代了原来的缩进。
+
+   Less 也是一种动态样式语言。对 CSS 赋予了动态语言的特性，Less 既可以在客户端上运行 (支持IE 6+, Webkit, Firefox)，也可在服务端运行 (借助 Node.js)。
+
+   Sass/SCSS 和 Less 的编译环境是不一样的，Sass/SCSS 需要借助 Ruby 环境，而 Less 只需要 Less.js。因此，在实际的使用中，Less 相对来说更为容易操作。
+
+   参考：
+   + [[https://www.cnblogs.com/wangpenghui522/p/5467560.html][sass/scss 和 less的区别 - 孤舟蓑翁 - 博客园]]
 

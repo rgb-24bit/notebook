@@ -2,7 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#基本的使用][基本的使用]]
-- [[#注意事项][注意事项]]
+- [[#retentionpolicy][RetentionPolicy]]
 
 * 基本的使用
   定义注解类的方式：
@@ -38,7 +38,11 @@
 
   + [[https://docs.oracle.com/javase/tutorial/java/annotations/index.html][Lesson: Annotations (The Java™ Tutorials > Learning the Java Language)]]
 
-* 注意事项
-  + 如果需要通过反射的方式获取注解，那么注解应该声明为 RUNTIME 类型
-  + 在获取注解后，调用相应的方法就可以获取到相应参数的值了
+* RetentionPolicy
+  RetentionPolicy 共定义了三种反射策略：
+  + CLASS - 注解由编译器记录在类文件中，但 VM 在运行时无需保留
+  + RUNTIME - 注解由编译器记录在类文件中，并在运行时由 VM 保留，因此可以通过反射方式读取它们
+  + SOURCE - 注解被编译器丢弃
+
+  因此，只有反射策略为 RUNTIME 的才能通过反射的方式读取。
 

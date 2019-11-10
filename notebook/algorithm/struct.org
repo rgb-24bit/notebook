@@ -4,6 +4,7 @@
 - [[#表][表]]
   - [[#删除当前链表节点][删除当前链表节点]]
   - [[#合并有序链表][合并有序链表]]
+  - [[#linux-内核链表][Linux 内核链表]]
 - [[#树][树]]
   - [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]
   - [[#获取二叉树的高度][获取二叉树的高度]]
@@ -93,6 +94,16 @@
          return ret;
        }
      #+END_SRC
+
+** Linux 内核链表
+   Linux 内核链表的实现很巧妙，不存在数据域，而是选择通过 ~container_of~ 的方式来获取链表的 container，通过这种方式，可以通用 List 结构：
+   #+begin_src C
+     struct list_head {
+       struct list_head *next, *prev;
+     };
+   #+end_src
+
+   参考：[[https://www.ibm.com/developerworks/cn/linux/kernel/l-chain/index.html][深入分析 Linux 内核链表]]
 
 * 树
 ** 二叉查找树 (Binary Search Tree)

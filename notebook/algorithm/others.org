@@ -5,6 +5,7 @@
 - [[#lru-cache][LRU Cache]]
 - [[#bitmap][BitMap]]
 - [[#bloomfilter][BloomFilter]]
+- [[#滑动窗口算法][滑动窗口算法]]
 
 * Base64 编码
   *Base64* 是一种基于 64 个可打印字符来表示二进制数据的表示方法。由于 2 ** 6 = 64，所以每 6 个比特为一个单元，对应某个可打印字符。
@@ -214,4 +215,13 @@
   如果这些点有任何一个 0，则被检元素一定不在，如果都是 1，则被检元素很可能在。这就是布隆过滤器的基本思想。
 
   可以发现，布隆过滤器就是 BitMap 算法的升级版，虽然存在一定的误差，但是，效率上还是很不错的。
+
+* 滑动窗口算法
+  在 LeetCode 上遇到 [[https://leetcode-cn.com/problems/longest-repeating-character-replacement/submissions/][424. 替换后的最长重复字符]] 这道题的时候，直接的想法就是暴力解决，然后 Time Out。看了题解后发现，使用了不是很熟悉的滑动窗口算法解答。
+
+  算法通常的步骤为：找到第一个窗口，然后根据边界条件缩小左窗口边界，扩展右窗口边界。
+
+  可以参考：
+  + [[https://www.zhihu.com/question/314669016/answer/620247024][什么是「滑动窗口算法」（sliding window algorithm），有哪些应用场景？ - 王天笑的回答 - 知乎]]
+  + [[https://note.youdao.com/ynoteshare1/index.html?id=270d3cd80b048c1074dcfa5b14ece4b4&type=note][LeetCode笔记-Java版-专题篇-滑动窗口]]
 

@@ -1,0 +1,14 @@
+#+TITLE:      ECMAScript 6
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关问题][相关问题]]
+  - [[#通过字面量定义对象时如何将变量做为一个对象的-key][通过字面量定义对象时如何将变量做为一个对象的 Key]]
+
+* 相关问题
+** 通过字面量定义对象时如何将变量做为一个对象的 Key
+   ES6 允许字面量定义对象时，用表达式作为对象的属性名：
+   #+begin_src js
+     var key = 'key'
+     var obj = {[key]: 'value'}  // {key: "value"}
+   #+end_src
+

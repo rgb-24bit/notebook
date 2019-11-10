@@ -126,3 +126,6 @@
 * project
   + [[https://phenix3443.github.io/notebook/emacs/modes/projectile-mode.html][projectile]]
 
+* spacemacs
+  + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#declaring-configuration-layers][Declaring Configuration layers]]
+

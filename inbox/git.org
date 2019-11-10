@@ -14,5 +14,3 @@
 * 原理
   + [[https://serverfault.com/questions/309171/possible-to-change-email-address-in-keypair][security - Possible to change email address in keypair? - Server Fault]]
 
-* gitignore
-  + core.excludesFile

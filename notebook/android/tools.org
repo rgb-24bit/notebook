@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#adb][ADB]]
+  - [[#常用指令][常用指令]]
 
 * ADB
   在 Mac OS X 上的安装，参考：[[https://stackoverflow.com/questions/17901692/set-up-adb-on-mac-os-x][android - Set up adb on Mac OS X - Stack Overflow]]
@@ -9,12 +10,21 @@
     brew cask install android-platform-tools
   #+end_src
 
-  安装 ADB 后可以通过 ADB 来操作连接的安装模拟器或真机，常见的一个需求就是复制文件，可以通过如下命令完成：
-  #+begin_src bash
-    adb pull /path/emulator /path/computer
-  #+end_src
 
   也可以通过 ~adb shell~ 命令连接安卓内置的 Shell，某些情况下会很有用。
 
-  参考链接：[[https://juejin.im/post/5b5683bcf265da0f9b4dea96#heading-110][ADB 操作命令详解及用法大全 - 掘金]]
+  
+
+** 常用指令
+   |----------------------------------------+------------------------------+----------------------------------------|
+   | 命令                                   | 作用                         | 相关                                   |
+   |----------------------------------------+------------------------------+----------------------------------------|
+   | ~adb pull /path/emulator /path/computer~ | 复制模拟器中的文件到指定路径 |                                        |
+   | ~adb shell~                              | 连接模拟器内置的 Shell       |                                        |
+   | ~adb logcat~                             | 查看日志                     | [[https://developer.android.com/studio/command-line/logcat?hl=zh-cn][Logcat 命令行工具 - Android Developers]] |
+   |----------------------------------------+------------------------------+----------------------------------------|
+
+   更多可以参考：
+   + [[https://developer.android.com/studio/command-line/adb?hl=zh-cn][Android 调试桥 (adb) - Android Developers]]
+   + [[https://juejin.im/post/5b5683bcf265da0f9b4dea96#heading-110][ADB 操作命令详解及用法大全 - 掘金]]
 
