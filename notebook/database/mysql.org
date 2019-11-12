@@ -7,6 +7,8 @@
   - [[#事务的隔离级别][事务的隔离级别]]
 - [[#执行计划][执行计划]]
 - [[#sql-语法][SQL 语法]]
+  - [[#sql-子查询][SQL 子查询]]
+  - [[#注意事项][注意事项]]
 - [[#主从复制][主从复制]]
 - [[#分区相关][分区相关]]
 - [[#函数使用][函数使用]]
@@ -22,6 +24,7 @@
   - [[#countast-和-count1][COUNT(\ast) 和 COUNT(1)]]
   - [[#怎样修改列值为允许为空][怎样修改列值为允许为空]]
   - [[#语句-on-duplicate-key-update-的受影响行数][语句 ON DUPLICATE KEY UPDATE 的受影响行数]]
+  - [[#mysql-中的-select-和-group-by][MySQL 中的 SELECT 和 GROUP BY]]
 
 * Install
   目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
@@ -135,7 +138,30 @@
   + Extra：额外的信息
 
 * SQL 语法
-  + 在 MySQL 中 LIMIT 不是子句，因此需要放在 ORDER BY 子句后面
+** SQL 子查询
+   子查询可以分为嵌套子查询和相关子查询，对于嵌套子查询来说，整个查询过程中只执行一次，而相关子查询，由于需要使用外部查询中的字段，
+   因此对于每一行数据都需要执行一次相关子查询。
+
+   参考：
+   + [[https://www.geeksforgeeks.org/sql-correlated-subqueries/][SQL Correlated Subqueries - GeeksforGeeks]]
+
+   另外，在 MySQL 中子查询存在的一个限制，不能再更新语句的子查询中使用和外部表相同的子查询：
+   #+begin_src sql
+     DELETE FROM t WHERE ... (SELECT ... FROM t ...);
+     UPDATE t ... WHERE col = (SELECT ... FROM t ...);
+     {INSERT|REPLACE} INTO t (SELECT ... FROM t ...);
+   #+end_src
+
+   但是可以通过将子查询的结果转换为临时表的方式绕开这一限制：
+   #+begin_src sql
+     UPDATE t ... WHERE col = (SELECT * FROM (SELECT ... FROM t...) AS dt ...);
+   #+end_src
+
+   参考：
+   + [[https://dev.mysql.com/doc/refman/8.0/en/subquery-restrictions.html][MySQL 8.0 Reference Manual - 13.2.11.13 Restrictions on Subqueries]]
+
+** 注意事项  
+   + 在 MySQL 中 LIMIT 不是子句，因此需要放在 ORDER BY 子句后面
 
 * 主从复制
   主写从读，主库的数据库引擎应该为 InnoDB，从库为 MyISAM。
@@ -210,6 +236,8 @@
      INSERT ... ON DUPLICATE KEY UPDATE ...
    #+end_src
 
+   参考：[[https://stackoverflow.com/questions/548541/insert-ignore-vs-insert-on-duplicate-key-update][mysql - "INSERT IGNORE" vs "INSERT ... ON DUPLICATE KEY UPDATE" - Stack Overflow]]
+
 ** 怎样显示 Table 的元数据信息
    通过 ~SHOW COLUMNS FROM tblName~ 可以显示表的元数据信息，但是也可以通过 ~DESCRIBE tblName~ 快速查询。
 
@@ -249,4 +277,18 @@
 
    参考：
    + [[https://stackoverflow.com/questions/3747314/why-are-2-rows-affected-in-my-insert-on-duplicate-key-update][mysql - Why are 2 rows affected in my `INSERT ... ON DUPLICATE KEY UPDATE`? - Stack Overflow]]
+
+** MySQL 中的 SELECT 和 GROUP BY
+   在 SQL Server 中，SELECT 只能查询在 GROUP BY 子句中出现的字段，但是在 MySQL 中，如果 SELECT 中存在不在 GROUP BY 子句中的字段，
+   就会任意选择一行数据数据。
+
+   每次用 MySQL 都以为我记错了 QAQ
+
+   参考：
+   #+begin_quote
+   A MySQL extension permits a column that does not appear in the GROUP BY list to be named in the select list. (For information about nonaggregated columns and GROUP BY, see Section 12.20.3, “MySQL Handling of GROUP BY”.)
+   In this case, the server is free to choose any value from this nonaggregated column in summary rows, and this includes the extra rows added by WITH ROLLUP. 
+   #+end_quote
+
+   [[https://dev.mysql.com/doc/refman/8.0/en/group-by-modifiers.html][MySQL :: MySQL 8.0 Reference Manual :: 12.20.2 GROUP BY Modifiers]]
 

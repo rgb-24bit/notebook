@@ -1,0 +1,106 @@
+#+TITLE:      Fundamental classes
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#object][Object]]
+- [[#string][String]]
+  - [[#stringintern][String#intern]]
+
+* Object
+  Java 中 Object 是所有类的基类，提供了一些基本的方法，其中部分方法的实现如下：
+  + 方法 ~toString()~ 是少数几个非 ~native~ 方法，实现代码很简单：
+    #+begin_src java
+      public String toString() {
+        return getClass().getName() + "@" + Integer.toHexString(hashCode());
+      }
+    #+end_src
+
+  + 方法 ~hashCode()~ 是 ~native~ 方法，可以参考的是 ~openjdk~ 中的实现：
+    #+begin_src C
+      static inline intptr_t get_next_hash(Thread * Self, oop obj) {
+        intptr_t value = 0 ;
+        if (hashCode == 0) {
+           // This form uses an unguarded global Park-Miller RNG,
+           // so it's possible for two threads to race and generate the same RNG.
+           // On MP system we'll have lots of RW access to a global, so the
+           // mechanism induces lots of coherency traffic.
+           value = os::random() ;
+        } else
+        if (hashCode == 1) {
+           // This variation has the property of being stable (idempotent)
+           // between STW operations.  This can be useful in some of the 1-0
+           // synchronization schemes.
+           intptr_t addrBits = cast_from_oop<intptr_t>(obj) >> 3 ;
+           value = addrBits ^ (addrBits >> 5) ^ GVars.stwRandom ;
+        } else
+        if (hashCode == 2) {
+           value = 1 ;            // for sensitivity testing
+        } else
+        if (hashCode == 3) {
+           value = ++GVars.hcSequence ;
+        } else
+        if (hashCode == 4) {
+           value = cast_from_oop<intptr_t>(obj) ;
+        } else {
+           // Marsaglia's xor-shift scheme with thread-specific state
+           // This is probably the best overall implementation -- we'll
+           // likely make this the default in future releases.
+           unsigned t = Self->_hashStateX ;
+           t ^= (t << 11) ;
+           Self->_hashStateX = Self->_hashStateY ;
+           Self->_hashStateY = Self->_hashStateZ ;
+           Self->_hashStateZ = Self->_hashStateW ;
+           unsigned v = Self->_hashStateW ;
+           v = (v ^ (v >> 19)) ^ (t ^ (t >> 8)) ;
+           Self->_hashStateW = v ;
+           value = v ;
+        }
+        value &= markOopDesc::hash_mask;
+        if (value == 0) value = 0xBAD ;
+        assert (value != markOopDesc::no_hash, "invariant") ;
+        TEVENT (hashCode: GENERATE) ;
+        return value;
+      }
+    #+end_src
+
+    可以看到在 openjdk 中 hashCode 的生成有 6 中方式：
+    1. 随机数
+    2. 对象的内存地址的函数
+    3. 固定值，为了进行灵敏度测试
+    4. 递增序列
+    5. int 类型的该对象的内存地址
+    6. 结合当前线程和 xorshift 生成
+
+    在 JDK8 中默认使用的是最后一种方式，参考：[[http://www.majiang.life/blog/deep-dive-on-java-hashcode/][细说 Java hashCode - 码匠笔记]]
+
+  + 方法 ~equals()~ 的默认实现就比较牛逼了，和没有实现差不多：
+    #+begin_src java
+      public boolean equals(Object obj) {
+        return (this == obj);
+      }
+    #+end_src
+
+  + 方法 ~clone()~ 的实现方式貌似很直接，创建一个新对象然后将原对象的值拷贝过去就完事了，由于引用对象保存的是对象的引用，
+    因此，默认的克隆方法是浅克隆。
+
+    可以参考：
+    + [[https://github.com/infobip/infobip-open-jdk-8/blob/master/hotspot/src/share/vm/prims/jvm.cpp#L580][openjdk - jvm.cpp - JVM_ENTRY(jobject, JVM_Clone(JNIEnv* env, jobject handle))]]
+
+  + 方法 ~finalize()~ 的使用频率好像并不高，这个方法将会有 GC 在回收对象时调用，默认实现为空：
+    #+begin_src java
+      protected void finalize() throws Throwable {}
+    #+end_src
+
+* String
+** String#intern
+   Java 语言中为 8 种基本类型和 ~String~ 提供了常量池缓存，使它们在运行过程中速度更快，更节省内存。
+
+   ~String~ 类型的常量池的使用方式有两种：
+   + 直接使用双引号声明出来的 String 对象会直接存储在常量池中
+   + 如果不是用双引号声明的 String 对象，可以使用 String 提供的 intern 方法。intern 方法会从字符串常量池中查询当前字符串是否存在，
+     若不存在就会将当前字符串放入常量池中
+
+   要注意的是，String 的 String Pool 是一个固定大小的 Hashtable，默认值大小长度是 1009，如果放进 String Pool 的 String 非常多，就会造成 Hash 冲突严重，
+   从而导致链表会很长，而链表长了后直接会造成的影响就是当调用 String.intern 时性能会大幅下降。
+
+   参考文章：[[https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html][深入解析 String#intern - 美团技术团队]]
+

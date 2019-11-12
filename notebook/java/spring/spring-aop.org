@@ -1,0 +1,14 @@
+#+TITLE:      Spring AOP
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#aop-概念][AOP 概念]]
+
+* AOP 概念
+  AOP 中的一些基本概念：
+  + JoinPoint - 切点，需要插入横切逻辑的地方，比如方法调用前后
+  + PointCut - 切面，用来描述切点的表达式
+  + Advice - 需要插入的横切逻辑
+  + Aspect - 包含 PointCut 和 Advice
+
+  定义好 Aspect 后，就可以使用织入器将相关逻辑织入 Bean。
+
