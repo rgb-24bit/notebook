@@ -10,3 +10,8 @@
 
   一词多义的情况好像不是很常见……
 
+* CI
+  + Github Action
+  + Jekins
+  + ……
+  + 

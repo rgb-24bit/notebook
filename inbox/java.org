@@ -183,3 +183,6 @@
 
   其实，最好的还是在本地配置一个 ~central~ 的，项目中指定另外的 ~repository~ 比较安逸。
 
+* maven parent
+  dependencyManagement、dependence、版本号
+

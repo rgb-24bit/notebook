@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#定时器][定时器]]
 - [[#json][JSON]]
+- [[#相关术语][相关术语]]
 - [[#相关技巧][相关技巧]]
   - [[#javascript-变量的命名][JavaScript 变量的命名]]
   - [[#让返回值变成-undefined][让返回值变成 undefined]]
@@ -29,6 +30,10 @@
     > JSON.stringify({id: 123456, name: "rgb-24bit"})
     "{"id":123456,"name":"rgb-24bit"}"
   #+END_SRC
+
+* 相关术语
+  + Falsy 值是在 Boolean 上下文中认定为 false 的值。参考：[[https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy][Falsy - 术语表 | MDN]]
+  + Truthy 值是在 Boolean 上下文中，转换后的值为真的值。参考：[[https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy][Truthy - 术语表 | MDN]]
 
 * 相关技巧
 ** JavaScript 变量的命名

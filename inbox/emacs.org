@@ -129,3 +129,7 @@
 * spacemacs
   + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#declaring-configuration-layers][Declaring Configuration layers]]
 
+* terminal
+  + display-graphic-p - windows-system
+  + [[https://emacs.stackexchange.com/questions/13050/different-theme-for-nw-terminal][Different theme for -nw (terminal) - Emacs Stack Exchange]]
+
