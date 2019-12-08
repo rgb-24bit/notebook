@@ -16,3 +16,6 @@
 * XDG
   + [[https://wiki.archlinux.org/index.php/XDG_user_directories_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][XDG user directories (简体中文) - ArchWiki]]
 
+* tmpfs
+  + [[https://segmentfault.com/a/1190000014737366][tmpfs详解 - - SegmentFault 思否]]
+

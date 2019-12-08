@@ -1,0 +1,12 @@
+#+TITLE:      Spring Cloud
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#简述][简述]]
+
+* 简述
+  Spring Cloud 是常用的微服务套件，它的版本命名方式比较特殊，有一些奇怪的单词组成，这些单词均为英国伦敦地铁站的站名，同时根据字母表的顺序来对应版本时间顺序，比如：
+  最早的 Release 版本 Angel，第二个 Release 版本 Brixton，然后是 Camden、 Dalston、Edgware、Finchley、Greenwich、Hoxton。
+
+  很好的入门资料：
+  + [[https://juejin.im/post/5de2553e5188256e885f4fa3][Spring Cloud 入门总结 - 掘金]]
+

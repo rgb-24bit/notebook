@@ -1,0 +1,13 @@
+#+TITLE:      Alpine
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#简述][简述]]
+
+* 简述
+  ~Alpine~ 是一个轻量级的 ~Linux~ 发行版，在保证功能较为完善的同时尽可能的减少了资源的消耗，因此，很适合用于 ~Docker~ 镜像的创建。
+
+  可以在 https://pkgs.alpinelinux.org/packages 这个网站获取包信息，还是比较全的。
+
+  参考：
+  + [[https://yeasy.gitbooks.io/docker_practice/cases/os/alpine.html][Alpine · Docker —— 从入门到实践]]
+

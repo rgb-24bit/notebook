@@ -64,6 +64,7 @@
   + [SQLite3](notebook/database/sqlite3.org)
   + [Standard SQL](notebook/database/standsql.org)
 ## devops
+  + [持续集成](notebook/devops/ci.org)
   + [相关概念](notebook/devops/concept.org)
   + [Nginx](notebook/devops/nginx.org)
 ## dotnet
@@ -165,6 +166,7 @@
   + [UML](notebook/lang/uml.org)
   + [XML](notebook/lang/xml.org)
 ## linux
+  + [Alpine](notebook/linux/alpine.org)
   + [Debian 系统使用](notebook/linux/debian.org)
   + [Linux 基础笔记](notebook/linux/linux.org)
   + [Misc](notebook/linux/misc.org)
@@ -176,6 +178,7 @@
   + [配置中心](notebook/microservice/config.org)
   + [日志记录与分析](notebook/microservice/log.org)
   + [远程过程调用](notebook/microservice/rpc.org)
+  + [Spring Cloud](notebook/microservice/spring-cloud.org)
 ## misc
   + [字符编码](notebook/misc/character-encoding.org)
   + [计算机图形学](notebook/misc/computer-graphics.org)

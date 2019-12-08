@@ -14,6 +14,7 @@
 - [[#函数使用][函数使用]]
 - [[#相关技巧][相关技巧]]
   - [[#通过-sql-语句获取-mysql-的版本][通过 SQL 语句获取 MySQL 的版本]]
+  - [[#mysql-中实用的时间函数][MySQL 中实用的时间函数]]
 - [[#相关问题][相关问题]]
   - [[#mysql-中-schema-和-database-的区别是什么][MySQL 中 Schema 和 Database 的区别是什么]]
   - [[#时区陷阱问题][时区陷阱问题]]
@@ -184,7 +185,12 @@
 * 相关技巧
 ** 通过 SQL 语句获取 MySQL 的版本
    这只需要执行 ~SELECT VERSION()~ 就可以获得 MySQL 的版本信息，很简单。
-   
+
+** MySQL 中实用的时间函数   
+   MySQL 中的时间函数其实还是很强大的，能够满足相当一部分需求了，参考：
+   + [[https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html][MySQL 8.0 Reference Manual - 12.7 Date and Time Functions]]
+   + [[https://www.cnblogs.com/redfox241/archive/2009/07/23/1529092.html][mysql 中 时间和日期函数 - redfox - 博客园]] 
+
 * 相关问题
 ** MySQL 中 Schema 和 Database 的区别是什么
    MySQL 中 Schema 和 Database 在语义上是等价的，两者可以等价替换。

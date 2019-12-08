@@ -6,3 +6,5 @@
 
 * timsort
   + [[https://sikasjc.github.io/2018/07/25/timsort/][Timsort原理学习 · Sika]]
+* 取整
+  向上取整 - (a+b-1)/b

@@ -5,6 +5,8 @@
   - [[#list_classifiers][list_classifiers]]
 - [[#使用-pipenv-或者-poetry][使用 Pipenv 或者 Poetry]]
 - [[#使用-pip][使用 Pip]]
+- [[#相关问题][相关问题]]
+  - [[#怎样打包源码][怎样打包源码]]
 
 * 通过 setup.py 打包
   通过 setup.py 打包项目是一个即传统但是有古老的方式，使用起来并不是那么方便，参考：
@@ -56,4 +58,10 @@
   #+begin_example
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
   #+end_example
+
+* 相关问题
+** 怎样打包源码
+   #+begin_example
+     python setup.py sdist
+   #+end_example
 

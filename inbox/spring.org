@@ -22,10 +22,10 @@
 
 * Spring Security Q
   + 取不到正确的 AuthenticationManager
+  + FramworkEndpoint
 
 * util
   assertutil，业务本身的（业务异常），库本身的（库异常），通用的（内置异常）
-
 
 * tool
   + IDEA 编辑技巧:
@@ -35,3 +35,25 @@
   + [[https://spring.io/guides/gs/testing-web/][Getting Started · Testing the Web Layer]]
   + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testing-tx][Testing]]
 
+* Java8
+  Java 8 时间解析：
+  + [[https://zh.wikipedia.org/wiki/JCP][JCP - 维基百科，自由的百科全书]]
+  + [[https://github.com/mybatis/typehandlers-jsr310][mybatis/typehandlers-jsr310: MyBatis type handlers for JSR-310]]
+  + [[https://github.com/FasterXML/jackson-datatype-jsr310][FasterXML/jackson-datatype-jsr310: (DEPRECATED) -- moved under `jackson-modules-java8` repo: https://github.com/FasterXML/jackson-modules-java8]]
+  + [[https://www.baeldung.com/spring-date-parameters][Working with Date Parameters in Spring | Baeldung]]
+
+  Java 8 时间操作：
+  + [[https://www.baeldung.com/java-day-start-end][How to Get the Start and the End of a Day using Java | Baeldung]]
+
+* @DateTimeFormat
+  Spring MVC 中的 @DateTimeFormat 是用来进行自动类型转换的，而带有 ~@RequstBody, @ResponseBody~ 注解的请求数据会通过 Json 解析器进行转换。
+
+  因此，在实体类上应该使用 ~JsonFormat~ 而不是 ~DateFormat~.
+
+  相关：HttpMessageConverter
+
+* Excel
+  + [[https://www.cnblogs.com/pcheng/p/7485979.html][HSSF、XSSF和SXSSF区别以及Excel导出优化 - PC君 - 博客园]]
+
+* swagger
+  + https://www.ibm.com/developerworks/cn/java/j-using-swagger-in-a-spring-boot-project/index.html

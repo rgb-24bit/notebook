@@ -2,6 +2,9 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简介][简介]]
+- [[#pep-3107][PEP 3107]]
+- [[#pep-484][PEP 484]]
+- [[#相关链接][相关链接]]
 
 * 简介
   Python 作为动态语言，缺少合适的类型检查工具一直是一个问题，及时静态类型检查工具可以提供一些帮助，但也十分有限。
@@ -10,4 +13,87 @@
 
   参考：
   + [[https://docs.python.org/3/library/typing.html][typing — Support for type hints — Python 3.8.0 documentation]]
+
+* PEP 3107
+  PEP 3107 是为了解决 Python2.x 系列缺少函数参数和返回值注释的手段的问题，对于 ~Function Annotations~ 来说：
+  1. 函数参数和返回值注释都是完全可选的
+  2. Python 解释器不会对函数注释进行过多的解析，详细的解析更多的是由第三方工具来完成，比如：
+     #+begin_src python
+       # 为参数和返回值添加更详细的文档
+       def compile(source: "something compilable",
+                   filename: "where the compilable thing comes from",
+                   mode: "is this a single statement or a suite?"):
+           ...
+
+       # 添加类型提示
+       def haul(item: Haulable, *vargs: PackAnimal) -> Distance:
+           ...
+     #+end_src
+
+  PEP 3107 的语法也是很简单的，对于参数来说如下：
+  #+begin_src python
+    # identifier: annotation = default value
+    def foo(a: expression, b: expression = 5):
+        ...
+
+    def foo(*args: expression, **kwargs: expression):
+        ...
+  #+end_src
+
+  返回值也同样简单：
+  #+begin_src python
+    def sum() -> expression:
+        ...
+  #+end_src
+
+  特别的，Lambda 表达式是不支持函数注释的。
+
+  函数注释会放在函数对象的 ~__annotations__~ 中，可以由第三方工具访问。
+  
+  文档：[[https://www.python.org/dev/peps/pep-3107/][PEP 3107 -- Function Annotations | Python.org]]
+
+* PEP 484
+  PEP 484 使用 PEP 3107 中定义的函数注释提供了针对类型提示的增强功能，这些功能主要有 typing 模块提供。
+
+  同时，由于 PEP 3107 只提供了函数注释的语法，因此，typing 还使用了一些列的针对 PEP484 进行的补充措施，这些措施可以在 [[https://docs.python.org/3/library/typing.html][typing]] 模块的文档中发现。
+
+  也就是说，PEP 484 和 typing 提供了类型提示相关的库，而其他的 PEP 提供了简便的语法，包括：
+  1. PEP 3107 - 函数注释
+     #+begin_src python
+       def foo(a: str) -> str:
+           ...
+     #+end_src
+
+  2. PEP 526  - 变量注释
+     #+begin_src python
+       primes: List[int] = []
+     #+end_src
+     
+     需要注意的是，在局域作用域中声明全局注释是非法的：
+     #+begin_src python
+       def f():
+           global x: int  # SyntaxError
+
+       def g():
+           x: int  # Also a SyntaxError
+           global x
+     #+end_src
+
+  3. PEP 544 - 结构化子类
+
+  4. PEP 586 - 字面量类型，可以用于限制字面量的范围：
+     #+begin_src python
+       ReadOnlyMode         = Literal["r", "r+"]
+       WriteAndTruncateMode = Literal["w", "w+", "wt", "w+t"]
+       WriteNoTruncateMode  = Literal["r+", "r+t"]
+       AppendMode           = Literal["a", "a+", "at", "a+t"]
+     #+end_src
+
+  5. PEP 589 - 字典类型限制，可以限制为固定的键集合
+
+  6. PEP 591 - final 限定符
+
+* 相关链接
+  + [[https://www.python.org/dev/peps/pep-0483/][PEP 483 -- The Theory of Type Hints | Python.org]]
+  + [[https://www.bernat.tech/the-state-of-type-hints-in-python/][the state of type hints in Python]]
 

@@ -16,6 +16,7 @@
 - [[#使用技巧][使用技巧]]
 - [[#相关问题][相关问题]]
   - [[#terminalttyshell-等的区别][Terminal、TTY、Shell 等的区别]]
+  - [[#获取当前-shell-脚本所在目录][获取当前 Shell 脚本所在目录]]
 
 * 网络操作相关
 ** 网络诊断相关
@@ -289,4 +290,12 @@
 
    详情可以参考
    + [[https://segmentfault.com/a/1190000016129862#articleHeader8][命令行界面 (CLI)、终端 (Terminal)、Shell、TTY，傻傻分不清楚？ - Blessing Studio - SegmentFault 思否]]
+
+** 获取当前 Shell 脚本所在目录
+   #+begin_src bash
+     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself][Get the source directory of a Bash script from within the script itself - Stack Overflow]]
 

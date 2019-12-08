@@ -6,6 +6,8 @@
 - [[#解决-homebrew-下载更新极慢的问题][解决 Homebrew 下载更新极慢的问题]]
 - [[#command-line-tools][Command Line Tools]]
 - [[#命令的区别][命令的区别]]
+- [[#charles-的使用问题][charles 的使用问题]]
+- [[#npm-指令老是提示没有权限的问题][npm 指令老是提示没有权限的问题]]
 
 * 怎样在 Mac 上安装 Java 8
   首先安装工具 Homebrew，通过如下指令完成：
@@ -70,4 +72,17 @@
     #+begin_src bash
       brew install gawk
     #+end_src
+
+* charles 的使用问题
+  1. 使用网易 mumu 模拟器时和 charles 存在冲突，解决方案为设置对 ~10.0.2.2,mumu.nie.netease.com,graph.facebook.com~ 这些网址不设置代理，参考：
+     + [[http://bbs.mumu.163.com/forum.php?mod=viewthread&tid=1087023][macOS 下用 charles 抓包，模拟器里面打不了字 - 问答专区 - 网易MuMu论坛]]
+
+* npm 指令老是提示没有权限的问题
+  一般情况下，npm 相关指令都是安装在 ~/usr/local~ 这个目录下的，因此可以执行如下指令：
+  #+begin_example
+    $ sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+  #+end_example
+
+  参考：
+  + [[https://stackoverflow.com/questions/47252451/permission-denied-when-installing-npm-modules-in-osx][node.js - Permission denied when installing npm modules in OSX - Stack Overflow]]
 

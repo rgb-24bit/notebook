@@ -1,0 +1,12 @@
+#+TITLE:      持续集成
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#jekins][Jekins]]
+  - [[#shell-相关][Shell 相关]]
+
+* Jekins
+  Jekins 是比较常用的持续集成工具，自己搭建相关的服务也很方便，值得了解。
+
+** Shell 相关
+   使用 Jekins 是常见的一个需求可能就是需要编写 Shell 脚本，使用 SCM 时，脚本的执行路径默认是项目的根目录。
+

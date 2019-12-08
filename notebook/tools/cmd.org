@@ -91,7 +91,7 @@
          nslookup –d [其他参数] domain [dns-server]
        #+END_EXAMPLE
 
-  + 可以通过 traceroute 命令显示数据包通过网络所采用的路由， 并测量任何传输延迟：
+  + 可以通过 tracert 命令显示数据包通过网络所采用的路由， 并测量任何传输延迟：
     #+BEGIN_EXAMPLE
       > tracert yourdomain.com
       > tracert -6 yourdomain.com

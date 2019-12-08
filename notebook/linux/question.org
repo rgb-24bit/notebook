@@ -13,6 +13,7 @@
 - [[#怎样合并两个目录][怎样合并两个目录]]
 - [[#怎样创建需要定时执行的任务][怎样创建需要定时执行的任务]]
 - [[#x11gtkgnome-等之间的关系][X11、GTK、GNOME 等之间的关系]]
+- [[#怎样关闭一个占用了指定端口的进程][怎样关闭一个占用了指定端口的进程]]
 
 * 如何快速删除文件
   + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
@@ -123,4 +124,18 @@
   参考：
   + [[https://blog.csdn.net/chenglian_999/article/details/4927459][X11,GTK,QT,GNOME 的区别与联系 - chenglian_999的专栏 - CSDN博客]]
   + [[https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1][X 窗口系统 - 维基百科，自由的百科全书]]
+
+* 怎样关闭一个占用了指定端口的进程
+  简易版本为：
+  #+begin_example
+    kill -9 $(lsof -t -i tcp:8080)
+  #+end_example
+
+  更加完美的版本：
+  #+begin_example
+    kill -9 $(lsof -t -i:3000 -sTCP:LISTEN)
+  #+end_example
+
+  参考：
+  + [[https://stackoverflow.com/questions/11583562/how-to-kill-a-process-running-on-particular-port-in-linux][unix - How to kill a process running on particular port in Linux? - Stack Overflow]]
 

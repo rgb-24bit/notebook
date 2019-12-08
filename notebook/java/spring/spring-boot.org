@@ -11,6 +11,7 @@
 - [[#日志操作][日志操作]]
 - [[#相关问题][相关问题]]
   - [[#在配置文件中使用环境变量][在配置文件中使用环境变量]]
+  - [[#spring-boot-mvc-中静态资源的默认路径][Spring Boot MVC 中静态资源的默认路径]]
 
 * 自动配置原理
   ~@SpringBootApplication~ 注解集成了 ~@EnableAutoConfiguration~ 注解，该注解会导入 ~AutoConfigurationImportSelector~ 进行自动配置：
@@ -201,4 +202,15 @@
    参考：
    + [[https://stackoverflow.com/questions/35531661/using-env-variable-in-spring-boots-application-properties][java - Using env variable in Spring Boot's application.properties - Stack Overflow]]
    + [[https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html][24. Externalized Configuration]]
+
+** Spring Boot MVC 中静态资源的默认路径
+   #+begin_example
+     classpath:/META-INF/resources/
+     classpath:/resources/
+     classpath:/static/
+     classpath:/public/
+   #+end_example
+
+   参考：
+   + [[https://spring.io/blog/2013/12/19/serving-static-web-content-with-spring-boot][Serving Static Web Content with Spring Boot]]
 
