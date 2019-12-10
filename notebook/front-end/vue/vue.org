@@ -1,8 +1,13 @@
 #+TITLE:      Vue.JS
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#组件相关][组件相关]]
 - [[#相关问题][相关问题]]
   - [[#vue-中-import-时的--符号的含义][Vue 中 Import 时的 @ 符号的含义]]
+  - [[#在-scoped-样式域中不能覆盖组件原样式的问题][在 scoped 样式域中不能覆盖组件原样式的问题]]
+
+* 组件相关
+  在 Vue 中可以通过特殊属性 ~ref~ 直接引用子组件或 DOM 节点，并通过父组件的 ~$refs~ 属性访问。这在需要使用子组件的方法或者访问指定 DOM 节点时很有用。
 
 * 相关问题
 ** Vue 中 Import 时的 @ 符号的含义
@@ -20,4 +25,8 @@
          }
      }
    #+end_src
+
+** 在 scoped 样式域中不能覆盖组件原样式的问题
+   可以使用深度作用选择器 ~/deep/~ 或者 ~>>>~ 来影响子组件的样式，参考：
+   + [[https://vue-loader-v14.vuejs.org/zh-cn/features/scoped-css.html][CSS 作用域 · vue-loader]]
 

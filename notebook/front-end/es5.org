@@ -1,0 +1,231 @@
+#+TITLE:      ECMAScript 5
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#基础概念][基础概念]]
+- [[#数据类型][数据类型]]
+- [[#相关技巧][相关技巧]]
+  - [[#javascript-变量的命名][JavaScript 变量的命名]]
+  - [[#让返回值变成-undefined][让返回值变成 undefined]]
+  - [[#显示所有元素的-outline][显示所有元素的 outline]]
+  - [[#iife][IIFE]]
+  - [[#数值运算符][数值运算符]]
+- [[#相关问题][相关问题]]
+  - [[#通过-innerhtml-的方式为-table-添加行失败][通过 innerHTML 的方式为 table 添加行失败]]
+  - [[#浏览器中-es6-模块化的语法不能使用][浏览器中 ES6 模块化的语法不能使用]]
+  - [[#怎样获取用户使用的语言][怎样获取用户使用的语言]]
+  - [[#javascript-的入口函数][JavaScript 的入口函数？]]
+
+* 基础概念
+  JavaScript 本身不提供任何与 I/O 相关的 API，都要靠宿主环境提供，比如浏览器、Node.js 这些。
+
+  JavaScript 的学习可以分为三个部分：
+  1. 基本的语法构造，比如操作符、控制结构、语句等
+  2. 标准库，就是一系列具有各种功能的对象比如 Array、Date、Math 等
+  3. 各种宿主环境提供额外的 API
+
+  JavaScript 常用的宿主环境为浏览器，浏览器提供的额外接口可以分为三类：
+  1. 浏览器控制类，用于操作浏览器
+  2. DOM 类，用于操作网页的各种元素
+  3. Web 类，用于实现互联网的各种功能
+
+  JavaScript 的核心语法不难，其复杂性体现在另外两个方面：
+  1. 涉及的大量的外部 API
+  2. 语言的一些设计缺陷
+     
+  ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现。在日常场合，这两个词是可以互换的。
+
+  其中，ECMAScript 只用来标准化 JavaScript 这种语言的基本语法结构，与部署环境相关的标准都由其他标准规定，比如 DOM 的标准就是由 W3C 组织制定的。
+
+  参考：
+  + [[https://wangdoc.com/javascript/index.html][JavaScript 教程 - 网道]]
+
+* 数据类型
+  JavaScript 中除了 ES6 新增的 Symbol 以外存在六种数据类型，分别为：数值、布尔值、字符串、undefined、null 和 对象。其中对象又可以分为狭义的对象、数组和函数。
+
+  JavaScript 可以通过三种方法来判断对象的类型：
+  + ~typeof~ 运算符
+  + ~instanceof~ 运算符
+  + ~Object.prototype.toString~ 方法
+
+  如果 JavaScript 预期某个位置应该是布尔值，会将该位置上现有的值自动转为布尔值。转换规则是除了 undefined、null、false、0、NaN 和空字符串这六个值被转为 false，其他值都视为 true。
+
+  JavaScript 内部，所有数字都是以 64 位浮点数形式储存，即使整数也是如此。这就是说，JavaScript 语言的底层根本没有整数，所有数字都是小数（64 位浮点数）。容易造成混淆的是，某些运算只有整数才能完成，
+  此时 JavaScript 会自动把 64 位浮点数，转成 32 位整数，然后再进行运算。
+
+  JavaScript 内部实际上存在 2 个0：一个是 +0，一个是 -0，几乎所有场合，正零和负零都会被当作正常的 0，除了在作为分母时。除以正零得到 +Infinity，除以负零得到 -Infinity。
+
+  由于 NaN 和 Infinity 这两个特殊数值和自动转换规则的存在，使得 JavaScript 数值运算几乎不会出现异常，只会得到让你一脸懵逼的结构 @_@
+
+  和数值操作相关的全局函数：
+  + ~parseInt~ 方法用于将字符串转为整数
+  + ~parseFloat~ 方法用于将字符串转为浮点数
+  + ~isNaN~ 方法可以用来判断一个值是否为 ~NaN~
+  + ~isFinite~ 方法返回一个布尔值，表示某个值是否为正常的数值，只有 Infinity、-Infinity、NaN 和 undefined 这几个值会返回 false。
+   
+  JavaScript 提供了两个原生方法 ~btoa~ 和 ~atob~ 来转换还原 Base64 字符串，这两个方法仅适用于 ASCII 字符。要将非 ASCII 码字符转为 Base64 编码，必须中间插入一个转码环节，再使用这两个方法：
+  #+begin_src js
+    function b64Encode(str) {
+      return btoa(encodeURIComponent(str));
+    }
+
+    function b64Decode(str) {
+      return decodeURIComponent(atob(str));
+    }
+  #+end_src
+
+  可以通过 ~Object.keys~ 方法来查看对象的所有属性，同时可以通过 ~delete~ 命令删除对象的属性。而 ~in~ 运算符可以检查对象是否包含某个属性，但是不能识别哪些属性是对象自身的，哪些属性是继承的，
+  这时，可以使用对象的 ~hasOwnProperty~ 方法判断一下，是否为对象自身的属性。
+
+  可以通过 ~for...in~ 循环遍历一个对象的全部属性，需要注意的是：
+  1. 它遍历的是对象所有可遍历的属性，会跳过不可遍历的属性
+  2. 它不仅遍历对象自身的属性，还遍历继承的属性
+
+  JavaScript 中的函数可以被多次声明，后面的声明就会覆盖前面的声明，这和变量不一样，变量多此声明时，如果不赋初始值，后面的声明就是无效的。也许，函数声明即有值，因此后面的会覆盖前面的。
+
+  JavaScript 引擎将函数名视同变量名，所以采用 function 命令声明函数时， *整个函数* 会像变量声明一样，被提升到代码头部，但是，如果采用赋值语句定义函数，就会存在问题：
+  #+begin_src js
+    var f = function () {
+      console.log('1');
+    }
+
+    function f() {
+      console.log('2');
+    }
+
+    f()
+  #+end_src
+
+  上面的代码经过变量提升后就变成了：
+  #+begin_src js
+    var f;
+
+    function f() {
+      console.log('2');
+    }
+
+    var f = function () {
+      console.log('1');
+    }
+
+    f() // 1
+  #+end_src
+
+  最后得到的就是通过赋值语句声明的函数，因此，如果同时采用 function 命令和赋值语句声明同一个函数，最后总是采用赋值语句的定义。
+
+  函数的属性和方法：
+  + 函数的 ~name~ 属性返回函数的名字
+  + 函数的 ~length~ 属性返回函数预期传入的参数个数，即函数定义之中的参数个数
+  + 函数的 ~toString~ 方法返回一个字符串，内容是函数的源码，包含注释
+
+  在 ES5 中，作用域可以分为全局作用域和函数（局部）作用域，其中，函数内部定义的变量，会在该作用域内覆盖同名全局变量。
+
+  JavaScript 中，函数参数不是必需的，JavaScript 允许省略参数，即使函数签名中有参数。另外，你多传参数也没有问题，JavaScript 会在填满参数列表后忽略后面的参数。
+
+  如果函数签名中有同名的参数，则取最后出现的那个值。
+
+  由于 JavaScript 中函数参数的不确定性，所以需要一种机制，可以在函数体内部读取所有参数。这就是 arguments 对象的由来。arguments 对象包含了函数运行时的所有参数，
+  arguments[0] 就是第一个参数，arguments[1] 就是第二个参数，以此类推。这个对象只有在函数体内部，才可以使用。
+
+  正常模式下，arguments 对象可以在运行时修改，而在严格模式下，严格模式下，arguments 对象与函数参数不具有联动关系。需要注意的是，arguments 对象虽然很像数组，但不是数组。
+
+  arguments 对象带有一个 callee 属性，可以返回它所对应的原函数，这个属性在严格模式里面是禁用的，因此不建议使用。
+
+  JavaScript 中数组是一种特殊的对象，数组的索引是通过对应的属性来实现的，即 ~0 - N~ 的索引其实是存在 ~0 - N~ 的属性，只不过，数字属性不能通过 ~obj.attr~ 的方式访问，
+  于是便通过 ~obj[attr]~ 的方式来操作了。
+
+  JavaScript 中数组可以存在空位，比如说 ~[1, ,3]~ 的形式中间便存在一个空位，可以通过 ~delete~ 命令删除数组元素，此时会在原数组上生成一个空位。
+
+  如果一个对象的所有键名都是正整数或零，并且有 ~length~ 属性，那么这个对象就很像数组，语法上称为类似数组的对象，可以通过 ~Array.prototype.slice.call~ 将类似数组的对象变成真正的数组。
+    
+* 相关技巧
+** JavaScript 变量的命名
+   JavaScript 的标识符允许大多数的 Unicode 字符，因此，你甚至可以使用颜文字来编写程序。
+
+** 让返回值变成 undefined
+   在浏览器地址栏执行函数时这个技巧挺有用的，可以避免因为函数返回值进行跳转：
+   #+BEGIN_SRC js
+     javascript:void window.prompt("Copy to clipboard: Ctrl+C, Enter", `[[${window.location.href}][${document.title}]]`)
+   #+END_SRC  
+
+   直接通过关键字 void 将值覆盖。
+
+** 显示所有元素的 outline
+   控制台中 $$ 相当于 document.querySelectorAll
+   #+BEGIN_SRC js
+     $$("*").forEach(
+       e => e.style.outline = "1px solid #" + (~~(Math.random() * (1<<24))).toString(16)
+     )
+   #+END_SRC
+
+** IIFE
+   IIFE（立即调用函数表达式）是一个在定义时就会立即执行的 JavaScript 函数。
+
+   这是一个被称为自执行匿名函数的设计模式，主要包含两部分:
+   + 第一部分是包围在圆括号运算符 () 里的一个匿名函数，这个匿名函数拥有独立的词法作用域。
+     这不仅避免了外界访问此 IIFE 中的变量，而且又不会污染全局作用域。
+   + 第二部分再一次使用 () 创建了一个立即执行函数表达式，JavaScript 引擎到此将直接执行函数。
+
+   #+BEGIN_SRC javascript
+     (function () { 
+       var name = "Barry";
+     })();
+   #+END_SRC
+
+** 数值运算符
+   数值运算符虽然使用加号，但它是一元运算符，作用在于可以将任何值转为数值，比如将 ~Date~ 转换为 Unix 时间戳：
+   #+begin_src js
+     let timestamp = +new Date();
+   #+end_src
+
+   与之相应的是负数值运算符，使用减号，参考：
+   + [[https://wangdoc.com/javascript/operators/arithmetic.html#%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%8C%E8%B4%9F%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6][算术运算符 - 数值运算符 - JavaScript 教程 - 网道]]
+
+* 相关问题
+** 通过 innerHTML 的方式为 table 添加行失败
+   通过 innerHTML 属性设置 HTML 时，底层引擎会自动关闭未关闭的标签，并修复其他错误的 HTML。
+
+   而单独的 <tr> 标签将被视作为关闭的标签，因此，通过 innerHTML 的方式为 table 添加行会失败。
+
+   解决方案：
+   #+BEGIN_SRC js
+     let table = document.createElement('table');
+     for (let i = 0; i < 3; ++i) {
+       let row = table.insertRow(i);
+       let text = document.createTextNode(i.toString());
+       let cell = row.insertCell(0);
+       cell.appendChild(text);
+     }
+   #+END_SRC
+
+** 浏览器中 ES6 模块化的语法不能使用
+   需要使用如下形式的 script 标签：
+   #+BEGIN_SRC html
+     <script type="module" src="...">
+   #+END_SRC
+
+   参考：[[http://es6.ruanyifeng.com/#docs/module][Module 的语法 - ECMAScript 6入门]]
+
+** 怎样获取用户使用的语言
+   在 ~Firefox~ 和 ~Chrome~ 中可以使用如下方式获取：
+   #+BEGIN_SRC js
+     var language;
+     if (window.navigator.languages) {
+       language = window.navigator.languages[0];
+     } else {
+       language = window.navigator.userLanguage || window.navigator.language;
+     }
+   #+END_SRC
+
+   参考：
+   + [[https://stackoverflow.com/questions/25606730/get-current-locale-of-chrome/42070353][javascript - Get current locale of chrome - Stack Overflow]]
+   + [[https://www.w3schools.com/jsref/obj_navigator.asp][Navigator Object]]
+
+** JavaScript 的入口函数？
+   在所有内容，包括外部图片之类的文件加载完后，才会执行的函数：
+   #+BEGIN_SRC javascript
+     window.onload = function () {
+       // ...
+     }
+   #+END_SRC
+
+

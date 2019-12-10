@@ -1,0 +1,10 @@
+#+TITLE:      Utils
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#命令行工具][命令行工具]]
+
+* 命令行工具
+  各个数据库大都提供了默认的命令行工具，这些命令行工具某些时候使用起来不是很方便，因此存在不少的替代增强客户端：
+  + [[https://github.com/dbcli/mycli][dbcli/mycli: A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting]]
+  + [[https://github.com/dbcli/litecli][dbcli/litecli: CLI for SQLite Databases with auto-completion and syntax highlighting]]
+

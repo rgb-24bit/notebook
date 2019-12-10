@@ -1,0 +1,63 @@
+#+TITLE:      JavaScript Library
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#axios][Axios]]
+- [[#lodash][Lodash]]
+- [[#moment][Moment]]
+- [[#相关链接][相关链接]]
+
+* Axios
+  + 问题：使用 GET 方法传递数组时参数格式不正确？
+
+    axios 对数据进行格式化时通过 qs 完成的，因此需要对 qs 进行配置：
+    #+begin_src js
+      axios.get(url, {
+        params:{
+          arr: [1,2,3]
+        },
+        paramsSerializer: function(params) {
+          return Qs.stringify(params, {arrayFormat: 'repeat'})
+        }
+      })
+    #+end_src
+
+    参考：
+    + [[https://segmentfault.com/q/1010000010323643][ajax - axios中怎么传数组 - SegmentFault 思否]]
+
+  + 问题：如何通过 axios 下载文件？
+    #+begin_src js
+      function download(targetUrl, filename) {
+        axios.get(targetUrl, {responseType: 'blob'})
+          .then(({data}) => {
+            const url = URL.createObjectURL(new Blob([data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+          });
+      }
+    #+end_src
+    
+    参考：
+    + [[https://gist.github.com/javilobo8/097c30a233786be52070986d8cdb1743][Download files with AJAX (axios)]]
+
+* Lodash
+  + 通过 ~keyBy~ 函数将对象数组转换为单个对象：
+    #+begin_src js
+      _.keyBy([{key: '1', value: '1'}, {key: '2', value: '2'}], 'key');  // {"1":{"key":"1","value":"1"},"2":{"key":"2","value":"2"}}
+    #+end_src
+
+* Moment
+  + 和 ISO Week 相关的操作：
+    #+begin_src js
+      moment('2019-12-30').isoWeekYear();     // => 2020, 2019-12-30 属于 2020 年第一周
+      moment({year: 2020}).isoWeeksInYear();  // => 54, 2020 年有 53 周
+      moment({year: 2019}).isoWeek(50);       // => 2019-12-10
+    #+end_src
+
+* 相关链接
+  + [[https://www.kancloud.cn/yunye/axios/234845][使用说明 · Axios 中文说明 · 看云]]
+  + [[https://www.lodashjs.com/][Lodash 中文文档 | Lodash 中文网]]
+  + [[http://momentjs.cn/docs/][文档 | Moment.js 中文网]]
+

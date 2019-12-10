@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#相关问题][相关问题]]
   - [[#怎样执行本地包中的命令][怎样执行本地包中的命令]]
+  - [[#依赖库版本号的规则是怎样的][依赖库版本号的规则是怎样的]]
+  - [[#如何为-npm-存储库配置多个镜像][如何为 npm 存储库配置多个镜像]]
 
 * 相关问题
 ** 怎样执行本地包中的命令
@@ -12,4 +14,24 @@
    #+END_EXAMPLE
    
    参考：[[https://stackoverflow.com/questions/9679932/how-to-use-package-installed-locally-in-node-modules][node.js - How to use package installed locally in node_modules? - Stack Overflow]]
+
+** 依赖库版本号的规则是怎样的
+   + 指定版本，比如 ~1.2.1~, 遵循 *主版本号.次版本号.修订版本号* 的规则，安装时只安装指定版本
+   + 固定主版本号和次版本号，比如 ~~1.2.1~, 表示安装 1.2.x 的最新版本
+   + 固定主版本号，比如 ~^1.2.1~, 表示安装 ~1.x.x~ 的最新版本
+   + 最新版本，指定为 ~latest~ 即可
+
+   参考：
+   + [[https://javascript.ruanyifeng.com/nodejs/packagejson.html][package.json文件 -- JavaScript 标准参考教程（alpha）]]
+
+** 如何为 npm 存储库配置多个镜像
+   #+begin_src conf
+     registry=http://serverA.url/repository-uri/
+     //serverB.url/repository-uri/
+     //serverC.url/repository-uri/:_authToken=00000000-0000-0000-0000-0000000000000
+     //registry.npmjs.org/
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/32633678/is-there-any-way-to-configure-multiple-registries-in-a-single-npmrc-file][node.js - Is there any way to configure multiple registries in a single npmrc file - Stack Overflow]]
 

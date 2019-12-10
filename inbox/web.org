@@ -140,23 +140,11 @@
   + PM2
   + app.js
 
-* Vue
-  + [[https://www.cnblogs.com/xumqfaith/p/7743387.html][vue中的 ref 和 $refs - 伊优 - 博客园]]
-  + [[https://blog.csdn.net/p930318/article/details/82767401][vue样式加scoped后不能覆盖组件的原有样式解决方法 - 小耳朵晨晨 - CSDN博客]]
-
 * React
   + [[https://zh-hans.reactjs.org/docs/add-react-to-a-website.html][在网站中添加 React – React]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/script][<script> - HTML（超文本标记语言） | MDN]]
   + [[https://www.babeljs.cn/][Babel 中文网 · Babel - 下一代 JavaScript 语法的编译器]]
   + [[https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Code_snippets/Rosetta][Rosetta - Archive of obsolete content | MDN]]
-
-* npm
-  + [[https://javascript.ruanyifeng.com/nodejs/packagejson.html][package.json文件 -- JavaScript 标准参考教程（alpha）]]
-  + [[https://stackoverflow.com/questions/32633678/is-there-any-way-to-configure-multiple-registries-in-a-single-npmrc-file][node.js - Is there any way to configure multiple registries in a single npmrc file - Stack Overflow]]
-
-* 浏览器指纹
-  + [[https://wzyboy.im/post/1130.html][浏览器指纹 | wzyboy’s blog]]
-  + [[https://paper.seebug.org/229/][Web客户端追踪（下）—浏览器指纹追踪]]
 
 * fp
   + [[https://juejin.im/post/5d6a3e9751882505877272a7][神奇的lambda表达式——函数式编程必学 - 掘金]]
@@ -164,6 +152,9 @@
   + [[https://juejin.im/post/5af13664f265da0ba266efcf][大佬，JavaScript 柯里化，了解一下？ - 掘金]]
   + [[https://www.baeldung.com/java-currying][Currying in Java | Baeldung]]
 
-* download
-  + [[https://gist.github.com/javilobo8/097c30a233786be52070986d8cdb1743][Download files with AJAX (axios)]]
+* JS
+  + 变量提升
+  + 等值比较
+  + 类型转换
+  + 运算符
 

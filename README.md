@@ -63,6 +63,7 @@
   + [Redis](notebook/database/redis.org)
   + [SQLite3](notebook/database/sqlite3.org)
   + [Standard SQL](notebook/database/standsql.org)
+  + [Utils](notebook/database/utils.org)
 ## devops
   + [持续集成](notebook/devops/ci.org)
   + [相关概念](notebook/devops/concept.org)
@@ -86,11 +87,12 @@
   + **vue**
     + [Vue.JS](notebook/front-end/vue/vue.org)
   + [CSS](notebook/front-end/css.org)
+  + [ECMAScript 5](notebook/front-end/es5.org)
   + [ECMAScript 6](notebook/front-end/es6.org)
   + [HTML](notebook/front-end/html.org)
   + [jQuery 相关笔记](notebook/front-end/jquery.org)
-  + [JavaScript](notebook/front-end/js.org)
-  + [JavaScript Library](notebook/front-end/lib.org)
+  + [JavaScript Library](notebook/front-end/library.org)
+  + [Misc](notebook/front-end/misc.org)
   + [Node.js](notebook/front-end/nodejs.org)
   + [Security](notebook/front-end/security.org)
   + [前端相关技术了解](notebook/front-end/technology.org)

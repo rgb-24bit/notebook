@@ -44,7 +44,11 @@
   + 表单输入元素的 checked 属性：
     #+BEGIN_SRC html
       <input type="radio" name="test-name" checked>
-    #+END_SRC  
+    #+END_SRC
+
+  + 表单回车提交自动绑定：
+    1. 默认情况下，单个输入框，无论按钮的 type="submit" 还是 type="button" 类型，回车即提交
+    2. 当 type="submit" 时，无论有几个 type="text" 输入框，回车均表示提交
 
 * 相关技巧
   + 标签 ruby 可以用来为汉字添加拼音
