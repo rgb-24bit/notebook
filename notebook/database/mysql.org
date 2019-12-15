@@ -181,6 +181,25 @@
 
 * 函数使用
   + 函数 ~CONCAT~ 的参数中存在 ~NULL~ 时得出的值也是 ~NULL~
+  + 函数 ~GROUP_CONCAT~ 的复杂使用：
+    #+begin_example
+      GROUP_CONCAT([DISTINCT] expr [,expr ...]
+                   [ORDER BY {unsigned_integer | col_name | expr}
+                       [ASC | DESC] [,col_name ...]]
+                   [SEPARATOR str_val])
+    #+end_example
+    
+    比如说：
+    #+begin_src sql
+      SELECT
+        GROUP_CONCAT(
+          DISTINCT name
+          ORDER BY id
+          SEPARATOR '-'
+        )
+        FROM tbl_user
+       GROUP BY address;
+    #+end_src
 
 * 相关技巧
 ** 通过 SQL 语句获取 MySQL 的版本

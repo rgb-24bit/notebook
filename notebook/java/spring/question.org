@@ -6,6 +6,7 @@
 - [[#spring-中-interceptorfilter-和-aop-的区别][Spring 中 Interceptor、Filter 和 AOP 的区别]]
 - [[#注解-resource-和-autowired-的区别][注解 @Resource 和 @Autowired 的区别]]
 - [[#控制反转和依赖注入是个什么东西][控制反转和依赖注入是个什么东西]]
+- [[#spring-中-jackson-转换时间问题][Spring 中 Jackson 转换时间问题]]
 
 * Spring 大家族都有些什么东西
   Spring 核心容器、Spring 上下文、Spring AOP、Spring DAO、Spring ORM、Spring Web、Spring MVC……
@@ -64,4 +65,17 @@
   对于一个库而言，复用的可能只是算法和数据结构，而对于一个框架而言，复用的往往还有控制流逻辑，这也是控制反转的结果。
 
   而依赖注入时通过 DI 容器将依赖传递给目标对象的技术，这对于动态语言来说是不必要的，但是对于静态语言来说，就是一个很方便的功能。
+
+* Spring 中 Jackson 转换时间问题
+  Spring 转 Json 的默认实现 Jackson 中会根据时区去转换时间，而 Jackson 的默认时区跟国内应该是相差 8 小时，所以会在时间换算上相差 8 个小时。
+
+  解决这个问题的方案：
+  1. 在 Model 字段上加上时区注解：
+     #+begin_src java
+       @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+     #+end_src
+  2. 增加统一的时区配置：
+     #+begin_src conf
+       spring.jackson.time-zone=GMT+8
+     #+end_src
 

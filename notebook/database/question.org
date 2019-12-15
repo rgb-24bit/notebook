@@ -4,6 +4,7 @@
 - [[#为什么要使用自增的-id-主键][为什么要使用自增的 ID 主键]]
 - [[#用户表的设计问题][用户表的设计问题]]
 - [[#redismongodb-和-memcache-的区别][Redis、MongoDB 和 Memcache 的区别]]
+- [[#常用数据库][常用数据库]]
 
 * 为什么要使用自增的 ID 主键
   1. 可以节省存储
@@ -27,4 +28,14 @@
 * Redis、MongoDB 和 Memcache 的区别
   参考链接：
   + [[https://www.cnblogs.com/tuyile006/p/6382062.html][Redis、Memcache 和 MongoDB 的区别 - 小y - 博客园]]
+
+* 常用数据库
+  常常用 Mysql、Redis 和 Mongodb 做存储层，Hadoop 和 Spark 做大数据分析，其中：
+  + Mysql 适合结构化数据，类似 Excel 表格一样定义严格的数据，用于数据量中，速度一般支持事务处理场合
+  + Redis 适合缓存内存对象，如缓存队列，用于数据量小，速度快不支持事务处理高并发场合
+  + Mongodb 适合半结构化数据，如文本信息，用于数据量大，速度较快不支持事务处理场合
+  + Hadoop 是个生态系统，上面有大数据分析很多组件，适合事后大数据分析任务
+  + Spark 类似 Hadoop，偏向于内存计算，流计算，适合实时半实时大数据分析任务
+
+  参考：[[https://www.zhihu.com/question/19882468/answer/213187521][怎样学 MongoDB？ - find goo的回答 - 知乎]]
 

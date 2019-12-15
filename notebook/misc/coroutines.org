@@ -1,0 +1,18 @@
+#+TITLE:      Coroutines
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#stackless-vs-stackful][Stackless vs. Stackful]]
+
+* Stackless vs. Stackful
+  协程目前来说应该也是一种使用的很广泛的一种功能了，但是对于协程的实现是存在区别的，其中一种就是协程的实现是 Stackless 还是 Stackful 的。
+
+  Stackless 和 Stackful 的概念针对的是协程在挂起的时候是否还有堆栈：
+  + Stackless 协程在挂起的时候不需要保留堆栈，它可以将其局部变量序列化为固定大小的结构，然后使用当前的调用堆栈执行下一个协程
+  + Stackful 协程在挂起的时候需要保留堆栈，虽然这回带来更多的开销，但是能够带来更强的功能
+
+  其中，JavaScript 中的协程便是 Stackless 的。
+
+  参考：
+  + [[https://stackoverflow.com/questions/28977302/how-do-stackless-coroutines-differ-from-stackful-coroutines][c++ - How do stackless coroutines differ from stackful coroutines? - Stack Overflow]]
+  + [[https://blog.varunramesh.net/posts/stackless-vs-stackful-coroutines/][Stackless vs. Stackful Coroutines - Varun Ramesh's Blog]]
+

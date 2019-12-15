@@ -12,6 +12,7 @@
 - [[#相关问题][相关问题]]
   - [[#在配置文件中使用环境变量][在配置文件中使用环境变量]]
   - [[#spring-boot-mvc-中静态资源的默认路径][Spring Boot MVC 中静态资源的默认路径]]
+  - [[#配置-favicon][配置 Favicon]]
 
 * 自动配置原理
   ~@SpringBootApplication~ 注解集成了 ~@EnableAutoConfiguration~ 注解，该注解会导入 ~AutoConfigurationImportSelector~ 进行自动配置：
@@ -124,6 +125,12 @@
 
   而遵循 application-{profile}.properties 这种命名格式，这能提供特定于 Profile 的属性。
 
+  命令行指定参数的方式：
+  #+begin_example
+    java -jar xxx.jar --server.port=8888
+    java -jar xxx.jar -Dserver.port 8888
+  #+end_example
+
 * 数据库版本控制
   Spring Boot 集成了高级的数据库版本控制工具，因此可以通过 Flyway 来进行数据库的版本控制：
   + [[https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html][85. Database Initialization]]  
@@ -213,4 +220,14 @@
 
    参考：
    + [[https://spring.io/blog/2013/12/19/serving-static-web-content-with-spring-boot][Serving Static Web Content with Spring Boot]]
+
+** 配置 Favicon
+   可以将 ~favicon.ico~ 放在如下目录：
+   #+begin_example
+     src/main/resources/favicon.ico
+     src/main/resources/static/favicon.ico
+   #+end_example
+
+   参考：
+   + [[https://www.baeldung.com/spring-boot-favicon][Guide to the Favicon in Spring Boot | Baeldung]]
 

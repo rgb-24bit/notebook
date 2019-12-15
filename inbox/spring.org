@@ -45,6 +45,8 @@
   Java 8 时间操作：
   + [[https://www.baeldung.com/java-day-start-end][How to Get the Start and the End of a Day using Java | Baeldung]]
 
+  使用时需要注意，LocalDateTime 要求必须有时间参数，用在实体类中但是时间格式中未指定时间时就会报错。
+
 * @DateTimeFormat
   Spring MVC 中的 @DateTimeFormat 是用来进行自动类型转换的，而带有 ~@RequstBody, @ResponseBody~ 注解的请求数据会通过 Json 解析器进行转换。
 
@@ -57,3 +59,6 @@
 
 * swagger
   + https://www.ibm.com/developerworks/cn/java/j-using-swagger-in-a-spring-boot-project/index.html
+* mongodb
+  + [[https://docs.spring.io/spring-data/mongodb/docs/2.2.3.RELEASE/reference/html/#reference][Spring Data MongoDB - Reference Documentation]]
+

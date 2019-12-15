@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#aop-概念][AOP 概念]]
+- [[#pointcut-表达式][PointCut 表达式]]
 
 * AOP 概念
   AOP 中的一些基本概念：
@@ -12,3 +13,20 @@
 
   定义好 Aspect 后，就可以使用织入器将相关逻辑织入 Bean。
 
+* PointCut 表达式
+  Spring AOP 中 PointCut 表达式由一个 *pointcut designator (PCD)* 开始，这是一个关键字，告诉 Spring AOP 要匹配什么。
+
+  常用的 *PCD* 是用于匹配方法执行点的 ~execution~, 它的形式和函数签名类似，可以通过通配符 ~*~ 匹配任意名称，通过 ~..~ 匹配任意参数数量：
+  #+begin_src java
+    @Pointcut("execution(public String org.baeldung.dao.FooDao.findById(Long))")
+    @Pointcut("execution(* org.baeldung.dao.FooDao.*(..))")
+  #+end_src
+
+  使用注解是一个更方便的方式：
+  #+begin_src java
+    @Pointcut("@annotation(org.baeldung.aop.annotations.Loggable)")
+  #+end_src
+
+  更多的可以参考：
+  + [[https://www.baeldung.com/spring-aop-pointcut-tutorial][Introduction to Pointcut Expressions in Spring | Baeldung]]
+  

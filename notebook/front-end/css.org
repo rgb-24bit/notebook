@@ -15,6 +15,7 @@
   - [[#怎样让文本居中显示][怎样让文本居中显示]]
   - [[#怎样在打印时去除-href][怎样在打印时去除 href]]
   - [[#scsssass-和-less-之间的区别][SCSS/Sass 和 Less 之间的区别]]
+  - [[#文本的溢出折行和断词问题][文本的溢出、折行和断词问题]]
 
 * 相关技巧
 ** 通过 transform 实现网页翻转镜像
@@ -152,4 +153,12 @@
 
    参考：
    + [[https://www.cnblogs.com/wangpenghui522/p/5467560.html][sass/scss 和 less的区别 - 孤舟蓑翁 - 博客园]]
+
+** 文本的溢出、折行和断词问题
+  CSS 将 DOM 树转换为由矩形 Box 构成的树，并通过设置这些 Box 的属性来改变其位置和大小，描述每个元素或文本的布局。
+
+  其中较为特殊的级别是 ~Line Box~ 这个级别，这种 Box 是自动生成的，溢出、折行、断词是 Line Box 中常见的问题，这些问题可以通过一些 CSS 属性进行控制。
+
+  参考：
+  + [[https://harttle.land/2015/06/12/css-line-wrap.html#header-2][CSS Line Box：溢出与折行 | Harttle Land]]
 

@@ -1,0 +1,10 @@
+#+TITLE:      Edit Latex
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#auctex][Auctex]]
+
+* Auctex
+  参考：
+  + [[https://www.gnu.org/software/auctex/documentation.html][AUCTeX - Sophisticated document creation]]
+  + [[https://www.math.uh.edu/~torok/math_6298/emacs/auctex-mode.html][AUCTeX-mode]]
+
