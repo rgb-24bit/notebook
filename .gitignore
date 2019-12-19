@@ -1,4 +1,6 @@
 *.html
 *.htm
+*.tex
+*.log
 __pycache__/
 .DS_Store

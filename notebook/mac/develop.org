@@ -8,6 +8,7 @@
 - [[#命令的区别][命令的区别]]
 - [[#charles-的使用问题][charles 的使用问题]]
 - [[#npm-指令老是提示没有权限的问题][npm 指令老是提示没有权限的问题]]
+- [[#命令行获取-cpu-信息][命令行获取 CPU 信息]]
 
 * 怎样在 Mac 上安装 Java 8
   首先安装工具 Homebrew，通过如下指令完成：
@@ -86,3 +87,13 @@
   参考：
   + [[https://stackoverflow.com/questions/47252451/permission-denied-when-installing-npm-modules-in-osx][node.js - Permission denied when installing npm modules in OSX - Stack Overflow]]
 
+* 命令行获取 CPU 信息
+  在 Unix/Linux 系统中 sysctl 命令被用于在内核运行时动态地修改内核的运行参数，而在 Mac 中，是可以用 sysctl 目录来查看 CPU 信息的：
+  #+begin_src bash
+    sysctl machdep.cpu                  # 查看所有信息
+    sysctl -n machdep.cpu.brand_string  # 显示 CPU 型号
+    sysctl -n machdep.cpu.core_count    # 显示 CPU 核心数
+    sysctl -n machdep.cpu.thread_count  # 显示线程数
+  #+end_src
+
+  

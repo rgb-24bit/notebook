@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#基础概念][基础概念]]
+  - [[#宿主环境][宿主环境]]
 - [[#数据类型][数据类型]]
 - [[#相关技巧][相关技巧]]
   - [[#javascript-变量的命名][JavaScript 变量的命名]]
@@ -16,7 +17,7 @@
   - [[#javascript-的入口函数][JavaScript 的入口函数？]]
 
 * 基础概念
-  JavaScript 本身不提供任何与 I/O 相关的 API，都要靠宿主环境提供，比如浏览器、Node.js 这些。
+  JavaScript 本身不提供任何与 I/O 相关的 API，这些都要靠宿主环境提供，比如浏览器、Node.js 这些。
 
   JavaScript 的学习可以分为三个部分：
   1. 基本的语法构造，比如操作符、控制结构、语句等
@@ -38,6 +39,22 @@
 
   参考：
   + [[https://wangdoc.com/javascript/index.html][JavaScript 教程 - 网道]]
+
+** 宿主环境
+   在学习 JavaScript 的时候需要注意区分不同的宿主环境，因为在不同的环境下 JavaScript 的表现多多少少还是存在一些区别。
+
+   最常见的宿主环境应该是浏览器，提供了很多额外的接口，另外一个现在常用的宿主环境的是 Node.js，其中，Node 是 JavaScript 语言的服务器运行环境，
+   提供大量工具库，使得 JavaScript 语言与操作系统互动。其中，Node 内部采用 Google 公司的 V8 引擎作为 JavaScript 语言解释器，
+   通过自行开发的 libuv 库，调用操作系统资源。
+
+   不同类型的宿主环境在 JavaScript 的实现上存在区别，不一定完全匹配 ECMAScript 标准，比如说，Node.js 中模块系统使用的便是 CommonJS 标准。
+
+   同一类型的宿主环境在 JavaScript 的实现上同样存在差异，比如说 IE 浏览器，因此，往往需要一些工具将高版本的 JS 编译为兼容低版本的 JS，
+   Babel 便是用来完成这一工作的。
+
+   参考：
+   + [[https://javascript.ruanyifeng.com/nodejs/basic.html][Node.js 概述 -- JavaScript 标准参考教程 (alpha)]]
+   + [[https://wangdoc.com/javascript/basic/introduction.html][导论 - JavaScript 教程 - 网道]]
 
 * 数据类型
   JavaScript 中除了 ES6 新增的 Symbol 以外存在六种数据类型，分别为：数值、布尔值、字符串、undefined、null 和 对象。其中对象又可以分为狭义的对象、数组和函数。

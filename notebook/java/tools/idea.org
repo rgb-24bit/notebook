@@ -12,6 +12,7 @@
   - [[#create-live-templates][Create Live Templates]]
   - [[#使用-scratch-文件][使用 Scratch 文件]]
   - [[#常用的快捷键][常用的快捷键]]
+  - [[#创建书签][创建书签]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
@@ -40,7 +41,6 @@
 * 调试程序
   + [[https://www.cnblogs.com/chiangchou/p/idea-debug.html][在 Intellij IDEA 中使用 Debug - bojiangzhou - 博客园]]
 
-  
 * 相关技巧
 ** 通过 Maven 创建 Web App
    1) 选择 maven-archetype-webapp 创建项目
@@ -104,6 +104,9 @@
    | M-F1    | Select In，可以快速的在目录中选中当前文件        |
    | C-S-m   | 括号跳转                                         |
    |---------+--------------------------------------------------|
+
+** 创建书签
+   通过 ~C-F11~ 创建取消书签，通过 ~S-F11~ 显示选择属性，通过 ~C-Num~ 快速跳转数字书签。
 
 * 相关问题
 ** 怎样添加静态导入到补全列表

@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#相关问题][相关问题]]
   - [[#通过字面量定义对象时如何将变量做为一个对象的-key][通过字面量定义对象时如何将变量做为一个对象的 Key]]
+  - [[#es6commonjs-和-amd-之间的关系][ES6、CommonJS 和 AMD 之间的关系]]
 
 * 相关问题
 ** 通过字面量定义对象时如何将变量做为一个对象的 Key
@@ -11,4 +12,14 @@
      var key = 'key'
      var obj = {[key]: 'value'}  // {key: "value"}
    #+end_src
+
+** ES6、CommonJS 和 AMD 之间的关系
+   在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS 和 AMD 两种。前者用于服务器，后者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，
+   而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。
+   
+   也就是说，CommonJS 和 AMD 为了解决 JavaScript 文件之间的依赖与引用问题的包管理规范。在组织 JS 代码时，可以根据自己的喜好，选择合适的包管理规范，
+   但应该注意，尽可能只选择一种。
+
+   参考：
+   + [[https://www.cnblogs.com/cag2050/p/7419258.html][commonJS 模块规范 和 es6 模块规范 区别 - cag2050 - 博客园]]
 
