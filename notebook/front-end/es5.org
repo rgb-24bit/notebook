@@ -4,6 +4,7 @@
 - [[#基础概念][基础概念]]
   - [[#宿主环境][宿主环境]]
 - [[#数据类型][数据类型]]
+- [[#属性描述符][属性描述符]]
 - [[#相关技巧][相关技巧]]
   - [[#javascript-变量的命名][JavaScript 变量的命名]]
   - [[#让返回值变成-undefined][让返回值变成 undefined]]
@@ -154,6 +155,30 @@
 
   如果一个对象的所有键名都是正整数或零，并且有 ~length~ 属性，那么这个对象就很像数组，语法上称为类似数组的对象，可以通过 ~Array.prototype.slice.call~ 将类似数组的对象变成真正的数组。
     
+* 属性描述符
+  JavaScript 提供了一个内部数据结构 - 属性描述符来描述对象的属性，对象里目前存在的属性描述符有两种主要形式：
+  + 数据描述符：数据描述符是一个具有值的属性，该值可能是可写的，也可能不是可写的
+  + 存取描述符：存取描述符是由 ~getter-setter~ 函数对描述的属性
+
+  描述符必须是这两种形式之一，不能同时是两者。
+
+  用于描述符本身的属性：
+  + ~configurable~ - 该属性描述符是否可以被改变，当值为 false 时，该属性描述符不能被修改，同时对应的属性也不能删除
+  + ~enumerable~ - 该属性能否被枚举，当属性不能被枚举时，for...in 和 Object.keys 会跳过该属性
+    
+  用于数据描述符的属性：
+  + ~value~ - 该属性对应的值
+  + ~writable~ - 该属性是否可写
+
+  用于存取描述符的属性：
+  + ~get~ - 该属性的 ~getter~ 方法
+  + ~set~ - 该属性的 ~setter~ 方法
+    
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6][Object.defineProperty() - JavaScript | MDN]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties][Object.defineProperties() - JavaScript | MDN]]
+  + [[https://wangdoc.com/javascript/stdlib/attributes.html][属性描述对象 - JavaScript 教程 - 网道]]
+
 * 相关技巧
 ** JavaScript 变量的命名
    JavaScript 的标识符允许大多数的 Unicode 字符，因此，你甚至可以使用颜文字来编写程序。

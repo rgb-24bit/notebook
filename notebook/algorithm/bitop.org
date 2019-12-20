@@ -60,13 +60,33 @@
   #+END_SRC
 
 * 其他操作
-  通过如下的方式使得将某一为置为 1：
-  #+BEGIN_SRC C
-    int to1(int x, int n) {
-      if (n == 0) {
-        return x;
-      }
-      return x | (1 << n);
+  #+begin_src java
+    /**
+     ,* 获取第 n + 1 位的值
+     ,*/
+    public static byte get(byte b, int n) {
+      return (byte) ((b >> n) & 1);
     }
-  #+END_SRC
+
+    /**
+     ,* 设置第 n + 1 位的值为 1
+     ,*/
+    public static byte set1(byte b, int n) {
+      return (byte) (b | (1 << n));
+    }
+
+    /**
+     ,* 设置第 n + 1 位的值为 0
+     ,*/
+    public static byte set0(byte b, int n) {
+      return (byte) (b & ~(1 << n));
+    }
+
+    /**
+     ,* 取反第 n + 1 位的值
+     ,*/
+    public static byte neg(byte b, int n) {
+      return (byte) (b ^ (1 << n));
+    }
+  #+end_src
 

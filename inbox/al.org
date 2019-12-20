@@ -1,10 +1,3 @@
-* fuzzy
-  + [[https://github.com/cireu/fuz.el][cireu/fuz.el: Fast and precise fuzzy scoring/matching utils for Emacs, powered by rust]]
-
-* heap
-  + [[https://www.cnblogs.com/vamei/archive/2013/03/20/2966612.html][纸上谈兵: 堆 (heap) - Vamei - 博客园]]
-
 * timsort
   + [[https://sikasjc.github.io/2018/07/25/timsort/][Timsort原理学习 · Sika]]
-* 取整
-  向上取整 - (a+b-1)/b
+

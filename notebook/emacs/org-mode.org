@@ -4,6 +4,7 @@
 - [[#agenda-views][Agenda Views]]
 - [[#dates-and-times][Dates and Times]]
 - [[#markup-for-rich-contents][Markup for Rich Contents]]
+- [[#refile--copy][Refile & copy]]
 - [[#问题集][问题集]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
   - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
@@ -52,6 +53,14 @@
   + Latex 的预览需要同时安装 latex 和 dvipng
     
   更多的 Latex 技巧可以参考：[[https://linux.cn/article-10269-1.html][技术|如何使用 Emacs 创建 LaTeX 文档]]
+
+* Refile & copy
+  使用 Org-Mode 时应该较为常见的使用常见是将一个 headline 移动到另一个 headline 下，这时，我们可以通过 refile 来完成这样工作。
+
+  通过快捷键 ~C-c C-w~ 可以将选中的 ~headline~ 转接到 ~org-refile-targets~ 指定的目标中。
+
+  参考：
+  + [[https://orgmode.org/manual/Refile-and-copy.html#DOCF94][The Org Manual: Refile and copy]]
 
 * 问题集
 ** 如何将 org-capture 捕获的内容插入当前光标位置

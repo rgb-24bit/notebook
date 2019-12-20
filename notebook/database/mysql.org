@@ -26,6 +26,7 @@
   - [[#怎样修改列值为允许为空][怎样修改列值为允许为空]]
   - [[#语句-on-duplicate-key-update-的受影响行数][语句 ON DUPLICATE KEY UPDATE 的受影响行数]]
   - [[#mysql-中的-select-和-group-by][MySQL 中的 SELECT 和 GROUP BY]]
+  - [[#mysql-中-update-语句影响行数为-0-的问题][MySQL 中 UPDATE 语句影响行数为 0 的问题]]
 
 * Install
   目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
@@ -316,4 +317,15 @@
    #+end_quote
 
    [[https://dev.mysql.com/doc/refman/8.0/en/group-by-modifiers.html][MySQL :: MySQL 8.0 Reference Manual :: 12.20.2 GROUP BY Modifiers]]
+
+** MySQL 中 UPDATE 语句影响行数为 0 的问题
+   MySQL 在官方文档中的描述：
+   #+begin_quote
+   If you set a column to the value it currently has, MySQL notices this and does not update it.
+   #+end_quote
+
+   也就是说，当要更新的值和原始值一样时，MySQL 就不会执行更新，当所有值都一样时，就不会进行修改，影响行数自然为 0。
+
+   参考：
+   + [[https://stackoverflow.com/questions/2186887/mysql-update-query-returns-0-rows-affected][mySQL UPDATE query returns "0 rows affected" - Stack Overflow]]
 

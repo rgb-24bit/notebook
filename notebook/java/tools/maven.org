@@ -10,6 +10,7 @@
 - [[#多模块项目][多模块项目]]
 - [[#使用技巧][使用技巧]]
   - [[#查看项目依赖树][查看项目依赖树]]
+  - [[#编译时跳过下载-snapshot-依赖][编译时跳过下载 SNAPSHOT 依赖]]
 - [[#注意事项][注意事项]]
 - [[#相关问题][相关问题]]
   - [[#怎样通过-maven-创建运行-webapp][怎样通过 Maven 创建运行 WebApp]]
@@ -146,6 +147,15 @@
    #+END_EXAMPLE
 
    这个在不清楚 spring-boot-starter 到底依赖了哪些东西的时候很有用。
+
+** 编译时跳过下载 SNAPSHOT 依赖
+   有些时候项目中存在 SNAPSHOT 依赖但是又经常需要编译，而下载 SNAPSHOT 依赖往往需要花费不少时间，因此，可以选择跳过下载 SNAPSHOT 依赖：
+   #+begin_src bash
+     $ mvn goal --no-snapshot-updates
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/1348603/how-can-i-get-maven-to-stop-attempting-to-check-for-updates-for-artifacts-from-a/6450634#6450634][java - How can I get Maven to stop attempting to check for updates for artifacts from a certain group from maven-central-repo? - Stack Overflow]]
 
 * 注意事项
   + Maven 总是会用最近的依赖，也就是说，你在项目的构建说明文件里增加的这个依赖，会覆盖传递依赖引入的另一个依赖。

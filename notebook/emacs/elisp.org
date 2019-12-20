@@ -269,11 +269,14 @@
 
 * 问题集
 ** setq 和 setq-defautl 的区别
-   Emacs 中有些变量是 buffer-local 的，通过 setq 设置 buffer-local 变量时，只会影响该缓冲区，而 setq-default 会设置全局的值。
+   Emacs 中有些变量是 buffer-local 的，通过 setq 设置 buffer-local 变量时，只会影响该缓冲区，而 setq-default 会设置全局的默认值。
 
-   简单的说，就是：
-   + setq：设置的值可能只影响当前缓冲区
-   + setq-default：设置的值是全局的，影响所有的缓冲区
+   也就是说，当设置的变量为 buffer-local 变量时：
+   + ~setq~ 设置的是该缓冲区的值，不会修改全局的默认值
+   + ~setq-default~ 设置的是全局的默认值，但缓冲区中的值不一定和全局默认值相同
+
+   参考：
+   + [[https://stackoverflow.com/questions/18172728/the-difference-between-setq-and-setq-default-in-emacs-lisp][elisp - The difference between setq and setq-default in Emacs Lisp - Stack Overflow]]
 
 ** let 和 let* 的区别
    ~let~ 的参数列表中，后序的参数不能使用前面定义的参数，而 ~let*~ 可以：

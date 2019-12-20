@@ -1,0 +1,20 @@
+#+TITLE:      服务发现
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#eureka-clients][Eureka Clients]]
+
+* Eureka Clients
+  通常，我们可以通过 ~@EnableDiscoveryClient~ 或 ~@EnableEurekaClient~ 注解来启动注册客户端，但是，在 Spring Boot 中，
+  我们也可以使用更简单的方式，直接在配置文件中配置 ~server~ 的地址就可以了，Spring Boot 会自动启动注册客户端。
+
+  参考：
+  + [[https://cloud.spring.io/spring-cloud-netflix/multi/multi__service_discovery_eureka_clients.html][1. Service Discovery: Eureka Clients]]
+
+  另外，对于 ~@EnableEurekaClient~ 和 ~@EnableDiscoveryClient~ 之间的区别：
+  + 在 Spring Cloud 中 Discovery service 有多种实现，比如 Eureka、Consul 和 Zookeeper 等
+  + 使用 ~@EnableEurekaClient~ 通常是配合 ~Eureka~ 使用，而 ~@EnableDiscoveryClient~ 通常配合其他服务使用，但也可以用于 Eureka
+
+  参考：
+  + [[https://stackoverflow.com/questions/31976236/whats-the-difference-between-enableeurekaclient-and-enablediscoveryclient][spring cloud - What's the difference between EnableEurekaClient and EnableDiscoveryClient? - Stack Overflow]]
+
+

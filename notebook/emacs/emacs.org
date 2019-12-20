@@ -27,6 +27,9 @@
   - [[#字体与字体集][字体与字体集]]
   - [[#hooks][Hooks]]
 - [[#休闲娱乐][休闲娱乐]]
+- [[#相关问题][相关问题]]
+  - [[#怎样让光标跳转到上一个位置][怎样让光标跳转到上一个位置]]
+  - [[#怎样获取-emacs-编译时的参数][怎样获取 Emacs 编译时的参数]]
 
 * 简单使用
 ** 文本编辑
@@ -201,4 +204,15 @@
 
 * 休闲娱乐
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]
+
+* 相关问题
+** 怎样让光标跳转到上一个位置
+   可以通过 ~C-Space C-Space~ 添加一个 Mark，然后通过 ~C-u C-Space~ 跳转到该位置。
+
+   参考：
+   + [[http://ergoemacs.org/emacs/emacs_jump_to_previous_position.html][Emacs: Jump to Previous Position]]
+
+** 怎样获取 Emacs 编译时的参数
+   可以通过 ~system-configuration-options~ 变量的值来进行查看，参考：
+   + [[https://emacs.stackexchange.com/questions/35497/does-emacs-have-an-option-to-display-build-settings][config - Does emacs have an option to display build settings? - Emacs Stack Exchange]]
 
