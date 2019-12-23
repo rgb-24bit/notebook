@@ -84,6 +84,7 @@
   + [Emacs - 正则表达式](notebook/emacs/regex.org)
   + [scimax](notebook/emacs/scimax.org)
   + [Emacs - 实用功能](notebook/emacs/utils.org)
+  + [Version Control](notebook/emacs/vc.org)
 ## front-end
   + **vue**
     + [Vue.JS](notebook/front-end/vue/vue.org)
@@ -180,10 +181,12 @@
   + [日常使用](notebook/mac/daily.org)
   + [开发相关](notebook/mac/develop.org)
 ## microservice
+  + **spring-cloud**
+    + [Spring Cloud 基本概念](notebook/microservice/spring-cloud/spring-cloud.org)
   + [配置中心](notebook/microservice/config.org)
   + [日志记录与分析](notebook/microservice/log.org)
   + [远程过程调用](notebook/microservice/rpc.org)
-  + [Spring Cloud](notebook/microservice/spring-cloud.org)
+  + [服务发现](notebook/microservice/service-discovery.org)
 ## misc
   + [字符编码](notebook/misc/character-encoding.org)
   + [计算机图形学](notebook/misc/computer-graphics.org)
@@ -256,10 +259,9 @@
 ## tools
   + [Chrome](notebook/tools/chrome.org)
   + [自动集成](notebook/tools/ci.org)
+  + [命令行工具](notebook/tools/cli.org)
   + [Windows CMD 命令](notebook/tools/cmd.org)
-  + [curl](notebook/tools/curl.org)
   + [Docker](notebook/tools/docker.org)
-  + [Enhance Tools](notebook/tools/enhance.org)
   + [Shell](notebook/tools/shell.org)
   + [SSH](notebook/tools/ssh.org)
   + [实用开源工具收集](notebook/tools/utils.org)

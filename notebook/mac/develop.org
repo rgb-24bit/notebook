@@ -9,6 +9,8 @@
 - [[#charles-的使用问题][charles 的使用问题]]
 - [[#npm-指令老是提示没有权限的问题][npm 指令老是提示没有权限的问题]]
 - [[#命令行获取-cpu-信息][命令行获取 CPU 信息]]
+- [[#设置-emacs-为-git-message-的编辑器][设置 emacs 为 git message 的编辑器]]
+- [[#通过-homebrew-安装程序时如何指定编译参数][通过 Homebrew 安装程序时如何指定编译参数]]
 
 * 怎样在 Mac 上安装 Java 8
   首先安装工具 Homebrew，通过如下指令完成：
@@ -96,4 +98,15 @@
     sysctl -n machdep.cpu.thread_count  # 显示线程数
   #+end_src
 
-  
+* 设置 emacs 为 git message 的编辑器
+  通常情况下可以用 ~emacsclient~ 作为编辑器，这时，编辑器的配置为：
+  #+begin_src conf
+    editor = "/usr/local/bin/emacsclient -c"
+  #+end_src
+
+* 通过 Homebrew 安装程序时如何指定编译参数
+  可以通过 ~brew options formula~ 的方式来获取支持的编译参数，使用时直接在后面添加就可以了，比如：
+  #+begin_src bash
+    $ brew upgrade emacs-mac --with-modules
+  #+end_src
+

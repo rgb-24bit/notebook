@@ -15,3 +15,13 @@
   + Jekins
   + ……
   + 
+* 协程
+  + [[https://blog.csdn.net/wentianyao/article/details/51445940][C++协程(1):协程原理及实现方式概述 - wentianyao的专栏]]
+  + [[https://www.zhihu.com/question/52193579][腾讯开源的 libco 号称千万级协程支持，那个共享栈模式原理是什么? - 知乎]]
+
+* Misc
+  1. Apollo 名称空间的优先级：前面的 > 后面的
+  2. Maven Root POM 中的 module 指定的是目录名称而不是模块名称
+  3. spring boot 启动 eureka 可以直接配置属性就行
+  4. 不少语言中都有将最后表达式的值作为代码块的返回值的功能，比如 C、Ruby 和 Lisp，但是有的不能，比如 Python 和 Java
+

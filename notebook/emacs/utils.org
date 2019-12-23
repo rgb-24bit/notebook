@@ -2,10 +2,15 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#寄存器][寄存器]]
+- [[#bar-charts][Bar Charts]]
 
 * 寄存器
   寄存器可以非常快速地存储和恢复字符串、整数、矩形、文件和目录路径、WindowConfigurations、
   FrameConfigurations 和标记。
 
   + [[https://www.emacswiki.org/emacs/Registers][EmacsWiki: Registers]]
+
+* Bar Charts
+  Emacs 中可以使用 ~chart~ 包来绘制柱状图，效果还不错，参考：
+  + [[https://francismurillo.github.io/2017-04-15-Exploring-Emacs-chart-Library/][Exploring Emacs chart Library]]
 

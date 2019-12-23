@@ -5,6 +5,7 @@
 - [[#dates-and-times][Dates and Times]]
 - [[#markup-for-rich-contents][Markup for Rich Contents]]
 - [[#refile--copy][Refile & copy]]
+- [[#文学编程][文学编程]]
 - [[#问题集][问题集]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
   - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
@@ -62,6 +63,35 @@
   参考：
   + [[https://orgmode.org/manual/Refile-and-copy.html#DOCF94][The Org Manual: Refile and copy]]
 
+* 文学编程
+  文学编程是一种很适合用来进行算法练习的编程模式，而 Org 提供了很多的功能来支持这样模式，可以参考：
+  + [[https://github.com/lujun9972/emacs-document/blob/master/org-mode/%E6%96%87%E5%AD%A6%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B.org][文学编程简介]]
+
+  相关问题：
+  + 参数 ~:noweb~ 和参数 ~:noweb-ref~ 的作用是什么？
+    
+    当代码块通过 ~#+NAME~ 或 ~:noweb-ref~ 指定名称后便可以在其他代码块中通过 ~<<name>>~ 的方式引用代码块，此时需要指定 ~:noweb~ 参数的值，
+    保证在导出时引用的代码块被展开。
+
+    参数 ~:noweb~ 的可选值有：
+    |--------------+------------------------------------------------------|
+    | 可选值       | 作用                                                 |
+    |--------------+------------------------------------------------------|
+    | ~no~           | 默认值，不展开引用代码块                             |
+    | ~yes~          | 在执行、提取代码、导出时都展开代码块                 |
+    | ~tangle~       | 仅在提取代码时展开代码块                             |
+    | ~no-export~    | 除了导出以外的情况都展开代码块                       |
+    | ~strip-export~ | 除了导出以外的情况都展开代码块，导出时移除代码块引用 |
+    | ~eval~         | 仅在执行时展开代码块                                 |
+    |--------------+------------------------------------------------------|
+
+  + 代码块执行结果的默认类型是什么？
+
+    对于 ~Functional mode~ 来说默认类型是 ~value~, 对于 ~Scripting mode~ 来说默认类型是 ~output~. 可以通过 ~results~ 来指定结果值。
+
+  相关链接：
+  + [[https://www.gnu.org/software/emacs/manual/html_node/org/Specific-header-arguments.html#Specific-header-arguments][Specific header arguments - The Org Manual]]
+  
 * 问题集
 ** 如何将 org-capture 捕获的内容插入当前光标位置
    #+BEGIN_QUOTE

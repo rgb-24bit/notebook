@@ -8,6 +8,7 @@
 - [[#相关问题][相关问题]]
   - [[#怎样在-makefile-中使用环境变量][怎样在 Makefile 中使用环境变量]]
   - [[#获取-shell-命令的输出][获取 Shell 命令的输出]]
+  - [[#怎样在编译的时候通过命令行参数定义宏][怎样在编译的时候通过命令行参数定义宏]]
 
 * 简单使用
 ** 自动化变量
@@ -53,4 +54,24 @@
    #+BEGIN_SRC makefile
      VAR = $(shell command...)
    #+END_SRC
+
+** 怎样在编译的时候通过命令行参数定义宏
+   C/C++ 中常见的一种技巧便是通过在编译期间指定宏的方式来指定不同的编译参数，我们可以通过编译器的 ~-D~ 参数来调用宏：
+   #+begin_example
+     -D <macro>=<value>      Define <macro> to <value> (or 1 if <value> omitted)
+   #+end_example
+   
+   同时，我们可以借助 Makefile 指定环境变量的方式来指定宏：
+   #+begin_src makefile
+     MACRO=-D ${MACRO}
+   #+end_src
+
+   使用：
+   #+begin_src bash
+     make MACRO=DEBUG
+   #+end_src
+   
+   参考：
+   + [[https://stackoverflow.com/questions/2826029/passing-additional-variables-from-command-line-to-make][makefile - Passing additional variables from command line to make - Stack Overflow]]
+   + [[https://stackoverflow.com/questions/28890634/how-to-get-a-shell-environment-variable-in-a-makefile][How to get a shell environment variable in a makefile? - Stack Overflow]]
 

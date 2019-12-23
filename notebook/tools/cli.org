@@ -1,0 +1,106 @@
+#+TITLE:      命令行工具
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#curl][curl]]
+- [[#fping][fping]]
+- [[#ffmpeg][ffmpeg]]
+
+* curl
+  curl 的常用选项如下：
+  #+BEGIN_EXAMPLE
+    -o,             保存网页内容到文件
+    -L,             自动跳转
+    -i,             显示响应头信息及网页代码
+    -I,             只显示响应头信息
+    -v,             显示整个 http 通信过程
+    --trace,        显示比 -v 选项更详细的通信过程
+    --trace-ascii,  将 --trace 的输出保存到文件
+    -X,             指定使用的请求方法
+    -d, --data,     指定要发送的数据
+    --user-agent,   指定 User Agent
+    --cookie,       发送 cookie
+    -H, --header，  增加头信息
+  #+END_EXAMPLE
+
+  使用实例：
+  + 查看网页源码
+    #+BEGIN_SRC bash
+      $ curl www.sina.com
+    #+END_SRC
+  + 自动跳转
+    #+BEGIN_SRC bash
+      $ curl -L www.sina.com
+    #+END_SRC
+  + 显示头信息
+    #+BEGIN_SRC bash
+      $ curl -i www.sina.com
+    #+END_SRC
+  + 显示通信过程
+    #+BEGIN_SRC bash
+      $ curl -v www.sina.com
+    #+END_SRC
+  + HTTP动词
+    #+BEGIN_SRC bash
+      $ curl -X POST www.example.com
+    #+END_SRC
+  + User Agent字段
+    #+BEGIN_SRC bash
+      $ curl --user-agent "[User Agent]" [URL]
+    #+END_SRC
+  + cookie
+    #+BEGIN_SRC bash
+      $ curl --cookie "name=xxx" www.example.com
+    #+END_SRC
+  + 增加头信息
+    #+BEGIN_SRC bash
+      $ curl -H "Content-Type:application/json" http://example.com
+    #+END_SRC
+
+
+
+* fping
+  Fping 相较于 ping 命令可以同时 ping 多个目标 IP 地址，甚至可以将要测试的 IP 地址保存到文件中作为标准输入。
+
+  #+begin_src bash
+    $ fping < ip.txt
+  #+end_src
+
+  参考：
+  + [[https://www.howtoing.com/ping-multiple-linux-hosts-using-fping][Fping - Linux 的高性能 Ping 工具]]
+
+* ffmpeg
+  FFmpeg 是一款非常快速的视频和音频转换器, 是开源项目 FFmpeg (Fast Forward moving pictures expert group) 的命令行程序。它可以在任意采样率之间转换，
+  并通过高质量的多相滤波器实时调整视频大小。
+
+  FFmpeg 程序的转码流程：
+  #+begin_example
+    _______              ______________
+    |       |            |              |
+    | input |  demuxer   | encoded data |   decoder
+    | file  | ---------> | packets      | -----+
+    |_______|            |______________|      |
+                                               v
+                                           _________
+                                          |         |
+                                          | decoded |
+                                          | frames  |
+                                          |_________|
+     ________             ______________       |
+    |        |           |              |      |
+    | output | <-------- | encoded data | <----+
+    | file   |   muxer   | packets      |   encoder
+    |________|           |______________|
+ 
+ 
+    其中, demuxer 为解复用器, muxer 为复用器; decoder 为解码器, encoder 为编码器
+  #+end_example
+
+  参考：
+  + [[https://www.cnblogs.com/chenpingzhao/p/10758820.html][关于 ffmpeg 的一些常见用法 - 踏雪无痕SS - 博客园]]
+
+  使用：
+  #+begin_src bash
+    # 转换 flv 文件为 MP3
+    ffmpeg -i input.flv -q:a 5 out.mp3
+  #+end_src
+
