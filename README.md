@@ -47,6 +47,7 @@
   + [C 语言](notebook/c-c++/c.org)
   + [C++](notebook/c-c++/cpp.org)
   + [GCC & GDB](notebook/c-c++/gcc-gdb.org)
+  + [C 标准库](notebook/c-c++/libc.org)
   + [强大的宏](notebook/c-c++/macro.org)
   + [Makefile](notebook/c-c++/makefile.org)
   + [指针](notebook/c-c++/pointer.org)

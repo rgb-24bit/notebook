@@ -2,9 +2,10 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网络面板过滤请求][网络面板过滤请求]]
-- [[#puppeteer][puppeteer]]
-- [[#user-agent][User-Agent]]
-- [[#chrome-扩展][Chrome 扩展]]
+- [[#puppeteer][Puppeteer]]
+- [[#相关链接][相关链接]]
+- [[#相关问题][相关问题]]
+  - [[#user-agent-的值怎么和其他浏览器的差不多][User-Agent 的值怎么和其他浏览器的差不多]]
 
 * 网络面板过滤请求
   |---------------------+----------------------------------------------------------------------------------------------|
@@ -23,18 +24,21 @@
   | ~set-cookie-value~    | 显示具有 Set-Cookie 标头并且值与指定值匹配的资源                                             |
   | ~status-code~         | 仅显示 HTTP 状态代码与指定代码匹配的资源                                                     |
   |---------------------+----------------------------------------------------------------------------------------------|
-  
-* puppeteer
-  中国区使用需要换源： ~PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors~
 
-* User-Agent
-  早期的 ~User-Agent~ 字符串格式为 ~Mozilla/Version [Language] (Platform; Encryption)~.
+* Puppeteer
+  Puppeteer 是 Chrome 官方的 Headless Chrome 工具，但是国内实用需要换一下源：
+  #+begin_example
+    PUPPETEER_DOWNLOAD_HOST = https://npm.taobao.org/mirrors
+  #+end_example
 
-  后来出现的浏览器为了兼容最初的格式，在原始的 ~User-Agent~ 进行修改，比如 ~IE~ 的：
-  #+BEGIN_EXAMPLE
-    Mozilla/2.0 (compatible; MSIE Version; Operating System)
-  #+END_EXAMPLE
+* 相关链接
+  + [[https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8][Chrome 插件(扩展)开发全攻略 - 我是小茗同学 - 博客园]]
 
-* Chrome 扩展
-  + [[https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html#%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8][Chrome插件(扩展)开发全攻略 - 我是小茗同学 - 博客园]]
+* 相关问题
+** User-Agent 的值怎么和其他浏览器的差不多
+   早期的 ~User-Agent~ 字符串格式为 ~Mozilla/Version [Language] (Platform; Encryption)~.
 
+   后来出现的浏览器为了兼容最初的格式，在原始的 ~User-Agent~ 进行修改，比如 ~IE~ 的：
+   #+BEGIN_EXAMPLE
+     Mozilla/2.0 (compatible; MSIE Version; Operating System)
+   #+END_EXAMPLE
