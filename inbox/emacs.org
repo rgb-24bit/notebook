@@ -118,5 +118,6 @@
 * 动态模块
   + [[https://github.com/railwaycat/homebrew-emacsmacport/blob/master/Formula/emacs-mac.rb][homebrew-emacsmacport/emacs-mac.rb at master · railwaycat/homebrew-emacsmacport]]
   + [[https://github.com/emacs-pe/emacs-modules][emacs-pe/emacs-modules: List of resources for Emacs modules]]
-  + [[https://github.com/akermu/emacs-libvterm][akermu/emacs-libvterm: Emacs libvterm integration]]
 
+* vterm
+  复制：通过 ~C-c C-t~ 开启复制模式，mark region 后 ~RET~ 即可完成复制

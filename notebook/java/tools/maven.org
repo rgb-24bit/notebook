@@ -11,6 +11,7 @@
 - [[#使用技巧][使用技巧]]
   - [[#查看项目依赖树][查看项目依赖树]]
   - [[#编译时跳过下载-snapshot-依赖][编译时跳过下载 SNAPSHOT 依赖]]
+  - [[#通过更快速的方式运行-checkstyle-检查][通过更快速的方式运行 checkstyle 检查]]
 - [[#注意事项][注意事项]]
 - [[#相关问题][相关问题]]
   - [[#怎样通过-maven-创建运行-webapp][怎样通过 Maven 创建运行 WebApp]]
@@ -156,6 +157,13 @@
 
    参考：
    + [[https://stackoverflow.com/questions/1348603/how-can-i-get-maven-to-stop-attempting-to-check-for-updates-for-artifacts-from-a/6450634#6450634][java - How can I get Maven to stop attempting to check for updates for artifacts from a certain group from maven-central-repo? - Stack Overflow]]
+
+** 通过更快速的方式运行 checkstyle 检查
+   #+begin_src bash
+     $ mvn checkstyle:checkstyle --no-snapshot-updates
+   #+end_src
+
+   这样可以省去编译和下载快照依赖的时间，快上很多！
 
 * 注意事项
   + Maven 总是会用最近的依赖，也就是说，你在项目的构建说明文件里增加的这个依赖，会覆盖传递依赖引入的另一个依赖。

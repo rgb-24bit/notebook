@@ -1,10 +1,11 @@
-#+TITLE:      Python 使用技巧
+#+TITLE:      Python Misc
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#使用-strmaketrans-转换消除字符][使用 str.maketrans 转换消除字符]]
 - [[#python-中的浮点数字面量][Python 中的浮点数字面量]]
 - [[#获取命令行参数][获取命令行参数]]
 - [[#获取某一周的第一天][获取某一周的第一天]]
+- [[#python-在不同平台上的环境控制工具][Python 在不同平台上的环境控制工具]]
 
 * 使用 str.maketrans 转换消除字符
   #+BEGIN_SRC python
@@ -34,4 +35,11 @@
         weekday = '%s %s 1' % (year, isoweek)
         return datetime.datetime.strptime(weekday, '%G %V %u').date()
   #+END_SRC
+
+* Python 在不同平台上的环境控制工具
+  对于 Node.js 来说可以用 nvm 来控制多个版本的 node 环境，Python 也具有类似的工具，只不过在 ~unix/linux~ 和 ~windows~ 平台上有一些区别：
+  + ~windows~ 平台可以使用 ~Python Launcher for Windows~ 来进行控制
+  + ~unix/linux~ 平台可以使用 ~pyenv~ 来进行控制
+
+  另外，虚拟环境常用 ~virtualenv~ 和 ~venv~ 来进行创建和使用。
 

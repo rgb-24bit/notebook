@@ -35,3 +35,7 @@
   + [[https://github.com/protocolbuffers/protobuf][protocolbuffers/protobuf: Protocol Buffers - Google's data interchange format]]
   + [[https://en.wikipedia.org/wiki/Type-length-value][Type-length-value - Wikipedia]]
 
+* 端口状态
+  通常情况下服务会对端口进行监听，这时状态为 LISTEN，建立连接后还会有 ESTABLISHED 状态。
+
+  

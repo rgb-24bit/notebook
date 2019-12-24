@@ -1,4 +1,0 @@
-* 环境控制
-  Python 环境控制大概可以分为虚拟环境和 Python 版本环境，其中，常用的虚拟环境工作主要为：virtualenv 和 venv，而常用的版本环境工具的话就是 pyenv，
-  windows 上有 Python Launcher for Windows。
-

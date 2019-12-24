@@ -5,6 +5,7 @@
   - [[#宿主环境][宿主环境]]
 - [[#数据类型][数据类型]]
 - [[#属性描述符][属性描述符]]
+- [[#对象字面量][对象字面量]]
 - [[#相关技巧][相关技巧]]
   - [[#javascript-变量的命名][JavaScript 变量的命名]]
   - [[#让返回值变成-undefined][让返回值变成 undefined]]
@@ -178,6 +179,34 @@
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6][Object.defineProperty() - JavaScript | MDN]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties][Object.defineProperties() - JavaScript | MDN]]
   + [[https://wangdoc.com/javascript/stdlib/attributes.html][属性描述对象 - JavaScript 教程 - 网道]]
+
+* 对象字面量
+  在 ES2015，对象字面值扩展支持：
+  + 在创建时设置原型
+  + 简写了 ~foo: foo~ 形式的属性赋值
+  + 方法定义
+  + 父方法调用
+  + 使用表达式动态计算属性名
+
+  例子:
+  #+begin_src js
+    var obj = {
+      // __proto__
+      __proto__: theProtoObj,
+      // Shorthand for ‘handler: handler’
+      handler,
+      // Methods
+      toString() {
+        // Super calls
+        return "d " + super.toString();
+      },
+      // Computed (dynamic) property names
+      [ 'prop_' + (() => 42)() ]: 42
+    };
+  #+end_src
+
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Grammar_and_types][语法和数据类型 - JavaScript | MDN]]
 
 * 相关技巧
 ** JavaScript 变量的命名

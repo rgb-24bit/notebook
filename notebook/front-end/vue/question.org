@@ -1,0 +1,28 @@
+#+TITLE:      相关问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#标签-template-和-div-的区别][标签 template 和 div 的区别]]
+
+* 标签 template 和 div 的区别
+  在 Vue 中可以使用 ~template~ 和 ~div~ 来包裹多个子元素，但是这两个是存在区别的，其中，主要的区别为：
+  + ~template~ 标签在渲染时不会出现在 DOM 而 ~div~ 会
+
+  #+begin_src html
+    <!-- 模板 -->
+    <template v-if="true">
+      <div>template</div>
+    </template>
+    <div v-if="true">
+      <div>div</div>
+    </div>
+
+    <!-- 渲染结果 -->
+    <div>template</div>
+    <div>
+      <div>div</div>
+    </div>
+  #+end_src
+
+  另外，标签 ~template~ 本身也是一个用于定义模板的新标签，可以参考：
+  + [[https://www.html5rocks.com/zh/tutorials/webcomponents/template/][HTML's New Template Tag: standardizing client-side templating - HTML5 Rocks]]
+
