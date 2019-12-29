@@ -25,4 +25,5 @@
 
   另外，标签 ~template~ 本身也是一个用于定义模板的新标签，可以参考：
   + [[https://www.html5rocks.com/zh/tutorials/webcomponents/template/][HTML's New Template Tag: standardizing client-side templating - HTML5 Rocks]]
+  + [[http://www.ruanyifeng.com/blog/2019/08/web_components.html][Web Components 入门实例教程 - 阮一峰的网络日志]]
 

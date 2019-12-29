@@ -17,6 +17,7 @@
   - [[#浏览器中-es6-模块化的语法不能使用][浏览器中 ES6 模块化的语法不能使用]]
   - [[#怎样获取用户使用的语言][怎样获取用户使用的语言]]
   - [[#javascript-的入口函数][JavaScript 的入口函数？]]
+  - [[#如何清空一个数组中的内容][如何清空一个数组中的内容]]
 
 * 基础概念
   JavaScript 本身不提供任何与 I/O 相关的 API，这些都要靠宿主环境提供，比如浏览器、Node.js 这些。
@@ -299,4 +300,39 @@
      }
    #+END_SRC
 
+** 如何清空一个数组中的内容
+   我们可以使用如下五种方法来清空一个数组中的内容：
+   1. 创建一个新的空数组，应该保证其他地方没有引用原来的数组：
+      #+begin_src js
+        A = [];
+      #+end_src
+
+   2. 将数组的 ~length~ 属性置为 0：
+      #+begin_src js
+        A.length = 0;
+      #+end_src
+
+   3. 使用数组的 ~splice~ 方法：
+      #+begin_src js
+        A.splice(0, A.length);
+      #+end_src
+
+   4. 暴力点，整一个循环：
+      #+begin_src js
+        while (A.length > 0) {
+          A.pop();
+        }
+      #+end_src
+
+   5. 再整一个循环：
+      #+begin_src js
+        while (A.length > 0) {
+          A.shift();
+        }
+      #+end_src
+
+   其中，最具可用性的是 ~2~ 和 ~3~ 这两种方式，它们两个的性能也差不多。
+
+   参考：
+   + [[https://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript][How do I empty an array in JavaScript? - Stack Overflow]]
 

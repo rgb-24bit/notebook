@@ -2,6 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#cron-表达式][Cron 表达式]]
+- [[#tmpfs][tmpfs]]
+- [[#xdg-user-directories][XDG user directories]]
 
 * Cron 表达式
   Linux 中常常通过 Cron 来定义定时任务，而 Cron 表达式也渐渐变得不局限于 Linux 中，很多定时任务的框架都集成了这一语法。
@@ -28,4 +30,25 @@
 
   参考：
   + [[https://www.jianshu.com/p/6b8341cf3311][Cron 表达式详解 - 简书]]
+
+* tmpfs
+  tmpfs 是一个临时文件系统，驻留在内存中，因为是在内存里，所以读写非常快，可以提供较高的访问速度。
+  
+  参考：
+  + [[https://segmentfault.com/a/1190000014737366][tmpfs 详解 - 个人文章 - SegmentFault 思否]]
+
+* XDG user directories
+  用户目录指位于 $HOME 下的一系列常用目录，例如 Documents，Downloads，Music，还有 Desktop。用户目录会在文件管理器中显示为不同的图标，且被多种应用程序所参照。
+
+  可以使用 ~xdg-user-dirs~ 自动生成这些目录：
+  #+begin_src bash
+    $ xdg-user-dirs-update
+  #+end_src
+
+  运行后该命令还会自动地：
+  + 创建一个本地的 ~~/.config/user-dirs.dirs~ 配置文件，应用程序通过它来查找使用特定帐号指定的用户目录
+  + 创建一个本地的 ~~/.config/user-dirs.locale~ 配置文件，根据使用的 locale 指定语言
+
+  参考：
+  + [[https://wiki.archlinux.org/index.php/XDG_user_directories_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][XDG user directories (简体中文) - ArchWiki]]
 

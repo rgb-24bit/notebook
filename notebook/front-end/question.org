@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#动态加载-css-和-javascript][动态加载 CSS 和 JavaScript]]
+- [[#shim-和-polyfill-是什么意思][Shim 和 Polyfill 是什么意思]]
 
 * 动态加载 CSS 和 JavaScript
   我们可以利用浏览器的特性来动态加载 CSS 和 JavaScript，当我们动态添加 ~script~ 或 ~style~ 标签到 DOM 中时，浏览器如果发现该标签需要加载远程资源，
@@ -15,4 +16,8 @@
 
   参考：
   + [[https://juejin.im/entry/59c128255188257e6e2628e4][动态加载 js css 插件 - 前端 - 掘金]]
+
+* Shim 和 Polyfill 是什么意思
+  + Shim - 一个 Shim 是一个库，它将一个新的 API 引入到一个旧的环境中，而且仅靠旧环境中已有的手段实现
+  + Polyfill - 一个 Polyfill 相当于是一个用在浏览器 API 上的 Shim，提供在旧环境中的浏览器原生 API 实现
 

@@ -4,6 +4,7 @@
 - [[#常用-http-请求头和响应头][常用 HTTP 请求头和响应头]]
 - [[#multipart][MultiPart]]
 - [[#http-api-认证授权][HTTP API 认证授权]]
+- [[#http-缓存][HTTP 缓存]]
 
 * 常用 HTTP 请求头和响应头
   HTTP 消息头支持自定义，自定义的专用消息头一般会添加 ~X-~ 前缀，常用的 HTTP 请求头和响应头可以参考：
@@ -58,4 +59,31 @@
 * HTTP API 认证授权
   + [[https://coolshell.cn/articles/19395.html][HTTP API 认证授权术 || 酷 壳 - CoolShell]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication][HTTP 身份验证 - HTTP | MDN]]
+
+* HTTP 缓存
+  在 HTTP 缓存机制中服务器端可以通过 ~Cache-control~ 响应头来控制缓存，可以：
+  + 禁止进行缓存，缓存中不得存储任何关于客户端请求和服务端响应的内容，每次由客户端发起的请求都会下载完整的响应内容：
+    #+begin_example
+      Cache-Control: no-store
+    #+end_example
+  + 强制确认缓存，每次有请求发出时，缓存会将该请求发到服务器，服务器端会验证请求中所描述的缓存是否过期，若未过期，则缓存才使用本地缓存副本：
+    #+begin_example
+      Cache-Control: no-cache
+    #+end_example
+  + 通过 ~max-age=<seconds>~ 指定资源能够被缓存的最大时间：
+    #+begin_example
+      Cache-Control: max-age=31536000
+    #+end_example
+
+  理论上来讲，当一个资源被缓存存储后，该资源应该可以被永久存储在缓存中。由于缓存只有有限的空间用于存储资源副本，所以缓存会定期地将一些副本删除，这个过程叫做缓存驱逐。
+
+  另一方面，当服务器上面的资源进行了更新，那么缓存中的对应资源也应该被更新，由于 HTTP 是 C/S 模式的协议，服务器更新一个资源时，不可能直接通知客户端更新缓存，
+  所以双方必须为该资源约定一个过期时间，在该过期时间之前，该资源（缓存副本）就是 *新鲜* 的，当 *过了过期时间* 后，该资源（缓存副本）则变为 *陈旧* 的。
+
+  驱逐算法用于将陈旧的资源替换为新鲜的，注意，一个陈旧的资源是不会直接被清除或忽略的，当客户端发起一个请求时，缓存检索到已有一个对应的陈旧资源，则缓存会先将此请求附加一个 ~If-None-Match~ 头，
+  然后发给目标服务器，以此来检查该资源副本是否是依然还是算新鲜的，若服务器返回了 304 (Not Modified)，则表示此资源副本是新鲜的，这样一来，可以节省一些带宽。
+  若服务器通过 ~If-None-Match~ 或 ~If-Modified-Since~ 判断后发现已过期，那么会带有该资源的实体内容返回。
+
+  参考
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ][HTTP 缓存 - HTTP | MDN]]
 

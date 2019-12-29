@@ -88,6 +88,7 @@
   + [Version Control](notebook/emacs/vc.org)
 ## front-end
   + **vue**
+    + [相关问题](notebook/front-end/vue/question.org)
     + [Vue.JS](notebook/front-end/vue/vue.org)
   + [CSS](notebook/front-end/css.org)
   + [ECMAScript 5](notebook/front-end/es5.org)
@@ -240,6 +241,7 @@
   + [Python 协程](notebook/python/coroutine.org)
   + [Python 爬虫笔记](notebook/python/crawler.org)
   + [框架 - Flask 笔记](notebook/python/flask.org)
+  + [Python Misc](notebook/python/misc.org)
   + [ORM 框架](notebook/python/orm.org)
   + [Python Packaging](notebook/python/packaging.org)
   + [Python 笔记](notebook/python/python.org)
@@ -248,7 +250,6 @@
   + [socket](notebook/python/socket.org)
   + [Python - 并发编程](notebook/python/thread.org)
   + [Tkinter](notebook/python/tkinter.org)
-  + [Python 使用技巧](notebook/python/trick.org)
   + [typing - Support for type hints](notebook/python/typing.org)
   + [Python - 弱引用](notebook/python/weakref.org)
 ## solution
