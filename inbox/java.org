@@ -97,14 +97,6 @@
 * java
   Maven - SNAPSHOST - RELEASE
 
-* repl
-  + [[https://www.infoq.cn/article/jshell-java-repl][JShell：Java REPL综合指南-InfoQ]]
-
-* 日志
-  在 CompletableFuture 中执行的任务，MyBatis 的日志好像没有打印出来
-
-  log.infoEnabled - 性能考虑
-
 * 协程
   + [[https://www.v2ex.com/t/598693#reply13][用 Java 撸了一个 yield 的玩具 - V2EX]]
   + [[https://www.v2ex.com/t/459387][天哪，看我竟然在 Java 语言里撸出了什么 - V2EX]]
@@ -141,51 +133,7 @@
 
   至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
 
-* log
-  + [[http://www.itjc5.com/post/8.html][vip教程分享-小结开发程序员的日志规则有那些呢？]]
-
 * 注解
-  组合注解，lombok 中的注解处理器由于会检查是否是类，因此无法直接当做组合注解……
+  + [[https://www.race604.com/annotation-processing/][Java 注解处理器]]
 
-  + [[https://juejin.im/post/5a619f886fb9a01c9f5b7e4f][Java中的注解-自定义注解 - 掘金]]
-  + [[https://stackoverflow.com/questions/41243018/create-custom-annotation-for-lombok][java - Create custom annotation for Lombok - Stack Overflow]]
-
-* 教程
-  + [[http://tutorials.jenkov.com/][Jenkov.com]]
-
-* AST
-  + [[https://www.baeldung.com/lombok-custom-annotation][Implementing a Custom Lombok Annotation | Baeldung]]
-  + [[https://www.race604.com/annotation-processing/][Java注解处理器]]
-
-* maven
-  多镜像配置：
-  #+begin_src xml
-    <mirror>
-      <id>Local</id>
-      <name>Nexus Mirror.</name>
-      <url>...</url>
-      <mirrorOf>*</mirrorOf>
-    </mirror>
-
-    <mirror>
-      <id>nexus-aliyun</id>
-      <name>nexus-aliyun</name>
-      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-      <mirrorOf>central</mirrorOf>
-    </mirror>
-  #+end_src
-
-  在 Local 中找不到的包就会去 central 下。
-
-  参考：[[https://maven.apache.org/guides/mini/guide-mirror-settings.html][Maven – Guide to Mirror Settings]]
-
-  理解：当镜像的 ~mirrorOf~ 配置是 ~*~ 时，配置在项目中的存储库也会走这个镜像，这时，要么修改 ~mirrorOf~ 的配置，要么添加镜像配置。
-
-  其实，最好的还是在本地配置一个 ~central~ 的，项目中指定另外的 ~repository~ 比较安逸。
-
-* maven parent
-  dependencyManagement、dependence、版本号
-
-* 时间格式
-  JSR-310、ISO 8601、strftime
 

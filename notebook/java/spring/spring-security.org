@@ -20,6 +20,7 @@
   - [[#sping-security-中-role-和-grantedauthority-的区别][Sping Security 中 Role 和 GrantedAuthority 的区别]]
   - [[#前端对-oauth2-协议的操作][前端对 OAuth2 协议的操作]]
   - [[#认证授权鉴权和权限控制][认证、授权、鉴权和权限控制]]
+  - [[#frameworkendpoint-注解的作用][@FrameworkEndpoint 注解的作用]]
 
 * Spring Security Core
   Spring Security 是一个多模块的项目，其基础功能由 Spring Security Core 这个模块提供，这个核心模块中的主要对象就是 Authentication、UserDetails、AuthenticationManager 这些，可以参考：
@@ -243,4 +244,10 @@
    过程：认证-->授权-->鉴权-->权限控制
 
    参考：[[https://www.cnblogs.com/badboyh2o/p/11068779.html][认证、授权、鉴权和权限控制 - badboyh2o - 博客园]]
+
+** @FrameworkEndpoint 注解的作用
+   ~@FrameworkEndpoint~ 注解是 ~@Controller~ 注解的同义注解，只不过，当发生冲突时，Controller 注解的优先级更高。
+
+   参考：
+   + [[https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/provider/endpoint/FrameworkEndpoint.html][FrameworkEndpoint (OAuth for Spring Security 2.4.0.BUILD-SNAPSHOT API)]]
 

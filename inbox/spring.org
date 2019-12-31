@@ -2,7 +2,7 @@
   + [[http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html][全文搜索引擎 Elasticsearch 入门教程 - 阮一峰的网络日志]]
   + [[https://www.baeldung.com/spring-boot-devtools][Overview of Spring-Boot Dev Tools | Baeldung]]
   + [[https://commons.apache.org/][Apache Commons – Apache Commons]]
-
+    
 * Spring Cloud
   + [[https://www.cnblogs.com/fengzheng/p/10603672.html][Spring Cloud 系列之 Eureka 实现服务注册与发现 - 风的姿态 - 博客园]]
   + [[http://blog.didispace.com/springcloud1/][Spring Cloud构建微服务架构（一）服务注册与发现 | 程序猿DD]]
@@ -16,48 +16,6 @@
   + [[https://www.ibm.com/developerworks/cn/java/spring5-webflux-reactive/index.html][使用 Spring 5 的 WebFlux 开发反应式 Web 应用]]
   + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html][Web on Reactive Stack]]
 
-* JDBC
-  + [[https://www.baeldung.com/spring-jdbc-jdbctemplate][Spring JDBC Tutorial | Baeldung]] - 异常相关需要看一下
-
-* Spring Security Q
-  + 取不到正确的 AuthenticationManager
-  + FramworkEndpoint
-
-* util
-  assertutil，业务本身的（业务异常），库本身的（库异常），通用的（内置异常）
-
-* tool
-  + IDEA 编辑技巧:
-    + Recent file - 跳转到原来的窗口
-    + Find file - 在当前窗口打开
-* 测试
-  + [[https://spring.io/guides/gs/testing-web/][Getting Started · Testing the Web Layer]]
-  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testing-tx][Testing]]
-
-* Java8
-  Java 8 时间解析：
-  + [[https://zh.wikipedia.org/wiki/JCP][JCP - 维基百科，自由的百科全书]]
-  + [[https://github.com/mybatis/typehandlers-jsr310][mybatis/typehandlers-jsr310: MyBatis type handlers for JSR-310]]
-  + [[https://github.com/FasterXML/jackson-datatype-jsr310][FasterXML/jackson-datatype-jsr310: (DEPRECATED) -- moved under `jackson-modules-java8` repo: https://github.com/FasterXML/jackson-modules-java8]]
-  + [[https://www.baeldung.com/spring-date-parameters][Working with Date Parameters in Spring | Baeldung]]
-
-  Java 8 时间操作：
-  + [[https://www.baeldung.com/java-day-start-end][How to Get the Start and the End of a Day using Java | Baeldung]]
-
-  使用时需要注意，LocalDateTime 要求必须有时间参数，用在实体类中但是时间格式中未指定时间时就会报错。
-
-* @DateTimeFormat
-  Spring MVC 中的 @DateTimeFormat 是用来进行自动类型转换的，而带有 ~@RequstBody, @ResponseBody~ 注解的请求数据会通过 Json 解析器进行转换。
-
-  因此，在实体类上应该使用 ~JsonFormat~ 而不是 ~DateFormat~.
-
-  相关：HttpMessageConverter
-
-* Excel
-  + [[https://www.cnblogs.com/pcheng/p/7485979.html][HSSF、XSSF和SXSSF区别以及Excel导出优化 - PC君 - 博客园]]
-
-* swagger
-  + https://www.ibm.com/developerworks/cn/java/j-using-swagger-in-a-spring-boot-project/index.html
-* mongodb
+* Mongodb
   + [[https://docs.spring.io/spring-data/mongodb/docs/2.2.3.RELEASE/reference/html/#reference][Spring Data MongoDB - Reference Documentation]]
 

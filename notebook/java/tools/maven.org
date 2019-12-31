@@ -8,6 +8,7 @@
   - [[#maven-scopes][Maven scopes]]
   - [[#依赖版本][依赖版本]]
 - [[#多模块项目][多模块项目]]
+  - [[#依赖版本管理][依赖版本管理]]
 - [[#使用技巧][使用技巧]]
   - [[#查看项目依赖树][查看项目依赖树]]
   - [[#编译时跳过下载-snapshot-依赖][编译时跳过下载 SNAPSHOT 依赖]]
@@ -140,6 +141,13 @@
 
   子模块需要使用其他子模块的功能时，需要在 ~dependencies~ 中声明依赖才行。
 
+** 依赖版本管理
+   可以在父模块中的 ~dependencyManagement~ 和 ~pluginManagement~ 元素中指定依赖和插件的版本，当没有使用时时不会下载依赖的，这样依赖，依赖可以在父模块中统一管理。
+
+   同时，子模块中使用在父模块中声明了的依赖时，也就可以不去指定版本号。
+
+   同时，共同的依赖可以在父模块的 ~dependencies~ 和 ~plugins~ 元素中指定，子模块会继承父模块的依赖。
+
 * 使用技巧
 ** 查看项目依赖树
    可以通过如下命令查看依赖树，并将依赖树输出到指定文件：
@@ -231,20 +239,34 @@
    + [[https://liyixing1.iteye.com/blog/2171254][版本号规范，镜像版本SNAPSHOT，LATEST 和 RELEASE 版本 - 李义星 - ITeye博客]]
 
 ** Maven 的镜像和存储库配置
-   当 Maven 的依赖不在本地仓库时, 就需要到远程仓库下载，这个时候如果配置了镜像，而且镜像配置的规则中匹配到目标仓库时，
-   Maven 认为目标仓库被镜像了，不会再去被镜像仓库下载依赖，而是直接去镜像仓库下载。
+   Maven 发现项目依赖了本地仓库中不存的依赖时会到远程仓库中下载该依赖，默认情况下会到 [[http://repo.maven.apache.org/maven2/][central]] 仓库去下载依赖，但也可以自己定义仓库。
 
-   其中，镜像通常在 setting.xml 中进行配置，而存储库在 POM 中进行配置，阿里云镜像配置如下：
-   #+BEGIN_SRC xml
+   其中，仓库可以在全局配置文件 ~~/.m2/settings.xml~ 文件中配置，也可以单独在项目的 ~pom~ 文件中配置，同时，可以为远程仓库配置镜像。
+   当存在和远程仓库对应的镜像时就会去镜像而不是远程仓库下载依赖。
+
+   仓库在定义时会有一个 ID，镜像在定义时会有一个 mirrorOf，当 mirrorOf 匹配 ID 时就说明远程仓库存在镜像。
+
+   特别的，当 mirrorOf 是通配符 ~*~ 时，在该镜像中找不到的依赖可以回退到次级的指定了具体名称的镜像去下载：
+   #+begin_src xml
+     <!-- 对于 central 仓库来说，当在 all 镜像中找不到依赖时就会到 nexus-aliyun 镜像去下载 -->
      <mirrors>
        <mirror>
-         <id>aliyunmaven</id>
+         <id>all</id>
          <mirrorOf>*</mirrorOf>
-         <name>aliyunmaven</name>
-         <url>https://maven.aliyun.com/repository/public</url>
+         <name>Nexus Mirror</name>
+         <url>...</url>
+       </mirror>
+
+       <mirror>
+         <id>nexus-aliyun</id>
+         <name>nexus-aliyun</name>
+         <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+         <mirrorOf>central</mirrorOf>
        </mirror>
      </mirrors>
-   #+END_SRC
+   #+end_src
+   
+   参考：[[https://maven.apache.org/guides/mini/guide-mirror-settings.html][Maven – Guide to Mirror Settings]]
 
 ** Maven 中编译时字符编码的设置
    通常情况下用 ~archetype~ 创建项目时已经帮我们设置好了：

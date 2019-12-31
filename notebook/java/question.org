@@ -29,6 +29,7 @@
 - [[#java-中为什么不存在-hashable-接口][Java 中为什么不存在 Hashable 接口]]
 - [[#在程序中获取-classpath-和指定类的路径][在程序中获取 CLASSPATH 和指定类的路径]]
 - [[#jar-和-war-之间的区别][JAR 和 WAR 之间的区别]]
+- [[#为什么是-mapgetobject-key-而不是-mapgetk-key][为什么是 Map.get(Object key) 而不是 Map.get(K key)]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -328,4 +329,8 @@
   #+end_quote
 
   参考：[[https://stackoverflow.com/questions/5871053/difference-between-jar-and-war-in-java][Difference between jar and war in Java - Stack Overflow]]
+
+* 为什么是 Map.get(Object key) 而不是 Map.get(K key)
+  因为按照方法规范来说，只需要满足 ~equals~ 方法就可以了，不需要判断类型，参考：
+  + [[https://stackoverflow.com/questions/857420/what-are-the-reasons-why-map-getobject-key-is-not-fully-generic][java - What are the reasons why Map.get(Object key) is not (fully) generic - Stack Overflow]]
 

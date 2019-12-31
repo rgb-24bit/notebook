@@ -1,0 +1,15 @@
+#+TITLE:      Java Library
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#apache-poi][Apache POI]]
+
+* Apache POI
+  Java 中常用 Apache POI 来操作 Excel 文档，相关问题：
+  + HSSF、XSSF 和 SXSSF 的区别是什么？
+    + HSSF：是操作 Excel97-2003 版本，扩展名为 .xls
+    + XSSF：是操作 Excel2007 版本开始，扩展名为 .xlsx
+    + SXSSF：是在 XSSF 基础上，POI3.8 版本开始提供的一种支持低内存占用的操作方式，扩展名为 .xlsx
+
+    参考：
+    + [[https://www.cnblogs.com/pcheng/p/7485979.html][HSSF、XSSF 和 SXSSF 区别以及 Excel 导出优化 - PC君 - 博客园]]
+

@@ -1,12 +1,14 @@
 #+TITLE:      Spring Data
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#使用-redis][使用 Redis]]
-- [[#多数据源][多数据源]]
-  - [[#mybatis][mybatis]]
-- [[#使用事务][使用事务]]
+- [[#spring-data-redis][spring-data-redis]]
+- [[#spring-data-jdbc][spring-data-jdbc]]
+  - [[#多数据源][多数据源]]
+    - [[#mybatis][mybatis]]
+  - [[#使用事务][使用事务]]
+  - [[#使用-dataaccessexception][使用 DataAccessException]]
 
-* 使用 Redis
+* spring-data-redis
   Spring Boot 中整合 Redis 是一件很容易的事情，简单的操作的话，可以通过 RedisTemplate 来完成：
   #+begin_src java
     @Bean
@@ -20,26 +22,35 @@
   
   参考：[[https://www.cnblogs.com/zeng1994/p/03303c805731afc9aa9c60dbbd32a323.html][SpringBoot 整合 Redis 及 Redis 工具类撰写 - zeng1994 - 博客园]]
 
-* 多数据源
-  Spring 中的多数据源可以通过 ~AbstractRoutingDataSource~ 的实现类来进行管理和操作，基础思路如下：
-  1. 通过 AbstractRoutingDataSource 获取数据源时，会调用实现类的 ~determineCurrentLookupKey~ 方法获取当前数据源的键，如果为空就返回默认数据源
-  2. 为了保证多个线程中的数据源配置不受干扰，因此，可以将当前线程上下文的数据源键保存在一个 ~ThreadLocal~ 变量中
-  3. 可以通过注解和 AOP 的方式，在需要使用特定数据源的方法上通过注解指定数据源，然后通过 AOP 在进入方法之前设置数据源，在离开方法后销毁数据源配置
+* spring-data-jdbc
+** 多数据源
+   Spring 中的多数据源可以通过 ~AbstractRoutingDataSource~ 的实现类来进行管理和操作，基础思路如下：
+   1. 通过 AbstractRoutingDataSource 获取数据源时，会调用实现类的 ~determineCurrentLookupKey~ 方法获取当前数据源的键，如果为空就返回默认数据源
+   2. 为了保证多个线程中的数据源配置不受干扰，因此，可以将当前线程上下文的数据源键保存在一个 ~ThreadLocal~ 变量中
+   3. 可以通过注解和 AOP 的方式，在需要使用特定数据源的方法上通过注解指定数据源，然后通过 AOP 在进入方法之前设置数据源，在离开方法后销毁数据源配置
      
-  需要注意的是，使用多数据源意味着事务可能难以生效，同时，Advice 的执行顺序应该在 @Transactional 之前。
+   需要注意的是，使用多数据源意味着事务可能难以生效，同时，Advice 的执行顺序应该在 @Transactional 之前。
 
-  参考实现：
-  + [[https://github.com/rgb-24bit/expractice/tree/master/spractice/spractice-dynamic-datasource][expractice/spractice/spractice-dynamic-datasource at master · rgb-24bit/expractice]]
+   参考实现：
+   + [[https://github.com/rgb-24bit/expractice/tree/master/spractice/spractice-dynamic-datasource][expractice/spractice/spractice-dynamic-datasource at master · rgb-24bit/expractice]]
 
-** mybatis
-   通过 mybatis 使用多数据源时，可以通过如下的方式制定不同的包下的 ~sqlSessionFactory~, 并为不同的 ~sqlSessionFactory~ 指定不同的数据源：
-   #+begin_src java
-     @MapperScan(basePackages = DataSourceConfig.PACKAGE_NAME, sqlSessionFactoryRef = "sqlSessionFactory")
-   #+end_src
+*** mybatis
+    通过 mybatis 使用多数据源时，可以通过如下的方式制定不同的包下的 ~sqlSessionFactory~, 并为不同的 ~sqlSessionFactory~ 指定不同的数据源：
+    #+begin_src java
+      @MapperScan(basePackages = DataSourceConfig.PACKAGE_NAME, sqlSessionFactoryRef = "sqlSessionFactory")
+    #+end_src
 
-   同样，也可以通过嵌套动态数据源的方式来进行管理。
+    同样，也可以通过嵌套动态数据源的方式来进行管理。
 
-* 使用事务
-  要在 Spring 中使用事务的话其实是很简单的，一般来说，注解 ~@Transactional~ 就能够满足大多数需求了，详细可以参考：
-  + [[https://www.cnblogs.com/dennyzhangdd/p/9549535.html][Spring 事务详解（一）初探事务 - 只会一点java - 博客园]]
+** 使用事务
+   要在 Spring 中使用事务的话其实是很简单的，一般来说，注解 ~@Transactional~ 就能够满足大多数需求了，详细可以参考：
+   + [[https://www.cnblogs.com/dennyzhangdd/p/9549535.html][Spring 事务详解（一）初探事务 - 只会一点java - 博客园]]
+
+** 使用 DataAccessException
+   Spring Data 对 SQL 异常进行了捕获并转换为了具有更详细信息的运行时异常 DataAccessException，我们可以通过 DataAccessException 和 DataAccessException 的子类来更精确的处理异常。
+
+   比如说，可以使用 ~DuplicateKeyException~ 来补货重复键异常，参考：
+   + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/dao/package-tree.html][org.springframework.dao Class Hierarchy (Spring Framework 5.2.2.RELEASE API)]]
+   + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/dao/DataAccessException.html][DataAccessException (Spring Framework 5.2.2.RELEASE API)]]
+
 

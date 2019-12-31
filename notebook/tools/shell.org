@@ -64,6 +64,11 @@
      参考：
      + [[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/lsof.html][lsof 一切皆文件 — Linux Tools Quick Tutorial]]
 
+   + 可以通过 ~dig~ 命令来测试域名系统工作是否正常：
+     #+begin_src bash
+       $ dig www.baidu.com
+     #+end_src
+
 ** 网络资源获取
    + 通过命令 ~wget~ 可以从指定的 ~URL~ 下载网页或文件，支持 ~HTTP~, ~HTTPS~, ~FTP~ 协议：
      + 如果因为 ~HTTPS~ 和 ~SSL~ 的原因导致不能下载， 可以使用选项 ~--no-cookie~ 和 ~--no-check-certificate~ 解决：

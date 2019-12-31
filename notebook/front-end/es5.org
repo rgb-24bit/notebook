@@ -175,11 +175,14 @@
   用于存取描述符的属性：
   + ~get~ - 该属性的 ~getter~ 方法
   + ~set~ - 该属性的 ~setter~ 方法
+
+  PS：可以通过 ~Proxy~ 对象拦截所有属性的 ~getter~ 和 ~setter~ 操作
     
   参考：
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6][Object.defineProperty() - JavaScript | MDN]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties][Object.defineProperties() - JavaScript | MDN]]
   + [[https://wangdoc.com/javascript/stdlib/attributes.html][属性描述对象 - JavaScript 教程 - 网道]]
+  + [[https://es6.ruanyifeng.com/#docs/proxy][Proxy - ECMAScript 6入门]]
 
 * 对象字面量
   在 ES2015，对象字面值扩展支持：

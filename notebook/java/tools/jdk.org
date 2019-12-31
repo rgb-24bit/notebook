@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#javap][javap]]
+- [[#jshell][JShell]]
 
 * javap
   javap 是 JDK 内置的反编译工具，可以通过 javap 获得类文件的字节码，从而学习编译器内部的工作。
@@ -19,4 +20,7 @@
     -verbose    输出栈大小，方法参数的个数
     -constants  输出静态 final 常量
   #+END_EXAMPLE
+
+* JShell
+  JShell 是 JDK9 之后就携带的一个 Java REPL，只是简单的一两个语句的测试可以考虑通过 JShell 来完成。
 

@@ -6,6 +6,7 @@
 - [[#vector--stack][Vector & Stack]]
 - [[#collectiontoarray][Collection.toArray]]
 - [[#datatypeconverter][DatatypeConverter]]
+- [[#temporalwith][Temporal.with]]
 
 * 序列化
   实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
@@ -103,4 +104,13 @@
   ~javax.xml.bind.DatatypeConverter~ 是一个挺有用的工具类，包括将字节数组转化为 16 进制字符串这样的方法。
 
   官方文档：[[https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/DatatypeConverter.html#printHexBinary-byte:A-][DatatypeConverter (Java Platform SE 8 )]]
+
+* Temporal.with
+  所有实现了 ~Temporal~ 接口的类都可以通过 ~with~ 方法方便快捷的对时间进行调整：
+  #+begin_src java
+    LocalDateTime endOfDate = localDateTime.with(ChronoField.NANO_OF_DAY, LocalTime.MAX.toNanoOfDay());
+  #+end_src
+  
+  与之相关的实用工具类：
+  + [[https://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoField.html][ChronoField (Java Platform SE 8 )]]
 
