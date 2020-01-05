@@ -5,11 +5,16 @@
   - [[#tex-live-安装][Tex Live 安装]]
   - [[#文本模式][文本模式]]
 - [[#包管理器][包管理器]]
+- [[#tex-理解][Tex 理解]]
 - [[#相关问题][相关问题]]
   - [[#怎样编译-tex-文件][怎样编译 Tex 文件]]
   - [[#tex-引擎格式发行版之间的关系][Tex 引擎、格式、发行版之间的关系]]
   - [[#cls-和-sty-文件的区别][cls 和 sty 文件的区别]]
   - [[#如何在-latex-中使用中文][如何在 Latex 中使用中文]]
+  - [[#latex2e-和-latex-之间的区别][Latex2e 和 Latex 之间的区别]]
+  - [[#latex-与-tex-的区别][LaTeX 与 TeX 的区别]]
+  - [[#命令和环境的区别][命令和环境的区别]]
+- [[#相关链接][相关链接]]
 
 * 简单使用
 ** Tex Live 安装
@@ -48,6 +53,36 @@
     $ tlmgr list --only-installed
   #+end_example
 
+* Tex 理解
+  Tex 本质上是一种页面排版系统，其工作流程大概为：
+  1. 通过 Tex 标记语言来编写需要输出排版的内容
+  2. 通过 Tex 引擎将 Tex 编译为页面描述语言 DVI 格式的文件
+  3. 通过驱动将 DVI 格式的文件转译为其他格式的页面描述语言，如 PDF
+  4. 将转译后的页面描述语言输入到 RIP 设备
+  5. RIP 设备根据输入生成点阵图像可以输出到激光照排机或直接制版机等制版设备，也可以选择输出到打印机
+
+  整个过程设计到了页面排版系统中的很多东西，关键是需要明白：
+  + Tex 本身只是一种标记语言，和 XML 这类语言没有本质区别，关键是在于可以通过 Tex 引擎将 Tex 编译为页面描述语言，如 DVI
+
+  其中，DVI 是一种设备无关的格式，它不能嵌入字体和图形，所有不能算是完整的页面描述语言，只能算作准页面描述语言，而页面描述语言，
+  则是作为 RIP 设备的输入来生成点阵图像打印显示。
+
+  字体则是一种与页面排版系统密切相关的一种文件，需要理解字体包含：
+  + 编码层 - 通过索引定义了字符集，通过二进制编码定义了字符编码格式
+  + 格式层 - 定义了字形的描述方法和字体文件的存储格式
+  + 显示层 - 字体的外在表现形式
+
+  和 Tex 对应的话，大概就是：
+  + 字体编码层对应 Tex 标记语言本身
+  + 字体格式层对应 Tex 编译后的页面描述语言
+  + 字体显示层对应 Tex 最后的输出
+
+  参考：
+  + Latex Notes 的第一章和第三章
+  + [[https://en.wikipedia.org/wiki/TeX_font_metric][TeX font metric - Wikipedia]]
+  + [[https://zh.wikipedia.org/wiki/OpenType][OpenType - 维基百科，自由的百科全书]]
+  + [[https://zh.wikipedia.org/wiki/TrueType][TrueType - 维基百科，自由的百科全书]]
+
 * 相关问题
 ** 怎样编译 Tex 文件
    #+BEGIN_SRC bash
@@ -57,6 +92,9 @@
    #+END_SRC   
 
 ** Tex 引擎、格式、发行版之间的关系
+   Tex 引擎用于将 Tex 编译为页面描述语言，不同的 Tex 引擎对 Tex 进行了不同的扩展，就像 GCC 对 C 语言的扩展一样，而格式是相对来说较为基础的 Tex 宏包，比如 Latex。
+
+   而发行版，就是集成了 Tex 引擎和很多宏包和其他一些工具的工具集，参考：
    + [[https://tex.stackexchange.com/questions/296616/questions-regarding-the-distinction-between-xetex-and-xelatex-and-how-they-relat][Questions regarding the distinction between XeTeX and XeLaTeX and how they relate to TeX and LaTeX? - TeX - LaTeX Stack Exchange]]
    + [[https://liam.page/2018/11/26/introduction-to-TeX-engine-format-and-distribution/][TeX 引擎、格式、发行版之介绍 | 始终]]
 
@@ -75,6 +113,9 @@
 
    参考：[[https://www.jianshu.com/p/12b4a4b3afce][latex 中 cls 和 sty 文件 - 简书]]
 
+   这也引出来了其他一些问题，比如说为什么 package 的后缀名为 sty 而不是 pkg，这是因为本质上所有的 tex 宏包都可以看做是样式文件，以前也没有 cls 这个后缀名：
+   + [[https://tex.stackexchange.com/questions/97418/sty-suffix-extension-for-latex-packages/97420][texmf - .sty suffix (extension) for LaTeX packages - TeX - LaTeX Stack Exchange]]
+
 ** 如何在 Latex 中使用中文
    在 Latex 中使用中文的简单方案是使用 CTEX 宏包和 xelatex 引擎，其中，CTEX 宏包提供了简便的 ctexart、ctexrep、ctexbook 和 ctexbemer 文档类，但是如果想使用其他的文档类的话，
    也可以单独使用 ctex 宏包。
@@ -89,5 +130,49 @@
    #+end_src
    
    其中，CTEX 宏包会使用 CJK 字体集，CJK 的含义是中日韩统一表意文字在电脑的所有字体列表，参考：
-   + [[https://zh.wikipedia.org/wiki/CJK%E5%AD%97%E4%BD%93%E5%88%97%E8%A1%A8][CJK字体列表 - 维基百科，自由的百科全书]]
+   + [[https://zh.wikipedia.org/wiki/CJK%E5%AD%97%E4%BD%93%E5%88%97%E8%A1%A8][CJK 字体列表 - 维基百科，自由的百科全书]]
+
+** Latex2e 和 Latex 之间的区别
+   #+begin_quote
+   LaTeX2e is the latest stable release of LaTeX.
+   #+end_quote
+
+   参考：
+   + [[https://tex.stackexchange.com/questions/13541/difference-between-latex-latex2e-latex3][Difference between LaTeX, LaTeX2e, LaTeX3 ? - TeX - LaTeX Stack Exchange]]
+
+** LaTeX 与 TeX 的区别
+   LaTeX 是用 TeX 编写的宏集，只不过现在有些命令比如 ~pdflatex~ 会默认加载这种宏集，这使得 ~TeX~ 和 ~LaTeX~ 的边界变得有点模糊不清。
+
+   参考：
+   + [[https://www.zhihu.com/question/49681542][LaTeX 与 TeX 有什么本质区别？ - 知乎]]
+   + [[https://zh.wikipedia.org/wiki/TeX][TeX - 维基百科，自由的百科全书]]
+
+** 命令和环境的区别
+   命令通常用来来控制 LaTeX 文档的行为，常见的格式为：
+   #+begin_src tex
+     \commandname[optional argument]{main argument}
+
+     % 多个参数
+     \multicolumn{number of columns joined}{alignment}{content} 
+   #+end_src
+
+   还有一些命令可以不要参数：
+   #+begin_src tex
+     \item Text being item content
+   #+end_src
+   
+   环境是一种特殊的命令，常见格式为：
+   #+begin_src tex
+     \begin{environmentname}
+       content
+     \end{environmentname}
+   #+end_src
+
+   注：环境也是命令，因此也可以有参数和选项
+
+   参考：
+   + [[https://www.overleaf.com/learn/latex/Commands_and_environments][Commands and environments - Overleaf, Online LaTeX Editor]]
+
+* 相关链接
+  + [[https://texfaq.org/][The TeX Frequently Asked Question List | The TeX FAQ]]
 

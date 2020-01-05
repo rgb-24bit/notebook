@@ -9,6 +9,7 @@
 - [[#arrays][Arrays]]
 - [[#enumerated][Enumerated]]
 - [[#泛型][泛型]]
+  - [[#获取类型参数][获取类型参数]]
 - [[#hierarchy][Hierarchy]]
 - [[#相关问题][相关问题]]
   - [[#如果通过反射获取一个包下的所有类][如果通过反射获取一个包下的所有类]]
@@ -382,6 +383,49 @@
   #+begin_src java
     new TypeToken<List<String>>() {}.getType();
   #+end_src
+
+** 获取类型参数
+   Java 反射中的 Type 接口只有一个实现类为 Class，但是它有四个子接口，描述了 Java 泛型的四种形式：
+   + GenericArrayType - 类似于 T[] 的情况
+   + ParameterizedTyp - 类似于 List<T> 的情况
+   + TypeVariable<T> - 表示泛型声明的参数类型
+   + WildcardType - 通配符类型表达式
+     
+   可以在以下情况中得到泛型实际类型参数：
+   1. 类成员变量类型的泛型参数：
+      #+begin_src java
+        public class Test {
+          private Map<String, Integer> map = new HashMap<String,Integer>();
+        }
+      #+end_src
+   2. 类成员方法返回值和类成员方法参数的泛型参数：
+      #+begin_src java
+        public class Test {
+          public List<Integer> test(List<String> list) {
+            return new ArrayList<Integer>();
+          }
+        }
+      #+end_src
+   3. 类构造函数的参数类型的泛型参数
+   4. 通过 extends 在子类指定父类中泛型变量具体类型的，可获取父类泛型的具体类型  
+
+   需要注意的是，下面的情况是拿不到实际类型参数的：
+   #+begin_src java
+     interface Super<T> {
+       T method();
+     }
+
+     // 拿不到
+     interface Child extends Super<Integer> {}
+
+     // 拿不到
+     interface Test {
+       <T> T method();
+     }
+   #+end_src
+   
+   参考：
+   + [[https://blog.csdn.net/qq_30698633/article/details/76671547][Java 通过反射获取泛型实际类型总结 - _qq_30698633 的博客 - CSDN 博客]]
 
 * Hierarchy
   部分类的继承结构：

@@ -1,3 +1,9 @@
+* IDLE
+** 区块链
+   区块链本质上一个分布式数据库，当数据库中某个节点需要修改时，需要某种方式来证明该修改的，这个证明方式可以是工作量证明之类的证明方式：
+   + [[https://yq.aliyun.com/articles/60131?utm_content=m_41917][亲，你淘的区块链到了！-云栖社区-阿里云]]
+   + [[https://www.infoq.cn/article/bitcoin-and-block-chain-part02][揭秘比特币和区块链（二）：什么是工作量证明？-InfoQ]]
+
 * Serialization
   Serialization 这个单词在计算机科学中存在两种含义：
   + 序列化 - 保存对象以便可以重新创建的过程，比如转换对象为二进制串、JSON、XML 等
@@ -14,7 +20,7 @@
   + Github Action
   + Jekins
   + ……
-  + 
+    + 
 * 协程
   + [[https://blog.csdn.net/wentianyao/article/details/51445940][C++协程(1):协程原理及实现方式概述 - wentianyao的专栏]]
   + [[https://www.zhihu.com/question/52193579][腾讯开源的 libco 号称千万级协程支持，那个共享栈模式原理是什么? - 知乎]]
@@ -24,4 +30,10 @@
   2. Maven Root POM 中的 module 指定的是目录名称而不是模块名称
   3. spring boot 启动 eureka 可以直接配置属性就行
   4. 不少语言中都有将最后表达式的值作为代码块的返回值的功能，比如 C、Ruby 和 Lisp，但是有的不能，比如 Python 和 Java
+
+  #+begin_quote
+  By having spring-cloud-starter-netflix-eureka-client on the classpath, your application automatically registers with the Eureka Server
+  #+end_quote
+
+  + [[https://cloud.spring.io/spring-cloud-netflix/multi/multi__service_discovery_eureka_clients.html][1. Service Discovery: Eureka Clients]]
 

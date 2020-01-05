@@ -135,5 +135,7 @@
 
 * 注解
   + [[https://www.race604.com/annotation-processing/][Java 注解处理器]]
-
+  + [[https://github.com/zhuhean/BuilderProcessor][zhuhean/BuilderProcessor: Android注解处理演示项目]]
+  + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
+  + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
 

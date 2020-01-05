@@ -180,6 +180,7 @@
   + [Linux 基础笔记](notebook/linux/linux.org)
   + [Misc](notebook/linux/misc.org)
   + [Linux 问题集](notebook/linux/question.org)
+  + [Shell](notebook/linux/shell.org)
 ## mac
   + [日常使用](notebook/mac/daily.org)
   + [开发相关](notebook/mac/develop.org)
@@ -261,11 +262,10 @@
   + [存储](notebook/solution/storage.org)
 ## tools
   + [Chrome](notebook/tools/chrome.org)
-  + [自动集成](notebook/tools/ci.org)
+  + [持续集成](notebook/tools/ci.org)
   + [命令行工具](notebook/tools/cli.org)
   + [Windows CMD 命令](notebook/tools/cmd.org)
   + [Docker](notebook/tools/docker.org)
-  + [Shell](notebook/tools/shell.org)
   + [SSH](notebook/tools/ssh.org)
   + [实用开源工具收集](notebook/tools/utils.org)
   + [Vim 笔记](notebook/tools/vim.org)

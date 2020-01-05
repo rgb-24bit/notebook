@@ -121,3 +121,6 @@
 
 * vterm
   复制：通过 ~C-c C-t~ 开启复制模式，mark region 后 ~RET~ 即可完成复制
+* log
+  + [[https://writequit.org/articles/working-with-logs-in-emacs.html][Working with log files in Emacs]]
+

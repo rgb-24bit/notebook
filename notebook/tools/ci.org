@@ -1,4 +1,4 @@
-#+TITLE:      自动集成
+#+TITLE:      持续集成
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概念][概念]]
