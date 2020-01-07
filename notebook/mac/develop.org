@@ -11,6 +11,7 @@
 - [[#命令行获取-cpu-信息][命令行获取 CPU 信息]]
 - [[#设置-emacs-为-git-message-的编辑器][设置 emacs 为 git message 的编辑器]]
 - [[#通过-homebrew-安装程序时如何指定编译参数][通过 Homebrew 安装程序时如何指定编译参数]]
+- [[#安卓调试相关问题][安卓调试相关问题]]
 
 * 怎样在 Mac 上安装 Java 8
   首先安装工具 Homebrew，通过如下指令完成：
@@ -109,4 +110,15 @@
   #+begin_src bash
     $ brew upgrade emacs-mac --with-modules
   #+end_src
+
+* 安卓调试相关问题
+  1. 使用 adb 无法连接网易 mumu 模拟器，可以进行如下操作：
+     #+begin_src bash
+       # windows
+       adb connect 127.0.0.1:7555
+       adb shell
+
+       # mac
+       adb kill-server && adb server && adb shell
+     #+end_src
 

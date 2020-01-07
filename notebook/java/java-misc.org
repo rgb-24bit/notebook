@@ -1,5 +1,3 @@
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://rgb-24bit.github.io/blog/misc/style.css" />
-
 #+TITLE:      Java Misc
 
 * 目录                                                    :TOC_4_gh:noexport:
@@ -7,6 +5,8 @@
 - [[#jcp][JCP]]
 - [[#异常层次结构][异常层次结构]]
 - [[#时间格式化][时间格式化]]
+- [[#collections][Collections]]
+- [[#comparator][Comparator]]
 
 * SPI
   SPI 的全称为 (Service Provider Interface) ，是 JDK 内置的一种服务提供发现机制。主要由工具类 ~java.util.ServiceLoader~ 提供相应的支持。
@@ -61,4 +61,31 @@
   |--------------+----------------------------------------------+---------------------------+---------------------------|
 
   NOTE: Java 以前的版本中提供了 SimpleDateFormat 这个方便的日期格式化类，但是这个类是线程不安全的，因此，考虑使用 Java8 中的 DateTimeFormatter 替换。
+
+* Collections
+  Java JDK 中的 Collections 提供了很多用于创建新集合的方法，大致可以分为如下几类：
+  #+begin_src java
+    checkedXXX();       // 创建类型安全的集合
+    emptyXXX();         // 空集合
+    singletonXXX();     // 单元素集合
+    synchronizedXXX();  // 并发安全的集合
+    unmodifiableXXX();  // 不可修改的集合
+  #+end_src
+
+  参考：
+  + [[https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html][Collections (Java Platform SE 8 )]]
+
+* Comparator
+  Comparator 接口提供了很多默认方法来构建 Comparator 实例，比如说需要根据需要排序二维数组：
+  #+begin_src java
+    int[][] arr = {
+      {1, 2, 3},
+      {4, 5, 6},
+      {7, 8, 9}
+    };
+    Arrays.sort(arr, Comparator.comparing(item -> item[0] % 2));
+  #+end_src
+
+  只不过需要注意在数组类型上的使用，特别是设计到基本数据类型和多维数组的时候，可以参考：
+  + [[https://www.baeldung.com/java-8-comparator-comparing][Guide to Java 8 Comparator.comparing() | Baeldung]]
 

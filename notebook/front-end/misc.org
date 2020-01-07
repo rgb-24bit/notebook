@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#浏览器指纹][浏览器指纹]]
+- [[#控制台输出][控制台输出]]
 
 * 浏览器指纹
   随着互联网络的广泛普及，数以亿计网民的网络行为数据早已成为最宝贵的资源，企业通过五花八门的各种手段了解网民的行为和隐私数据，用于广告投递、用户兴趣分析等，进而作为决策的依据，
@@ -15,4 +16,10 @@
   + [[https://paper.seebug.org/227/][Web 客户端追踪（上）— Cookie追踪]]
   + [[https://paper.seebug.org/229/][Web 客户端追踪（下）— 浏览器指纹追踪]]
   + [[https://wzyboy.im/post/1130.html][浏览器指纹 | wzyboy’s blog]]
+
+* 控制台输出
+  浏览器的控制台可以通过设置样式得到各种各样的输出，比如在控制台输出一个 Badge:
+  #+begin_src js
+    console.log('%cEnvironment%cproduction','color:#fff;background:#ccc;','color:#fff;background:green');
+  #+end_src
 

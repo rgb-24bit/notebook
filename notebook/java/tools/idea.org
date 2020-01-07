@@ -14,6 +14,7 @@
   - [[#常用的快捷键][常用的快捷键]]
   - [[#创建书签][创建书签]]
   - [[#寻找文件][寻找文件]]
+  - [[#快速添加依赖][快速添加依赖]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
@@ -111,6 +112,10 @@
 
 ** 寻找文件
    通过 ~Recent file~ 方式打开的文件会在原来的窗口打开，而通过 ~Find file~ 方式打开的文件会在当前窗口打开。
+
+** 快速添加依赖
+   在 POM 文件的 generate 上下文中可以选择 dependency 快速选择添加依赖：
+   + [[https://www.jetbrains.com/help/idea/work-with-maven-dependencies.html][Maven dependencies - Help | IntelliJ IDEA]]
 
 * 相关问题
 ** 怎样添加静态导入到补全列表

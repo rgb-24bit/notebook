@@ -30,6 +30,8 @@
 - [[#在程序中获取-classpath-和指定类的路径][在程序中获取 CLASSPATH 和指定类的路径]]
 - [[#jar-和-war-之间的区别][JAR 和 WAR 之间的区别]]
 - [[#为什么是-mapgetobject-key-而不是-mapgetk-key][为什么是 Map.get(Object key) 而不是 Map.get(K key)]]
+- [[#systemarraycopy-和-arrayscopyof-的区别][System.arraycopy 和 Arrays.copyof 的区别]]
+- [[#为什么-hashmap-允许-null-键而-treemap-不允许][为什么 HashMap 允许 null 键而 TreeMap 不允许]]
 
 * 怎样执行包中的类
   #+BEGIN_EXAMPLE
@@ -333,4 +335,16 @@
 * 为什么是 Map.get(Object key) 而不是 Map.get(K key)
   因为按照方法规范来说，只需要满足 ~equals~ 方法就可以了，不需要判断类型，参考：
   + [[https://stackoverflow.com/questions/857420/what-are-the-reasons-why-map-getobject-key-is-not-fully-generic][java - What are the reasons why Map.get(Object key) is not (fully) generic - Stack Overflow]]
+
+* System.arraycopy 和 Arrays.copyof 的区别
+  区别主要在于 ~Arrays.copyOf~ 不仅会复制元素，还会创建一个新数组，而 ~System.arrayCopy~ 是复制到已有数组中，参考：
+  + [[https://www.programcreek.com/2015/03/system-arraycopy-vs-arrays-copyof-in-java/][System.arraycopy() vs. Arrays.copyOf() in Java]]
+
+* 为什么 HashMap 允许 null 键而 TreeMap 不允许
+  对于 HashMap 来说，这里有两个可能的原因：
+  1. 早在 JDK 1.2 版本的时候就已经允许这样了，如果要修改的话就难以兼容旧版本
+  2. 支持或不支持 null 键都需要对 null 值进行检测
+
+  而对于 TreeMap 来说，对于涉及到 null 值的排序是很难的，可以参考：
+  + [[https://stackoverflow.com/questions/47747199/why-does-hashmap-allow-a-null-key][java - Why does Hashmap allow a null key? - Stack Overflow]]
 

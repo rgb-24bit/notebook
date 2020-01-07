@@ -16,6 +16,7 @@
   - [[#怎样自定义响应码][怎样自定义响应码]]
   - [[#datetimeformat-和-jsonformat-的使用][@DateTimeFormat 和 @JsonFormat 的使用]]
   - [[#使用-java8-时间日期库][使用 Java8 时间日期库]]
+  - [[#怎样在-dispatcherservlet-初始化完成后执行一些逻辑][怎样在 DispatcherServlet 初始化完成后执行一些逻辑]]
 
 * 配置
   通过 Java 配置时，鉴于初始化会获取所有实现 WebApplicationInitializer 的类，那么我们可以实现这一接口，在这个接口的 onStartup 方法中借助 Servlet 3.0 进行动态配置。
@@ -290,4 +291,19 @@
    + [[https://github.com/FasterXML/jackson-datatype-jsr310][FasterXML/jackson-datatype-jsr310: (DEPRECATED)]]
 
    需要注意的是 Java8 中的 LocalDateTime 类，这个类要求必须有时间参数，因此，类似 ~yyyy-MM-dd~ 的格式会导致其实例化失败！
+
+** 怎样在 DispatcherServlet 初始化完成后执行一些逻辑
+   有时，一些代码可能想要在这之后执行：
+   #+begin_example
+     Initializing Spring FrameworkServlet 'dispatcherServlet'
+   #+end_example
+
+   这里可以通过继承 ~DispatcherServlet~ 来完成这个操作：
+   #+begin_src java
+     @Override
+     protected WebApplicationContext initWebApplicationContext() {
+       WebApplicationContext wac = super.initWebApplicationContext();
+       return wac;
+     }
+   #+end_src
 

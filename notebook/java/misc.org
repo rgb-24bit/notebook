@@ -1,116 +1,77 @@
 #+TITLE:      Java Misc
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#序列化][序列化]]
-- [[#日期和时间][日期和时间]]
-- [[#vector--stack][Vector & Stack]]
-- [[#collectiontoarray][Collection.toArray]]
-- [[#datatypeconverter][DatatypeConverter]]
-- [[#temporalwith][Temporal.with]]
+- [[#spi][SPI]]
+- [[#jcp][JCP]]
+- [[#异常层次结构][异常层次结构]]
+- [[#时间格式化][时间格式化]]
+- [[#浅克隆的实现][浅克隆的实现]]
 
-* 序列化
-  实现了 ~Serializable~ 接口的类的对象可以被 *序列化*, 序列化时， 该对象引用的所有对象也会被自动序列化。
+* SPI
+  SPI 的全称为 (Service Provider Interface) ，是 JDK 内置的一种服务提供发现机制。主要由工具类 ~java.util.ServiceLoader~ 提供相应的支持。
 
-  如果引用的对象中存在不能序列化的对象， 那么序列化会失败。 一种解决方法是用关键字 ~transient~ 修饰不被
-  序列化的对象， 序列化时会跳过这些被 ~transient~ 修饰的实例变量。
+  其中的两个角色为：
+  + Service - 服务，通常为一个接口或一个抽象类，具体类虽然也可以，但是一般不建议那样做
+  + Service Provider - 服务提供者，服务的具体实现类
 
-  如果对象内部存在两个引用同一对象的实例变量， 那么别引用的独享只会保存一次。
+  使用时，需要在 ~META-INF/services~ 下创建和服务的全限定名相同的文件，然后在该文件中写入服务提供者的全限定名，可以用 ~#~ 作为注释。
 
-  序列化：
-  #+BEGIN_SRC java
-    import java.io.*;
-
-    FileOutputStream fileStream = new FileOutputStream("object.ser");
-    ObjectOutputStream os = new ObjectOutputStream(fileStream);
-
-    os.writeObject(object);
-    os.close();
-  #+END_SRC
-
-  解序列化时， 对象重流中读取出来， 通过存储的信息判断出对象的类， 如果 java 虚拟机找不到
-  或无法加载该类， 则虚拟机会抛出异常。
-
-  新的对象会二笔直接配置在堆上， 构造函数不会被执行。
-
-  如果对象的继承树上有个不可序列化的祖先类， 那么重该类开始及其以上的类的构造函数都会被执行。
-
-  对象的实例变量会被还原为序列化时的状态， transient 变量被还原为对应类型的 *默认值*.
-
-  *静态变量* 不会被序列化。 解序列化时也不会影响静态变量的值。
-
-  解序列化：
-  #+BEGIN_SRC java
-    import java.io.*;
-
-    FileInputStream fileStream = new FileInputStream("object.ser");
-    ObjectInputStream os = new ObjectInputStream(fileStream);
-
-    Object obj = os.readObject();  // 通过强制类型转换转换为其他类型
-    os.close()
-  #+END_SRC
-
-* 日期和时间
-  日期格式化：
-  #+BEGIN_SRC java
-    // 完整日期和时间
-    String.format("%tc", new Date());
-
-    // 只有时间
-    String.format("%tr", new Date());
-
-    // 周， 月， 日 - %tA, %tB, %td
-    String.format("%tA %<tB %<td", new Date());
-  #+END_SRC
-
-  取得当前日期和时间使用 ~Date~.
-
-  其余功能可以使用 ~Calendar~.
-
-* Vector & Stack
-  ~Vector~ 和 ~ArrayList~ 两者都实现 ~List~ 接口，但 ~Vector~ 支持线程同步，即某一时刻只有一个线程能够写 ~Vector~.
-
-  因此 ~Vector~ 较 ~ArrayList~ 慢一些。
-
-  而 ~Vector~ 的子类 ~Stack~ 实现了一个标准的后进先出的栈，一般使用还是使用 ~Deque~ 比较好。
-  
-  |--------------+-------------------------|
-  | Stack Method | Equivalent Deque Method |
-  |--------------+-------------------------|
-  | push(e)      | addFirst(e)             |
-  | pop()        | removeFirst()           |
-  | peek()       | peekFirst()             |
-  |--------------+-------------------------|
-
-* Collection.toArray
-  #+BEGIN_SRC java
-    // ArraysList.toArray()
-    public <T> T[] toArray(T[] a) {
-      if (a.length < size)
-        // Make a new array of a's runtime type, but my contents:
-        return (T[]) Arrays.copyOf(elementData, size, a.getClass());
-      System.arraycopy(elementData, 0, a, 0, size);
-      if (a.length > size)
-        a[size] = null;
-      return a;
-    }
-  #+END_SRC
-  
-  因此，简单的使用不需要考虑传入参数的长度：
-  #+BEGIN_SRC java
-    list.toArray(new Integer[0]);
-  #+END_SRC
-
-* DatatypeConverter
-  ~javax.xml.bind.DatatypeConverter~ 是一个挺有用的工具类，包括将字节数组转化为 16 进制字符串这样的方法。
-
-  官方文档：[[https://docs.oracle.com/javase/8/docs/api/javax/xml/bind/DatatypeConverter.html#printHexBinary-byte:A-][DatatypeConverter (Java Platform SE 8 )]]
-
-* Temporal.with
-  所有实现了 ~Temporal~ 接口的类都可以通过 ~with~ 方法方便快捷的对时间进行调整：
+  然后，就可以通过 ~ServiceLoader~ 来获取这些服务提供者。由于 ServiceLoader 并没有提供直接获取服务提供者的方法，因此，只能通过迭代的方式获取：
   #+begin_src java
-    LocalDateTime endOfDate = localDateTime.with(ChronoField.NANO_OF_DAY, LocalTime.MAX.toNanoOfDay());
+    ServiceLoader<Service> loader = ServiceLoader.load(Service.class, getClassLoader());
+
+    for (Service service : loader) {
+      // ...
+    }
   #+end_src
   
-  与之相关的实用工具类：
-  + [[https://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoField.html][ChronoField (Java Platform SE 8 )]]
+  参考：[[https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html][ServiceLoader (Java Platform SE 8 )]]
+
+* JCP
+  JCP（Java Community Process）成立于 1998 年，是使有兴趣的各方参与定义 Java 的特征和未来版本的正式过程。
+  
+  JCP 使用 JSR（Java 规范请求，Java Specification Requests）作为正式规范文档，描述被提议加入到 Java 体系中的的规范和技术。
+
+  参考：
+  + [[https://en.wikipedia.org/wiki/Java_Community_Process][Java Community Process - Wikipedia]]
+
+* 异常层次结构
+  可以根据通用异常 -> 库异常 -> 业务异常的层次创建 ~asset~ 工具类，抛出相应层次的异常，便于管理。
+
+* 时间格式化
+  作为 Java 程序员，作为偶尔还会写一点前端的 Java 程序员，可能会遇到需要使用多种时间格式的情况，主要有 Java、Moment(ISO 8601) 和 strftime 这几种格式。
+
+  三种格式的文档可以参考：
+  + [[https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html][DateTimeFormatter (Java Platform SE 8 )]]
+  + [[https://momentjs.com/docs/#/displaying/format/][Format - Moment.js | Docs]]
+  + [[https://zh.cppreference.com/w/c/chrono/strftime][strftime - cppreference.com]]
+
+  常用的时间模式符：
+  |--------------+----------------------------------------------+---------------------------+---------------------------|
+  | 时间         | Java                                         | Moment                    | strftime                  |
+  |--------------+----------------------------------------------+---------------------------+---------------------------|
+  | Year         | yy: 69, yyyy: 1969                           | YY: 69, YYYY: 1969        | %y: 69, %Y: 1969          |
+  | Month        | M: 7, MM: 07, MMM: Jul, MMMM: July, MMMMM: J | M:7, MM: 07, MMM: Jul     | %m: 07, %b: Jul, %B: July |
+  | Day of Month | d: 6, dd: 06                                 | D: 6, DD: 06              | %d: 06                    |
+  | Day of Week  | E: Wed, EEE: Wednesday, EEEE: W              | ddd: Wed, dddd: Wednesday | %a: Wed, %A: Wednesday    |
+  | Hour         | H: 9, HH: 09                                 | H: 9, HH: 09              | %H: 09                    |
+  | Minute       | mm: 02                                       | mm: 02                    | %M: 02                    |
+  | Second       | ss: 00                                       | ss: 00                    | %S: 00                    |
+  |--------------+----------------------------------------------+---------------------------+---------------------------|
+
+  NOTE: Java 以前的版本中提供了 SimpleDateFormat 这个方便的日期格式化类，但是这个类是线程不安全的，因此，考虑使用 Java8 中的 DateTimeFormatter 替换。
+
+* 浅克隆的实现
+  Java 中浅克隆的实现只需要实现 ~Cloneable~ 接口并覆盖 ~Object.clone~ 方法就可以了：
+  #+begin_src java
+    public class Example implements CloseAble {
+      @Override
+      public Example clone() throws CloneNotSupportedException {
+        return (Example) super.clone();
+      }
+    }
+  #+end_src
+
+  参考：
+  + [[https://docs.oracle.com/javase/8/docs/api/java/lang/Cloneable.html][Cloneable (Java Platform SE 8 )]]
 

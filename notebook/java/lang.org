@@ -4,6 +4,7 @@
 - [[#object][Object]]
 - [[#string][String]]
   - [[#stringintern][String#intern]]
+- [[#reference][Reference]]
 
 * Object
   Java 中 Object 是所有类的基类，提供了一些基本的方法，其中部分方法的实现如下：
@@ -103,4 +104,31 @@
    从而导致链表会很长，而链表长了后直接会造成的影响就是当调用 String.intern 时性能会大幅下降。
 
    参考文章：[[https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html][深入解析 String#intern - 美团技术团队]]
+
+* Reference
+  Java 中的引用可以分为四个类型：
+  + 强引用，默认的引用类型，当被引用的对象可达时其内存永远不会被释放
+    #+begin_src java
+      Object strongReference = new Object();
+    #+end_src
+  + 软引用，当一个对象只存在软引用时，内存不足时就会回收该对象的内存
+    #+begin_src java
+      SoftReference<String> softReference = new SoftReference<String>(new String("abc"));
+    #+end_src
+  + 弱引用，当一个对象只存在弱引用时，垃圾回收器便会直接回收它的内存
+    #+begin_src java
+      WeakReference<String> weakReference = new WeakReference<>(new String("abc"));
+    #+end_src
+  + 虚引用，和该对象不存在任何引用的情况相同
+    #+begin_src java
+      PhantomReference pr = new PhantomReference(new String("abc"), new ReferenceQueue());
+    #+end_src
+
+  其中，可以将一个 ~ReferenceQueue~ 作为构造函数的参数传递给其他引用类型，当被引用的对象被回收时，对应的引用就会被放到 ~ReferenceQueue~ 中，
+  方便后续的处理。
+
+  参考：
+  + [[https://juejin.im/post/5b82c02df265da436152f5ad#heading-5][理解 Java 的强引用、软引用、弱引用和虚引用 - 掘金]]
+  + [[https://www.cnblogs.com/dreamroute/p/5029899.html][ReferenceQueue 的使用 - 神一样的存在 - 博客园]]
+  + [[https://docs.oracle.com/javase/8/docs/api/java/lang/ref/ReferenceQueue.html][ReferenceQueue (Java Platform SE 8 )]]
 

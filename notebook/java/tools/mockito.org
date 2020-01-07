@@ -4,6 +4,7 @@
 - [[#简单使用][简单使用]]
 - [[#相关问题][相关问题]]
   - [[#和-spring-test-之间的集成][和 Spring Test 之间的集成]]
+- [[#相关链接][相关链接]]
 
 * 简单使用
   Mockito 时 Java 中的一个非常好用的 Mock 测试框架，其常用的两个注解为：
@@ -46,4 +47,7 @@
    在测试类内部，需要在测试方法开始执行前调用 MockitoAnnotations 的 initMocks 方法来创建 Mock 对象并注入依赖，而 Mockito 时可以识别 @Autowired 注解的。
 
    参考：[[https://blog.gmem.cc/ut-with-spring-and-mockito][绿色记忆:基于 Spring Test 和 Mockito 进行单元测试]]
+
+* 相关链接
+  + [[https://waylau.com/mockito-quick-start/][Mockito 简明教程 | waylau.com]]
 

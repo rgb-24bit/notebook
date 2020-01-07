@@ -12,7 +12,7 @@
     sensor/1/#
 
     sensor/+/temperature
-
+    
     uber/drivers/joe/inbox
   #+end_example
 

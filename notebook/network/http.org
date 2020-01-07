@@ -5,6 +5,7 @@
 - [[#multipart][MultiPart]]
 - [[#http-api-认证授权][HTTP API 认证授权]]
 - [[#http-缓存][HTTP 缓存]]
+- [[#断点续传][断点续传]]
 
 * 常用 HTTP 请求头和响应头
   HTTP 消息头支持自定义，自定义的专用消息头一般会添加 ~X-~ 前缀，常用的 HTTP 请求头和响应头可以参考：
@@ -86,4 +87,17 @@
 
   参考
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ][HTTP 缓存 - HTTP | MDN]]
+
+* 断点续传
+  断点续传利用的主要是 ~Range~ 这个请求头，通过一定的请求格式来获取想要的数据段：
+  #+begin_example
+    Range: <unit>=<range-start>-
+    Range: <unit>=<range-start>-<range-end>
+    Range: <unit>=<range-start>-<range-end>, <range-start>-<range-end>
+    Range: <unit>=<range-start>-<range-end>, <range-start>-<range-end>, <range-start>-<range-end>
+  #+end_example
+
+  同时，根据响应头中的 ~Content-Length~ 获取数据的总长度，参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range][Range - HTTP | MDN]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Length][Content-Length - HTTP | MDN]]
 

@@ -1,7 +1,6 @@
 #+TITLE:      Java - I/O 操作
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#refrence][Refrence]]
 - [[#io-streams][I/O Streams]]
   - [[#byte-streams][Byte Streams]]
   - [[#character-streams][Character Streams]]
@@ -18,12 +17,10 @@
   - [[#managing-metadata][Managing Metadata]]
   - [[#reading-writing-and-creating-files][Reading, Writing, and Creating Files]]
   - [[#walking-the-file-tree][Walking the File Tree]]
+- [[#网络编程][网络编程]]
 - [[#相关问题][相关问题]]
   - [[#java-io-流中怎样进行字符回退][Java I/O 流中怎样进行字符回退]]
   - [[#怎样将-inputstream-转换为字符串][怎样将 InputStream 转换为字符串]]
-
-* Refrence
-  + [[https://docs.oracle.com/javase/tutorial/essential/io/index.html][Lesson: Basic I/O]]
 
 * I/O Streams
   输入输出流代表对应的 *输入源* 或 *输出目标*.
@@ -317,6 +314,19 @@
    #+END_SRC
 
    + [[https://docs.oracle.com/javase/tutorial/essential/io/walk.html][Walking the File Tree]]
+
+* 网络编程
+  Java 作为面向对象的编程语言，对网络 I/O 操作也进行了相应的抽象，但是，这个抽象不是很彻底，比如说，需要使用 URLConnection 对象来发起请求，读取输入输出。
+
+  为什么不直接抽象为请求和响应呢？
+
+  使用 URLConnection 需要注意的事项：
+  + 调用 openConnection 方法发起请求
+  + 调用 getXXX 方法后会发起请求
+  + 单个实例只能发起一个请求，因此，调用 getXXX 方法后就不能设置请求属性了
+
+  当然了，现在由很多更好的网络请求库可以使用，对于 JDK 自带的网络请求库，看需要使用吧，可以参考：
+  + [[https://www.baeldung.com/java-http-request][Do a Simple HTTP Request in Java | Baeldung]]
 
 * 相关问题
 ** Java I/O 流中怎样进行字符回退

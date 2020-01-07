@@ -1,50 +1,15 @@
-* 相关链接
-  + 网络操作相关：
-    + [[https://www.baeldung.com/java-http-request][Do a Simple HTTP Request in Java]]
+* More
+** 图形处理
+  + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][Java 图片处理 (文字水印、图片水印、缩放、补白)]]
+  + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
 
-  + 图像处理相关：
-    + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][java 图片处理 (文字水印、图片水印、缩放、补白)]]
-    + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
-
-  + 并发操作相关
-    + [[https://juejin.im/post/594a24defe88c2006aa01f1c][Java 之 synchronized 详解]]
-
-  + 其他
-    + [[https://www.zhihu.com/question/37401125][Java中的强引用，软引用，弱引用，虚引用有什么用？]]
-    + [[https://www.cnblogs.com/Qian123/p/5710533.html][Java提高篇——对象克隆（复制） - 萌小Q - 博客园]]
-
-* 集合
-  + 自定义集合时可以继承 AbstractXXX
-  + 迭代器位于两个元素之间
-  + 轻量级集合包装器
+** 函数式编程
+   + [[https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-4/index.html][深入理解 Java 函数式编程，第 4 部分: 使用 Vavr 进行函数式编程]]
+   + [[https://www.vavr.io/vavr-docs/][Vavr User Guide]]
 
 * 并发
   + [[https://www.cnblogs.com/dolphin0520/p/3920397.html][Java并发编程：CountDownLatch、CyclicBarrier和Semaphore - Matrix海子 - 博客园]]
   + 理解原子性时需要记住：读取、计算、写入是可能被分开的
-
-* net
-  + [[https://blog.csdn.net/dabing69221/article/details/17351881][Java TCP/IP Socket — close()/shutdownOutput()/shutdownInput() 分析 - 开挂的程序猿 - CSDN博客]]
-  + [[https://www.cnblogs.com/amosli/p/3821474.html][Java--使用多线程下载,断点续传技术原理(RandomAccessFile) - Hi_Amos - 博客园]]
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range][Range - HTTP | MDN]]
-
-  URLConnection:
-  + 调用 openConnection 方法发起请求
-  + 调用 getXXX 方法后会发起请求
-  + 单个实例只能发起一个请求，因此，调用 getXXX 方法后就不能设置请求属性了
-
-* mock
-  + [[https://waylau.com/mockito-quick-start/][Mockito 简明教程 | waylau.com]]
-    
-* 问题
-  + 二维数组和 Comparator.comparing
-  + StringBuilder 的实现 - [[https://github.com/exsourcode/jdk8u-jdk/blob/master/src/share/classes/java/lang/AbstractStringBuilder.java#L427][jdk8u-jdk/AbstractStringBuilder.java at master · exsourcode/jdk8u-jdk]]
-    1. 将要添加的对象转换为字符串
-    2. 检查容量确保足够
-    3. 将目标字符串复制到字符数组
-    4. [[https://www.runoob.com/java/java-string-getchars.html][Java getChars() 方法 | 菜鸟教程]]
-  + System.arraycopy 和 Arrays.copyof 的区别 - [[https://www.programcreek.com/2015/03/system-arraycopy-vs-arrays-copyof-in-java/][System.arraycopy() vs. Arrays.copyOf() in Java]]
-    + 主要在于一个创建新的数组，一个不会
-  + [[https://stackoverflow.com/questions/47747199/why-does-hashmap-allow-a-null-key][java - Why does Hashmap allow a null key? - Stack Overflow]]
 
 * JDBC
   #+begin_example
@@ -72,6 +37,10 @@
   #+end_example
   
   数据库中 DECIMAL 类型默认是不带小数位的，需要注意。
+* 异步
+  + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
+  + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
+
 * 正则表达式
   通过如下的正则表单式去除查询条件中的通配符：
   #+begin_src java
@@ -86,10 +55,6 @@
     jshell> str.replaceAll("([\\\\_%])", "\\\\$1");
     $5 ==> "l\\%k\\_e\\\\"
   #+end_src
-
-* 异步
-  + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
-  + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
 
 * solution
   + [[https://www.cnblogs.com/rjzheng/p/9041659.html][【原创】分布式之数据库和缓存双写一致性方案解析 - 孤独烟 - 博客园]]
@@ -139,3 +104,6 @@
   + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
   + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
 
+* cglib
+  + -Dcglib.debugLocation=/Users/jony.q.ma/.scratch
+  + CGLIB CALLBACK
