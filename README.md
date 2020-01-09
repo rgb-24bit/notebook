@@ -157,7 +157,6 @@
   + [Java 函数式编程](notebook/java/fp.org)
   + [Java 泛型](notebook/java/generic.org)
   + [Java - I/O 操作](notebook/java/io.org)
-  + [Java Misc](notebook/java/java-misc.org)
   + [Fundamental classes](notebook/java/lang.org)
   + [Java Library](notebook/java/library.org)
   + [Java 日志框架](notebook/java/log.org)

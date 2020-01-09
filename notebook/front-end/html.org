@@ -54,6 +54,8 @@
   + 标签 ruby 可以用来为汉字添加拼音
   + 标签 base 可以为页面中的所有相对链接添加统一的前缀
   + 通过 meta 标签指定页面编码格式是应该作为 head 内部第一个节点，因为浏览器一看到这个标签，就会停止解析页面，转而用你指定的编码重新解读并加载页面
+  + 当标签 script 的 type 属性不是 JavaScript 类型时，该元素所包含的内容会被当作数据块而不会被浏览器执行，这为自定义语言提供了便利，参考：
+    - [[https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Code_snippets/Rosetta][Rosetta - Archive of obsolete content | MDN]]
 
 * 相关问题
 ** 怎样显示 Base64 格式的图片

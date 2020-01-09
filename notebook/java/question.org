@@ -345,6 +345,13 @@
   1. 早在 JDK 1.2 版本的时候就已经允许这样了，如果要修改的话就难以兼容旧版本
   2. 支持或不支持 null 键都需要对 null 值进行检测
 
+  #+begin_src java
+    static final int hash(Object key) {
+      int h;
+      return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    }
+  #+end_src
+
   而对于 TreeMap 来说，对于涉及到 null 值的排序是很难的，可以参考：
   + [[https://stackoverflow.com/questions/47747199/why-does-hashmap-allow-a-null-key][java - Why does Hashmap allow a null key? - Stack Overflow]]
 

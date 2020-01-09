@@ -12,6 +12,7 @@
   - [[#windows-office-套件的替代产品][Windows Office 套件的替代产品]]
   - [[#怎样取消-command--tab-应用切换][怎样取消 Command + Tab 应用切换]]
   - [[#easymonitor-这个进程是怎么回事][EasyMonitor 这个进程是怎么回事]]
+  - [[#cpu-占用超过-100-是个什么情况][CPU 占用超过 100% 是个什么情况]]
 
 * 使用入门
   Mac 的菜单栏位于桌面的最上上，从左到右分别为：苹果菜单、应用菜单和系统功能图标区。
@@ -121,4 +122,8 @@
 
    参考：
    + [[https://blog.jiayx.net/archives/274.html][Mac 下禁用开机自启软件 - JIAYX]]
+
+** CPU 占用超过 100% 是个什么情况
+   CPU 占用是相对于单个核心来说的，超过 100% 就是指占用了不止一个核心，参考：
+   + [[https://apple.stackexchange.com/questions/5329/what-does-it-mean-when-a-cpu-exceeds-of-cores-x-100][macos - What does it mean when a %CPU exceeds (# of cores) x 100%? - Ask Different]]
 

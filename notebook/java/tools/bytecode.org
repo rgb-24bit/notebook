@@ -7,6 +7,11 @@
 * CGLib
   CGLIB 建立在 ASM 的基础上极大地简化了字节码的操作难度，Java 的许多框架都使用了它提供的功能，比较著名的应该就是 Spring AOP 了。
 
+  特别的是，CGLIB 能够对方法的调用进行拦截，这和通过 Proxy 生成的代理类不一样，通过 Proxy 生成的代理类内部调用是不会被拦截的，
+  而 CGLIB 可以通过 CGLIB_CALLBACK 完成拦截操作。
+
+  同时，可以通过设置 ~-Dcglib.debugLocation~ 来查看 CGLIB 动态生成的代理类。
+
   参考：[[https://www.cnblogs.com/xrq730/p/6661692.html][CGlib 及其基本使用 - 五月的仓颉 - 博客园]]
 
 ** BeanCopier

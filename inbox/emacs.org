@@ -124,3 +124,6 @@
 * log
   + [[https://writequit.org/articles/working-with-logs-in-emacs.html][Working with log files in Emacs]]
 
+* frame
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Frame-Commands.html][Frame Commands - GNU Emacs Manual]]
+

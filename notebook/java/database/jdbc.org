@@ -81,6 +81,8 @@
 
    MySQL 和 JDBC 之间的类型映射：[[https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-type-conversions.html][MySQL :: MySQL Connector/J 8.0 Developer Guide :: 6.5 Java, JDBC, and MySQL Types]]
 
+   需要注意，数据库中 DECIMAL 类型默认是不带小数位的。
+
 * 数据库连接池
   数据库连接池的一个基本作用就是用来管理数据库的 *连接* 资源，Java 中常用的数据库连接池为 ~C3P0~, ~DBCP~ 和 ~Druid~.
 

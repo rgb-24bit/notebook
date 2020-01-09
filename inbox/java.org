@@ -1,4 +1,4 @@
-* More
+* Future
 ** 图形处理
   + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][Java 图片处理 (文字水印、图片水印、缩放、补白)]]
   + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
@@ -6,104 +6,46 @@
 ** 函数式编程
    + [[https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-4/index.html][深入理解 Java 函数式编程，第 4 部分: 使用 Vavr 进行函数式编程]]
    + [[https://www.vavr.io/vavr-docs/][Vavr User Guide]]
+   + [[https://www.baeldung.com/java-currying][Currying in Java | Baeldung]]
 
-* 并发
-  + [[https://www.cnblogs.com/dolphin0520/p/3920397.html][Java并发编程：CountDownLatch、CyclicBarrier和Semaphore - Matrix海子 - 博客园]]
-  + 理解原子性时需要记住：读取、计算、写入是可能被分开的
+** 异步
+   + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
+   + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
+   + [[https://www.v2ex.com/t/598693#reply13][用 Java 撸了一个 yield 的玩具 - V2EX]]
+   + [[https://www.v2ex.com/t/459387][天哪，看我竟然在 Java 语言里撸出了什么 - V2EX]]
 
-* JDBC
-  #+begin_example
-    MySQL Type      Java Type
-    ----------      ---------
-    CHAR            String
-    VARCHAR         String
-    LONGVARCHAR     String
-    NUMERIC         java.math.BigDecimal
-    DECIMAL         java.math.BigDecimal
-    BIT             boolean
-    TINYINT         byte
-    SMALLINT        short
-    INTEGER         int
-    BIGINT          long
-    REAL            float
-    FLOAT           double
-    DOUBLE          double
-    BINARY          byte[]
-    VARBINARY       byte[]
-    LONGVARBINARY   byte[]
-    DATE            java.sql.Date
-    TIME            java.sql.Time
-    TIMESTAMP       java.sql.Tiimestamp
-  #+end_example
-  
-  数据库中 DECIMAL 类型默认是不带小数位的，需要注意。
-* 异步
-  + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
-  + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
+** Agent
+   本来是想看一下调试中断点是怎么一回事，结果，和 Java Agent 扯上了。
 
-* 正则表达式
-  通过如下的正则表单式去除查询条件中的通配符：
-  #+begin_src java
-    String.replaceAll("([\\\\_%])", "\\\\$1");
-  #+end_src
-  
-  实际效果：
-  #+begin_src java
-    jshell> String str = "l%k_e\\";
-    str ==> "l%k_e\\"
+   Java Agent 是一种依附于 JVM 进程的程序，可以通过这种方式来监听控制 JVM 进程。
 
-    jshell> str.replaceAll("([\\\\_%])", "\\\\$1");
-    $5 ==> "l\\%k\\_e\\\\"
-  #+end_src
+   加载 Java Agent 的方式主要有两种：
+   1. 通过命令行参数指定要加载的 Java Agent 程序，主要的选项为：
+      |------------------------------+------------------------------|
+      | 选项                         | 作用                         |
+      |------------------------------+------------------------------|
+      | javaagent:jarpath[=options]  | 加载指定的 jar               |
+      | agentlib:libname[=options]   | 加载 PATH 环境变量下的动态库 |
+      | agentpath:pathname[=options] | 通过完全路径加载动态库       |
+      |------------------------------+------------------------------|
 
-* solution
-  + [[https://www.cnblogs.com/rjzheng/p/9041659.html][【原创】分布式之数据库和缓存双写一致性方案解析 - 孤独烟 - 博客园]]
+      参考：
+      + [[http://www.voidcn.com/article/p-ptghvuzj-bbz.html][6.1 java 选项 -javaagent、-agentlib、-agentpath - 程序园]]
+      + 
 
-* java
-  Maven - SNAPSHOST - RELEASE
-
-* 协程
-  + [[https://www.v2ex.com/t/598693#reply13][用 Java 撸了一个 yield 的玩具 - V2EX]]
-  + [[https://www.v2ex.com/t/459387][天哪，看我竟然在 Java 语言里撸出了什么 - V2EX]]
-
-* manifest
-  + [[https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jar.html#JARManifest][JAR File Specification]]
-
-* Agent
-  本来是想看一下调试中断点是怎么一回事，结果，和 Java Agent 扯上了。
-
-  Java Agent 是一种依附于 JVM 进程的程序，可以通过这种方式来监听控制 JVM 进程。
-
-  加载 Java Agent 的方式主要有两种：
-  1. 通过命令行参数指定要加载的 Java Agent 程序，主要的选项为：
-     |------------------------------+------------------------------|
-     | 选项                         | 作用                         |
-     |------------------------------+------------------------------|
-     | javaagent:jarpath[=options]  | 加载指定的 jar               |
-     | agentlib:libname[=options]   | 加载 PATH 环境变量下的动态库 |
-     | agentpath:pathname[=options] | 通过完全路径加载动态库       |
-     |------------------------------+------------------------------|
-
-     参考：
-     + [[http://www.voidcn.com/article/p-ptghvuzj-bbz.html][6.1 java 选项 -javaagent、-agentlib、-agentpath - 程序园]]
-     + 
-
-  2. 通过 Sun 公司提供的 VirtualMachine 接口动态加载 Agent，参考：
-     + [[https://www.cnblogs.com/LittleHann/p/4783581.html][Java Attach API - 郑瀚 Andrew.Hann - 博客园]]
-     + [[https://docs.oracle.com/javase/8/docs/jdk/api/attach/spec/com/sun/tools/attach/VirtualMachine.html][VirtualMachine (Attach API )]]
+   2. 通过 Sun 公司提供的 VirtualMachine 接口动态加载 Agent，参考：
+      + [[https://www.cnblogs.com/LittleHann/p/4783581.html][Java Attach API - 郑瀚 Andrew.Hann - 博客园]]
+      + [[https://docs.oracle.com/javase/8/docs/jdk/api/attach/spec/com/sun/tools/attach/VirtualMachine.html][VirtualMachine (Attach API )]]
      
-  其中，Java Agent 程序的编写利用了 java.lang.instrument 包下提供的接口，参考：
-  + [[https://www.cnkirito.moe/instrument/][JAVA 拾遗--Instrument 机制 | 徐靖峰|个人博客]]
-  + [[https://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html][Java SE 6 新特性: Instrumentation 新功能]]
+   其中，Java Agent 程序的编写利用了 java.lang.instrument 包下提供的接口，参考：
+   + [[https://www.cnkirito.moe/instrument/][JAVA 拾遗--Instrument 机制 | 徐靖峰|个人博客]]
+   + [[https://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html][Java SE 6 新特性: Instrumentation 新功能]]
 
-  至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
+   至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
 
-* 注解
-  + [[https://www.race604.com/annotation-processing/][Java 注解处理器]]
-  + [[https://github.com/zhuhean/BuilderProcessor][zhuhean/BuilderProcessor: Android注解处理演示项目]]
-  + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
-  + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
+** 注解
+   + [[https://www.race604.com/annotation-processing/][Java 注解处理器]]
+   + [[https://github.com/zhuhean/BuilderProcessor][zhuhean/BuilderProcessor: Android注解处理演示项目]]
+   + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
+   + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
 
-* cglib
-  + -Dcglib.debugLocation=/Users/jony.q.ma/.scratch
-  + CGLIB CALLBACK

@@ -3,19 +3,19 @@
   + [[https://www.baeldung.com/spring-boot-devtools][Overview of Spring-Boot Dev Tools | Baeldung]]
   + [[https://commons.apache.org/][Apache Commons – Apache Commons]]
     
-* Spring Cloud
-  + [[https://www.cnblogs.com/fengzheng/p/10603672.html][Spring Cloud 系列之 Eureka 实现服务注册与发现 - 风的姿态 - 博客园]]
-  + [[http://blog.didispace.com/springcloud1/][Spring Cloud构建微服务架构（一）服务注册与发现 | 程序猿DD]]
-  + [[http://blog.didispace.com/springcloud5/][Spring Cloud构建微服务架构（五）服务网关 | 程序猿DD]]
-  + [[https://juejin.im/post/5adee863f265da0b7527c26e][Spring Cloud Ribbon 客户端负载均衡 - 掘金]]
-  + [[https://www.jianshu.com/p/3e11ac385c73][Hystrix技术解析 - 简书]]
-  + [[https://cloud.spring.io/spring-cloud-static/Greenwich.SR3/single/spring-cloud.html#_spring_cloud_commons_common_abstractions][Spring Cloud 官方文档]]
-  + Spring Cloud Security 和 Spring Security 之间的关系
+** Spring Cloud
+   + [[https://www.cnblogs.com/fengzheng/p/10603672.html][Spring Cloud 系列之 Eureka 实现服务注册与发现 - 风的姿态 - 博客园]]
+   + [[http://blog.didispace.com/springcloud1/][Spring Cloud构建微服务架构（一）服务注册与发现 | 程序猿DD]]
+   + [[http://blog.didispace.com/springcloud5/][Spring Cloud构建微服务架构（五）服务网关 | 程序猿DD]]
+   + [[https://juejin.im/post/5adee863f265da0b7527c26e][Spring Cloud Ribbon 客户端负载均衡 - 掘金]]
+   + [[https://www.jianshu.com/p/3e11ac385c73][Hystrix技术解析 - 简书]]
+   + [[https://cloud.spring.io/spring-cloud-static/Greenwich.SR3/single/spring-cloud.html#_spring_cloud_commons_common_abstractions][Spring Cloud 官方文档]]
+   + Spring Cloud Security 和 Spring Security 之间的关系
 
-* Spring WebFlux
-  + [[https://www.ibm.com/developerworks/cn/java/spring5-webflux-reactive/index.html][使用 Spring 5 的 WebFlux 开发反应式 Web 应用]]
-  + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html][Web on Reactive Stack]]
+** Spring WebFlux
+   + [[https://www.ibm.com/developerworks/cn/java/spring5-webflux-reactive/index.html][使用 Spring 5 的 WebFlux 开发反应式 Web 应用]]
+   + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html][Web on Reactive Stack]]
 
-* Mongodb
-  + [[https://docs.spring.io/spring-data/mongodb/docs/2.2.3.RELEASE/reference/html/#reference][Spring Data MongoDB - Reference Documentation]]
+** Mongodb
+   + [[https://docs.spring.io/spring-data/mongodb/docs/2.2.3.RELEASE/reference/html/#reference][Spring Data MongoDB - Reference Documentation]]
 

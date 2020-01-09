@@ -215,7 +215,10 @@
   + [[https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/annotation/AliasFor.html][AliasFor (Spring Framework 5.2.0.RELEASE API)]]
 
 * 相关技巧
-  BeanFactory 和 ApplicationContext 这些对象会被 Spring 自动注册为 Bean，因此可以通过自动注入获取这些对象。
+  + BeanFactory 和 ApplicationContext 这些对象会被 Spring 自动注册为 Bean，因此可以通过自动注入获取这些对象
+  + 当被 ~@AutoWired~ 注解的字段类型为数组、集合或映射的时候，IOC 容器将自动装配所有与声明的值 *类型匹配* 的 Bean，并且会自动根据 Bean 上的 ~@Order~ 注解进行排序，
+    是一个很好用的特性，参考：
+    - [[https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Autowired.html][Autowired (Spring Framework 5.2.3.BUILD-SNAPSHOT API)]]
 
 * 相关问题
 ** 怎样在 XML 配置文件中指定 Qualifier

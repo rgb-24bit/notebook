@@ -5,6 +5,7 @@
 - [[#spring-boot][Spring Boot]]
 - [[#缓存机制][缓存机制]]
 - [[#相关技巧][相关技巧]]
+  - [[#likestringtypehandler][LikeStringTypeHandler]]
 - [[#相关问题][相关问题]]
   - [[#mybatis-是不是不支持重载][mybatis 是不是不支持重载]]
   - [[#mybatis-返回自增主键的问题][mybatis 返回自增主键的问题]]
@@ -116,6 +117,37 @@
 
 * 相关技巧
   + 可以通过 mybatis-generator 这个插件快速生成实体类和 mapper 文件
+
+** LikeStringTypeHandler
+   使用 mybatis 可以通过 LikeStringTypeHandler 来去除字符串中的通配符：
+   #+begin_src java
+     public class LikeStringTypeHandler extends BaseTypeHandler<String> {
+       @Override
+       public void setNonNullParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType) throws SQLException {
+         String text = parameter;
+
+         if (text != null) {
+           text = text.replaceAll("([\\\\_%])", "\\\\$1");
+         }
+         ps.setString(i, text);
+       }
+
+       @Override
+       public String getNullableResult(ResultSet rs, String columnName) throws SQLException {
+         return rs.getString(columnName);
+       }
+
+       @Override
+       public String getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+         return rs.getString(columnIndex);
+       }
+
+       @Override
+       public String getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+         return cs.getString(columnIndex);
+       }
+     }
+   #+end_src
 
 * 相关问题
 ** mybatis 是不是不支持重载

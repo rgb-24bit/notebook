@@ -1,4 +1,9 @@
-* 异步编程模型的理解
+* 编译原理
+  + [[https://coolshell.cn/articles/1547.html][使用 Flex Bison 和 LLVM 编写自己的编译器 - 酷 壳 - CoolShell]]
+  + [[https://pandolia.net/tinyc/index.html][自己动手写编译器 — 自己动手写编译器]]
+  + [[https://github.com/miloyip/json-tutorial][从零开始的 JSON 库教程]]
+
+* 异步编程
   撇开 I/O 的异步编程模型理解：
   1. 在主线程上存在一个耗时的 Task，为了不让这个 Task 阻塞主线程，于是，可以考虑安排它到另一个线程执行
   2. 我们需要这个 Task 执行的结果，所以说，我看可以用一个 Future 来保存这个 Task 的引用，当 Task 执行完成后就将结果保存到 Future

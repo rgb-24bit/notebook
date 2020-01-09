@@ -1,10 +1,42 @@
 #+TITLE:      ECMAScript 6
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#ellipsis][Ellipsis]]
 - [[#相关问题][相关问题]]
   - [[#通过字面量定义对象时如何将变量做为一个对象的-key][通过字面量定义对象时如何将变量做为一个对象的 Key]]
   - [[#es6commonjs-和-amd-之间的关系][ES6、CommonJS 和 AMD 之间的关系]]
 
+* Ellipsis
+  ES6 中的展开运算符和其余运算符都是 ~...~ 的形式，其中：
+  + 展开运算符可以用来展开一个可迭代对象，效果如下：
+    #+begin_src js
+      const params = [ "hello", true, 7 ]
+      const other = [ 1, 2, ...params ] // [ 1, 2, "hello", true, 7 ]
+
+      function sum(a, b, c) {
+        return a + b + c
+      }
+      const args = [1, 2, 3]
+      sum(...args)    // 6
+
+      [..."123456"]   // ["1", "2", "3", "4", "5", "6"]
+    #+end_src
+  + 其余运算符与展开运算符相反，效果如下：
+    #+begin_src js
+      function sum(...numbers) {
+        const result = 0
+
+        numbers.forEach(function (number) {
+          result += number
+        })
+
+        return result
+      }
+
+      sum(1)              // 1
+      sum(1, 2, 3, 4, 5)  // 15
+    #+end_src
+    
 * 相关问题
 ** 通过字面量定义对象时如何将变量做为一个对象的 Key
    ES6 允许字面量定义对象时，用表达式作为对象的属性名：

@@ -6,6 +6,8 @@
 - [[#数据类型][数据类型]]
 - [[#属性描述符][属性描述符]]
 - [[#对象字面量][对象字面量]]
+- [[#数据类型的转换][数据类型的转换]]
+- [[#事件机制][事件机制]]
 - [[#相关技巧][相关技巧]]
   - [[#javascript-变量的命名][JavaScript 变量的命名]]
   - [[#让返回值变成-undefined][让返回值变成 undefined]]
@@ -18,6 +20,9 @@
   - [[#怎样获取用户使用的语言][怎样获取用户使用的语言]]
   - [[#javascript-的入口函数][JavaScript 的入口函数？]]
   - [[#如何清空一个数组中的内容][如何清空一个数组中的内容]]
+  - [[#变量提升的规则][变量提升的规则]]
+  - [[#windowonload-和-documentonload][window.onload 和 document.onload]]
+  - [[#普通函数和构造函数的区别][普通函数和构造函数的区别]]
 
 * 基础概念
   JavaScript 本身不提供任何与 I/O 相关的 API，这些都要靠宿主环境提供，比如浏览器、Node.js 这些。
@@ -212,6 +217,17 @@
   参考：
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Grammar_and_types][语法和数据类型 - JavaScript | MDN]]
 
+* 数据类型的转换
+  JavaScript 中的数据类型转换规则是我目前见过的所有语言中最复杂的一个，其中，自动类型转换是通过调用 Boolean、String 和 Number 函数完成的。
+
+  同时，自动类型转换又往往和比较运算符扯在一起，详细规则可以见：
+  + [[https://wangdoc.com/javascript/features/conversion.html][数据类型的转换 - JavaScript 教程 - 网道]]
+  + [[https://wangdoc.com/javascript/operators/comparison.html#%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6][比较运算符 - JavaScript 教程 - 网道]]
+
+* 事件机制
+  + 通过 ~addEventListener~ 方法可以为同一个事件添加多个不同的监听函数。这些函数按照添加顺序触发，即先添加先触发。如果为同一个事件多次添加同一个监听函数，
+    该函数只会执行一次，多余的添加将自动被去除。
+
 * 相关技巧
 ** JavaScript 变量的命名
    JavaScript 的标识符允许大多数的 Unicode 字符，因此，你甚至可以使用颜文字来编写程序。
@@ -338,4 +354,63 @@
 
    参考：
    + [[https://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript][How do I empty an array in JavaScript? - Stack Overflow]]
+
+** 变量提升的规则
+   JavaScript 中的变量提升给我的感觉是一种略显尴尬的功能，主要原因大概就是它只提升声明不提升初始化，使得发生以下情况：
+   #+begin_src js
+     var x = 1;                 // 声明 + 初始化 x
+     console.log(x + " " + y);  // '1 undefined'
+     var y = 2;                 // 声明 + 初始化 y
+
+
+     //上面的代码和下面的代码是一样的 
+     var x = 1;                 // 声明 + 初始化 x
+     var y;                     //声明 y
+     console.log(x + " " + y);  //y 是未定义的
+     y = 2;                     // 初始化  y 
+   #+end_src
+
+   同时，对于函数来说，通过赋值语句定义的函数提升规则和普通变量相同：
+   #+begin_src js
+     f();
+     var f = function () {};
+     // TypeError: undefined is not a function
+
+     // 上面的代码等同于下面的形式
+     var f;
+     f();
+     f = function () {};
+   #+end_src
+
+   参考：
+   + [[https://wangdoc.com/javascript/types/function.html#%E5%87%BD%E6%95%B0%E5%90%8D%E7%9A%84%E6%8F%90%E5%8D%87][函数名的提升 - JavaScript 教程 - 网道]]
+   + [[https://developer.mozilla.org/zh-CN/docs/Glossary/Hoisting][变量提升 - 术语表 | MDN]]
+
+** window.onload 和 document.onload
+   window.onload 触发在页面资源加载完成后，包括图像和脚本资源，而 document.onload 可以触发在图像和其他额外资源加载完成之前。
+
+   参考：
+   + [[https://stackoverflow.com/questions/588040/window-onload-vs-document-onload][javascript - window.onload vs document.onload - Stack Overflow]]
+
+** 普通函数和构造函数的区别
+   JS 中通过 ~new function~ 的方式来创建对象的方式让人多少有些不习惯，但是其本质还是很简单的，通过构造函数创建对象时会发生：
+   #+begin_src js
+     // 1. 创建一个空对象
+     var _obj = {}
+
+     // 2. this 变量指向对象 _obj
+     Constructor.call(_obj)
+
+     // 3. _obj 继承了构造函数 Constructor() 的原型
+     _obj.__proto__ = Constructor.prototype
+
+     // 4. 执行构造函数 Constructor() 内的代码
+   #+end_src
+   
+   普通函数和构造函数的关键区别就在于 ~this~ 指针的指向。
+
+   参考：
+   + [[https://segmentfault.com/a/1190000008615288][普通函数和构造函数的区别 - 前端学习之路 - SegmentFault 思否]]
+   + [[https://wangdoc.com/javascript/oop/prototype.html][对象的继承 - JavaScript 教程 - 网道]]
+   + [[https://interactive-examples.mdn.mozilla.net/pages/js/function-call.html][JavaScript Demo: Function.call()]]
 

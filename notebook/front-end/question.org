@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#动态加载-css-和-javascript][动态加载 CSS 和 JavaScript]]
 - [[#shim-和-polyfill-是什么意思][Shim 和 Polyfill 是什么意思]]
+- [[#前端路由的实现原理][前端路由的实现原理]]
+- [[#url-编码的问题][URL 编码的问题]]
 
 * 动态加载 CSS 和 JavaScript
   我们可以利用浏览器的特性来动态加载 CSS 和 JavaScript，当我们动态添加 ~script~ 或 ~style~ 标签到 DOM 中时，浏览器如果发现该标签需要加载远程资源，
@@ -20,4 +22,39 @@
 * Shim 和 Polyfill 是什么意思
   + Shim - 一个 Shim 是一个库，它将一个新的 API 引入到一个旧的环境中，而且仅靠旧环境中已有的手段实现
   + Polyfill - 一个 Polyfill 相当于是一个用在浏览器 API 上的 Shim，提供在旧环境中的浏览器原生 API 实现
+
+* 前端路由的实现原理
+  直接修改 ~window.location~ 属性时会导致网页的重新加载，为了避免这样情况的方式，前端路由使用了两种方式来实现：
+  + 通过 URL Hash 来实现，即通过修改 ~#fragment~ 来达到路由跳转的效果，由于存在 ~hashchange~ 事件，还可以通过监听 Hash 的改变来进行操作
+  + 通过 HTML5 History 接口来实现，虽然 URL Hash 兼容性好，但是拿来做路由的话，原来的锚点功能就不能用了。其次，hash 的传参是基于 url 的，如果要传递复杂的数据，会有体积的限制。
+    因此，通过 HTML5 History 接口可以得到更好看的 URL。
+
+  参考：
+  + [[https://stackoverflow.com/questions/824349/how-do-i-modify-the-url-without-reloading-the-page][javascript - How do I modify the URL without reloading the page? - Stack Overflow]]
+  + [[https://www.cnblogs.com/JRliu/p/9025290.html][前端路由的两种模式：hash 模式和 history 模式 - mr_lao - 博客园]]
+
+* URL 编码的问题
+  前端可以通过 ~escape~, ~encodeURI~ 和 ~encodeURIComponent~ 对 URL 字符进行编码，其中：
+  + ~escape~ 在处理 ~0xff~ 之外字符的时候，是直接使用字符的 ~unicode~ 在前面加上一个 ~%u~
+  + ~encodeURI~ 和 ~encodeURIComponent~ 是在 ~UTF-8~ 的每个字节码前加上一个 ~%~
+  + ~encodeURI~ 是 ~W3C~ 的标准，而 ~escape~ 是非标准
+
+  各自不会转译的字符：
+  #+begin_src js
+    // escape
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    "*@-_+./"
+
+    // encodeURI
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    "-_.!~*'();/?:@&=+$,#"
+
+    // encodeURIComponent
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    ",/?:@&=+$#"
+  #+end_src
+  
+  参考：
+  + [[https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/index.html][URL编码的奥秘 | Aotu.io「凹凸实验室」]]
+  + [[https://tools.ietf.org/html/rfc3986][RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax]]
 
