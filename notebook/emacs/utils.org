@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#寄存器][寄存器]]
 - [[#bar-charts][Bar Charts]]
+- [[#follow-mode][Follow Mode]]
+- [[#vterm][vterm]]
 
 * 寄存器
   寄存器可以非常快速地存储和恢复字符串、整数、矩形、文件和目录路径、WindowConfigurations、
@@ -13,4 +15,15 @@
 * Bar Charts
   Emacs 中可以使用 ~chart~ 包来绘制柱状图，效果还不错，参考：
   + [[https://francismurillo.github.io/2017-04-15-Exploring-Emacs-chart-Library/][Exploring Emacs chart Library]]
+
+* Follow Mode
+  在查看长的大文件的时候，Follow Mode 是一个很有用的功能，通过 ~C-x 3~ 将窗口分割，然后打开 Follow Mode 就可以在两边的窗口中浏览同一个缓冲区的内容了。
+
+  这在阅读日志时可能是一个很有用的辅助功能，参考：
+  + [[https://writequit.org/articles/working-with-logs-in-emacs.html][Working with log files in Emacs]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Follow-Mode.html][Follow Mode - GNU Emacs Manual]]
+
+* vterm
+  vterm 是一个动态模块，提供了很好的终端模拟器功能支持，一些快捷键：
+  + ~C-c C-t~ 开启复制模式，mark region 后 ~RET~ 即可完成复制
 

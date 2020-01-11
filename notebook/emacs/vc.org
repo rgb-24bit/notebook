@@ -2,6 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#annotate][Annotate]]
+- [[#magit][Magit]]
+  - [[#相关问题][相关问题]]
 
 * Annotate
   Emacs 中提供了内置的 ~vc~ 前端工具，虽然这个工具在很多时候都没有 ~magit~ 好用，但是，它的 ~vc-annotate~ 功能还是要比 ~magit~ 舒服一些的。
@@ -10,4 +12,11 @@
   + [[https://stackoverflow.com/questions/15460550/git-blame-with-commit-details-in-emacs][git blame with commit details in emacs - Stack Overflow]]
   + [[https://magit.vc/manual/magit/Blaming.html][Blaming (Magit User Manual)]]
   + [[https://git-scm.com/docs/git-blame][Git - git-blame Documentation]]
+
+* Magit
+** 相关问题
+   + 在 Magit 中怎样对比两个分支之间的区别？
+
+     可以通过 ~m p~ 来查看，就是进行合并预览，效果还是很好的，参考：
+     + [[https://stackoverflow.com/questions/39863277/in-magit-how-do-i-see-a-diff-what-a-branch-adds-to-my-current-branch][emacs - In magit, how do I see a diff what a branch adds to my current branch? - Stack Overflow]]
 

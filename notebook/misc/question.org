@@ -8,6 +8,7 @@
 - [[#域名后缀为-io-通常是什么意思][域名后缀为 io 通常是什么意思]]
 - [[#什么是开源精神][什么是开源精神]]
 - [[#windows-media-player-可视化效果][Windows Media Player 可视化效果]]
+- [[#我可以修改-rsa-公钥后面跟着的邮箱吗][我可以修改 RSA 公钥后面跟着的邮箱吗]]
 
 * 怎样设定软件版本号
   版本格式：主版本号.次版本号.修订号，版本号递增规则如下：
@@ -50,4 +51,8 @@
 
   下载：
   + [[https://support.microsoft.com/zh-cn/help/17878/visualizations-for-windows-media-player][Windows Media Player 可视化效果 - Windows Help]]
+
+* 我可以修改 RSA 公钥后面跟着的邮箱吗
+  可以，RSA 公钥最后面的那部分内容只起到注释的作用，可以随意修改，参考：
+  + [[https://serverfault.com/questions/309171/possible-to-change-email-address-in-keypair][security - Possible to change email address in keypair? - Server Fault]]
 

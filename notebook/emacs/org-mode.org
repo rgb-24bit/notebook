@@ -5,6 +5,7 @@
 - [[#dates-and-times][Dates and Times]]
 - [[#markup-for-rich-contents][Markup for Rich Contents]]
 - [[#refile--copy][Refile & copy]]
+- [[#misc][Misc]]
 - [[#文学编程][文学编程]]
 - [[#问题集][问题集]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
@@ -12,6 +13,7 @@
   - [[#怎样在-org-92-中使用旧的模板引擎][怎样在 Org 9.2 中使用旧的模板引擎]]
   - [[#怎样在导出-html-使用-css-样式高亮代码][怎样在导出 HTML 使用 CSS 样式高亮代码]]
   - [[#怎样对齐文件中的所有标签][怎样对齐文件中的所有标签]]
+- [[#相关链接][相关链接]]
 
 * Agenda Views
   + Agenda Views 默认会显示每个条目的 ~CATEGORY~ 属性，该属性可以通过快捷键 ~C-c C-x p~ 进行插入
@@ -62,6 +64,10 @@
 
   参考：
   + [[https://orgmode.org/manual/Refile-and-copy.html#DOCF94][The Org Manual: Refile and copy]]
+
+* Misc
+  + 在 Org 文件的头部可以通过 ~#+STARTUP~ 来控制打开文件时各个标题下内容的可见性，参考：
+    + [[https://orgmode.org/manual/Initial-visibility.html][Initial visibility (The Org Manual)]]
 
 * 文学编程
   文学编程是一种很适合用来进行算法练习的编程模式，而 Org 提供了很多的功能来支持这样模式，可以参考：
@@ -124,4 +130,11 @@
 
 ** 怎样对齐文件中的所有标签
    通过快捷键 ~C-u C-c C-q~ 可以很方便的完成这一工作。
+
+* 相关链接
+  + 教程合集：
+    + [[https://blog.csdn.net/u014801157/article/details/24372485][Emacs 月月积累（终结篇）：熟练使用 org-mode 管理日常事务_R语言与生物信息学-CSDN博客]]
+    + [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
+    + [[https://www.cnblogs.com/open_source/archive/2011/07/17/2108747.html][Org-mode 简明手册 - open source - 博客园]]
+    + [[http://www.voidcn.com/article/p-evkruzgd-hr.html][用Org-mode实践《奇特的一生》 - 程序园]]
 

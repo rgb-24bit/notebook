@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#git-pull-时使用存储库的链接][git pull 时使用存储库的链接]]
 - [[#git-ignore][git ignore]]
+- [[#git-merge-strategy][git merge strategy]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
@@ -19,4 +20,8 @@
 
   参考：
   + [[https://git-scm.com/docs/gitignore][Git - gitignore Documentation]]
+
+* git merge strategy
+  在 merge 的时候可以通过 ~-X~ 选项指定合并策略，比如 ~theirs~ 和 ~ours~ 这两种简易的策略，可以参考：
+  + [[https://stackoverflow.com/questions/173919/is-there-a-theirs-version-of-git-merge-s-ours][Is there a "theirs" version of "git merge -s ours"? - Stack Overflow]]
 

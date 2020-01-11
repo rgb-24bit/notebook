@@ -4,6 +4,8 @@
 - [[#curl][curl]]
 - [[#fping][fping]]
 - [[#ffmpeg][ffmpeg]]
+- [[#nc][nc]]
+- [[#search][search]]
 
 * curl
   curl 的常用选项如下：
@@ -57,7 +59,6 @@
     #+END_SRC
 
 
-
 * fping
   Fping 相较于 ping 命令可以同时 ping 多个目标 IP 地址，甚至可以将要测试的 IP 地址保存到文件中作为标准输入。
 
@@ -103,4 +104,26 @@
     # 转换 flv 文件为 MP3
     ffmpeg -i input.flv -q:a 5 out.mp3
   #+end_src
+
+* nc
+  NetCat，在网络工具中有“瑞士军刀”美誉，其有 Windows 和 Linux 的版本。因为它短小精悍、功能实用，被设计为一个简单、可靠的网络工具，可通过 TCP 或 UDP 协议传输读写数据。同时，它还是一个网络应用 Debug 分析器，
+  因为它可以根据需要创建各种不同类型的网络连接。
+
+  可以通过 ~-l~ 选项监听某个端口：
+  #+begin_src sh
+    $ nc -l port
+  #+end_src
+
+  可以通过重定向标准输入输出的方式传输信息：
+  #+begin_src sh
+    $ nc -l port > file
+    $ cat file | nc host port
+  #+end_src
+  
+* search
+  在使用 Emacs 的过程中了解到有很多强大的外部搜索工具，对于文件来说 ~fd~ 通常就是一个很好的选择，
+  而文本则可以使用 ~rg~ 来搜索。
+
+  更多的可以参考：
+  + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#searching][Searching - With an external tool]]
 

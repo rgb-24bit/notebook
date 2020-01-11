@@ -5,6 +5,7 @@
 - [[#string][String]]
   - [[#stringintern][String#intern]]
 - [[#reference][Reference]]
+- [[#内部类][内部类]]
 
 * Object
   Java 中 Object 是所有类的基类，提供了一些基本的方法，其中部分方法的实现如下：
@@ -131,4 +132,11 @@
   + [[https://juejin.im/post/5b82c02df265da436152f5ad#heading-5][理解 Java 的强引用、软引用、弱引用和虚引用 - 掘金]]
   + [[https://www.cnblogs.com/dreamroute/p/5029899.html][ReferenceQueue 的使用 - 神一样的存在 - 博客园]]
   + [[https://docs.oracle.com/javase/8/docs/api/java/lang/ref/ReferenceQueue.html][ReferenceQueue (Java Platform SE 8 )]]
+
+* 内部类
+  Java 内部类是一种编译器行为，创建普通的非静态内部类时编译器往往会创建一个 ~this$0~ 引用执行外部类实例，同时为外部内的私有字段创建 ~access~ 方法来允许内部类访问私有字段。
+
+  当创建的是局部内部类时，编译器还会为内部类创建局部变量的引用保存。
+
+  详情可参考《Java 核心技术卷卷一》内部类章节。
 

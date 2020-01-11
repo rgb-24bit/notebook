@@ -9,6 +9,7 @@
 - [[#通配符][通配符]]
 - [[#类型擦除][类型擦除]]
 - [[#泛型的限制][泛型的限制]]
+- [[#泛型继承][泛型继承]]
 
 * 泛型类型
   + *类型参数命名约定*
@@ -313,3 +314,11 @@
      #+END_SRC
 
   9. 运行时类型查询（反射）只能获取原始类型（类型擦除之后）
+* 泛型继承
+  在下面的代码中，Child 必然是 ~Super<Integer>~ 类型的：
+  #+begin_src java
+    interface Super<T> {}
+
+    interface Child<T> extends Super<Integer> {}
+  #+end_src
+

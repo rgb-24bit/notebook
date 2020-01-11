@@ -1,129 +1,30 @@
 * Future
-  + 配置打开 Org 文件时 Headline 的可见性 - [[https://orgmode.org/manual/Initial-visibility.html][The Org Manual: Initial visibility]]
   + SEXP
-    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html][Sexp Diary Entries - GNU Emacs Manual]]
     + [[https://emacs.stackexchange.com/questions/31683/schedule-org-task-for-last-day-of-every-month/31708][org mode - Schedule org task for last day of every month? - Emacs Stack Exchange]]
-      
-* Solarized
-  + [[https://github.com/sellout/emacs-color-theme-solarized/blob/master/solarized-definitions.el][emacs-color-theme-solarized/solarized-definitions.el at master · sellout/emacs-color-theme-solarized]]
-  + [[https://github.com/bbatsov/solarized-emacs][bbatsov/solarized-emacs: The Solarized colour theme, ported to Emacs.]]
-  + [[https://github.com/purcell/color-theme-sanityinc-solarized/blob/master/color-theme-sanityinc-solarized.el][color-theme-sanityinc-solarized/color-theme-sanityinc-solarized.el at master · purcell/color-theme-sanityinc-solarized]]
-  + [[https://github.com/altercation/solarized][altercation/solarized: precision color scheme for multiple applications (terminal, vim, etc.) with both dark/light modes]]
-
-  配置问题：
-  + [[https://github.com/purcell/color-theme-sanityinc-solarized/commit/d4cfd08e54b34b2e3e2d34747b82c3490744e16b][Change interface colour selection to more closely match tomorrow themes · purcell/color-theme-sanityinc-solarized@d4cfd08]]
-  + [[https://emacs.stackexchange.com/questions/38888/howto-include-a-local-theme-in-spacemacs][Howto include a local theme in spacemacs - Emacs Stack Exchange]]
-
-  颜色好像都是一样的，就是配置有点区别。
-
-  考虑自己进行配置维护 @_@
-
-* magit
-  + 窗口分割位置：
-    + [[https://emacs.stackexchange.com/questions/2513/how-to-get-org-agenda-to-prefer-split-window-right][org mode - How to get org-agenda to prefer split-window-right - Emacs Stack Exchange]]
-    + [[https://github.com/syl20bnr/spacemacs/issues/5140][How to make spacemacs split window right automatically? · Issue #5140 · syl20bnr/spacemacs]]
-  + [[https://stackoverflow.com/questions/39863277/in-magit-how-do-i-see-a-diff-what-a-branch-adds-to-my-current-branch][emacs - In magit, how do I see a diff what a branch adds to my current branch? - Stack Overflow]]
-
-* search
-  + [[https://github.com/manateelazycat/snails][manateelazycat/snails: A modern, easy-to-expand fuzzy search framework]]
-  + [[https://github.com/sharkdp/fd][sharkdp/fd: A simple, fast and user-friendly alternative to 'find']]
-  + [[https://github.com/BurntSushi/ripgrep][BurntSushi/ripgrep: ripgrep recursively searches directories for a regex pattern]]
-  + [[http://ergoemacs.org/emacs/emacs_grep_find.html][Emacs: Search Text in Directory]]
-  + [[https://www.emacswiki.org/emacs/CategorySearchAndReplace][EmacsWiki: Category Search And Replace]]
-  + [[https://github.com/dajva/rg.el][dajva/rg.el: Emacs search tool based on ripgrep]]
-  + [[https://github.com/Wilfred/ag.el][Wilfred/ag.el: An Emacs frontend to The Silver Searcher]]
-  + [[https://github.com/bling/pt.el][bling/pt.el: An emacs front-end for Pt, the Platinum Searcher]]
-  + [[https://www.the5fire.com/about-ack-grep-in-linux.html][linux下的高效代码搜索工具-ack | the5fire的技术博客]]
-  + [[https://man.linuxde.net/grep][grep命令_Linux grep 命令用法详解：强大的文本搜索工具]]
-  + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#searching][spacemacs/DOCUMENTATION.org at develop · syl20bnr/spacemacs]]
-  + [[https://learnku.com/articles/7337/a-programmers-command-line-search-tool][程序员的命令行搜索工具 | Laravel China 社区]]
-  + [[https://juejin.im/entry/5b70f7705188256137187ffe][推荐一款比 Find 快 10 倍的搜索工具 FD - 阅读 - 掘金]]
-
-* bookmark
-  + [[https://www.emacswiki.org/emacs/BookmarkPlus][EmacsWiki: Bookmark Plus]]
-
-* keybinding
-  + hydra
-  + [[https://github.com/abo-abo/hydra][abo-abo/hydra: make Emacs bindings that stick around]]
-    #+begin_src elisp
-      (defhydra hydra-cursor-move (global-map "<f2>")
-        "Simple cursor move by hydra."
-        ("n" next-line "next-line"))
-    #+end_src
-
-* advice
-  + [[https://nullprogram.com/blog/2013/01/22/][The Limits of Emacs Advice « null program]]
-
-* find-file
-  + [[https://man.linuxde.net/locate_slocate][locate/slocate命令_Linux locate/slocate 命令用法详解：查找文件或目录]]
-  + [[https://stackoverflow.com/questions/4340949/how-to-find-a-file-in-emacs-without-known-exact-directory][How to find a file in Emacs without known exact directory? - Stack Overflow]]
-  + [[https://blog.csdn.net/yaomingyang/article/details/74852361][MAC终端搜索文件find mdfind操作命令 - 明洋的专栏 - CSDN博客]]
-  + [[https://www.emacswiki.org/emacs/LocateFilesAnywhere][EmacsWiki: Locate Files Anywhere]]
-
-* mac
-  + [[https://www.emacswiki.org/emacs/EmacsForMacOS#toc22][EmacsWiki: Emacs For Mac OS]]
-
-* delete space
-  + [[http://ergoemacs.org/emacs/emacs_shrink_whitespace.html][Emacs: Delete Whitespace around Cursor]]
-
-* TRAMP
+    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html][Sexp Diary Entries - GNU Emacs Manual]]
+  + 动态模块
+    + [[https://github.com/railwaycat/homebrew-emacsmacport/blob/master/Formula/emacs-mac.rb][homebrew-emacsmacport/emacs-mac.rb at master · railwaycat/homebrew-emacsmacport]]
+    + [[https://github.com/emacs-pe/emacs-modules][emacs-pe/emacs-modules: List of resources for Emacs modules]]
+  + LSP 和 DAP 可以看一下
   + [[http://lifegoo.pluskid.org/wiki/EmacsTRAMP.html][用 TRAMP 管理远程文件]]
 
-* org
-  + [[https://orgmode.org/manual/Built_002din-table-editor.html][The Org Manual: Built-in table editor]]
+** solarized
+   + [[https://github.com/sellout/emacs-color-theme-solarized/blob/master/solarized-definitions.el][emacs-color-theme-solarized/solarized-definitions.el at master · sellout/emacs-color-theme-solarized]]
+   + [[https://github.com/bbatsov/solarized-emacs][bbatsov/solarized-emacs: The Solarized colour theme, ported to Emacs.]]
+   + [[https://github.com/purcell/color-theme-sanityinc-solarized/blob/master/color-theme-sanityinc-solarized.el][color-theme-sanityinc-solarized/color-theme-sanityinc-solarized.el at master · purcell/color-theme-sanityinc-solarized]]
+   + [[https://github.com/altercation/solarized][altercation/solarized: precision color scheme for multiple applications (terminal, vim, etc.) with both dark/light modes]]
 
-* window
-  + [[https://www.cnblogs.com/robertzml/archive/2010/03/24/1692737.html][学习Emacs系列教程（十）：多窗口 - 下下签 - 博客园]]
+   配置问题：
+   + [[https://github.com/purcell/color-theme-sanityinc-solarized/commit/d4cfd08e54b34b2e3e2d34747b82c3490744e16b][Change interface colour selection to more closely match tomorrow themes · purcell/color-theme-sanityinc-solarized@d4cfd08]]
+   + [[https://emacs.stackexchange.com/questions/38888/howto-include-a-local-theme-in-spacemacs][Howto include a local theme in spacemacs - Emacs Stack Exchange]]
 
-* 日志查看
-  + [[https://writequit.org/articles/working-with-logs-in-emacs.html][Working with log files in Emacs]]
+   颜色好像都是一样的，就是配置有点区别。
 
-* leder
-  + [[https://rolfschr.github.io/gswl-book/latest.html][Getting Started With Ledger - August 28, 2019 201f047]]
-
-* spacemacs
-  + expand-region
-  + M-s h .
-  + [[https://emacs-china.org/t/package-symbol-overlay-symbol/7706][推销packagesymbol-overlay，同时高亮多个symbol - Emacs-general - Emacs China]]
-  + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#selectingignoring-packages-of-a-layer][Selecting/Ignoring packages of a layer]]
-  + user-emacs-directory
-  + 临时缓冲区 C-x b NAME RET
-
-* bookmark
-  + [[https://www.emacswiki.org/emacs/BookmarkPlus][EmacsWiki: Bookmark Plus]]
-  + [[https://www.emacswiki.org/emacs/BookMarks][EmacsWiki: Book Marks]]
-
-* vscode
-  + 协议 - LSP、DAP
-
-* org
-  子标题 - M-S-Left
-
-* mac
-  + railwaycat/emacsmacport/emacs-mac
-
-* dired
-  + [[https://www.emacswiki.org/emacs/DiredOmitMode][EmacsWiki: Dired Omit Mode]]
-
-* project
-  + [[https://phenix3443.github.io/notebook/emacs/modes/projectile-mode.html][projectile]]
-
-* spacemacs
-  + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#declaring-configuration-layers][Declaring Configuration layers]]
-
-* terminal
-  + display-graphic-p - windows-system
-  + [[https://emacs.stackexchange.com/questions/13050/different-theme-for-nw-terminal][Different theme for -nw (terminal) - Emacs Stack Exchange]]
-
-* 动态模块
-  + [[https://github.com/railwaycat/homebrew-emacsmacport/blob/master/Formula/emacs-mac.rb][homebrew-emacsmacport/emacs-mac.rb at master · railwaycat/homebrew-emacsmacport]]
-  + [[https://github.com/emacs-pe/emacs-modules][emacs-pe/emacs-modules: List of resources for Emacs modules]]
-
-* vterm
-  复制：通过 ~C-c C-t~ 开启复制模式，mark region 后 ~RET~ 即可完成复制
-* log
-  + [[https://writequit.org/articles/working-with-logs-in-emacs.html][Working with log files in Emacs]]
-
-* frame
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Frame-Commands.html][Frame Commands - GNU Emacs Manual]]
+** hydra
+   + [[https://github.com/abo-abo/hydra][abo-abo/hydra: make Emacs bindings that stick around]]
+     #+begin_src elisp
+       (defhydra hydra-cursor-move (global-map "<f2>")
+         "Simple cursor move by hydra."
+         ("n" next-line "next-line"))
+     #+end_src
 

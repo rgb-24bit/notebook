@@ -12,6 +12,7 @@
 - [[#怎样在某个模式下禁用全局的-minor-mode][怎样在某个模式下禁用全局的 minor-mode]]
 - [[#怎样通过-use-package-加载使用主题][怎样通过 use-package 加载使用主题]]
 - [[#spacemacs-中进行粘贴时怎样保留内容缩进格式][Spacemacs 中进行粘贴时怎样保留内容缩进格式]]
+- [[#怎样判断当前的环境是不是终端环境][怎样判断当前的环境是不是终端环境]]
 
 * 怎样在 org-mode 的表格中插入竖线
   使用符号 ~\vert~ 代替，导出时会显示为竖线，参考：
@@ -76,4 +77,15 @@
 
 * Spacemacs 中进行粘贴时怎样保留内容缩进格式
   C-y	Automatically indenting after pasting. With prefix argument, paste text as it is.
+
+* 怎样判断当前的环境是不是终端环境
+  可以通过函数 ~display-graphic-p~ 进行判断，在配置主题这些东西的时候是一个很好用的功能：
+  #+begin_src elisp
+    (if (display-graphic-p) 
+        (enable-theme 'solarized) 
+      (enable-theme 'wheatgrass))
+  #+end_src
+
+  参考：
+  + [[https://emacs.stackexchange.com/questions/13050/different-theme-for-nw-terminal][Different theme for -nw (terminal) - Emacs Stack Exchange]]
 

@@ -1,0 +1,36 @@
+#+TITLE:      Spacemacs
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#layer-配置][Layer 配置]]
+
+* Layer 配置
+  Spacemacs 中 layer 支持很懂配置，除了常用的一些变量配置以外，还支持：
+  #+begin_src elisp
+    ;; Disabling layer services in other layers
+    (defun dotspacemacs/layers ()
+      ;; List of configuration layers to load.
+      (setq-default dotspacemacs-configuration-layers
+                    '(org git
+                          (auto-completion :disabled-for org git))))
+
+    ;; 可以使用 :enabled-for 直接指明可以使用的地方
+    (defun dotspacemacs/layers ()
+      ;; List of configuration layers to load.
+      (setq-default dotspacemacs-configuration-layers
+                    '(java python c-c++
+                           (auto-completion :enabled-for java python))))
+
+    ;; Selecting/Ignoring packages of a layer
+    (defun dotspacemacs/layers ()
+      ;; List of configuration layers to load.
+      (setq-default dotspacemacs-configuration-layers
+                    '(auto-completion
+                      (spacemacs-ui-visual :packages (not treemacs fancy-battery)))))
+
+    (defun dotspacemacs/layers ()
+      ;; List of configuration layers to load.
+      (setq-default dotspacemacs-configuration-layers
+                    '(auto-completion
+                      (spacemacs-ui-visual :packages treemacs fancy-battery))))
+  #+end_src
+

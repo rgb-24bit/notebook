@@ -4,6 +4,7 @@
 - [[#cron-表达式][Cron 表达式]]
 - [[#tmpfs][tmpfs]]
 - [[#xdg-user-directories][XDG user directories]]
+- [[#窗口管理器到桌面环境][窗口管理器到桌面环境]]
 
 * Cron 表达式
   Linux 中常常通过 Cron 来定义定时任务，而 Cron 表达式也渐渐变得不局限于 Linux 中，很多定时任务的框架都集成了这一语法。
@@ -51,4 +52,29 @@
 
   参考：
   + [[https://wiki.archlinux.org/index.php/XDG_user_directories_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][XDG user directories (简体中文) - ArchWiki]]
+
+* 窗口管理器到桌面环境
+  X 窗口系统是 MIT 1984 年提出的以位图图像显示图形化界面的一套软件规范及协议，是目前 Linux 下使用最多的窗口系统，最广的软件实现是 Xorg。
+
+  X Window System 使用 C/S 架构，服务端和客户端可以基于网络通信，客户端(也就是各种软件)将绘图请求发给服务端，服务端操纵显卡或视频终端把位图图像绘制出来，并处理键盘鼠标的事件，发送给客户端。
+  需要注意的是，直接和人交互的是服务端。
+
+  而为了方便编写 GUI 程序，程序员开发出 GTK、QT 这种图形库，这些图形库作为 X Window 的客户端工作。
+
+  为了管理众多的窗口在屏幕上的显示，需要窗口管理器(Window manager)。窗口管理器可以实现一个屏幕上显示多个 X 程序，实现调整程序大小、标题栏、最大化、最小化、关闭按钮和虚拟桌面这些功能。
+
+  为了实现窗口之间的特效，还需要窗口合成器，窗口合成器可以制造半透明之类的特效。
+
+  Linux 还有一个组件叫显示管理器（display manager），用于开机后显示登陆界面，并启动窗口管理器等 X 组件。没有显示管理器，Linux 开机会显示命令行登陆界面，需要使用命令行登陆后手动启动 X server 和窗口管理器才能显示 GUI，
+  显示管理器自动的完成这些工作。
+
+  此外为了显示桌面图标，还需要一个文件管理器。
+
+  把窗口管理器、显示管理器、合成器、文件管理器及其他应用、主题、GTK+/QT 等图形库，连同通用的组件，比如 Xorg，进程间通信用的 Dbus 等等库或程序，打包起来，就形成当今 Linux 下的桌面环境(Desktop environment)。
+
+  参考：
+  + [[https://askubuntu.com/questions/18078/what-is-the-difference-between-a-desktop-environment-and-a-window-manager][What is the difference between a desktop environment and a window manager? - Ask Ubuntu]]
+  + [[https://www.zhihu.com/question/321725817/answer/669568568][Linux 图形界面的显示原理是什么？ - 韩朴宇的回答 - 知乎]]
+  + [[https://zh.wikipedia.org/wiki/X%E8%A6%96%E7%AA%97%E7%B3%BB%E7%B5%B1][X 窗口系统 - 维基百科，自由的百科全书]]
+  + [[https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/index.html][X Window 系统的窗口显示原理]]
 

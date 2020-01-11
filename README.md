@@ -84,6 +84,7 @@
   + [Emacs - 问题集](notebook/emacs/question.org)
   + [Emacs - 正则表达式](notebook/emacs/regex.org)
   + [scimax](notebook/emacs/scimax.org)
+  + [Spacemacs](notebook/emacs/spacemacs.org)
   + [Emacs - 实用功能](notebook/emacs/utils.org)
   + [Version Control](notebook/emacs/vc.org)
 ## front-end

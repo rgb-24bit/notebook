@@ -17,6 +17,7 @@
 - [[#怎样更新远程分支的名称][怎样更新远程分支的名称]]
 - [[#如何删除已提交但是位于-gitignore-的文件][如何删除已提交但是位于 .gitignore 的文件]]
 - [[#git-命名的由来][Git 命名的由来]]
+- [[#如何在-push-的时候同时向多个远程库推送代码][如何在 push 的时候同时向多个远程库推送代码]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -167,4 +168,13 @@
 
 * Git 命名的由来
   参考：[[https://en.wikipedia.org/wiki/Git#Naming][Git#Naming - Wikipedia]]
+
+* 如何在 push 的时候同时向多个远程库推送代码
+  #+begin_src bash
+    git remote set-url --add --push [remote] [original repo URL]
+    git remote set-url --add --push [remote] [second repo URL]
+  #+end_src
+
+  参考：
+  + [[https://gist.github.com/bjmiller121/f93cd974ff709d2b968f][Add multiple push URLs to a single git remote]]
 

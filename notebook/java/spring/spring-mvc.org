@@ -7,6 +7,8 @@
   - [[#requestparam--requestbody][@RequestParam & @RequestBody]]
 - [[#控制流程][控制流程]]
 - [[#过滤器和拦截器][过滤器和拦截器]]
+  - [[#使用技巧][使用技巧]]
+  - [[#contentcachingrequestwrapper--contentcachingresponsewrapper][ContentCachingRequestWrapper && ContentCachingResponseWrapper]]
 - [[#相关问题][相关问题]]
   - [[#响应头中的编码配置][响应头中的编码配置]]
   - [[#怎样处理静态资源][怎样处理静态资源]]
@@ -142,6 +144,38 @@
 
   参考：
   + [[https://examples.javacodegeeks.com/enterprise-java/spring/mvc/spring-mvc-interceptor-tutorial/][Spring MVC Interceptor Tutorial | Examples Java Code Geeks - 2019]]
+
+** 使用技巧
+** ContentCachingRequestWrapper && ContentCachingResponseWrapper
+   在过滤器中常常需要操作请求和响应对象的输入输出流对象，这通常需要实现 ~ServletRequestWrapper~ 和 ~ServletResponseWrapper~ 来避免使输入和输出流失效。
+
+   Spring MVC 中提供了两个现成的实现，通过 ~ContentCachingRequestWrapper~ 和 ~ContentCachingResponseWrapper~ 能够满足一些简单操作的大部分需求，简单的是使用方式为：
+   #+begin_src java
+     @Override
+     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+       throws ServletException, IOException {
+       ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
+       ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
+
+       try {
+         filterChain.doFilter(requestWrapper, responseWrapper);
+       } finally {
+         String requestBody = new String(requestWrapper.getContentAsByteArray());
+         log.info("Request body: {}", requestBody);
+
+         String responseBody = new String(responseWrapper.getContentAsByteArray());
+         log.info("Response body: {}", responseBody);
+
+         // Do not forget this line after reading response content or actual response will be empty!
+         responseWrapper.copyBodyToResponse();
+       }
+     }
+   #+end_src
+
+   同时，可以考虑通过继承 ~OncePerRequestFilter~ 来实现自己的过滤器。
+
+   参考：
+   + [[https://www.programcreek.com/java-api-examples/?api=org.springframework.web.util.ContentCachingResponseWrapper][Java Code Examples org.springframework.web.util.ContentCachingResponseWrapper]]
 
 * 相关问题
 ** 响应头中的编码配置
