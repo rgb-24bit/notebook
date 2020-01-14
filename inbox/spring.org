@@ -19,3 +19,68 @@
 ** Mongodb
    + [[https://docs.spring.io/spring-data/mongodb/docs/2.2.3.RELEASE/reference/html/#reference][Spring Data MongoDB - Reference Documentation]]
 
+* Spring MVC
+  #+begin_src java
+    private Optional<ApiOperation> getApiOperation(HttpServletRequest request) {
+      try {
+        return Optional.ofNullable(requestMappingHandlerMapping.getHandler(request))
+          .map(handlerExecutionChain -> {
+              Object object = handlerExecutionChain.getHandler();
+              if (object instanceof HandlerMethod) {
+                return ((HandlerMethod) object).getMethodAnnotation(ApiOperation.class);
+              }
+              return null;
+            });
+      } catch (Exception e) {
+        log.info("无匹配 Handler 的请求 {}", request.getRequestURI());
+      }
+      return Optional.empty();
+    }
+
+    /**
+     ,* 异常信息
+     ,*/
+    @Data
+    public static class DataCaptureExceptionInfo {
+      /**
+       ,* 异常信息
+       ,*/
+      private String message;
+
+      /**
+       ,* 栈追踪信息
+       ,*/
+      private List<String> stackTrace;
+
+      /**
+       ,* 根据异常创建 DataCaptureExceptionInfo 实例
+       ,*
+       ,* @param ex 异常实例
+       ,* @return DataCaptureExceptionInfo 实例
+       ,*/
+      public static DataCaptureExceptionInfo of(Throwable ex) {
+        DataCaptureExceptionInfo dataCaptureExceptionInfo = new DataCaptureExceptionInfo();
+
+        dataCaptureExceptionInfo.setMessage(ex.getMessage());
+
+        List<String> stackTrace = new ArrayList<>();
+        while (Objects.nonNull(ex)) {
+          StackTraceElement stackTraceElement = ex.getStackTrace()[0];
+
+          stackTrace.add(String.format("%s at %s(%s:%d)", stackTraceElement.getClassName(), stackTraceElement.getMethodName(), stackTraceElement.getFileName(),
+                                       stackTraceElement.getLineNumber()));
+
+          ex = ex.getCause();
+        }
+        dataCaptureExceptionInfo.setStackTrace(stackTrace);
+
+        return dataCaptureExceptionInfo;
+      }
+    }
+
+  #+end_src
+
+* JSON
+  fastjson - JSON.parse
+
+

@@ -25,6 +25,21 @@
   
    执行脚本 ~install-tl-advanced.bat~ 即可。
 
+   MacOS 上的 Tex Live 叫做 MacTeX，安装方式：
+   #+begin_example
+      If you meant "texlive" specifically:
+      There are three versions of MacTeX.
+
+      Full installation:
+        brew cask install mactex
+
+      Full installation without bundled applications:
+        brew cask install mactex-no-gui
+
+      Minimal installation:
+        brew cask install basictex
+    #+end_example
+
 ** 文本模式
    Tex 中的一些字符是特殊字符，需要输入这些字符时需要通过 ~\~ 进行转义，同时，由于 ~\\~ 表示为换行，因此，
    如果要输入 ~\~ 需要使用 ~\textbackslash~.

@@ -1,14 +1,8 @@
-* 守护进程
-  + [[https://askubuntu.com/questions/903354/difference-between-systemctl-and-service-commands][Difference between systemctl and service commands - Ask Ubuntu]]
-
 * I/O 模型
   + [[https://woshijpf.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html][Linux I/O 模型详解]]
   + [[http://flyflypeng.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html][Linux I/O 模型详解]]
   + [[https://notes.shichao.io/unp/ch6/][Chapter 6. I/O Multiplexing: The select and poll Functions - Shichao's Notes]]
   + 并发文件操作 - 只是不能删除吗
   + [[https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/][Linux – IO Multiplexing – Select vs Poll vs Epoll – Developers Area]]
-
-* 工具
-  + [[https://wangchujiang.com/linux-command/c/dig.html][dig 命令，Linux dig 命令详解：域名查询工具 - Linux 命令搜索引擎]]
 
 

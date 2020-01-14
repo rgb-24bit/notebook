@@ -1,33 +1,11 @@
-* JDBC
-  + [[https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html][MySQL Connector/J 8.0 Developer Guide - 6.3 Configuration Properties]]
+* Future
+** 查询优化
+   + [[https://juejin.im/post/5e0f5eec5188253a9d4a436f][干货！SQL性能优化，书写高质量SQL语句 - 掘金]]
+   + [[https://tech.meituan.com/2014/06/30/mysql-index.html][MySQL索引原理及慢查询优化 - 美团技术团队]]
+   + [[https://www.cnblogs.com/youyoui/p/7851007.html][MySQL 分页查询优化 - 悠悠i - 博客园]]
+   + [[https://juejin.im/post/5b55b842f265da0f9e589e79#heading-8][数据库两大神器【索引和锁】 - 掘金]]
+   + [[https://www.jianshu.com/p/6446c0118427][数据库索引创建与优化 - 简书]]
 
-* 自增 ID
-  插入时，如果插入的 ID 值为 NULL，那么 ID 值会通过自增自动生成，如果不是 NULL，具直接使用该值。
+** 并发
+   + [[https://juejin.im/post/5b82e0196fb9a019f47d1823][全面了解 mysql 锁机制（InnoDB）与问题排查 - 掘金]]   
 
-* 插入更新
-  + [[https://lobert.iteye.com/blog/1604122][ON DUPLICATE KEY UPDATE重复插入时更新 - 知知为知知 - ITeye博客]]
-
-* CAST
-  + [[https://www.w3schools.com/sql/func_mysql_cast.asp][MySQL CAST() Function]]
-  + [[https://lobert.iteye.com/blog/1604122][ON DUPLICATE KEY UPDATE重复插入时更新 - 知知为知知 - ITeye博客]]
-
-* 索引
-  + [[https://tech.meituan.com/2014/06/30/mysql-index.html][MySQL索引原理及慢查询优化 - 美团技术团队]]
-  + [[https://juejin.im/post/5b55b842f265da0f9e589e79#heading-8][数据库两大神器【索引和锁】 - 掘金]]
-  + [[https://www.jianshu.com/p/6446c0118427][数据库索引创建与优化 - 简书]]
-
-* 字段长度
-  + [[https://blog.csdn.net/u012491783/article/details/78339269][mysql varchar(50)到底能存多少个汉字 - 稻草人的格子衫 - CSDN博客]]
-
-* 分页查询
-  + [[https://www.cnblogs.com/youyoui/p/7851007.html][MySQL分页查询优化 - 悠悠i - 博客园]]
-* UPDATE
-  + [[https://www.yiibai.com/mysql/update-join.html][MySQL update join语句 - MySQL教程™]]
-
-* function  
-  + [[https://www.cnblogs.com/ggjucheng/p/3352280.html][MySQL：日期函数、时间函数总结 - ggjucheng - 博客园]]
-
-* SELECT form update
-  + [[https://tojohnonly.github.io/106-MySql%20For%20Update%20%E7%94%A8%E6%B3%95.html][MySql For Update 用法]]
-  + [[https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-reads.html][MySQL :: MySQL 8.0 Reference Manual :: 15.7.2.4 Locking Reads]]
-  

@@ -1,4 +1,10 @@
-* MQTT
+#+TITLE:      MQTT
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#主题筛选器][主题筛选器]]
+- [[#相关链接][相关链接]]
+
+* 主题筛选器
   MQTT 中的主题(Topic) 以 / 为分隔符区分不同的层级，包含通配符 + 或 # 的主题又称为主题过滤器(Topic Filters)，不含通配符的称为主题名(Topic Names)。
 
   其中，+ 通配一层，而 # 通配多层，必需在末尾：
@@ -18,13 +24,10 @@
 
   另外，发布者(Publisher) 只能向主题名发布消息，订阅者(Subscriber) 则可以通过订阅主题过滤器来通配多个主题名称。
 
-* EMQX
-  EMQX 控制台的默认用户名为 admin，密码是 public。
-
 * 相关链接
   + [[https://docs.emqx.io/broker/v3/cn/guide.html][用户指南 (User Guide) — EMQ X - 百万级开源 MQTT 消息服务器 3.2.0 文档]]
   + [[https://www.eclipse.org/paho/][Eclipse Paho - MQTT and MQTT-SN software]]
   + [[https://mosquitto.org/man/mqtt-7.html][MQTT man page | Eclipse Mosquitto]]
   + [[https://mosquitto.org/download/][Download | Eclipse Mosquitto]]
-  + [[https://www.runoob.com/w3cnote/mqtt-intro.html][MQTT 入门介绍 | 菜鸟教程]]
   + [[https://www.ibm.com/developerworks/cn/iot/iot-mqtt-why-good-for-iot/index.html][初识 MQTT]]
+

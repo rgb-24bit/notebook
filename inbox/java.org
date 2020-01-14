@@ -49,3 +49,10 @@
    + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
    + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
 
+* NIO
+  + [[https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html][NIO 入门]]
+
+* Fork/Join
+  + [[https://www.ibm.com/developerworks/cn/java/j-lo-forkjoin/index.html][JDK 7 中的 Fork/Join 模式]]
+  + [[https://www.baeldung.com/java-fork-join][Guide to the Fork/Join Framework in Java | Baeldung]]
+

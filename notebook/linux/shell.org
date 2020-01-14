@@ -53,7 +53,7 @@
        netstat -antlp
      #+end_src
 
-     参考：
+     通常情况下服务会对端口进行监听，这时状态为 LISTEN，建立连接后还会有 ESTABLISHED 状态，参考：
      + [[https://linux.cn/article-2434-1.html][技术|netstat 的 10 个基本用法]]
 
    + 可以通过 ~lsof~ 命令来获取指定端口的使用情况：

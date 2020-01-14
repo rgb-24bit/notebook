@@ -1,25 +1,3 @@
-* Tikz
+* Future
   + [[https://zhuanlan.zhihu.com/p/48300815][LaTeX 绘图指南 - 001 TikZ 的简介、资源以及学习方法 - 知乎]]
-  + TexLive - MacTex
-    #+begin_example
-      If you meant "texlive" specifically:
-      There are three versions of MacTeX.
-
-      Full installation:
-        brew cask install mactex
-
-      Full installation without bundled applications:
-        brew cask install mactex-no-gui
-
-      Minimal installation:
-        brew cask install basictex
-    #+end_example
-  + [[http://www.tug.org/mactex/morepackages.html][More Packages - MacTeX - TeX Users Group]]
-
-* 参考
-  + [[https://github.com/zilongshanren/spacemacs-private/blob/develop/layers/zilongshanren-org/packages.el#L152][spacemacs-private/packages.el at develop · zilongshanren/spacemacs-private]]
-  + [[https://linux.cn/article-10269-1.html][技术|如何使用 Emacs 创建 LaTeX 文档]]
-  + [[https://orgmode.org/worg/org-tutorials/org-latex-export.html][LaTeX Export for Org Mode < 8.0]]
-  + [[http://liuchengxu.org/blog-cn/posts/quick-latex/][从零开始 LaTeX 快速入门]]
-  + [[https://jdhao.github.io/2018/03/29/latex-chinese.zh/][如何在 LaTeX 中使用中文 - jdhao's blog]]
 

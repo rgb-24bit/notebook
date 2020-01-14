@@ -1,8 +1,24 @@
 #+TITLE:      持续集成
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#基本概念][基本概念]]
 - [[#jekins][Jekins]]
   - [[#shell-相关][Shell 相关]]
+
+* 基本概念
+  通过持续集成服务可以持续快速的将代码合并到主干，让产品可以快速迭代，同时还能保持高质量。
+
+  目前常用的构建工具：
+  #+begin_example
+    Jenkins
+    Travis
+    Codeship
+    Strider
+  #+end_example
+
+  参考：
+  + [[https://knapsackpro.com/ci_comparisons/jenkins/vs/github-actions][Jenkins vs Github Actions comparison of Continuous Integration servers]]
+  + [[http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html][持续集成是什么？ - 阮一峰的网络日志]]
 
 * Jekins
   Jekins 是比较常用的持续集成工具，自己搭建相关的服务也很方便，值得了解。

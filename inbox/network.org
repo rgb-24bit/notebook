@@ -1,41 +1,20 @@
-* 网关接口
-  + 通用网关接口 - CGI
-  + 服务器网关接口 - WSGI
-    
-  两者都是 *协议*, 规定了 *服务器* 和 *应用程序(脚本)* 之间的通信规范.
+* Future
+** 自定义协议
+   + [[https://github.com/protocolbuffers/protobuf][protocolbuffers/protobuf: Protocol Buffers - Google's data interchange format]]
+   + [[https://juejin.im/post/5b67902f6fb9a04fc67c1a24][Netty(三) 什么是 TCP 拆、粘包？如何解决？ - 掘金]]
+   + [[https://en.wikipedia.org/wiki/Type-length-value][Type-length-value - Wikipedia]]
 
-  + [[https://www.biaodianfu.com/cgi-fastcgi-wsgi.html][网关协议学习：CGI、FastCGI、WSGI]]
-  + [[https://en.wikipedia.org/wiki/Common_Gateway_Interface][Wiki - Common Gateway Interface]]
-  + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
-  + [[http://www.cnblogs.com/liuzhang/p/3929198.html][我所了解的 cgi - 博客园]]
+** 网关接口协议
+   通用网关接口 - CGI 和服务器网关接口 - WSGI都是 *协议*, 规定了 *服务器* 和 *应用程序(脚本)* 之间的通信规范，可以对比 Servlet 规范，参考：
+   + [[https://www.python.org/dev/peps/pep-3333/][PEP 3333 -- Python Web Server Gateway Interface]]
+   + [[https://www.biaodianfu.com/cgi-fastcgi-wsgi.html][网关协议学习：CGI、FastCGI、WSGI]]
+   + [[https://en.wikipedia.org/wiki/Common_Gateway_Interface][Wiki - Common Gateway Interface]]
+   + [[http://www.cnblogs.com/liuzhang/p/3929198.html][我所了解的 cgi - 博客园]]
 
-* socket
-  建立 socket 后会创建输入和输出两个缓冲区，为读取输入时输入会堆积在输入缓冲区。
+** 连接管理
+   + [[https://segmentfault.com/a/1190000014044351#articleHeader4][一篇搞懂TCP、HTTP、Socket、Socket连接池 - 个人文章 - SegmentFault 思否]]
+   + [[http://c.biancheng.net/cpp/html/3040.html][socket缓冲区以及阻塞模式_C语言中文网]]
+   + [[https://www.cnblogs.com/skynet/archive/2010/12/11/1903347.html][HTTP Keep-Alive模式 - 吴秦 - 博客园]]
+   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x][HTTP/1.x 的连接管理 - HTTP | MDN]]
+   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Session][典型的 HTTP 会话 - HTTP | MDN]]
 
-  + [[http://c.biancheng.net/cpp/html/3040.html][socket 缓冲区以及阻塞模式 - C 语言中文网]]
-
-  缓冲区可能会溢出。
-
-  [[https://segmentfault.com/a/1190000014044351#articleHeader4][一篇搞懂TCP、HTTP、Socket、Socket连接池 - 个人文章 - SegmentFault 思否]]
-
-* HTTP
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Session][典型的 HTTP 会话 - HTTP | MDN]]
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x][HTTP/1.x 的连接管理 - HTTP | MDN]]
-  + [[https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/][How Browsers Work: Behind the scenes of modern web browsers - HTML5 Rocks]]
-  + 缓存控制 - Cache-Control
-
-* HTTPS
-  + [[http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html][SSL/TLS协议运行机制的概述 - 阮一峰的网络日志]]
-
-* TCP
-  + [[https://www.cnkirito.moe/tcp-talk/][聊聊 TCP 长连接和心跳那些事 | 徐靖峰|个人博客]]
-  
-* 自定义协议
-  + [[https://juejin.im/post/5b67902f6fb9a04fc67c1a24][Netty(三) 什么是 TCP 拆、粘包？如何解决？ - 掘金]]
-  + [[https://github.com/protocolbuffers/protobuf][protocolbuffers/protobuf: Protocol Buffers - Google's data interchange format]]
-  + [[https://en.wikipedia.org/wiki/Type-length-value][Type-length-value - Wikipedia]]
-
-* 端口状态
-  通常情况下服务会对端口进行监听，这时状态为 LISTEN，建立连接后还会有 ESTABLISHED 状态。
-
-  

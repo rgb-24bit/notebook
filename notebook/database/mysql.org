@@ -28,6 +28,7 @@
   - [[#mysql-中的-select-和-group-by][MySQL 中的 SELECT 和 GROUP BY]]
   - [[#mysql-中-update-语句影响行数为-0-的问题][MySQL 中 UPDATE 语句影响行数为 0 的问题]]
   - [[#mysql-如何对死锁进行检测][MySQL 如何对死锁进行检测]]
+  - [[#mysql-中-varchar-类型到底能存多少汉字][MySQL 中 VARCHAR 类型到底能存多少汉字]]
 
 * Install
   目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
@@ -202,6 +203,7 @@
         FROM tbl_user
        GROUP BY address;
     #+end_src
+  + 函数 ~CAST~ 和 ~CONVERT~ 可以用来将转换任意类型的数据到另一类型
 
 * 相关技巧
 ** 通过 SQL 语句获取 MySQL 的版本
@@ -337,4 +339,8 @@
 
    参考：
    + [[https://www.cnblogs.com/lbser/p/5183300.html][mysql 死锁问题分析 - zhanlijun - 博客园]]
+
+** MySQL 中 VARCHAR 类型到底能存多少汉字
+   + mysql 4.0 版本以下，varchar(50)，指的是 50 字节，如果存放 utf8 汉字时，只能存放 16 个（每个汉字 3 字节）
+   + mysql 5.0 版本以上，varchar(50), 指的是 50 字符，无论存放的是数字、字母还是 UTF8 汉字，都可以存放 50 个
 

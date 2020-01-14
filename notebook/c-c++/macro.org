@@ -51,4 +51,5 @@
   关于 ~({})~ 这种语法形式可以参考：
   + [[https://stackoverflow.com/questions/1635549/in-what-versions-of-c-is-a-block-inside-parenthesis-used-to-return-a-value-valid][In what versions of C is a block inside parenthesis used to return a value valid? - Stack Overflow]]
 
+  还有一些其他语言有将块中最后一个表达式的结算结果返回的特性，比如 Ruby 和 Lisp，但是 Python 和 Java 就没有。
 

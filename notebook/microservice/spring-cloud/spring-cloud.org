@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简述][简述]]
+- [[#service-discovery-eureka-clients][Service Discovery: Eureka Clients]]
 
 * 简述
   Spring Cloud 是常用的微服务套件，它的版本命名方式比较特殊，有一些奇怪的单词组成，这些单词均为英国伦敦地铁站的站名，同时根据字母表的顺序来对应版本时间顺序，比如：
@@ -9,4 +10,13 @@
 
   很好的入门资料：
   + [[https://juejin.im/post/5de2553e5188256e885f4fa3][Spring Cloud 入门总结 - 掘金]]
+
+* Service Discovery: Eureka Clients
+  通常情况下，我们可以通过 ~@EnableEurekaClient~ 注解开启客户端，但是，使用 Spring Boot 时，可以免去这一步：
+  #+begin_quote
+  By having =spring-cloud-starter-netflix-eureka-client= on the classpath, your application automatically registers with the Eureka Server.
+  #+end_quote
+
+  参考：
+  + [[https://cloud.spring.io/spring-cloud-netflix/multi/multi__service_discovery_eureka_clients.html][Service Discovery: Eureka Clients]]
 

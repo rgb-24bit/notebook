@@ -215,7 +215,9 @@
   + [HTTP Protocol](notebook/network/http.org)
   + [HTTPS](notebook/network/https.org)
   + [计算机网络 - 分层模型](notebook/network/layer-mode.org)
+  + [MQTT](notebook/network/mqtt.org)
   + [计算机网络 - 协议](notebook/network/protocol.org)
+  + [TCP/UDP 协议](notebook/network/tcp-udp.org)
   + [Network Tools](notebook/network/tools.org)
 ## os
   + [操作系统 - 基础内容](notebook/os/base.org)
