@@ -4,6 +4,7 @@
 - [[#abbrev-mode][Abbrev Mode]]
 - [[#mode-line][mode-line]]
 - [[#auto-insert-mode][Auto Insert Mode]]
+- [[#cua-mode][CUA Mode]]
 
 * Abbrev Mode
   可以通过定义缩写的方式避免一些编码错误，比如：
@@ -28,4 +29,10 @@
   可以借助这一模式实现自动插入文件头的功能，可以参考：
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][Emacs 自动添加文件头 · honmaple's blog · 风落花语风落天，花落风雨花落田.]]
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][Emacs 自动更新文件头 · honmaple's blog · 风落花语风落天，花落风雨花落田.]]
+
+* CUA Mode
+  CUA Mode 的 ~cua-rectangle-mark-mode~ 提供了增强的矩形编辑功能，通过 ~C-RET~ 开启/关闭该功能。
+
+  参考：
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/CUA-Bindings.html][CUA Bindings - GNU Emacs Manual]]
 

@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#图片的存储方案][图片的存储方案]]
+- [[#数据库分片][数据库分片]]
 - [[#相关问题][相关问题]]
   - [[#文件数量对性能的影响][文件数量对性能的影响]]
 
@@ -25,7 +26,24 @@
   + [[https://segmentfault.com/q/1010000000121448][图片存储 - 图片服务器应该如何设计文件结构？ - SegmentFault 思否]]
 
   在存储时，可以计算得到图片的 hash 值，避免重复存储。
-  
+
+* 数据库分片
+  分片（Sharding）是一种与水平切分（horizontal partitioning）相关的数据库架构模式 - 将一个表里面的行，分成多个不同的表的做法（称为分区）。
+  每个区都具有相同的模式和列，但每个表有完全不同的行。同样，每个分区中保存的数据都是唯一的，并且与其他分区中保存的数据无关。
+
+  分片（Sharding）将一个数据分成两个或多个较小的块，称为逻辑分片（logical shards）。然后，逻辑分片（logical shards）分布在单独的数据库节点上，
+  称为物理分片（physical shards）。物理分片（physical shards）可以容纳多个逻辑分片（logical shards）。而所有分片中保存的数据，
+  共同代表整个逻辑数据集。
+
+  分片可以促进水平扩展，也可以加快单个分片的查询速度，同时可以减小宕机（outage）的影响，使应用程序更稳定可靠。但是，分片本身是一个容易出现错误的操作，
+  而分片后也难以恢复为原有的未分片的结构，因此，分片应该慎重。
+
+  参考：
+  + [[https://zhuanlan.zhihu.com/p/57185574][数据库分片（Database Sharding)详解 - 知乎]]
+
+  分片和分区的区别：分区是用于跨表或数据库划分数据的通用术语。分片是一种特定的分区类型，即水平分区，参考：
+  + [[https://stackoverflow.com/questions/20771435/database-sharding-vs-partitioning][mysql - Database sharding vs partitioning - Stack Overflow]]
+
 * 相关问题
 ** 文件数量对性能的影响
    当文件夹和文件的数量很多时，多少还是会影响找到文件的速度的，参考：

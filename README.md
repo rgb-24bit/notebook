@@ -159,7 +159,7 @@
   + [Java 泛型](notebook/java/generic.org)
   + [Java - I/O 操作](notebook/java/io.org)
   + [Fundamental classes](notebook/java/lang.org)
-  + [Java Library](notebook/java/library.org)
+  + [Java 常用第三方库](notebook/java/library.org)
   + [Java 日志框架](notebook/java/log.org)
   + [Java Misc](notebook/java/misc.org)
   + [Java 问题集](notebook/java/question.org)
@@ -209,7 +209,7 @@
   + [结构化编程](notebook/misc/se.org)
   + [搜索引擎](notebook/misc/search.org)
   + [单元测试](notebook/misc/unit-test.org)
-  + [常用编程单词](notebook/misc/word.org)
+  + [英语单词](notebook/misc/word.org)
 ## network
   + [DHCP · DNS](notebook/network/dhcp-dns.org)
   + [HTTP Protocol](notebook/network/http.org)

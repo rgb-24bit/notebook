@@ -1,8 +1,10 @@
-#+TITLE:      常用编程单词
+#+TITLE:      英语单词
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#noop][noop]]
 - [[#括号][括号]]
+- [[#qos][QoS]]
+- [[#绩效][绩效]]
 
 * noop
   在自定义协议的时候，常常可以用 ~noop~ 这个单词来代表无，比如：
@@ -23,4 +25,12 @@
   | ~<>~       | angled brackets          |
   | ~()~       | parentheses              |
   |----------+--------------------------|
+
+* QoS
+  QoS 是 Quality of Service - 服务质量额一个缩写，参考：
+  + [[https://zh.wikipedia.org/wiki/%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F][服务质量 - 维基百科，自由的百科全书]]
+
+* 绩效
+  + KPI - 关键绩效指标(KPI：Key Performance Indicator) - [[https://baike.baidu.com/item/%E5%85%B3%E9%94%AE%E7%BB%A9%E6%95%88%E6%8C%87%E6%A0%87%E6%B3%95/4723067?fromtitle=KPI&fromid=3007508][关键绩效指标法_百度百科]]
+  + OKR - 目标与关键成果法(OKR: Objectives and Key Results) - [[https://baike.baidu.com/item/OKR][OKR_百度百科]]
 

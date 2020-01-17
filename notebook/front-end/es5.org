@@ -7,6 +7,8 @@
 - [[#属性描述符][属性描述符]]
 - [[#对象字面量][对象字面量]]
 - [[#数据类型的转换][数据类型的转换]]
+- [[#面向对象][面向对象]]
+  - [[#类型判断][类型判断]]
 - [[#事件机制][事件机制]]
 - [[#相关技巧][相关技巧]]
   - [[#javascript-变量的命名][JavaScript 变量的命名]]
@@ -23,6 +25,7 @@
   - [[#变量提升的规则][变量提升的规则]]
   - [[#windowonload-和-documentonload][window.onload 和 document.onload]]
   - [[#普通函数和构造函数的区别][普通函数和构造函数的区别]]
+  - [[#怎样实现字符串的-replaceall-操作][怎样实现字符串的 replaceAll 操作]]
 
 * 基础概念
   JavaScript 本身不提供任何与 I/O 相关的 API，这些都要靠宿主环境提供，比如浏览器、Node.js 这些。
@@ -214,8 +217,27 @@
     };
   #+end_src
 
+  属性的 getter 和 setter 也可以简写：
+  #+begin_src js
+    const cart = {
+      _wheels: 4,
+
+      get wheels () {
+        return this._wheels;
+      },
+
+      set wheels (value) {
+        if (value < this._wheels) {
+          throw new Error('数值太小了！');
+        }
+        this._wheels = value;
+      }
+    }
+  #+end_src
+
   参考：
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Grammar_and_types][语法和数据类型 - JavaScript | MDN]]
+  + [[https://es6.ruanyifeng.com/#docs/object][对象的扩展 - ECMAScript 6入门]]
 
 * 数据类型的转换
   JavaScript 中的数据类型转换规则是我目前见过的所有语言中最复杂的一个，其中，自动类型转换是通过调用 Boolean、String 和 Number 函数完成的。
@@ -224,9 +246,114 @@
   + [[https://wangdoc.com/javascript/features/conversion.html][数据类型的转换 - JavaScript 教程 - 网道]]
   + [[https://wangdoc.com/javascript/operators/comparison.html#%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6][比较运算符 - JavaScript 教程 - 网道]]
 
+* 面向对象
+  JavaScript 中的原型链和我想象中的存在一点区别，大致存在三个层次：
+  #+begin_example
+                  ConstructorA      ConstructorB      ConstructorC
+                       |                 |                 |
+    Instance       prototype         prototype         prototype
+        |       /      |         /       |         /       |
+        |      /       |        /        |        /        |
+    __proto__       __proto__         __proto__         __proto__
+  #+end_example
+
+  这和 Python 的存在区别，之前一直按 Python 中的 =__class__= 类比理解的：
+  #+begin_example
+    Instance         ClassA         ClassB         ClassB   
+        |        /      |       /      |       /      |  
+        |       /       |      /       |      /       |
+    __class__       __class__      __class__      __class__
+  #+end_example
+
+  # 感觉这样理解不太好
+  #
+  # 不过本质上还是相似的：
+  # + JavaScript 中的实例通过 =__proto__= 属性引用构造器的 =prototype= 属性，而 =prototype= 属性通过它的 =constructor= 属性引用构造器
+  # + Python 中的实例通过 =__class__= 属性引用类对象，而类对象存在对自身属性字典的引用
+
+  # 统一一下名词就是：
+  # + JavaScript 是：实例 -> 构造器属性 -> 构造器
+  # + Python 是：实例 -> 构造器 -> 构造器属性
+
+  通过 ~instanceof~ 判断对象类型的时候，会判断右值的 ~prototype~ 是否在左值的原型链上，当左值的类型为以下类型时直接返回 Fasle：
+  #+begin_quote
+  Boolean Null Undefined Number BigInt String Symbol
+  #+end_quote
+
+  获取原型链：
+  #+begin_src js
+    function getPrototypes(obj) {
+      prototypes = []
+      while (obj) {
+        prototypes.push(obj.__proto__)
+        obj = obj.__proto__
+      }
+      return prototypes
+    }
+  #+end_src
+
+  这里我一直也理解错了，以为 JavaScript 和 Python 一样，一切皆是对象，结果 JavaScript 中居然还有 primitive 类型，只不过在 primitive 调用方法时会自动包装为对象。
+  
+  参考：
+  + [[https://segmentfault.com/q/1010000004457932][javascript - `1 instanceof Number` 为啥是 false? - SegmentFault 思否]]
+  + [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures][JavaScript data types and data structures - JavaScript | MDN]]
+  + [[https://wangdoc.com/javascript/oop/prototype.html][对象的继承 - JavaScript 教程 - 网道]]
+
+** 类型判断  
+   JavaScript 中可以通过 typeof、instanceof、constructor 和 toString 来判断对象的类型，其中：
+   1) typeof 判断对象类型是通过对象的底层表示形式来判断的，这就导致了一个问题，typeof null 会被判断为 object，参考：
+      #+begin_src js
+        typeof '';              // string
+        typeof 1;               // number
+        typeof 1n;              // bigint
+        typeof Symbol();        // symbol
+        typeof true;            // boolean
+        typeof undefined;       // undefined
+        typeof new Function();  // function
+
+        typeof null;            // object
+        typeof [] ;             // object
+        typeof new Date();      // object
+        typeof new RegExp();    // object
+      #+end_src
+      
+      返回值其实是有规律的：
+      1. primitive type 类型中，除了 null 以外都可以得到正确的判断
+      2. function 是特殊的对象，单独给个底层表示形式不过分
+      3. 其他的都是 object 就可以了
+      
+      参考：
+      1. [[https://segmentfault.com/q/1010000011846328][JavaScript 中 typeof 原理探究？ - SegmentFault 思否]]
+      2. [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof][typeof - JavaScript | MDN]]
+   2) instanceof 通过原型链来判断对象类型，当一个对象的原型就是 null 时，它不能作为 instanceof 操作符的右值，而左值类型为 primitive 时会直接返回 false
+   3) 原型对象的 constructor 属性指向构造器本身，因此，这种判断方式本质上还是在使用原型链：
+      #+begin_src js
+        obj = new Dog()
+        obj.constructor == Dog
+      #+end_src
+   4) 方法 Object.prototype.toString 会返回对象的 ~[[Class]]~ 属性，其格式为 ~[object Xxx]~, 其中 ~Xxx~ 就是对象的类型
+      #+begin_src js
+        Object.prototype.toString.call('')              // [object String]
+        Object.prototype.toString.call(1)               // [object Number]
+        Object.prototype.toString.call(true)            // [object Boolean]
+        Object.prototype.toString.call(Symbol())        // [object Symbol]
+        Object.prototype.toString.call(undefined)       // [object Undefined]
+        Object.prototype.toString.call(null)            // [object Null]
+        Object.prototype.toString.call(newFunction())   // [object Function]
+        Object.prototype.toString.call(newDate())       // [object Date]
+        Object.prototype.toString.call([])              // [object Array]
+        Object.prototype.toString.call(newRegExp())     // [object RegExp]
+      #+end_src
+
+   总的来说，JavaScript 中类型判断的坑很多，感觉其中一个原因大概就是存在 primitive 类型但是有没有类型系统的锅，像 Python 那样，一切皆是对象，直接一条原型链搞定。
+
+   参考：
+   + [[https://www.cnblogs.com/onepixel/p/5126046.html][判断 JS 数据类型的四种方法 - 一像素 - 博客园]]
+
 * 事件机制
   + 通过 ~addEventListener~ 方法可以为同一个事件添加多个不同的监听函数。这些函数按照添加顺序触发，即先添加先触发。如果为同一个事件多次添加同一个监听函数，
     该函数只会执行一次，多余的添加将自动被去除。
+  + 事件 =Event= 对象的 =timeStamp= 属性的值为打开当前页面后到触发该事件的事件长度，通过 =+new Date()= 减去该值便可以得到打开页面的时间 
 
 * 相关技巧
 ** JavaScript 变量的命名
@@ -413,4 +540,14 @@
    + [[https://segmentfault.com/a/1190000008615288][普通函数和构造函数的区别 - 前端学习之路 - SegmentFault 思否]]
    + [[https://wangdoc.com/javascript/oop/prototype.html][对象的继承 - JavaScript 教程 - 网道]]
    + [[https://interactive-examples.mdn.mozilla.net/pages/js/function-call.html][JavaScript Demo: Function.call()]]
+
+** 怎样实现字符串的 replaceAll 操作
+   两种较为实用的方式为：
+   #+begin_src js
+     str.split('abc').join('')
+     str.replace(/abc/g, '')
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string][javascript - How to replace all occurrences of a string? - Stack Overflow]]
 

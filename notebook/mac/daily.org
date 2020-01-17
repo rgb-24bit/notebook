@@ -13,6 +13,7 @@
   - [[#怎样取消-command--tab-应用切换][怎样取消 Command + Tab 应用切换]]
   - [[#easymonitor-这个进程是怎么回事][EasyMonitor 这个进程是怎么回事]]
   - [[#cpu-占用超过-100-是个什么情况][CPU 占用超过 100% 是个什么情况]]
+  - [[#突然无法切换桌面该怎么办][突然无法切换桌面该怎么办]]
 
 * 使用入门
   Mac 的菜单栏位于桌面的最上上，从左到右分别为：苹果菜单、应用菜单和系统功能图标区。
@@ -127,3 +128,8 @@
    CPU 占用是相对于单个核心来说的，超过 100% 就是指占用了不止一个核心，参考：
    + [[https://apple.stackexchange.com/questions/5329/what-does-it-mean-when-a-cpu-exceeds-of-cores-x-100][macos - What does it mean when a %CPU exceeds (# of cores) x 100%? - Ask Different]]
 
+** 突然无法切换桌面该怎么办
+   遇到了 Mac 突然无法切换桌面的情况，当前桌面的所有程序都可以正常使用，但是就是没法切换到其他桌面。
+
+   除了重启以外，网上找的的办法，执行 ~killall Dock~ 可以解决。
+   

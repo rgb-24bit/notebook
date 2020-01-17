@@ -9,3 +9,11 @@
    + [[https://www.zhihu.com/question/52193579][腾讯开源的 libco 号称千万级协程支持，那个共享栈模式原理是什么? - 知乎]]
 
 
+* URL Schemes
+  + [[https://fokkezb.nl/2013/08/26/url-schemes-for-ios-and-android-1/][URL schemes for iOS and Android (1/2) | Fokke Zandbergen]]
+
+* 性能测试
+  + [[https://www.jianshu.com/p/62cf2690e6eb][性能测试中服务器关键性能指标浅析 - 简书]]
+  + [[https://testerhome.com/articles/21178][性能专题：一文搞懂性能测试常见指标 · TesterHome]]
+  + # operation per second   
+

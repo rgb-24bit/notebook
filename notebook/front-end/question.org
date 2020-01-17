@@ -5,6 +5,7 @@
 - [[#shim-和-polyfill-是什么意思][Shim 和 Polyfill 是什么意思]]
 - [[#前端路由的实现原理][前端路由的实现原理]]
 - [[#url-编码的问题][URL 编码的问题]]
+- [[#怎样获取一个元素的所有事件监听器][怎样获取一个元素的所有事件监听器]]
 
 * 动态加载 CSS 和 JavaScript
   我们可以利用浏览器的特性来动态加载 CSS 和 JavaScript，当我们动态添加 ~script~ 或 ~style~ 标签到 DOM 中时，浏览器如果发现该标签需要加载远程资源，
@@ -57,4 +58,8 @@
   参考：
   + [[https://aotu.io/notes/2017/06/15/The-mystery-of-URL-encoding/index.html][URL编码的奥秘 | Aotu.io「凹凸实验室」]]
   + [[https://tools.ietf.org/html/rfc3986][RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax]]
+
+* 怎样获取一个元素的所有事件监听器
+  在 Chrome DevTools 中可以通过函数 ~getEventListeners(node)~ 获取所有的监听器，参考：
+  + [[https://stackoverflow.com/questions/9046741/get-event-listeners-attached-to-node-using-addeventlistener][javascript - Get event listeners attached to node using addEventListener - Stack Overflow]]
 

@@ -30,6 +30,7 @@
 - [[#相关问题][相关问题]]
   - [[#怎样让光标跳转到上一个位置][怎样让光标跳转到上一个位置]]
   - [[#怎样获取-emacs-编译时的参数][怎样获取 Emacs 编译时的参数]]
+  - [[#怎样绑定-c-return-为快捷键][怎样绑定 C-return 为快捷键]]
 
 * 简单使用
 ** 文本编辑
@@ -215,4 +216,13 @@
 ** 怎样获取 Emacs 编译时的参数
    可以通过 ~system-configuration-options~ 变量的值来进行查看，参考：
    + [[https://emacs.stackexchange.com/questions/35497/does-emacs-have-an-option-to-display-build-settings][config - Does emacs have an option to display build settings? - Emacs Stack Exchange]]
+
+** 怎样绑定 C-return 为快捷键
+   使用如下的方式：
+   #+begin_src elisp
+     (define-key my-keys-mode-map (kbd "<C-return>") 'my-function)
+   #+end_src
+
+   参考：
+   + [[https://emacs.stackexchange.com/questions/31375/how-can-i-bind-c-return-with-define-key-and-kbd][key bindings - How can I bind C-return with define-key and kbd? - Emacs Stack Exchange]]
 

@@ -28,3 +28,7 @@
          ("n" next-line "next-line"))
      #+end_src
 
+** Tex
+   + [[https://www.emacswiki.org/emacs/CategoryTex][EmacsWiki: Category Tex]]
+   + [[https://www.emacswiki.org/emacs/CDLaTeX][EmacsWiki: CDLaTeX]]
+

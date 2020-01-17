@@ -75,3 +75,63 @@
   + [[https://stackoverflow.com/questions/2631820/how-do-i-ensure-saved-click-coordinates-can-be-reloaed-to-the-same-place-even-i/2631931#2631931][javascript - How do I ensure saved click coordinates can be reloaed to the same place, even if the page layout changed? - Stack Overflow]]
 
 
+* Source Map
+  + [[https://stackoverflow.com/questions/27626764/configure-webpack-to-allow-browser-debugging][javascript - Configure webpack to allow browser debugging - Stack Overflow]]
+  + [[http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html][JavaScript Source Map 详解 - 阮一峰的网络日志]]
+
+* 依赖管理
+  + 包 A 和 包 B 都依赖了包 C，那么以哪个为准
+    
+* 调试
+  + [[https://www.cnblogs.com/fundebug/p/use-console-to-debug-javascript.html][灵活使用 console 让 js 调试更简单 - Fundebug - 博客园]]
+  + [[https://wangdoc.com/javascript/features/console.html][console 对象与控制台 - JavaScript 教程 - 网道]]
+
+  #+begin_src js
+    const DEV_ENV = 'development'
+
+    export default {
+      trace(message, ...optionalParams) {
+        if (process.env.NODE_ENV === DEV_ENV) {
+          console.trace(message, ...optionalParams)
+        }
+      },
+      debug(message, ...optionalParams) {
+        if (process.env.NODE_ENV === DEV_ENV) {
+          console.debug(message, ...optionalParams)
+        }
+      },
+      info(message, ...optionalParams) {
+        if (process.env.NODE_ENV === DEV_ENV) {
+          console.info(message, ...optionalParams)
+        }
+      },
+      error(message, ...optionalParams) {
+        if (process.env.NODE_ENV === DEV_ENV) {
+          console.error(message, ...optionalParams)
+        }
+      },
+      log(message, ...optionalParams) {
+        if (process.env.NODE_ENV === DEV_ENV) {
+          console.log(message, ...optionalParams)
+        }
+      },
+      group(groupTitle, ...optionalParams) {
+        if (process.env.NODE_ENV === DEV_ENV) {
+          console.group(groupTitle, ...optionalParams)
+        }
+      },
+      groupEnd() {
+        if (process.env.NODE_ENV === DEV_ENV) {
+          console.groupEnd()
+        }
+      }
+    }
+
+  #+end_src
+
+* 分包机制
+* 库收集
+* 事件循环
+  + [[https://juejin.im/post/5c337ae06fb9a049bc4cd218][浏览器与Node的事件循环(Event Loop)有何区别? - 掘金]]
+  + [[https://html.spec.whatwg.org/multipage/webappapis.html#event-loops][HTML Standard]]
+  + [[https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#what-is-the-event-loop][The Node.js Event Loop, Timers, and process.nextTick() | Node.js]]

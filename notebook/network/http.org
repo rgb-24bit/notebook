@@ -6,6 +6,8 @@
 - [[#http-api-认证授权][HTTP API 认证授权]]
 - [[#http-缓存][HTTP 缓存]]
 - [[#断点续传][断点续传]]
+- [[#相关问题][相关问题]]
+  - [[#http-header-大小写敏感吗][HTTP Header 大小写敏感吗]]
 
 * 常用 HTTP 请求头和响应头
   HTTP 消息头支持自定义，自定义的专用消息头一般会添加 ~X-~ 前缀，常用的 HTTP 请求头和响应头可以参考：
@@ -100,4 +102,9 @@
   同时，根据响应头中的 ~Content-Length~ 获取数据的总长度，参考：
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range][Range - HTTP | MDN]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Length][Content-Length - HTTP | MDN]]
+
+* 相关问题
+** HTTP Header 大小写敏感吗
+   HTTP Header 大小写不敏感，参考：
+   + [[https://stackoverflow.com/questions/5258977/are-http-headers-case-sensitive][Are HTTP headers case-sensitive? - Stack Overflow]]
 

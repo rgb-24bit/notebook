@@ -56,3 +56,6 @@
   + [[https://www.ibm.com/developerworks/cn/java/j-lo-forkjoin/index.html][JDK 7 中的 Fork/Join 模式]]
   + [[https://www.baeldung.com/java-fork-join][Guide to the Fork/Join Framework in Java | Baeldung]]
 
+* 并发
+  + [[https://stackoverflow.com/questions/10589103/concurrenthashmap-locking][java - ConcurrentHashMap locking - Stack Overflow]]
+

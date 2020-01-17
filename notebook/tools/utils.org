@@ -4,6 +4,7 @@
 - [[#x64dbg][x64dbg]]
 - [[#gnupg][Gnupg]]
 - [[#licecap][LICEcap]]
+- [[#gitinspector][Gitinspector]]
 
 * x64dbg
   Windows的开源 x64 / x32调试器, 用来学习汇编很可以
@@ -17,3 +18,12 @@
   gif 图片录制
 
   + [[https://github.com/justinfrankel/licecap][LICEcap]]
+* Gitinspector
+  Git 仓库代码添加工具，使用：
+  #+begin_src bash
+    $ gitinspector -HTlrm > stat.html &
+  #+end_src
+
+  参考：
+  + [[https://github.com/ejwa/gitinspector][ejwa/gitinspector: The statistical analysis tool for git repositories]]
+  

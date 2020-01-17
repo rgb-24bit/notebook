@@ -4,5 +4,6 @@
   + [[https://notes.shichao.io/unp/ch6/][Chapter 6. I/O Multiplexing: The select and poll Functions - Shichao's Notes]]
   + 并发文件操作 - 只是不能删除吗
   + [[https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/][Linux – IO Multiplexing – Select vs Poll vs Epoll – Developers Area]]
+  + [[https://segmentfault.com/a/1190000021587865][从操作系统层面理解Linux下的网络IO模型 - 宜信技术学院 - SegmentFault 思否]]
 
 
