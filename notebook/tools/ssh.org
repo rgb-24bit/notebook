@@ -4,6 +4,7 @@
 - [[#简单使用][简单使用]]
 - [[#文件传输][文件传输]]
 - [[#git-ssh-私钥][git ssh 私钥]]
+- [[#gssapi][GSSAPI]]
 
 * 简单使用
   使用用户名和密码登录：
@@ -58,4 +59,18 @@
   #+BEGIN_EXAMPLE
     $ chome go=---
   #+END_EXAMPLE
+
+* GSSAPI
+  建立 SSH 连接时如果开启了 GSSAPI 认证会消耗较多的时间，因此，如果不需要使用 GSSAPI 的话可以关掉该配置：
+  #+begin_src conf
+    Host *
+      GSSAPIAuthentication no
+  #+end_src
+
+  配置文件路径为：
+  + 服务端 - ~/etc/ssh/sshd_config~
+  + 客户端 - ~/etc/ssh/ssh_config~
+
+  参考：
+  + [[https://jaminzhang.github.io/linux/GSSAPI-related-options-in-ssh-configuration/][SSH 中的 GSSAPI 相关选项 - Jamin Zhang]]
 

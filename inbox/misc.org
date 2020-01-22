@@ -17,3 +17,6 @@
   + [[https://testerhome.com/articles/21178][性能专题：一文搞懂性能测试常见指标 · TesterHome]]
   + # operation per second   
 
+* 尾递归
+  + [[https://www.ruanyifeng.com/blog/2015/04/tail-call.html][尾调用优化 - 阮一峰的网络日志]]
+

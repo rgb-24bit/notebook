@@ -1,0 +1,233 @@
+#+TITLE:      异步编程模型
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#事件循环][事件循环]]
+- [[#promise][Promise]]
+- [[#generator][Generator]]
+
+* 事件循环
+  JavaScript 的宿主环境，如浏览器和 Node.js 原生提供了对事件循环和异步操作的支持，整个模型的主要组成为：
+  + 运行时栈 - JavaScript 代码的执行栈，同步代码和异步任务的回调函数都在这上面执行
+  + 任务队列 - 当运行时栈为空时，事件循环便会从任务队列中取出任务放入运行时栈执行
+  + 事件循环 - 负责取出任务放入运行时栈执行
+
+  在浏览器中，调用 ~setTimeout(task, 0)~ 不代表该任务会立即执行，这样只是让该任务被快速加入到任务队列，需要等待事件循环的取出调用。
+
+  简单来说就是，JavaScript 先天支持异步操作，除了语言本身以外还具有十分方便的宿主环境，为异步操作提供了极大的便利。
+
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop][并发模型与事件循环 - JavaScript | MDN]]
+
+* Promise
+  Promise 对象的状态值只可能时 Pending、Fulfilled 和 Rejected 中的一个，且变换方式只能为 Pending -> Fulfilled 或 Pending -> Rejected：
+  #+begin_src js
+    const PromiseStatus = {
+      Pending: 1, Fulfilled: 2, Rejected: 3
+    }
+  #+end_src
+
+  通过构造器创建实例时，参数是一个接受 ~resolve~ 和 ~reject~ 回调函数的 ~excutor~ 函数，该函数在恰当的时候通过调用 =resolve= 或 =reject= 函数改变 =Promise= 对象状态：
+  #+begin_src js
+    function isFunction(obj) {
+      return typeof obj === 'function'
+    }
+
+    function Promise(executor) {
+      if (isFunction(executor)) {
+        this.status = PromiseStatus.Pending
+        this.result = undefined
+
+        this.resolveCallbacks = []
+        this.rejectCallbacks = []
+
+        try {
+          // 构造 Promise 对象实例时 excutor 便开始执行了
+          executor(resolve.bind(this), reject.bind(this))
+        } catch (err) {
+          reject.call(this, err)
+        }
+      } else {
+        throw new TypeError('Executor must be a function!')
+      }
+    }
+  #+end_src
+  
+  我们可以通过 ~then(onFulfilled, onRejected)~ 方法注册回调函数，该方法返回一个新的 ~Promise~ 对象，该对象的状态由当前 ~Promise~ 对象决定:
+  #+begin_src js
+    Promise.prototype.then = function (onFulfilled, onRejected) {
+      return new Promise((resolveNext, rejectNext) => {
+        // 当 Promise 对象状态变为 Fulfilled 时的回调函数
+        let fulfilled = value => {
+          try {
+            if (!isFunction(onFulfilled)) {
+              // 当 onFulfilled 不是函数时，会被替换为 x => x 形式的函数
+              onFulfilled = x => x
+            }
+            let res = onFulfilled(value)
+            // 回调函数返回 Promise 对象，那么新 Promise 对象的状态修改交由返回的 Promise 对象处理
+            if (res instanceof Promise) {
+              res.then(resolveNext, rejectNext)
+            } else {
+              rejectNext(res)
+            }
+          } catch (err) {
+            // 回调函数抛出异常，新的 Promise 对象状态修改为 Rejected
+            rejectNext(err)
+          }
+        }
+
+        // 当 Promise 对象状态变为 Rejected 时的回调函数
+        let rejected = value => {
+          try {
+            if (!isFunction(onRejected)) {
+              // 当 onRejected 不是函数时，会转换为将输入值抛出的 Thrower 函数
+              onRejected = x => {
+                throw x
+              }
+            }
+            let res = onRejected(value)
+            if (res instanceof Promise) {
+              res.then(resolveNext, rejectNext)
+            } else {
+              resolveNext(res)
+            }
+          } catch (err) {
+            rejectNext(err)
+          }
+        }
+
+        switch (this.status) {
+          // 当状态为 Pending 时，将 then 方法回调函数加入执行队列等待执行
+          case PromiseStatus.Pending:
+            this.resolveCallbacks.push(fulfilled)
+            this.rejectCallbacks.push(rejected)
+            break
+          // 当状态已经改变时，立即执行对应的回调函数
+          case PromiseStatus.Fulfilled:
+            fulfilled(this.result)
+            break
+          case PromiseStatus.Rejected:
+            rejected(this.result)
+            break
+        }
+      })
+    }
+  #+end_src
+
+  这里的重点是，当 =Promise= 对象的状态为 =Pending= 时需要将回调函数注册到该 =Promise= 对象中，无论是 =fulfilled= 回调还是 =rejected= 回调，都会：
+  1. 根据当前 Promise 对象的结果执行 =onFulfilled= 或 =onRejected= 回调函数
+  2. 根据回调函数的执行结果修改新 =Promise= 对象的状态
+
+  通过中间回调函数的方式，将新旧 =Promise= 对象的状态关联起来。
+
+  =resolve= 和 =reject= 方法的实现：
+  #+begin_src js
+    function resolve(value) {
+      // resolve 和 reject 方法只有第一次调用有效
+      if (this.status === PromiseStatus.Pending) {
+        const runner = () => {
+          const runFulfilled = (value) => {
+            let cb;
+            while (cb = this.resolveCallbacks.shift()) {
+              cb(value)
+            }
+          }
+
+          const runRejected = (error) => {
+            let cb;
+            while (cb = this.rejectCallbacks.shift()) {
+              cb(error)
+            }
+          }
+
+          // 如果 resolve 的参数为 Promise 对象，则必须等待该 Promise 对象状态改变后,
+          // 当前 Promsie 的状态才会改变，且状态取决于参数 Promsie 对象的状态
+          if (value instanceof Promise) {
+            value.then(value => {
+              this.result = value
+              this.status = PromiseStatus.Fulfilled
+              runFulfilled(value)
+            }, err => {
+              this.result = err
+              this.status = PromiseStatus.Rejected
+              runRejected(err)
+            })
+          } else {
+            this.status = PromiseStatus.Fulfilled
+            this.result = value
+            runFulfilled(this.result)
+          }
+        }
+        // resolve 和 reject 方法的调用都不应该阻塞同步代码的执行
+        setTimeout(runner, 0)
+      }
+    }
+
+    function reject(err) {
+      if (this.status === PromiseStatus.Pending) {
+        const runner = () => {
+          this.status = PromiseStatus.Fulfilled
+          this.result = err
+          let cb;
+          while (cb = this.rejectCallbacks.shift()) {
+            cb(this.result)
+          }
+        }
+        setTimeout(runner, 0)
+      }
+    }
+  #+end_src
+
+  参考链接：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/then][Promise.prototype.then() - JavaScript | MDN]]
+  + [[https://juejin.im/post/5b83cb5ae51d4538cc3ec354][Promise实现原理（附源码） - 掘金]]
+  + [[https://es6.ruanyifeng.com/#docs/promise][Promise 对象 - ECMAScript 6入门]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise][Promise - JavaScript | MDN]]
+
+* Generator
+  通过 Generator 函数，可以用同步代码的方式编写异步程序，这依赖于一个外部的执行器，运气好的是，JavaScript 中自带这样的执行器。
+
+  JavaScript 中一个 Generator 函数返回的是一个 Iterator 对象，当函数体内部遇到 ~yield~ 语句时就会暂停执行并将 ~yield~ 后面的表达式的计算结果作为返回值返回：
+  #+begin_src js
+    function* generator() {
+      yield* [1, 2, 3, 4, 5]
+    }
+
+    generator().next()  // {value: 1, done: false}
+  #+end_src
+
+  因此，我们可以让 ~yield~ 的返回值是一个 =Promise= 对象，并将 ~next~ 调用作为回调函数注册到该 ~Promsie~ 对象，这样一来，在执行异步代码时暂停，异步代码执行完成后通过 ~next~ 方法继续函数的执行，
+  就可以达到用同步代码的方式编写异步程序的目的。
+
+  进一步的，可以利用 ~generator~ 函数的特性，将 ~Promsie~ 对象的返回值或异常传递到函数体内部，外部执行器例子：
+  #+begin_src js
+    function spawn(genF) {
+      return new Promise(function(resolve, reject) {
+        const gen = genF();
+        function step(nextF) {
+          let next;
+          try {
+            next = nextF();
+          } catch(e) {
+            return reject(e);
+          }
+          if(next.done) {
+            return resolve(next.value);
+          }
+          Promise.resolve(next.value).then(function(v) {
+            step(function() { return gen.next(v); });
+          }, function(e) {
+            step(function() { return gen.throw(e); });
+          });
+        }
+        step(function() { return gen.next(undefined); });
+      });
+    }
+  #+end_src
+
+  参考链接：
+  + [[https://es6.ruanyifeng.com/#docs/iterator][Iterator 和 for...of 循环 - ECMAScript 6入门]]
+  + [[https://es6.ruanyifeng.com/#docs/generator-async][Generator 函数的异步应用 - ECMAScript 6入门]]
+  + [[https://es6.ruanyifeng.com/#docs/generator][Generator 函数的语法 - ECMAScript 6入门]]
+  + [[https://es6.ruanyifeng.com/#docs/async][async 函数 - ECMAScript 6入门]]  
+

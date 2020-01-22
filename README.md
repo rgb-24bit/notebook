@@ -91,6 +91,7 @@
   + **vue**
     + [相关问题](notebook/front-end/vue/question.org)
     + [Vue.JS](notebook/front-end/vue/vue.org)
+  + [异步编程模型](notebook/front-end/async.org)
   + [CSS](notebook/front-end/css.org)
   + [ECMAScript 5](notebook/front-end/es5.org)
   + [ECMAScript 6](notebook/front-end/es6.org)
@@ -178,6 +179,7 @@
 ## linux
   + [Alpine](notebook/linux/alpine.org)
   + [Debian 系统使用](notebook/linux/debian.org)
+  + [Linux I/O 模型](notebook/linux/io.org)
   + [Linux 基础笔记](notebook/linux/linux.org)
   + [Misc](notebook/linux/misc.org)
   + [Linux 问题集](notebook/linux/question.org)

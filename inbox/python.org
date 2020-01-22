@@ -1,3 +1,8 @@
+* Future
+  1. Python 异步需要看一下，先看怎么用，然后看一下实现原理
+  2. Python Language Reference 可以重温一下，特别是 Data Model 部分
+  3. 词汇表也看一下 [[https://docs.python.org/3/glossary.html#term-awaitable][Glossary — Python 3.8.1 documentation]]
+
 * 异步编程
   + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O — Python 3.8.1 documentation]]
   + [[http://xiaorui.cc/2016/04/27/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8Bgevent-monkey-patch_all%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/][源码分析之gevent monkey.patch_all实现原理 – 峰云就她了]]
@@ -7,3 +12,45 @@
   + [[https://rgb-24bit.github.io/blog/2019/python-selectors.html][Python 高级 I/O 多路复用]]
   + [[https://rgb-24bit.github.io/blog/2019/python-coroutine-event-loop.html][Python 协程和事件循环]]
 
+** 使用教程
+   + [[https://realpython.com/async-io-python/][Async IO in Python: A Complete Walkthrough – Real Python]]
+   + [[https://docs.python.org/3/library/asyncio-task.html#asyncio-generator-based-coro][Generator-based Coroutines]]
+   + [[https://docs.python.org/3/library/asyncio-future.html#asyncio.Future][Futures — Python 3.8.1 documentation]]
+     #+begin_src python
+       async def set_after(fut, delay, value):
+           # Sleep for *delay* seconds.
+           await asyncio.sleep(delay)
+
+           # Set *value* as a result of *fut* Future.
+           fut.set_result(value)
+
+       async def main():
+           # Get the current event loop.
+           loop = asyncio.get_running_loop()
+
+           # Create a new Future object.
+           fut = loop.create_future()
+
+           # Run "set_after()" coroutine in a parallel Task.
+           # We are using the low-level "loop.create_task()" API here because
+           # we already have a reference to the event loop at hand.
+           # Otherwise we could have just used "asyncio.create_task()".
+           loop.create_task(
+               set_after(fut, 1, '... world'))
+
+           print('hello ...')
+
+           # Wait until *fut* has a result (1 second) and print it.
+           print(await fut)
+
+       asyncio.run(main())
+     #+end_src
+   + [[https://docs.python.org/3/library/asyncio-task.html#coroutine][Coroutines and Tasks — Python 3.8.1 documentation]]
+
+** 理解
+   1. Task 创建时便被加入事件循环
+
+** 问题
+   + [[https://stackoverflow.com/questions/33409888/how-can-i-await-inside-future-like-objects-await][python - How can I await inside future-like object's __await__? - Stack Overflow]]
+
+     

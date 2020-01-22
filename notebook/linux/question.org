@@ -21,9 +21,10 @@
 * 如何快速删除文件
   + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
 
-  #+BEGIN_EXAMPLE
-    $ perl -e 'for(<*>){((stat)[9]<(unlink))}'
-  #+END_EXAMPLE
+  #+begin_src sh
+    # 删除 target 中比 empty 目录多的文件
+    $ rsync -a --detate empty/ target/
+  #+end_src
 
 * 避免 SSH 连接因超时闲置断开
 ** 方案一：客户端设置

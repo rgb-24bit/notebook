@@ -27,24 +27,23 @@
   1. 本身的编码
   2. 于可结合字符结合得到的字符编码
 
- 使用 ~Python~ 可以将第一种情况转换为第二种：
- #+BEGIN_SRC python
-   >>> import unicodedata
-   >>> import sys
-   >>> cmb_chrs = dict.fromkeys(c for c in range(sys.maxunicode)
-   ...                         if unicodedata.combining(chr(c)))
-   >>> a = 'pýtĥöñ is awesome\n'
-   >>> b = unicodedata.normalize('NFD', a)
-   >>> b
-   'pýtĥöñ is awesome\n'
-   >>> b.translate(cmb_chrs)
-   'python is awesome\n'
+  使用 ~Python~ 可以将第一种情况转换为第二种：
+  #+BEGIN_SRC python
+    >>> import unicodedata
+    >>> import sys
+    >>> cmb_chrs = dict.fromkeys(c for c in range(sys.maxunicode) if unicodedata.combining(chr(c)))
+    >>> a = 'pýtĥöñ is awesome\n'
+    >>> b = unicodedata.normalize('NFD', a)
+    >>> b
+    'pýtĥöñ is awesome\n'
+    >>> b.translate(cmb_chrs)
+    'python is awesome\n'
 
-   >>> list(a)
-   ['p', 'ý', 't', 'ĥ', 'ö', 'ñ', ' ', 'i', 's', ' ', 'a', 'w', 'e', 's', 'o', 'm', 'e', '\n']
-   >>> list(b)
-   ['p', 'y', '́', 't', 'h', '̂', 'o', '̈', 'n', '̃', ' ', 'i', 's', ' ', 'a', 'w', 'e', 's', 'o', 'm', 'e', '\n']
- #+END_SRC
+    >>> list(a)
+    ['p', 'ý', 't', 'ĥ', 'ö', 'ñ', ' ', 'i', 's', ' ', 'a', 'w', 'e', 's', 'o', 'm', 'e', '\n']
+    >>> list(b)
+    ['p', 'y', '́', 't', 'h', '̂', 'o', '̈', 'n', '̃', ' ', 'i', 's', ' ', 'a', 'w', 'e', 's', 'o', 'm', 'e', '\n']
+  #+END_SRC
 
 * 不可见字符 \u2061
   可以利用这个字符来防止敏感词被屏蔽，可以写个 ~JavaScript~ 的函数：
@@ -65,7 +64,7 @@
     def convert(string, *encodings):
         for i in range(len(encodings) - 1):
             string = decode(encode(string, encodings[i]), encodings[i + 1], errors='ignore')
-        print(' -> '.join(encodings), string)
+            print(' -> '.join(encodings), string)
 
     string = '测试字符串'
 
@@ -76,7 +75,7 @@
     convert(string, 'utf-8', 'gbk', 'utf-8')
     convert(string, 'gbk', 'utf-8', 'gbk')
   #+end_src
-  
+
   详情的可以看图片：
   #+HTML: <img src="https://i.loli.net/2019/09/03/hyHxNGtP18glXaO.jpg">
 
@@ -107,4 +106,3 @@
 * 字符编码的兼容情况
   某种程度上来说，ASCII 和 ISO8859-1 是编码方式的同时也是字符集：
   #+HTML: <img src="https://i.loli.net/2020/01/04/O31gTpDZYVWUEaz.png">
-

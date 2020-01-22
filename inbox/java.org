@@ -11,8 +11,6 @@
 ** 异步
    + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
    + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
-   + [[https://www.v2ex.com/t/598693#reply13][用 Java 撸了一个 yield 的玩具 - V2EX]]
-   + [[https://www.v2ex.com/t/459387][天哪，看我竟然在 Java 语言里撸出了什么 - V2EX]]
 
 ** Agent
    本来是想看一下调试中断点是怎么一回事，结果，和 Java Agent 扯上了。

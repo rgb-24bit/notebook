@@ -15,6 +15,7 @@
   - [[#创建书签][创建书签]]
   - [[#寻找文件][寻找文件]]
   - [[#快速添加依赖][快速添加依赖]]
+  - [[#多-project-操作][多 project 操作]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
@@ -116,6 +117,12 @@
 ** 快速添加依赖
    在 POM 文件的 generate 上下文中可以选择 dependency 快速选择添加依赖：
    + [[https://www.jetbrains.com/help/idea/work-with-maven-dependencies.html][Maven dependencies - Help | IntelliJ IDEA]]
+
+** 多 project 操作
+   IDEA 是支持添加多个项目到一个 IDEA 实例的，参考：
+   + [[https://stackoverflow.com/questions/8774024/intellij-working-on-multiple-projects][IntelliJ: Working on multiple projects - Stack Overflow]]
+
+   问题就是使用体验没有想象的那么好……
 
 * 相关问题
 ** 怎样添加静态导入到补全列表
