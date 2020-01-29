@@ -47,6 +47,9 @@
    + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
    + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
 
+** JNI
+   + [[https://blog.csdn.net/hackooo/article/details/48395765][Java JNI实现原理初探_最帅惋红曲-CSDN博客]]
+
 * NIO
   + [[https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html][NIO 入门]]
 
@@ -56,4 +59,8 @@
 
 * 并发
   + [[https://stackoverflow.com/questions/10589103/concurrenthashmap-locking][java - ConcurrentHashMap locking - Stack Overflow]]
+
+* 网络请求
+  + [[https://github.com/akullpp/awesome-java#http-clients][akullpp/awesome-java: A curated list of awesome frameworks, libraries and software for the Java programming language.]]
+  + [[https://liudanking.com/sitelog/java-http-client-lib-comparison/][Java HTTP 组件库选型看这篇就够了 | 行思錄 | Travel Coder]]
 

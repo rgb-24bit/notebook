@@ -13,6 +13,7 @@
 - [[#内存泄漏和内存溢出][内存泄漏和内存溢出]]
 - [[#serialization][Serialization]]
 - [[#iaaspaassaas][IaaS，PaaS，SaaS]]
+- [[#指针和句柄][指针和句柄]]
 
 * DevOps
   DevOps 是一个完整的面向IT运维的工作流，以 IT 自动化以及持续集成（CI）、持续部署（CD）为基础，来优化程式开发、测试、系统运维等所有环节。
@@ -91,4 +92,15 @@
 
   参考：
   + [[http://www.ruanyifeng.com/blog/2017/07/iaas-paas-saas.html][IaaS，PaaS，SaaS 的区别 - 阮一峰的网络日志]]
+
+* 指针和句柄
+  #+begin_quote
+  In computer programming, a handle is an abstract reference to a resource that is used when application software references blocks of memory or objects that are managed by another system like a database or an operating system.
+  #+end_quote
+
+  简单来说，句柄是被单独的系统管理的对象，我们可以通过句柄间接访问目标对象，系统可以通过句柄来对访问进行控制，而指针，就很自由。
+  
+  参考：
+  + [[https://en.wikipedia.org/wiki/Handle_(computing)][Handle (computing) - Wikipedia]]
+  + [[https://www.jianshu.com/p/ce6d7a5eea0a][指针与句柄的区别 - 简书]]
 

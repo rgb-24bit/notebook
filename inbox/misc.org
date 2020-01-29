@@ -8,6 +8,9 @@
    + [[https://blog.csdn.net/wentianyao/article/details/51445940][C++协程(1):协程原理及实现方式概述 - wentianyao的专栏]]
    + [[https://www.zhihu.com/question/52193579][腾讯开源的 libco 号称千万级协程支持，那个共享栈模式原理是什么? - 知乎]]
 
+** COM
+   + [[https://zh.wikipedia.org/wiki/%E7%BB%84%E4%BB%B6%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B][组件对象模型 - 维基百科，自由的百科全书]]
+   + 
 
 * URL Schemes
   + [[https://fokkezb.nl/2013/08/26/url-schemes-for-ios-and-android-1/][URL schemes for iOS and Android (1/2) | Fokke Zandbergen]]
