@@ -50,6 +50,9 @@
 ** JNI
    + [[https://blog.csdn.net/hackooo/article/details/48395765][Java JNI实现原理初探_最帅惋红曲-CSDN博客]]
 
+** 动态语言
+   + [[https://www.infoq.cn/article/jdk-dynamically-typed-language][解析 JDK 7 的动态类型语言支持-InfoQ]]
+
 * NIO
   + [[https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html][NIO 入门]]
 
@@ -63,4 +66,9 @@
 * 网络请求
   + [[https://github.com/akullpp/awesome-java#http-clients][akullpp/awesome-java: A curated list of awesome frameworks, libraries and software for the Java programming language.]]
   + [[https://liudanking.com/sitelog/java-http-client-lib-comparison/][Java HTTP 组件库选型看这篇就够了 | 行思錄 | Travel Coder]]
+  + [[https://juejin.im/post/5d6a0612f265da03b46c04c5][跨平台调用 Retrofit - 掘金]]
 
+
+* 初始化
+  + 对象：创建对象 -> 填充零值 -> <init>(super.<init> -> block)
+  + 类型：加载类型 -> 准备阶段（零值或常量） -> <clinit>(super.<clinit> -> static block)

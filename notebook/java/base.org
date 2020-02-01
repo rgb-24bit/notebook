@@ -356,22 +356,26 @@
    + ~Throwable~ 同样属于受查异常
 
 * 其他
-  块作用域是由大括号确定的作用域：
-  #+BEGIN_SRC java
-    public class Test {
-      public static void main(String[] args) {
-        {
-          int num = 10;  // ok
-        }
+  + 块作用域是由大括号确定的作用域：
+    #+BEGIN_SRC java
+      public class Test {
+        public static void main(String[] args) {
+          {
+            int num = 10;  // ok
+          }
 
-        int num = 10;    // ok
+          int num = 10;    // ok
 
-        {
-          int num = 10;  // error
+          {
+            int num = 10;  // error
+          }
         }
       }
-    }
-  #+END_SRC
+    #+END_SRC
+  + =strictfp= 关键字可应用于类、接口或方法。使用 =strictfp= 关键字声明一个方法时，该方法中所有的 float 和 double 表达式都严格遵守 FP-strict 的限制，
+    符合 IEEE-754 规范。当对一个类或接口使用 =strictfp= 关键字时，该类中的所有代码，包括嵌套类型中的初始设定值和代码，都将严格地进行计算。
+    严格约束意味着所有表达式的结果都必须是 IEEE 754 算法对操作数预期的结果，以单精度和双精度格式表示。
+  + 当串行化某个对象时，如果该对象的某个变量是 transient，那么这个变量不会被串行化进去
 
 * Tips
   + Java 没有无符号数
@@ -400,7 +404,7 @@
   + 默认访问级别对子类不可见
   + 比较枚举值使用 == 就可以了
   + 接口中的所有方法自动为 public
-  + 接口中的域自动设为 public static final
+  + *接口中的域自动设为 public static final*
   + 伴随类 - Path/Paths，伴随类包含静态方法
   + 默认方法冲突 - 超类优先，接口冲突就必须手动覆盖
   + 所有数组类型都有一个 public 的 clone 方法，可以建立一个新数组，包含源数组所有元素的副本

@@ -125,7 +125,7 @@
     + [Java EE 问题集](notebook/java/javaee/question.org)
     + [Servlet](notebook/java/javaee/servlet.org)
   + **jvm**
-    + [内存管理相关](notebook/java/jvm/ram.org)
+    + [Java 虚拟机结构](notebook/java/jvm/jvm.org)
   + **mq**
     + [相关问题](notebook/java/mq/question.org)
     + [RocketMQ](notebook/java/mq/rocketmq.org)
@@ -219,7 +219,6 @@
   + [计算机网络 - 分层模型](notebook/network/layer-mode.org)
   + [MQTT](notebook/network/mqtt.org)
   + [计算机网络 - 协议](notebook/network/protocol.org)
-  + [TCP/UDP 协议](notebook/network/tcp-udp.org)
   + [Network Tools](notebook/network/tools.org)
 ## os
   + [操作系统 - 基础内容](notebook/os/base.org)
@@ -251,6 +250,7 @@
   + [Python Misc](notebook/python/misc.org)
   + [ORM 框架](notebook/python/orm.org)
   + [Python Packaging](notebook/python/packaging.org)
+  + [Python Language Reference](notebook/python/plr.org)
   + [Python 笔记](notebook/python/python.org)
   + [Python 文档字符串](notebook/python/pythondoc.org)
   + [Python 问题集](notebook/python/question.org)

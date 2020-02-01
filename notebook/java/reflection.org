@@ -11,6 +11,7 @@
 - [[#泛型][泛型]]
   - [[#获取类型参数][获取类型参数]]
 - [[#hierarchy][Hierarchy]]
+- [[#动态代理][动态代理]]
 - [[#相关问题][相关问题]]
   - [[#如果通过反射获取一个包下的所有类][如果通过反射获取一个包下的所有类]]
 
@@ -460,6 +461,88 @@
   #+end_example
 
   简单来看的话，包 ~java.lang.reflect~ 下提供的功能主要就是各种类信息的访问操作和 Proxy 动态代理了。
+
+* 动态代理
+  Java 动态代理的调用方式为：
+  1. 通过 =Proxy.newPorxyInstance= 创建代理对象，该对象是 =Proxy= 的子类
+  2. 子类会为 hashCode、equals、toString 和指定的接口中的方法创建代理
+  3. 调用相关方法时，会通过 =InvocationHandler= 实例的 =invoke= 方法调用
+
+  例子：
+  #+begin_src java
+    // 生成的一个代理类，继承 Proxy 并实现要代理的接口
+    final class $Proxy0 extends Proxy implements TestInterface {
+      private static Method m1;
+      private static Method m2;
+      private static Method m3;
+      private static Method m0;
+
+      // 实现的 InvocationHandler
+      public $Proxy0(InvocationHandler var1) throws  {
+        super(var1);
+      }
+
+      public final boolean equals(Object var1) throws  {
+        try {
+          return (Boolean)super.h.invoke(this, m1, new Object[]{var1});
+        } catch (RuntimeException | Error var3) {
+          throw var3;
+        } catch (Throwable var4) {
+          throw new UndeclaredThrowableException(var4);
+        }
+      }
+
+      public final String toString() throws  {
+        try {
+          return (String)super.h.invoke(this, m2, (Object[])null);
+        } catch (RuntimeException | Error var2) {
+          throw var2;
+        } catch (Throwable var3) {
+          throw new UndeclaredThrowableException(var3);
+        }
+      }
+
+      public final void testMethod() throws  {
+        try {
+          // 通过 InvocationHandler 调用目标方法
+          super.h.invoke(this, m3, (Object[])null);
+        } catch (RuntimeException | Error var2) {
+          throw var2;
+        } catch (Throwable var3) {
+          throw new UndeclaredThrowableException(var3);
+        }
+      }
+
+      public final int hashCode() throws  {
+        try {
+          return (Integer)super.h.invoke(this, m0, (Object[])null);
+        } catch (RuntimeException | Error var2) {
+          throw var2;
+        } catch (Throwable var3) {
+          throw new UndeclaredThrowableException(var3);
+        }
+      }
+
+      static {
+        try {
+          // 为 hashCode、toString、equals 和 TestInterface 中定义的方法创建代理
+          m1 = Class.forName("java.lang.Object").getMethod("equals", Class.forName("java.lang.Object"));
+          m2 = Class.forName("java.lang.Object").getMethod("toString");
+          m3 = Class.forName("classload.TestInterface").getMethod("testMethod");
+          m0 = Class.forName("java.lang.Object").getMethod("hashCode");
+        } catch (NoSuchMethodException var2) {
+          throw new NoSuchMethodError(var2.getMessage());
+        } catch (ClassNotFoundException var3) {
+          throw new NoClassDefFoundError(var3.getMessage());
+        }
+      }
+    }
+  #+end_src
+
+  比较适合于需要为对象的不同方法创建统一的 AOP 逻辑。
+
+  参考：
+  + [[https://www.ibm.com/developerworks/cn/java/j-lo-proxy1/index.html][Java 动态代理机制分析及扩展，第 1 部分]]
 
 * 相关问题
 ** 如果通过反射获取一个包下的所有类

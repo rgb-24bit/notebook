@@ -1,0 +1,14 @@
+#+TITLE:      Python Language Reference
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#the-import-system][The import system]]
+
+* The import system
+  通过 =import= 语句导入模块时组合了两个操作：
+  1. 通过 =__import__()= 函数查找模块，如果该函数查找到模块就会执行模块的创建规则
+  2. 将 =__import__()= 函数的返回值绑定到本地作用域
+
+  模块被第一次导入时，如果查找到模块，就会创建相应的 *模块对象* 并进行初始化，如果没找到就会抛出 =ModuleNotFoundError= 异常。
+
+  这里需要明白的一点是，模块也是对象，而且全局情况下默认只会创建因此，因此，标准库中有很多奖全局属性保存在模块中的例子。
+
