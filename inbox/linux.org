@@ -4,7 +4,7 @@
   + [[https://cloud.tencent.com/developer/news/406991][5分钟搞懂Linux中直接I/O原理 - 云+社区 - 腾讯云]]
   + [[https://www.ibm.com/developerworks/cn/linux/l-cn-directio/index.html][Linux 中直接 I/O 机制的介绍]]
   + [[https://www.ibm.com/developerworks/cn/linux/l-memmod/index.html][探索 Linux 内存模型]]
-
+    
 ** 并发操作
    系统调用好像都是原子性的，默认情况下系统不会的文件的访问加锁，需要手动加锁。
 

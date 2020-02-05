@@ -68,7 +68,3 @@
   + [[https://liudanking.com/sitelog/java-http-client-lib-comparison/][Java HTTP 组件库选型看这篇就够了 | 行思錄 | Travel Coder]]
   + [[https://juejin.im/post/5d6a0612f265da03b46c04c5][跨平台调用 Retrofit - 掘金]]
 
-
-* 初始化
-  + 对象：创建对象 -> 填充零值 -> <init>(super.<init> -> block)
-  + 类型：加载类型 -> 准备阶段（零值或常量） -> <clinit>(super.<clinit> -> static block)

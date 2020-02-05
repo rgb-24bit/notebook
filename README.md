@@ -223,6 +223,7 @@
 ## os
   + [操作系统 - 基础内容](notebook/os/base.org)
   + [并发编程](notebook/os/concurrent.org)
+  + [计算机组成相关](notebook/os/csorg.org)
   + [操作系统 - 异常控制流](notebook/os/ecf.org)
   + [操作系统 - 程序的机器级表示](notebook/os/express.org)
   + [操作系统 - 信息的表示和处理](notebook/os/info.org)

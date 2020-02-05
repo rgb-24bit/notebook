@@ -1,0 +1,20 @@
+#+TITLE:      计算机组成相关
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#cpu-的速度][CPU 的速度]]
+
+* CPU 的速度
+  从串行到并发，从多进程到多线程，从单核到多核，从并发到异步，一个核心的观点就是减少上下文的切换，减少 I/O 操作，尽可能多的利用 CPU。
+
+  说起来，一直对 CPU 和 I/O 操作之间的速度没有太直观的感受，但是通过下面这篇文章还是可以了解到，如果执行 I/O 操作时阻塞 CPU 会带来极大的浪费：
+  + [[https://cizixs.com/2017/01/03/how-slow-is-disk-and-network/][让 CPU 告诉你硬盘和网络到底有多慢 | Cizixs Write Here]]
+
+  即使时从内存中读取数据也会慢很多，因此需要通过多级缓存来提高 CPU 的利用率，需要通过指令重排来保证流水线作业。
+
+  PS: 感觉大学里面我们专业没教计算机组成原理是一件很亏的事啊……
+
+  参考链接：
+  + 分支预测 - [[https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array][java - Why is processing a sorted array faster than processing an unsorted array? - Stack Overflow]]
+  + [[https://zhuanlan.zhihu.com/p/73937739][计算机基础 | 多核、缓存...现代 CPU 是如何工作的 - 知乎]]
+  + [[https://www.cnblogs.com/Finley/p/5641806.html][CPU 结构与指令执行过程简介 - -Finley- - 博客园]]
+
