@@ -14,9 +14,11 @@
 - [[#其他命令][其他命令]]
 - [[#标准输出][标准输出]]
 - [[#使用技巧][使用技巧]]
+  - [[#简单技巧][简单技巧]]
 - [[#相关问题][相关问题]]
   - [[#terminalttyshell-等的区别][Terminal、TTY、Shell 等的区别]]
   - [[#获取当前-shell-脚本所在目录][获取当前 Shell 脚本所在目录]]
+  - [[#如何获取文件中某几行的内容][如何获取文件中某几行的内容]]
 
 * 网络操作相关
 ** 网络诊断相关
@@ -322,6 +324,7 @@
   + [[https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97][ANSI 转义序列 - 维基百科，自由的百科全书]]
 
 * 使用技巧
+** 简单技巧
   + 通过快捷键 C-l 可以清屏
   + 通过快捷键 C-u 可以清楚当前输入
   + 环境变量 RANDOM 可以作为随机数生成器使用：
@@ -348,3 +351,10 @@
 
    参考：
    + [[https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself][Get the source directory of a Bash script from within the script itself - Stack Overflow]]
+
+** 如何获取文件中某几行的内容
+   可以通过 =sed= 命令查看文件中某几行的内容，比如查看第 =5= 到 =10= 的内容：
+   #+begin_src bash
+     sed -n '5,10p' filename
+   #+end_src
+

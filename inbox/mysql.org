@@ -11,3 +11,4 @@
 ** 并发
    + [[https://blog.csdn.net/bigtree_3721/article/details/73277419][MySQL insert into ... select 的锁情况 【转】_mysql,insert,select_大树叶 技术专栏-CSDN博客]]
    + [[https://juejin.im/post/5b82e0196fb9a019f47d1823][全面了解 mysql 锁机制（InnoDB）与问题排查 - 掘金]]   
+     

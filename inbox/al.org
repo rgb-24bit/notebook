@@ -1,3 +1,10 @@
 * Future
   + [[https://sikasjc.github.io/2018/07/25/timsort/][Timsort 原理学习 · Sika]]
 
+* 二叉树
+  先序、中序
+  + [[https://www.nowcoder.com/profile/152895/codeBookDetail?submissionId=1521389][专业维修电脑的个人主页_牛客网]]
+
+* 约瑟夫环问题
+  + [[https://www.cnblogs.com/ericyang/archive/2009/09/04/1560478.html][约瑟夫环问题两解 - EricYang - 博客园]]
+

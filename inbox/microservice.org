@@ -7,6 +7,5 @@
 
 
 * SOA 和微服务架构的区别
-  + [[https://www.zhihu.com/question/37808426][SOA和微服务架构的区别？ - 知乎]]
   + [[https://www.cnblogs.com/netfocus/p/5548025.html][浅谈我对DDD领域驱动设计的理解 - netfocus - 博客园]]
 

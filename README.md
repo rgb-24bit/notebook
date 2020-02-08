@@ -89,6 +89,7 @@
   + [Version Control](notebook/emacs/vc.org)
 ## front-end
   + **vue**
+    + [Element UI](notebook/front-end/vue/element-ui.org)
     + [相关问题](notebook/front-end/vue/question.org)
     + [Vue.JS](notebook/front-end/vue/vue.org)
   + [异步编程模型](notebook/front-end/async.org)
@@ -192,6 +193,7 @@
     + [Spring Cloud 基本概念](notebook/microservice/spring-cloud/spring-cloud.org)
   + [配置中心](notebook/microservice/config.org)
   + [日志记录与分析](notebook/microservice/log.org)
+  + [相关问题](notebook/microservice/question.org)
   + [远程过程调用](notebook/microservice/rpc.org)
   + [服务发现](notebook/microservice/service-discovery.org)
 ## misc

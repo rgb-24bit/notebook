@@ -25,3 +25,6 @@
 * 方法签名
   + [[https://en.wikipedia.org/wiki/Type_signature][Type signature - Wikipedia]]
 
+* 概念
+  + 裸指针
+

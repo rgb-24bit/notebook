@@ -1,0 +1,26 @@
+#+TITLE:      Element UI
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关问题][相关问题]]
+  - [[#表格中表单验证的问题][表格中表单验证的问题]]
+
+* 相关问题
+** 表格中表单验证的问题
+   #+begin_src html
+     <el-form :model="model" :rules="rules" ref="form">
+       <el-table :data="model.datas">
+         <el-table-column>
+           <template slot-scope="scope">
+             <!-- 该 form-item 绑定的元素为 model['datas']['scope.$index']['field'] -->
+             <el-form-item :prop="datas.' + scope.$index + '.field'" :rules='rules.field'>
+               <el-input v-model="scope.row.field" ></el-input>
+             </el-form-item>
+           </template>
+         </el-table-column>
+       </el-table>
+     </el-form>
+   #+end_src
+   
+   参考链接：
+   + [[https://www.cnblogs.com/Kummy/p/9470393.html][element-ui 解决 table 里包含表单验证的问题！ - 李 维 - 博客园]]
+
