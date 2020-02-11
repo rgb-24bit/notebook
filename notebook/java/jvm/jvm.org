@@ -431,6 +431,7 @@
 
    参考：
    + [[https://www.zhihu.com/question/53826114][java 偏向锁，轻量级锁与重量级锁为什么会相互膨胀? - 知乎]]
+   + [[https://rgb-24bit.github.io/blog/2020/java-synchronized.html][Java 偏向锁、轻量级锁和重量级锁]]
 
 * Footnotes
 

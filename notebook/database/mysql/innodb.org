@@ -1,0 +1,85 @@
+#+TITLE:      InnoDB 引擎相关
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#innodb-锁][InnoDB 锁]]
+  - [[#共享锁和排它锁][共享锁和排它锁]]
+  - [[#意向锁][意向锁]]
+  - [[#记录锁][记录锁]]
+  - [[#间隙锁][间隙锁]]
+  - [[#next-key-lock][Next-Key Lock]]
+  - [[#插入意向锁][插入意向锁]]
+  - [[#参考链接][参考链接]]
+- [[#相关问题][相关问题]]
+  - [[#当表没有主键时-innodb-会怎样做][当表没有主键时 InnoDB 会怎样做]]
+- [[#footnotes][Footnotes]]
+
+* InnoDB 锁
+** 共享锁和排它锁
+   共享锁(Shared Locks：S 锁)与排他锁(Exclusive Locks：X 锁)，InnoDB 允许拿到 S 锁的事务读一行，允许拿到 X 锁的事务更新或删除一行。
+   
+   锁兼容矩阵为[fn:1]：
+   |----+----------+------------+------------+------------|
+   |    | X        | IX         | S          | IS         |
+   |----+----------+------------+------------+------------|
+   | X  | Conflict | Conflict   | Conflict   | Conflict   |
+   | IX | Conflict | Compatible | Conflict   | Compatible |
+   | S  | Conflict | Conflict   | Compatible | Compatible |
+   | IS | Conflict | Compatible | Compatible | Compatible |
+   |----+----------+------------+------------+------------|
+
+** 意向锁
+   无论是共享锁还是互斥锁其实都只是对某一个数据行进行加锁，InnoDB 支持多种粒度的锁，也就是行锁和表锁，为了支持多粒度锁定，InnoDB 存储引擎引入了意向锁（Intention Lock），意向锁就是一种表级锁。
+   
+   意向锁同样分为两类：
+   + 意向共享锁 IS：事务想要在获得表中某些记录的共享锁，需要在表上先加意向共享锁
+   + 意向排它锁 IX：事务想要在获得表中某些记录的互斥锁，需要在表上先加意向互斥锁
+
+   锁兼容矩阵为：
+   |----+----------+------------+------------+------------|
+   |    | X        | IX         | S          | IS         |
+   |----+----------+------------+------------+------------|
+   | X  | Conflict | Conflict   | Conflict   | Conflict   |
+   | IX | Conflict | Compatible | Conflict   | Compatible |
+   | S  | Conflict | Conflict   | Compatible | Compatible |
+   | IS | Conflict | Compatible | Compatible | Compatible |
+   |----+----------+------------+------------+------------|
+   
+   意向锁其实不会阻塞全表扫描之外的任何请求，它们的主要目的是为了表示是否有人请求锁定表中的某一行数据。
+
+   如果没有意向锁，当已经有人使用行锁对表中的某一行进行修改时，如果另外一个请求要对全表进行修改，那么就需要对所有的行是否被锁定进行扫描，在这种情况下，效率是非常低的，不过，在引入意向锁之后，
+   当有人使用行锁对表中的某一行进行修改之前，会先为表添加意向互斥锁（IX），再为行记录添加互斥锁（X），在这时如果有人尝试对全表进行修改就不需要判断表中的每一行数据是否被加锁了，
+   只需要通过等待意向互斥锁被释放就可以了。
+
+** 记录锁
+   记录锁（Record Lock）是加到索引记录上的锁，通过确切的索引进行查询时便可以通过记录锁锁定单行数据。
+
+** 间隙锁
+   记录锁是在存储引擎中最为常见的锁，除了记录锁之外，InnoDB 中还存在间隙锁（Gap Lock），间隙锁是对索引记录中的一段连续区域的锁。当使用类似 =SELECT * FROM users WHERE id BETWEEN 10 AND 20 FOR UPDATE= 的 SQL 语句时，
+   就会阻止其他事务向表中插入 =id = 15= 的记录，因为整个范围都被间隙锁锁定了。
+
+** Next-Key Lock
+   默认情况下，InnoDB 使用 Next-Key Lock 来锁定记录，在锁定目标索引范围的情况下，还会用间隙锁锁定后面一段范围，用于解决幻读的问题。
+
+   但当查询的索引含有唯一属性的时候，Next-Key Lock 会进行优化，将其降级为 Record Lock，即仅锁住索引本身，不是范围。
+
+** 插入意向锁
+   Gap Lock 中存在一种插入意向锁，在 Insert 操作时产生。在多事务同时写入不同数据至同一索引间隙的时候，并不需要等待其他事务完成，不会发生锁等待。
+
+   假设有一个记录索引包含键值 4 和 7，不同的事务分别插入 5 和 6，每个事务都会产生一个加在 4-7 之间的插入意向锁，获取在插入行上的排它锁，但是不会被互相锁住，因为数据行并不冲突。
+
+** 参考链接
+   + [[https://blog.csdn.net/bigtree_3721/article/details/73277419][MySQL insert into ... select 的锁情况 【转】_mysql,insert,select_大树叶 技术专栏-CSDN博客]]
+   + [[https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html][MySQL 5.7 Reference Manual - 14.7.1 InnoDB Locking]]
+   + [[https://draveness.me/mysql-innodb][『浅入浅出』MySQL 和 InnoDB]]
+
+* 相关问题
+** 当表没有主键时 InnoDB 会怎样做
+   InnoDB 底层存储数据时是通过聚集索引来保存数据的，即使没有显式创建主键，也会生成默认的聚集索引。
+
+   参考：
+   + [[https://blog.jcole.us/2013/05/02/how-does-innodb-behave-without-a-primary-key/][How does InnoDB behave without a Primary Key? – Jeremy Cole]]
+
+* Footnotes
+
+[fn:1] 横向是已经持有的锁，纵向是正在请求的锁 
+

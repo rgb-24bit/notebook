@@ -31,6 +31,7 @@
   + [查找 Search](notebook/algorithm/search.org)
   + [排序 Sort](notebook/algorithm/sort.org)
   + [数据结构](notebook/algorithm/struct.org)
+  + [数据结构 - 树](notebook/algorithm/tree.org)
   + [算法技巧](notebook/algorithm/trick.org)
 ## android
   + [Android - Activity](notebook/android/activity.org)
@@ -56,9 +57,12 @@
   + [编译原理 - 词法分析](notebook/compile/lex.org)
   + [编译原理 - 简单的语法制导翻译器](notebook/compile/simple-compile.org)
 ## database
+  + **mysql**
+    + [InnoDB 引擎相关](notebook/database/mysql/innodb.org)
+    + [MySQL](notebook/database/mysql/mysql.org)
+    + [相关问题](notebook/database/mysql/question.org)
   + [MongoDB](notebook/database/mongo.org)
   + [SQL Server](notebook/database/mssql.org)
-  + [MySQL](notebook/database/mysql.org)
   + [Others](notebook/database/others.org)
   + [通用问题集](notebook/database/question.org)
   + [Redis](notebook/database/redis.org)
