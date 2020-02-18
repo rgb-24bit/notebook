@@ -8,3 +8,5 @@
 * 约瑟夫环问题
   + [[https://www.cnblogs.com/ericyang/archive/2009/09/04/1560478.html][约瑟夫环问题两解 - EricYang - 博客园]]
 
+* 跳表
+  + [[https://zhuanlan.zhihu.com/p/53975333][漫画：什么是跳表？ - 知乎]]

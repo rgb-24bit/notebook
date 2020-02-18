@@ -34,7 +34,7 @@
     5) COUNT(*) 不忽略 NULL 值，COUNT(column) 忽略
     6) 在指定别名以包含某个聚集函数的结果时，不应该使用表中实际的列名
     7) 指定 DISTINCT 的方式：COUNT(DISTINCT column)
-
+       
   + 在使用 *视图* 时需要注意：
     1) 通常 DMBS 都禁止早视图中添加 ORDER BY 语句
     2) 不要把视图当做表使用，因为它的效率很低

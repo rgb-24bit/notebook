@@ -1,3 +1,16 @@
 #+TITLE:      Java Collections
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#hashmap][HashMap]]
+
+* HashMap
+  =HashMap= 是 Java 中常用的一个工具类，通过散列桶的方式实现，当单个桶的元素数量超过一定值的时候，该桶中的节点将变为 =TreeNode=, 
+  通过红黑树提升查询速度，当元素小于一定值时又会变回一般的节点，节省插入和删除的消耗。
+
+  在对 =HashMap= 进行遍历时，当其他线程对其进行了修改，那么 =modCount= 的值就会发生变化，使得在遍历时抛出 =ConcurrentModificationException= 异常。
+
+  内部确定键在那个桶时用的是 =&= 的方式而不是 =%= 的方式，且，1.8 中不会出现以前的版本中并发扩容时死循环的情况。
+
+  参考：
+  + [[https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html][HashMap (Java Platform SE 8 )]]  
+
