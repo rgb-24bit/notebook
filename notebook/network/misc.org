@@ -1,0 +1,34 @@
+#+TITLE:     Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#数据包嵌套][数据包嵌套]]
+- [[#mime][MIME]]
+
+* 数据包嵌套
+  各层的数据包的基本格式都是： ~head + data~, 分层嵌套：
+  [[file:image/net.png]]
+
+  详细教程： [[http://www.ruanyifeng.com/blog/2012/05/internet_protocol_suite_part_i.html][阮一峰 - 互联网协议入门]]
+
+* MIME
+  MIME(Multipurpose Internet Mail Extensions) 是一个互联网标准，它扩展了电子邮件标准，使其能够支持：
+  + 非 ASCII 字符文本
+  + 非文本格式附件
+  + 由多部分组成的消息体
+  + 包含非 ASCII 字符的头信息
+
+  常见的 MINE 类型有：
+  + text/plain - 纯文本
+  + text/html - HTML文档
+  + image/gif - GIF图像
+  + image/jpeg - JPEG图像
+  + image/png - PNG图像
+  + video/mpeg - MPEG动画
+  + application/pdf - PDF文档
+  + multipart/form-data - 同上，但主要用于表单提交时伴随文件上传的场合
+
+  #+BEGIN_QUOTE
+  浏览器通常使用 MIME 类型来确定如何处理 URL，因此 Web 服务器在响应头中添加正确的 MIME 类型非常重要。
+  如果配置不正确，浏览器可能会曲解文件内容，网站将无法正常工作，并且下载的文件也会被错误处理。
+  #+END_QUOTE
+
