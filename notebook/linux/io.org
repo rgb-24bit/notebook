@@ -18,5 +18,7 @@
   因此，在 I/O 并发量低的时候，多路 I/O 复用并不一定比多线程阻塞 I/O 有更好的表现。
 
   参考：
+  + [[https://www.cnblogs.com/crazymakercircle/p/10225159.html][10 分钟看懂， Java NIO 底层原理 - 疯狂创客圈 - 博客园]]
   + [[http://flyflypeng.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html][Linux I/O 模型详解]]
 
+    

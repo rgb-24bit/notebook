@@ -1,0 +1,13 @@
+#+TITLE:      Java NIO
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#学习资料][学习资料]]
+
+* 学习资料
+  Java NIO 和 Java IO 之间的抽象是存在差异的：
+  + Java NIO 将读写操作抽象为了 ~Channel~ 和 ~Buffer~ 两部分，通道负责文件的读写操作，缓冲区负责持有数据
+  + Java IO 只是简单的将读写操作抽象为了 ~InputStream~ 和 ~OutputStream~ 两个流，流底层的操作单位为字节
+
+  同时，Java NIO 提供了一些强大的新特性，比如文件锁定、Selector 等，详情可以参考下面这个非常好的教程：
+  + [[https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html][NIO 入门]]
+

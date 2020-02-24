@@ -59,24 +59,29 @@
    + [[https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/index.html][探索 ConcurrentHashMap 高并发性的实现机制]]
    + [[https://www.cnblogs.com/aspirant/p/8623864.html][ConcurrentHashMap原理分析（1.7与1.8）]]
 
-* NIO
-  + [[https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html][NIO 入门]]
-
-* Fork/Join
-  + [[https://www.ibm.com/developerworks/cn/java/j-lo-forkjoin/index.html][JDK 7 中的 Fork/Join 模式]]
-  + [[https://www.baeldung.com/java-fork-join][Guide to the Fork/Join Framework in Java | Baeldung]]
-
 * 网络请求
   + [[https://github.com/akullpp/awesome-java#http-clients][akullpp/awesome-java: A curated list of awesome frameworks, libraries and software for the Java programming language.]]
   + [[https://liudanking.com/sitelog/java-http-client-lib-comparison/][Java HTTP 组件库选型看这篇就够了 | 行思錄 | Travel Coder]]
   + [[https://juejin.im/post/5d6a0612f265da03b46c04c5][跨平台调用 Retrofit - 掘金]]
 
 * 并发
-  + [[https://www.jianshu.com/p/155260c8af6c][ReentrantLock的使用 - 简书]]
-  + [[https://juejin.im/post/5c33400c6fb9a049fe35503b][彻底弄懂 Java 线程池原理 - 掘金]]
-  + [[https://segmentfault.com/a/1190000008471362][浅谈Java并发编程系列（九）—— AQS结构及原理分析 - codershamo - SegmentFault 思否]]
-  + [[https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ThreadPoolExecutor.html][ThreadPoolExecutor (Java Platform SE 8 )]]
+  Java 中的并发设计不只是可以用于 Java 中，对于运行在操作系统中的并发程序来说，拥有共同的基础工具：
+  + 操作系统同步原语，如 Mutex 和 Semaphore
+  + 硬件中断/时钟，抢占式和协作式调度
+  + Volatile，可见性和避免重排序
+  + 硬件同步原语，如 CAS 操作
+  + 进程/线程，执行任务
+  + 临界资源
+  + 临界区
+  + ……
 
-* 语法
-  + [[https://www.jianshu.com/p/7954b61bc6ee][java 中 break continue label的使用 - 简书]]
+  面临着相同的问题：
+  + 原子性
+  + 有序性
+  + 可见性
+  + 临界区
+  + 死锁
+  + ……
+
+  这些是基本的材料，通过这些材料能够做出来什么东西，怎么做，就是并发编程需要考虑的问题。
 

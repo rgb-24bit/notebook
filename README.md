@@ -117,7 +117,9 @@
   + [Git 使用技巧](notebook/git/trick.org)
 ## java
   + **concurrent**
+    + [Java Fork/Join 框架](notebook/java/concurrent/fork-join.org)
     + [Java 并发操作](notebook/java/concurrent/java-concurrent.org)
+    + [Java Util Concurrent](notebook/java/concurrent/juc.org)
     + [相关问题](notebook/java/concurrent/question.org)
   + **database**
     + [数据库连接池](notebook/java/database/connection-pool.org)
@@ -168,6 +170,7 @@
   + [Java 常用第三方库](notebook/java/library.org)
   + [Java 日志框架](notebook/java/log.org)
   + [Java Misc](notebook/java/misc.org)
+  + [Java NIO](notebook/java/nio.org)
   + [Java 问题集](notebook/java/question.org)
   + [Java - 反射](notebook/java/reflection.org)
   + [Java - 流相关](notebook/java/stream.org)

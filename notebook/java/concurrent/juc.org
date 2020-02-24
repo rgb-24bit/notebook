@@ -1,0 +1,188 @@
+#+TITLE:      Java Util Concurrent
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#happends-before][happends-before]]
+- [[#monitor][monitor]]
+- [[#locks][Locks]]
+- [[#atmoic][atmoic]]
+- [[#concurrent][concurrent]]
+  - [[#executors][Executors]]
+  - [[#queues][Queues]]
+  - [[#synchronizers][Synchronizers]]
+  - [[#concurrent-collections][Concurrent Collections]]
+    - [[#concurrenthashmap][ConcurrentHashMap]]
+- [[#相关问题][相关问题]]
+  - [[#线程池大小设置][线程池大小设置]]
+  - [[#concurrenthashmap-大小必须是-2-的幂次的原因][ConcurrentHashMap 大小必须是 2 的幂次的原因]]
+
+* happends-before
+  可以用来判断当一个操作 A 在时间上先于 B 发生时，这个操作是否就真的是先发生的，规则如下：
+  + 程序次序规则：在 *一个线程* 内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作
+  + 锁定规则：一个 unLock 操作先行发生于后面对同一个锁的 lock 操作
+  + volatile 变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作
+  + 传递规则：如果操作 A 先行发生于操作 B，而操作 B 又先行发生于操作 C，则可以得出操作 A 先行发生于操作 C
+  + 线程启动规则：Thread 对象的 start() 方法先行发生于此线程的每个一个动作
+  + 线程中断规则：对线程 interrupt() 方法的调用先行发生于被中断线程的代码检测到中断事件的发生
+  + 线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过 Thread.join() 方法结束、Thread.isAlive() 的返回值手段检测到线程已经终止执行
+  + 对象终结规则：一个对象的初始化完成先行发生于他的 finalize() 方法的开始
+
+  但是，时间上的先后和先行发生原则 *并没有* 直接的关系。
+
+  详见：《Java 并发编程实战》 P377
+
+  =java.util.concurrent= 对这样规则进行了增强：
+  + 将对象放入并发集合的操作 happends-before 访问移除集合中的该对象的操作
+  + 将 Runnale 放入 Executor 的操作 happends-before Runnale 的执行，Callables 到 ExecutorService 同理
+  + 通过 Future 代表的异步计算任务的执行 happends-before Future.get() 的返回
+  + 持有 Lock、Semaphore 等同步器的线程，在释放前的操作都 happends-before 其他线程获取 *成功* 同一个同步器之后的操作
+  + 对于通过交换程序成功交换对象的每对线程，每个线程中的 exchange() 之前的动作发生在另一个线程中相应的 exchange() 之后的动作之前
+  + CyclicBarrier.await 和 Phaser.awaitAdvance 的调用 happends-before 屏障之后的操作，and actions performed by the barrier action happen-before actions subsequent to a successful return from the corresponding await in other threads.
+
+  参考：
+  + [[https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html#MemoryVisibility][java.util.concurrent (Java Platform SE 8 )]]
+
+* monitor
+  # 问题：Object 和 ObjectMonitor 之间的关联关系到底是怎样的，重量级锁时指针指向的是 Object 还是 ObjectMonitor，等待后续阅读源码好了，路径 - share/native/...
+  # 偏向锁和轻量级锁似乎没有用到 ObjectMonitor，而是由 InterpreterRuntime 调用 ObjectSynchronizer::fast_enter 和 ObjectSynchronizer::slow_enter 对对象头进行操作完成加锁操作
+  # https://www.jianshu.com/p/c5058b6fe8e5
+
+  重量级锁由 ObjectMonitor 实现，ObjectMonitor 对象中有两个队列 WaitSet 和 EntrySet，用来保存 ObjectWaiter 对象列表，同时存在一个 Owner 指针指向拥有该 ObjectMonitor 的线程。
+
+  调用 Object.wait 方法时会释放锁并将该线程对应的 ObjectWaiter 放入 WaitSet，调用 notify 和 notifyAll 时，会从 WaitSet 随机选择一个或所有 ObjectWaiter 进行自选操作获取锁，
+  或者放入 EntrySet，但是不会释放锁。
+
+  #+HTML: <img src="https://upload-images.jianshu.io/upload_images/2184951-9723bfce3c71c591.png?imageMogr2/auto-orient/strip|imageView2/2/w/533/format/webp">
+
+  参考：
+  + [[https://www.jianshu.com/p/f4454164c017][JVM 源码分析之 Object.wait/notify 实现 - 简书]]
+
+* Locks
+  结构：
+  #+BEGIN_SRC plantuml
+    @startuml
+
+    Interface Lock {
+      + lock()
+      + lockInterruptibly()
+      + newCondition() : Condition
+      + tryLock()
+      + tryLock(long time, TimeUnit unit)
+      + unlock()
+    }
+
+    Interface ReadWriteLock {
+      + readLock() : Lock
+      + writeLock() : Lock
+    }
+
+    Interface Condition {
+      + await()
+      + await(long time, TimeUnit unit) : boolean
+      + awaitNanos(long nanosTimeout) : long
+      + awaitUninterruptibly()
+      + awaitUntil(Date deadline) : boolean
+      + signal()
+      + signalAll()
+    }
+
+    Class ReentrantLock
+    Class ReentrantReadWriteLock
+
+    Lock <|-- ReentrantLock 
+    ReadWriteLock <|-- ReentrantReadWriteLock
+
+    @enduml
+  #+END_SRC
+
+  JUC Locks 提供的三大件：
+  + ReentrantLock(Lock) - 可重入锁，类似于内置锁，但是更加灵活
+  + ReentrantReadWriteLock(ReadWriteLock) - 读写锁，读读不互斥，读写互斥，写写互斥，支持锁降级：获取写锁后在获取读锁，不支持锁升级：获取读锁后获取写锁。
+  + Condition - 条件队列，对应 Object 的 wait 和 notify 方法使用
+
+  #+HTML: <img src="https://i.loli.net/2020/02/24/d35MZrENKqvhj6T.png">
+
+  JUC Locks 提供的基础工具：
+  + AbstractOwnableSynchronizer - 线程专有的同步，AQS 继承了它
+  + AbstractQueuedSynchronizer - 大名鼎鼎的 AQS，提供一个框架，用于实现依赖于先进先出（FIFO）等待队列的阻塞锁和相关的同步器，其基本思想和 ObjectMonitor 是一样的：
+    + 获取锁时根据 state 的值判断是否能够获取到锁，获取不到的话就将当前线程对应的 Waiter 节点放入等待队列，然后通过循环的 CAS 操作尝试获取锁，一定时间获取不到在将线程挂起
+
+    参考：
+    + [[https://www.cnblogs.com/leesf456/p/5350186.html][JDK1.8 源码分析之 AbstractQueuedSynchronizer - leesf - 博客园]]
+    + [[https://juejin.im/post/5c3ac10351882524bb0b337f][AbstractQueuedSynchronizer 超详细原理解析 - 掘金]]
+
+  官方文档：
+  + [[https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/AbstractQueuedSynchronizer.html][AbstractQueuedSynchronizer (Java Platform SE 8 )]]
+  + [[https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/package-summary.html][java.util.concurrent.locks (Java Platform SE 8 )]]
+
+* atmoic
+  JUC Atmoic 相对来说要直接很多，大致就是通过 CAS 操作来更新旧值之类的……
+
+  参考：
+  + [[https://juejin.im/post/5bd93e91f265da396269d32f][并发编程面试必备：JUC 中的 Atomic 原子类总结 - 掘金]]
+
+* concurrent
+** Executors
+   # TODO Fork Join
+   + [[https://rgb-24bit.github.io/blog/2020/java-executor-framework.html][Java 并发之 Executor 框架]]
+
+** Queues
+   JUC 提供了线程安全的无阻塞队列 ConcurrentLinkedQueue 和 ConcurrentLinkedDeque，但也提供了五种阻塞队列的实现：
+   |-----------------------+----------------------------------|
+   | BlockingQueue         | 特点                             |
+   |-----------------------+----------------------------------|
+   | ArrayBlockingQueue    | 基于数组实现，有界队列           |
+   | LinkedBlockingQueue   | 基于链表实现，可以有界也可以无界 |
+   | SynchronousQueue      | 不保存元素                       |
+   | PriorityBlockingQueue | 支持优先级排序的无界阻塞队列     |
+   | DelayQueue            | 使用优先级队列实现的无界阻塞队列 |
+   |-----------------------+----------------------------------|
+
+** Synchronizers
+   + [[https://segmentfault.com/a/1190000015918459][Semaphore - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   + [[https://segmentfault.com/a/1190000015886497][CountDownLatch - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   + [[https://segmentfault.com/a/1190000015888316][CyclicBarrier - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   + [[https://segmentfault.com/a/1190000015979879][Phaser - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   + [[https://segmentfault.com/a/1190000015963932][Exchanger - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+
+** Concurrent Collections
+*** ConcurrentHashMap
+    ConcurrentHashMap 中当键不是 Comparable 时，通过如下方式比较节点大小：
+    #+BEGIN_SRC java
+      static int tieBreakOrder(Object a, Object b) {
+        int d;
+        if (a == null || b == null ||
+            (d = a.getClass().getName().
+             compareTo(b.getClass().getName())) == 0)
+          d = (System.identityHashCode(a) <= System.identityHashCode(b) ?
+               -1 : 1);
+        return d;
+      }
+    #+END_SRC
+
+    + System.identityHashCode - 获取通过对象内存地址计算出的 hash 值
+
+    ConcurrentHashMap 的 Get 操作：
+    1. 首先根据 key 的 hash 值计算映射到 table 的哪个桶 table[i]
+    2. 如果 table[i] 的 key 和待查找 key 相同，那直接返回 - 由于 Key 是 final 且 val 是 volatile 的，因此，能够保证读操作 happends-before 写操作
+    3. 如果 table[i] 对应的结点是特殊结点，则通过 find 方法查找
+    4. 如果 table[i] 对应的结点是普通链表结点，则按链表方式查找
+
+    当节点为 TreeBin 是，用了一种类似读写锁的方式，当有线程持有写锁时，如果读线程需要查找，不会像传统的读写锁那样阻塞等待，而是转而以链表的形式进行查找，
+    否则添加读锁。
+
+    ConcurrentHashMap 的 Put 操作：
+    1. 首先根据 key 计算 hash 值，然后通过 hash 值与 table 容量进行运算，计算得到 key 所映射的索引,也就是对应到 table 中桶的位置 i
+    2. 当 table[i] 对应的桶为空，直接 CAS 操作占用桶 table[i] 即可
+    3. 出现 hash 冲突，当 table[i] 的结点类型为 Node 时，就会将新结点以尾插法的形式插入链表的尾部，当 table[i] 的结点类型为 TreeBin 时，就会将新结点通过红黑树的插入方式插入
+
+* 相关问题
+** 线程池大小设置
+   + 线程饥饿死锁 - 在 Executor 中一个任务提交另一个任务到 Executor 到同一个 Executor 就可能导致死锁，特别是在单线程的 Executor 中
+   + 线程池大小设置：
+     1. CPU 密集型可以设置为：处理器数量 + 1
+     2. I/O 密集型可以设置为：处理器数量 * 处理器利用率 * (1 + 等待时间/计算时间)
+
+** ConcurrentHashMap 大小必须是 2 的幂次的原因
+   这是因为索引计算方式为 ~i = (n - 1) & hash~, 当 table.length 为 2 的幂次时，(table.length - 1) 的二进制形式的特点是除最高位外全部是 1，
+   配合这种索引计算方式可以实现 key 在 table 中的均匀分布，减少 hash 冲突。
+

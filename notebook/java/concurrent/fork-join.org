@@ -1,0 +1,25 @@
+#+TITLE:      Java Fork/Join 框架
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#学习资料][学习资料]]
+
+* 学习资料
+  Java Fork/Join 框架的思想还是很简单的，就是将任务分解为多个子任务，将子任务交给不同的 ~Worker~ 来完成，然后将所有子任务的结果组合作为最终结果：
+  #+BEGIN_SRC java
+  #+END_SRC
+  #+BEGIN_EXAMPLE
+    Result solve(Problem problem) {
+      if (problem is small)
+          directly solve problem
+      else {
+          split problem into independent parts
+          fork new subtasks to solve each part
+          join all subtasks
+          compose result from subresults
+      }
+    }
+  #+END_EXAMPLE
+
+  Doug Lea 大佬本人写的论文：
+  + http://gee.cs.oswego.edu/dl/papers/fj.pdf
+

@@ -1,0 +1,3 @@
+* 基本知识
+  + [[https://www.cnblogs.com/lemaden/p/10134472.html][操作系统-并发控制原理及其实现 - lemaden - 博客园]]
+
