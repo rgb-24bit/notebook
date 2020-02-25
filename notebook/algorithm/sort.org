@@ -5,6 +5,7 @@
 - [[#归并排序][归并排序]]
 - [[#相关问题][相关问题]]
   - [[#为什么快速排序要优于归并排序][为什么快速排序要优于归并排序]]
+  - [[#冒泡排序和选择排序的区别][冒泡排序和选择排序的区别]]
 
 * 经典排序算法
   十大经典排序算法复杂度：
@@ -56,4 +57,7 @@
 
    参考链接：
    + [[https://stackoverflow.com/questions/70402/why-is-quicksort-better-than-mergesort][algorithm - Why is quicksort better than mergesort? - Stack Overflow]]
+
+** 冒泡排序和选择排序的区别
+   同样数据的情况下，两种算法的循环次数是一样的，但选择排序只有 0 到 1 次交换，而冒泡排序有 0 到 n 次交换。
 

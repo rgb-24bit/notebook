@@ -85,3 +85,7 @@
 
   这些是基本的材料，通过这些材料能够做出来什么东西，怎么做，就是并发编程需要考虑的问题。
 
+* Object
+  + [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--][hashcode]]
+  + [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals]]
+

@@ -34,3 +34,6 @@
   参考：
   + [[https://www.cnblogs.com/rjzheng/p/9041659.html][分布式之数据库和缓存双写一致性方案解析 - 孤独烟 - 博客园]]
 
+  其他：
+  + [[https://blog.csdn.net/xiangwanpeng/article/details/79725692][缓存穿透，缓存失效（缓存雪崩）和缓存并发_数据库_Alan_Xiang的博客-CSDN博客]]
+
