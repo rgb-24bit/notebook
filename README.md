@@ -224,7 +224,7 @@
 ## network
   + [DHCP · DNS](notebook/network/dhcp-dns.org)
   + [计算机网络 - 谢希仁 - 五层模型](notebook/network/five-layer-mode.org)
-  + [HTTP Protocol](notebook/network/http.org)
+  + [HTTP/HTTPS](notebook/network/http-https.org)
   + [HTTPS](notebook/network/https.org)
   + [Misc](notebook/network/misc.org)
   + [MQTT](notebook/network/mqtt.org)

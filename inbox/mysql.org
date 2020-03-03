@@ -6,4 +6,28 @@
    + [[https://www.cnblogs.com/youyoui/p/7851007.html][MySQL 分页查询优化 - 悠悠i - 博客园]]
    + [[https://www.jianshu.com/p/6446c0118427][数据库索引创建与优化 - 简书]]
 
-     
+* 使用技巧
+  + [[https://www.jianshu.com/p/4aa113f7a027][MYSQL \G 用法：查询结果按列打印 - 简书]]
+
+* SQL
+  + [[https://stackoverflow.com/questions/11366006/mysql-on-vs-using][join - MySQL ON vs USING? - Stack Overflow]]
+  + [[https://blog.csdn.net/J080624/article/details/72910548][MySQL - exists与in及any的用法_数据库_小小默：进无止境-CSDN博客]]
+
+* 分区
+  MySQL 中可以在服务器层确定数据在那个分区，减少了 I/O 操作的次数，同时可以通过过滤分区的方式提高查询效率。
+
+* 回表查询
+  + [[https://www.cnblogs.com/myseries/p/11265849.html][MySQL优化：如何避免回表查询？什么是索引覆盖？ (转) - myseries - 博客园]]
+  + [[https://tech.meituan.com/2014/06/30/mysql-index.html][MySQL 索引原理及慢查询优化 - 美团技术团队]] - 磁盘 IO 与预读 - 图
+
+* Binlog
+  + [[https://laijianfeng.org/2019/03/MySQL-Binlog-%E4%BB%8B%E7%BB%8D/][MySQL Binlog 介绍 | 小旋锋]]
+
+* VARCHAR 碎片
+  插入为了性能，都是直接添加到末尾。否则需要维护空闲列表。
+
+  修改是由于有些变长字段修改会导致重新分配，比如varchar等字段，修改后造成原空间塞不下引起重新分配。所以可以使用char的定长来处理
+
+  变长，定长指存储空间变不变。varchar在存储时候是按照实际大小存的，不会留空间，但是char会留空间来操作。如果字段变化引起数据在原空间放不下，会插入到末尾去。那么之前的地方相当于删除了，就变成碎片了。
+
+

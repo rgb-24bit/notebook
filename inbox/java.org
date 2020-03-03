@@ -84,8 +84,17 @@
   + ……
 
   这些是基本的材料，通过这些材料能够做出来什么东西，怎么做，就是并发编程需要考虑的问题。
+  
+  + WAIT:
+    1. ObjectMonitor 源码阅读，它和 Object 之间的关系
+    2. ASQ 源码阅读
+       #+BEGIN_QUOTE
+       This class is designed to be a useful basis for most kinds of synchronizers that rely on a _single atomic int value_ to represent state
+       #+END_QUOTE
 
 * Object
   + [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--][hashcode]]
   + [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals]]
 
+* maven
+  + [[https://www.cnblogs.com/liaojie970/p/8806843.html][Maven parent.relativePath - 山高我为峰 - 博客园]]

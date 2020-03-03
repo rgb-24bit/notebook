@@ -26,5 +26,8 @@
   + [[https://en.wikipedia.org/wiki/Type_signature][Type signature - Wikipedia]]
 
 * 概念
+  + [[https://zhuanlan.zhihu.com/p/43216852][Iass、Pass、SasS三种云服务区别 - 知乎]]
   + 裸指针
 
+* Gnuplot
+  + [[https://www.ibm.com/developerworks/cn/linux/l-gnuplot/][gnuplot 让您的数据可视化]]

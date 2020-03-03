@@ -83,7 +83,8 @@
 * JSON
   fastjson - JSON.parse
 
-
 * AOP
   动态代理是使用 Proxy 还是 CGLIB 需要考虑的应该是需要注入的 Bean 的类型，如果要注入的是类的话，就只有 CGLIB 了，如果是 Interface 和 InterfaceImpl 的形式，还可以用 Proxy
 
+* Spring Cloud
+  + [[https://www.cnblogs.com/linkstar/p/9055900.html][SpringCloud各个组件说明 - LinkinStar - 博客园]]
