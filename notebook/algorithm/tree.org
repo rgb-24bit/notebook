@@ -1,14 +1,15 @@
-#+TITLE:      数据结构 - 树
+#+TITLE:      Tree
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#二叉查找树-binary-search-tree][二叉查找树 (Binary Search Tree)]]
   - [[#获取二叉树的高度][获取二叉树的高度]]
   - [[#删除二叉树的节点][删除二叉树的节点]]
-- [[#avl-树][AVL 树]]
 - [[#b-树和-b-树][B 树和 B+ 树]]
   - [[#b-树][B 树]]
   - [[#b-树-1][B+ 树]]
   - [[#理解][理解]]
+- [[#树的旋转][树的旋转]]
+- [[#红黑树][红黑树]]
 - [[#others][Others]]
   - [[#bk-tree][BK-Tree]]
 - [[#footnotes][Footnotes]]
@@ -44,12 +45,6 @@
    + 删除节点后，用该节点的后继节点（比删除节点大的最小节点）来替换原有节点，也就是找到要删除节点的最左子节点
 
    当然，如果是普通的二叉树，随便找一个节点来替换也是可以的。
-
-* AVL 树
-  AVL 树的存在感感觉不是很强烈，但是我们可以通过 AVL 树学习到一个重要的操作：树的旋转。
-
-  参考：
-  + [[https://www.cnblogs.com/skywang12345/p/3576969.html][AVL 树之图文解析和 C 语言的实现 - 如果天空不死 - 博客园]]
 
 * B 树和 B+ 树
 ** B 树
@@ -122,6 +117,33 @@
 
    参考：
    + [[https://blog.csdn.net/v_JULY_v/article/details/6530142][从 B 树、B+ 树、B* 树谈到 R 树_磁盘,数据结构,存储_结构之法 算法之道-CSDN博客]]
+
+* 树的旋转
+  树旋转是对二叉树的一种操作，不影响元素的顺序，但会改变树的结构，将一个节点上移、一个节点下移。树旋转会改变树的形状，
+  因此常被用来将较小的子树下移、较大的子树上移，从而降低树的高度、提升许多树操作的效率。
+
+  #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Tree_rotation_animation_250x250.gif">
+
+  参考：
+  + [[https://zh.wikipedia.org/wiki/%E6%A0%91%E6%97%8B%E8%BD%AC][树旋转 - 维基百科，自由的百科全书]]
+
+* 红黑树
+  红黑树是每个节点都带有颜色属性的二叉查找树，颜色为红色或黑色。在二叉查找树强制一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求：
+  1. 每个节点是红色或黑色
+  2. 根是黑色
+  3. 所有叶子都是黑色（叶子是 NIL 节点）
+  4. 每个红色节点必须有两个黑色的子节点
+  5. 从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点
+
+  下面是一个具体的红黑树的图例：
+  #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Red-black_tree_example.svg/900px-Red-black_tree_example.svg.png">
+
+  感觉除了二叉树以外，其他树的定义都很复杂，或者说抽象，你不能通过其定义就直观的感受到它是怎么回事，而是需要结合相应的插入、删除、查找操作来理解。
+
+  参考链接：
+  + [[https://www.cnblogs.com/skywang12345/p/3245399.html][红黑树(一)之 原理和算法详细介绍 - 如果天空不死 - 博客园]]
+  + [[https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91][红黑树 - 维基百科，自由的百科全书]]
+  + [[https://www.jianshu.com/p/e136ec79235c][30 张图带你彻底理解红黑树 - 简书]]
 
 * Others
 ** BK-Tree

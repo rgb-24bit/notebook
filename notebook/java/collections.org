@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#hashmap][HashMap]]
+- [[#旧集合][旧集合]]
 
 * HashMap
   =HashMap= 是 Java 中常用的一个工具类，通过散列桶的方式实现，当单个桶的元素数量超过一定值的时候，该桶中的节点将变为 =TreeNode=, 
@@ -13,4 +14,7 @@
 
   参考：
   + [[https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html][HashMap (Java Platform SE 8 )]]  
+
+* 旧集合
+  HashTable 和 Vector 基本上就是用 synchronized 关键字包了一层来实现并发安全……
 

@@ -6,6 +6,7 @@
 - [[#常用容器][常用容器]]
   - [[#mysql][mysql]]
   - [[#redis][redis]]
+  - [[#mongodb][mongodb]]
   - [[#elasticsearch][elasticsearch]]
 - [[#相关问题][相关问题]]
   - [[#怎样配置-docker-的镜像加速器][怎样配置 Docker 的镜像加速器]]
@@ -55,6 +56,17 @@
      docker exec -it redis bash
    #+end_src
 
+** mongodb
+   创建 MongoDB 容器，使用最新镜像：
+   #+begin_src bash
+     docker run --name mongo -p 27017:27017 -d mongo --auth
+   #+end_src
+   
+   进入容器：
+   #+begin_src bash
+     docker exec -it mongo mongo admin
+   #+end_src
+   
 ** elasticsearch
    创建 elasticsearch 容器：
    #+begin_src bash

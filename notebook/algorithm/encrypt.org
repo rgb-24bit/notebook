@@ -1,0 +1,30 @@
+#+TITLE:      加密算法
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#非对称加密算法][非对称加密算法]]
+  - [[#rsa-算法][RSA 算法]]
+- [[#对称加密算法][对称加密算法]]
+  - [[#aes-算法][AES 算法]]
+- [[#相关问题][相关问题]]
+  - [[#对称加密和非对称加密的区别][对称加密和非对称加密的区别]]
+
+* 非对称加密算法
+** RSA 算法
+   *RSA 加密算法* 是一种非对称加密算法，可靠性来源于对极大整数做因数分解的难度，可以参考：
+   + [[http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html][阮一峰 - RSA 算法原理一]]
+   + [[http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html][阮一峰 - RSA 算法原理二]]
+
+* 对称加密算法
+** AES 算法
+   高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称 Rijndael 加密法，是美国联邦政府采用的一种区块加密标准。
+
+   参考链接：
+   + [[https://www.cnblogs.com/luop/p/4334160.html][密码算法详解——AES - ReadingLover - 博客园]]
+   + [[https://github.com/matt-wu/AES][matt-wu/AES: Understanding AES & Rijndael]]
+
+* 相关问题
+** 对称加密和非对称加密的区别
+   最直接的区别：对称加密加解密使用同一个秘钥，而非对称加密加解密使用不同的秘钥。
+
+   同时，对称加密相对来说性能要更好一些，但是安全性也相对较弱。
+

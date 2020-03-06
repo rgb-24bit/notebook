@@ -1,4 +1,4 @@
-#+TITLE:      Others
+#+TITLE:      Misc
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#base64-编码][Base64 编码]]
@@ -6,6 +6,7 @@
 - [[#bitmap][BitMap]]
 - [[#bloomfilter][BloomFilter]]
 - [[#滑动窗口算法][滑动窗口算法]]
+- [[#循环数组索引][循环数组索引]]
 
 * Base64 编码
   *Base64* 是一种基于 64 个可打印字符来表示二进制数据的表示方法。由于 2 ** 6 = 64，所以每 6 个比特为一个单元，对应某个可打印字符。
@@ -224,4 +225,12 @@
   可以参考：
   + [[https://www.zhihu.com/question/314669016/answer/620247024][什么是「滑动窗口算法」（sliding window algorithm），有哪些应用场景？ - 王天笑的回答 - 知乎]]
   + [[https://note.youdao.com/ynoteshare1/index.html?id=270d3cd80b048c1074dcfa5b14ece4b4&type=note][LeetCode笔记-Java版-专题篇-滑动窗口]]
+
+* 循环数组索引
+  借助循环数组索引可以避免边界值的判断问题：
+  #+BEGIN_SRC js
+    function get(arr, x, offset) {
+      return arr[(arr.length + x + offset) % arr.length];
+    }
+  #+END_SRC
 
