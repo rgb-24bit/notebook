@@ -1,4 +1,4 @@
-#+TITLE:      Java Util Concurrent
+#+TITLE:      J.U.C
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#happends-before][happends-before]]

@@ -7,6 +7,7 @@
 - [[#获取区间交集和并集][获取区间交集和并集]]
 - [[#整数的向上与向下取整][整数的向上与向下取整]]
 - [[#全排列][全排列]]
+- [[#进制转换][进制转换]]
 
 * 三点共线问题
   三点共线问题可以通过判断三个点围成的三角形的面积来判断，其中使用的三角形面积公式为：
@@ -61,4 +62,24 @@
   全排列问题可以用回溯算法解决，参考：
   + [[https://leetcode-cn.com/problems/permutations/solution/quan-pai-lie-by-leetcode/][全排列 - 全排列 - 力扣（LeetCode）]]
   + [[https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/][回溯搜索 + 剪枝 - 全排列 II - 力扣（LeetCode）]]
+
+* 进制转换
+  将 ~N~ 进制数转换为 ~10~ 进制数，每进一位乘一次进制：
+  #+begin_src python
+    def to10(num: str, tab: str) -> int:
+        res, base = 0, len(tab)
+        for n in num:
+            res = res * base + tab.find(n)
+        return res
+  #+end_src
+
+  将 ~10~ 进制数转换为 ~N~ 进制数，每次求余得到低位数字：
+  #+begin_src python
+    def ton(num: int, tab: str) -> int:
+        res, base = '', len(tab)
+        while num:
+            res = tab[num % base] + res
+            num = num // base
+        return res
+  #+end_src
 

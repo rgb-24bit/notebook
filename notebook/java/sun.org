@@ -1,0 +1,25 @@
+#+TITLE:      Java Sun Package
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#简述][简述]]
+- [[#unsafe][Unsafe]]
+
+* 简述
+  Java Sun 包位于 ~rt.jar~ 下，提供了很多很有用，但是可能用不了的工具类，虽然平时用不到，但是，阅读 JDK 源码时，到是经常出现它们的身影……
+
+* Unsafe
+  ~Unsafe~ 类在 ~JUC~ 下的使用十分频繁，可以通过 ~getUnsafe~ 方法获取实例：
+  #+begin_src java
+    @CallerSensitive
+    public static Unsafe getUnsafe() {
+      Class var0 = Reflection.getCallerClass();
+      if (!VM.isSystemDomainLoader(var0.getClassLoader())) {
+        throw new SecurityException("Unsafe");
+      } else {
+        return theUnsafe;
+      }
+    }
+  #+end_src
+
+  但是，很遗憾的就是，该方法限制了调用类的类加载器为 ~SystemDomain~ 才行，也就是说，无法通过直接这个方法来获取 ~Unsafe~ 实例。
+
