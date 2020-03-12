@@ -1,0 +1,37 @@
+#+TITLE:      JVM Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#jvm-调优常用参数配置][JVM 调优常用参数配置]]
+
+* JVM 调优常用参数配置
+  + 堆大小设置置：
+    #+begin_example
+      -Xms              : 初始堆大小
+      -Xmx              : 最大堆大小
+      -XX:NewSize       : 设置年轻代大小
+      -XX:newRatio      : 设置年轻代和年老代的比值
+      -XX:SurvivorRatio : 年轻代中 Eden 区与两个 Survivor 区的比值
+      -XX:MaxPermSize   : 设置永久代大小
+    #+end_example
+  + 垃圾收集器设置：
+    #+begin_example
+      -XX:+UseSerialGC        : 设置串行收集器
+      -XX:+UseParallelGC      : 设置并行收集器
+      -XX:+UseParalledlOldGC  : 设置并行年老代收集器
+      -XX:+UseConcMarkSweepGC : 设置并发收集器
+    #+end_example
+  + 垃圾回收统计信息：
+    #+begin_example
+      -XX:+PrintGC 
+      -XX:+PrintGCDetails
+      -XX:+PrintGCTimeStamps
+      -Xloggc:filename
+    #+end_example
+  + 并行收集器设置：
+    #+begin_example
+      -XX:ParallelGCThreads   : 设置并行收集器收集时使用的线程数
+      -XX:MaxGCPauseMillis    : 设置并行收集最大的暂停时间（如果到这个时间了，垃圾回收器依然没有回收完，也会停止回收）
+      -XX:GCTimeRatio         : 设置垃圾回收时间占程序运行时间的百分比，公式 1 / (1 + n)
+      -XX:+CMSIncrementalMode : 设置为增量模式，适用于单 CPU 情况
+    #+end_example
+

@@ -14,6 +14,8 @@
 - [[#serialization][Serialization]]
 - [[#iaaspaassaas][IaaS，PaaS，SaaS]]
 - [[#指针和句柄][指针和句柄]]
+- [[#静态类型动态类型弱类型强类型][静态类型、动态类型、弱类型、强类型]]
+- [[#编译运行解释运行][编译运行、解释运行]]
 
 * DevOps
   DevOps 是一个完整的面向IT运维的工作流，以 IT 自动化以及持续集成（CI）、持续部署（CD）为基础，来优化程式开发、测试、系统运维等所有环节。
@@ -103,4 +105,31 @@
   参考：
   + [[https://en.wikipedia.org/wiki/Handle_(computing)][Handle (computing) - Wikipedia]]
   + [[https://www.jianshu.com/p/ce6d7a5eea0a][指针与句柄的区别 - 简书]]
+
+* 静态类型、动态类型、弱类型、强类型
+  Program Errors:
+  + trapped errors: 导致程序终止执行，如除 0，Java 中数组越界访问
+  + untrapped errors: 出错后继续执行，但可能出现任意行为。如 C 里的缓冲区溢出、Jump 到错误地址
+
+  Forbidden Behaviours: 语言设计时，可以定义一组 forbidden behaviors。它必须包括所有 untrapped errors，但可能包含 trapped errors。
+  
+  Well behaved、ill behaved:
+  + well behaved: 如果程序执行不可能出现 forbidden behaviors，则为 well behaved
+  + ill behaved: 否则为 ill behaved
+
+  强、弱类型：
+  + 强类型 strongly typed: 如果一种语言的所有程序都是 well behaved —— 即不可能出现 forbidden behaviors，那么该语言为 strongly typed
+  + 弱类型 weakly typed: 否则为 weakly typed。比如 C 语言的缓冲区溢出，属于 untrapped errors，即属于 forbidden behaviors，故 C 是弱类型
+
+  动态、静态类型：
+  + 静态类型 statically: 如果在编译时拒绝 ill behaved 程序，则是 statically typed
+  + 动态类型 dynamiclly: 如果在运行时拒绝 ill behaviors，则是 dynamiclly typed
+
+  Python 是强类型、动态类型的语言。
+
+* 编译运行、解释运行
+  无论是编译执行还是解释执行往往都需要经过词法分析、语法分析的步骤生成抽象语法树，往往，在生成抽象语法树后，解释运行和编译运行就出现了区别：
+  + 编译运行通常会将抽象语法树优化生成中间代码，然后将中间代码转译为目标平台机器码后执行，虽然还是 CPU 在解释执行机器码
+  + 解释运行通常会将抽象语法树翻译为字节码，然后由解释器、虚拟机执行，虚拟机或解释器可以选择通过 JIT 将中间语言进一步编译为机器码，
+    但也可以选择直接解释执行 AST
 

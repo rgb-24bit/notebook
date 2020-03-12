@@ -135,6 +135,7 @@
     + [Servlet](notebook/java/javaee/servlet.org)
   + **jvm**
     + [Java 虚拟机结构](notebook/java/jvm/jvm.org)
+    + [JVM Misc](notebook/java/jvm/misc.org)
   + **mq**
     + [相关问题](notebook/java/mq/question.org)
     + [RocketMQ](notebook/java/mq/rocketmq.org)
