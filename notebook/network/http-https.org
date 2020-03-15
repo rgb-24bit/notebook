@@ -136,8 +136,11 @@
    在使用长连接的情况下，当一个网页打开完成后，客户端和服务器之间用于传输 HTTP 数据的 TCP 连接不会关闭，客户端再次访问这个服务器时，
    会继续使用这一条已经建立的连接。Keep-Alive 不会永久保持连接，它有一个保持时间，可以在不同的服务器软件中设定这个时间。
 
+   客户端也可以通过 ~Connection~ 头的 ~timeout~ 参数设置超时时间。
+
    参考：
    + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x][HTTP/1.x 的连接管理 - HTTP | MDN]]
+   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Keep-Alive][Keep-Alive - HTTP | MDN]]
 
 ** HTTP 请求头和响应头
    HTTP 消息头支持自定义，自定义的专用消息头一般会添加 ~X-~ 前缀，常用的 HTTP 请求头和响应头可以参考：
@@ -249,7 +252,6 @@
     + [[http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html][数字签名是什么？ - 阮一峰的网络日志]]
     + [[https://rootdeep.github.io/posts/ssl/#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6][理解数字证书及制作过程]]
    
-  
 * 相关问题
 ** HTTP Header 大小写敏感吗
    HTTP Header 大小写不敏感，参考：

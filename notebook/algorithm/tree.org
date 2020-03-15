@@ -10,6 +10,7 @@
   - [[#理解][理解]]
 - [[#树的旋转][树的旋转]]
 - [[#红黑树][红黑树]]
+- [[#霍夫曼编码][霍夫曼编码]]
 - [[#others][Others]]
   - [[#bk-tree][BK-Tree]]
 - [[#footnotes][Footnotes]]
@@ -92,7 +93,8 @@
 ** B+ 树
    理解了 B 树以后，B+ 树的理解就简单多了，B+ 树整体结构和 B 树类似，但是进行了一些修改：
    1. B+ 树包含 2 种类型的结点：内部结点（也称索引结点）和叶子结点，索引节点只保存关键字值，所有数据都保存在叶子节点中
-   2. 每个叶子结点都存有相邻叶子结点的指针，叶子结点本身依关键字的大小自小而大顺序链接，这样一来，所有叶子节点也构成了一个链表
+   2. 每个叶子结点都存有相邻叶子结点的指针，叶子结点本身依关键字的大小自小而大顺序链接，这样一来，所有叶子节点也构成了一个链表，
+      这个链表根据需要可以是单链表，也可以是双向链表
 
    对于 B+ 树的操作影响最大的应该是索引节点不保存值这一特性，这使得插入和删除操作时，需要不断维护内部索引节点的值以匹配叶子节点，详情可参考：
    + [[https://www.cnblogs.com/nullzx/p/8729425.html][B 树和 B+ 树的插入、删除图文详解 - nullzx - 博客园]]
@@ -122,6 +124,22 @@
   树旋转是对二叉树的一种操作，不影响元素的顺序，但会改变树的结构，将一个节点上移、一个节点下移。树旋转会改变树的形状，
   因此常被用来将较小的子树下移、较大的子树上移，从而降低树的高度、提升许多树操作的效率。
 
+  #+begin_src C
+    TreeNode* rotate_left(TreeNode* node) {
+      TreeNode* right = node->right;
+      node->right = right->left;
+      right->left = node;
+      return right;
+    }
+
+    TreeNode* rotate_right(TreeNode* node) {
+      TreeNode* left = node->left;
+      node->left = left->right;
+      left->right = node;
+      return left;
+    }
+  #+end_src
+
   #+HTML: <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Tree_rotation_animation_250x250.gif">
 
   参考：
@@ -144,6 +162,83 @@
   + [[https://www.cnblogs.com/skywang12345/p/3245399.html][红黑树(一)之 原理和算法详细介绍 - 如果天空不死 - 博客园]]
   + [[https://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91][红黑树 - 维基百科，自由的百科全书]]
   + [[https://www.jianshu.com/p/e136ec79235c][30 张图带你彻底理解红黑树 - 简书]]
+
+* 霍夫曼编码
+  霍夫曼编码可以通过构造一颗二叉树来实现，当输入是一个字符串时，我们：
+  1. 统计字符串中各字符出现的次数，并从小到大排列
+  2. 创建相应的树节点，节点值为字符，节点权重为字符出现的次数
+  3. 每次选取所有节点中权值最小的两个，创建它们的父节点，父节点权值为两个子节点的和，重复直到只剩下一个节点
+  4. 按照左为 0 右为 1 的规则得到所有字符对应的霍夫曼编码
+
+  参考实现：
+  #+begin_src java
+    public class Huffman {
+      private static class Node {
+        Node left;
+        Node right;
+        char val;
+        int weight;
+
+        public Node(char val, int weight) {
+          this.val = val;
+          this.weight = weight;
+        }
+
+        public Node(Node left, Node right) {
+          this.left = left;
+          this.right = right;
+          this.weight = left.weight + right.weight;
+          this.val = '#';
+        }
+      }
+
+      public static Map<Character, String> make(String str) {
+        Map<Character, Integer> counter = new HashMap<>();
+
+        for (char chr : str.toCharArray()) {
+          counter.put(chr, 1 + counter.getOrDefault(chr, 0));
+        }
+
+        Queue<Node> minHeap = new PriorityQueue<>((na, nb) -> na.weight - nb.weight);
+        for (Map.Entry<Character, Integer> entry : counter.entrySet()) {
+          minHeap.add(new Node(entry.getKey(), entry.getValue()));
+        }
+
+        while (minHeap.size() > 1) {
+          Node na = minHeap.poll();  // 权值小
+          Node nb = minHeap.poll();  // 权值大
+
+          minHeap.add(new Node(na, nb));
+        }
+
+        Map<Character, String> map = new HashMap<>();
+        makeMap(minHeap.poll(), map, new LinkedList<>());
+        return map;
+      }
+
+      private static void makeMap(Node node, Map<Character, String> map, Deque<Integer> stack) {
+        if (node.left == null && node.right == null) {
+          map.put(node.val, stack.toString());
+          return;
+        }
+
+        // 左子树为 0
+        stack.addLast(0);
+        makeMap(node.left, map, stack);
+        stack.removeLast();
+
+        // 右子树为 1
+        stack.addLast(1);
+        makeMap(node.right, map, stack);
+        stack.removeLast();
+      }
+    }
+  #+end_src
+
+  考虑到有不断重复选取最小节点的操作，因此可以用最小堆来存储树的节点。
+
+  参考：
+  + [[https://zh.wikipedia.org/wiki/%E9%9C%8D%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81][霍夫曼编码 - 维基百科，自由的百科全书]]
 
 * Others
 ** BK-Tree

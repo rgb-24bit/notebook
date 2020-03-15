@@ -1,0 +1,8 @@
+* 最左前缀
+  + [[https://juejin.im/post/5da53e04e51d45782f663c04][官方文档解释MySQL最左匹配(最左前缀)原则 - 掘金]]
+
+* MVCC
+  + [[https://segmentfault.com/a/1190000012650596][MySQL-InnoDB-MVCC多版本并发控制 - 编程空间 - SegmentFault 思否]]
+  + [[https://www.cnblogs.com/huanongying/p/11070834.html][MySQL-InnoDB-MVCC多版本并发控制 - 花弄影 - 博客园]]
+  + [[https://www.cnblogs.com/chenpingzhao/p/5065316.html][关于innodb中MVCC的一些理解 - 踏雪无痕SS - 博客园]]
+

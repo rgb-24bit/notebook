@@ -5,6 +5,7 @@
 - [[#innodb-锁][InnoDB 锁]]
 - [[#事务相关][事务相关]]
   - [[#事务的隔离级别][事务的隔离级别]]
+  - [[#多版本并发控制][多版本并发控制]]
 - [[#执行计划][执行计划]]
 - [[#sql-语法][SQL 语法]]
   - [[#sql-子查询][SQL 子查询]]
@@ -85,12 +86,15 @@
    | SERIALIZABLE     | Y    | Y          | Y    |
    |------------------+------+------------+------|
 
-   MySQL InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重复读）。
+   MySQL InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重复读），利用了 MVCC 进行实现。
 
    参考链接：
    + [[https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB(%E5%9B%BE%E6%96%87%E8%AF%A6%E8%A7%A3).md][事务隔离级别(图文详解)]]
    + [[https://www.cnblogs.com/huanongying/p/7021555.html][MySQL 的四种事务隔离级别 - 花弄影 - 博客园]]
    + [[https://blog.csdn.net/zhangzeyuaaa/article/details/46400419][数据库并发的五个问题以及四级封锁协议与事务隔离的四个级别_数据库_似水流年-CSDN博客]]
+
+** 多版本并发控制
+   多版本并发控制 MVCC 可以看做是行级锁的一个变种，但它在很多情况下避免了加锁操作，因此开销更低。
 
 * 执行计划
   MySQL 数据库索引使用的是 B+ 树结构，我们查询数据时，查询条件命中索引时，查询效率会特别高，如果没有命中索引，此时，则会全表扫描，耗时且消耗性能。

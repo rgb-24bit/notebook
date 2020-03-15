@@ -1,4 +1,4 @@
-#+TITLE:      查找 Search
+#+TITLE:      Search
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#二分搜索算法][二分搜索算法]]
