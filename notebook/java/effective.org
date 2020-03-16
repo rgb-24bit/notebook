@@ -1,0 +1,42 @@
+#+TITLE:      Effective
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#hashcode--equals][hashCode & equals]]
+
+* hashCode & equals
+  ~equals()~ 方法用来判断其他的对象是否和该对象相等，该方法的基本性质为：
+  1. 自反性：对于任意不为 null 的引用值 x，x.equals(x) 一定是 true
+  2. 对称性：对于任意不为 null 的引用值 x 和 y，当且仅当 x.equals(y) 是 true 时，y.equals(x) 也是 true
+  3. 传递性：对于任意不为 null 的引用值 x、y 和 z，如果 x.equals(y) 是 true，同时 y.equals(z) 是 true，那么 x.equals(z) 一定是true
+  4. 一致性：对于任意不为 null 的引用值 x 和 y，如果用于 equals 比较的对象信息没有被修改的话，多次调用时 x.equals(y) 要么一致地返回 true 要么一致地返回 false
+  5. 对于任意不为 null 的引用值 x，x.equals(null) 返回 false
+     
+  常规的实现方式为：
+  #+begin_src java
+    public boolean equals(Object other) {
+      if (this == other) {
+        return true;
+      }
+      // null instanceof ? === false
+      if (other instanceof ?) {
+        // compare...
+      }
+      return false;
+    }
+  #+end_src
+
+  同时，在实现了 ~equals~ 方法后，还应该实现 ~hashCode~ 方法，保证相等的对象，它们的 ~hashCode~ 也一定相等。
+
+  方法 ~hashcode()~ 的基本性质为：
+  1. 在一个 Java 应用的执行期间，如果一个对象提供给 equals 做比较的信息没有被修改的话，该对象多次调用 hashCode() 方法，该方法必须始终如一返回同一个整数
+  2. 如果两个对象根据 equals(Object) 方法是相等的，那么调用二者各自的 hashCode() 方法必须产生同一个整数结果
+  3. 并不要求根据 equals(java.lang.Object) 方法不相等的两个对象，调用二者各自的 hashCode() 方法必须产生不同的结果
+
+  可以使用 ~Objects.hash(Object...)~ 方法来实现 ~hashCode~ 方法：
+  #+begin_src java
+    public int hashCode() {
+      reutrn Objects.hash(p1, p2, p3, p4);
+    }
+  #+end_src
+
+  

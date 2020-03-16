@@ -3,7 +3,6 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#链表][链表]]
   - [[#删除当前链表节点][删除当前链表节点]]
-  - [[#合并有序链表][合并有序链表]]
   - [[#linux-内核链表][Linux 内核链表]]
 - [[#跳表][跳表]]
 - [[#后缀表达式][后缀表达式]]
@@ -24,75 +23,6 @@
      }
    #+END_SRC
 
-** 合并有序链表
-   + 递归合并
-     #+BEGIN_SRC C
-       Node* Merge(Node* head1, Node* head2) {
-         if (head1 == NULL) return head2;
-         if (head2 == NULL) return head1;
-
-         Node* res = NULL;
-
-         if (head1->value < head2->value) {
-           res = head1;
-           res->next = Merge(head1->next, head2);
-         } else {
-           res = head2;
-           res->next = Merge(head1, head2->next);
-         }
-
-         return res;
-       }
-     #+END_SRC
-
-   + 循环迭代合并
-     #+BEGIN_SRC C
-       Node* Merge(Node* head1, Node* head2) {
-         if (head1 == NULL) return head2;
-         if (head2 == NULL) return head1;
-
-         Node* res;
-         Node* ret;
-         Node* p = head1;
-         Node* q = head2;
-
-         if (p->value < q->value) {
-           res = p;
-           p = p->next;
-         } else {
-           res = q;
-           q = q->next;
-         }
-
-         ret = res;
-         while (p && q) {
-           if (p->value < q->value) {
-             res->next = p;
-             res = p;
-             p = p->next;
-           } else {
-             res->next = q;
-             res = q;
-             q = q->next;
-           }
-         }
-
-         while (p) {
-           res->next = p;
-           res = p;
-           p = p->next;
-         }
-
-         while (q) {
-           res->next = q;
-           res = q;
-           q = q->next;
-         }
-
-         return ret;
-       }
-     #+END_SRC
-
 ** Linux 内核链表
    Linux 内核链表的实现很巧妙，不存在数据域，而是选择通过 ~container_of~ 的方式来获取链表的 container，通过这种方式，可以通用 List 结构：
    #+begin_src C
@@ -102,6 +32,7 @@
    #+end_src
 
    参考：[[https://www.ibm.com/developerworks/cn/linux/kernel/l-chain/index.html][深入分析 Linux 内核链表]]
+
 * 跳表
   跳表是对有序链表的一种扩张，通过提取有序链表中的部分节点作为索引，提高查找、插入和删除效率，但是也会提高内存消耗：
   #+HTML: <img src="https://pic3.zhimg.com/80/v2-bfbe88e9c30b8417f73458f97d1d0da6_1440w.jpg">
@@ -117,6 +48,7 @@
 
   参考：
   + [[https://zhuanlan.zhihu.com/p/53975333][漫画：什么是跳表？ - 知乎]]
+
 * 后缀表达式
 ** 中缀表达式 -> 后缀表达式
    中缀表达式 ~a + b * c + (d * e + f) * g~ 转换得到的后缀表达式为 ~a b c * + d e * f  + g * +~, 转换规则为：

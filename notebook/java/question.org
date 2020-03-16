@@ -46,7 +46,7 @@
     包括 Java 虚拟机和 Java 程序所需的核心类库等， 如果想要运行一个开发好的 Java 程序，计算机中只需要安装 JRE 即可。
   + JDK(Java Development Kit), Java 开发工具包的缩写. JDK是提供给 Java 开发人员使用的，其中包含了 java 的开发工具，
     也包括了 JRE。所以安装了 JDK，就不用在单独安装 JRE 了。其中的开发工具： 编译工具(javac.exe)  打包工具(jar.exe)等。
-  
+
   参考： [[https://blog.csdn.net/z15732621736/article/details/50603819][JDK、JRE、JVM 简介]]
 
 * Java 的版本号是怎么回事
@@ -87,7 +87,7 @@
 * Java 资源问题
   + [[https://docs.oracle.com/javase/8/docs/technotes/guides/lang/resources.html][Location-Independent Access to Resources]]
   + [[https://www.cnblogs.com/yejg1212/p/3270152.html][关于 Class.getResource 和 ClassLoader.getResource 的路径问题]]
-    
+
   #+BEGIN_SRC java
     Class.getResource("name");   // current_class_file_path/name
     Class.getResource("/name");  // current_classpath/name
@@ -121,7 +121,7 @@
 
 * Java 编程中 Bean 类的含义
   + [[https://dzone.com/articles/the-bean-class-for-java-programming][The Bean Class for Java Programming]]
-    
+
   Bean 类： 用于聚合或收集原始数据类型的类以及用于在程序中建模数据的类
 
   多数程序需要定义多个元素或值来描述它们与之交互的数据。这些元素不是单独列出每个元素，
@@ -133,10 +133,10 @@
   + 读取或写入实例变量的方法必须以前缀 set 或 get 开头
   + bean 类应该实现可序列化的 interfaceOptional
 
- 一些可选的规则：
- + bean 类应该有一个 toString 方法
- + bean 类应该有一个 hashCode 和一个 equals 方法
- + bean 类应该实现 Comparable 接口并具有 compareTo 方法
+  一些可选的规则：
+  + bean 类应该有一个 toString 方法
+  + bean 类应该有一个 hashCode 和一个 equals 方法
+  + bean 类应该实现 Comparable 接口并具有 compareTo 方法
 
 * null 重载的问题
   #+BEGIN_SRC java
@@ -272,7 +272,7 @@
   通过 ~java.lang.Class.isPrimitive~ 方法可以判断一个 ~Class~ 是不是 ~Primitive~, 其中：
   + int.class 和 Integer.TYPE 是相同的，都是 Primitive
   + Integer.class 不是 Primitive
-    
+
   参考：[[https://stackoverflow.com/questions/22470985/integer-class-vs-int-class][java - Integer.class vs int.class - Stack Overflow]]
 
 * Interface 是类吗
@@ -354,4 +354,3 @@
 
   而对于 TreeMap 来说，对于涉及到 null 值的排序是很难的，可以参考：
   + [[https://stackoverflow.com/questions/47747199/why-does-hashmap-allow-a-null-key][java - Why does Hashmap allow a null key? - Stack Overflow]]
-

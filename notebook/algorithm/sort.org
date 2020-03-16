@@ -4,6 +4,7 @@
 - [[#经典排序算法][经典排序算法]]
 - [[#归并排序][归并排序]]
 - [[#快速排序][快速排序]]
+- [[#堆排序][堆排序]]
 - [[#相关问题][相关问题]]
   - [[#为什么快速排序要优于归并排序][为什么快速排序要优于归并排序]]
   - [[#冒泡排序和选择排序的区别][冒泡排序和选择排序的区别]]
@@ -51,6 +52,59 @@
   快速排序作为分治算法，最好的时间复杂度为 ~O(nlogn)~, 但是在最坏情况下，快速排序会退化为冒泡排序，必然每次选取的枢纽元都是最小值的情况，
   此时时间复杂度为 ~O(n^2)~.
   
+* 堆排序
+  堆排序的时间复杂度在最坏和最优时都是 ~O(nlogn)~, 对数组 ~[57, 40, 38, 11, 13, 34, 48, 75, 6, 19, 9, 7]~ 进行堆排序的步骤为：
+  1. 根据输入和排序方式创建最大堆或最小堆
+     #+HTML: <img src="https://pic3.zhimg.com/80/v2-a71cede24ccc2f9c866762b179883772_1440w.jpg">
+  2. 不断将堆的根节点放到末尾，调整堆序
+     #+HTML: <img src="https://pic2.zhimg.com/80/v2-843070653f31636b46728b4777a0aac9_1440w.jpg">
+
+  参考实现：
+  #+begin_src java
+    public class HeapSort {
+      public static void sort(int[] arr) {
+        for (int i = arr.length / 2; i >= 0; i--) {
+          sink(arr, i, arr.length);
+        }
+
+        for (int i = arr.length - 1; i >= 0; i--) {
+          swap(arr, 0, i);
+          sink(arr, 0, i);
+        }
+      }
+
+      public static void sink(int[] arr, int i, int n) {
+        // 下滤操作
+        int left = i * 2 + 1;
+        int right = left + 1;
+        int largest = i;
+
+        if (left < n && arr[left] > arr[largest]) {
+          largest = left;
+        }
+
+        if (right < n && arr[right] > arr[largest]) {
+          largest = right;
+        }
+
+        if (largest != i) {
+          swap(arr, i, largest);
+          sink(arr, largest, n);
+        }
+      }
+
+      public static void swap(int[] arr, int i, int j){
+        int num = arr[i];
+        arr[i] = arr[j];
+        arr[j] = num;
+      }
+    }
+  #+end_src
+
+  参考：
+  + [[https://blog.csdn.net/sxhelijian/article/details/50295637][数据结构示例——堆排序过程_C/C++_迂者-贺利坚的专栏-CSDN博客]]
+  + [[https://www.cnblogs.com/chengxiao/p/6129630.html][图解排序算法(三)之堆排序 - dreamcatcher-cx - 博客园]]
+
 * 相关问题
 ** 为什么快速排序要优于归并排序
    尽管两个排序算法的时间复杂度时相同的，但是，在存在很多影响算法运行时间的因数时，快速排序的表现往往要比归并排序的要好。

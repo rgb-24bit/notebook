@@ -7,6 +7,9 @@
   - [[#事务的隔离级别][事务的隔离级别]]
   - [[#多版本并发控制][多版本并发控制]]
 - [[#执行计划][执行计划]]
+- [[#sql-优化][SQL 优化]]
+  - [[#索引类型][索引类型]]
+  - [[#最左前缀匹配规则][最左前缀匹配规则]]
 - [[#sql-语法][SQL 语法]]
   - [[#sql-子查询][SQL 子查询]]
   - [[#注意事项][注意事项]]
@@ -77,14 +80,14 @@
      其他事务不能读写该表中的任何数据
 
    各自可以避免的并发问题：
-   |------------------+------+------------+------|
-   | 隔离级别         | 脏读 | 不可重复读 | 幻读 |
-   |------------------+------+------------+------|
-   | READ-UNCOMMITTED | Y    | Y          | Y    |
-   | READ-COMMITTED   | N    | Y          | Y    |
-   | REPEATABLE-READ  | N    | N          | Y    |
-   | SERIALIZABLE     | Y    | Y          | Y    |
-   |------------------+------+------------+------|
+   |------------------+------+------+------------+------|
+   | 隔离级别         | 缩写 | 脏读 | 不可重复读 | 幻读 |
+   |------------------+------+------+------------+------|
+   | READ-UNCOMMITTED | RU   | Y    | Y          | Y    |
+   | READ-COMMITTED   | RC   | N    | Y          | Y    |
+   | REPEATABLE-READ  | RR   | N    | N          | Y    |
+   | SERIALIZABLE     |      | Y    | Y          | Y    |
+   |------------------+------+------+------------+------|
 
    MySQL InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重复读），利用了 MVCC 进行实现。
 
@@ -94,7 +97,42 @@
    + [[https://blog.csdn.net/zhangzeyuaaa/article/details/46400419][数据库并发的五个问题以及四级封锁协议与事务隔离的四个级别_数据库_似水流年-CSDN博客]]
 
 ** 多版本并发控制
-   多版本并发控制 MVCC 可以看做是行级锁的一个变种，但它在很多情况下避免了加锁操作，因此开销更低。
+   在 InnoDB 中，MVCC 在 RC 和 RR 隔离级别下是借助 consistent read view（一致读视图）实现的。
+
+   所谓 consistent read view 就是在某一时刻给事务系统 trx_sys 打 snapshot，把当时 trx_sys 状态记下来，之后的所有读操作根据其事务 ID（即 trx_id）与 snapshot 中的 trx_sys 的状态作比较，
+   以此判断 read view 对于事务的可见性。
+   
+   其中，read view 记录的数据有：
+   + ~low_limit_id~ - 创建 ~read view~ 那一刻 *活跃* 的事务列表的 *最大* 的事务 ID
+   + ~up_limit_id~ - 创建 ~read view~ 那一刻活跃的事务列表的 *最小* 的事务 ID
+   + ~trx_ids~ - 创建 ~read view~ 那一刻所有的活跃事务列表
+
+   根据 ~read view~ 可以将所有事务分为三组：
+   + ~trx_id < up_limit_id~ - 创建 ~read view~ 时已经提交了的事务
+   + ~up_limit_id <= trx_id <= low_limit_id~ - 创建 ~read view~ 时正常执行的事务
+   + ~trx_id > low_limit_id~ - 创建 ~read view~ 时还未创建的事务
+
+   此时，我们可以根据 ~read view~ 来判断行记录的可见性：
+   1. 当记录的 ~DATA_TRX_ID~ 小于 ~read vew~ 的 ~up_limit_id~ 时说明该记录在创建 ~read view~ 之前就已经提交，记录可见
+   2. 如果记录的 ~DATA_TRX_ID~ 和事务创建者的 ~TRX_ID~ 一样时，记录可见
+   3. 当记录的 ~DATA_TRX_ID~ 大于 ~read vew~ 的 ~up_limit_id~ 时，说明该记录在创建 ~read view~ 之后进行的新建事务修改提交的，记录不可见
+   4. 如果记录对应的 ~DATA_TRX_ID~ 在 ~read view~ 的 ~trx_ids~ 里面，那么该记录也是不可见的
+
+   其中：
+   + ~RC~ 级别，每次执行 ~SELECT~ 时都会创建 read view，这就使得事务能够读取到其他事务对某一行的修改，导致不可重复读
+   + ~RR~ 级别，只在事务开始之前创建 read view，实现了可重复读
+
+   行记录的三个隐藏列：
+   + DATA_ROW_ID: 如果表没有显示定义主键，则采用 MySQL 自己生成的 ROW_ID，为 48-bit，否则表示的是用户自定义的主键值
+   + DATA_TRX_ID: 表示这条记录的事务 ID
+   + DATA_ROLL_PTR: 指向对应的回滚段的指针
+
+   当通过 ~read view~ 判断该行记录对于当前事务不可见时，就可以通过 ~DATA_ROLL_PTR~ 从 ~undo log~ 找到之前的数据记录，从新进行判断，
+   直到数据为空或可见。
+   
+   参考：
+   + [[https://segmentfault.com/a/1190000012650596][MySQL-InnoDB-MVCC 多版本并发控制 - 编程空间 - SegmentFault 思否]]
+   + [[https://tech.youzan.com/-ci-da-liang-shan-chu-dao-zhi-mysqlman-cha-de-fen-xi/][一次大量删除导致 MySQL 慢查的分析]]
 
 * 执行计划
   MySQL 数据库索引使用的是 B+ 树结构，我们查询数据时，查询条件命中索引时，查询效率会特别高，如果没有命中索引，此时，则会全表扫描，耗时且消耗性能。
@@ -138,6 +176,50 @@
   + rows：查找到记录所扫描的行数
   + filtered：查找到所需记录所占总扫描记录数比例
   + Extra：额外的信息
+
+* SQL 优化
+** 索引类型
+   MySQL 中建表时就创建索引的语法为：
+   #+begin_example
+     CREATE TABLE table_name[col_name data type]
+     [unique|fulltext][index|key][index_name](col_name[length])[asc|desc]
+   #+end_example
+
+   各部分的含义为：
+   1. ~[unique|fulltext]~ - 可选，分别表示唯一索引、全文索引
+   2. ~[index|key]~ - 两者作用相同，用来指定创建索引
+   3. ~[index_name]~ - 索引名称
+   4. ~(col_name[length])~ - 索引包含的字段及字段长度，其中长度是可选值
+   5. ~[asc|desc]~ - 指定按升序或降序存储索引值
+
+   具体的类型包括：
+   + 普通索引，数据结构为 ~B+~ 树
+     #+begin_src sql
+       CREATE INDEX index_name ON table(column(length));
+     #+end_src
+   + 唯一索引，索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一
+     #+begin_src sql
+       CREATE UNIQUE INDEX indexName ON table(column(length));
+     #+end_src
+   + 主键索引，是一种特殊的唯一索引，一个表只能有一个主键，不允许有空值
+   + 组合索引，指多个字段上创建的索引，只有在查询条件中使用了创建索引时的第一个字段，索引才会被使用
+   + 全文索引，主要用来查找文本中的关键字，而不是直接与索引中的值相比较
+
+   索引的优点为：
+   1. 减少服务器需要扫描的数据量
+   2. 帮助服务器避免排序和临时表
+   3. 将随机 I/O 变为顺序 I/O
+
+   三星索引划分：
+   1. ✦ 索引将相关的记录放在一起
+   2. ✦✦ 索引中的数据顺序和查找中的顺序一致
+   3. ✦✦✦ 索引包含了查询中需要的全部列
+
+   参考：
+   + [[https://www.cnblogs.com/luyucheng/p/6289714.html][MySQL 索引类型 - 成九 - 博客园]]
+
+** 最左前缀匹配规则
+   对于联合索引 ~(c1, c2, c3)~ 来说，查询条件 ~(c1, c3)~ 也是可以使用 ~c1~ 上的索引进行查询的。
 
 * SQL 语法
 ** SQL 子查询

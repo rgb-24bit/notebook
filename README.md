@@ -23,6 +23,7 @@
   + [windows](#windows)
 ## algorithm
   + [位运算](notebook/algorithm/bit.org)
+  + [经典问题](notebook/algorithm/classic.org)
   + [Containers](notebook/algorithm/containers.org)
   + [摘要算法](notebook/algorithm/digest.org)
   + [加密算法](notebook/algorithm/encrypt.org)
@@ -166,6 +167,7 @@
   + [Java Annotations](notebook/java/annotations.org)
   + [Java 基础](notebook/java/base.org)
   + [Java Collections](notebook/java/collections.org)
+  + [Effective](notebook/java/effective.org)
   + [Java 函数式编程](notebook/java/fp.org)
   + [Java 泛型](notebook/java/generic.org)
   + [Java - I/O 操作](notebook/java/io.org)

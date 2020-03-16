@@ -1,0 +1,66 @@
+#+TITLE:      经典问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#汉诺塔问题][汉诺塔问题]]
+- [[#约瑟夫环问题][约瑟夫环问题]]
+
+* 汉诺塔问题
+  汉诺塔是一个经典的递归问题，解决问题的一个关键点就是，只要把最大的哪一个盘子移动到目标柱以后就可以不用管了。
+
+  在只有一个盘子的时候，之间将其从 *左* 移动到 *右* 就可以了：
+  #+begin_src python
+    def move(n, left, center, right):
+        if n == 1:
+            print(f'{left} ---> {right}')
+  #+end_src
+
+  当盘子数量大于一的时候，为了把最大的盘子移动到目标柱，那么就需要先把其他的盘子移动到中间的柱子上：
+  #+begin_src python
+    move(n - 1, left, right, center)
+  #+end_src
+
+  然后将最大的盘子移动到右边的柱子上：
+  #+begin_src python
+    move(1, left, center, right)
+  #+end_src
+
+  此时，最大的盘子已经移动到右边，左边的柱子处于空闲状态，我们需要做的是将中间的移动到右边：
+  #+begin_src python
+    move(n - 1, center, left, right)
+  #+end_src
+
+  最后的结果便是：
+  #+begin_src python
+    def move(n, left, center, right):
+        if n == 1:
+            print(f'{left} ---> {right}')
+            return 1
+        count = 0
+        count += move(n - 1, left, right, center)
+        count += move(1, left, center, right)
+        count += move(n - 1, center, left, right)
+        return count
+  #+end_src
+
+  参考：
+  + [[https://www.zhihu.com/question/24385418/answer/282940567][如何理解汉诺塔的递归？ - 酱紫君的回答 - 知乎]]
+
+* 约瑟夫环问题
+  约瑟夫环问题也是极为经典的一个问题了，题目描述：
+  #+begin_quote
+  已知 n 个人（以编号 1，2，3…n 分别表示）围坐在一张圆桌周围。从编号为 k 的人开始报数，数到 m 的那个人出圈。他的下一个人又从 1 开始报数，数到 m 的那个人又出圈。
+  依此规律重复下去，直到剩余最后一个胜利者。
+  #+end_quote
+
+  这个问题简单的解法就是构建一个循环链表，不断剔除数据直到只剩下一个，但是这样的时间复杂度是比较高的，因此，可以通过数学方法来解决这个问题：
+  #+begin_src c
+    int josephus(int n, int k) {
+      int res = 0;
+      for (int i = 1; i <= n; ++i) res = (res + k) % i;
+      return res;
+    }
+  #+end_src
+
+  参考：
+  + [[https://oi-wiki.org/misc/josephus/][约瑟夫问题 - OI Wiki]]
+
