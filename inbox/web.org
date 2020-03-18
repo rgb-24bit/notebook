@@ -129,7 +129,6 @@
   #+end_src
 
 * 分包机制
-* 库收集
 * 事件循环
   + [[https://juejin.im/post/5c337ae06fb9a049bc4cd218][浏览器与Node的事件循环(Event Loop)有何区别? - 掘金]]
   + [[https://html.spec.whatwg.org/multipage/webappapis.html#event-loops][HTML Standard]]

@@ -32,3 +32,5 @@
    + [[https://www.emacswiki.org/emacs/CategoryTex][EmacsWiki: Category Tex]]
    + [[https://www.emacswiki.org/emacs/CDLaTeX][EmacsWiki: CDLaTeX]]
 
+* Org
+  + [[https://github.com/loveminimal/site][loveminimal/site: A pure site.]]

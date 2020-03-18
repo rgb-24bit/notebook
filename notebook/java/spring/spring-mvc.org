@@ -7,7 +7,6 @@
   - [[#requestparam--requestbody][@RequestParam & @RequestBody]]
 - [[#控制流程][控制流程]]
 - [[#过滤器和拦截器][过滤器和拦截器]]
-  - [[#使用技巧][使用技巧]]
   - [[#contentcachingrequestwrapper--contentcachingresponsewrapper][ContentCachingRequestWrapper && ContentCachingResponseWrapper]]
 - [[#相关问题][相关问题]]
   - [[#响应头中的编码配置][响应头中的编码配置]]
@@ -145,7 +144,6 @@
   参考：
   + [[https://examples.javacodegeeks.com/enterprise-java/spring/mvc/spring-mvc-interceptor-tutorial/][Spring MVC Interceptor Tutorial | Examples Java Code Geeks - 2019]]
 
-** 使用技巧
 ** ContentCachingRequestWrapper && ContentCachingResponseWrapper
    在过滤器中常常需要操作请求和响应对象的输入输出流对象，这通常需要实现 ~ServletRequestWrapper~ 和 ~ServletResponseWrapper~ 来避免使输入和输出流失效。
 

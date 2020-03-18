@@ -234,17 +234,21 @@
 
 * Java 集合中移除原始数据类型的包装对象时是按值还是按对象
   #+BEGIN_SRC java :results output :classname Test
-    import java.util.*;
-
-    public class Test {
-      public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-
-        list.add(1000);
-        list.remove(new Integer(1000));
-
-        System.out.println(list);  // []
+    public boolean remove(Object o) {
+      if (o == null) {
+        for (int index = 0; index < size; index++)
+          if (elementData[index] == null) {
+            fastRemove(index);
+            return true;
+          }
+      } else {
+        for (int index = 0; index < size; index++)
+          if (o.equals(elementData[index])) {
+            fastRemove(index);
+            return true;
+          }
       }
+      return false;
     }
   #+END_SRC
 
@@ -339,6 +343,8 @@
 * System.arraycopy 和 Arrays.copyof 的区别
   区别主要在于 ~Arrays.copyOf~ 不仅会复制元素，还会创建一个新数组，而 ~System.arrayCopy~ 是复制到已有数组中，参考：
   + [[https://www.programcreek.com/2015/03/system-arraycopy-vs-arrays-copyof-in-java/][System.arraycopy() vs. Arrays.copyOf() in Java]]
+
+  实际上，Arrays.copyOf 内部也是调用 System.arrayCopy 完成数组的复制的，而 System.arrayCopy 时通过 JNI 实现的，速度比 for 和 clone 更快。
 
 * 为什么 HashMap 允许 null 键而 TreeMap 不允许
   对于 HashMap 来说，这里有两个可能的原因：

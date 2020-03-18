@@ -15,9 +15,9 @@
         return getClass().getName() + "@" + Integer.toHexString(hashCode());
       }
     #+end_src
-
+    
   + 方法 ~hashCode()~ 是 ~native~ 方法，可以参考的是 ~openjdk~ 中的实现：
-    #+begin_src C
+    #+begin_src c
       static inline intptr_t get_next_hash(Thread * Self, oop obj) {
         intptr_t value = 0 ;
         if (hashCode == 0) {
@@ -72,7 +72,9 @@
     5. int 类型的该对象的内存地址
     6. 结合当前线程和 xorshift 生成
 
-    在 JDK8 中默认使用的是最后一种方式，参考：[[http://www.majiang.life/blog/deep-dive-on-java-hashcode/][细说 Java hashCode - 码匠笔记]]
+    在 JDK8 中默认使用的是最后一种方式，参考：
+    + [[https://juejin.im/entry/5968876df265da6c232898c2][Java Object.hashCode() 返回的是对象内存地址？ - 后端 - 掘金]]
+    + [[http://www.majiang.life/blog/deep-dive-on-java-hashcode/][细说 Java hashCode - 码匠笔记]]
 
   + 方法 ~equals()~ 的默认实现就比较牛逼了，和没有实现差不多：
     #+begin_src java

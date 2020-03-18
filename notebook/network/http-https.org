@@ -162,7 +162,7 @@
    #+begin_example
      Content-Type: multipart/form-data; boundary=MjkyMTI5NjktMUVCNy00NENELUFFMTctREQ1Q0YzREM3NUY5Cg
    #+end_example
-
+   
    请求体中的每一部分以 ~--boundary~ 开始，最后一个部分以 ~--boundary--~ 结束，每个部分需要通过 ~Content-Disposition~ 指定该部分对应的字段名称：
    #+begin_example
      Content-Disposition: form-data; name="user";

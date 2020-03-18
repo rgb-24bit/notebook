@@ -2,7 +2,6 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#数据类型][数据类型]]
-- [[#类型转换][类型转换]]
 - [[#数组相关][数组相关]]
   - [[#数组的类型][数组的类型]]
   - [[#数组的克隆][数组的克隆]]
@@ -11,14 +10,19 @@
   - [[#抽象][抽象]]
   - [[#封装][封装]]
   - [[#多态][多态]]
+- [[#注解][注解]]
+  - [[#简单使用][简单使用]]
+  - [[#retentionpolicy][RetentionPolicy]]
+  - [[#通过反射获取][通过反射获取]]
 - [[#枚举][枚举]]
 - [[#异常][异常]]
   - [[#注意事项][注意事项]]
+- [[#术语][术语]]
 - [[#其他][其他]]
 - [[#tips][Tips]]
 
 * 数据类型
-  Primitive Type 的取值范围：
+  Java 中存在 8 种 Primitive Type，它们的取值范围为：
   |---------+-----------------+--------------------------|
   | 类型    |            位数 | 值域                     |
   |---------+-----------------+--------------------------|
@@ -32,7 +36,7 @@
   | double  |              64 | 范围规模可变             |
   |---------+-----------------+--------------------------|
 
-  Java 中布尔类型支持部位运算符操作：
+  Java 中布尔类型支持部分运算符操作，也就是布尔代数相关的操作：
   #+BEGIN_SRC java
     System.out.println(true | false);
     System.out.println(true & false);
@@ -42,34 +46,6 @@
   Java 中 byte 进行移位运算时会自动升为 int，这有可能会导致一些意料之外的结果，参考：
   + [[https://stackoverflow.com/questions/3948220/behaviour-of-unsigned-right-shift-applied-to-byte-variable#][java - Behaviour of unsigned right shift applied to byte variable - Stack Overflow]]
 
-* 类型转换
-  由与所有的非 ~Object~ 对象都继承了 ~Object~, 因此这些对象在 *堆* 上的实例上， 内部也包括了一个 ~Object~ 实例。
-
-  即：后代的实例内部包含父类的实例。
-
-  因此父类类型的引用相当于只能操作子类实例内部的父类实例。
-
-  通过强制类型转换可以将父类引用转换为子类引用，转换前应该使用关键字 ~instanceof~ 来判断该对象是否是对应类型的实例。
-
-  #+BEGIN_SRC java
-    if (obj instanceof Dog) {
-      Dog d = (Dog)obj;
-    }
-  #+END_SRC
-
-  如果类型转换失败会抛出 ~ClassCastException~ 异常。
-
-  *向上向下转型：*
-  #+BEGIN_SRC java
-    // 向上转型
-    SuperClass ref = new SubClass();
-
-    // 向下转型
-    SubClass ref = (SubClass) SuperClassRef;
-  #+END_SRC
-
-  注意：null isinstanceof xxx 会返回 false
-
 * 数组相关
   数组的声明和初始化方式都存在多种：
   #+BEGIN_SRC java
@@ -77,7 +53,7 @@
     dataType[] arrayRefVar;   // 首选的方法
     dataType arrayRefVar[];   // 效果相同，但不是首选方法
 
-    // 创建数组
+    // 创建数组实例
     dataType[] arrayRefVar = new dataType[arraySize];
     dataType[] arrayRefVar = {value0, value1, ..., valuek};  // 只能在声明的同时使用
     dataType[] arrayRefVar = new dataType[] {value0, value1, ..., valuek};
@@ -126,26 +102,9 @@
 
 * 面向对象
 ** 继承
-   Java 中 Object 类是所有类的基类，没有继承其他类的类会隐式继承这个类，可以被实例化。
-
-   Object 类的一些方法：
-   |------------------+----------------------------------------|
-   | 方法             | 作用                                   |
-   |------------------+----------------------------------------|
-   | ~equals(Object o)~ | 判断两个对象的值是否相等               |
-   | ~getClass()~       | 获取对象的类型                         |
-   | ~hashCode()~       | 列出对象的哈希代码， 这是对象的唯一 id |
-   | ~toString()~       | 列出类的名字和一个我们不关心的数字     |
-   | ~finalize()~       | 析构函数                               |
-   | ~getClass()~       | 获取类                                 |
-   |------------------+----------------------------------------|
-
-   子类覆盖父类方法时需要注意：
+   Java 中，子类可以覆盖父类的 *实例* 方法，覆盖父类方法时需要注意：
    1. 方法在覆盖时的可见性不能 *低于* 父类，可以高于
    2. 子类方法抛出的异常不能比父类的更通用，如果父类方法没有抛出异常那么子类的也不能抛出
-      
-   子类的一些行为：
-   + 实例化子类时，会自动调用父类的构造方法，因此，定义一个无参的构造方法时很有用的
 
 ** 抽象
    使用抽象类和抽象方法时需要注意：
@@ -159,6 +118,7 @@
    1. 接口不能被实例化， 但是可以被实现
    2. 接口没有构造方法
    3. 接口中所有的方法默认(必须)为 ~public abstract~
+   4. 接口中的字段默认都是 ~static final~
 
 ** 封装
    私有字段可以在内部直接访问，不管是不是当前实例：
@@ -188,6 +148,54 @@
 
    对于多态来说：
    + 编译器根据 *引用类型* 来判断有哪些 ~method~ 可以调用，而不是 ~Object~ 确实的类型
+
+* 注解
+** 简单使用
+   自定义注解：
+   #+BEGIN_SRC java
+     @interface ClassPreamble {
+       String author();
+       String date();
+       int currentRevision() default 1;
+       String lastModified() default "N/A";
+       String lastModifiedBy() default "N/A";
+       // Note use of array
+       String[] reviewers();
+     }
+   #+END_SRC
+
+   使用注解：
+   #+BEGIN_SRC java
+     @ClassPreamble (
+         author = "John Doe",
+         date = "3/17/2002",
+         currentRevision = 6,
+         lastModified = "4/12/2004",
+         lastModifiedBy = "Jane Doe",
+         // Note array notation
+         reviewers = {"Alice", "Bob", "Cindy"}
+     )
+     public class Generation3List extends Generation2List {
+       // class code goes here
+     }
+   #+END_SRC
+
+   对定义自己的注解类很有帮助的包：
+   + [[https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/package-summary.html][java.lang.annotation]]
+
+** RetentionPolicy
+   RetentionPolicy 共定义了三种反射策略：
+   + CLASS - 注解由编译器记录在类文件中，但 VM 在运行时无需保留
+   + RUNTIME - 注解由编译器记录在类文件中，并在运行时由 VM 保留，因此可以通过反射方式读取它们
+   + SOURCE - 注解被编译器丢弃
+
+   因此，只有反射策略为 RUNTIME 的才能通过反射的方式读取。
+
+** 通过反射获取
+   Spring 用多了给了我一种 Java 默认支持组合注解的错觉，看了源码后才发现，Spring 解析注解时会不断解析注解上的注解。而在实际的使用中，
+   通过 ~Class.getAnnotation~ 方法只能获取到指定类型的注解，如果该注解被定义为 ~@Inherited~ 的，那么，还会寻找该类的父类。
+
+   但是，不会自动的寻找注解上的注解。
 
 * 枚举
   枚举类型的声明可以在 *类外部* 或 *类内部*, 但是不能在 *方法内部*.
@@ -355,6 +363,16 @@
    + 通过 ~catch~ 捕获受查异常时，try 语句块中必须可能抛出该受查异常才行
    + ~Throwable~ 同样属于受查异常
 
+* 术语
+  向上向下转型：
+  #+BEGIN_SRC java
+    // 向上转型
+    SuperClass ref = new SubClass();
+
+    // 向下转型
+    SubClass ref = (SubClass) SuperClassRef;
+  #+END_SRC
+
 * 其他
   + 块作用域是由大括号确定的作用域：
     #+BEGIN_SRC java
@@ -384,35 +402,26 @@
 
 * Tips
   + Java 没有无符号数
-  + 定义 ~float~ 的数值需要加 ~f~ 后缀， 如： ~float f = 32.45f~, 否则小数会默认当做 ~double~ 处理
-  + 隐式类型转换只允许在不会有数据丢失的情况下进行， 即: ~int~ 不能和 ~float~ 直接转换。
-    也不能使用类似 ~byte x = 128~ 的语句。
-  + 除基本数据类型之外的类型的变量都是对一个对象的 *引用*, *对象* 实例保存在可回收垃圾的堆上
+  + 定义 ~float~ 的数值需要加 ~f~ 后缀，如： ~float f = 32.45f~, 否则小数会默认当做 ~double~ 处理
+  + 隐式类型转换只允许在不会有数据丢失的情况下进行，不能使用类似 ~byte x = 128~ 的语句
   + 所有引用变量的大小都一样，不一样的是内存中的实例大小
-  + 数组也是对象，数组名是引用类型变量
   + String 不是 Java 关键字
-  + 没有初始化的数值类型（包括 char） 默认为 0, 布尔类型默认为 false, 引用默认为 null.
-  + 局部变量没有默认值， 使用前必须初始化
+  + 没有初始化的值类型默认为 0，布尔类型默认为 false，引用默认为 null
   + 根据 Java 语言规范，main 方法必须声明为 public
-  + 字符 $ 在 Java 中虽然合法，但是只用在 Java 编译器工具生成的名字中
+  + 字符 $ 在 Java 中虽然合法，但是通常只用在 Java 编译器工具生成的名字中
   + const 是 Java 保留的关键字，但目前并没有使用，因此必须使用 final 关键字定义常量
-  + Java 不使用逗号运算符
   + 格式化字符串时，s 转换符对于实现了 Formattable 接口的对象会调用 formatTo 方法，否则调用 toString
   + 命令行参数中，程序名并没有保存在 args 数组中
   + 打印二维数组 Arrays.deepToString()
-  + 编译器在编译源文件是不检查目录结构，但是不合适的目录结构会导致找不到类
-  + 未指定访问修饰符的域可以被包内所有成员访问
-  + 覆盖方法时，子类方法不能低于超类方法的可见性
-  + 将超类转换为子类之前应该用 instanceof 进行检查
-  + null instanceof type 返回 false
-  + 抽象类可以包含具体数据和具体方法
+  + 编译器在编译源文件时不检查目录结构，但是不合适的目录结构会导致找不到类
+  + 未指定访问修饰符的 ~default~ 域可以被包内所有成员访问
+  + ~null instanceof type~ 返回 false
   + 默认访问级别对子类不可见
   + 比较枚举值使用 == 就可以了
   + 接口中的所有方法自动为 public
   + *接口中的域自动设为 public static final*
   + 伴随类 - Path/Paths，伴随类包含静态方法
   + 默认方法冲突 - 超类优先，接口冲突就必须手动覆盖
-  + 所有数组类型都有一个 public 的 clone 方法，可以建立一个新数组，包含源数组所有元素的副本
   + 函数式接口注释 - FunctionalInterface
   + 非静态内部类不能有 static 方法
   + 内部类的所有静态域都必须是 final

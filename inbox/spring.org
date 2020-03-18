@@ -88,3 +88,7 @@
 
 * Spring Cloud
   + [[https://www.cnblogs.com/linkstar/p/9055900.html][SpringCloud各个组件说明 - LinkinStar - 博客园]]
+
+* IOC
+  + [[https://juejin.im/post/5c98a7b4f265da60ee12e9b2][spring 是如何解决循环依赖的？ - 掘金]]
+
