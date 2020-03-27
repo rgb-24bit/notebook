@@ -142,6 +142,9 @@
 
   子模块需要使用其他子模块的功能时，需要在 ~dependencies~ 中声明依赖才行。
 
+  参考：
+  + [[https://www.cnblogs.com/liaojie970/p/8806843.html][Maven parent.relativePath - 山高我为峰 - 博客园]]
+
 ** 依赖版本管理
    可以在父模块中的 ~dependencyManagement~ 和 ~pluginManagement~ 元素中指定依赖和插件的版本，当没有使用时时不会下载依赖的，这样依赖，依赖可以在父模块中统一管理。
 

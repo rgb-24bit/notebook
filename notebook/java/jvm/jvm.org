@@ -123,8 +123,8 @@
   但是 Full GC 的时候，往往就避免不了要停顿工作线程了。
 
   参考：
-  + [[https://zhuanlan.zhihu.com/p/58896728][7 种 JVM 垃圾收集器特点，优劣势、及使用场景 - 知乎]]
   + [[https://crowhawk.github.io/2017/08/15/jvm_3/][深入理解 JVM(3)——7 种垃圾收集器 - 王泽远的博客 | Crow's Blog]]
+  + [[https://zhuanlan.zhihu.com/p/58896728][7 种 JVM 垃圾收集器特点，优劣势、及使用场景 - 知乎]]
 
 ** G1 收集器
    G1 收集器是可以同时兼顾年轻的和老年代的垃圾收集器，特点为：

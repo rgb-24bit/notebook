@@ -20,7 +20,8 @@
   + [[https://www.cnblogs.com/myseries/p/11265849.html][MySQL优化：如何避免回表查询？什么是索引覆盖？ (转) - myseries - 博客园]]
   + [[https://tech.meituan.com/2014/06/30/mysql-index.html][MySQL 索引原理及慢查询优化 - 美团技术团队]] - 磁盘 IO 与预读 - 图
 
-* Binlog
+* log
+  + [[https://www.cnblogs.com/wy123/p/8365234.html][MySQL中的重做日志（redo log），回滚日志（undo log），以及二进制日志（binlog）的简单总结 - MSSQL123 - 博客园]]
   + [[https://laijianfeng.org/2019/03/MySQL-Binlog-%E4%BB%8B%E7%BB%8D/][MySQL Binlog 介绍 | 小旋锋]]
 
 * VARCHAR 碎片
@@ -36,3 +37,6 @@
 
 
   
+* myisam
+  + [[https://www.cnblogs.com/jayxuan/p/10711435.html][MyIASM和Innodb引擎详解 - 小虾同学 - 博客园]]
+

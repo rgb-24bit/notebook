@@ -92,9 +92,4 @@
        This class is designed to be a useful basis for most kinds of synchronizers that rely on a _single atomic int value_ to represent state
        #+END_QUOTE
 
-* Object
-  + [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--][hashcode]]
-  + [[https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-][equals]]
 
-* maven
-  + [[https://www.cnblogs.com/liaojie970/p/8806843.html][Maven parent.relativePath - 山高我为峰 - 博客园]]

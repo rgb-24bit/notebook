@@ -51,7 +51,68 @@
 * 快速排序
   快速排序作为分治算法，最好的时间复杂度为 ~O(nlogn)~, 但是在最坏情况下，快速排序会退化为冒泡排序，必然每次选取的枢纽元都是最小值的情况，
   此时时间复杂度为 ~O(n^2)~.
-  
+
+  参考实现：
+  #+begin_src java
+    public class QuickSort {
+      public static void quickSort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
+      }
+
+      public static void quickSort(int[] arr, int left, int right) {
+        if (left >= right) {
+          return;
+        }
+
+        // 通过 selectPivot 选择枢纽元时会将排序区间缩小为 [left + 1, right - 2]
+        // 即 [++i, --j]
+        int i = left, j = right - 1, pivot = selectPivot(arr, left, right);
+
+        while (i < j) {
+          while (arr[++i] < pivot);
+          while (arr[--j] > pivot);
+
+          if (i < j) {
+            swap(arr, i, j);
+          }
+        }
+
+        swap(arr, i, right - 1);
+
+        quickSort(arr, left, i - 1);
+        quickSort(arr, i + 1, right);
+      }
+
+      private static int selectPivot(int[] arr, int left, int right) {
+        int mid = (left + right) / 2;
+
+        if (arr[left] > arr[mid]) {
+          swap(arr, left, mid);
+        }
+
+        if (arr[left] > arr[right]) {
+          swap(arr, left, right);
+        }
+
+        if (arr[mid] > arr[right]) {
+          swap(arr, mid, right);
+        }
+
+        // arr[left] <= arr[mid] <= arr[right]
+        // 确保正确的边界条件
+        swap(arr, mid, right - 1);
+
+        return arr[right - 1];
+      }
+
+      private static void swap(int[] arr, int i, int j) {
+        int item = arr[i];
+        arr[i] = arr[j];
+        arr[j] = item;
+      }
+    }
+  #+end_src
+
 * 堆排序
   堆排序的时间复杂度在最坏和最优时都是 ~O(nlogn)~, 对数组 ~[57, 40, 38, 11, 13, 34, 48, 75, 6, 19, 9, 7]~ 进行堆排序的步骤为：
   1. 根据输入和排序方式创建最大堆或最小堆

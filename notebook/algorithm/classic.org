@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#汉诺塔问题][汉诺塔问题]]
 - [[#约瑟夫环问题][约瑟夫环问题]]
+- [[#top-k-问题][Top K 问题]]
 
 * 汉诺塔问题
   汉诺塔是一个经典的递归问题，解决问题的一个关键点就是，只要把最大的哪一个盘子移动到目标柱以后就可以不用管了。
@@ -63,4 +64,62 @@
 
   参考：
   + [[https://oi-wiki.org/misc/josephus/][约瑟夫问题 - OI Wiki]]
+
+* Top K 问题
+  在一个数组中找到第 K 大的数或第 K 个最大的数，这个问题的直接解法就是通过排序解决，但是，
+  排序往往并不是最优解。
+
+  解决这个问题的一种方式是使用 *随机选择* 算法，该算法的思路和 *快速排序* 类似，只不过在选取枢纽元后可以确定目标在哪个区间，
+  因此，每次选择枢纽元都可以过来一部分元素，最后能够达到 ~O(n)~ 的级别。
+
+  参考实现：
+  #+begin_src java
+    public class RandomSelect {
+        public static int select(int[] arr, int k) {
+            select(arr, 0, arr.length - 1, k);
+            return arr[k];
+        }
+
+        public static void select(int[] arr, int left, int right, int k) {
+            if (left >= right) {
+                return;
+            }
+            int i = partition(arr, left, right);
+            if (i == k) {
+                return;
+            }
+            if (i > k) {
+                select(arr, left, i - 1, k);
+            } else {
+                select(arr, i + 1, right, k);
+            }
+        }
+
+        public static int partition(int[] arr, int left, int right) {
+            int mid = (left + right) / 2;
+            swap(arr, mid, right);
+
+            int index = left, pivot = arr[right];
+
+            for (int i = left; i < right; i++) {
+                if (arr[i] < pivot) {
+                    swap(arr, i, index++);
+                }
+            }
+
+            swap(arr, index, right);
+
+            return index;
+        }
+
+        public static void swap(int[] arr, int i, int j) {
+            int item = arr[i];
+            arr[i] = arr[j];
+            arr[j] = item;
+        }
+    }
+  #+end_src
+  
+  参考：
+  + [[https://www.cnblogs.com/sungoshawk/p/3647354.html][算法导论读书笔记（9） - sungoshawk - 博客园]]
 

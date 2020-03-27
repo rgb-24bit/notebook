@@ -24,6 +24,8 @@
   1. 这个数字足够巨大的同时还小于最大的整数值
   2. 这个数字是一个素数
 
+  注：不是最大的素数
+
 * 编程语言中的求余和取模
   不同的编程语言对其的实现不相同，可参考：
   + [[https://en.wikipedia.org/wiki/Modulo_operation][Modulo operation - Wikipedia]]

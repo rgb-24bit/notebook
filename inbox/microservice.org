@@ -5,7 +5,6 @@
    + [[https://juejin.im/post/5aa3c7736fb9a028bb189bca][常用的分布式事务解决方案 - 掘金]]
    + [[https://draveness.me/distributed-transaction-principle][分布式事务的实现原理]]
 
-
 * SOA 和微服务架构的区别
   + [[https://www.cnblogs.com/netfocus/p/5548025.html][浅谈我对DDD领域驱动设计的理解 - netfocus - 博客园]]
 

@@ -18,3 +18,16 @@
    + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Connection_management_in_HTTP_1.x][HTTP/1.x 的连接管理 - HTTP | MDN]]
    + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Session][典型的 HTTP 会话 - HTTP | MDN]]
 
+
+* 配置
+  + [[https://linux.cn/article-1394-1.html][技术|Linux TCP 系统参数配置]]
+  + [[https://zhuanlan.zhihu.com/p/28894266][聊聊 TCP 中的 KeepAlive 机制 - 知乎]]
+
+* URL
+  + [[https://www.cnblogs.com/549294286/p/5172435.html][DNS分别在什么情况下使用UDP和TCP - Loull - 博客园]]
+  + [[https://segmentfault.com/a/1190000006879700][前端经典面试题: 从输入URL到页面加载发生了什么？ - 我的前端之路 - SegmentFault 思否]]
+  + [[http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html][图解SSL/TLS协议 - 阮一峰的网络日志]]
+
+* TCP
+  + [[https://blog.csdn.net/goodstuddayupyyeah/article/details/70247685][TCP三次握手第三次握手时ACK丢失怎么办_网络_Vi的博客-CSDN博客]]
+

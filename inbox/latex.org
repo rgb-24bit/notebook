@@ -1,6 +1,0 @@
-* Future
-  + [[https://zhuanlan.zhihu.com/p/48300815][LaTeX 绘图指南 - 001 TikZ 的简介、资源以及学习方法 - 知乎]]
-
-* Tutor
-  + [[https://oi-wiki.org/intro/latex/][LaTeX 入门 - OI Wiki]]
-
