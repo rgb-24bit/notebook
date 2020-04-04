@@ -4,6 +4,7 @@
 - [[#apache-poi][Apache POI]]
 - [[#guava][Guava]]
   - [[#caches][Caches]]
+- [[#http-client][Http Client]]
 
 * Apache POI
   Java 中常用 Apache POI 来操作 Excel 文档，相关问题：
@@ -13,7 +14,7 @@
     + SXSSF：是在 XSSF 基础上，POI3.8 版本开始提供的一种支持低内存占用的操作方式，扩展名为 .xlsx
 
     参考：
-    + [[https://www.cnblogs.com/pcheng/p/7485979.html][HSSF、XSSF 和 SXSSF 区别以及 Excel 导出优化 - PC君 - 博客园]]
+    + [[https://www.cnblogs.com/pcheng/p/7485979.html][HSSF、XSSF 和 SXSSF 区别以及 Excel 导出优化 - PC 君 - 博客园]]
 
 * Guava
 ** Caches
@@ -33,6 +34,10 @@
    在构建时可以指定 ~CacheLoader~ 自动加载缓存到内存，也可以使用 ~Cache.get(key, Callable)~ 来加载。
 
    参考：
-   + [[https://segmentfault.com/a/1190000011105644][Guava Cache用法介绍 - 个人文章 - SegmentFault 思否]]
+   + [[https://segmentfault.com/a/1190000011105644][Guava Cache 用法介绍 - 个人文章 - SegmentFault 思否]]
    + [[https://github.com/google/guava/wiki/CachesExplained][CachesExplained · google/guava Wiki]]
+
+* Http Client
+  + [[https://github.com/akullpp/awesome-java#http-clients][akullpp/awesome-java: A curated list of awesome frameworks, libraries and software for the Java programming language.]]
+  + [[https://liudanking.com/sitelog/java-http-client-lib-comparison/][Java HTTP 组件库选型看这篇就够了 | 行思錄 | Travel Coder]]  
 

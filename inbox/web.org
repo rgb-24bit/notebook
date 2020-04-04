@@ -144,3 +144,13 @@
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/apply][Function.prototype.apply() - JavaScript | MDN]]
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind][Function.prototype.bind() - JavaScript | MDN]]
 
+* Misc
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect][Element.getBoundingClientRect() - Web API 接口参考 | MDN]]
+
+* 前端
+  + JavaScript 模块化标准、语言标准、宿主环境、编译器 Babel
+  + HTML/CSS 预处理器
+  + Webpack 打包工具
+  + [[https://github.com/wallstreetcn/webpack-and-spa-guide][wallstreetcn/webpack-and-spa-guide: Webpack 4 和单页应用入门]]
+
+

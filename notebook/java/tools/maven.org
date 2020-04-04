@@ -10,6 +10,7 @@
 - [[#多模块项目][多模块项目]]
   - [[#依赖版本管理][依赖版本管理]]
   - [[#注意事项][注意事项]]
+- [[#pom-relationships][POM Relationships]]
 - [[#使用技巧][使用技巧]]
   - [[#查看项目依赖树][查看项目依赖树]]
   - [[#编译时跳过下载-snapshot-依赖][编译时跳过下载 SNAPSHOT 依赖]]
@@ -158,6 +159,45 @@
        mvn clean package -pl module_a,module_b -am -Dmaven.test.skip=true
      #+end_src
 
+* POM Relationships
+  Maven 可以处理项目之间的依赖、继承和聚合关系，特别是对于多模块的项目来说，这些功能尤为重要。
+
+  子模块可以继承父模块的：
+  + groupId
+  + version
+  + description
+  + url
+  + inceptionYear
+  + organization
+  + licenses
+  + developers
+  + contributors
+  + mailingLists
+  + scm
+  + issueManagement
+  + ciManagement
+  + properties
+  + dependencyManagement
+  + dependencies
+  + repositories
+  + pluginRepositories
+  + build
+    + plugin executions with matching ids
+    + plugin configuration
+    + etc.
+  + reporting
+  + profiles
+
+  不能继承的有：
+  + artifactId
+  + name
+  + prerequisites
+
+  当项目是多模块项目时，在根 pom 上运行 maven 指令会将指令传递到各个子模块中执行，并根据各模块之间的依赖关系排好序。
+
+  参考：
+  + [[https://maven.apache.org/pom.html#POM_Relationships][POM Relationships]]
+
 * 使用技巧
 ** 查看项目依赖树
    可以通过如下命令查看依赖树，并将依赖树输出到指定文件：
@@ -281,13 +321,14 @@
    #+END_SRC
 
 ** Maven 怎样解决依赖冲突的问题的
-   当依赖存在冲突时，Maven 自动选择依赖树中离根节点最近的依赖。
+   当依赖存在冲突时，Maven 自动选择依赖树中离根节点最近的依赖，当两个距离一样时声明优先。
 
    比如：A -> B -> C -> D[1.0], A -> C -> D[2.0]，此时，Maven 会选择 D[2.0]。
 
    最直接的解决方法就是在 pom 中直接指定版本。
 
    参考：[[http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management][Maven – Introduction to the Dependency Mechanism]]
+
 ** GA 版本是什么意思 
    GA 是单词 General Availability 的缩写，即一般可用性，可以参考：
    + [[https://stackoverflow.com/questions/2140010/what-does-ga-means-in-hibernate-versions][software lifecycle - What does GA means in hibernate versions? - Stack Overflow]]

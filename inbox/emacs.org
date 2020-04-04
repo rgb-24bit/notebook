@@ -34,3 +34,41 @@
 
 
    
+* Info
+  + n -> next node - same level
+  + p -> prev node - same level
+  + spc -> move forward(node)
+  + del -> move backforward(node)
+  + ] -> next node
+  + [ -> prev node
+  + page up -> move forward
+  + page down -> move backforward
+  + C-l -> recenter top bottom
+  + b -> go to begining
+  + H/? -> help
+  + m -> go to subnode
+  + <TAB>/S-<TAB> -> next/prev menu/ref
+  + RET -> enter node
+  + u -> go to up
+  + f -> go to cross ref
+  + i -> search index
+  + l -> history: go to backforward node
+  + r -> history: go to forward node
+  + L -> Info history
+  + d -> go to dir node
+  + t -> go to top node
+  + q -> exit
+
+
+  -----
+
+  Nodes:
+  + Help-Inv
+
+
+  -----
+
+  Menus:
+  * Brief name for subtopic:  Name of node.  Description.
+  * Brief name for subtopic:: subtopic name adn node name are the same.
+

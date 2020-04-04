@@ -31,3 +31,8 @@
 
 * Gnuplot
   + [[https://www.ibm.com/developerworks/cn/linux/l-gnuplot/][gnuplot 让您的数据可视化]]
+* 200/201
+  200 when an object is created and returned
+  201 when an object is created but only its reference is returned (such as an ID or a link)
+
+  复数

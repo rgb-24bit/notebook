@@ -1,0 +1,3 @@
+* 终端
+  默认模式为 canonical mode，在键入 Enter 才将输入发送给目标程序。
+

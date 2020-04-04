@@ -31,3 +31,5 @@
 * TCP
   + [[https://blog.csdn.net/goodstuddayupyyeah/article/details/70247685][TCP三次握手第三次握手时ACK丢失怎么办_网络_Vi的博客-CSDN博客]]
 
+* IPv6
+
