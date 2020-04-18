@@ -9,6 +9,7 @@
   - [[#桥接模式和策略模式的区别][桥接模式和策略模式的区别]]
   - [[#代理模式和装饰模式之间的区别][代理模式和装饰模式之间的区别]]
   - [[#策略模式和状态模式之间的区别][策略模式和状态模式之间的区别]]
+  - [[#策略模式和模板方法之间的区别][策略模式和模板方法之间的区别]]
 
 * 面向对象设计原则
   |--------------+------------------------------------------------|
@@ -86,4 +87,11 @@
 
    参考：
    + [[https://www.runoob.com/w3cnote/state-vs-strategy.html][策略模式 VS 状态模式 | 菜鸟教程]]
+
+** 策略模式和模板方法之间的区别
+   + 模板方法：通过子类来选择算法
+   + 策略模式：通过组合来选择算法
+
+   参考：
+   + [[https://stackoverflow.com/questions/669271/what-is-the-difference-between-the-template-method-and-the-strategy-patterns][What is the difference between the template method and the strategy patterns? - Stack Overflow]]
 

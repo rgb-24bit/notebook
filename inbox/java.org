@@ -86,4 +86,13 @@
        #+BEGIN_QUOTE
        This class is designed to be a useful basis for most kinds of synchronizers that rely on a _single atomic int value_ to represent state
        #+END_QUOTE
+    3. [[https://www.infoq.cn/article/1ggzj_oFl8wuJFwVG9et][简明高效的 Java 并发编程学习指南 - InfoQ]]
+
+* Idea
+  + [[https://stackoverflow.com/questions/14146422/automatically-generating-of-type-and-reference-to-returned-object-for-method-usi][java - Automatically generating of type and reference to returned object for method using hot keys in Intellij IDEA - Stack Overflow]]
+  + Inlay hints
+
+* ?
+  JsonFormat - DateTimeFormat
+
 

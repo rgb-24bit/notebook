@@ -89,6 +89,9 @@
     0b1000
   #+end_src
 
+  强者的写法：
+  + https://github.com/dotnet/corert/blob/master/src/System.Private.CoreLib/shared/System/Numerics/BitOperations.cs#L187
+
   -----
   
   在 Java 的 HashMap 和 ConcurrentHashMap 中可以发现计算索引时通过 ~(tab.length - 1) & hash~ 的方式完成的，这是因为：

@@ -22,3 +22,6 @@
   + [[https://juejin.im/post/5c0f1739f265da616c65724e][linux的IO模型 - 掘金]]
   + [[https://www.cnkirito.moe/future-and-promise/][JAVA 拾遗 --Future 模式与 Promise 模式 | 徐靖峰|个人博客]]
 
+* 编辑器
+  + [[https://viewsourcecode.org/snaptoken/kilo/index.html][Build Your Own Text Editor]]
+

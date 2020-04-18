@@ -1,12 +1,25 @@
 #+TITLE:      Spring Data
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#spring-data][spring-data]]
 - [[#spring-data-redis][spring-data-redis]]
 - [[#spring-data-jdbc][spring-data-jdbc]]
   - [[#多数据源][多数据源]]
     - [[#mybatis][mybatis]]
   - [[#使用事务][使用事务]]
   - [[#使用-dataaccessexception][使用 DataAccessException]]
+
+* spring-data
+  无论是哪种持久化存储，数据访问对象通常都会提供对单一域对象的 CRUD 操作、查询方法、排序和分页方法等。
+  Spring Data 则提供了基于这些层面的统一接口以及对持久化存储的实现。  
+
+  通常，Spring Data 会提供：
+  + 模板 - 如 MongodbTemplate
+  + 对象、数据存储映射 - 如 @Document
+  + 对数据访问对象的支持 - 如 Repository
+
+  参考：
+  + [[https://www.infoq.cn/article/spring-data-intro][Spring Data —— 完全统一的 API？ - InfoQ]]
 
 * spring-data-redis
   Spring Boot 中整合 Redis 是一件很容易的事情，简单的操作的话，可以通过 RedisTemplate 来完成：

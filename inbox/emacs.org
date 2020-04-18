@@ -33,7 +33,12 @@
    + [[https://www.emacswiki.org/emacs/CDLaTeX][EmacsWiki: CDLaTeX]]
 
 
-   
+* Minor mode
+  + visible-mode
+  + whitespace-mode
+  + auto-fill-mode
+  + overwrite-mode
+
 * Info
   + n -> next node - same level
   + p -> prev node - same level
@@ -71,4 +76,93 @@
   Menus:
   * Brief name for subtopic:  Name of node.  Description.
   * Brief name for subtopic:: subtopic name adn node name are the same.
+
+* Screen
+  We will use the term “frame” to mean a graphical window or terminal screen occupied by Emacs.
+
+  The last line of the window is a “mode line”.
+
+  #+begin_example
+    Frame
+      Menu bar
+      Tool bar
+      Window
+        buffer text
+        scroll bar
+        mode line
+      Echo area
+  #+end_example
+
+  The echo area is also used to display the “minibuffer”, a special window where you can input arguments to commands, such as the name of a file to be edited.
+  You can always get out of the minibuffer by typing ‘C-g’.
+
+* User Input
+  + Simple characters - a, B, 3, =, SPC...
+  + Control characters - RET, TAB, DEL, ESC, F1...
+  + modifier keys recognized control characters, Control, Meta...
+  + <ESC> Can press nad release it. <Meta> can't.
+
+* Keys
+  + complete key
+  + prefix key
+  + By default, the prefix keys in Emacs are ‘C-c’, ‘C-h’, ‘C-x’, ‘C-x <RET>’, ‘C-x @’, ‘C-x a’, ‘C-x n’, ‘C-x r’, ‘C-x v’, ‘C-x 4’, ‘C-x 5’, ‘C-x 6’, <ESC>, ‘M-g’, and ‘M-o’.
+    (<F1> and <F2> are aliases for ‘C-h’ and ‘C-x 6’.)
+
+* Entering Emacs
+  + emacs & !!!
+  + ‘C-x C-c’ behaves specially if you are using Emacs as a server.  
+    If you type it from a client frame, it closes the client connection.
+  + confirm-kill-emacs
+  + confirm-kill-processes
+
+* Edit
+  + type C-j, which inserts just a newline, without any auto-indentation.
+  + Only graphic characters can be inserted by typing the associated key;
+    other keys act as editing commands and do not insert themselves.
+
+    e.g., <DEL> - delete-backward-char
+
+    graphic characters maybe like python string.printable:
+    #+begin_example
+      '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
+    #+end_example
+  + C-q, read-quoted-char-radix
+  + C-x 8 - Insert unicode characters
+  + M-r - move point to begin left, center left, bottom left, behaive like c-l
+  + M-g c goto char
+  + M-g M-g go to line
+  + M-g <TAB> move point to current line N
+  + C-o Insert blank line, C-x C-o Delete all but one of many consecutive blank lines
+  + Continuation Lines/Truncate Lines/Visual Line Mode
+  + Cursor Position Information
+    #+begin_example
+      ‘M-x what-line’
+           Display the line number of point.
+      ‘M-x line-number-mode’
+      ‘M-x column-number-mode’
+           Toggle automatic display of the current line number or column
+           number.  *Note Optional Mode Line::.  If you want to have a line
+           number displayed before each line, see *note Display Custom::.
+
+      ‘M-=’
+           Display the number of lines, words, and characters that are present
+           in the region (‘count-words-region’).  *Note Mark::, for
+           information about the region.
+
+      ‘M-x count-words’
+           Display the number of lines, words, and characters that are present
+           in the buffer.  If the region is active (*note Mark::), display the
+           numbers for the region instead.
+
+      ‘C-x =’
+           Display the character code of character after point, character
+           position of point, and column of point (‘what-cursor-position’).
+      ‘M-x hl-line-mode’
+           Enable or disable highlighting of the current line.  *Note Cursor
+           Display::.
+      ‘M-x size-indication-mode’
+           Toggle automatic display of the size of the buffer.  *Note Optional
+           Mode Line::.
+    #+end_example
+  + C-x z Repeat Command
 

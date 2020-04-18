@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#浏览器指纹][浏览器指纹]]
 - [[#控制台输出][控制台输出]]
+- [[#http-referer][HTTP Referer]]
 
 * 浏览器指纹
   随着互联网络的广泛普及，数以亿计网民的网络行为数据早已成为最宝贵的资源，企业通过五花八门的各种手段了解网民的行为和隐私数据，用于广告投递、用户兴趣分析等，进而作为决策的依据，
@@ -23,3 +24,17 @@
     console.log('%cEnvironment%cproduction','color:#fff;background:#ccc;','color:#fff;background:green');
   #+end_src
 
+* HTTP Referer
+  有些网站不允许图片外链，只有自家的网站才能显示图片，外部网站加载图片就会报错。它的实现就是基于 Referer 字段，如果该字段的网址是自家网址，就放行。
+
+  可以通过如下方式选择不发送 Referer：
+  #+begin_src html
+    <meta name="referrer" content="origin">
+  #+end_src
+
+  其中，用户在地址栏输入网址，或者选中浏览器书签，是不会发送 Referer 字段的。
+
+  参考：
+  + [[https://segmentfault.com/a/1190000011628835][【前端】解决访问api图片403禁止访问问题 - 前端探秘 - SegmentFault 思否]]
+  + [[http://www.ruanyifeng.com/blog/2019/06/http-referer.html][HTTP Referer 教程 - 阮一峰的网络日志]]
+  

@@ -1,0 +1,4 @@
++ [[https://stackoverflow.com/questions/32877064/how-to-use-aggregrate-in-mongodb-to-match-id][How to use aggregrate in mongodb to $match _id - Stack Overflow]]
++ [[https://www.runoob.com/mongodb/mongodb-aggregate.html][MongoDB 聚合 | 菜鸟教程]]
++ [[https://docs.mongodb.com/manual/reference/operator/aggregation/size/][$size (aggregation) — MongoDB Manual]]
+

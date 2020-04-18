@@ -333,6 +333,7 @@
     #+END_SRC
   + 通过 alias 命令定义别名，通过 unalias 删除别名
   + 通过 bash 函数可以修改当前的位置，在 CMD 中不行
+  + 通过 ~%{jobId}~ 的方式快速使用 ~fg~ 命令
 
 * 相关问题
 ** Terminal、TTY、Shell 等的区别

@@ -92,3 +92,9 @@
 * IOC
   + [[https://juejin.im/post/5c98a7b4f265da60ee12e9b2][spring 是如何解决循环依赖的？ - 掘金]]
 
+* qa
+  + [[https://stackoverflow.com/questions/53996250/the-bean-datasource-defined-in-beandefinition-defined-in-class-path-resource][spring - The bean 'dataSource', defined in BeanDefinition defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$H - Stack Overflow]]
+  + [[https://www.cnblogs.com/larryzeal/p/5552360.html][Intellij IDEA Module 的Language Level的问题 - LarryZeal - 博客园]]
+  + [[https://blog.csdn.net/andy_zhang2007/article/details/87908507][Spring Cloud 声明式REST客户端 OpenFeign -- 10. 注解@QueryMap支持_Java_Details Inside Spring-CSDN博客]]
+
+
