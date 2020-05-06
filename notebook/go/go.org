@@ -1,0 +1,170 @@
+#+TITLE:      GoLang
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#go-语言起源][Go 语言起源]]
+- [[#简单语句][简单语句]]
+- [[#程序结构][程序结构]]
+  - [[#命名][命名]]
+  - [[#声明][声明]]
+- [[#数据类型][数据类型]]
+  - [[#指针][指针]]
+
+* Go 语言起源
+  Go 语言的设计主要受到 CSP、Pascal 和 C 三个分支的影响，其中，CSP 只是一个用于描述并发性基本概念的描述语言，
+  并不是一个可以编写可执行程序的通用编程语言。
+  
+  在 CSP 中，程序是一组中间没有共享状态的平行运行的处理过程，它们之间使用 *管道* 进行通信和控制同步。
+
+  #+HTML: <img src="https://books.studygolang.com/gopl-zh/images/ch0-01.png">
+  
+  Go 语言的设计虽然参考了其他语言，但是，本身的设计上是很简单的，也就是说，缺少一些在其他语言中很常见的特性。例如，
+  它没有隐式的数值转换，没有构造函数和析构函数，没有运算符重载，没有默认参数，也没有继承，没有泛型，没有异常，
+  没有宏，没有函数修饰，更没有线程局部存储。
+
+  这体现了 Go 语言的一个设计哲学——少即是多（感觉某些时候会很蛋疼）
+
+  可以参考：
+  + [[https://en.wikipedia.org/wiki/Communicating_sequential_processes][Communicating sequential processes - Wikipedia]]
+  + [[https://books.studygolang.com/gopl-zh/ch0/ch0-01.html][Go语言起源 | Go语言圣经]]
+  + [[https://books.studygolang.com/gopl-zh/ch0/ch0-02.html][Go语言项目 | Go语言圣经]]
+
+* 简单语句
+  Go 语言不需要在语句或者声明的末尾添加分号，除非一行上有多条语句，因为编译器会主动把特定符号后的换行符转换为分号，主要包括以下情况：
+  + 行末是标识符、整数、浮点数、虚数、字符或字符串文字、关键字 break、continue、fallthrough 或 return 中的一个
+  + 行末是运算符和分隔符 ++、--、)、] 或 } 中的一个
+
+  也就是说，这样的代码会出问题：
+  #+begin_src go
+    f(
+      a(), b(), c()
+    )
+  #+end_src
+
+  但是可以这样：
+  #+begin_src go
+    f(
+      a(), b(), c(),
+    )
+  #+end_src
+
+* 程序结构
+** 命名
+   Go 语言中标识符必须以字母（Unicode 字母）或下划线开头，后面跟任意数量的字母、数组或下划线，大小写敏感。
+
+   关键字和内建名字有：
+   #+begin_example
+     Keywords:
+         break      default       func     interface   select
+         case       defer         go       map         struct
+         chan       else          goto     package     switch
+         const      fallthrough   if       range       type
+         continue   for           import   return      var
+
+     Built-in Constants:
+         true false iota nil
+
+     Built-in Types:
+         int     int8    int16      int32     int64
+         uint    uint8   uint16     uint32    uint64 uintptr
+         float32 float64 complex128 complex64
+         bool    byte    rune       string    error
+
+     Built-in Functions:
+         make    len     cap  new append copy close delete
+         complex real    imag
+         panic   recover
+   #+end_example
+  
+   #+begin_quote
+   内建名字可以被从新定义，但是也要注意避免过度而引起语义混乱。
+   #+end_quote
+
+   如果一个名字是在函数内部定义，那么它的就只在函数内部有效。如果是在函数外部定义，那么将在当前包的所有文件中都可以访问。
+   名字的开头字母的大小写决定了名字在包外的可见性。如果一个名字是大写字母开头的，那么它将是导出的。
+
+   名字的长度没有逻辑限制，但是 Go 语言的风格是尽量使用短小的名字，对于局部变量尤其是这样。
+
+   #+begin_comment
+   a, b, c, d, e...?
+   #+end_comment
+  
+   同时，在习惯上，Go 语言程序员推荐使用 *驼峰式* 命名，当名字有几个单词组成的时优先使用大小写分隔，而不是优先用下划线分隔。
+  
+** 声明
+   声明语句定义了程序的各种实体对象以及部分或全部的属性。Go 语言主要有四种类型的声明语句：var、const、type 和 func，
+   分别对应变量、常量、类型和函数实体对象的声明。
+
+   Go 语言编写的程序对应一个或多个以 =.go= 为文件后缀名的源文件中。每个源文件以包的声明语句开始，说明该源文件是属于哪个包。
+   包声明语句之后是 =import= 语句导入依赖的其它包，然后是包一级的类型、变量、常量、函数的声明语句，
+   包一级的各种类型的声明语句的顺序无关紧要（函数内部的名字则必须先声明之后才能使用）。
+   #+begin_src go
+     // =============================================================================
+     // package declare
+     // =============================================================================
+
+     package main
+
+     // =============================================================================
+     // import statement
+     // =============================================================================
+
+     import "fmt"
+
+     // =============================================================================
+     // package-level declarations of types, variables, constants, and functions
+     // =============================================================================
+
+     func main() {
+         fmt.Println("Hello, World!")
+     }
+   #+end_src
+
+   + 变量 ::
+     可以通过 =var= 关键字声明变量，类型放在最后面，只能有一个类型：
+     #+begin_src go
+       var c, python, java bool
+     #+end_src
+     
+     使用初始值是可以通过类型推断自动判断类型，可以有多个类型的值：
+     #+begin_src go
+       var c, python, java = true, false, "no!"
+     #+end_src
+     
+     可以使用 ~:=~ 代理具有隐式类型声明的 =var= 语句，这需要左值为一个新的变量，由于函数外面的语句必须由关键字开始，因此函数外面无法使用这一语句：
+     #+begin_src go
+       c, python, java := true, false, "no!"
+     #+end_src
+
+     变量的生命周期为：
+     + 对于包一级声明的变量来说，它们的生命周期和整个程序的运行周期是一致的
+     + 对于局部变量来说，它们的生命周期为每次从创建一个新变量的声明语句开始，直到该变量不再被引用为止，然后变量的存储空间可能被回收
+     
+     其中，函数的参数变量和返回值变量都是局部变量，它们在函数每次被调用的时候创建。
+
+     可以参考：《Go 程序设计语言 2.3.4 节》
+
+
+
+* 数据类型
+** 指针
+   Go 中存在指针，和 C 语言不同的是：
+   1. Go 语言中的指针是不能偏移的，不能像 C 语言中那样，拿到个指针就可以到处飘了
+   2. Go 语言中返回函数中局部变量的地址也是安全的
+
+   这就使得下面这个操作的含义和 C 语言中的不一样，C 语言中是让指针 p 的值发生偏移，但是 Go 中是让 p 指向的变量的值加一：
+   #+begin_src go
+     func incr(p *int) int {
+         ,*p++
+         return *p
+     }
+   #+end_src
+
+   可以通过内建函数 =new= 创建变量，表达式 =new(T)= 将创建一个 =T= 类型的匿名变量，初始化为 =T= 类型的零值，然后返回变量地址，类型为 =*T= 的指针，
+   一定程度上等价于如下函数：
+   #+begin_src go
+     func newInt() *int {
+         var dummy int
+         return &dummy
+     }
+   #+end_src
+   

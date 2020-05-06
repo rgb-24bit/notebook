@@ -1,0 +1,91 @@
+#+TITLE:      使用技巧
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#批量修改文件名称][批量修改文件名称]]
+- [[#录制键盘宏][录制键盘宏]]
+- [[#版本控制-vc][版本控制 VC]]
+- [[#undotree][undotree]]
+- [[#重复操作][重复操作]]
+- [[#实用指令][实用指令]]
+- [[#性能监控][性能监控]]
+- [[#矩形编辑][矩形编辑]]
+- [[#保存-scratch-缓冲区的代码][保存 scratch 缓冲区的代码]]
+- [[#插入文件中的内容][插入文件中的内容]]
+- [[#快速的创建多级目录][快速的创建多级目录]]
+- [[#find-file][find file]]
+
+* 批量修改文件名称
+  通过 ~dired-mode~ 的编辑模式完成这一工作：
+  1. 通过快捷键 ~C-x C-q~ 进入编辑模式
+  2. 通过文本编辑方式批量修改文件名称
+  3. 使用快捷键 ~C-c C-c~ 保存修改
+
+* 录制键盘宏
+  通过快捷键 ~F3~ 开始录制宏，快捷键 ~F4~ 结束录制，结束录制后通过快捷键 ~F4~ 进行使用。
+
+  可以通过快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
+
+* 版本控制 VC 
+  通过命令 ~vc-version-diff~ 进行版本对比。
+
+* undotree
+  ~Emacs~ 默认的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-g C-/~.
+   
+  但是很多的配置中都使用了 ~undo-tree.el~ 这个扩展，修改了撤销的快捷键。
+
+  ~undo-tree.el~ 定义的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-?~.
+
+* 重复操作
+  通过 ~C-x z~ 重复上一次执行的指令，连续重复执行 ~C-x z z z...~ 就可以了。
+
+* 实用指令
+  + ~erase-buffer~ - 清空当前缓冲区
+
+* 性能监控
+  通过指令 ~profiler-start~ 启动性能监控，通过指令 ~profiler-report~ 显示监控结果。
+
+* 矩形编辑
+  矩形编辑中常用的一些快捷键：
+  |------------------------------------------------+----------------------------|
+  | 快捷键                                         | 作用                       |
+  |------------------------------------------------+----------------------------|
+  | C-x r k                                        | 剪切矩形区域的内容         |
+  | C-x r M-w                                      | 复制矩形区域的内容         |
+  | C-x r d                                        | 删除矩形区域的内容         |
+  | C-x r y                                        | 粘贴复制的矩形区域         |
+  | C-x r N                                        | 在矩形边缘插入行号         |
+  | M-x string-insert-rectangle <RET> string <RET> | 在矩形的每一行上插入字符串 |
+  |------------------------------------------------+----------------------------|
+
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Rectangles.html][Rectangles - GNU Emacs Manual]]
+
+* 保存 scratch 缓冲区的代码
+  #+BEGIN_SRC elisp
+    (setq initial-scratch-message "")
+
+    (setq initial-buffer-choice
+          '(lambda ()
+             (let ((buf (get-buffer-create "*scratch*"))
+                   (file "~/.emacs.d/scratch.el"))
+               (with-current-buffer buf
+                 (insert-file-contents file)
+                 (local-set-key
+                  "\C-x\C-s"
+                  '(lambda ()
+                     (interactive)
+                     (let ((str (buffer-string)))
+                       (with-current-buffer
+                           (find-file "~/.emacs.d/scratch.el")
+                         (erase-buffer)   (insert str)
+                         (save-buffer)    (kill-buffer)
+                         )))))
+               buf)))
+  #+END_SRC
+
+* 插入文件中的内容
+  通过快捷键 ~C-x i~ 可以快速的插入指定文件中的内容到当前位置。
+
+* 快速的创建多级目录
+  通过命令 ~make-directory~ 可以很方便的快速创建多级目录。
+
+* find file

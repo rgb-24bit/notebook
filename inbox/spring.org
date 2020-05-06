@@ -97,4 +97,12 @@
   + [[https://www.cnblogs.com/larryzeal/p/5552360.html][Intellij IDEA Module 的Language Level的问题 - LarryZeal - 博客园]]
   + [[https://blog.csdn.net/andy_zhang2007/article/details/87908507][Spring Cloud 声明式REST客户端 OpenFeign -- 10. 注解@QueryMap支持_Java_Details Inside Spring-CSDN博客]]
 
+* caching
+  + [[https://juejin.im/post/5da52d55f265da5b5b6c6d3f#heading-4][Spring Boot 2.X(七)：Spring Cache 使用 - 掘金]]
+
+* mongodb
+  + [[https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#mongo.query][Spring Data MongoDB - Reference Documentation]]
+  + [[https://www.cnblogs.com/hapjin/p/7944404.html][MongoDB统计文档(Document)的数组(Array)中的各个元素出现的次数 - hapjin - 博客园]]
+
+
 

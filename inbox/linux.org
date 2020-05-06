@@ -16,3 +16,5 @@
    + [[https://www.ibm.com/developerworks/cn/linux/l-cn-filelock/index.html][Linux 2.6 中的文件锁]]
 
 
+* debian
+  + [[https://wiki.debian.org/Java/][Java - Debian Wiki]]

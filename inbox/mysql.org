@@ -38,3 +38,7 @@
 * myisam
   + [[https://www.cnblogs.com/jayxuan/p/10711435.html][MyIASM和Innodb引擎详解 - 小虾同学 - 博客园]]
 
+* docker
+  + https://stackoverflow.com/questions/8062496/how-to-change-max-allowed-packet-size
+  + https://stackoverflow.com/questions/39369367/increase-max-allowed-packet-size-in-mysql-docker
+

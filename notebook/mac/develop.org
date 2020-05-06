@@ -10,6 +10,7 @@
 - [[#npm-指令老是提示没有权限的问题][npm 指令老是提示没有权限的问题]]
 - [[#命令行获取-cpu-信息][命令行获取 CPU 信息]]
 - [[#设置-emacs-为-git-message-的编辑器][设置 emacs 为 git message 的编辑器]]
+- [[#emacs-安装][Emacs 安装]]
 - [[#通过-homebrew-安装程序时如何指定编译参数][通过 Homebrew 安装程序时如何指定编译参数]]
 - [[#安卓调试相关问题][安卓调试相关问题]]
 
@@ -104,6 +105,14 @@
   #+begin_src conf
     editor = "/usr/local/bin/emacsclient -c"
   #+end_src
+
+* Emacs 安装
+  #+begin_src bash
+    $ brew install emacs-mac --with-modules
+  #+end_src  
+
+  + [[https://github.com/railwaycat/homebrew-emacsmacport][railwaycat/homebrew-emacsmacport: Emacs mac port formulae for the Homebrew package manager]]
+  + [[https://emacs-china.org/t/mac-emacs/2582/16][Mac 上哪个版本的 emacs 比较好？ - Emacs-general - Emacs China]]
 
 * 通过 Homebrew 安装程序时如何指定编译参数
   可以通过 ~brew options formula~ 的方式来获取支持的编译参数，使用时直接在后面添加就可以了，比如：

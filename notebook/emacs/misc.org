@@ -1,0 +1,83 @@
+#+TITLE:      Misc
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#快捷键][快捷键]]
+- [[#概念问题][概念问题]]
+  - [[#前缀参数][前缀参数]]
+  - [[#编码问题][编码问题]]
+  - [[#emacs-server][emacs server]]
+  - [[#字体与字体集][字体与字体集]]
+- [[#相关问题][相关问题]]
+  - [[#怎样获取-emacs-编译时的参数][怎样获取 Emacs 编译时的参数]]
+  - [[#怎样绑定-c-return-为快捷键][怎样绑定 C-return 为快捷键]]
+
+* 快捷键
+  窗口操作相关快捷键：
+  + 快捷键 ~C-x ^~ 扩大当前窗口高度
+  + 快捷键 ~C-x }~ 扩大当前窗口宽度
+  + 快捷键 ~C-x {~ 缩减当前窗口宽度
+  + 快捷键 ~C-x -~ 缩小窗口以适应内容
+  + 快捷键 ~C-x +~ 使所有窗口等宽等高
+
+  帮助操作相关快捷键：
+  + 快捷键 ~C-h C-h~ 查看关于帮助的帮助
+  + 快捷键 ~C-h r~ 在 Emacs 类阅读 Emacs manual
+  + 快捷键 ~C-h l~ 查看最近输入了什么按键以及对应的命令
+
+  缓冲区操作相关快捷键：
+  + 保存所有缓冲区 - ~C-u C-x s~
+
+* 概念问题
+** 前缀参数
+   可以通过 ~C-u~ 指定或指示需要输入前缀参数，比如在 ~org-mode~ 中创建脚注的时候，是可以指定前缀参数的：
+   + [[https://orgmode.org/manual/Footnotes.html][The Org Manual: Footnotes]]
+
+   指示需要前缀参数的使用方式：
+   #+BEGIN_EXAMPLE
+   C-u C-c C-x f
+   #+END_EXAMPLE
+
+** 编码问题
+   Emacs 中根据换行符的样式将同一种编码分为 ~unix~, ~dos~, ~mac~ 三类，可以参考：
+   + [[http://ergoemacs.org/emacs/emacs_line_ending_char.html][Emacs: Newline Representation ^M ^J ^L]]
+   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Coding-Systems.html#Coding-Systems][Coding Systems - GNU Emacs Manual]]
+
+   另外，这是 Spacemacs 中的 mode-line 显示编码的方式：
+   #+BEGIN_SRC elisp
+     (defun buffer-encoding-abbrev ()
+       "The line ending convention used in the buffer."
+       (let ((buf-coding (format "%s" buffer-file-coding-system)))
+         (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+             (match-string 1 buf-coding)
+           buf-coding)))
+   #+END_SRC  
+
+** emacs server
+   在 Windows 系统上可以通过 ~runemacs --daemon~ 的方式启动 ~emacs server~, 通过 ~emacsclient~ 连接服务器。
+
+   连接 ~emacs server~ 的时候，可以通过 ~c~ 参数创建一个新的 Frame，通过参数 ~n~ 不用等待服务器返回。
+
+   关闭服务器可以通过如下方式：
+   #+BEGIN_SRC bash
+     $ emacsclient -e "(kill-emacs)"
+   #+END_SRC
+
+   参考：[[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki: Emacs As Daemon]]
+
+** 字体与字体集
+   + [[https://archive.casouri.co.uk/note/2019/emacs-%E5%AD%97%E4%BD%93%E4%B8%8E%E5%AD%97%E4%BD%93%E9%9B%86/index.html][Emacs，字体与字符集]]
+
+* 相关问题
+** 怎样获取 Emacs 编译时的参数
+   可以通过 ~system-configuration-options~ 变量的值来进行查看，参考：
+   + [[https://emacs.stackexchange.com/questions/35497/does-emacs-have-an-option-to-display-build-settings][config - Does emacs have an option to display build settings? - Emacs Stack Exchange]]
+
+** 怎样绑定 C-return 为快捷键
+   使用如下的方式：
+   #+begin_src elisp
+     (define-key my-keys-mode-map (kbd "<C-return>") 'my-function)
+   #+end_src
+
+   参考：
+   + [[https://emacs.stackexchange.com/questions/31375/how-can-i-bind-c-return-with-define-key-and-kbd][key bindings - How can I bind C-return with define-key and kbd? - Emacs Stack Exchange]]
+

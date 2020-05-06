@@ -1,2 +1,17 @@
-+ [[https://segmentfault.com/a/1190000002443283][git 文件打包命令 - 海诺 - SegmentFault 思否]]
+* package
+  + [[https://segmentfault.com/a/1190000002443283][git 文件打包命令 - 海诺 - SegmentFault 思否]]
+
+* after clone --depth 1
+  1. git pull --unshallow
+  2. edit .git/config
+     #+begin_example
+       [remote "origin"]
+               url = git@github.com:rgb-24bit/spacemacs.git
+               fetch = +refs/heads/master:refs/remotes/origin/master
+
+
+       [remote "origin"]
+               url = git@github.com:rgb-24bit/spacemacs.git
+               fetch = +refs/heads/*:refs/remotes/origin/*
+     #+end_example
 

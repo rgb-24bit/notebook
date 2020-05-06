@@ -95,4 +95,6 @@
 * ?
   JsonFormat - DateTimeFormat
 
+* utils
+  + [[https://stackoverflow.com/questions/2895342/java-how-can-i-split-an-arraylist-in-multiple-small-arraylists][Java: how can I split an ArrayList in multiple small ArrayLists? - Stack Overflow]]
 

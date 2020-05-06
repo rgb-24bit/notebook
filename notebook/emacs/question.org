@@ -13,6 +13,7 @@
 - [[#怎样通过-use-package-加载使用主题][怎样通过 use-package 加载使用主题]]
 - [[#spacemacs-中进行粘贴时怎样保留内容缩进格式][Spacemacs 中进行粘贴时怎样保留内容缩进格式]]
 - [[#怎样判断当前的环境是不是终端环境][怎样判断当前的环境是不是终端环境]]
+- [[#如何自定义快捷键][如何自定义快捷键]]
 
 * 怎样在 org-mode 的表格中插入竖线
   使用符号 ~\vert~ 代替，导出时会显示为竖线，参考：
@@ -88,4 +89,20 @@
 
   参考：
   + [[https://emacs.stackexchange.com/questions/13050/different-theme-for-nw-terminal][Different theme for -nw (terminal) - Emacs Stack Exchange]]
+
+* 如何自定义快捷键
+  通过函数 ~global-set-key~ 来设置全局的快捷键：
+  #+BEGIN_SRC elisp
+    (global-set-key (kbd "C-x C-\\") 'next-line)
+    (global-set-key "\C-x\C-\\" 'next-line)
+  #+END_SRC
+
+  如果 ~C-x~ 已经是快捷键节，就需要先通过函数 ~global-unset-key~ 取消设置：
+  #+BEGIN_SRC elisp
+    (global-unset-key "\C-x")
+  #+END_SRC
+
+  通过 ~local-set-key~ 和 ~local-unset-key~ 设置指定模式下的快捷键。
+
+  缓冲区本地快捷键可以参考： [[https://www.emacswiki.org/emacs/BufferLocalKeys][EmacsWiki: Buffer Local Keys]]
 

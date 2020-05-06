@@ -1,0 +1,88 @@
+#+TITLE:      高级数据结构
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#binary-indexed-tree][Binary Indexed Tree]]
+
+* Binary Indexed Tree
+  树状数组（Binary Indexed Tree）用于解决数组前缀和问题，在这个问题中，有一个整数数组，存在大量的对该数组的 =update= 和 =prefixSum= 操作：
+  + =update(idx, delta)= - 将 =delta= 加到位置 =idx= 的数字上
+  + 求从数组第一个位置到第 =idx= 个位置所有数字的和
+
+  针对这一问题，有两个简单的解决思路：
+  1. 执行 =prefixSum= 时遍历前缀数组，执行 =update= 时直接更新索引位置的数字，这时，时间复杂度分别为 =O(n)= 和 =O(1)=
+  2. 预先生成前缀和数组，执行 =prefixSum= 时直接取出索引位置的结果，执行 =update= 时更新该索引位置及其后的前缀和，时间复杂度分别为 =O(1)= 和 =O(n)=
+
+  如果使用树状数组，那么可以通过 =O(logn)= 级别的时间复杂度完成两个操作。
+
+  树状数组的思路是，假如需要计算 =[1, 13]= 的前缀和，这时，由于 =13 = 2 ^ 3 + 2 ^ 2 + 2 ^ 0=, 因此，可以将前缀和分解为 =[1, 8] + [9, 12] + [13]= 三部分。
+
+  我们可以预先按照这样的规律，分段计算得到前缀和数组，然后在计算前缀和和更新时反向更新，可以参考：
+  + [[https://blog.csdn.net/Yaokai_AssultMaster/article/details/79492190][树状数组（Binary Indexed Tree），看这一篇就够了_Java_正西风落叶下长安-CSDN博客]]
+  + [[https://www.youtube.com/watch?v=v_wj_mOAlig][Tutorial: Binary Indexed Tree (Fenwick Tree) - YouTube]]
+
+  实现：
+  #+begin_src python
+    # Reference: https://github.com/jakobkogler/Algorithm-DataStructures/blob/master/RangeQuery/BinaryIndexedTree.py
+
+    class BIT:
+        """Implementation of a Binary Indexed Tree (Fennwick Tree)"""
+
+        #def __init__(self, list):
+        #    """Initialize BIT with list in O(n*log(n))"""
+        #    self.array = [0] * (len(list) + 1)
+        #    for idx, val in enumerate(list):
+        #        self.update(idx, val)
+
+        def __init__(self, list):
+            """"Initialize BIT with list in O(n)"""
+            self.array = [0] + list
+            for idx in range(1, len(self.array)):
+                idx2 = idx + (idx & -idx)
+                if idx2 < len(self.array):
+                    self.array[idx2] += self.array[idx]
+
+        def prefix_query(self, idx):
+            """Computes prefix sum of up to including the idx-th element"""
+            idx += 1
+            result = 0
+            while idx:
+                result += self.array[idx]
+                idx -= idx & -idx
+            return result
+
+        def range_query(self, from_idx, to_idx):
+            """Computes the range sum between two indices (both inclusive)"""
+            return self.prefix_query(to_idx) - self.prefix_query(from_idx - 1)
+
+        def update(self, idx, add):
+            """Add a value to the idx-th element"""
+            idx += 1
+            while idx < len(self.array):
+                self.array[idx] += add
+                idx += idx & -idx
+
+
+    if __name__ == '__main__':
+        array = [1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5]
+        bit = BIT(array)
+        print('Array: [{}]'.format(', '.join(map(str, array))))
+        print()
+
+        print('Prefix sum of first {} elements: {}'.format(13, bit.prefix_query(12)))
+        print('Prefix sum of first {} elements: {}'.format(7, bit.prefix_query(6)))
+        print('Range sum from pos {} to pos {}: {}'.format(1, 5, bit.range_query(1, 5)))
+        print()
+
+        bit.update(4, 2)
+        print('Add {} to element at pos {}'.format(2, 4))
+        new_array = [bit.range_query(idx, idx) for idx in range(len(array))]
+        print('Array: [{}]'.format(', '.join(map(str, new_array))))
+        print()
+
+        print('Prefix sum of first {} elements: {}'.format(13, bit.prefix_query(12)))
+        print('Prefix sum of first {} elements: {}'.format(7, bit.prefix_query(6)))
+        print('Range sum from pos {} to pos {}: {}'.format(1, 5, bit.range_query(1, 5)))
+        print()
+
+  #+end_src
+

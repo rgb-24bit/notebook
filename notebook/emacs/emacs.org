@@ -1,228 +1,53 @@
 #+TITLE:      Emacs
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#简单使用][简单使用]]
-  - [[#文本编辑][文本编辑]]
-  - [[#窗口操作][窗口操作]]
-  - [[#查看帮助][查看帮助]]
-  - [[#缓冲区操作][缓冲区操作]]
-  - [[#自定义快捷键][自定义快捷键]]
-- [[#使用技巧][使用技巧]]
-  - [[#批量修改文件名称][批量修改文件名称]]
-  - [[#录制键盘宏][录制键盘宏]]
-  - [[#版本控制-vc][版本控制 VC]]
-  - [[#undotree][undotree]]
-  - [[#重复操作][重复操作]]
-  - [[#实用指令][实用指令]]
-  - [[#性能监控][性能监控]]
-  - [[#矩形编辑][矩形编辑]]
-  - [[#保存-scratch-缓冲区的代码][保存 scratch 缓冲区的代码]]
-  - [[#插入文件中的内容][插入文件中的内容]]
-  - [[#快速的创建多级目录][快速的创建多级目录]]
-  - [[#find-file][find file]]
-- [[#概念问题][概念问题]]
-  - [[#前缀参数][前缀参数]]
-  - [[#编码问题][编码问题]]
-  - [[#emacs-server][emacs server]]
-  - [[#字体与字体集][字体与字体集]]
-  - [[#hooks][Hooks]]
-- [[#休闲娱乐][休闲娱乐]]
-- [[#相关问题][相关问题]]
-  - [[#怎样让光标跳转到上一个位置][怎样让光标跳转到上一个位置]]
-  - [[#怎样获取-emacs-编译时的参数][怎样获取 Emacs 编译时的参数]]
-  - [[#怎样绑定-c-return-为快捷键][怎样绑定 C-return 为快捷键]]
+- [[#important-general-concepts][Important General Concepts]]
+  - [[#screen][Screen]]
+  - [[#user-input][User Input]]
+  - [[#keys][Keys]]
+  - [[#enter--exit][Enter & Exit]]
+- [[#fundamental-editing-commands][Fundamental Editing Commands]]
 
-* 简单使用
-** 文本编辑
-   + 使用快捷键 ~C-q~ 转义下一个将要输入的字符，通过 ~C-q C-l~ 可以输入分页符
-   + 使用快捷键 ~C-x 8~ 选择输入特殊字符，也可以通过 ~C-x 8 <key>~ 的方式输入对应的特殊字符
-   + 通过快捷键 ~C-x RET C-\ Tex RET~ 可以开启输入 ~Tex~ 字符的环境
-   + 通过快捷键 ~M-g M-g~ 跳转到指定行
-
-** 窗口操作
-   窗口大小的调整：
-   + 快捷键 ~C-x ^~ 扩大当前窗口高度
-   + 快捷键 ~C-x }~ 扩大当前窗口宽度
-   + 快捷键 ~C-x {~ 缩减当前窗口宽度
-   + 快捷键 ~C-x -~ 缩小窗口以适应内容
-   + 快捷键 ~C-x +~ 使所有窗口等宽等高
-
-** 查看帮助
-   + 快捷键 ~C-h C-h~ 查看关于帮助的帮助
-   + 快捷键 ~C-h r~ 在 Emacs 类阅读 Emacs manual
-   + 快捷键 ~C-h l~ 查看最近输入了什么按键以及对应的命令
-
-** 缓冲区操作
-   + 保存所有缓冲区 - ~C-u C-x s~
-
-** 自定义快捷键
-   通过函数 ~global-set-key~ 来设置全局的快捷键：
-   #+BEGIN_SRC elisp
-     (global-set-key (kbd "C-x C-\\") 'next-line)
-     (global-set-key "\C-x\C-\\" 'next-line)
-   #+END_SRC
-
-   如果 ~C-x~ 已经是快捷键节，就需要先通过函数 ~global-unset-key~ 取消设置：
-   #+BEGIN_SRC elisp
-     (global-unset-key "\C-x")
-   #+END_SRC
-
-   通过 ~local-set-key~ 和 ~local-unset-key~ 设置指定模式下的快捷键。
-
-   缓冲区本地快捷键可以参考： [[https://www.emacswiki.org/emacs/BufferLocalKeys][EmacsWiki: Buffer Local Keys]]
-
-* 使用技巧
-** 批量修改文件名称
-   通过 ~dired-mode~ 的编辑模式完成这一工作：
-   1. 通过快捷键 ~C-x C-q~ 进入编辑模式
-   2. 通过文本编辑方式批量修改文件名称
-   3. 使用快捷键 ~C-c C-c~ 保存修改
-
-** 录制键盘宏
-   通过快捷键 ~F3~ 开始录制宏，快捷键 ~F4~ 结束录制，结束录制后通过快捷键 ~F4~ 进行使用。
-
-   可以通过快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
-
-** 版本控制 VC 
-   通过命令 ~vc-version-diff~ 进行版本对比。
-
-** undotree
-   ~Emacs~ 默认的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-g C-/~.
-   
-   但是很多的配置中都使用了 ~undo-tree.el~ 这个扩展，修改了撤销的快捷键。
-
-   ~undo-tree.el~ 定义的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-?~.
-
-** 重复操作
-   通过 ~C-x z~ 重复上一次执行的指令，连续重复执行 ~C-x z z z...~ 就可以了。
-
-** 实用指令
-   + ~erase-buffer~ - 清空当前缓冲区
-
-** 性能监控
-   通过指令 ~profiler-start~ 启动性能监控，通过指令 ~profiler-report~ 显示监控结果。
-
-** 矩形编辑
-   矩形编辑中常用的一些快捷键：
-   |------------------------------------------------+----------------------------|
-   | 快捷键                                         | 作用                       |
-   |------------------------------------------------+----------------------------|
-   | C-x r k                                        | 剪切矩形区域的内容         |
-   | C-x r M-w                                      | 复制矩形区域的内容         |
-   | C-x r d                                        | 删除矩形区域的内容         |
-   | C-x r y                                        | 粘贴复制的矩形区域         |
-   | C-x r N                                        | 在矩形边缘插入行号         |
-   | M-x string-insert-rectangle <RET> string <RET> | 在矩形的每一行上插入字符串 |
-   |------------------------------------------------+----------------------------|
-
-   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Rectangles.html][Rectangles - GNU Emacs Manual]]
-
-** 保存 scratch 缓冲区的代码
-   #+BEGIN_SRC elisp
-     (setq initial-scratch-message "")
-
-     (setq initial-buffer-choice
-           '(lambda ()
-              (let ((buf (get-buffer-create "*scratch*"))
-                    (file "~/.emacs.d/scratch.el"))
-                (with-current-buffer buf
-                  (insert-file-contents file)
-                  (local-set-key
-                   "\C-x\C-s"
-                   '(lambda ()
-                      (interactive)
-                      (let ((str (buffer-string)))
-                        (with-current-buffer
-                            (find-file "~/.emacs.d/scratch.el")
-                          (erase-buffer)   (insert str)
-                          (save-buffer)    (kill-buffer)
-                          )))))
-                buf)))
-   #+END_SRC
-
-** 插入文件中的内容
-   通过快捷键 ~C-x i~ 可以快速的插入指定文件中的内容到当前位置。
-
-** 快速的创建多级目录
-   通过命令 ~make-directory~ 可以很方便的快速创建多级目录。
-
-** find file
-   通过命令 find-file 打开文件时，键入以下字符串具有特殊含义：
-   |----------+-------------------------------------|
-   | 字符串   | 作用                                |
-   |----------+-------------------------------------|
-   | ~driver:/~ | 跳转到指定驱动盘，需要 Windows 系统 |
-   | ~~/~       | 跳转到 ~~~ 目录                       |
-   | ~//~       | 跳转到 ~/~ 目录                       |
-   |----------+-------------------------------------|
-   
-   参考：[[https://www.emacswiki.org/emacs/FindFile][EmacsWiki: Find File]]
-
-* 概念问题
-** 前缀参数
-   可以通过 ~C-u~ 指定或指示需要输入前缀参数，比如在 ~org-mode~ 中创建脚注的时候，是可以指定前缀参数的：
-   + [[https://orgmode.org/manual/Footnotes.html][The Org Manual: Footnotes]]
-
-   指示需要前缀参数的使用方式：
-   #+BEGIN_EXAMPLE
-   C-u C-c C-x f
-   #+END_EXAMPLE
-
-** 编码问题
-   Emacs 中根据换行符的样式将同一种编码分为 ~unix~, ~dos~, ~mac~ 三类，可以参考：
-   + [[http://ergoemacs.org/emacs/emacs_line_ending_char.html][Emacs: Newline Representation ^M ^J ^L]]
-   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Coding-Systems.html#Coding-Systems][Coding Systems - GNU Emacs Manual]]
-
-   另外，这是 Spacemacs 中的 mode-line 显示编码的方式：
-   #+BEGIN_SRC elisp
-     (defun buffer-encoding-abbrev ()
-       "The line ending convention used in the buffer."
-       (let ((buf-coding (format "%s" buffer-file-coding-system)))
-         (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
-             (match-string 1 buf-coding)
-           buf-coding)))
-   #+END_SRC  
-
-** emacs server
-   在 Windows 系统上可以通过 ~runemacs --daemon~ 的方式启动 ~emacs server~, 通过 ~emacsclient~ 连接服务器。
-
-   连接 ~emacs server~ 的时候，可以通过 ~c~ 参数创建一个新的 Frame，通过参数 ~n~ 不用等待服务器返回。
-
-   关闭服务器可以通过如下方式：
-   #+BEGIN_SRC bash
-     $ emacsclient -e "(kill-emacs)"
-   #+END_SRC
-
-   参考：[[https://www.emacswiki.org/emacs/EmacsAsDaemon][EmacsWiki: Emacs As Daemon]]
-
-** 字体与字体集
-   + [[https://archive.casouri.co.uk/note/2019/emacs-%E5%AD%97%E4%BD%93%E4%B8%8E%E5%AD%97%E4%BD%93%E9%9B%86/index.html][Emacs，字体与字符集]]
-
-** Hooks
-   Hook 是 Emacs 中重要的扩展机制，是一个函数列表，会在执行某些操作后执行这个列表中的函数。
+* Important General Concepts
+** Screen
+   也许是 Emacs 的诞生比较早的原因，操作系统层面的单个窗口或终端界面在 Emacs 中的名称为 Frame。
   
-   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][Hooks - GNU Emacs Manual]]
+   在 =Frame= 内部的才是 Emacs 的 Window，每个 Window 的最后一行是一个 mode line，整体结构为：
+   #+begin_example
+     Frame
+       Menu bar
+       Tool bar
+       Window
+         buffer text
+         scroll bar
+         mode line
+       Echo area
+   #+end_example  
 
-* 休闲娱乐
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html][Games and Other Amusements]]
+   其中，echo area 还被用来显示 minibuffer（一个特殊的 Window），可以用个快捷键 =C-g= 退出 minibuffer。
 
-* 相关问题
-** 怎样让光标跳转到上一个位置
-   可以通过 ~C-Space C-Space~ 添加一个 Mark，然后通过 ~C-u C-Space~ 跳转到该位置。
+** User Input
+   Emacs 中可以将用户输入分为：
+   + Simple characters 简单字符，包括字母、数字、符号和空格
+   + Control characters 控制字符，包括 <RET>、<TAB>、<DEL>、<ESC>、<F1>、<HOME> 和 <LEFT> 等
+   + Modifier keys，通过 <Control> 和 <Meta> 可以改变接下来输入的字符的含义，变为控制字符
+     
+   可以使用 <ESC> 来代替 <Meta> 键，而且 <ESC> 按下后可以松开，但是 <Meta> 不行，但是 <Meta> 近一点。
 
-   参考：
-   + [[http://ergoemacs.org/emacs/emacs_jump_to_previous_position.html][Emacs: Jump to Previous Position]]
+** Keys
+   在 Emacs 中，一个按键序列 key sequnce，如 C-x C-f，或者一个短按键，如 C-f，被称作 =compile key=.
 
-** 怎样获取 Emacs 编译时的参数
-   可以通过 ~system-configuration-options~ 变量的值来进行查看，参考：
-   + [[https://emacs.stackexchange.com/questions/35497/does-emacs-have-an-option-to-display-build-settings][config - Does emacs have an option to display build settings? - Emacs Stack Exchange]]
+   对于 =C-x C-f= 这样的按键序列中，C-x 部分被称作 =prefix key=.
 
-** 怎样绑定 C-return 为快捷键
-   使用如下的方式：
-   #+begin_src elisp
-     (define-key my-keys-mode-map (kbd "<C-return>") 'my-function)
-   #+end_src
+   Emacs 中默认的前缀键有：‘C-c’, ‘C-h’, ‘C-x’, ‘C-x <RET>’, ‘C-x @’, ‘C-x a’, ‘C-x n’, ‘C-x r’, ‘C-x v’, ‘C-x 4’, ‘C-x 5’, ‘C-x 6’, <ESC>, ‘M-g’, and ‘M-o’.
+   (<F1> and <F2> are aliases for ‘C-h’ and ‘C-x 6’.)
 
-   参考：
-   + [[https://emacs.stackexchange.com/questions/31375/how-can-i-bind-c-return-with-define-key-and-kbd][key bindings - How can I bind C-return with define-key and kbd? - Emacs Stack Exchange]]
+   按键到具体命令之间的映射被叫做 ‘keymaps’。
+
+** Enter & Exit
+   在 Unix/Linux 系统中，通过命令行启动 Emacs 时可以使用 =&= 后缀避免阻塞终端界面。
+
+   可以通过变量 =confirm-kill-emacs= 和 =confirm-kill-processes= 来控制关闭 Emacs 时的行为。
+
+* Fundamental Editing Commands
 

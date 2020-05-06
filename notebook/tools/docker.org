@@ -37,7 +37,7 @@
 ** mysql
    创建 MySQL 容器，使用最新镜像：
    #+begin_src bash
-     docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=yourpassword -d mysql
+     docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=yourpassword -d mysql:5.7 --max-allowed-packet=67108864
    #+end_src
 
    进入容器：

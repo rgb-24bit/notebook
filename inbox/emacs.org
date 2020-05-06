@@ -32,88 +32,12 @@
    + [[https://www.emacswiki.org/emacs/CategoryTex][EmacsWiki: Category Tex]]
    + [[https://www.emacswiki.org/emacs/CDLaTeX][EmacsWiki: CDLaTeX]]
 
-
 * Minor mode
   + visible-mode
   + whitespace-mode
   + auto-fill-mode
   + overwrite-mode
-
-* Info
-  + n -> next node - same level
-  + p -> prev node - same level
-  + spc -> move forward(node)
-  + del -> move backforward(node)
-  + ] -> next node
-  + [ -> prev node
-  + page up -> move forward
-  + page down -> move backforward
-  + C-l -> recenter top bottom
-  + b -> go to begining
-  + H/? -> help
-  + m -> go to subnode
-  + <TAB>/S-<TAB> -> next/prev menu/ref
-  + RET -> enter node
-  + u -> go to up
-  + f -> go to cross ref
-  + i -> search index
-  + l -> history: go to backforward node
-  + r -> history: go to forward node
-  + L -> Info history
-  + d -> go to dir node
-  + t -> go to top node
-  + q -> exit
-
-
-  -----
-
-  Nodes:
-  + Help-Inv
-
-
-  -----
-
-  Menus:
-  * Brief name for subtopic:  Name of node.  Description.
-  * Brief name for subtopic:: subtopic name adn node name are the same.
-
-* Screen
-  We will use the term “frame” to mean a graphical window or terminal screen occupied by Emacs.
-
-  The last line of the window is a “mode line”.
-
-  #+begin_example
-    Frame
-      Menu bar
-      Tool bar
-      Window
-        buffer text
-        scroll bar
-        mode line
-      Echo area
-  #+end_example
-
-  The echo area is also used to display the “minibuffer”, a special window where you can input arguments to commands, such as the name of a file to be edited.
-  You can always get out of the minibuffer by typing ‘C-g’.
-
-* User Input
-  + Simple characters - a, B, 3, =, SPC...
-  + Control characters - RET, TAB, DEL, ESC, F1...
-  + modifier keys recognized control characters, Control, Meta...
-  + <ESC> Can press nad release it. <Meta> can't.
-
-* Keys
-  + complete key
-  + prefix key
-  + By default, the prefix keys in Emacs are ‘C-c’, ‘C-h’, ‘C-x’, ‘C-x <RET>’, ‘C-x @’, ‘C-x a’, ‘C-x n’, ‘C-x r’, ‘C-x v’, ‘C-x 4’, ‘C-x 5’, ‘C-x 6’, <ESC>, ‘M-g’, and ‘M-o’.
-    (<F1> and <F2> are aliases for ‘C-h’ and ‘C-x 6’.)
-
-* Entering Emacs
-  + emacs & !!!
-  + ‘C-x C-c’ behaves specially if you are using Emacs as a server.  
-    If you type it from a client frame, it closes the client connection.
-  + confirm-kill-emacs
-  + confirm-kill-processes
+  + witch-function-mode
 
 * Edit
   + type C-j, which inserts just a newline, without any auto-indentation.
