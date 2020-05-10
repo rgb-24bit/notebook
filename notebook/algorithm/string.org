@@ -1,0 +1,266 @@
+#+TITLE:      字符串
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#kmp-算法][KMP 算法]]
+  - [[#基于-dfa-实现][基于 DFA 实现]]
+  - [[#基于-pmt-实现][基于 PMT 实现]]
+  - [[#dfa--pmt][DFA & PMT]]
+
+* KMP 算法
+  #+begin_quote
+  在 1970 年，S.Cook 在理论上证明了一个关于某种特定类型的抽象计算机的结论。这个结论暗示了一种在最坏情况下用时也只是与 M + N 
+  成正比的解决子字符串查找问题的算法。
+
+  D.E.Knuth 和 V.R.Pratt 改进了 Cook 用来证明定理的框架并将它提炼为一个相对简单而实用的算法。
+
+  J.H.Morris 在实现一个文本编辑器时，未来解决某个棘手的问题也发明了几乎相同的算法。
+  #+end_quote
+
+  这个算法就是 KMP 算法，该算法的实现有两种思路，都是用来解决子字符串查找问题的算法。
+
+  子字符串查找问题可以通过朴素查找算法解决，也就是暴力搜索（显式回退）：
+  #+begin_src python
+    def search(txt: str, pat: str) -> int:
+        i, j, txt_len, pat_len = 0, 0, len(txt), len(pat)
+
+        while i < txt_len and j < pat_len:
+            if txt[i] == pat[j]:
+                j += 1
+            else:
+                i -= j  # 回退文本指针 i
+                j = 0   # 回退模式指针 j
+            i += 1
+
+        if j == pat_len:
+            return i - pat_len
+
+        return -1
+  #+end_src
+
+  虽然朴素查找算法能够在很多时候工作的很好，但是在遇到类似 =AAAAAAAAAAB= 和 =AAAB= 的情况是，时间复杂度会变成 =O(MN)= 级别，
+  相对的，KMP 能够以最坏为 =O(M + N)= 级别的时间复杂度解决问题。
+
+  KMP 算法的基本思想是当出现不匹配时，利用已知的一部分文本的内容避免回退文本指针，而是只回退模式指针，有两种实现思路。
+
+** 基于 DFA 实现
+   KMP 的一个思路是通过 *确定有限自动状态机* 来实现，状态机由 *状态* 和 *（输入）转换* 两部分组成，如图：
+   #+HTML: <img src="https://i.loli.net/2020/05/09/5QgR1oXsawi2eUH.png">
+
+   其中 *状态* 就是匹配到的模式字符在模式字符串中的位置，也就是模式指针，而 *转换* 就是当前状态下，遇到下一个（文本）字符后，
+   状态更新为什么值，也就是，下一次应该用模式字符串中的那个字符和下一个文本字符比较。
+
+   上图就是模式字符串 =ABABAC= 的状态机，初始状态为 0, 也就是应该用第 0 个字符来和文本字符比较，在遇到不同的文本字符后，
+   状态机的状态会变为不同的状态。
+   
+   对于状态 0 来说，遇到字符 =A= 时说明该字符和当前的模式字符匹配，模式指针 =+1= 变为 1，遇到其他字符说明不匹配，状态变为 0。
+
+   可以通过 =[输入][状态] = 下一个状态= 或 =[状态][输入] = 下一个状态= 的形式来表示这个状态机，当 *状态* 对应的字符和 *输入* 当的字符相同时，
+   下一个状态必然为 *状态 + 1*, 也就是说，我们需要考虑的是不同时应该怎么解决。
+
+   在朴素算法中，在位置 =j= 出现不匹配时，我们会回退文本指针并右移 1 位重新开始匹配，这时，这部分 *文本字符串* 字串等于 =pat[1:j]= 这个 *模式字符串* 子串：
+   #+begin_example
+     txt: A B A B A D A
+                    i
+
+     pat: A B A B A C
+                    j
+                    5
+     ---
+
+     txt: A [B A B A] D A
+             i
+     pat:    A [B A B A] C
+                1        j
+   #+end_example
+
+   模拟匹配 =BABA= 这个字符时，发现，最后可以达到的状态为 3，也就是说，在状态机中 =[][5]= 的值应该和 =[][3]= 的值相等，同时 =[C][5]= 的值应该为 6。
+
+   也就是说，在匹配过程中，就算匹配失败，重新匹配时，也必然会在继续匹配到 =j - 1= 时到达另一个状态（重启状态），而这个状态下的转换值，就算我们需要的。
+
+   而这个状态的变化，也是有规律的，当 =j= 的重启状态为 =X= 时，意味着，在 =j= 处不匹配时，重新匹配模式字符串可以到达的状态为 =X=, 此时，
+   我们将 =j= 处的字符作为输入，那么 =[pat[j]][X]= 的值不就是 =j + 1= 的重启状态了吗？
+
+   也就是说：
+   #+begin_src python
+     x = dfa[pat[j]][x]
+   #+end_src
+
+   这样，我们就得到构造 DFA 的过程了：
+   #+begin_src python
+     # 状态 0 的重启状态自然也是 0
+     x, dfa[pat[0]][0] = 0, 1
+
+     for j in range(1, pat_len):
+         for ch in pat_chrs:
+             dfa[ch][j] = dfa[ch][x]  # 先将重启状态的值复制到当前状态
+         dfa[pat[j]][j] = j + 1       # 匹配时下一个状态为 j + 1
+         x = dfa[pat[j]][x]           # j + 1 时的重启状态
+   #+end_src
+   
+   使用 DFA 来完成查找的过程就是跑一下状态机的过程：
+   #+begin_src python
+     while i < txt_len and j < pat_len:
+         j = dfa[txt[i]][j]
+         i += 1
+
+     if j == pat_len:
+         return i - pat_len
+
+     return -1
+   #+end_src
+
+   完整的实现：
+   #+begin_src python
+     def kmp_search(txt, pat):
+         txt_len, pat_len = len(txt), len(pat)
+
+         def make_dfa():
+             dfa = [{} for i in range(pat_len)]  # [state][in] => next state
+
+             x, dfa[0][pat[0]] = 0, 1
+
+             for j in range(1, pat_len):
+                 for ch in pat:
+                     dfa[j][ch] = dfa[x].get(ch, 0)
+                 dfa[j][pat[j]] = j + 1
+                 x = dfa[x].get(pat[j], 0)
+
+             return dfa
+
+         i, j, dfa = 0, 0, make_dfa()
+
+         while i < txt_len and j < pat_len:
+             j = dfa[j].get(txt[i], 0)
+             i += 1
+
+         if j == pat_len:
+             return i - pat_len, i, j
+
+         return -1, i, j
+   #+end_src
+
+   参考：
+   + [[https://blog.csdn.net/xiangshimoni/article/details/45459963][从 DFA 角度理解 KMP 算法_fpga开发_DC的陋室-CSDN博客]]
+
+** 基于 PMT 实现
+   KMP 的另一个更加常见的实现方式是基于 PMT 来实现的，核心思路是计算模式字符串 =pat= 的每一个位置之前的字符串的前缀和后缀公共部分的最大长度。
+   这个最大公共长度记录为 =PMT= 数组，整体右移一位就是 =next= 数组了。
+
+   当在位置 =j= 匹配失败时，我们可以知道前一段文本字符串中的字符和 =pat[0:j]= 相同，此时，我们可以根据 =pat[0:j]= 这段字符串中最大公共长度来回退 =j= 指针，
+   也就是回退到 *最大公共长度 + 1* 的程度，由于长度值比索引值大 1，因此，直接回退到最大公共长度就行了。
+
+   #+begin_src python
+     def kmp_search(txt, pat):
+         txt_len, pat_len = len(txt), len(pat)
+
+         i = j = 0
+
+         while i < txt_len and j < pat_len:
+             if j == -1 or txt[i] == pat[j]:
+                 i += 1
+                 j += 1
+             else:
+                 j = next[j]
+
+         if j == pat_len:
+             return i - pat_len
+
+         return -1
+   #+end_src
+
+   #+begin_quote
+      next[0] = -1, 当 ~txt[i] != pat[0]~ 时，j 的值会变为 -1，这时就可以进入另一个分支让 i + 1 并让 j 归 0
+   #+end_quote
+
+   这里面的关键就是构建包含最大公共长度的 =next= 数组，这个构建过程也是有规律的，首先，我们需要明白的是，值 =next[i]= 表示的是串 =pat[0:i]= 中的最大公共长度，
+   假如该值等于 2，那么就是说存在类似 =AB...AB= 的情况。
+
+   #+begin_example
+     0           i
+     A B ... A B ?
+   #+end_example
+
+   如果，这个时候，满足 =pat[next[i]] = pat[i]= 这个条件，假如说是字符 C，那么，就变成了 =ABC...ABC= 这个情况，即：
+   + 当 =pat[next[i]] = pat[i]= 时，值 =next[i + 1]= 也就等于 =next[next[i]] + 1=
+
+   #+begin_example
+     0             i
+     A B C ... A B C
+         |
+     pat[next[i]]
+   #+end_example
+
+   如果不满足，那么，也就是说，最大公共长度还位于更短的串中，也就是在 =pat[0:next[i]]= 的内部：
+   #+begin_example
+     0             i
+     A B D ... A B A
+     ---
+      |
+     pat[0:next[i]]
+   #+end_example
+
+   此时，便可以重复前面的过程，判断 =pat[next[next[i]]] = pat[i]= 是否成立，这里，值 =next[next[i]]= 为 0，恰好一样，这时 =next[i + 1]= 的值就为 =0 + 1=.
+
+   构造 =next= 数组时重复上述过程，直到 =next[i] = pat[i]= 或 =i = 0= 为止。
+
+   #+begin_src python
+     def make_next(pat):
+         i, j, pat_len, next = 0, -1, len(pat), [-1]
+
+         while i < pat_len:
+             if j == -1 or pat[i] == pat[j]:
+                 i += 1
+                 j += 1
+                 next.append(j)
+             else:
+                 j = next[j]
+
+         return next
+   #+end_src
+
+   完整实现：
+   #+begin_src python
+     def kmp_search(txt, pat):
+         txt_len, pat_len = len(txt), len(pat)
+
+         def make_next():
+             i, j, next = 0, -1, [-1]
+
+             while i < pat_len:
+                 if j == -1 or pat[i] == pat[j]:
+                     i += 1
+                     j += 1
+                     next.append(j)
+                 else:
+                     j = next[j]
+
+             return next
+
+         i, j, next = 0, 0, make_next()
+
+         while i < txt_len and j < pat_len:
+             if j == -1 or txt[i] == pat[j]:
+                 i += 1
+                 j += 1
+             else:
+                 j = next[j]
+
+         if j == pat_len:
+             return i - pat_len
+
+         return -1
+   #+end_src
+
+   参考：
+   + [[https://donche.github.io/2017/06/24/KMP.html][KMP 字符串查找算法的两种实现 - 知地 | Donche]]
+   + [[https://www.zhihu.com/question/21923021][如何更好地理解和掌握 KMP 算法? - 知乎]]
+
+** DFA & PMT
+   DFA 中的重启状态 X 的含义是：当在位置 =j= 处匹配失败时，文本字符串前面的部分为 =pat[0:j]= 这个字串，由于匹配失败，
+   需要使用字符串 =pat[1:j]= 重新匹配模式字符串。
+
+   这个匹配过程中，能够到达的状态就是重启状态 X，实际上，就是寻找文本字符串 =pat[1:j]= 的后缀与 =pat= 的前缀公共部分的最大长度，
+   这个长度就是重启状态 X 的值。
+
+   而这个值，恰好和 PMT 中的是一样的，因此，在构造 DFA 的过程中，重启状态 X 的序列就是 PMT 数组。
+
