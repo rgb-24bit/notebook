@@ -36,6 +36,7 @@
   + [随机数相关](notebook/algorithm/random.org)
   + [Search](notebook/algorithm/search.org)
   + [Sort](notebook/algorithm/sort.org)
+  + [字符串](notebook/algorithm/string.org)
   + [Tree](notebook/algorithm/tree.org)
 ## android
   + [Android - Activity](notebook/android/activity.org)
