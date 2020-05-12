@@ -18,6 +18,7 @@
 - [[#如何删除已提交但是位于-gitignore-的文件][如何删除已提交但是位于 .gitignore 的文件]]
 - [[#git-命名的由来][Git 命名的由来]]
 - [[#如何在-push-的时候同时向多个远程库推送代码][如何在 push 的时候同时向多个远程库推送代码]]
+- [[#git-clone---depth-1-之后获取完整记录][git clone --depth 1 之后获取完整记录]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -177,4 +178,25 @@
 
   参考：
   + [[https://gist.github.com/bjmiller121/f93cd974ff709d2b968f][Add multiple push URLs to a single git remote]]
+
+* git clone --depth 1 之后获取完整记录
+
+  通过 =git clone --depth 1= 仅克隆一层记录后想重新获取所有提交记录，可以执行：
+  #+begin_example
+    $ git pull --unshallow
+  #+end_example
+
+  但是这样只能获取克隆时指定的分支的记录，如果还需要获取远程分支，可以执行：
+  #+begin_example
+    $ git fetch origin *:refs/remotes/origin/*
+  #+end_example
+
+  然后 =checkout= 远程分支：
+  #+begin_example
+    git checkout -b <branch> <remote>/<branch>
+
+    or
+
+    git checkout -t <remote>/<branch>
+  #+end_example
 

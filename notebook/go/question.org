@@ -1,0 +1,19 @@
+#+TITLE:      相关问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#创建动态大小的数组][创建动态大小的数组]]
+
+* 创建动态大小的数组
+  #+begin_src go
+    left := make([]int, leftLength)
+
+    a := make([][]uint8, dy)
+    for i := range a {
+        a[i] = make([]uint8, dx)
+    }
+  #+end_src
+
+  参考：
+  + [[https://stackoverflow.com/questions/39804861/what-is-a-concise-way-to-create-a-2d-slice-in-go][What is a concise way to create a 2D slice in Go? - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/38362631/go-error-non-constant-array-bound][Go error: non-constant array bound - Stack Overflow]]
+

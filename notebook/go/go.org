@@ -2,7 +2,10 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#go-语言起源][Go 语言起源]]
-- [[#简单语句][简单语句]]
+- [[#基本语法][基本语法]]
+  - [[#分号][分号]]
+  - [[#控制流][控制流]]
+  - [[#切片][切片]]
 - [[#程序结构][程序结构]]
   - [[#命名][命名]]
   - [[#声明][声明]]
@@ -31,24 +34,211 @@
   + [[https://books.studygolang.com/gopl-zh/ch0/ch0-01.html][Go语言起源 | Go语言圣经]]
   + [[https://books.studygolang.com/gopl-zh/ch0/ch0-02.html][Go语言项目 | Go语言圣经]]
 
-* 简单语句
-  Go 语言不需要在语句或者声明的末尾添加分号，除非一行上有多条语句，因为编译器会主动把特定符号后的换行符转换为分号，主要包括以下情况：
-  + 行末是标识符、整数、浮点数、虚数、字符或字符串文字、关键字 break、continue、fallthrough 或 return 中的一个
-  + 行末是运算符和分隔符 ++、--、)、] 或 } 中的一个
+* 基本语法
+** 分号
+   Go 语言不需要在语句或者声明的末尾添加分号，除非一行上有多条语句，因为编译器会主动把特定符号后的换行符转换为分号，主要包括以下情况：
+   + 行末是标识符、整数、浮点数、虚数、字符或字符串文字、关键字 break、continue、fallthrough 或 return 中的一个
+   + 行末是运算符和分隔符 ++、--、)、] 或 } 中的一个
 
-  也就是说，这样的代码会出问题：
-  #+begin_src go
-    f(
-      a(), b(), c()
-    )
-  #+end_src
+   #+begin_src go
+     f(
+       a(), b(), c()   // error
+     )
 
-  但是可以这样：
-  #+begin_src go
-    f(
-      a(), b(), c(),
-    )
-  #+end_src
+     f(
+       a(), b(), c(),  // ok
+     )
+   #+end_src
+
+** 控制流
+   Go 语言里面 =for= 循环就是唯一的循环控制语句了，几个特点：
+   + 由 init statement、condition expression 和 post statement 组成
+   + 总是有大括号但是没有小括号：
+     #+begin_src go
+       for i := 0; i < 10; i++ {
+         sum += i
+       }
+     #+end_src
+   + 循环语句上声明的变量作用域仅限于循环语句内部
+   + init statement 和 post statement 是可选的：
+     #+begin_src go
+       for ; sum < 1000; {
+         sum += sum
+       }
+     #+end_src
+
+     删除分号就约等于 =while= 语句了：
+     #+begin_src go
+       for sum < 1000 {
+         sum += sum
+       }
+     #+end_src
+     
+     啥都不要就是死循环：
+     #+begin_src go
+       for {
+       }
+     #+end_src
+
+   条件判断语句 =if= 也不要小括号但是要大括号：
+   #+begin_src go
+     func sqrt(x float64) string {
+       if x < 0 {
+         return sqrt(-x) + "i"
+       }
+       return fmt.Sprint(math.Sqrt(x))
+     }
+   #+end_src
+
+   条件表达式前面可以有一个短语句，如果是声明变量，那么作用域仅限于条件语句：
+   #+begin_src go
+     if v := math.Pow(x, n); v < lim {
+       return v
+     }
+   #+end_src
+
+   作用域是包括 =else= 块的：
+   #+begin_src go
+     if v := math.Pow(x, n); v < lim {
+       return v
+     } else {
+       fmt.Printf("%g >= %g\n", v, lim)
+     }
+   #+end_src
+
+   Go 语言支持 =switch= 语句：
+   #+begin_src go
+     switch os := runtime.GOOS; os {
+     case "darwin":
+       fmt.Println("OS X.")
+     case "linux":
+       fmt.Println("Linux.")
+     default:
+       // freebsd, openbsd,
+       // plan9, windows...
+       fmt.Printf("%s.\n", os)
+     }
+   #+end_src
+   
+   但是它的 =case= 可以是表达式：
+   #+begin_src go
+     switch time.Saturday {
+     case today + 0:
+       fmt.Println("Today.")
+     case today + 1:
+       fmt.Println("Tomorrow.")
+     case today + 2:
+       fmt.Println("In two days.")
+     default:
+       fmt.Println("Too far away.")
+     }
+   #+end_src
+
+   因此，可以不要条件：
+   #+begin_src go
+     switch {
+     case t.Hour() < 12:
+       fmt.Println("Good morning!")
+     case t.Hour() < 17:
+       fmt.Println("Good afternoon.")
+     default:
+       fmt.Println("Good evening.")
+     }
+   #+end_src   
+
+   同时，比较特殊的是，Go 中匹配一个 case 项后不会自动执行后面的 case 项，除非使用了 =fallthrough= 关键字：
+   #+begin_src go
+     switch (v) {
+     case 1:
+       fmt.Println(1)
+       fallthrough
+     case 2:
+       fmt.Println(2)
+     }
+   #+end_src
+
+   PS：感觉 =break= 的方式更加符合使用习惯才对……
+
+   defer 语句将函数的执行推迟到函数返回之前，但是参数还是会立即计算出来：
+   #+begin_src go
+     defer fmt.Println("world")
+
+     fmt.Println("hello")
+   #+end_src
+
+   多个 defer 函数调用：
+   #+begin_src go
+     func main() {
+       fmt.Println("counting")
+
+       for i := 0; i < 10; i++ {
+         defer fmt.Println(i)
+       }
+
+       fmt.Println("done")
+     }
+   #+end_src
+
+   运行结果为，可以看到是后进先出的：
+   #+begin_example
+     counting
+     done
+     9
+     8
+     7
+     6
+     5
+     4
+     3
+     2
+     1
+     0
+   #+end_example
+
+   更多可以参考：
+   + [[https://blog.golang.org/defer-panic-and-recover][Defer, Panic, and Recover - The Go Blog]]
+
+** 切片
+   Go 中部分类型是支持切片操作的，但是，Go 中的切片和 Python 中的切片不一样，Go 中的切片是原对象的一个视图 View，
+   修改切片也就会修改原对象，而 Python 中切片是创建一个新对象。
+
+   当然，也因为 Go 中切片是原对象的视图的原因，使得切片同时具有长度 =length= 和容量 =capacity= 两个属性：
+   + 长度表示该切片有多少个元素
+   + 容量表示该切片 *对应的* 原对象左边界到原对象右边界之间的大小，当容量大于长度时，可以从新切片扩容
+
+   PS：调整切片左边界会影响容量，但是右边界不会……
+
+   可以通过函数 =len= 和 =cap= 获取这两个属性的值：
+   #+begin_src go
+     func main() {
+       s := []int{2, 3, 5, 7, 11, 13}
+       printSlice(s)
+
+       // Slice the slice to give it zero length.
+       s = s[:0]
+       printSlice(s)
+
+       // Extend its length.
+       s = s[:4]
+       printSlice(s)
+
+       // Drop its first two values.
+       s = s[2:]
+       printSlice(s)
+     }
+
+     func printSlice(s []int) {
+       fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+     }
+   #+end_src
+
+   运行结果：
+   #+begin_example
+     len=6 cap=6 [2 3 5 7 11 13]
+     len=0 cap=6 []
+     len=4 cap=6 [2 3 5 7]
+     len=2 cap=4 [5 7]
+   #+end_example
 
 * 程序结构
 ** 命名
@@ -345,7 +535,229 @@
      布尔类型没啥好说的，只有 =true= 和 =false= 这两个值，存在短路行为，OVER。
 
    + 字符串 :: 
+     字符串是一个不可改变的字节序列，可以包含任意的数据，包括 byte 值 0。文本字符串通常被解释为采用 UTF8 编码的 Unicode 码点（rune）序列。
+
+     内置的 len 函数可以返回一个字符串中的 *字节* 数目（不是 rune 字符数目），索引操作 =s[i]= 返回第 =i= 个 *字节* 的字节值。
+
+     字符串可以用比较运算符进行比较，比较通过逐个 *字节* 比较完成，因此比较的结果是字符串自然编码的顺序。
+     也可以使用 =+= 操作符完成字符串拼接操作，但是只能拼接字符串或字符串切片。
      
+     字符串的不变性意味如果两个字符串共享相同的底层数据的话也是安全的，这使得复制任何长度的字符串代价是低廉的。同样，
+     一个字符串 =s= 和对应的子字符串切片 =s[7:]= 的操作也可以安全地共享相同的内存，因此字符串切片操作代价也是低廉的。
+     在这两种情况下都没有必要分配新的内存。
+     
+     如图：
+     #+HTML: <img src="https://books.studygolang.com/gopl-zh/images/ch3-04.png">
+
+     字符串的字面量形式和其他语言差不多，值得注意的是，Go 中存在类似 Python 中的原生字符串：
+     #+begin_src go
+       `This is a raw string.
+
+       Yes, new line.
+
+       \\\\\\\\\\
+       `
+     #+end_src
+
+     Go 语言的 range 循环在处理字符串的时候，会自动隐式解码 UTF8 字符串（为什么字符串要设计成字节数组呢？）：
+     #+HTML: <img src="https://books.studygolang.com/gopl-zh/images/ch3-05.png">
+
+     PS: Go 在遇到一个错误的 UTF8 编码输入时会将生成一个特别的 Unicode 字符 \uFFFD。
+
+     UTF8 字符串作为交换格式是非常方便的，但是在程序内部采用 rune 序列可能更方便，因为 rune 大小一致，支持数组索引和方便切割。
+     将 =[]rune= 类型转换应用到 =UTF8= 编码的字符串，将返回字符串编码的 =Unicode= 码点序列：
+     #+begin_src go
+       // "program" in Japanese katakana
+       s := "プログラム"
+       fmt.Printf("% x\n", s) // "e3 83 97 e3 83 ad e3 82 b0 e3 83 a9 e3 83 a0"
+       r := []rune(s)
+       fmt.Printf("%x\n", r)  // "[30d7 30ed 30b0 30e9 30e0]"
+     #+end_src
+
+     如果是将一个 =[]rune= 类型的 Unicode 字符 =slice= 或数组转为 string，则对它们进行 UTF8 编码：
+     #+begin_src go
+       fmt.Println(string(r)) // "プログラム"
+     #+end_src
+
+     将一个整数转型为字符串意思是生成以只包含对应 Unicode 码点字符的 UTF8 字符串，如果对应码点的字符是无效的，
+     则用 \uFFFD 无效字符作为替换：
+     #+begin_src go
+       fmt.Println(string(65))     // "A", not "65"
+       fmt.Println(string(0x4eac)) // "京"
+       fmt.Println(string(1234567)) // "�"
+     #+end_src
+     
+     字符串是包含的只读字节数组，一旦创建，是不可变的。相比之下，字节切片的元素则可以自由地修改，两者可以相互转换：
+     #+begin_src go
+       s := "abc"
+       b := []byte(s)
+       s2 := string(b)
+     #+end_src
+
+     从概念上讲，一个 =[]byte(s)= 转换是分配了一个新的字节数组用于保存字符串数据的拷贝，然后引用这个底层的字节数组。
+     编译器的优化可以避免在一些场景下分配和复制字符串数据，但总的来说需要确保在变量 b 被修改的情况下，
+     原始的 s 字符串也不会改变。将一个字节切片转到字符串的 =string(b)= 操作则是构造一个字符串拷贝，
+     以确保 s2 字符串是只读的。
+
+     为了避免转换中不必要的内存分配，bytes 包和 strings 同时提供了许多实用函数：
+     #+begin_src go
+       // package string
+       func Contains(s, substr string) bool
+       func Count(s, sep string) int
+       func Fields(s string) []string
+       func HasPrefix(s, prefix string) bool
+       func Index(s, sep string) int
+       func Join(a []string, sep string) string
+
+       // package bytes
+       func Contains(b, subslice []byte) bool
+       func Count(s, sep []byte) int
+       func Fields(s []byte) [][]byte
+       func HasPrefix(s, prefix []byte) bool
+       func Index(s, sep []byte) int
+       func Join(s [][]byte, sep []byte) []byte
+     #+end_src
+
+     它们之间唯一的区别是字符串类型参数被替换成了字节切片类型的参数。
+
+     bytes 包还提供了 Buffer 类型用于字节 slice 的缓存。一个 Buffer 开始是空的，但是随着 string、byte 或 []byte 等类型数据的写入可以动态增长，
+     一个 bytes.Buffer 变量并不需要初始化，因为零值也是有效的：
+     #+begin_src go
+       // intsToString is like fmt.Sprint(values) but adds commas.
+       func intsToString(values []int) string {
+           var buf bytes.Buffer
+           buf.WriteByte('[')
+           for i, v := range values {
+               if i > 0 {
+                   buf.WriteString(", ")
+               }
+               fmt.Fprintf(&buf, "%d", v)
+           }
+           buf.WriteByte(']')
+           return buf.String()
+       }
+
+       func main() {
+           fmt.Println(intsToString([]int{1, 2, 3})) // "[1, 2, 3]"
+       }
+     #+end_src
+
+     标准库中对字符串处理尤为重要的四个包：bytes、strings、strconv 和 unicode。
+
+   + 常量 :: 
+     常量表达式的值在编译期计算，而不是在运行期（常见的编译期优化操作）。每种常量的潜在类型都是基础类型：boolean、string 或数字。
+
+     常量间的所有算术运算、逻辑运算和比较运算的结果也是常量，对常量的类型转换操作或以下函数调用都是返回常量结果：
+     + len、cap、real、imag、complex 和 unsafe.Sizeof
+       
+     因为它们的值是在编译期就确定的，因此常量可以是构成类型的一部分，例如用于指定数组类型的长度（Go 中动态声明二维数组也太恶心了）：
+     #+begin_src go
+       const IPv4Len = 4
+
+       // parseIPv4 parses an IPv4 address (d.d.d.d).
+       func parseIPv4(s string) IP {
+           var p [IPv4Len]byte
+           // ...
+       }
+     #+end_src
+
+     如果是批量声明的常量，除了第一个外其它的常量右边的初始化表达式都可以省略，如果省略初始化表达式则表示使用前面常量的初始化表达式写法，
+     对应的常量类型也一样的。例如：
+     #+begin_src go
+       const (
+           a = 1
+           b
+           c = 2
+           d
+       )
+
+       fmt.Println(a, b, c, d) // "1 1 2 2"
+     #+end_src
+
+     这个特性可以让我们使用 iota 常量生成器，它用于生成一组以相似规则初始化的常量，但是不用每行都写一遍初始化表达式。在一个 const 声明语句中，
+     在第一个声明的常量所在的行，iota 将会被置为 0，然后在每一个有常量声明的行加一。
+     
+     可以将其用在复杂的表达式中：
+     #+begin_src go
+       const (
+           _ = 1 << (10 * iota)
+           KiB // 1024
+           MiB // 1048576
+           GiB // 1073741824
+           TiB // 1099511627776             (exceeds 1 << 32)
+           PiB // 1125899906842624
+           EiB // 1152921504606846976
+           ZiB // 1180591620717411303424    (exceeds 1 << 64)
+           YiB // 1208925819614629174706176
+       )
+     #+end_src
+
+     当常量没有一个确定的基础类型时，编译器为这些没有明确的基础类型的数字常量提供比基础类型更高精度的算术运算，主要包括：
+     + 无类型的布尔型、无类型的整数、无类型的字符、无类型的浮点数、无类型的复数、无类型的字符串
+
+     通过延迟明确常量的具体类型，无类型的常量不仅可以提供更高的运算精度，而且可以直接用于更多的表达式而不需要显式的类型转换：
+     #+begin_src go
+       var x float32 = math.Pi
+       var y float64 = math.Pi
+       var z complex128 = math.Pi
+     #+end_src
+     
+     对于常量面值，不同的写法可能会对应不同的类型。例如 0、0.0、0i 和 \u0000 虽然有着相同的常量值，但是它们分别对应无类型的整数、
+     无类型的浮点数、无类型的复数和无类型的字符等不同的常量类型。同样，true 和 false 也是无类型的布尔类型，
+     字符串面值常量是无类型的字符串类型。
+
+     同时，除法运算符 =/= 会根据操作数的类型生成对应类型的结果。因此，不同写法的 *常量除法表达式* 可能对应不同的结果：
+     #+begin_src go
+       var f float64 = 212
+       fmt.Println((f - 32) * 5 / 9)     // "100"; (f - 32) * 5 is a float64
+       fmt.Println(5 / 9 * (f - 32))     // "0";   5/9 is an untyped integer, 0
+       fmt.Println(5.0 / 9.0 * (f - 32)) // "100"; 5.0/9.0 is an untyped float
+     #+end_src
+
+     只有常量可以是无类型的。当一个无类型的常量被赋值给一个变量的时候，无类型的常量将会被隐式转换为对应的类型，如果转换合法的话：
+     #+begin_src go
+       var f float64 = 3 + 0i // untyped complex -> float64
+       f = 2                  // untyped integer -> float64
+       f = 1e123              // untyped floating-point -> float64
+       f = 'a'                // untyped rune -> float64
+     #+end_src
+
+     无论是隐式或显式转换，将一种类型转换为另一种类型都要求目标可以表示原始值。对于浮点数和复数，可能会有舍入处理：
+     #+begin_src go
+       const (
+           deadbeef = 0xdeadbeef // untyped int with value 3735928559
+           a = uint32(deadbeef)  // uint32 with value 3735928559
+           b = float32(deadbeef) // float32 with value 3735928576 (rounded up)
+           c = float64(deadbeef) // float64 with value 3735928559 (exact)
+           d = int32(deadbeef)   // compile error: constant overflows int32
+           e = float64(1e309)    // compile error: constant overflows float64
+           f = uint(-1)          // compile error: constant underflows uint
+       )
+     #+end_src
+
+     对于一个没有显式类型的变量声明（包括简短变量声明），常量的形式将隐式决定变量的默认类型，就像下面的例子：
+     #+begin_src go
+       i := 0      // untyped integer;        implicit int(0)
+       r := '\000' // untyped rune;           implicit rune('\000')
+       f := 0.0    // untyped floating-point; implicit float64(0.0)
+       c := 0i     // untyped complex;        implicit complex128(0i)
+     #+end_src
+
+     常量的默认类型：
+     #+begin_src go
+       fmt.Printf("%T\n", 0)      // "int"
+       fmt.Printf("%T\n", 0.0)    // "float64"
+       fmt.Printf("%T\n", 0i)     // "complex128"
+       fmt.Printf("%T\n", '\000') // "int32" (rune)
+     #+end_src
+
+   + 字符 ::
+     Go 语言中没有专门的字符类型，如果要存储单个字符（字母），一般使用 byte 来保存。字符串就是一串固定长度的字符连接起来的字符序列。
+     Go 的字符串是由单个字节连接起来的。也就是说对于传统的字符串是由字符组成的，而 Go 的字符串不同，它是由字节组成的。
+
+     #+begin_src go
+       var chr = 'c'
+     #+end_src
 
 ** 引用类型
    + 指针 ::

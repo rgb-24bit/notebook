@@ -9,6 +9,7 @@
 - [[#git-push][git push]]
 - [[#git-commit][git commit]]
 - [[#git-apply][git apply]]
+- [[#git-archive][git archive]]
 
 * git clone
   + 克隆远程库时指定分支或标签：
@@ -120,4 +121,13 @@
 
   可以参考的文章：
   + [[https://juejin.im/post/5b5851976fb9a04f844ad0f4][Git 打补丁-- patch 和 diff 的使用 - 掘金]]
+
+* git archive
+  将 master 以 zip 格式打包到指定文件：
+  #+begin_example
+  git archive --format zip --output /path/to/file.zip master
+  #+end_example
+  
+  参考：
+  + [[https://segmentfault.com/a/1190000002443283][git 文件打包命令 - 海诺 - SegmentFault 思否]]
 

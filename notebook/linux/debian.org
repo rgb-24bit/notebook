@@ -7,7 +7,7 @@
   - [[#13-安装-python][1.3 安装 Python]]
   - [[#14-安装-database][1.4 安装 Database]]
   - [[#15-安装-font][1.5 安装 Font]]
-  - [[#16-清理][1.6 清理]]
+  - [[#16-安装-java][1.6 安装 Java]]
 - [[#2-应用程序配置][2. 应用程序配置]]
   - [[#21-clone--synchronize-dotfiles][2.1 clone & synchronize dotfiles]]
   - [[#22-clone-emacs-kit][2.2 clone emacs-kit]]
@@ -90,8 +90,14 @@
      fc-cache -f -v
    #+END_SRC
 
-** 1.6 清理
-   安装程序时在一个临时目录中进行，安装完成后删除该临时目录即可。
+** 1.6 安装 Java
+   JDK8 还是比较常用的：
+   #+begin_example
+     $ apt-get install openjdk-8-jdk
+   #+end_example
+
+   参考：
+   + [[https://wiki.debian.org/Java/][Java - Debian Wiki]]
 
 * 2. 应用程序配置
 ** 2.1 clone & synchronize dotfiles
