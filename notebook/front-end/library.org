@@ -45,7 +45,11 @@
 * Lodash
   + 通过 ~keyBy~ 函数将对象数组转换为单个对象：
     #+begin_src js
-      _.keyBy([{key: '1', value: '1'}, {key: '2', value: '2'}], 'key');  // {"1":{"key":"1","value":"1"},"2":{"key":"2","value":"2"}}
+      _.keyBy([{key: '1', value: '1'}, {key: '2', value: '2'}], 'key');  // => {"1":{"key":"1","value":"1"},"2":{"key":"2","value":"2"}}
+    #+end_src
+  + 通过 =pickBy= 函数移除对象中的 =undefined= 和 =null= 值：
+    #+begin_src js
+      _.pickBy({ a: null, b: 1, c: undefined }, _.identity);  // => {b: 1}
     #+end_src
 
 * Moment

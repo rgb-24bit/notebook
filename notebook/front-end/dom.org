@@ -1,0 +1,62 @@
+#+TITLE:      JavaScript DOM API
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#element][Element]]
+
+* Element
+  方法 =Element.getBoundingClientRect()= 方法返回元素的大小及其相对于视口的位置，这在需要在元素附近添加悬浮窗口的时候很有用。
+
+  比如：
+  #+begin_src html
+    <html>
+      <head>
+        <style>
+          .word { text-decoration: underline; }
+        </style>
+      </head>
+      <body>
+        <p>This is a <span class="word">word</span>.</p>
+
+        <script>
+          const tbox = document.createElement("div");
+
+          tbox.style.visibility = "hidden";
+          tbox.style.position = "fixed";
+          tbox.style.fontFamily = "sans-serif";
+          tbox.style.fontSize = "16px";
+          tbox.style.color = "black";
+          tbox.style.fontWeight = "normal";
+          tbox.style.left = "20px";
+          tbox.style.top = "20px";
+          tbox.style.padding = "4px";
+          tbox.style.textAlign = "left";
+          tbox.style.border = "solid thin grey";
+          tbox.style.borderRadius = "8px";
+          tbox.style.backgroundColor = "#fdf5e6";
+          tbox.style.boxShadow = "3px 3px 20px black";
+          tbox.style.zIndex = "341";
+
+          tbox.appendChild(document.createTextNode("nothing"));
+          document.body.insertBefore(tbox, document.body.firstChild);
+
+          document.querySelectorAll('.word').forEach(word => {
+            word.onmouseover = (evt) => {
+              let boxx = evt.target.getBoundingClientRect();
+              tbox.style.left = boxx.left.toString() + "px";
+              tbox.style.top = (boxx.top + 40).toString() + "px";
+              let langWord = evt.target.firstChild.nodeValue;
+              tbox.innerHTML = langWord;
+              tbox.style.visibility = "visible";
+            }
+            word.onmouseout = (evt) => {
+              tbox.style.visibility = "hidden";
+            }
+          })
+        </script>
+      </body>
+    </html>
+  #+end_src
+
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect][Element.getBoundingClientRect() - Web API 接口参考 | MDN]]
+

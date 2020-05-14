@@ -9,6 +9,7 @@
 - [[#数据类型的转换][数据类型的转换]]
 - [[#面向对象][面向对象]]
   - [[#类型判断][类型判断]]
+- [[#this-指针][this 指针]]
 - [[#事件机制][事件机制]]
 - [[#相关技巧][相关技巧]]
   - [[#javascript-变量的命名][JavaScript 变量的命名]]
@@ -164,7 +165,7 @@
   JavaScript 中数组可以存在空位，比如说 ~[1, ,3]~ 的形式中间便存在一个空位，可以通过 ~delete~ 命令删除数组元素，此时会在原数组上生成一个空位。
 
   如果一个对象的所有键名都是正整数或零，并且有 ~length~ 属性，那么这个对象就很像数组，语法上称为类似数组的对象，可以通过 ~Array.prototype.slice.call~ 将类似数组的对象变成真正的数组。
-    
+  
 * 属性描述符
   JavaScript 提供了一个内部数据结构 - 属性描述符来描述对象的属性，对象里目前存在的属性描述符有两种主要形式：
   + 数据描述符：数据描述符是一个具有值的属性，该值可能是可写的，也可能不是可写的
@@ -349,6 +350,229 @@
 
    参考：
    + [[https://www.cnblogs.com/onepixel/p/5126046.html][判断 JS 数据类型的四种方法 - 一像素 - 博客园]]
+
+* this 指针
+  在全局执行环境下 =this= 指针指向全局对象，也就是 =window= 或 =global= 对象：
+  #+begin_src js
+    console.log(this === window);  // true
+
+    a = 37;
+    console.log(window.a);         // 37
+
+    this.b = "MDN";
+    console.log(window.b)          // "MDN"
+    console.log(b)                 // "MDN"
+  #+end_src
+  
+  在函数内部 =this= 指针的值取决于函数被调用的方式：
+  + 简单调用 ::
+    即在全局环境下直接调用，不在严格模式下时 =this= 指针指向全局对象，严格模式下 =this= 将保持他进入执行环境时的值，
+    此时该值为 =undefined=:
+    #+begin_src js
+      function f1() {
+        return this;  // window or global
+      }
+
+      function f2() {
+        "use strict";
+        return this;  // undefined
+      }
+    #+end_src
+    
+    需要注意的是，函数的直接调用 =f2()= 和类似 =window.f2()= 的调用是不同的，通过 =window.f2()= 调用时会返回 =window= 对象。
+    
+    如果要想把 this 的值从一个环境传到另一个，就要用 =call= 或者 =apply= 方法：
+    #+begin_src js
+      // 将一个对象作为 call 和 apply 的第一个参数，this 会被绑定到这个对象
+      var obj = {a: 'Custom'};
+
+      // 这个属性是在全局对象定义的
+      var a = 'Global';
+
+      function whatsThis(arg) {
+        return this.a;  // this 的值取决于函数的调用方式
+      }
+
+      whatsThis();          // 'Global'
+      whatsThis.call(obj);  // 'Custom'
+      whatsThis.apply(obj); // 'Custom'
+    #+end_src
+
+    使用 =call= 和 =apply= 函数的时候要注意，如果传递给 this 的值不是一个对象，JavaScript 会尝试使用内部 =ToObject= 操作将其转换为对象。
+
+  + bind 方法 :: 
+    ECMAScript 5 引入了 =Function.prototype.bind()= 函数，调用 =f.bind(someObject)= 会创建一个与 =f= 具有相同函数体和作用域的函数，
+    但是在这个新函数中，this 将永久地被绑定到了 =bind= 的第一个参数，无论这个函数是如何被调用的。
+    #+begin_src js
+      function f(){
+        return this.a;
+      }
+
+      var g = f.bind({a:"azerty"});
+      console.log(g());                       // azerty
+
+      var h = g.bind({a:'yoo'});              // bind 只生效一次！
+      console.log(h());                       // azerty
+
+      var o = {a:37, f:f, g:g, h:h};
+      console.log(o.a, o.f(), o.g(), o.h());  // 37, 37, azerty, azerty
+    #+end_src
+
+  + 箭头函数 :: 
+    在箭头函数中，this 与 *封闭词法环境* 的 this 保持一致。在全局代码中，它将被设置为全局对象：
+    #+begin_src js
+      var globalObject = this;
+      var foo = () => this;
+      console.log(foo() === globalObject); // true
+    #+end_src
+    
+    如果将 this 传递给 call、bind、或者 apply 来调用箭头函数，它将被忽略。
+
+    更为复杂的例子：
+    #+begin_src js
+      var obj = {
+        f1: function() {
+          return x = () => this
+        },
+        f2: function() {
+          'use strict'
+          return x = () => this
+        }
+      };
+
+      obj.f1()()  // 此时 f1 的 this 为 obj，因此返回值为 obj
+      obj.f2()()  // 此时 f2 的 this 为 obj，因此返回值为 obj
+
+      var f1 = obj.f1
+      f1()()     // 非严格模式，此时 f1 的 this 指向全局对象，也就是 window
+
+      var f2 = obj.f2
+      f2()()     // 严格模式，此时 f2 的 this 指向 undefined
+    #+end_src
+
+  + 作为对象的方法 :: 
+    当函数作为对象里的方法被调用时，它们的 =this= 指向调用该函数的对象：
+    #+begin_src js
+      var o = {
+        prop: 37,
+        f: function() {
+          return this.prop;
+        }
+      };
+
+      console.log(o.f()); // 37
+    #+end_src
+  
+    同时，这样的行为，不受函数定义方式或位置的影响：
+    #+begin_src js
+      var o = {prop: 37};
+
+      function independent() {
+        return this.prop;
+      }
+
+      o.f = independent;
+
+      console.log(o.f()); // 37
+    #+end_src
+
+    同时，this 的绑定只受最靠近的成员引用的影响：
+    #+begin_src js
+      o.b = {g: independent, prop: 42};
+      console.log(o.b.g()); // 42
+    #+end_src
+
+  + 原型链中的 this :: 
+    对于在对象原型链上某处定义的方法，同样的概念也适用。如果该方法存在于一个对象的原型链上，那么 this 指向的是调用这个方法的对象，
+    就像该方法在对象上一样：
+    #+begin_src js
+      var o = {
+        f: function() { 
+          return this.a + this.b; 
+        }
+      };
+      var p = Object.create(o);
+      p.a = 1;
+      p.b = 4;
+
+      console.log(p.f()); // 5
+    #+end_src
+
+    就是说依然遵循上一个规则。
+
+  + getter 与 setter 中的 this :: 
+    用作 getter 或 setter 的函数都会把 this 绑定到设置或获取属性的对象：
+    #+begin_src js
+      function sum() {
+        return this.a + this.b + this.c;
+      }
+
+      var o = {
+        a: 1,
+        b: 2,
+        c: 3,
+        get average() {
+          return (this.a + this.b + this.c) / 3;
+        }
+      };
+
+      Object.defineProperty(o, 'sum', {
+        get: sum, enumerable: true, configurable: true});
+
+      console.log(o.average, o.sum); // logs 2, 6
+    #+end_src
+
+  + 作为构造函数 :: 
+    当一个函数用作构造函数时，它的 this 被绑定到正在构造的新对象：
+    #+begin_src js
+      function C(){
+        this.a = 37;
+      }
+
+      var o = new C();
+      console.log(o.a); // logs 37
+    #+end_src
+
+  + 作为一个 DOM 事件处理函数 :: 
+    当函数被用作事件处理函数时，它的 this 指向触发事件的元素（一些浏览器在使用非 addEventListener 的函数动态添加监听函数时不遵守这个约定）：
+    #+begin_src js
+      // 被调用时，将关联的元素变成蓝色
+      function bluify(e){
+        console.log(this === e.currentTarget); // 总是 true
+
+        // 当 currentTarget 和 target 是同一个对象时为 true
+        console.log(this === e.target);        
+        this.style.backgroundColor = '#A5D9F3';
+      }
+
+      // 获取文档中的所有元素的列表
+      var elements = document.getElementsByTagName('*');
+
+      // 将 bluify 作为元素的点击监听函数，当元素被点击时，就会变成蓝色
+      for(var i=0 ; i<elements.length ; i++){
+        elements[i].addEventListener('click', bluify, false);
+      }
+    #+end_src
+
+  + 作为一个内联事件处理函数 :: 
+    当代码被内联 =on-event= 处理函数调用时，它的 this 指向监听器所在的 DOM 元素：
+    #+begin_src html
+      <button onclick="alert(this.tagName.toLowerCase());">
+        Show this
+      </button>
+    #+end_src
+
+  + setTimeout :: 
+    由 =setTimeout()= 调用的代码运行在与所在函数完全分离的执行环境上。这会导致，这些代码中包含的 this 关键字在非严格模式会指向全局对象，
+    严格模式下为 undefined。
+
+    同时，即使是在严格模式下，setTimeout() 的回调函数里面的 this 仍然默认指向 window 对象，并不是 undefined。
+
+    PS：在 Chrome 上的测试结果是，无论是否是严格模式，函数和代码中的 this 都指向 window
+
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this][this - JavaScript | MDN]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/API/Window/setTimeout][window.setTimeout - Web API 接口参考 | MDN]]
 
 * 事件机制
   + 通过 ~addEventListener~ 方法可以为同一个事件添加多个不同的监听函数。这些函数按照添加顺序触发，即先添加先触发。如果为同一个事件多次添加同一个监听函数，

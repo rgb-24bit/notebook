@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#html-理解][HTML 理解]]
 - [[#表单相关][表单相关]]
+- [[#标签-a][标签 <a>]]
 - [[#相关技巧][相关技巧]]
 - [[#相关问题][相关问题]]
   - [[#怎样显示-base64-格式的图片][怎样显示 Base64 格式的图片]]
@@ -49,6 +50,26 @@
   + 表单回车提交自动绑定：
     1. 默认情况下，单个输入框，无论按钮的 type="submit" 还是 type="button" 类型，回车即提交
     2. 当 type="submit" 时，无论有几个 type="text" 输入框，回车均表示提交
+
+* 标签 <a>
+  网页里的 =<a>= 标签默认在当前窗口跳转链接地址，如果需要在新窗口打开，需要给 =a= 标签添加一个 target="_blank" 属性。
+
+  这存在一些问题：
+  1. 安全隐患，如果只是加上 target="_blank"，打开新窗口后，新页面能通过 =window.opener= 获取到来源页面的 =window= 对象，即使跨域也一样
+  2. 性能问题，通过 target="_blank" 打开的新窗口，跟原来的页面窗口共用一个进程。如果这个新页面执行了一大堆性能不好的 JavaScript 代码，
+     占用了大量系统资源，那你原来的页面的性能也会收到影响
+
+  解决方案：
+  1. 尽量不使用 target="_blank"
+  2. 如果一定要用，需要加上 rel="noopener" 或者 rel="noreferrer"。这样新窗口的 window.openner 就是 null 了，而且会让新窗口运行在独立的进程里，
+     不会拖累原来页面的进程
+  3. 通过 =window.open= 的方式打开的新页面：
+     #+begin_src js
+       var newWindow = window.open();
+       newWindow.opener = null;
+       newWindow.location = "https://weibo.com/";
+       newWindow.target = "_blank";
+     #+end_src
 
 * 相关技巧
   + 标签 ruby 可以用来为汉字添加拼音

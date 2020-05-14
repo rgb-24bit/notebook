@@ -78,6 +78,12 @@
   + [[https://stackoverflow.com/questions/27626764/configure-webpack-to-allow-browser-debugging][javascript - Configure webpack to allow browser debugging - Stack Overflow]]
   + [[http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html][JavaScript Source Map 详解 - 阮一峰的网络日志]]
 
+* 前端学习
+  + [[https://github.com/wallstreetcn/webpack-and-spa-guide][wallstreetcn/webpack-and-spa-guide: Webpack 4 和单页应用入门]]
+  + JavaScript 模块化标准、语言标准、宿主环境、编译器 Babel
+  + HTML/CSS 预处理器
+  + Webpack 打包工具
+
 * 依赖管理
   + 包 A 和 包 B 都依赖了包 C，那么以哪个为准
     
@@ -137,23 +143,4 @@
 * 参数列表
   JavaScript 中参数列表中参数的数量并不影响我参数的传递，多和少都是无所谓的。
 
-* this指针
-  + 箭头函数内部的 this 总是指向定义时所在的对象
-  + 其他地方，this 指针总是指向函数的最后一个调用者
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call][Function.prototype.call() - JavaScript | MDN]]
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/apply][Function.prototype.apply() - JavaScript | MDN]]
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind][Function.prototype.bind() - JavaScript | MDN]]
-
-* Misc
-  + [[https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect][Element.getBoundingClientRect() - Web API 接口参考 | MDN]]
-
-* 前端
-  + JavaScript 模块化标准、语言标准、宿主环境、编译器 Babel
-  + HTML/CSS 预处理器
-  + Webpack 打包工具
-  + [[https://github.com/wallstreetcn/webpack-and-spa-guide][wallstreetcn/webpack-and-spa-guide: Webpack 4 和单页应用入门]]
-
-
-* lodash
-  + [[https://stackoverflow.com/questions/30812765/how-to-remove-undefined-and-null-values-from-an-object-using-lodash][javascript - How to remove undefined and null values from an object using lodash? - Stack Overflow]]
 

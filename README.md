@@ -107,6 +107,7 @@
     + [Vue.JS](notebook/front-end/vue/vue.org)
   + [异步编程模型](notebook/front-end/async.org)
   + [CSS](notebook/front-end/css.org)
+  + [JavaScript DOM API](notebook/front-end/dom.org)
   + [ECMAScript 5](notebook/front-end/es5.org)
   + [ECMAScript 6](notebook/front-end/es6.org)
   + [HTML](notebook/front-end/html.org)
