@@ -9,138 +9,14 @@
 ** Components
    + [[http://www.ruanyifeng.com/blog/2019/08/web_components.html][Web Components 入门实例教程 - 阮一峰的网络日志]]
 
-** 跨域
-   + [[http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html][浏览器同源政策及其规避方法 - 阮一峰的网络日志]]
-
-* Trace
-  + 监听 click 事件，进行追踪
-    #+begin_src js
-      import axios from 'axios'
-
-      const HEADER_FROM_PAGE = 'X-From-Page'
-      const HEADER_FROM_PATH = 'X-From-Path'
-
-      let _trace = {}
-
-      window._trace = function(xpath) {
-        let result = document.evaluate(xpath, document)
-        for (let node = result.iterateNext(); node !== null; node = result.iterateNext()) {
-          node.style.outline = '3px solid #' + (~~(Math.random() * (1 << 24))).toString(16)
-        }
-      }
-
-      function getPathTo(element) {
-        if (element.tagName === 'HTML') {
-          return '/HTML'
-        }
-        if (element === document.body) {
-          return '/HTML/BODY'
-        }
-
-        let ix = 0
-        let siblings = element.parentNode.childNodes
-        for (let i = 0; i < siblings.length; i++) {
-          let sibling = siblings[i]
-          if (sibling === element) {
-            return getPathTo(element.parentNode) + '/' + element.tagName + '[' + (ix + 1) + ']'
-          }
-          if (sibling.nodeType === 1 && sibling.tagName === element.tagName) {
-            ix++
-          }
-        }
-      }
-
-      function bodyClickListener(event) {
-        if (event instanceof MouseEvent) {
-          _trace[HEADER_FROM_PATH] = `${event.x}.${event.y}.${btoa(getPathTo(event.target))}.${event.timeStamp}`
-        }
-      }
-
-      function requestInterceptor(requestConfig) {
-        requestConfig.headers[HEADER_FROM_PAGE] = window.location.pathname
-        requestConfig.headers[HEADER_FROM_PATH] = _trace[HEADER_FROM_PATH]
-        return requestConfig
-      }
-
-      export function applyTrace() {
-        document.body.addEventListener('click', bodyClickListener, true)
-        axios.interceptors.request.use(requestInterceptor)
-      }
-    #+end_src
-  + 相关：
-    + JS 事件机制
-    + XPATH 路径获取
-    + axios 拦截器
-  + [[https://segmentfault.com/a/1190000007623810][JS中的事件顺序(事件捕获与冒泡) - Yoomin的前端学习笔记 - SegmentFault 思否]]
-  + [[https://stackoverflow.com/questions/2631820/how-do-i-ensure-saved-click-coordinates-can-be-reloaed-to-the-same-place-even-i/2631931#2631931][javascript - How do I ensure saved click coordinates can be reloaed to the same place, even if the page layout changed? - Stack Overflow]]
-
-* Source Map
-  + [[https://stackoverflow.com/questions/27626764/configure-webpack-to-allow-browser-debugging][javascript - Configure webpack to allow browser debugging - Stack Overflow]]
-  + [[http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html][JavaScript Source Map 详解 - 阮一峰的网络日志]]
+** 事件循环
+   + [[https://juejin.im/post/5c337ae06fb9a049bc4cd218][浏览器与Node的事件循环(Event Loop)有何区别? - 掘金]]
+   + [[https://html.spec.whatwg.org/multipage/webappapis.html#event-loops][HTML Standard]]
+   + [[https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#what-is-the-event-loop][The Node.js Event Loop, Timers, and process.nextTick() | Node.js]]
 
 * 前端学习
   + [[https://github.com/wallstreetcn/webpack-and-spa-guide][wallstreetcn/webpack-and-spa-guide: Webpack 4 和单页应用入门]]
   + JavaScript 模块化标准、语言标准、宿主环境、编译器 Babel
   + HTML/CSS 预处理器
   + Webpack 打包工具
-
-* 依赖管理
-  + 包 A 和 包 B 都依赖了包 C，那么以哪个为准
-    
-* 调试
-  + [[https://www.cnblogs.com/fundebug/p/use-console-to-debug-javascript.html][灵活使用 console 让 js 调试更简单 - Fundebug - 博客园]]
-  + [[https://wangdoc.com/javascript/features/console.html][console 对象与控制台 - JavaScript 教程 - 网道]]
-
-  #+begin_src js
-    const DEV_ENV = 'development'
-
-    export default {
-      trace(message, ...optionalParams) {
-        if (process.env.NODE_ENV === DEV_ENV) {
-          console.trace(message, ...optionalParams)
-        }
-      },
-      debug(message, ...optionalParams) {
-        if (process.env.NODE_ENV === DEV_ENV) {
-          console.debug(message, ...optionalParams)
-        }
-      },
-      info(message, ...optionalParams) {
-        if (process.env.NODE_ENV === DEV_ENV) {
-          console.info(message, ...optionalParams)
-        }
-      },
-      error(message, ...optionalParams) {
-        if (process.env.NODE_ENV === DEV_ENV) {
-          console.error(message, ...optionalParams)
-        }
-      },
-      log(message, ...optionalParams) {
-        if (process.env.NODE_ENV === DEV_ENV) {
-          console.log(message, ...optionalParams)
-        }
-      },
-      group(groupTitle, ...optionalParams) {
-        if (process.env.NODE_ENV === DEV_ENV) {
-          console.group(groupTitle, ...optionalParams)
-        }
-      },
-      groupEnd() {
-        if (process.env.NODE_ENV === DEV_ENV) {
-          console.groupEnd()
-        }
-      }
-    }
-
-  #+end_src
-
-* 分包机制
-* 事件循环
-  + [[https://juejin.im/post/5c337ae06fb9a049bc4cd218][浏览器与Node的事件循环(Event Loop)有何区别? - 掘金]]
-  + [[https://html.spec.whatwg.org/multipage/webappapis.html#event-loops][HTML Standard]]
-  + [[https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#what-is-the-event-loop][The Node.js Event Loop, Timers, and process.nextTick() | Node.js]]
-
-* 参数列表
-  JavaScript 中参数列表中参数的数量并不影响我参数的传递，多和少都是无所谓的。
-
 

@@ -17,6 +17,7 @@
   - [[#显示所有元素的-outline][显示所有元素的 outline]]
   - [[#iife][IIFE]]
   - [[#数值运算符][数值运算符]]
+  - [[#函数参数列表][函数参数列表]]
 - [[#相关问题][相关问题]]
   - [[#通过-innerhtml-的方式为-table-添加行失败][通过 innerHTML 的方式为 table 添加行失败]]
   - [[#浏览器中-es6-模块化的语法不能使用][浏览器中 ES6 模块化的语法不能使用]]
@@ -621,6 +622,9 @@
 
    与之相应的是负数值运算符，使用减号，参考：
    + [[https://wangdoc.com/javascript/operators/arithmetic.html#%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%8C%E8%B4%9F%E6%95%B0%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6][算术运算符 - 数值运算符 - JavaScript 教程 - 网道]]
+
+** 函数参数列表
+   JavaScript 中参数列表中参数的数量并不影响我参数的传递，多和少都是无所谓的。
 
 * 相关问题
 ** 通过 innerHTML 的方式为 table 添加行失败

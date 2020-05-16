@@ -80,29 +80,4 @@
 
   #+end_src
 
-* JSON
-  fastjson - JSON.parse
-
-* AOP
-  动态代理是使用 Proxy 还是 CGLIB 需要考虑的应该是需要注入的 Bean 的类型，如果要注入的是类的话，就只有 CGLIB 了，如果是 Interface 和 InterfaceImpl 的形式，还可以用 Proxy
-
-* Spring Cloud
-  + [[https://www.cnblogs.com/linkstar/p/9055900.html][SpringCloud各个组件说明 - LinkinStar - 博客园]]
-
-* IOC
-  + [[https://juejin.im/post/5c98a7b4f265da60ee12e9b2][spring 是如何解决循环依赖的？ - 掘金]]
-
-* qa
-  + [[https://stackoverflow.com/questions/53996250/the-bean-datasource-defined-in-beandefinition-defined-in-class-path-resource][spring - The bean 'dataSource', defined in BeanDefinition defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$H - Stack Overflow]]
-  + [[https://www.cnblogs.com/larryzeal/p/5552360.html][Intellij IDEA Module 的Language Level的问题 - LarryZeal - 博客园]]
-  + [[https://blog.csdn.net/andy_zhang2007/article/details/87908507][Spring Cloud 声明式REST客户端 OpenFeign -- 10. 注解@QueryMap支持_Java_Details Inside Spring-CSDN博客]]
-
-* caching
-  + [[https://juejin.im/post/5da52d55f265da5b5b6c6d3f#heading-4][Spring Boot 2.X(七)：Spring Cache 使用 - 掘金]]
-
-* mongodb
-  + [[https://docs.spring.io/spring-data/mongodb/docs/current/reference/html/#mongo.query][Spring Data MongoDB - Reference Documentation]]
-  + [[https://www.cnblogs.com/hapjin/p/7944404.html][MongoDB统计文档(Document)的数组(Array)中的各个元素出现的次数 - hapjin - 博客园]]
-
-
 

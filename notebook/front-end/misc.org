@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#浏览器指纹][浏览器指纹]]
 - [[#控制台输出][控制台输出]]
+- [[#事件顺序][事件顺序]]
 - [[#http-referer][HTTP Referer]]
 
 * 浏览器指纹
@@ -23,6 +24,45 @@
   #+begin_src js
     console.log('%cEnvironment%cproduction','color:#fff;background:#ccc;','color:#fff;background:green');
   #+end_src
+
+  同时，控制台对象拥有更多的方法来控制输出，参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/API/Console][Console - Web API 接口参考 | MDN]]
+
+* 事件顺序
+  如果一个元素和它的祖先元素注册了同一类型的事件函数，那么当事件发生时事件函数调用的顺序是什么呢？
+
+  过去有两个模型被用来解决这个问题：
+  + =Netscape= 的事件捕获(event capturing)模型，认为祖先元素上的处理函数应该先被执行
+  + =Microsoft= 的事件冒泡(event bubbling)模型，认为内部元素上的处理函数应该被先执行
+
+  在 W3C 标准中，采取了折中的方案，在 W3C 事件模型中发生的任何事件, 先从其祖先元素开始一路向下捕获，直到达到目标元素，其后再次从目标元素开始冒泡：
+  #+begin_example
+              1. 先从上往下捕获
+                      |
+                     | |  / \
+    -----------------| |--| |-----------------
+    | outer          | |  | |                |
+    |   -------------| |--| |-----------     |
+    |   |   inner    \ /  | |          |     |
+    |   |                  |           |     |
+    |   | 2. 到达目标元素后从下往上冒泡|     |
+    |   --------------------------------     |
+    |        W3C event model                 |
+    ------------------------------------------
+  #+end_example
+
+  作为开发者，可以决定事件处理器是注册在捕获或者是冒泡阶段。如果 =addEventListener= 的最后一个参数是 true，那么处理函数将在 *捕获阶段* 被触发，
+  否则，会在冒泡阶段被触发。
+
+  传统模型将被注册在冒泡阶段：
+  #+begin_src js
+    element.onclick = function() {}
+  #+end_src
+  
+  也就是说，我们可以在 =body= 上注册事件处理函数，然后捕获所有元素的点击事件。
+
+  参考：
+  + [[https://segmentfault.com/a/1190000007623810][JS 中的事件顺序(事件捕获与冒泡) - Yoomin 的前端学习笔记 - SegmentFault 思否]]
 
 * HTTP Referer
   有些网站不允许图片外链，只有自家的网站才能显示图片，外部网站加载图片就会报错。它的实现就是基于 Referer 字段，如果该字段的网址是自家网址，就放行。

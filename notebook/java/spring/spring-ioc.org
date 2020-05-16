@@ -22,6 +22,7 @@
   - [[#spring-低版本下自我装配失败的问题][Spring 低版本下自我装配失败的问题]]
   - [[#bean-name-和-id-的区别][Bean Name 和 ID 的区别]]
   - [[#怎样获取所有被同一个注解注解了的-bean][怎样获取所有被同一个注解注解了的 Bean]]
+  - [[#spring-ioc-是如何解决循环依赖问题的][Spring IOC 是如何解决循环依赖问题的]]
 
 * 基本概念
   IOC 的全名是 Inversion of Control，即控制反转，还有别名叫做依赖注入。
@@ -266,4 +267,10 @@
 ** 怎样获取所有被同一个注解注解了的 Bean
    简单的方式，通过 ~ApplicationContext.getBeansWithAnnotation~ 就可以了，参考：
    + [[https://stackoverflow.com/questions/14236424/how-can-i-find-all-beans-with-the-custom-annotation-foo][spring - How can I find all beans with the custom annotation @Foo? - Stack Overflow]]
+
+** Spring IOC 是如何解决循环依赖问题的
+   Spring IOC 通过 *三级缓存* 的方式能够解决单例模式下 =setter= 方法注入的循环依赖问题。
+
+   参考：
+   + [[https://segmentfault.com/a/1190000015221968][Spring IOC 容器源码分析 - 循环依赖的解决办法 - 个人文章 - SegmentFault 思否]]
 

@@ -5,6 +5,7 @@
 - [[#guava][Guava]]
   - [[#caches][Caches]]
 - [[#http-client][Http Client]]
+- [[#fastjson][fastjson]]
 
 * Apache POI
   Java 中常用 Apache POI 来操作 Excel 文档，相关问题：
@@ -41,3 +42,6 @@
   + [[https://github.com/akullpp/awesome-java#http-clients][akullpp/awesome-java: A curated list of awesome frameworks, libraries and software for the Java programming language.]]
   + [[https://liudanking.com/sitelog/java-http-client-lib-comparison/][Java HTTP 组件库选型看这篇就够了 | 行思錄 | Travel Coder]]  
 
+* fastjson
+  可以通过 =JSON.parse= 简单解析 JSON 对象。
+  

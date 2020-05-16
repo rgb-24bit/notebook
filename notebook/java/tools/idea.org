@@ -23,6 +23,7 @@
   - [[#idea-集成-mybatis-时可能遇到的问题][Idea 集成 Mybatis 时可能遇到的问题]]
   - [[#怎样设置单行注释的对其方式][怎样设置单行注释的对其方式]]
   - [[#怎样关闭某段代码的自动格式化][怎样关闭某段代码的自动格式化]]
+  - [[#intellij-idea-module-的-language-level-的问题][Intellij IDEA Module 的 Language Level 的问题]]
 
 * 简单使用
   在 Emacs 键位下的一些常用快捷键：
@@ -161,4 +162,44 @@
      ...
      // @formatter:on 
    #+end_src
+
+** Intellij IDEA Module 的 Language Level 的问题
+   在新建项目后 Language Level 总是会变成 1.5 的原因：
+   #+begin_quote
+   Apache Maven Compiler Plugin
+
+   The Compiler Plugin is used to compile the sources of your project. Since 3.0, the default compiler is javax.tools.JavaCompiler (if you are using java 1.6) and is used to compile Java sources.
+   If you want to force the plugin using javac, you must configure the plugin option forceJavacCompilerUse.
+
+   Also note that at present the default source setting is 1.5 and the default target setting is 1.5, independently of the JDK you run Maven with.
+   If you want to change these defaults, you should set source and target as described in Setting the -source and -target of the Java Compiler.   
+   #+end_quote
+
+   可以做出如下修改：
+   #+begin_src xml
+     <build>
+         <plugins>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-compiler-plugin</artifactId>
+                 <version>2.3.2</version>
+                 <configuration>
+                     <source>1.8</source>
+                     <target>1.8</target>
+                 </configuration>
+             </plugin>
+         </plugins>
+     </build>
+   #+end_src
+
+   或：
+   #+begin_src xml
+     <properties>
+       <maven.compiler.source>1.8</maven.compiler.source>
+       <maven.compiler.target>1.8</maven.compiler.target>
+     </properties>
+   #+end_src
+
+   参考：
+   + [[https://www.cnblogs.com/larryzeal/p/5552360.html][Intellij IDEA Module 的 Language Level 的问题 - LarryZeal - 博客园]]
 

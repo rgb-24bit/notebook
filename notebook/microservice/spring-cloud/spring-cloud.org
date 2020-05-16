@@ -2,7 +2,9 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简述][简述]]
+- [[#instruction][Instruction]]
 - [[#service-discovery-eureka-clients][Service Discovery: Eureka Clients]]
+- [[#spring-cloud-openfeign][Spring Cloud OpenFeign]]
 
 * 简述
   Spring Cloud 是常用的微服务套件，它的版本命名方式比较特殊，有一些奇怪的单词组成，这些单词均为英国伦敦地铁站的站名，同时根据字母表的顺序来对应版本时间顺序，比如：
@@ -10,6 +12,18 @@
 
   很好的入门资料：
   + [[https://juejin.im/post/5de2553e5188256e885f4fa3][Spring Cloud 入门总结 - 掘金]]
+
+* Instruction
+  组件名字和发音：
+  #+begin_quote
+  Eureka [jʊ'ri:kə]
+  Ribbon [ˈrɪbən]
+  Feign [fen]
+  Hystrix [hɪst'rɪks]
+  Zuul [zulu]
+  Sleuth [sluθ]
+  Turbine [ˈtɜ:rbaɪn]
+  #+end_quote
 
 * Service Discovery: Eureka Clients
   通常情况下，我们可以通过 ~@EnableEurekaClient~ 注解开启客户端，但是，使用 Spring Boot 时，可以免去这一步：
@@ -19,4 +33,9 @@
 
   参考：
   + [[https://cloud.spring.io/spring-cloud-netflix/multi/multi__service_discovery_eureka_clients.html][Service Discovery: Eureka Clients]]
+
+* Spring Cloud OpenFeign
+  OpenFeign 注解 =@QueryMap= 支持将 POJO 对象用作 GET map 参数。但是该 OpenFeign 缺省注解跟 Spring 不兼容，因为它缺少一个属性 value。  
+
+  但是 Spring Cloud OpenFeign 提供了一个功能上等价的注解 @SpringQueryMap，使用该注解，可以将一个 POJO 或者 Map 作为一个请求参数。
 
