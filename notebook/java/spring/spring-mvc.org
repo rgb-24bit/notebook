@@ -18,6 +18,7 @@
   - [[#datetimeformat-和-jsonformat-的使用][@DateTimeFormat 和 @JsonFormat 的使用]]
   - [[#使用-java8-时间日期库][使用 Java8 时间日期库]]
   - [[#怎样在-dispatcherservlet-初始化完成后执行一些逻辑][怎样在 DispatcherServlet 初始化完成后执行一些逻辑]]
+  - [[#如何获取请求对应的-handler][如何获取请求对应的 handler]]
 
 * 配置
   通过 Java 配置时，鉴于初始化会获取所有实现 WebApplicationInitializer 的类，那么我们可以实现这一接口，在这个接口的 onStartup 方法中借助 Servlet 3.0 进行动态配置。
@@ -314,7 +315,7 @@
 ** @DateTimeFormat 和 @JsonFormat 的使用
    Spring MVC 中的 ~@DateTimeFormat~ 是用来进行自动类型转换的，而带有 ~@RequstBody, @ResponseBody~ 注解的请求数据会通过 Json 解析器进行转换。
 
-   因此，在实体类上应该使用 ~@JsonFormat~ 注解而不是 ~@DateTimeFormat~ 注解，相关：
+   简单来说，当数据传输格式为 =Json= 时用 =@JsonFormat=, 否则用 =@DateTimeFormat= 就可以了：
    + [[https://www.baeldung.com/spring-httpmessageconverter-rest][Http Message Converters with the Spring Framework | Baeldung]]
 
 ** 使用 Java8 时间日期库
@@ -337,5 +338,10 @@
        WebApplicationContext wac = super.initWebApplicationContext();
        return wac;
      }
+   #+end_src
+
+** 如何获取请求对应的 handler
+   #+begin_src java
+     requestMappingHandlerMapping.getHandler(request)
    #+end_src
 

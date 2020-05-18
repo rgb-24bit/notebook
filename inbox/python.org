@@ -54,14 +54,3 @@
    + [[https://stackoverflow.com/questions/33409888/how-can-i-await-inside-future-like-objects-await][python - How can I await inside future-like object's __await__? - Stack Overflow]]
 
      
-* 作用域
-  #+begin_src python
-    In [4]: class Outter:
-       ...:     class Inner:
-       ...:         pass
-       ...:     def __init__(self):
-       ...:         self.inner = Outter.Inner()
-       ...:
-       ...:
-  #+end_src
-

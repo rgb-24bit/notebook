@@ -88,13 +88,4 @@
        #+END_QUOTE
     3. [[https://www.infoq.cn/article/1ggzj_oFl8wuJFwVG9et][简明高效的 Java 并发编程学习指南 - InfoQ]]
 
-* Idea
-  + [[https://stackoverflow.com/questions/14146422/automatically-generating-of-type-and-reference-to-returned-object-for-method-usi][java - Automatically generating of type and reference to returned object for method using hot keys in Intellij IDEA - Stack Overflow]]
-  + Inlay hints
-
-* ?
-  JsonFormat - DateTimeFormat
-
-* utils
-  + [[https://stackoverflow.com/questions/2895342/java-how-can-i-split-an-arraylist-in-multiple-small-arraylists][Java: how can I split an ArrayList in multiple small ArrayLists? - Stack Overflow]]
 

@@ -4,6 +4,7 @@
 - [[#apache-poi][Apache POI]]
 - [[#guava][Guava]]
   - [[#caches][Caches]]
+  - [[#lists][Lists]]
 - [[#http-client][Http Client]]
 - [[#fastjson][fastjson]]
 
@@ -37,6 +38,12 @@
    参考：
    + [[https://segmentfault.com/a/1190000011105644][Guava Cache 用法介绍 - 个人文章 - SegmentFault 思否]]
    + [[https://github.com/google/guava/wiki/CachesExplained][CachesExplained · google/guava Wiki]]
+
+** Lists
+   对列表进行分片操作：
+   #+begin_src java
+     List<List<Integer>> smallerLists = Lists.partition(bigList, 10);
+   #+end_src
 
 * Http Client
   + [[https://github.com/akullpp/awesome-java#http-clients][akullpp/awesome-java: A curated list of awesome frameworks, libraries and software for the Java programming language.]]

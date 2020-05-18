@@ -14,6 +14,9 @@
   - [[#基础类型][基础类型]]
   - [[#复合类型][复合类型]]
   - [[#引用类型][引用类型]]
+- [[#函数][函数]]
+- [[#异常][异常]]
+- [[#方法][方法]]
 
 * Go 语言起源
   Go 语言的设计主要受到 CSP、Pascal 和 C 三个分支的影响，其中，CSP 只是一个用于描述并发性基本概念的描述语言，
@@ -843,8 +846,7 @@
        p := &Vertex{1, 2}
        p.X = 100
      #+end_src
-
-
+     
 ** 引用类型
    Go 语言中的引用和 Java 一样，更接近 C/C++ 中的指针，而不是 C++ 式的引用，引用类型的默认值为 nil，同时很多在 nil 上的操作都不会导致 NPE 的发生。
 
@@ -1042,3 +1044,166 @@
      
      和 slice 一样，map 之间也不能进行相等比较，唯一的例外是和 nil 进行比较。
 
+   + 函数 ::
+     函数也是值，可以作为参数传递，但是好像说 Go 不适合函数式编程，不知道为啥：
+     #+begin_src go
+       func compute(fn func(float64, float64) float64) float64 {
+         return fn(3, 4)
+       }
+
+       func main() {
+         hypot := func(x, y float64) float64 {
+           return math.Sqrt(x*x + y*y)
+         }
+         fmt.Println(hypot(5, 12))
+
+         fmt.Println(compute(hypot))
+         fmt.Println(compute(math.Pow))
+       }
+     #+end_src
+
+     同时，函数值之间是不可比较的，也不能用函数值作为 map 的 key。
+     
+* 函数
+  函数的声明从关键字 =func= 开始，参数的类型位于变量名称后面，这样做的理由- [[https://blog.golang.org/declaration-syntax][Go's Declaration Syntax - The Go Blog]]。
+  #+begin_src go
+    func name(parameter-list) (result-list) {
+        body
+    }
+  #+end_src
+
+  相邻参数类型相同时，可以省略前面参数的类型：
+  #+begin_src go
+    func add(x int , y int, c int) int {
+      return x + y + c
+    }
+
+    // or
+
+    func add(x, y, c int) int {
+      return x + y + c
+    }
+  #+end_src
+
+  函数可以很方便的返回多个值，同时，应该同时接收多个返回值：
+  #+begin_src go
+    func swap(x, y string) (string, string) {
+      return y, x
+    }
+
+    func main() {
+      a, b := swap("hello", "world")
+      // use a and b
+    }
+  #+end_src
+
+  可以为返回值命名，这些名称同样是变量，函数内部为其赋值不需要声明了，使用 ~return~ 时直接返回变量值（bare return），
+  如果 ~return~ 有参数，就按照参数进行返回。
+  #+begin_src go
+    func split(sum int) (x, y int) {
+      x = sum * 4 / 9
+      y = sum - x
+      return // y, x
+    }
+  #+end_src
+
+  =return= 返回的参数数量要么和签名上的一样，要么为 0。
+
+  拥有函数名的函数只能在 *包级语法块* 中被声明，匿名函数可以位于任意表达式中：
+  #+begin_src go
+    strings.Map(func(r rune) rune { return r + 1 }, "HAL-9000")
+  #+end_src
+  
+  匿名函数可以访问完整的词法环境（lexical environment），这意味着在函数中定义的内部函数可以引用该函数的变量。
+  利用这一特性时，如果位于循环体内部，捕获循环变量时需要在声明一次。
+  
+  Go 函数支持可变参数，调用者会隐式的创建一个数组，并将原始参数复制到数组中，再把数组的一个切片作为参数传给被调函数：
+  #+begin_src go
+    func sum(vals ...int) int {
+        total := 0
+        for _, val := range vals {
+            total += val
+        }
+        return total
+    }
+  #+end_src
+  
+  如果参数就是切片，那么可以这样调用：
+  #+begin_src go
+    values := []int{1, 2, 3, 4}
+    fmt.Println(sum(values...)) // "10"
+  #+end_src
+
+* 异常
+  当 panic 异常发生时，程序会中断运行，并立即执行在该 =goroutine= 中被 =defer= 的函数。对于大部分漏洞，我们应该使用 Go 提供的错误机制，
+  而不是 panic，尽量避免程序的崩溃。
+  
+  如果在 deferred 函数中调用了内置函数 recover，并且定义该 defer 语句的函数发生了 panic 异常，recover 会使程序从 panic 中恢复，
+  并返回 panic value。导致 panic 异常的函数不会继续运行，但能正常返回。在未发生 panic 时调用 recover，recover 会返回 nil。
+  
+  例子：
+  #+begin_src go
+    func main() {
+        a := returnN()
+        fmt.Println(a)
+    }
+
+    func returnN() (result int) {
+        defer func() {
+            if p := recover(); p != nil {
+                result = p.(int)
+            }
+        }()
+        panic(3)
+    }
+  #+end_src
+
+* 方法
+  在函数声明时，在其名字之前放上一个变量，即是一个方法。这个附加的参数会将该函数附加到这种类型上，即相当于为这种类型定义了一个独占的方法：
+  #+begin_src go
+    func (receiver T) name(parameter-list) (result-list) {
+      body
+    }
+  #+end_src
+
+  可以给 *同一个包* 内的任意命名类型定义方法，只要这个命名类型的底层类型不是指针或者 interface。
+
+  方法的 =receiver= 可以是指针，也就是说，传递引用而非值（二级指针是不允许的）：
+  #+begin_src go
+    func (v *Vertex) Scale(f float64) {
+      v.X = v.X * f
+      v.Y = v.Y * f
+    }
+  #+end_src
+
+  当 =receiver= 类型为指针时，调用 =v.Scale= 会自动转换为 =(&v).Scale=, 但是函数参数不行：
+  #+begin_src go
+    // function
+    var v Vertex
+    ScaleFunc(v, 5)  // Compile error!
+    ScaleFunc(&v, 5) // OK
+
+    // method
+    var v Vertex
+    v.Scale(5)  // OK
+    p := &v
+    p.Scale(10) // OK
+  #+end_src
+
+  当 =receiver= 类型不是指针时，调用 =v.Scale= 也可以自动转换为 =(*p).Scale=, 函数参数同样不行：
+  #+begin_src go
+    var v Vertex
+    fmt.Println(AbsFunc(v))  // OK
+    fmt.Println(AbsFunc(&v)) // Compile error!
+
+    var v Vertex
+    fmt.Println(v.Abs()) // OK
+    p := &v
+    fmt.Println(p.Abs()) // OK
+  #+end_src
+
+  简单来说，对于函数参数来说，指针是指针，值是值，对于方法 =receiver= 来说，两者可以自动转换。
+
+  可以选择指针或值作为方法 =receiver=, 一般可能会选择指针，但是，两者中只能选择一个。
+
+  同时，当接受者类型是指针时，那么，空指针的方法调用不会抛出异常，而是将 =nil= 传递给接受者。

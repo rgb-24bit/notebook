@@ -16,6 +16,7 @@
   - [[#寻找文件][寻找文件]]
   - [[#快速添加依赖][快速添加依赖]]
   - [[#多-project-操作][多 project 操作]]
+  - [[#自动创建返回值][自动创建返回值]]
 - [[#相关问题][相关问题]]
   - [[#怎样添加静态导入到补全列表][怎样添加静态导入到补全列表]]
   - [[#怎样清理同步-vsf][怎样清理同步 VSF]]
@@ -24,6 +25,7 @@
   - [[#怎样设置单行注释的对其方式][怎样设置单行注释的对其方式]]
   - [[#怎样关闭某段代码的自动格式化][怎样关闭某段代码的自动格式化]]
   - [[#intellij-idea-module-的-language-level-的问题][Intellij IDEA Module 的 Language Level 的问题]]
+  - [[#关闭参数提示][关闭参数提示]]
 
 * 简单使用
   在 Emacs 键位下的一些常用快捷键：
@@ -125,6 +127,9 @@
 
    问题就是使用体验没有想象的那么好……
 
+** 自动创建返回值
+   快捷键 =C-M-V=
+
 * 相关问题
 ** 怎样添加静态导入到补全列表
    在 ~Settings -> Code Style -> Java -> Imports~ 处进行设置就可以了。
@@ -202,4 +207,8 @@
 
    参考：
    + [[https://www.cnblogs.com/larryzeal/p/5552360.html][Intellij IDEA Module 的 Language Level 的问题 - LarryZeal - 博客园]]
+
+** 关闭参数提示
+   #+HTML: <img src="https://resources.jetbrains.com/help/img/idea/2020.1/inlay_hints_example.png">
+   + [[https://www.jetbrains.com/help/idea/inlay-hints.html][Inlay Hints - Help | IntelliJ IDEA]]
 
