@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#迪杰斯特拉算法][迪杰斯特拉算法]]
+- [[#环路检测和拓扑排序][环路检测和拓扑排序]]
 
 * 迪杰斯特拉算法
   Dijkstra's algorithm 用于计算一个节点到其他所有节点的最短路径，其原理很简单：
@@ -44,4 +45,12 @@
 
   相关链接：
   + [[https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm][Dijkstra's algorithm - Wikipedia]]
+
+* 环路检测和拓扑排序
+  拓扑排序用于解决优先级限制下的调度问题，这类问题可以通过一个 *有向图* 表示，要求图无环才能解决。
+
+  即：有向无环图 DAG。
+
+  LeetCode 上的例题：
+  + [[https://leetcode-cn.com/problems/course-schedule-ii/][Course Schedule II]]
 

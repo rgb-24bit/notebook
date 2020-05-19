@@ -21,6 +21,7 @@
   - [[#http-header-大小写敏感吗][HTTP Header 大小写敏感吗]]
   - [[#http-协议中的无状态是什么意思][HTTP 协议中的无状态是什么意思]]
   - [[#get-和-post-之间的区别][GET 和 POST 之间的区别]]
+  - [[#状态码-200201-的使用][状态码 200/201 的使用]]
 
 * HTTP
 ** HTTP 概述
@@ -290,3 +291,10 @@
    参考：
    + [[https://zhuanlan.zhihu.com/p/25028045][听说『99% 的人都理解错了 HTTP 中 GET 与 POST 的区别』？？ - 知乎]]
    + [[https://zhuanlan.zhihu.com/p/22536382][99% 的人都理解错了 HTTP 中 GET 与 POST 的区别 - 知乎]]
+** 状态码 200/201 的使用
+   在 RESTful 服务中，POST 请求成功后可以考虑返回这两个状态码中的一个，各自的含义为：
+   + 200 when an object is created and returned
+   + 201 when an object is created but only its reference is returned (such as an ID or a link)
+
+   一般来说还是 200 要用的多一些吧……
+

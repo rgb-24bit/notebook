@@ -90,3 +90,5 @@
     #+end_example
   + C-x z Repeat Command
 
+* org-mode
+  + C-x n s/w

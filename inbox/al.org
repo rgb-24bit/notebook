@@ -1,6 +1,0 @@
-* 教程
-  + [[https://github.com/labuladong/fucking-algorithm][labuladong/fucking-algorithm]]
-
-* 图
-  + https://leetcode-cn.com/problems/course-schedule-ii/solution/ke-cheng-biao-ii-by-leetcode-solution/
-

@@ -231,6 +231,7 @@
   + [机器学习](notebook/misc/ml.org)
   + [技术了解](notebook/misc/noun.org)
   + [编程范式相关](notebook/misc/paradigm.org)
+  + [性能测试](notebook/misc/performance-test.org)
   + [问题集](notebook/misc/question.org)
   + [结构化编程](notebook/misc/se.org)
   + [搜索引擎](notebook/misc/search.org)

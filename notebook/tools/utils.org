@@ -5,6 +5,7 @@
 - [[#gnupg][Gnupg]]
 - [[#licecap][LICEcap]]
 - [[#gitinspector][Gitinspector]]
+- [[#gnuplot][Gnuplot]]
 
 * x64dbg
   Windows的开源 x64 / x32调试器, 用来学习汇编很可以
@@ -27,3 +28,7 @@
   参考：
   + [[https://github.com/ejwa/gitinspector][ejwa/gitinspector: The statistical analysis tool for git repositories]]
   
+* Gnuplot
+  可以用 gnuplot 进行数据可视化，参考：
+  + [[https://www.ibm.com/developerworks/cn/linux/l-gnuplot/][gnuplot 让您的数据可视化]]
+
