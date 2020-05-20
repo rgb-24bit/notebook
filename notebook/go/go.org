@@ -17,6 +17,7 @@
 - [[#函数][函数]]
 - [[#异常][异常]]
 - [[#方法][方法]]
+- [[#接口][接口]]
 
 * Go 语言起源
   Go 语言的设计主要受到 CSP、Pascal 和 C 三个分支的影响，其中，CSP 只是一个用于描述并发性基本概念的描述语言，
@@ -805,12 +806,12 @@
      匿名成员的数据类型必须是命名的类型或指向一个命名的类型的指针：
      #+begin_src go
        type Circle struct {
-           Point             // nested member
+           Point             // named type
            Radius int
        }
 
        type Wheel struct {
-           Circle
+           ,*Circle          // point
            Spokes int
        }
      #+end_src
@@ -1202,8 +1203,81 @@
     fmt.Println(p.Abs()) // OK
   #+end_src
 
-  简单来说，对于函数参数来说，指针是指针，值是值，对于方法 =receiver= 来说，两者可以自动转换。
+  简单来说，对于函数参数来说，指针是指针，值是值，对于方法 =receiver= 来说，两者可以自动转换。同时，当接受者类型是指针时，
+  空指针的方法调用不会抛出异常，而是将 =nil= 传递给接受者，如果接受者不是指针但指针值是 =nil= 时，调用会抛出异常。
 
-  可以选择指针或值作为方法 =receiver=, 一般可能会选择指针，但是，两者中只能选择一个。
+  PS: 可以选择指针或值作为方法 =receiver=, 一般可能会选择指针，但是，两者中只能选择一个。
+  
+  结构体中的 *匿名字段* 的 *成员* 和 *方法* 都可以直接访问，即：
+  #+begin_src go
+    Circle.Point.X         // Circle.X
+    Circle.Point.Method()  // Circle.Method()
+  #+end_src
+  
+  这需要确保多个匿名字段引入的成员和方法不存在二义性，这是一个很有用的特性，比如将：
+  #+begin_src go
+    var (
+        mu sync.Mutex // guards mapping
+        mapping = make(map[string]string)
+    )
 
-  同时，当接受者类型是指针时，那么，空指针的方法调用不会抛出异常，而是将 =nil= 传递给接受者。
+    func Lookup(key string) string {
+        mu.Lock()
+        v := mapping[key]
+        mu.Unlock()
+        return v
+    }
+  #+end_src
+
+  写成：
+  #+begin_src go
+    var cache = struct {
+        sync.Mutex
+        mapping map[string]string
+    }{
+        mapping: make(map[string]string),
+    }
+
+
+    func Lookup(key string) string {
+        cache.Lock()
+        v := cache.mapping[key]
+        cache.Unlock()
+        return v
+    }
+  #+end_src
+
+  -----
+
+  特定对象的方法可以通过 *方法值* 来表示，我们把类似 =obj.Method= 叫做选择器，该选择器返回一个值，该值为将方法绑定到特定接收器变量的函数。
+  类似函数的柯里化：
+  #+begin_src go
+    p := Point{1, 2}
+    q := Point{4, 6}
+
+    distanceFromP := p.Distance        // method value
+    fmt.Println(distanceFromP(q))      // "5"
+    var origin Point                   // {0, 0}
+    fmt.Println(distanceFromP(origin)) // "2.23606797749979", sqrt(5)
+  #+end_src
+
+  特定类型的方法可以通过 *方法表达式* 来表示，类似于 =T.Method= 或 =(*T).Method= 的形式，我们可以为方法表达式指定 =receiver= 和调用参数，
+  这个和 JavaScript 中 =Function.prototype.call= 有点像。
+
+  简单来说就是一个指定了 =receiver= 一个没指定。
+
+  -----
+
+  和其他语言不同，Go 语言中封装的最小单位是包，而且是通过名称首字母大小写来控制的。
+
+* 接口
+  Go 语言中接口类型的独特之处在于它是满足隐式实现的。也就是说，我们没有必要对于给定的具体类型定义所有满足的接口类型，
+  简单地拥有一些必需的方法就足够了。
+
+  这种设计可以让你创建一个新的接口类型满足已经存在的具体类型却不会去改变这些类型的定义。
+
+  #+begin_comment
+  我喜欢这样的设定，这样可以更好的管理 接口 <=> 实现 之间的关系
+  #+end_comment
+
+  
