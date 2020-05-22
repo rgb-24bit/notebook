@@ -7,7 +7,7 @@
 - [[#refile--copy][Refile & copy]]
 - [[#misc][Misc]]
 - [[#文学编程][文学编程]]
-- [[#问题集][问题集]]
+- [[#相关问题][相关问题]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
   - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
   - [[#怎样在-org-92-中使用旧的模板引擎][怎样在 Org 9.2 中使用旧的模板引擎]]
@@ -68,6 +68,7 @@
 * Misc
   + 在 Org 文件的头部可以通过 ~#+STARTUP~ 来控制打开文件时各个标题下内容的可见性，参考：
     + [[https://orgmode.org/manual/Initial-visibility.html][Initial visibility (The Org Manual)]]
+  + 可以通过快捷键 =C-x n s/w= 全屏显示某个 headline
 
 * 文学编程
   文学编程是一种很适合用来进行算法练习的编程模式，而 Org 提供了很多的功能来支持这样模式，可以参考：
@@ -98,7 +99,7 @@
   相关链接：
   + [[https://www.gnu.org/software/emacs/manual/html_node/org/Specific-header-arguments.html#Specific-header-arguments][Specific header arguments - The Org Manual]]
   
-* 问题集
+* 相关问题
 ** 如何将 org-capture 捕获的内容插入当前光标位置
    #+BEGIN_QUOTE
    When called with a ‘C-0’ (zero) prefix, insert a template at point.

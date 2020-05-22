@@ -85,6 +85,7 @@
   + [.NET - 未分类](notebook/dotnet/misc.org)
   + [.NET - WinForm 相关笔记](notebook/dotnet/winforms.org)
 ## emacs
+  + [Emacs Beautify](notebook/emacs/beautify.org)
   + [Emacs Lisp](notebook/emacs/elisp.org)
   + [Emacs](notebook/emacs/emacs.org)
   + [Info Mode](notebook/emacs/info.org)
@@ -126,8 +127,10 @@
   + [Git 使用规范](notebook/git/style.org)
   + [Git 使用技巧](notebook/git/trick.org)
 ## go
+  + [Go Development](notebook/go/dev.org)
   + [GoLang](notebook/go/go.org)
   + [相关问题](notebook/go/question.org)
+  + [Go Toolkit](notebook/go/toolkit.org)
 ## java
   + **concurrent**
     + [Java Fork/Join 框架](notebook/java/concurrent/fork-join.org)

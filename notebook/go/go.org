@@ -5,6 +5,7 @@
 - [[#基本语法][基本语法]]
   - [[#分号][分号]]
   - [[#控制流][控制流]]
+  - [[#range][range]]
 - [[#程序结构][程序结构]]
   - [[#命名][命名]]
   - [[#声明][声明]]
@@ -18,6 +19,7 @@
 - [[#异常][异常]]
 - [[#方法][方法]]
 - [[#接口][接口]]
+- [[#并发][并发]]
 
 * Go 语言起源
   Go 语言的设计主要受到 CSP、Pascal 和 C 三个分支的影响，其中，CSP 只是一个用于描述并发性基本概念的描述语言，
@@ -201,6 +203,27 @@
 
    更多可以参考：
    + [[https://blog.golang.org/defer-panic-and-recover][Defer, Panic, and Recover - The Go Blog]]
+
+** range
+   range 可以用于 =for= 循环迭代切片、数组和 =Map= 的索引和值：
+   #+begin_src go
+     for i, v := range pow {
+       fmt.Printf("2**%d = %d\n", i, v)
+     }
+   #+end_src
+
+   忽略另一个值：
+   #+begin_src go
+     pow := make([]int, 10)
+     for i := range pow {
+       pow[i] = 1 << uint(i) // == 2**i
+     }
+     for _, value := range pow {
+       fmt.Printf("%d\n", value)
+     }
+   #+end_src
+   
+   PS: _ 是不能作为值使用的……
 
 * 程序结构
 ** 命名
@@ -1280,4 +1303,96 @@
   我喜欢这样的设定，这样可以更好的管理 接口 <=> 实现 之间的关系
   #+end_comment
 
+  -----
+
+  接口类型具体描述了一系列方法的集合，一个实现了这些方法的具体类型是这个接口类型的实例。其定义方式如下：
+  #+begin_src go
+    type InterfaceName interface {
+        (method-list)
+    }
+  #+end_src
+
+  同时，新的接口类型可以通过组合已经有的接口来定义，和结构体的匿名字段类似，接口中的方法顺序没有影响，：
+  #+begin_src go
+    type ReadWriter interface {
+        Read(p []byte) (n int, err error)
+        Write(p []byte) (n int, err error)
+    }
+
+    type ReadWriter interface {
+        Read(p []byte) (n int, err error)
+        Writer
+    }
+
+    type ReadWriter interface {
+        Reader
+        Writer
+    }
+  #+end_src
+
+  和一般的方法调用不一样，一般的方法调用可以根据 =receiver= 的类型自动在值和指针之间进行转换，但是接口不行，接口底层持有 =(value, type)= 元组，
+  其中需要找到和类型匹配的方法才表示实现了该接口，这个类型是根据 =receiver= 来确定的。
+
+  这使得接口的零值 =nil= 也有两种情况：
+   1. 只是 =value= 为零值，但是 =type= 是存在的，这时，加入 =receiver= 的类型为指针，那么就会传递 =nil= 值到方法，值直接传对应类型的零值就行了
+   2. =(value, type)= 都是零值，那么，此时调用方法就会出现运行时异常
+
+  接口值可以使用 ~==~ 和 ~!=~ 来进行比较。两个接口值相等仅当它们都是 =nil= 值或者它们的动态类型相同并且动态值也根据这个动态类型的 ~==~ 操作相等。
+  因为接口值是可比较的，所以它们可以用在 =map= 的键或者作为 =switch= 语句的操作数。
+ 
+  然而，如果两个接口值的动态类型相同，但是这个动态类型是不可比较的（比如切片），将它们进行比较就会失败并且 panic：
+  #+begin_src go
+    var x interface{} = []int{1, 2, 3}
+    fmt.Println(x == x) // panic: comparing uncomparable type []int
+  #+end_src
+
+  -----
+  
+  类型断言是一个使用在接口值上的操作。语法上它看起来像 =x.(T)= 被称为断言类型，这里 =x= 表示一个接口的类型和 =T= 表示一个类型。
+  一个类型断言检查它操作对象的动态类型是否和断言的类型匹配。
+
+  这里有两种可能：
+  1. 如果断言的类型 =T= 是一个具体类型，然后类型断言检查 =x= 的动态类型是否和 =T= 相同。如果这个检查成功了，类型断言的结果是 =x= 的动态值，
+     当然它的类型是 T。换句话说，具体类型的类型断言从它的操作对象中获得具体的值。如果检查失败，接下来这个操作会抛出 panic
+     #+begin_src go
+       var w io.Writer
+       w = os.Stdout
+       f := w.(*os.File)      // success: f == os.Stdout
+       c := w.(*bytes.Buffer) // panic: interface holds *os.File, not *bytes.Bufferc
+     #+end_src
+  2. 如果断言的类型 =T= 是一个接口类型，然后类型断言检查 =x= 的动态类型是否匹配 =T= 接口。如果成功，就相当于将 =x= 转换为了 =T= 接口类型，
+     否则抛出 panic
+     #+begin_src go
+       var w io.Writer
+       w = os.Stdout
+       rw := w.(io.ReadWriter) // success: *os.File has both Read and Write
+       w = new(ByteCounter)
+       rw = w.(io.ReadWriter) // panic: *ByteCounter has no Read method
+     #+end_src
+
+  当然，如果断言操作的对象是一个 =(nil, nil)= 接口值，那么不论被断言的类型是什么这个类型断言都会失败。
+
+  通过如下方式可以避免失败时抛出 panic 错误，这是很有用的特性：
+  #+begin_src go
+    v, ok := i.(T)
+
+    // example
+    if f, ok := w.(*os.File); ok {
+        // ...use f...
+    }
+  #+end_src
+
+  也可以通过 =switch type= 语句根据具体的类型进行不同的操作：
+   #+begin_src go
+     switch x := x.(type) {
+     case T:
+         // here v has type T
+     case S:
+         // here v has type S
+     default:
+         // no match; here v has the same type as i
+     }
+   #+end_src
+
+* 并发
   

@@ -6,13 +6,6 @@
    + [[https://www.cnblogs.com/youyoui/p/7851007.html][MySQL 分页查询优化 - 悠悠i - 博客园]]
    + [[https://www.jianshu.com/p/6446c0118427][数据库索引创建与优化 - 简书]]
 
-* 使用技巧
-  + [[https://www.jianshu.com/p/4aa113f7a027][MYSQL \G 用法：查询结果按列打印 - 简书]]
-
-* SQL
-  + [[https://stackoverflow.com/questions/11366006/mysql-on-vs-using][join - MySQL ON vs USING? - Stack Overflow]]
-  + [[https://blog.csdn.net/J080624/article/details/72910548][MySQL - exists与in及any的用法_数据库_小小默：进无止境-CSDN博客]]
-
 * 分区
   MySQL 中可以在服务器层确定数据在那个分区，减少了 I/O 操作的次数，同时可以通过过滤分区的方式提高查询效率。
 
@@ -37,8 +30,4 @@
   
 * myisam
   + [[https://www.cnblogs.com/jayxuan/p/10711435.html][MyIASM和Innodb引擎详解 - 小虾同学 - 博客园]]
-
-* docker
-  + https://stackoverflow.com/questions/8062496/how-to-change-max-allowed-packet-size
-  + https://stackoverflow.com/questions/39369367/increase-max-allowed-packet-size-in-mysql-docker
 

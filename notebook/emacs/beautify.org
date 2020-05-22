@@ -1,0 +1,13 @@
+#+TITLE:      Emacs Beautify
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#mode-line][mode-line]]
+
+* mode-line
+  通过 mode-line 可以显示一些必要的信息来辅助编辑工作，变量 ~mode-line-format~ 可以用于设置 mode-line 的格式。
+
+  列表项中类似 ~%1~ 的值表明该项至少占据 ~1~ 的宽度，用来分隔不同的部分很合适。
+
+  + [[https://emacs-china.org/t/topic/655][手动美化 mode-line 第二季 - Spacemacs - Emacs China]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Mode-Line.html][Mode Line - Programming in Emacs Lisp]]
+

@@ -1,6 +1,4 @@
 * Future
-  + forever - pm2 - supervisor - systemd(阮一峰)
-
 ** 函数式编程
    + [[https://juejin.im/post/5d6a3e9751882505877272a7][神奇的lambda表达式——函数式编程必学 - 掘金]]
    + [[http://www.unicornsummer.com/blog/2014-08/lambda.html][Lambda 算子]]
@@ -13,10 +11,4 @@
    + [[https://juejin.im/post/5c337ae06fb9a049bc4cd218][浏览器与Node的事件循环(Event Loop)有何区别? - 掘金]]
    + [[https://html.spec.whatwg.org/multipage/webappapis.html#event-loops][HTML Standard]]
    + [[https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#what-is-the-event-loop][The Node.js Event Loop, Timers, and process.nextTick() | Node.js]]
-
-* 前端学习
-  + [[https://github.com/wallstreetcn/webpack-and-spa-guide][wallstreetcn/webpack-and-spa-guide: Webpack 4 和单页应用入门]]
-  + JavaScript 模块化标准、语言标准、宿主环境、编译器 Babel
-  + HTML/CSS 预处理器
-  + Webpack 打包工具
 

@@ -6,6 +6,7 @@
 - [[#licecap][LICEcap]]
 - [[#gitinspector][Gitinspector]]
 - [[#gnuplot][Gnuplot]]
+- [[#进程管理工具][进程管理工具]]
 
 * x64dbg
   Windows的开源 x64 / x32调试器, 用来学习汇编很可以
@@ -31,4 +32,9 @@
 * Gnuplot
   可以用 gnuplot 进行数据可视化，参考：
   + [[https://www.ibm.com/developerworks/cn/linux/l-gnuplot/][gnuplot 让您的数据可视化]]
+
+* 进程管理工具
+  + supervisor 
+  + systemd 
+  + pm
 

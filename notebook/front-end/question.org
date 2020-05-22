@@ -6,6 +6,7 @@
 - [[#前端路由的实现原理][前端路由的实现原理]]
 - [[#url-编码的问题][URL 编码的问题]]
 - [[#怎样获取一个元素的所有事件监听器][怎样获取一个元素的所有事件监听器]]
+- [[#前端工具链][前端工具链]]
 
 * 动态加载 CSS 和 JavaScript
   我们可以利用浏览器的特性来动态加载 CSS 和 JavaScript，当我们动态添加 ~script~ 或 ~style~ 标签到 DOM 中时，浏览器如果发现该标签需要加载远程资源，
@@ -62,4 +63,38 @@
 * 怎样获取一个元素的所有事件监听器
   在 Chrome DevTools 中可以通过函数 ~getEventListeners(node)~ 获取所有的监听器，参考：
   + [[https://stackoverflow.com/questions/9046741/get-event-listeners-attached-to-node-using-addeventlistener][javascript - Get event listeners attached to node using addEventListener - Stack Overflow]]
+
+* 前端工具链
+  似乎是由于前端应用场景的复杂性，前端的工具链也很复杂，和刚开始学习前端的时候 =HTML/CSS/JavaScript= 一把梭不一样，
+  现在前端的工具链在某种程度上已经将 *开发环境* 和 *应用环境* 给区分开了。
+
+  在开发环境中，对于 =JavaScript= 来说：
+  + 它的宿主环境可能是不一样的，有可能是浏览器，也有可能是 =node.js=
+  + 使用的语言标准可能是不一样的，比如 =ES5= 和 =ES6= 之类的
+  + 使用的模块标准可能是不一样的，比如 =CommonJS= 和 =AMD= 之类的
+  + 使用的依赖版本可能是不一样的
+  + ……
+
+  甚至，对于 =HTML/CSS= 来说，都有可能存在不同的 *预处理器* 来简化编写时的复杂度。
+
+  这使得开发环境和应用环境之间存在巨大的区别，未来去掉这个区别，需要很多工具来将编写的代码转换为应用环境可以识别的代码。
+
+  这些工具的使用通常是建立在 =node.js= 环境上的（虽然也可以直接在目标环境中使用），其中：
+  + =npm= 是一个包管理器，运行在 =node.js= 的基础上，通过一系列的包增强功能
+  + =webpack= 是一个打包工具，可以通过各种扩展将代码转换打包，并可以自动适配不同的模块标准
+  + =babel= 是一个工具，可以将 =ES6= 的代码转换到 =ES5= 等等
+  + ……
+
+  在这些工具的基础上，前端的开发部署流程变成了：
+  #+begin_example
+    开发 -> 打包 -> 部署
+  #+end_example
+    
+  在打包过程中，需要完成代码的转换工作，然后才能部署到生成环境使用。
+
+  原本的前端的话，HTML/CSS/JavaScript 都不需要编译，写好直接打开就行了，现在的话，变得需要 *编译* 了一样。
+  
+  #+begin_comment
+  感觉 deno 可以在一定程度上解决这个复杂性……
+  #+end_comment
 

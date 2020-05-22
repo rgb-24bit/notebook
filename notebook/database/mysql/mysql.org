@@ -19,6 +19,7 @@
 - [[#相关技巧][相关技巧]]
   - [[#通过-sql-语句获取-mysql-的版本][通过 SQL 语句获取 MySQL 的版本]]
   - [[#mysql-中实用的时间函数][MySQL 中实用的时间函数]]
+  - [[#按列打印查询结果][按列打印查询结果]]
 
 * Install
   目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
@@ -242,6 +243,8 @@
      UPDATE t ... WHERE col = (SELECT * FROM (SELECT ... FROM t...) AS dt ...);
    #+end_src
 
+   子查询相关的关键字有 =any/some/all/in= 这几个，可以用来扩展查询语句。
+
    参考：
    + [[https://dev.mysql.com/doc/refman/8.0/en/subquery-restrictions.html][MySQL 8.0 Reference Manual - 13.2.11.13 Restrictions on Subqueries]]
 
@@ -294,4 +297,10 @@
    MySQL 中的时间函数其实还是很强大的，能够满足相当一部分需求了，参考：
    + [[https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html][MySQL 8.0 Reference Manual - 12.7 Date and Time Functions]]
    + [[https://www.cnblogs.com/redfox241/archive/2009/07/23/1529092.html][mysql 中 时间和日期函数 - redfox - 博客园]] 
+
+** 按列打印查询结果
+   通过 =\G= 选项可以按列打印查询结果：
+   #+begin_src sql
+     select * from tbl_name \G;
+   #+end_src
 

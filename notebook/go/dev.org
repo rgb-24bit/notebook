@@ -1,0 +1,29 @@
+#+TITLE:      Go Development
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#环境变量][环境变量]]
+- [[#配置代理][配置代理]]
+
+* 环境变量
+  Go 环境变量可以通过配置系统环境变量的方式配置，但是在 ~Go version >= 1.13~ 时可以通过 =go env -w= 命令设置：
+  #+begin_example
+    go env -w GO111MODULE=on
+  #+end_example
+
+* 配置代理
+  当我们使用 go get、go install、go mod 等命令时，会自动下载相应的包或依赖包。但由于众所周知的原因，
+  类似于 golang.org/x/... 的包会出现下载失败的情况。如下所示：
+  #+begin_example
+    $ go get -u golang.org/x/sys
+
+    go get golang.org/x/sys: unrecognized import path "golang.org/x/sys" (https fetch: Get https://golang.org/x/sys?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
+  #+end_example
+
+  这时可以考虑通过设置代理的方式解决这一问题：
+  #+begin_example
+    go env -w GOPROXY=https://goproxy.io
+  #+end_example
+  
+  参考：
+  + [[https://shockerli.net/post/go-get-golang-org-x-solution/][一键解决 go get golang.org/x 包失败 - 格物]]
+  

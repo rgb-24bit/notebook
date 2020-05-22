@@ -1,12 +1,16 @@
 #+TITLE:      minor mode
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#abbrev-mode][Abbrev Mode]]
-- [[#mode-line][mode-line]]
-- [[#auto-insert-mode][Auto Insert Mode]]
-- [[#cua-mode][CUA Mode]]
+- [[#abbrev-mode][abbrev-mode]]
+- [[#auto-insert-mode][auto-insert-mode]]
+- [[#cua-rectangle-mark-mode][cua-rectangle-mark-mode]]
+- [[#visible-mode][visible-mode]]
+- [[#whitespace-mode][whitespace-mode]]
+- [[#auto-fill-mode][auto-fill-mode]]
+- [[#overwrite-mode][overwrite-mode]]
+- [[#which-function-mode][which-function-mode]]
 
-* Abbrev Mode
+* abbrev-mode
   可以通过定义缩写的方式避免一些编码错误，比如：
   #+BEGIN_SRC elisp
     (define-abbrev-table 'global-abbrev-table
@@ -17,22 +21,35 @@
 
   + [[https://www.emacswiki.org/emacs/AbbrevMode][EmacsWiki: Abbrev Mode]]
 
-* mode-line
-  通过 mode-line 可以显示一些必要的信息来辅助编辑工作，变量 ~mode-line-format~ 可以用于设置 mode-line 的格式。
-
-  列表项中类似 ~%1~ 的值表明该项至少占据 ~1~ 的宽度，用来分隔不同的部分很合适。
-
-  + [[https://emacs-china.org/t/topic/655][手动美化 mode-line 第二季 - Spacemacs - Emacs China]]
-  + [[https://www.gnu.org/software/emacs/manual/html_node/eintr/Mode-Line.html][Mode Line - Programming in Emacs Lisp]]
-
-* Auto Insert Mode
+* auto-insert-mode
   可以借助这一模式实现自动插入文件头的功能，可以参考：
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%A4%B4.html][Emacs 自动添加文件头 · honmaple's blog · 风落花语风落天，花落风雨花落田.]]
   + [[https://honmaple.me/articles/2018/01/emacs%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%96%87%E4%BB%B6%E5%A4%B4.html][Emacs 自动更新文件头 · honmaple's blog · 风落花语风落天，花落风雨花落田.]]
 
-* CUA Mode
+* cua-rectangle-mark-mode
   CUA Mode 的 ~cua-rectangle-mark-mode~ 提供了增强的矩形编辑功能，通过 ~C-RET~ 开启/关闭该功能。
 
   参考：
   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/CUA-Bindings.html][CUA Bindings - GNU Emacs Manual]]
+
+* visible-mode
+  启动 =visible-mode= 可以显示被隐藏的文本，参考：
+  + [[help:visible-mode]]
+
+* whitespace-mode
+  启动 =whitespace-mode= 可以显示空白字符，参考：
+  + [[help:whitespace-mode]]
+
+* auto-fill-mode
+  =auto-fill-mode= 可以在文本太长是在空白处断开，参考：
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Auto-Fill.html][Auto Fill - GNU Emacs Manual]]
+  + [[help:auto-fill-mode]]
+
+* overwrite-mode
+  在 =Emacs= 中，粘贴时默认不会覆盖被选中的文本，但是可以通过开启 =overwrite-mode= 来使用这一特性：
+  + [[help:overwrite-mode]]
+
+* which-function-mode
+  用于在状态栏显示当前位于那个函数，当函数很长的时候回很有用，在 =org= 中显示的是 headline：
+  + [[help:which-function-mode]]
 

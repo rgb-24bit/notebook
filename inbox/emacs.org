@@ -5,8 +5,10 @@
   + 动态模块
     + [[https://github.com/railwaycat/homebrew-emacsmacport/blob/master/Formula/emacs-mac.rb][homebrew-emacsmacport/emacs-mac.rb at master · railwaycat/homebrew-emacsmacport]]
     + [[https://github.com/emacs-pe/emacs-modules][emacs-pe/emacs-modules: List of resources for Emacs modules]]
-  + LSP 和 DAP 可以看一下
+  + LSP & DAP
   + [[http://lifegoo.pluskid.org/wiki/EmacsTRAMP.html][用 TRAMP 管理远程文件]]
+  + Elisp
+    + [[http://0x100.club/wiki_emacs/interactive.html][Elisp 中 interactive 总结]]    
 
 ** solarized
    + [[https://github.com/sellout/emacs-color-theme-solarized/blob/master/solarized-definitions.el][emacs-color-theme-solarized/solarized-definitions.el at master · sellout/emacs-color-theme-solarized]]
@@ -31,13 +33,6 @@
 ** Tex
    + [[https://www.emacswiki.org/emacs/CategoryTex][EmacsWiki: Category Tex]]
    + [[https://www.emacswiki.org/emacs/CDLaTeX][EmacsWiki: CDLaTeX]]
-
-* Minor mode
-  + visible-mode
-  + whitespace-mode
-  + auto-fill-mode
-  + overwrite-mode
-  + witch-function-mode
 
 * Edit
   + type C-j, which inserts just a newline, without any auto-indentation.
@@ -90,5 +85,3 @@
     #+end_example
   + C-x z Repeat Command
 
-* org-mode
-  + C-x n s/w
