@@ -47,7 +47,7 @@ def makecatalog(fd: TextIO, notes: Node):
     """Generate content catalog."""
     fd.write('## Table of contents\n')
 
-    itemfmt = '  + [[#{anchor}][{name}]]\n'
+    itemfmt = '  + [{name}](#{anchor})\n'
 
     for item in notes.subdirs:
         fd.write(itemfmt.format(name=item.name, anchor=item.name.lower()))

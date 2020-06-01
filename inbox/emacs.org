@@ -85,3 +85,8 @@
     #+end_example
   + C-x z Repeat Command
 
+* org-mode
+  + [[https://orgmode.org/manual/Agenda-Commands.html][Agenda Commands (The Org Manual)]]
+  + [[https://orgmode.org/manual/Moving-subtrees.html#Moving-subtrees][Moving subtrees (The Org Manual)]]
+  + [[https://orgmode.org/manual/Repeated-tasks.html][Repeated tasks (The Org Manual)]]
+

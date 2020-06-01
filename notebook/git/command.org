@@ -125,7 +125,7 @@
 * git archive
   将 master 以 zip 格式打包到指定文件：
   #+begin_example
-  git archive --format zip --output /path/to/file.zip master
+    git archive --format zip --output /path/to/file.zip master
   #+end_example
   
   参考：

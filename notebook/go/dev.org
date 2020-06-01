@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#环境变量][环境变量]]
 - [[#配置代理][配置代理]]
+- [[#依赖管理][依赖管理]]
+- [[#footnotes][Footnotes]]
 
 * 环境变量
   Go 环境变量可以通过配置系统环境变量的方式配置，但是在 ~Go version >= 1.13~ 时可以通过 =go env -w= 命令设置：
@@ -27,3 +29,34 @@
   参考：
   + [[https://shockerli.net/post/go-get-golang-org-x-solution/][一键解决 go get golang.org/x 包失败 - 格物]]
   
+* 依赖管理
+  Go 的依赖管理经历了很崎岖的一路，我的运气很好，在其比较成熟以后才开始学习 Go 语言。
+
+  Go 的依赖管理大概可以分为：
+  + =GOPATH= 模式，使用 =GOPATH= 模式时，每个 =GOPATH= 都是一个工作区，下载的依赖默认为目标依赖 =master= 分支的最新提交，不能存在多个版本，
+    项目可能也需要放在 =GOPATH= 下[fn:1]
+
+    这时，可以通过手动下载不同版本的依赖放在不同的 =GOPATH= 下使用，但还是很麻烦
+
+  + =GOPATH= + =vender= 模式，此时，Go 支持将依赖放置于 =vender= 目录中，优先在该目录下寻找依赖，但仍然需要手动下载，因此，
+    出现了一些工具来解决这一问题，但还是很麻烦
+
+  + =Go Module= 模式，当前较为成熟的依赖管理模式，这时一般可以将项目放置于 =GOPATH= 外，依赖可以指定版本，默认存放位置为 =GOPATH/pkg= 文件夹，
+    比较接近 =Maven= 的模式了
+
+  现在，Go 寻找依赖的顺序为：
+  1. 当前包下的 =vendor= 目录
+  2. 向上级目录查找，直到找到 =vendor= 目录
+  3. 在 =GOROOT= 目录下查找
+  4. 在 =GOPATH= 下面查找依赖包
+
+  总的来说，Go 现在的依赖管理方式还是比较方便了，同时通过 =URL= 来获取依赖可以避免中心化，通过 =vender= 也可以固化依赖。
+
+  参考：
+  + [[https://golang.org/doc/gopath_code.html][How to Write Go Code (with GOPATH) - The Go Programming Language]]
+  + [[https://golang.org/doc/code.html][How to Write Go Code - The Go Programming Language]]
+
+* Footnotes
+
+[fn:1] 在 =Go 1.14= 下使用 =GOPATH= 模式时，项目在 =GOPATH= 外面好像能够正常编译，就是不知道其他工具是什么情况 
+
