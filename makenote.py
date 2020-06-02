@@ -81,4 +81,4 @@ def make(fn: str, basedir: str):
 
 
 if __name__ == '__main__':
-    make('README.md', 'notebook')
+    make('README.md', Path(os.path.abspath('.')).name)
