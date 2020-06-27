@@ -1,17 +1,4 @@
 * Future
-** 图形处理
-  + [[https://www.cnblogs.com/XL-Liang/archive/2011/12/14/2287566.html][Java 图片处理 (文字水印、图片水印、缩放、补白)]]
-  + [[https://segmentfault.com/a/1190000011388060][Java图像处理之正片叠底]]
-
-** 函数式编程
-   + [[https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-4/index.html][深入理解 Java 函数式编程，第 4 部分: 使用 Vavr 进行函数式编程]]
-   + [[https://www.vavr.io/vavr-docs/][Vavr User Guide]]
-   + [[https://www.baeldung.com/java-currying][Currying in Java | Baeldung]]
-
-** 异步
-   + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
-   + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
-
 ** Agent
    本来是想看一下调试中断点是怎么一回事，结果，和 Java Agent 扯上了。
 
@@ -41,17 +28,15 @@
 
    至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
 
+** 异步
+   + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
+   + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
+
 ** 注解
    + [[https://www.race604.com/annotation-processing/][Java 注解处理器]]
    + [[https://github.com/zhuhean/BuilderProcessor][zhuhean/BuilderProcessor: Android注解处理演示项目]]
    + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
    + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
-
-** JNI
-   + [[https://blog.csdn.net/hackooo/article/details/48395765][Java JNI实现原理初探_最帅惋红曲-CSDN博客]]
-
-** 动态语言
-   + [[https://www.infoq.cn/article/jdk-dynamically-typed-language][解析 JDK 7 的动态类型语言支持-InfoQ]]
 
 ** ConcurrentHashMap
    + [[https://www.cnblogs.com/study-everyday/p/6430462.html][ConcurrentHashMap原理分析（1.7与1.8） - 明志健致远 - 博客园]]
