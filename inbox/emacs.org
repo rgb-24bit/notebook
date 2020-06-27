@@ -90,3 +90,6 @@
   + [[https://orgmode.org/manual/Moving-subtrees.html#Moving-subtrees][Moving subtrees (The Org Manual)]]
   + [[https://orgmode.org/manual/Repeated-tasks.html][Repeated tasks (The Org Manual)]]
 
+* dired+
+  去掉？
+

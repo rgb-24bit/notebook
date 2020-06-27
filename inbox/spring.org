@@ -1,8 +1,4 @@
 * Future
-  + [[http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html][全文搜索引擎 Elasticsearch 入门教程 - 阮一峰的网络日志]]
-  + [[https://www.baeldung.com/spring-boot-devtools][Overview of Spring-Boot Dev Tools | Baeldung]]
-  + [[https://commons.apache.org/][Apache Commons – Apache Commons]]
-    
 ** Spring Cloud
    + [[https://www.cnblogs.com/fengzheng/p/10603672.html][Spring Cloud 系列之 Eureka 实现服务注册与发现 - 风的姿态 - 博客园]]
    + [[http://blog.didispace.com/springcloud1/][Spring Cloud构建微服务架构（一）服务注册与发现 | 程序猿DD]]
@@ -15,7 +11,4 @@
 ** Spring WebFlux
    + [[https://www.ibm.com/developerworks/cn/java/spring5-webflux-reactive/index.html][使用 Spring 5 的 WebFlux 开发反应式 Web 应用]]
    + [[https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html][Web on Reactive Stack]]
-
-** Mongodb
-   + [[https://docs.spring.io/spring-data/mongodb/docs/2.2.3.RELEASE/reference/html/#reference][Spring Data MongoDB - Reference Documentation]]
 

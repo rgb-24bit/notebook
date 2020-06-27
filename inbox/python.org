@@ -1,7 +1,6 @@
 * Future
-  1. Python 异步需要看一下，先看怎么用，然后看一下实现原理
-  2. Python Language Reference 可以重温一下，特别是 Data Model 部分
-  3. 词汇表也看一下 [[https://docs.python.org/3/glossary.html#term-awaitable][Glossary — Python 3.8.1 documentation]]
+  1. Python Language Reference 可以重温一下，特别是 Data Model 部分
+  2. 词汇表也看一下 [[https://docs.python.org/3/glossary.html#term-awaitable][Glossary — Python 3.8.1 documentation]]
 
 * 异步编程
   + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O — Python 3.8.1 documentation]]

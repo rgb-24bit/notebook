@@ -9,7 +9,7 @@
   1) 安装 JDK 1.8，最为简单直接的方式，也是最推荐的方式
   2) 参考 [[https://www.cnblogs.com/wintersoft/p/10881601.html][RocketMQ 官方启动脚本不支持 JDK 11 的修改 - wintersoft - 博客园]] 对启动脚本进行修改
 
-  当然，还可以选择通过 Docker 搭建，目前的 [[https://github.com/apache/rocketmq-docker][apache/rocketmq-docker]] 对 ~JAVA_HOME~ 的配置存在问题，因此，可以使用修改版 [[https://github.com/rgb-24bit/rocketmq-docker][rgb-24bit/rocketmq-docker]].
+  +当然，还可以选择通过 Docker 搭建，目前的 [[https://github.com/apache/rocketmq-docker][apache/rocketmq-docker]] 对 ~JAVA_HOME~ 的配置存在问题，因此，可以使用修改版 [[https://github.com/rgb-24bit/rocketmq-docker][rgb-24bit/rocketmq-docker]].+
 
   可以参考：[[https://stackoverflow.com/questions/24641536/how-to-set-java-home-in-linux-for-all-users][java - How to set JAVA_HOME in Linux for all users - Stack Overflow]]
 

@@ -1,0 +1,6 @@
+* Github
+  + [[https://blog.ops-coffee.cn/s/11-yhyohtdsbl9ffnvcs6w][Github Pages访问太慢？通过Netlify免费加速]]
+  + [[https://app.netlify.com/sites/rgb-24bit/settings/general][General | Settings]]
+
+* git branch
+  + git branch --contains

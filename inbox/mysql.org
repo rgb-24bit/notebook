@@ -31,3 +31,6 @@
 * myisam
   + [[https://www.cnblogs.com/jayxuan/p/10711435.html][MyIASM和Innodb引擎详解 - 小虾同学 - 博客园]]
 
+* 字段类型
+  + [[https://segmentfault.com/q/1010000000121702][Mysql时间字段格式如何选择，TIMESTAMP，DATETIME，INT？ - SegmentFault 思否]]
+

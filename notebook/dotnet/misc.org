@@ -1,4 +1,4 @@
-#+TITLE:      .NET - 未分类
+#+TITLE:      .NET - Misc
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#动态链接库][动态链接库]]

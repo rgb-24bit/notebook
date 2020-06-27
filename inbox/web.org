@@ -1,11 +1,7 @@
 * Future
 ** 函数式编程
-   + [[https://juejin.im/post/5d6a3e9751882505877272a7][神奇的lambda表达式——函数式编程必学 - 掘金]]
+   + [[https://juejin.im/post/5d6a3e9751882505877272a7][神奇的 lambda 表达式——函数式编程必学 - 掘金]]
    + [[http://www.unicornsummer.com/blog/2014-08/lambda.html][Lambda 算子]]
-   + [[https://juejin.im/post/5af13664f265da0ba266efcf][大佬，JavaScript 柯里化，了解一下？ - 掘金]]
-
-** Components
-   + [[http://www.ruanyifeng.com/blog/2019/08/web_components.html][Web Components 入门实例教程 - 阮一峰的网络日志]]
 
 ** 事件循环
    + [[https://juejin.im/post/5c337ae06fb9a049bc4cd218][浏览器与Node的事件循环(Event Loop)有何区别? - 掘金]]
