@@ -25,3 +25,9 @@
   + [[https://en.wikipedia.org/wiki/List_of_Linux_distributions][List of Linux distributions - Wikipedia]]
   + [[https://juejin.im/post/5d93f518518825092e15ec62][2019 年最好的 Linux 发行版 - 掘金]]
 
+* 登录认证
+  kint……
+
+* 同步服务
+  samba
+

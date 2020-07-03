@@ -1,3 +1,6 @@
 * git branch
   + git branch --contains
 
+* git config
+  + [[https://dzone.com/articles/how-to-use-gitconfigs-includeif][How to Use .gitconfig's includeIf - DZone Open Source]]
+

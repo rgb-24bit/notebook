@@ -87,3 +87,9 @@
 * dired+
   去掉？
 
+* tramp
+  ssh kinit
+
+* spacemacs
+  M-m a p/P
+

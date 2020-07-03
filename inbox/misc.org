@@ -4,3 +4,5 @@
    + [[https://blog.csdn.net/wentianyao/article/details/51445940][C++协程(1):协程原理及实现方式概述 - wentianyao的专栏]]
 
 
+* Hash Avatars
+  + [[https://barro.github.io/2018/02/avatars-identicons-and-hash-visualization/][Avatars, identicons, and hash visualization]]
