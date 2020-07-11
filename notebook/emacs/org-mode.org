@@ -16,6 +16,13 @@
 - [[#相关链接][相关链接]]
 
 * Agenda Views
+  |--------+------------------------+--------+------------------------|
+  | 快捷键 | 作用                   | 快捷键 | 作用                   |
+  |--------+------------------------+--------+------------------------|
+  | =b=      | 显示前一天/周/月的视图 | =f=      | 显示后一天/周/月的视图 |
+  | =.=      | Goto today             |        |                        |
+  |--------+------------------------+--------+------------------------|
+
   + Agenda Views 默认会显示每个条目的 ~CATEGORY~ 属性，该属性可以通过快捷键 ~C-c C-x p~ 进行插入
 
   + Agenda Views 中可以通过快捷键 ~C-k~ 删除条目，也可以通过 ~B f org-agenda-kill~ 批量删除标记的条目
@@ -29,6 +36,9 @@
   + 设置距离 DEADLINE 还有几天时进行显示： ~DEADLINE -nd~
 
   + 可以通过快捷键 ~j~ 跳转到指定日期，方便的显示该日所在的周视图
+
+  参考：
+  + [[https://orgmode.org/manual/Agenda-Commands.html][Agenda Commands (The Org Manual)]]
 
 * Dates and Times
   可以通过快捷键 ~C-c C-x C-r~ 插入 clock table 来进行时间统计，其中：
@@ -45,6 +55,11 @@
     #+END_SRC
 
   可以通过连续的 ~C-c .~ 创建时间段，而 ~C-c C-y~ 可以用于计算时间段的间隔
+
+  任务的重复，其中 =+1m= 表示此次完成后下一次开始需要间隔的时间，而 =-3d= 表示距离 DDL 多久时显示警告在 =Agenda View= 中：
+  #+begin_example
+    DEADLINE: <2005-10-01 Sat +1m -3d>
+  #+end_example
 
 * Markup for Rich Contents
   Org-mode 中可以之间插入 latex 内容，行内公式可以通过 ~$~ 包围插入，而环境则可以通过 ~\begin~ 插入。

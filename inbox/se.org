@@ -1,0 +1,4 @@
+* 方法论
+  + [[https://www.infoq.cn/article/2014/11/ddd-onion-architecture][在洋葱（Onion）架构中实现领域驱动设计 - InfoQ]]
+  + [[https://www.jianshu.com/p/80929aa1d20c][一文告诉你 ATDD,TDD,BDD 的区别 - 简书]]
+  + [[http://kaelzhang81.github.io/2017/06/18/%E8%AF%A6%E8%A7%A3%E5%9C%88%E5%A4%8D%E6%9D%82%E5%BA%A6/][详解圈复杂度 - Tech For Fun]]

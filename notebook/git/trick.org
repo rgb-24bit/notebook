@@ -4,6 +4,7 @@
 - [[#git-pull-时使用存储库的链接][git pull 时使用存储库的链接]]
 - [[#git-ignore][git ignore]]
 - [[#git-merge-strategy][git merge strategy]]
+- [[#使用不同的配置][使用不同的配置]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
@@ -24,4 +25,28 @@
 * git merge strategy
   在 merge 的时候可以通过 ~-X~ 选项指定合并策略，比如 ~theirs~ 和 ~ours~ 这两种简易的策略，可以参考：
   + [[https://stackoverflow.com/questions/173919/is-there-a-theirs-version-of-git-merge-s-ours][Is there a "theirs" version of "git merge -s ours"? - Stack Overflow]]
+
+* 使用不同的配置
+
+
+  当自己在 Github 上的用户名和在公司使用的用户名不一样时，可以选择将公司的仓库全部克隆在一个目录下，
+  然后在 =~/.gitconfig= 添加如下配置：
+  #+begin_src conf
+    [user]
+        name = yourname
+        email = youremail
+
+    [includeIf "gitdir:~/company/"]
+        path = ~/.gitconfig-company
+  #+end_src
+
+  此时，在 =~/company= 目录下，会使用 =~/.gitconfig-company= 中的配置覆盖 =~/.gitconfig= 中的配置，这样，
+  就可以在 =~/.gitconfig-company= 中指定你在公司的用户名和邮箱了。
+
+  #+begin_src conf
+    [user]
+        name = companyname
+        email = companyemail
+  #+end_src
+
 

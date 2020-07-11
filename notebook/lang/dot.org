@@ -40,7 +40,7 @@
       a:nw -> c:n;
       c:w -> d:sw;
       b:sw -> d;
-    }
+    }p
   #+end_src
 
   参考：

@@ -2,5 +2,8 @@
   + git branch --contains
 
 * git config
-  + [[https://dzone.com/articles/how-to-use-gitconfigs-includeif][How to Use .gitconfig's includeIf - DZone Open Source]]
+  + [[http://kuanghy.github.io/2017/03/19/git-lf-or-crlf][Git 多平台换行符问题(LF or CRLF)]]
+
+* github
+  + 和用户同名的仓库
 

@@ -5,6 +5,7 @@
 - [[#bar-charts][Bar Charts]]
 - [[#follow-mode][Follow Mode]]
 - [[#vterm][vterm]]
+- [[#进程管理][进程管理]]
 
 * 寄存器
   寄存器可以非常快速地存储和恢复字符串、整数、矩形、文件和目录路径、WindowConfigurations、
@@ -26,4 +27,9 @@
 * vterm
   vterm 是一个动态模块，提供了很好的终端模拟器功能支持，一些快捷键：
   + ~C-c C-t~ 开启复制模式，mark region 后 ~RET~ 即可完成复制
+
+* 进程管理
+  可以通过 =list-process= 和 =list-system-process= 列出进程，在 =process menu= 界面通过 =d= 关闭进程。
+
+  在 spacemacs 中两个命令的快捷键分别为 =M-m a p/P=.
 

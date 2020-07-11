@@ -73,7 +73,77 @@
        #+END_QUOTE
     3. [[https://www.infoq.cn/article/1ggzj_oFl8wuJFwVG9et][简明高效的 Java 并发编程学习指南 - InfoQ]]
 
-
 * sdk
   + https://zhuanlan.zhihu.com/p/101085411
+
+
+* BeanCopy
+  + [[https://www.lagou.com/lgeduarticle/73585.html][BeanCopy框架终极指南]]
+  + [[https://juejin.im/entry/5b228c2651882574b15882ba][推荐一个 Java 实体映射工具 MapStruct - 后端 - 掘金]]
+
+* 编程范式
+  + [[https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-4/index.html][深入理解 Java 函数式编程，第 4 部分: 使用 Vavr 进行函数式编程]]
+  + [[https://www.vavr.io/vavr-docs/][Vavr User Guide]]
+  + [[https://www.cnblogs.com/snowinpluto/p/5981400.html][JDK 8 函数式编程入门 - alfred_zhong - 博客园]]
+  + [[https://stackoverflow.com/questions/49843262/where-does-the-word-flatmap-originate-from][functional programming - Where does the word "flatMap" originate from? - Stack Overflow]]
+  + [[https://www.ibm.com/developerworks/cn/java/j-cn-with-reactor-response-encode/index.html][使用 Reactor 进行反应式编程]]
+  + [[https://projectreactor.io/docs/core/release/reference/][Reactor 3 Reference Guide]]
+  + [[https://blog.csdn.net/universsky2015/article/details/104894733][什么是反应式编程? 这里有你想要了解的反应式编程 (Reactive programming)_universsky2015的博客-CSDN博客_java反应式编程 node.js]]
+
+  VAVR:
+  + Either 表示可能有两种不同类型的值，分别称为左值或右值。只能是其中的一种情况。Either 通常用来表示成功或失败两种情况。惯例是把成功的值作为右值，
+    而失败的值作为左值。可以在 Either 上添加应用于左值或右值的计算。应用于右值的计算只有在 Either 包含右值时才生效，对左值也是同理。
+    
+    Either 的 map 和 mapLeft 方法分别对右值和左值进行计算。
+    
+    #+begin_src java
+      // 构造函数
+      Either.left()
+      Either.right()
+
+      // 类型判断
+      Either.isLeft()
+      Either.isRight()
+
+      // 对左值或右值进行处理，得到同一类型 U 的结果
+      Either.fold(Function<? super L, ? extends U> leftMapper, Function<? super R, ? extends U> rightMapper)
+
+      // 将函数作用于右值
+      Either.map()
+
+      // 将函数作用于左值
+      Either.mapLeft()
+
+      // 获取右值或默认值
+      Either.getOrElse(other)
+    #+end_src
+  Reactor:
+  + Mono 包含表示 0-1 个元素的流
+    
+  函数式、反应式、异步、闭包、延迟调用……
+
+  Java 语言的缺陷，这样的代码阅读起来比较麻烦，特别是在不熟悉的情况下
+
+  Reactor 默认是单线程的。如果要异步执行某些操作，则必须通过传递相关调度程序使用 subscribeOn 和 observeOn 运算符明确告知它。
+
+* 名词
+  + IDL - 接口描述语言
+
+* RPC
+  + [[https://developer.51cto.com/art/201906/597963.htm][花了一个星期，我终于把RPC框架整明白了！ - 51CTO.COM]]
+  + [[https://github.com/twitter/finagle][GitHub - twitter/finagle: A fault tolerant, protocol-agnostic RPC system]]
+    感觉像是 RPC 界的门面？
+  + [[http://skaka.me/blog/2016/05/02/finagle3/][微服务框架Finagle介绍 Part3: 在Finagle中开发基于Thrift协议的应用 - skaka的博客]]
+  + [[https://www.infoq.cn/article/2014/05/twitter-finagle-intro][Twitter的RPC框架Finagle简介 - InfoQ]]
+  + [[https://blog.twitter.com/engineering/en_us/a/2014/netty-at-twitter-with-finagle.html][Netty at Twitter with Finagle]]
+
+  插件：
+  + [[https://twitter.github.io/scrooge/MVNPlugin.html][Maven Plugin — Scrooge 20.6.0 documentation]]
+    生成的代码默认在对应的 namespace 下
+
+* ORM
+  + [[https://amao12580.github.io/post/2016/04/JOOQ-from-entry-to-improve/][(*´∇｀*)被你发现啦~ JOOQ 3.8.2 使用 教程：从入门到提高 | Cat's Blog]]
+
+* 库
+  + [[https://github.com/twitter/util][GitHub - twitter/util: Wonderful reusable code from Twitter]]
 
