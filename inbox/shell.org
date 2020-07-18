@@ -1,0 +1,9 @@
+* 参数处理
+  + [[https://stackoverflow.com/questions/255898/how-to-iterate-over-arguments-in-a-bash-script][command line - How to iterate over arguments in a Bash script - Stack Overflow]]
+  + [[https://www.runoob.com/linux/linux-shell-func.html][Shell 函数 | 菜鸟教程]]
+  + [[https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function][Using getopts inside a Bash function - Stack Overflow]]
+
+* 脚本调用
+  + [[https://stackoverflow.com/questions/8352851/how-to-call-one-shell-script-from-another-shell-script][bash - How to call one shell script from another shell script? - Stack Overflow]]
+
+

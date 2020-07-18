@@ -1,4 +1,5 @@
 * git branch
+  + [[https://stackoverflow.com/questions/1783405/how-do-i-check-out-a-remote-git-branch][git checkout - How do I check out a remote Git branch? - Stack Overflow]]
   + git branch --contains
 
 * git config

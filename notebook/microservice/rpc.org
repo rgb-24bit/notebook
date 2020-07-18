@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概览][概览]]
+- [[#finagle][Finagle]]
 - [[#相关链接][相关链接]]
 
 * 概览
@@ -13,7 +14,18 @@
   远程过程调用采用客户机/服务器(C/S)模式。请求程序就是一个客户机，而服务提供程序就是一台服务器。和常规或本地过程调用一样，远程过程调用是同步操作，在远程过程结果返回之前，需要暂时中止请求程序。
   使用相同地址空间的低权进程或低权线程允许同时运行多个远程过程调用。
 
+* Finagle
+  对于 RPC 框架来说，通常需要提供 Server/Client SDK 来完成通信和调用，具体的协议可能不同。
+
+  其中，Finagle 是协议无关的 RPC 框架，可以搭配多种协议和语言，支持编译得到多种语言的 Server/Client SDK。
+
+  参考：
+  + [[http://skaka.me/blog/2016/05/02/finagle3/][微服务框架 Finagle 介绍 Part3: 在 Finagle 中开发基于 Thrift 协议的应用 - skaka的博客]]
+  + [[https://www.infoq.cn/article/2014/05/twitter-finagle-intro][Twitter 的 RPC 框架 Finagle 简介 - InfoQ]]
+  + [[http://kapsterio.github.io/thrift/2016/10/20/thrift-async-server.html][thrift async server · kaspterio]]
+
 * 相关链接
+  + [[https://www.cnkirito.moe/rpc-registry/][深入理解 RPC 之服务注册与发现篇 | 徐靖峰|个人博客]]
   + [[https://waylau.com/remote-procedure-calls/][远程过程调用(RPC)详解 | waylau.com]]
   + [[https://www.infoq.cn/article/ujea*5ch0HjW2racClC9][RPC 协议之争和选型要点-InfoQ]]
 

@@ -44,42 +44,34 @@
    + [[https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/index.html][探索 ConcurrentHashMap 高并发性的实现机制]]
    + [[https://www.cnblogs.com/aspirant/p/8623864.html][ConcurrentHashMap原理分析（1.7与1.8）]]
 
-* 并发
-  Java 中的并发设计不只是可以用于 Java 中，对于运行在操作系统中的并发程序来说，拥有共同的基础工具：
-  + 操作系统同步原语，如 Mutex 和 Semaphore
-  + 硬件中断/时钟，抢占式和协作式调度
-  + Volatile，可见性和避免重排序
-  + 硬件同步原语，如 CAS 操作
-  + 进程/线程，执行任务
-  + 临界资源
-  + 临界区
-  + ……
+** 并发
+   Java 中的并发设计不只是可以用于 Java 中，对于运行在操作系统中的并发程序来说，拥有共同的基础工具：
+   + 操作系统同步原语，如 Mutex 和 Semaphore
+   + 硬件中断/时钟，抢占式和协作式调度
+   + Volatile，可见性和避免重排序
+   + 硬件同步原语，如 CAS 操作
+   + 进程/线程，执行任务
+   + 临界资源
+   + 临界区
+   + ……
 
-  面临着相同的问题：
-  + 原子性
-  + 有序性
-  + 可见性
-  + 临界区
-  + 死锁
-  + ……
+   面临着相同的问题：
+   + 原子性
+   + 有序性
+   + 可见性
+   + 临界区
+   + 死锁
+   + ……
 
-  这些是基本的材料，通过这些材料能够做出来什么东西，怎么做，就是并发编程需要考虑的问题。
+   这些是基本的材料，通过这些材料能够做出来什么东西，怎么做，就是并发编程需要考虑的问题。
   
-  + WAIT:
-    1. ObjectMonitor 源码阅读，它和 Object 之间的关系
-    2. ASQ 源码阅读
-       #+BEGIN_QUOTE
-       This class is designed to be a useful basis for most kinds of synchronizers that rely on a _single atomic int value_ to represent state
-       #+END_QUOTE
-    3. [[https://www.infoq.cn/article/1ggzj_oFl8wuJFwVG9et][简明高效的 Java 并发编程学习指南 - InfoQ]]
-
-* sdk
-  + https://zhuanlan.zhihu.com/p/101085411
-
-
-* BeanCopy
-  + [[https://www.lagou.com/lgeduarticle/73585.html][BeanCopy框架终极指南]]
-  + [[https://juejin.im/entry/5b228c2651882574b15882ba][推荐一个 Java 实体映射工具 MapStruct - 后端 - 掘金]]
+   + WAIT:
+     1. ObjectMonitor 源码阅读，它和 Object 之间的关系
+     2. ASQ 源码阅读
+        #+BEGIN_QUOTE
+        This class is designed to be a useful basis for most kinds of synchronizers that rely on a _single atomic int value_ to represent state
+        #+END_QUOTE
+     3. [[https://www.infoq.cn/article/1ggzj_oFl8wuJFwVG9et][简明高效的 Java 并发编程学习指南 - InfoQ]]
 
 * 编程范式
   + [[https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-4/index.html][深入理解 Java 函数式编程，第 4 部分: 使用 Vavr 进行函数式编程]]
@@ -126,24 +118,36 @@
 
   Reactor 默认是单线程的。如果要异步执行某些操作，则必须通过传递相关调度程序使用 subscribeOn 和 observeOn 运算符明确告知它。
 
-* 名词
-  + IDL - 接口描述语言
+  + [[https://www.codenong.com/42062199/][关于java：反应式编程优点/缺点 | 码农家园]]
+    降低了主线程的压力。
 
 * RPC
-  + [[https://developer.51cto.com/art/201906/597963.htm][花了一个星期，我终于把RPC框架整明白了！ - 51CTO.COM]]
-  + [[https://github.com/twitter/finagle][GitHub - twitter/finagle: A fault tolerant, protocol-agnostic RPC system]]
-    感觉像是 RPC 界的门面？
-  + [[http://skaka.me/blog/2016/05/02/finagle3/][微服务框架Finagle介绍 Part3: 在Finagle中开发基于Thrift协议的应用 - skaka的博客]]
+  需要注意区分的是：
+  1. 协议层和传输层协议，不是一个东西
+  2. RPC 协议和框架，两者常常绑定在一起，但不绝对
+
+  RPC 协议关注的应该是编解码、序列化等问题，和传输方式相对立，而框架则对调用进行包装，
+  负责负责均衡、服务发现等。
+
+  参考：
+  + [[https://www.cnkirito.moe/rpc-protocol/][深入理解 RPC 之协议篇 | 徐靖峰|个人博客]]
+
+  Finagle:
   + [[https://www.infoq.cn/article/2014/05/twitter-finagle-intro][Twitter的RPC框架Finagle简介 - InfoQ]]
-  + [[https://blog.twitter.com/engineering/en_us/a/2014/netty-at-twitter-with-finagle.html][Netty at Twitter with Finagle]]
+  + [[https://twitter.github.io/finagle/guide/][Contents — Finagle 20.6.0 documentation]]
+
+  Misc：
+  + RPC 更偏向内部调用，REST 更偏向外部调用
+  + https://pic3.zhimg.com/80/v2-0854647c8265ba5b4f79897c3504aa8f_1440w.jpg
+  + [[https://www.infoq.cn/article/ujea*5ch0HjW2racClC9][RPC协议之争和选型要点 - InfoQ]]
 
   插件：
   + [[https://twitter.github.io/scrooge/MVNPlugin.html][Maven Plugin — Scrooge 20.6.0 documentation]]
     生成的代码默认在对应的 namespace 下
 
-* ORM
-  + [[https://amao12580.github.io/post/2016/04/JOOQ-from-entry-to-improve/][(*´∇｀*)被你发现啦~ JOOQ 3.8.2 使用 教程：从入门到提高 | Cat's Blog]]
-
 * 库
   + [[https://github.com/twitter/util][GitHub - twitter/util: Wonderful reusable code from Twitter]]
+
+* Mac IDEA
+  配置文件路径：~/Library/Application Support/JetBrains/IntelliJIdea2020.1
 

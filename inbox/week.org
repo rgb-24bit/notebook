@@ -12,7 +12,4 @@
   + [[https://www.runoob.com/linux/linux-comm-uniq.html][Linux uniq 命令 | 菜鸟教程]]
 
   
-
-* 笔记
-** 基础命令
    

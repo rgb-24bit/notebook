@@ -52,7 +52,6 @@
 ** 问题
    + [[https://stackoverflow.com/questions/33409888/how-can-i-await-inside-future-like-objects-await][python - How can I await inside future-like object's __await__? - Stack Overflow]]
 
-     
 * 异步编程
   撇开 I/O 的异步编程模型理解：
   1. 在主线程上存在一个耗时的 Task，为了不让这个 Task 阻塞主线程，于是，可以考虑安排它到另一个线程执行
@@ -72,3 +71,9 @@
   + [[https://juejin.im/post/5c0f1739f265da616c65724e][linux的IO模型 - 掘金]]
   + [[https://www.cnkirito.moe/future-and-promise/][JAVA 拾遗 --Future 模式与 Promise 模式 | 徐靖峰|个人博客]]
     
+* 问题
+  + [[https://stackoverflow.com/questions/48020593/python-what-are-the-advantages-of-async-over-threads][multithreading - Python: what are the advantages of async over threads? - Stack Overflow]]
+
+* PIP
+  + [[https://www.runoob.com/w3cnote/python-pip-install-usage.html][Python pip 安装与使用 | 菜鸟教程]]
+

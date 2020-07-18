@@ -29,5 +29,8 @@
   kint……
 
 * 同步服务
-  samba
+  + samba - 感觉不好用
+  + [[https://www.cnblogs.com/f-ck-need-u/p/7220009.html][第2章 rsync(一)：基本命令和用法 - 骏马金龙 - 博客园]] - 还是 rsync 快
+  + [[https://stackoverflow.com/questions/13713101/rsync-exclude-according-to-gitignore-hgignore-svnignore-like-filter-c][git - rsync exclude according to .gitignore & .hgignore & svn:ignore like --filter=:C - Stack Overflow]]
+
 

@@ -6,6 +6,7 @@
 - [[#follow-mode][Follow Mode]]
 - [[#vterm][vterm]]
 - [[#进程管理][进程管理]]
+- [[#bookmark][Bookmark]]
 
 * 寄存器
   寄存器可以非常快速地存储和恢复字符串、整数、矩形、文件和目录路径、WindowConfigurations、
@@ -32,4 +33,35 @@
   可以通过 =list-process= 和 =list-system-process= 列出进程，在 =process menu= 界面通过 =d= 关闭进程。
 
   在 spacemacs 中两个命令的快捷键分别为 =M-m a p/P=.
+
+* Bookmark
+  可以通过 =bookmark-set(C-x r m)= 命令创建书签，通过命令 =bookmark-jump(C-x r b)= 跳转到某个书签。
+
+  可以通过 =bookmark-bmenu-list(C-x r l)= 在 =Bookmark List= 书签列表查看所有书签，快捷键有：
+  |--------+-------------------------------------------------------|
+  | 快捷键 | 作用                                                  |
+  |--------+-------------------------------------------------------|
+  | =a=      | 显示当前书签的标注信息                                |
+  | =A=      | 在另一个 buffer 中显示所有书签的所有标注信息          |
+  | =d=      | 标记删除                                              |
+  | =x=      | 执行删除                                              |
+  | =e=      | 编辑标注信息                                          |
+  | =m=      | 标记书签                                              |
+  | =o=      | 在另一个 window 中显示书签，光标也会跟到另一个 window |
+  | =C-o=    | 在另一个 window 中显示书签，光标不会跟到另一个 window |
+  | =r=      | 重命名书签                                            |
+  | =w=      | 在 minibuffer 显示书签位置                            |
+  |--------+-------------------------------------------------------|
+
+  以下代码可以让书签按照最近访问时间排序：
+  #+begin_src elisp
+    (defadvice bookmark-jump (after bookmark-jump activate)
+      (let ((latest (bookmark-get-bookmark bookmark)))
+        (setq bookmark-alist (delq latest bookmark-alist))
+        (add-to-list 'bookmark-alist latest)))
+  #+end_src
+
+  参考：
+  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Bookmarks.html][Bookmarks - GNU Emacs Manual]]
+  + [[https://www.emacswiki.org/emacs/bookmark+.el][EmacsWiki: bookmark+.el]]
 

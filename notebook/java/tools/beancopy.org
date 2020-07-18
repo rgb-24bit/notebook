@@ -1,0 +1,31 @@
+#+TITLE:      BeanCopy
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#框架选择][框架选择]]
+- [[#mapstruct][MapStruct]]
+
+* 框架选择
+  针对不同的 BeanCopy 需求：
+  1. 字段相同最简单的 Copy
+
+     建议直接使用 Orika 工具类，实现非常简单，客户端编码非常少，基本上就是丢一个 source 和 target type 进去即可，保证了深拷贝，性能上高于 Dozer 等老产品，
+     并且集合之间拷贝也很优秀。像 BeanUtils、BeanCopier 在很多场景表现明显不如 Orika，会有各种问题备受吐槽。
+
+  2. 有复杂性的 Copy（比如字段名称不同、有 ignore 需求、有格式化需求）
+
+     建议使用功能强大的 MapStruct 框架，它的好处呢，就是既生成了代码，比较直观方便 debug。又支持非常多且强大的注解，可以轻松做到多层级之间字段映射、
+     字段 ignore、日期格式化、金额格式化等。还有 mapping 模版继承复用、组合等功能。还有就是天然支持 Spring 注入，SpringBoot 集成等。
+
+  3. 有业务逻辑的 Copy，考虑手写
+
+
+  #+begin_comment
+  也就是说，之前学习的 WrappedBeanCopier 其实有更好的现成的工具替代……重复造轮子了啊，而且在造的过程中并没有什么收获。
+  #+end_comment
+
+  参考：
+  + [[https://juejin.im/post/5dd672e2e51d4536d737d504][BeanCopy 框架终极指南 - 掘金]]
+
+* MapStruct
+  + [[https://juejin.im/entry/5b228c2651882574b15882ba][推荐一个 Java 实体映射工具 MapStruct - 后端 - 掘金]]
+

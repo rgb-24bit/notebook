@@ -308,6 +308,12 @@
     #+begin_src bash
       $ TRACEID=$(uuidgen | tr '[:upper:]' '[:lower:]')
     #+end_src
+
+    去掉中间的短横线：
+    #+begin_src bash
+      TRACEID=$(uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '-')
+    #+end_src
+
   + 命令 =strip= 可以通过删除可执行文件中 ELF 头的 typchk 段、符号表、字符串表、行号信息、调试段、注解段、重定位信息等来实现缩减程序体积的目的
 
 * 标准输出

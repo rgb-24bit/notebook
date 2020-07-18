@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#important-general-concepts][Important General Concepts]]
 - [[#fundamental-editing-commands][Fundamental Editing Commands]]
+- [[#important-text-changing-commands][Important Text-Changing Commands]]
 
 * Important General Concepts
   也许是 Emacs 的诞生比较早的原因，操作系统层面的单个窗口或终端界面在 Emacs 中的名称为 Frame。
@@ -74,4 +75,30 @@
 
   =Minibuffer= 是 Emacs 中比较特殊的一个输入区域，通常用来读取输入一些复杂的参数，比如文件名、命令名、Lisp 表达式等。
 
+
+* Important Text-Changing Commands
+  默认可以通过 =C-SPC= 和 =C-@= 调用 =set-mark-command= 命令，当然，有些时候 =C-SPC= 快捷键可能被操作系统拦截。
+
+  同时，可以通过 =C-x =C-x= 切换 region 的起始和结束位置，创建一个 region 试一下就明白了。
+
+  也可以在按住 =Shift= 后移动光标快速创建 region，和操作系统中一样。
+
+  |---------+-------------------|
+  | 快捷键  | 作用              |
+  |---------+-------------------|
+  | =M-@=     | mark-word         |
+  | =C-M-@=   | mark-sexp         |
+  | =M-h=     | mark-paragraph    |
+  | =C-M-h=   | mark-defun        |
+  | =C-x C-p= | mark-page         |
+  | =C-x h=   | mark-whole-buffer |
+  |---------+-------------------|
+
+  快捷键 =C-x C-l= 和 =C-x C-u= 可以切换 region 中的大小写情况。
+  
+  快捷键 =C-M-\= 调整 region 中的 Indentation。
+
+  mark-ring，在 =set-mark-command= 后，会将 mark 的位置 push 到 mark-ring 中，可以通过 =C-u C-SPC= pop 并跳转到该位置。
+
+  同时，有一个全局的 =global mark ring=, 可以通过 =C-x C-SPC= 进行 pop 操作。
 

@@ -1,0 +1,13 @@
+#+TITLE:      JOOQ
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#jooq][JOOQ]]
+
+* JOOQ
+  JOOQ 通过 Java 代码来编写 SQL 语句，避免了 Mybatis 中 SQL 难以维护和 Hibernate 过于抽象的问题。
+
+  使用时，需要通过 JOOQ CodeGen 生成相关的代码，这些代码建议通过单独的项目进行管理，然后其他项目直接导入就可以用了。
+
+  参考：
+  + [[https://www.baeldung.com/jooq-with-spring][Introduction toJooq with Spring | Baeldung]]
+

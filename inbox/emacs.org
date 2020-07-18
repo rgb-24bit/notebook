@@ -28,4 +28,28 @@
          ("n" next-line "next-line"))
      #+end_src
 
-     
+* 快捷键
+  + d 标记删除
+  + x 执行删除
+  + D 直接删除
+
+* Org-Roam
+  + [[https://www.zmonster.me/2020/06/27/org-roam-introduction.html][使用 org-roam 构建自己的知识网络 · ZMonster's Blog]]
+
+* 功能
+  + register
+  + accumulating text
+
+
+
+
+
+* spacemacs
+  + C-u M-'
+  + C-u number prefix M-'
+
+* frame
+  笔记本一个 Frame，显示器一个 Frame，C-x 5 2 创建，C-x 5 0 关闭，C-x 5 o 切换。
+
+* org
+  + [[https://emacs.stackexchange.com/questions/49066/need-help-with-expand-region-symbol-s-function-definition-is-void-org-outlin][org mode - Need help with `expand-region`: Symbol’s function definition is void: org-outline-overlay-data - Emacs Stack Exchange]]

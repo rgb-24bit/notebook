@@ -1,0 +1,34 @@
+* 协程
+  + 减少线程数，减少切换消耗
+* aio -> io_uring
+* map
+  + map: 值 -> 值
+  + flatMap: 值 -> 流/容器
+
+* 圈复杂度
+
+* Lentency
+  + https://gist.github.com/jboner/2841832
+
+* C10K
+  
+* Web
+  + https://www.techempower.com/benchmarks/
+
+* 编程模型
+  + Callback
+  + Promise
+  + Yield?
+  + Stream - 常和函数式结合
+  + async/await - 面条代码
+  + 函数式
+  + 无感知 - Golang
+  + 状态机 - Rust
+
+  区别：
+  1. Eager vs Lazy
+  2. Top-level async or not
+  3. Built-in vs Opt-in
+
+  高性能 = 缓存 + 异步？
+

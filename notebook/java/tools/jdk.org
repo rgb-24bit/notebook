@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#javap][javap]]
 - [[#jshell][JShell]]
+- [[#sdkmain][SDKMAIN]]
 
 * javap
   javap 是 JDK 内置的反编译工具，可以通过 javap 获得类文件的字节码，从而学习编译器内部的工作。
@@ -23,4 +24,13 @@
 
 * JShell
   JShell 是 JDK9 之后就携带的一个 Java REPL，只是简单的一两个语句的测试可以考虑通过 JShell 来完成。
+
+* SDKMAIN
+  可以通过 SDKMAIN 来安装管理机器上的 JDK，通过如下命令安装：
+  #+begin_src bash
+    $ curl -s "https://get.sdkman.io" | bash
+  #+end_src
+  
+  可惜不支持 Windows，参考：
+  + [[https://sdkman.io/][Home - SDKMAN! the Software Development Kit Manager]]
 
