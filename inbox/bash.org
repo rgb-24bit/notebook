@@ -1,0 +1,6 @@
+* 命令
+  + 通过 apropos 和关键词在 man page 描述中查找相应的程序
+  + 通过 type 判断命令是 可执行文件、shell 内置命令还是别名
+  + [[https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash][shell - Difference between single and double quotes in Bash - Stack Overflow]]
+  + [[https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md][the-art-of-command-line/README-zh.md at master · jlevy/the-art-of-command-line]]
+

@@ -12,6 +12,10 @@
 - [[#相关问题][相关问题]]
   - [[#怎样将字符串转换为小写][怎样将字符串转换为小写]]
   - [[#怎样在命令行格式化-json-字符串][怎样在命令行格式化 json 字符串]]
+  - [[#如何在脚本里面调用另一个脚本][如何在脚本里面调用另一个脚本]]
+  - [[#遍历命令行参数][遍历命令行参数]]
+  - [[#在函数内部使用-getopts][在函数内部使用 getopts]]
+  - [[#执行传入的命令][执行传入的命令]]
 
 * 基础
   脚本第一行叫做 ~shebang~, 用于告诉 ~shell~ 使用什么程序执行这个脚本。
@@ -240,4 +244,59 @@
 
    更多可以参考：
    + [[https://stackoverflow.com/questions/352098/how-can-i-pretty-print-json-in-a-shell-script][unix - How can I pretty-print JSON in a shell script? - Stack Overflow]]
+
+** 如何在脚本里面调用另一个脚本
+   可以使用如下三种方式，其中，使用 =bash= 的适合无法修改当前 shell 的环境变量，而 =.= 是 =source= 的一种 alias：
+   #+begin_src sh
+     bash another_script.sh
+     source another_script.sh
+     . another_script.sh
+   #+end_src
+   
+   参考：
+   + [[https://stackoverflow.com/questions/8352851/how-to-call-one-shell-script-from-another-shell-script][bash - How to call one shell script from another shell script? - Stack Overflow]]
+
+** 遍历命令行参数
+   #+begin_src sh
+     for var in "$@"
+     do
+         echo "$var"
+     done
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/255898/how-to-iterate-over-arguments-in-a-bash-script][command line - How to iterate over arguments in a Bash script - Stack Overflow]]
+
+** 在函数内部使用 getopts
+   在使用 =getopts= 之前设置 =local OPTIND= 就行了：
+   #+begin_src sh
+     foo()
+     {
+         foo_usage() { echo "foo: [-a <arg>]" 1>&2; exit; }
+
+         local OPTIND o a
+         while getopts ":a:" o; do
+             case "${o}" in
+                 a)
+                     a="${OPTARG}"
+                     ;;
+                 ,*)
+                     foo_usage
+                     ;;
+             esac
+         done
+         shift $((OPTIND-1))
+
+         echo "a: [${a}], non-option arguments: $*"
+     }
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function][Using getopts inside a Bash function - Stack Overflow]]
+
+** 执行传入的命令
+   #+begin_src sh
+     COMMAND="$@"
+     http_proxy=... $COMMAND
+   #+end_src
 

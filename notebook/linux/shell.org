@@ -316,6 +316,8 @@
 
   + 命令 =strip= 可以通过删除可执行文件中 ELF 头的 typchk 段、符号表、字符串表、行号信息、调试段、注解段、重定位信息等来实现缩减程序体积的目的
 
+  + 命令 =cut= 可以通过指定分割符的方式截取列
+
 * 标准输出
   常用于进行标准输出的指令 echo 其实有两个版本，其中一个是 ~bash~ 内置的指令，而另一个是 ~/bin/echo~ 这个指令。
 
@@ -343,10 +345,12 @@
 
 * 相关问题
 ** Terminal、TTY、Shell 等的区别
-   简单来说就是下面这样：
-   + 终端 (Terminal) = TTY = 文本输入/输出环境
-   + 控制台 (Console) = 一种特殊的终端
-   + Shell = 命令行解释器，执行用户输入的命令并返回结果
+   这里主要需要区分的概念是终端模拟器 Terminal Emulator 和 Shell，其中，终端模拟器是用来模拟传统终端的一个添软件，
+   它会捕获键盘输入，将输入发送给对应的 Shell，执行，将输入打印到屏幕上。
+
+   而 Shell，则是 sh、zsh、bash 和 fish 这些负责处理执行输入的的程序。
+
+   这里也应该注意区分 Shell 本身的命令和 Shell 调用的应用程序。
 
    详情可以参考
    + [[https://segmentfault.com/a/1190000016129862#articleHeader8][命令行界面 (CLI)、终端 (Terminal)、Shell、TTY，傻傻分不清楚？ - Blessing Studio - SegmentFault 思否]]
@@ -364,4 +368,5 @@
    #+begin_src bash
      sed -n '5,10p' filename
    #+end_src
+
 

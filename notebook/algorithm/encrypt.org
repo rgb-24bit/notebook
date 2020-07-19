@@ -18,6 +18,8 @@
 ** AES 算法
    高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称 Rijndael 加密法，是美国联邦政府采用的一种区块加密标准。
 
+   在使用 AES 算法时，常常会考虑算法的模式、填充模式、初始向量这些参数，这些值的不同常常会得到不一样的密文。
+
    参考链接：
    + [[https://www.cnblogs.com/luop/p/4334160.html][密码算法详解——AES - ReadingLover - 博客园]]
    + [[https://github.com/matt-wu/AES][matt-wu/AES: Understanding AES & Rijndael]]
