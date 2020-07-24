@@ -53,3 +53,17 @@
 
 * org
   + [[https://emacs.stackexchange.com/questions/49066/need-help-with-expand-region-symbol-s-function-definition-is-void-org-outlin][org mode - Need help with `expand-region`: Symbol’s function definition is void: org-outline-overlay-data - Emacs Stack Exchange]]
+* 函数参数
+  + [[https://stackoverflow.com/questions/26102889/how-do-i-make-named-arguments-in-elisp][emacs - How do I make named arguments in ELisp? - Stack Overflow]]
+  + [[https://stackoverflow.com/questions/4651274/convert-symbol-to-a-string-in-elisp][Convert Symbol to a String in Elisp - Stack Overflow]]
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Macros.html][Defining Macros - GNU Emacs Lisp Reference Manual]]
+
+* 问题
+  + magit-list-repositories 触发 switch-frame 事件，处理成功前就不用多 frame 了……
+  + macos emacsclient 字体配置有效，但还是存在上面这个问题
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Selecting-Windows.html][Selecting Windows - GNU Emacs Lisp Reference Manual]]
+  + [[https://doc.endlessparentheses.com/Fun/handle-switch-frame.html][Emacs Online Documentation]]
+
+* Regex place
+  + M-n/p
+
