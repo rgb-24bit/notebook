@@ -67,3 +67,18 @@
 * Regex place
   + M-n/p
 
+* ledger
+  交易记录格式：
+  #+begin_src ledger
+    时间戳 * 交易对象
+    收款方账户  正值
+    付款方账户  负值（可省略）
+  #+end_src
+
+  星号含义和 Reconciliation 作用：[[https://www.ledger-cli.org/3.0/doc/ledger-mode.html#Marking-Transactions][Marking Transactions]]
+
+  参考：
+  + [[https://zero4drift.github.io/posts/ledger--ledger-mode-xue-xi-zhi-shi-dian-zong-jie/][Ledger & ledger-mode 学习知识点总结 - 找一个吃麦旋风的理由]]
+  + [[https://www.ledger-cli.org/3.0/doc/ledger-mode.html][Ledger: Command-Line Accounting]]
+  + [[https://www.ledger-cli.org/3.0/doc/ledger3.html][Ledger: Command-Line Accounting]]
+
