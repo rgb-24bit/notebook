@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#创建动态大小的数组][创建动态大小的数组]]
+- [[#goroutines-和线程][Goroutines 和线程]]
 
 * 创建动态大小的数组
   #+begin_src go
@@ -16,4 +17,13 @@
   参考：
   + [[https://stackoverflow.com/questions/39804861/what-is-a-concise-way-to-create-a-2d-slice-in-go][What is a concise way to create a 2D slice in Go? - Stack Overflow]]
   + [[https://stackoverflow.com/questions/38362631/go-error-non-constant-array-bound][Go error: non-constant array bound - Stack Overflow]]
+
+* Goroutines 和线程
+  通过阅读 [[https://books.studygolang.com/gopl-zh/ch9/ch9-08.html][Goroutines 和线程 · Go语言圣经]] 可以了解到 Goroutines 和线程之间的一些区别和联系：
+  1. 栈的大小，线程通常会分配一个固定大小的栈，这个栈可能小了也可能大了，而 Goroutines 则是动态的栈，
+     一开始很小，后面可以根据需要进行扩大
+  2. 线程由内核进行调度，而 Go 的运行时包含了其自己的调度器，这个调度器使用了一些技术手段，比如 m:n 调度，
+     在 n 个操作系统线程上多工（调度）m 个 goroutine
+  3. 可以通过 GOMAXPROCS 变量来决定会有多少个操作系统的线程同时执行 Go 的代码，默认值是运行机器上的 CPU 的核心数
+  4. Goroutine 没有 ID 号，ThreadLocal 也就不存在了……
 

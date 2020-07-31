@@ -8,3 +8,8 @@
 * github
   + 和用户同名的仓库
 
+* cherry-pick
+  + [[https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html][git cherry-pick 教程 - 阮一峰的网络日志]]
+
+* gerrit
+

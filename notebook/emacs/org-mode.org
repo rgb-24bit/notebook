@@ -5,6 +5,7 @@
 - [[#dates-and-times][Dates and Times]]
 - [[#markup-for-rich-contents][Markup for Rich Contents]]
 - [[#refile--copy][Refile & copy]]
+- [[#property][Property]]
 - [[#misc][Misc]]
 - [[#文学编程][文学编程]]
 - [[#相关问题][相关问题]]
@@ -79,6 +80,10 @@
 
   参考：
   + [[https://orgmode.org/manual/Refile-and-copy.html#DOCF94][The Org Manual: Refile and copy]]
+
+* Property
+  可以在文件头通过 =#+STARTUP= 设置打开整个文件是 headline 的可见性，也可以为单个 headline 设置 =VISIBILITY= 属性，参考：
+  + [[https://orgmode.org/manual/Initial-visibility.html][Initial visibility (The Org Manual)]]
 
 * Misc
   + 在 Org 文件的头部可以通过 ~#+STARTUP~ 来控制打开文件时各个标题下内容的可见性，参考：

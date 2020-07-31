@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#快捷键][快捷键]]
+- [[#dired-local][dired-local]]
 - [[#概念问题][概念问题]]
   - [[#前缀参数][前缀参数]]
   - [[#编码问题][编码问题]]
@@ -26,6 +27,9 @@
 
   缓冲区操作相关快捷键：
   + 保存所有缓冲区 - ~C-u C-x s~
+
+* dired-local
+  dired-local 变量可以（应该）通过 =add-dir-local-variable= 创建，Spacemacs 的快捷键是 =M-m f v d=.
 
 * 概念问题
 ** 前缀参数

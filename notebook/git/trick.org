@@ -5,6 +5,7 @@
 - [[#git-ignore][git ignore]]
 - [[#git-merge-strategy][git merge strategy]]
 - [[#使用不同的配置][使用不同的配置]]
+- [[#workflow][workflow]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
@@ -27,8 +28,6 @@
   + [[https://stackoverflow.com/questions/173919/is-there-a-theirs-version-of-git-merge-s-ours][Is there a "theirs" version of "git merge -s ours"? - Stack Overflow]]
 
 * 使用不同的配置
-
-
   当自己在 Github 上的用户名和在公司使用的用户名不一样时，可以选择将公司的仓库全部克隆在一个目录下，
   然后在 =~/.gitconfig= 添加如下配置：
   #+begin_src conf
@@ -49,4 +48,6 @@
         email = companyemail
   #+end_src
 
+* workflow
+  + [[http://www.ruanyifeng.com/blog/2015/12/git-workflow.html][Git 工作流程 - 阮一峰的网络日志]]
 

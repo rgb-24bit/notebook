@@ -43,7 +43,6 @@
 
 
 
-
 * spacemacs
   + C-u M-'
   + C-u number prefix M-'
@@ -66,6 +65,7 @@
 
 * Regex place
   + M-n/p
+  + re-builder
 
 * ledger
   交易记录格式：
@@ -81,4 +81,10 @@
   + [[https://zero4drift.github.io/posts/ledger--ledger-mode-xue-xi-zhi-shi-dian-zong-jie/][Ledger & ledger-mode 学习知识点总结 - 找一个吃麦旋风的理由]]
   + [[https://www.ledger-cli.org/3.0/doc/ledger-mode.html][Ledger: Command-Line Accounting]]
   + [[https://www.ledger-cli.org/3.0/doc/ledger3.html][Ledger: Command-Line Accounting]]
+
+    
+  asdasdasd
+* lsp
+  + [[https://github.com/manateelazycat/nox][GitHub - manateelazycat/nox: Nox is a lightweight, high-performance LSP client for Emacs]]
+  + [[https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_completion][Specification]]
 
