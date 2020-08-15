@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#简单使用][简单使用]]
 - [[#特殊操作][特殊操作]]
+- [[#相关问题][相关问题]]
+  - [[#粘贴时关闭-autoindent][粘贴时关闭 autoindent]]
 
 * 简单使用
   + [[http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor][vimtutor]]  
@@ -14,3 +16,12 @@
   | 不重启更新配置 | :so %           |
   |----------------+-----------------|
   
+* 相关问题
+** 粘贴时关闭 autoindent
+   #+begin_example
+     :set paste
+   #+end_example
+
+   参考：
+   + [[https://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim][configuration - Turning off auto indent when pasting text into vim - Stack Overflow]]
+

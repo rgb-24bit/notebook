@@ -5,3 +5,8 @@
 
 * 开发
   + TDD + 洋葱架构 + 领域建模 
+* Entity 和 Value 的区别
+  一个区别是，Entity 的属性是可变的，而 Value 的不可变，参考：
+  + [[https://enterprisecraftsmanship.com/posts/is-entity-same-as-value-object/][Is Entity the same as Value Object? · Enterprise Craftsmanship]]
+  + [[https://enterprisecraftsmanship.com/posts/entity-vs-value-object-the-ultimate-list-of-differences/][Entity vs Value Object: the ultimate list of differences · Enterprise Craftsmanship]]
+

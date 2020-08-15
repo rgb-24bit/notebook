@@ -57,8 +57,11 @@
     #+BEGIN_SRC bash
       $ curl -H "Content-Type:application/json" http://example.com
     #+END_SRC
-
-
+  + 自己当前的公网 IP
+    #+begin_src sh
+      $ curl cip.cc
+    #+end_src
+    
 * fping
   Fping 相较于 ping 命令可以同时 ping 多个目标 IP 地址，甚至可以将要测试的 IP 地址保存到文件中作为标准输入。
 

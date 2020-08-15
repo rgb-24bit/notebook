@@ -6,3 +6,10 @@
 
 * Hash Avatars
   + [[https://barro.github.io/2018/02/avatars-identicons-and-hash-visualization/][Avatars, identicons, and hash visualization]]
+
+* ask
+  + https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md
+
+* IAM
+  + [[https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/introduction.html][什么是 IAM？ - AWS Identity and Access Management]]
+

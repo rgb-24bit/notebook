@@ -13,6 +13,11 @@
   + [[https://magit.vc/manual/magit/Blaming.html][Blaming (Magit User Manual)]]
   + [[https://git-scm.com/docs/git-blame][Git - git-blame Documentation]]
 
+  常用操作：
+  + p/n - 上一个/下一个提交
+  + l   - 查看 log
+  + f   - 查看文件
+
 * Magit
 ** 相关问题
    + 在 Magit 中怎样对比两个分支之间的区别？

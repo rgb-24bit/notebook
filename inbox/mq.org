@@ -1,0 +1,2 @@
+* kafka
+  + [[https://juejin.im/post/6844903495670169607#heading-25][真的，Kafka 入门一篇文章就够了 - 掘金]]

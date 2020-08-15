@@ -10,6 +10,7 @@
   - [[#elasticsearch][elasticsearch]]
 - [[#相关问题][相关问题]]
   - [[#怎样配置-docker-的镜像加速器][怎样配置 Docker 的镜像加速器]]
+  - [[#停止或移除所有-containers][停止或移除所有 Containers]]
 
 * Docker 架构
   Docker 使用客户端 - 服务器架构模式，使用远程 API 来管理和创建 Docker 容器。
@@ -97,4 +98,10 @@
 
    保存配置后重启服务就可以了，参考：[[https://yeasy.gitbooks.io/docker_practice/install/mirror.html][镜像加速器 · Docker —— 从入门到实践]]
 
+   
+** 停止或移除所有 Containers
+   #+begin_src sh
+     docker stop $(docker ps -a -q)
+     docker rm $(docker ps -a -q)
+   #+end_src
    

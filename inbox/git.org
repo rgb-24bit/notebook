@@ -12,4 +12,12 @@
   + [[https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html][git cherry-pick 教程 - 阮一峰的网络日志]]
 
 * gerrit
+  push 时显示 no new changes?
+  git cin
+
+
+  git diff | git apply 
+
+* 删除远程分支  
+  + [[https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely][version control - How do I delete a Git branch locally and remotely? - Stack Overflow]]
 

@@ -34,3 +34,6 @@
 * 字段类型
   + [[https://segmentfault.com/q/1010000000121702][Mysql时间字段格式如何选择，TIMESTAMP，DATETIME，INT？ - SegmentFault 思否]]
 
+* 查询
+  + [[https://stackoverflow.com/questions/12125904/select-last-n-rows-from-mysql][database - Select last N rows from MySQL - Stack Overflow]]
+

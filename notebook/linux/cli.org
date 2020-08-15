@@ -1,4 +1,4 @@
-#+TITLE:      Shell
+#+TITLE:      CLI Tools
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#网络操作相关][网络操作相关]]

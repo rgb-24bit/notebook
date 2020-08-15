@@ -88,3 +88,6 @@
   + [[https://github.com/manateelazycat/nox][GitHub - manateelazycat/nox: Nox is a lightweight, high-performance LSP client for Emacs]]
   + [[https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_completion][Specification]]
 
+* git
+  git-gutter
+

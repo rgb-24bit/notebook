@@ -82,7 +82,7 @@
 ## dotnet
   + [.NET - C# 高级特性](notebook/dotnet/csharp-feature.org)
   + [.NET - C# 基础](notebook/dotnet/csharp-note.org)
-  + [.NET - 未分类](notebook/dotnet/misc.org)
+  + [.NET - Misc](notebook/dotnet/misc.org)
   + [.NET - WinForm 相关笔记](notebook/dotnet/winforms.org)
 ## emacs
   + [Emacs Beautify](notebook/emacs/beautify.org)
@@ -140,6 +140,7 @@
   + **database**
     + [数据库连接池](notebook/java/database/connection-pool.org)
     + [JDBC](notebook/java/database/jdbc.org)
+    + [JOOQ](notebook/java/database/jooq.org)
     + [mybatis](notebook/java/database/mybatis.org)
     + [Redis](notebook/java/database/redis.org)
   + **javaee**
@@ -166,6 +167,7 @@
     + [Spring Test](notebook/java/spring/spring-test.org)
     + [Spring Utils](notebook/java/spring/spring-utils.org)
   + **tools**
+    + [BeanCopy](notebook/java/tools/beancopy.org)
     + [字节码操作](notebook/java/tools/bytecode.org)
     + [Gradle](notebook/java/tools/gradle.org)
     + [IntelliJ IDEA](notebook/java/tools/idea.org)
@@ -196,7 +198,6 @@
   + [Swing](notebook/java/swing.org)
   + [Java Tricks](notebook/java/tricks.org)
 ## lang
-  + [Bash](notebook/lang/bash.org)
   + [Dot](notebook/lang/dot.org)
   + [Latex](notebook/lang/latex.org)
   + [Plantuml](notebook/lang/plantuml.org)
@@ -204,12 +205,13 @@
   + [XML](notebook/lang/xml.org)
 ## linux
   + [Alpine](notebook/linux/alpine.org)
+  + [Bash](notebook/linux/bash.org)
+  + [CLI Tools](notebook/linux/cli.org)
   + [Debian 系统使用](notebook/linux/debian.org)
   + [Linux I/O 模型](notebook/linux/io.org)
   + [Linux 基础笔记](notebook/linux/linux.org)
   + [Misc](notebook/linux/misc.org)
   + [Linux 问题集](notebook/linux/question.org)
-  + [Shell](notebook/linux/shell.org)
 ## mac
   + [日常使用](notebook/mac/daily.org)
   + [开发相关](notebook/mac/develop.org)
