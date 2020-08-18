@@ -1,3 +1,8 @@
 #+TITLE:      Go Toolkit
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#相关链接][相关链接]]
+
+* 相关链接
+  + [[https://docs.hacknode.org/gopl-zh/ch10/ch10-07.html][工具 | Go语言圣经]]
+

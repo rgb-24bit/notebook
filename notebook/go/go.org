@@ -21,6 +21,8 @@
 - [[#接口][接口]]
 - [[#并发][并发]]
 - [[#并发控制][并发控制]]
+- [[#反射][反射]]
+- [[#底层编程][底层编程]]
 
 * Go 语言起源
   Go 语言的设计主要受到 CSP、Pascal 和 C 三个分支的影响，其中，CSP 只是一个用于描述并发性基本概念的描述语言，
@@ -404,6 +406,12 @@
 
    除了包的导入路径，每个包还有一个包名，包名一般是短小的名字（并不要求包名是唯一的），包名在包的声明处指定。按照惯例，
    一个包的名字和包的导入路径的最后一个字段相同，例如 =gopl.io/ch2/tempconv= 包的名字一般是 =tempconv=.
+
+   可以通过 =_= 只导入包（副作用），或者在包路径前添加别名：
+   #+begin_src go
+     import _ "/path/to/package"
+     import alias "/path/to/package"
+   #+end_src
 
    包的初始化首先是解决包级变量的依赖顺序，然后按照包级变量声明出现的顺序依次初始化：
    #+begin_src go
@@ -1583,4 +1591,128 @@
       return icons[name]
     }
   #+end_src
+
+* 反射
+  我们知道接口底层持有 =(value, type)= 元组，可以通过 =reflect.Type= 和 =reflect.Value= 获取操作这两个信息：
+  #+begin_src go
+    func TypeOf(i interface{}) Type
+    func ValueOf(i interface{}) Value
+  #+end_src
+
+  可以通过 =reflect.Value.Kind= 方法对类型进行判断：
+  #+begin_src go
+    func formatAtom(v reflect.Value) string {
+      switch v.Kind() {
+      case reflect.Invalid:
+        return "invalid"
+      case reflect.Int, reflect.Int8, reflect.Int16,
+        reflect.Int32, reflect.Int64:
+        return strconv.FormatInt(v.Int(), 10)
+      case reflect.Uint, reflect.Uint8, reflect.Uint16,
+        reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+        return strconv.FormatUint(v.Uint(), 10)
+        // ...floating-point and complex cases omitted for brevity...
+      case reflect.Bool:
+        return strconv.FormatBool(v.Bool())
+      case reflect.String:
+        return strconv.Quote(v.String())
+      case reflect.Chan, reflect.Func, reflect.Ptr, reflect.Slice, reflect.Map:
+        return v.Type().String() + " 0x" +
+          strconv.FormatUint(uint64(v.Pointer()), 16)
+      default: // reflect.Array, reflect.Struct, reflect.Interface
+        return v.Type().String() + " value"
+      }
+    }
+  #+end_src
+
+  对不同类型的值的获取：
+  #+begin_src go
+    func display(path string, v reflect.Value) {
+        switch v.Kind() {
+        case reflect.Invalid:
+            fmt.Printf("%s = invalid\n", path)
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < v.Len(); i++ {
+                display(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
+            }
+        case reflect.Struct:
+            for i := 0; i < v.NumField(); i++ {
+                fieldPath := fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name)
+                display(fieldPath, v.Field(i))
+            }
+        case reflect.Map:
+            for _, key := range v.MapKeys() {
+                display(fmt.Sprintf("%s[%s]", path,
+                    formatAtom(key)), v.MapIndex(key))
+            }
+        case reflect.Ptr:
+            if v.IsNil() {
+                fmt.Printf("%s = nil\n", path)
+            } else {
+                display(fmt.Sprintf("(*%s)", path), v.Elem())
+            }
+        case reflect.Interface:
+            if v.IsNil() {
+                fmt.Printf("%s = nil\n", path)
+            } else {
+                fmt.Printf("%s.type = %s\n", path, v.Elem().Type())
+                display(path+".value", v.Elem())
+            }
+        default: // basic types, channels, funcs
+            fmt.Printf("%s = %s\n", path, formatAtom(v))
+        }
+    }
+  #+end_src
+  
+  可以通过 =reflect.Value= 修改值，需要目标对象是可以被取址的，这通常需要通过 =reflect.ValueOf(&x)= 的形式创建 =Value= 对象。
+
+  结构体字段的标签可以通过 =v.Type().Field(i).Tag= 来获取操作。
+
+  获取方法：
+  #+begin_src go
+    func Print(x interface{}) {
+      // reflect.Type 同理
+      v := reflect.ValueOf(x)
+      t := v.Type()
+      fmt.Printf("type %s\n", t)
+
+      for i := 0; i < v.NumMethod(); i++ {
+        methType := v.Method(i).Type()
+        fmt.Printf("func (%s) %s%s\n", t, t.Method(i).Name,
+          strings.TrimPrefix(methType.String(), "func"))
+      }
+    }
+  #+end_src
+
+  需要注意，基于反射的代码通常比正常的代码运行速度慢一到两个数量级，对于性能要求较高的场景应该考虑使用其他方式替代。
+
+  可以参考：
+  + [[https://books.studygolang.com/gopl-zh/ch12/ch12.html][反射 · Go语言圣经]]
+
+* 底层编程
+  Go 语言的实现刻意隐藏了很多底层细节，使用 unsafe 包可以在一定程度上摆脱 Go 语言规则带来的限制。这个包是采用特殊方式实现的包。虽然它可以和普通包一样的导入和使用，
+  但它实际上是由编译器实现的。它提供了一些访问语言内部特性的方法，特别是内存布局相关的细节。
+
+  可以通过 Sizeof、Alignof 和 Offsetof 获取类型大小、对齐倍数和偏移量等信息，这在使用指针操作值的时候是很有用的：
+  #+begin_src go
+    var x struct {
+      a bool
+      b int16
+      c []int
+    }
+
+    // 32 bit os
+    // Sizeof(x)   = 16  Alignof(x)   = 4
+    // Sizeof(x.a) = 1   Alignof(x.a) = 1 Offsetof(x.a) = 0
+    // Sizeof(x.b) = 2   Alignof(x.b) = 2 Offsetof(x.b) = 2
+    // Sizeof(x.c) = 12  Alignof(x.c) = 4 Offsetof(x.c) = 4
+
+    // 64 bit os
+    // Sizeof(x)   = 32  Alignof(x)   = 8
+    // Sizeof(x.a) = 1   Alignof(x.a) = 1 Offsetof(x.a) = 0
+    // Sizeof(x.b) = 2   Alignof(x.b) = 2 Offsetof(x.b) = 2
+    // Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
+  #+end_src
+
+  而 Pointer 就更加爽了，可以包含任意类型变量的地址，然后通过其他方式来操作。
 
