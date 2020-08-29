@@ -4,7 +4,6 @@
 - [[#环境变量][环境变量]]
 - [[#配置代理][配置代理]]
 - [[#依赖管理][依赖管理]]
-- [[#footnotes][Footnotes]]
 
 * 环境变量
   Go 环境变量可以通过配置系统环境变量的方式配置，但是在 ~Go version >= 1.13~ 时可以通过 =go env -w= 命令设置：
@@ -30,33 +29,53 @@
   + [[https://shockerli.net/post/go-get-golang-org-x-solution/][一键解决 go get golang.org/x 包失败 - 格物]]
   
 * 依赖管理
-  Go 的依赖管理经历了很崎岖的一路，我的运气很好，在其比较成熟以后才开始学习 Go 语言。
+  Go 作为现代编程语言，是自带依赖管理功能的，但是，这个功能在历史上存在多次变动，带来了额外的理解学习成本。
 
-  Go 的依赖管理大概可以分为：
-  + =GOPATH= 模式，使用 =GOPATH= 模式时，每个 =GOPATH= 都是一个工作区，下载的依赖默认为目标依赖 =master= 分支的最新提交，不能存在多个版本，
-    项目可能也需要放在 =GOPATH= 下[fn:1]
+  首先需要了解一下最初的两种依赖管理方式带来的影响：
+  1. 基于 GOPATH 的依赖管理模式，要求项目和依赖都在 GOPATH 下，通过类似命名空间的方式隔离，这样的管理方式存在很多问题，比如，依赖不能存在多个版本，
+     这使得不同项目无法使用不同版本的依赖。
 
-    这时，可以通过手动下载不同版本的依赖放在不同的 =GOPATH= 下使用，但还是很麻烦
+     带来的影响：虽然现在项目可以不在 GOPATH 下，但是很多项目往往还是会在 GOPATH 下开发，而且 GOPATH 这个环境变量依然发挥着作用，
+     下载的依赖现在也还保存在 GOPATH 下。
 
-  + =GOPATH= + =vender= 模式，此时，Go 支持将依赖放置于 =vender= 目录中，优先在该目录下寻找依赖，但仍然需要手动下载，因此，
-    出现了一些工具来解决这一问题，但还是很麻烦
+  2. 基于 vendor 目录的依赖管理模式，这是 Go 1.5 引入的模式，当 Go 工具发现存在 vendor 目录时，就会优先使用 vendor 目录中的依赖编译测试。
+     这在一定程度上解决了依赖的版本问题。
 
-  + =Go Module= 模式，当前较为成熟的依赖管理模式，这时一般可以将项目放置于 =GOPATH= 外，依赖可以指定版本，默认存放位置为 =GOPATH/pkg= 文件夹，
-    比较接近 =Maven= 的模式了
+     带来的影响：现在一些使用 go mod 的项目依然存在 vendor 目录，Go 工具也同样还识别该目录，go mod 也提供了 vendor 这个子命令。
+     
+  而在 Go 1.11 后引入的 Go Module 则是现在官方支持的依赖管理模式，在经过几个版本的迭代后，这种管理方式也完善了很多：
+  1. 通过 go mod init 初始化项目，如果是基于旧的依赖管理模式的项目，那么会自动转换
+  2. 通过 go mod download 下载依赖
+  3. 命令 go build、go get 甚至 go list 都能识别 go.mod 并进行更新
+  4. 通过 go mod vendor 将依赖拷贝到 vendor 目录
+  5. ……
 
-  现在，Go 寻找依赖的顺序为：
-  1. 当前包下的 =vendor= 目录
-  2. 向上级目录查找，直到找到 =vendor= 目录
-  3. 在 =GOROOT= 目录下查找
-  4. 在 =GOPATH= 下面查找依赖包
+  命令使用：
+  #+begin_src sh
+    # 下载依赖，但不会更新
+    $ go get
 
-  总的来说，Go 现在的依赖管理方式还是比较方便了，同时通过 =URL= 来获取依赖可以避免中心化，通过 =vender= 也可以固化依赖。
+    # 更新所有依赖
+    $ go get -u
 
-  参考：
-  + [[https://golang.org/doc/gopath_code.html][How to Write Go Code (with GOPATH) - The Go Programming Language]]
-  + [[https://golang.org/doc/code.html][How to Write Go Code - The Go Programming Language]]
+    # 更新指定依赖及其依赖
+    $ get get -u full_package_name
 
-* Footnotes
+    # 获取依赖的指定版本
+    $ go get package@version
 
-[fn:1] 在 =Go 1.14= 下使用 =GOPATH= 模式时，项目在 =GOPATH= 外面好像能够正常编译，就是不知道其他工具是什么情况 
+    # 下载依赖
+    $ go mod download
+
+    # 移除无用依赖
+    $ go mod tidy
+
+    # 复制依赖到 vendor 目录
+    $ go mod vendor
+
+    # 判断为什么依赖
+    $ go mod why
+  #+end_src
+
+  另外需要注意，Go 1.13 后使用 go get 命令下载依赖时会到特定位置下载和效验，这时，应该将私有库前缀放在 GOPRIVATE 环境变量里面。
 

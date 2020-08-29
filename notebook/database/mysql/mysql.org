@@ -20,6 +20,7 @@
   - [[#通过-sql-语句获取-mysql-的版本][通过 SQL 语句获取 MySQL 的版本]]
   - [[#mysql-中实用的时间函数][MySQL 中实用的时间函数]]
   - [[#按列打印查询结果][按列打印查询结果]]
+  - [[#根据相对时间进行查询][根据相对时间进行查询]]
 
 * Install
   目前来说，有一些 Linux 发行版已经将 MySQL 换成了 MariaDB，安装方式也就变成了：
@@ -303,4 +304,13 @@
    #+begin_src sql
      select * from tbl_name \G;
    #+end_src
+
+** 根据相对时间进行查询 
+   距离现在相差超过 90 天的数据：
+   #+begin_src sql
+     SELECT * FROM tbl_name WHERE tbl_field <= (NOW() - INTERVAL 90 DAY)
+   #+end_src
+   
+   参考：
+   + [[https://stackoverflow.com/questions/3906361/mysql-query-date-90-days][php - Mysql Query date >= 90 days - Stack Overflow]]
 

@@ -23,6 +23,7 @@
 - [[#并发控制][并发控制]]
 - [[#反射][反射]]
 - [[#底层编程][底层编程]]
+- [[#相关链接][相关链接]]
 
 * Go 语言起源
   Go 语言的设计主要受到 CSP、Pascal 和 C 三个分支的影响，其中，CSP 只是一个用于描述并发性基本概念的描述语言，
@@ -798,7 +799,7 @@
      结构体底层类型由结构体字段的顺序、名称、类型和所在的包确定：
      #+begin_quote
      Two struct types are identical if they have the same sequence of fields, and if corresponding fields have the same names, and identical types, and identical tags.
-     Non-exported field names from different packages are always different.
+     Non-exported field names from different packages are always different.([[https://golang.org/ref/spec#Struct_types][Type identity ¶]])
      #+end_quote
 
      通常的声明方式为：
@@ -879,6 +880,9 @@
        p := &Vertex{1, 2}
        p.X = 100
      #+end_src
+
+     相关：
+     + [[file:trick.org::* 类型转换][☞ Go Trick::类型转换]]
      
 ** 引用类型
    Go 语言中的引用和 Java 一样，更接近 C/C++ 中的指针，而不是 C++ 式的引用，引用类型的默认值为 nil，同时很多在 nil 上的操作都不会导致 NPE 的发生。
@@ -1302,6 +1306,25 @@
 
   和其他语言不同，Go 语言中封装的最小单位是包，而且是通过名称首字母大小写来控制的。
 
+  -----
+
+  需要注意的一件事，当 reciver 是值的时候，传递过来的也就只有值，直接在这个值上的改动是 *不能* 反馈到原对象上的。
+
+  -----
+
+  需要注意的另一件事，Go 中结构体和 Java 中的对象是不一样的（写习惯了 Java 在这一点上容易被坑），在 Java 中，新创建一个对象的时候会分配新的内存，
+  但是在 Go 中，执行 Type{} 不一定会分配内存：
+  #+begin_src go
+    type User struct {
+      name string
+    }
+
+    func main() {
+      user := User{name: "name"}  // 为 user 分配内存
+      user = User{}               // 不会为 user 分配新的内存，只是用 User{} 的值覆盖原内存的值
+    }
+  #+end_src
+
 * 接口
   Go 语言中接口类型的独特之处在于它是满足隐式实现的。也就是说，我们没有必要对于给定的具体类型定义所有满足的接口类型，
   简单地拥有一些必需的方法就足够了。
@@ -1715,4 +1738,8 @@
   #+end_src
 
   而 Pointer 就更加爽了，可以包含任意类型变量的地址，然后通过其他方式来操作。
+
+* 相关链接
+  + [[https://tour.golang.org/welcome/1][A Tour of Go]]
+  + [[https://books.studygolang.com/gopl-zh/][Go 语言圣经]]
 

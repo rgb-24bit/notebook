@@ -1,0 +1,41 @@
+#+TITLE:      Go Trick
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#类型转换][类型转换]]
+- [[#uintptr--unsafepointer][uintptr & unsafe.Pointer]]
+
+* 类型转换
+  当两个结构体忽略 tag 后拥有相同的底层类型，那么就可以进行显示类型转换：
+  #+begin_quote
+  A non-constant value x can be converted to type T in any of these cases:
+  + ignoring struct tags (see below), x's type and T have identical underlying types.
+  + ignoring struct tags (see below), x's type and T are pointer types that are not defined types, and their pointer base types have identical underlying types.
+  #+end_quote
+
+  参考：
+  + [[https://golang.org/ref/spec#Conversions][Conversions ¶]]
+    
+* uintptr & unsafe.Pointer
+  Go 中的指针是不支持指针偏移运算的，也就是说，指针的值要么是固定的，要么通过取址操作给它一个新值。
+
+  但是，我们可以通过将指针转换为 uintptr 来绕过这一限制。
+
+  uintptr 是 Go 的内置类型，是能存储指针的整型，能够进行整数运算，此时，通过搭配 unsafe.Offsetof 我们就可以得到结构体某个字段的偏移地址，然后进行操作：
+  #+begin_src go
+    pb := (*int16)(unsafe.Pointer(uintptr(unsafe.Pointer(&x)) + unsafe.Offsetof(x.b)))
+  #+end_src
+
+  这里需要注意的是，不要试图引入一个 uintptr 类型的临时变量，因为有时候垃圾回收器会移动一些变量以降低内存碎片等问题。
+
+  当一个变量被移动，所有的保存改变量旧地址的指针必须同时被更新为变量移动后的新地址。从垃圾收集器的视角来看，一个 unsafe.Pointer 是一个指向变量的指针，
+  因此当变量被移动是对应的指针也必须被更新；但是 uintptr 类型的临时变量只是一个普通的数字，所以其值不应该被改变。
+
+  也就是说，下面的代码存在安全隐患：
+  #+begin_src go
+    tmp := uintptr(unsafe.Pointer(&x)) + unsafe.Offsetof(x.b)
+    pb := (*int16)(unsafe.Pointer(tmp))
+  #+end_src
+
+  参考：
+  + [[https://www.cnblogs.com/sunsky303/p/11820500.html][你不知道的 Go unsafe.Pointer uintptr 原理和玩法 - sunsky303 - 博客园]]
+

@@ -1,0 +1,29 @@
+#+TITLE:      Go 标准库
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#atmoic][atmoic]]
+- [[#expvar][expvar]]
+- [[#runtime][runtime]]
+
+* atmoic
+  在并发场景下，如果能够使用原子操作替代互斥锁，那么，往往能够在保证并发安全的同时得到更好的性能表现。
+
+  Go 中通过标准库 =atmoic= 提供了常用的原子操作，比较特别的是针对指针的 LoadPointer/StorePointer 和类型无关的 atmoic.Value。
+
+  使用 unsafe.Pointer 和 LoadPointer/StorePointer，可以加载或存储指向任意变量的指针，利用指针的强大特性，可以做到很多有趣的事情。
+
+  而 atmoic.Value 则允许我们对任意类型的变量进行原子的 Load/Store 操作，这也是很有用的。
+
+  参考：
+  + [[https://studygolang.com/articles/3557][Go 语言 atomic 原子操作 - Go语言中文网 - Golang中文社区]]
+  + [[https://blog.betacat.io/post/golang-atomic-value-exploration/][Go 语言标准库中 atomic.Value 的前世今生 - 喵叔没话说]]
+
+* expvar
+  + [[https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter13/13.3.html][expvar - 公共变量的标准化接口 · Go语言标准库]]
+
+* runtime
+  runtime 包提供和 go 运行时环境的互操作，比如通过 runtime.Caller 来获取调用栈，打印行号、方法。
+
+  参考：
+  + [[https://studygolang.com/articles/28981][Go 日志，打印源码文件名和行号造成的性能开销 - Go语言中文网 - Golang中文社区]]
+

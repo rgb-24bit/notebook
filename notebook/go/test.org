@@ -1,0 +1,55 @@
+#+TITLE:      Go Test
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#gotestsum][gotestsum]]
+- [[#monkey][Monkey]]
+- [[#相关问题][相关问题]]
+  - [[#使用-go-test-测试所有包][使用 go test 测试所有包]]
+
+* gotestsum
+  #+begin_quote
+  gotestsum runs tests using go test --json, prints friendly test output and a summary of the test run. It is designed for both local development, and running tests in a CI system.
+  #+end_quote
+
+  + [[https://github.com/gotestyourself/gotestsum][GitHub - gotestyourself/gotestsum: 'go test' runner with output optimized for humans, JUnit XML for CI integration, and a summary of the test results.]]
+
+* Monkey
+  函数/过程打桩：
+  #+begin_src go
+    guard := monkey.Patch(function, func(...) (...) {
+      // ...
+    })
+    defer guard.Unpatch()
+  #+end_src
+
+  方法打桩：
+  #+begin_src go
+    type Etcd struct {
+
+    }
+
+    func (e *Etcd) Get(id string) []string {
+      names := make([]string, 0)
+      // ...
+      return names
+    }
+
+    var e *Etcd
+    guard := PatchInstanceMethod(reflect.TypeOf(e), "Get", func(_ string) []string {
+      return []string{"LiLei", "HanMeiMei", "ZhangMing"}
+    })
+    defer guard.Unpatch()
+  #+end_src
+
+  + [[https://studygolang.com/articles/11296][Monkey框架使用指南 - Go语言中文网 - Golang中文社区]]
+  
+* 相关问题
+** 使用 go test 测试所有包
+   #+begin_src sh
+     go test -cover -coverprofile=profile.cov ./...
+     go tool cover -func profile.cov
+   #+end_src
+  
+   参考：
+   + [[https://stackoverflow.com/questions/16353016/how-to-go-test-all-tests-in-my-project][testing - How to `go test` all tests in my project? - Stack Overflow]]
+

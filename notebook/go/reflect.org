@@ -1,0 +1,47 @@
+#+TITLE:      Go Reflect
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#三大法则][三大法则]]
+- [[#go-tag][Go Tag]]
+- [[#理解][理解]]
+
+* 三大法则
+  1. 从 interface{} 变量可以反射出反射对象
+     #+HTML: <img src="https://img.draveness.me/golang-interface-to-reflection.png">
+  2. 从反射对象可以获取 interface{} 变量
+     #+HTML: <img src="https://img.draveness.me/golang-reflection-to-interface.png">
+     
+     获取到 interface{} 变量后通过进一步的类型断言获得原始类型的值：
+     #+HTML: <img src="https://img.draveness.me/golang-bidirectional-reflection.png">
+  3. 要修改反射对象，其值必须可设置，简单来说就是要求值为引用类型，对于普通的结构体来说要用指针
+     #+begin_src go
+       reflect.Value.Elem().Set()
+     #+end_src
+     
+  参考：
+  + [[https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/#431-%E4%B8%89%E5%A4%A7%E6%B3%95%E5%88%99][Go 语言反射的实现原理 | Go 语言设计与实现]]
+
+* Go Tag
+  Go 中有一个名为 Tag 的语法，以 key:"value" 这种键值对的形式存在，如果有多个键值对，则以空格分隔：
+  #+begin_src go
+    type User struct {
+      Name string `json:"name" xml:"name"`
+      Age  int8   `json:"age"`
+    }
+  #+end_src
+
+  其中，我们可以通过 reflect 得到字段对应的 StructTag，然后通过 Get 方法获取对应键的值。
+  
+  #+begin_src go
+    t := reflect.TypeOf(XXX)
+    for i := 0; i < t.NumField(); i++ {
+      tag := t.Field(i).Tag
+      fmt.Println(tag.Get("key"))
+    }
+  #+end_src
+
+* 理解
+  + 无论是 Java 还是 Go，反射的两个基本要素都是类型和值（实例），这在 Java 中是 Class 和 Instance，在 Go 中，则是 Type 和 Value
+  + Go 中反射的实现利用了 interface{} 底层持有 (type, value) 元组的特性
+  + 反射中的很多操作都是在通过代码模仿语法
+

@@ -6,6 +6,7 @@
 - [[#git-merge-strategy][git merge strategy]]
 - [[#使用不同的配置][使用不同的配置]]
 - [[#workflow][workflow]]
+- [[#合并多个-commit-为一个][合并多个 commit 为一个]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
@@ -50,4 +51,13 @@
 
 * workflow
   + [[http://www.ruanyifeng.com/blog/2015/12/git-workflow.html][Git 工作流程 - 阮一峰的网络日志]]
+
+* 合并多个 commit 为一个
+  #+begin_example
+    1. git rebase/merge master
+    2. git co master
+    3. git diff <branch> | git apply
+  #+end_example
+  
+  包含二进制文件时可以在 diff 后添加 --binary 参数。
 

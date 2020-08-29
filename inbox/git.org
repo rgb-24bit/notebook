@@ -15,9 +15,11 @@
   push 时显示 no new changes?
   git cin
 
-
   git diff | git apply 
+
+  merge confilct -- rebase
 
 * 删除远程分支  
   + [[https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely][version control - How do I delete a Git branch locally and remotely? - Stack Overflow]]
 
+ 
