@@ -92,6 +92,11 @@
       $ git branch -vv
     #+END_EXAMPLE
 
+  + 获取包含指定 commit 的所有分支：
+    #+begin_example
+      $ git branch --contains <commit>
+    #+end_example
+
 * git push
   + 将所有分支的修改都推送到远程存储库：
     #+BEGIN_EXAMPLE

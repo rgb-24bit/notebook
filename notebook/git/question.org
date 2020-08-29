@@ -19,6 +19,8 @@
 - [[#git-命名的由来][Git 命名的由来]]
 - [[#如何在-push-的时候同时向多个远程库推送代码][如何在 push 的时候同时向多个远程库推送代码]]
 - [[#git-clone---depth-1-之后获取完整记录][git clone --depth 1 之后获取完整记录]]
+- [[#如何删除远程分支][如何删除远程分支]]
+- [[#how-do-i-check-out-a-remote-git-branch][How do I check out a remote Git branch?]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -199,4 +201,24 @@
 
     git checkout -t <remote>/<branch>
   #+end_example
+
+* 如何删除远程分支
+  #+begin_example
+    git push -d <remote_name> <branch_name>
+  #+end_example
+
+  #+begin_comment
+  果然，越简单的问题阅读量越多啊……
+  #+end_comment
+  
+  参考：
+  + [[https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely?answertab=votes#tab-top][version control - How do I delete a Git branch locally and remotely? - Stack Overflow]]
+
+* How do I check out a remote Git branch?
+  #+begin_example
+    git checkout -t <name of remote>/test
+  #+end_example
+
+  参考：
+  [[https://stackoverflow.com/a/1783426/8177747][git checkout - How do I check out a remote Git branch? - Stack Overflow]]
 

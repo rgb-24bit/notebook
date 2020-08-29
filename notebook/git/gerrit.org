@@ -1,0 +1,14 @@
+#+TITLE:      Gerrit
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关技巧][相关技巧]]
+- [[#相关问题][相关问题]]
+  - [[#如何解决-merge-confilct][如何解决 merge confilct]]
+
+* 相关技巧
+  可以使用 git diff | git apply 的方式将修改应用到当前分支，这可以解决想随手 commit 又不想提交一串 commit 的问题。
+
+* 相关问题
+** 如何解决 merge confilct
+   使用 rebase 解决就可以来，使用 merge 貌似会有新的 commit……
+

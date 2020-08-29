@@ -8,13 +8,13 @@
 - [[#property][Property]]
 - [[#misc][Misc]]
 - [[#文学编程][文学编程]]
+- [[#相关技巧][相关技巧]]
 - [[#相关问题][相关问题]]
   - [[#如何将-org-capture-捕获的内容插入当前光标位置][如何将 org-capture 捕获的内容插入当前光标位置]]
   - [[#怎样在-org-table-中计算日期][怎样在 org-table 中计算日期]]
   - [[#怎样在-org-92-中使用旧的模板引擎][怎样在 Org 9.2 中使用旧的模板引擎]]
   - [[#怎样在导出-html-使用-css-样式高亮代码][怎样在导出 HTML 使用 CSS 样式高亮代码]]
   - [[#怎样对齐文件中的所有标签][怎样对齐文件中的所有标签]]
-- [[#相关技巧][相关技巧]]
 - [[#相关链接][相关链接]]
 
 * Agenda Views
@@ -120,7 +120,18 @@
   相关链接：
   + [[https://www.gnu.org/software/emacs/manual/html_node/org/Specific-header-arguments.html#Specific-header-arguments][Specific header arguments - The Org Manual]]
   
+* 相关技巧
+  + 在 org 文件中，通过 C-c l 生成当前 headline 的链接并保存，可以通过 C-c C-l 粘贴
+
 * 相关问题
+  使用 expand-region 时可能遇到的问题：Symbol’s function definition is void: org-outline-overlay-data，原因大概是：
+  #+begin_quote
+  The problem is that expand-region is byte-compiled with the built-in org, but then the org layer installs a newer version from ELPA which has changed the definition of the org-save-outline-visibility macro, leading to the symbol error.
+  #+end_quote
+
+  参考：
+  + [[https://emacs.stackexchange.com/questions/49066/need-help-with-expand-region-symbol-s-function-definition-is-void-org-outlin][org mode - Need help with `expand-region`: Symbol’s function definition is void: org-outline-overlay-data - Emacs Stack Exchange]]
+
 ** 如何将 org-capture 捕获的内容插入当前光标位置
    #+BEGIN_QUOTE
    When called with a ‘C-0’ (zero) prefix, insert a template at point.
@@ -152,9 +163,6 @@
 
 ** 怎样对齐文件中的所有标签
    通过快捷键 ~C-u C-c C-q~ 可以很方便的完成这一工作。
-
-* 相关技巧
-  + 在 org 文件中，通过 C-c l 生成当前 headline 的链接并保存，可以通过 C-c C-l 粘贴
 
 * 相关链接
   + 教程合集：

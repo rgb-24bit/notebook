@@ -97,6 +97,7 @@
   + [Emacs - 问题集](notebook/emacs/question.org)
   + [Emacs - 正则表达式](notebook/emacs/regex.org)
   + [scimax](notebook/emacs/scimax.org)
+  + [Emacs Site Lisp](notebook/emacs/site-lisp.org)
   + [Spacemacs](notebook/emacs/spacemacs.org)
   + [使用技巧](notebook/emacs/trick.org)
   + [Emacs - 实用功能](notebook/emacs/utils.org)
@@ -121,6 +122,7 @@
   + [前端相关技术了解](notebook/front-end/technology.org)
 ## git
   + [Git Command](notebook/git/command.org)
+  + [Gerrit](notebook/git/gerrit.org)
   + [Git - Github](notebook/git/github.org)
   + [Git 内部原理](notebook/git/principle.org)
   + [Git 问题集](notebook/git/question.org)
@@ -130,7 +132,11 @@
   + [Go Development](notebook/go/dev.org)
   + [GoLang](notebook/go/go.org)
   + [相关问题](notebook/go/question.org)
+  + [Go Reflect](notebook/go/reflect.org)
+  + [Go 标准库](notebook/go/stdlib.org)
+  + [Go Test](notebook/go/test.org)
   + [Go Toolkit](notebook/go/toolkit.org)
+  + [Go Trick](notebook/go/trick.org)
 ## java
   + **concurrent**
     + [Java Fork/Join 框架](notebook/java/concurrent/fork-join.org)
@@ -224,6 +230,7 @@
   + [远程过程调用](notebook/microservice/rpc.org)
   + [服务发现](notebook/microservice/service-discovery.org)
 ## misc
+  + [异步编程](notebook/misc/async.org)
   + [字符编码](notebook/misc/character-encoding.org)
   + [计算机图形学](notebook/misc/computer-graphics.org)
   + [概念了解](notebook/misc/concept.org)

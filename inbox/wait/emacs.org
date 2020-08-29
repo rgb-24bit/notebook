@@ -1,0 +1,22 @@
+* solarized
+  + [[https://github.com/sellout/emacs-color-theme-solarized/blob/master/solarized-definitions.el][emacs-color-theme-solarized/solarized-definitions.el at master · sellout/emacs-color-theme-solarized]]
+  + [[https://github.com/bbatsov/solarized-emacs][bbatsov/solarized-emacs: The Solarized colour theme, ported to Emacs.]]
+  + [[https://github.com/purcell/color-theme-sanityinc-solarized/blob/master/color-theme-sanityinc-solarized.el][color-theme-sanityinc-solarized/color-theme-sanityinc-solarized.el at master · purcell/color-theme-sanityinc-solarized]]
+  + [[https://github.com/altercation/solarized][altercation/solarized: precision color scheme for multiple applications (terminal, vim, etc.) with both dark/light modes]]
+
+  配置问题：
+  + [[https://github.com/purcell/color-theme-sanityinc-solarized/commit/d4cfd08e54b34b2e3e2d34747b82c3490744e16b][Change interface colour selection to more closely match tomorrow themes · purcell/color-theme-sanityinc-solarized@d4cfd08]]
+  + [[https://emacs.stackexchange.com/questions/38888/howto-include-a-local-theme-in-spacemacs][Howto include a local theme in spacemacs - Emacs Stack Exchange]]
+
+  颜色好像都是一样的，就是配置有点区别。
+
+* LSP & DAP
+* hydra
+  + [[https://github.com/abo-abo/hydra][abo-abo/hydra: make Emacs bindings that stick around]]
+    #+begin_src elisp
+      (defhydra hydra-cursor-move (global-map "<f2>")
+        "Simple cursor move by hydra."
+        ("n" next-line "next-line"))
+    #+end_src
+
+

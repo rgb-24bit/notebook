@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#layer-配置][Layer 配置]]
+- [[#shell][Shell]]
 
 * Layer 配置
   Spacemacs 中 layer 支持很懂配置，除了常用的一些变量配置以外，还支持：
@@ -33,4 +34,7 @@
                     '(auto-completion
                       (spacemacs-ui-visual :packages treemacs fancy-battery))))
   #+end_src
+
+* Shell
+  使用 vterm 的时候，可以通过 C-u number prefix M-' 的形式打开多个 vterm 实例。
 

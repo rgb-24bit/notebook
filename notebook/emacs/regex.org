@@ -4,7 +4,9 @@
 - [[#regular-expression-syntax][Regular Expression Syntax]]
 - [[#idiosyncrasies-of-emacs-regular-expressions][Idiosyncrasies of Emacs Regular Expressions]]
 - [[#replace-regexp-with-lisp-expressions][Replace Regexp With Lisp Expressions]]
-- [[#环视][环视]]
+- [[#query-replace][Query Replace]]
+- [[#re-builder][re-builder]]
+- [[#lookaround][Lookaround]]
 - [[#tips][Tips]]
 
 * Regular Expression Syntax
@@ -85,7 +87,16 @@
 
   其中， ~,(capitalize \1)~ 会执行 ~(capitalize)~ 来替换字符串。
 
-* 环视
+* Query Replace
+  在 Emacs 中使用 Query Replace 的时候，可以通过 =M-n/p= 选择之前使用过的匹配模式，顺序为：
+  #+begin_example
+    (from -> to) (from -> to) to from to from
+  #+end_example
+
+* re-builder
+  可以使用 re-builder 来构建正则表达式
+
+* Lookaround
   环视只进行子表达式的匹配，不占有字符，匹配到的内容不保存到最终的匹配结果，是零宽度的。
 
   Emacs 不支持这一特性。

@@ -298,7 +298,31 @@
      :key-1
    #+END_SRC
 
-   可以通 ~keywordp~ 判断一个符号是否是关键字：
+   可以通过 ~keywordp~ 判断一个符号是否是关键字：
    #+BEGIN_SRC elisp
      (keywordp :key-1)  ; => t
    #+END_SRC
+
+   当然，常用的方式是将它们作为关键字参数使用，可以使用 cl-lib 来实现，但也可以使用 plist 来实现：
+   #+begin_src elisp
+     (defun print-name (&rest args)
+       (let ((first (plist-get args :first))
+             (last (or (plist-get args :last) "?")))
+         (princ last)
+         (when first
+           (princ ", ")
+           (princ first))))
+
+     ;; > (print-name)
+     ;; ?
+     ;; > (print-name :first "John")
+     ;; ?, John
+     ;; > (print-name :last "Doe")
+     ;; Doe
+     ;; > (print-name :first "John" :last "Doe")
+     ;; Doe, John
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/26102889/how-do-i-make-named-arguments-in-elisp][emacs - How do I make named arguments in ELisp? - Stack Overflow]]
+
