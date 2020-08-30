@@ -2,10 +2,14 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#命名管道][命名管道]]
+- [[#重设网络环境][重设网络环境]]
 
 * 命名管道
   Windows 命名管道是一种 Windows 上进程间的一种通信方式，屏蔽了底层的网络协议细节。
   
   参考：
   + [[https://www.cnblogs.com/roucheng/p/windowsguandao.html][Windows 进程间通信—命名管道 - roucheng - 博客园]]
+
+* 重设网络环境
+  netsh winsock reset，上不了网的时候可以试一下
 

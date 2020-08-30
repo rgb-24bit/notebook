@@ -20,3 +20,7 @@
     #+end_src
 
 
+* major mode
+  + [[http://www.wilfred.me.uk/blog/2015/03/19/adding-a-new-language-to-emacs/][Adding A New Language to Emacs – Wilfred Hughes::Blog]]
+  + [[http://ergoemacs.org/emacs/elisp_syntax_coloring.html][How to Write a Emacs Major Mode for Syntax Coloring]]
+
