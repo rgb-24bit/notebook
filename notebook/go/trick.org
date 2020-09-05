@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#类型转换][类型转换]]
 - [[#uintptr--unsafepointer][uintptr & unsafe.Pointer]]
+- [[#short-variable-declarations][Short variable declarations]]
+- [[#匿名字段][匿名字段]]
 
 * 类型转换
   当两个结构体忽略 tag 后拥有相同的底层类型，那么就可以进行显示类型转换：
@@ -38,4 +40,13 @@
 
   参考：
   + [[https://www.cnblogs.com/sunsky303/p/11820500.html][你不知道的 Go unsafe.Pointer uintptr 原理和玩法 - sunsky303 - 博客园]]
+
+* Short variable declarations
+  在满足下列条件时，已被声明的变量 v 可出现在 := 声明中：
+  + 本次声明与已声明的 v 处于同一作用域中（若 v 已在外层作用域中声明过，则此次声明会创建一个新的变量）
+  + 在初始化中与其类型相应的值才能赋予 v，且
+  + 在此次声明中至少另有一个变量是新声明的
+
+* 匿名字段
+  我们可以利用匿名字段的特性，定义一个接口并提供默认的实现，这时，只要其他结构体包含该匿名字段，那么，它就实现了该接口。
 

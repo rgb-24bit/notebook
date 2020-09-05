@@ -1,0 +1,301 @@
+#+TITLE:      Go Style
+
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#effective-go][Effective Go]]
+  - [[#formatting][Formatting]]
+  - [[#commentary][Commentary]]
+  - [[#names][Names]]
+  - [[#control-structures][Control structures]]
+  - [[#initialization][Initialization]]
+  - [[#interfaces-and-other-types][Interfaces and other types]]
+- [[#go-code-review-comments][Go Code Review Comments]]
+  - [[#contexts][Contexts]]
+  - [[#crypto-rand][Crypto Rand]]
+  - [[#declaring-empty-slices][Declaring Empty Slices]]
+  - [[#error-strings][Error Strings]]
+  - [[#examples][Examples]]
+  - [[#goroutine-lifetimes][Goroutine Lifetimes]]
+  - [[#handle-errors][Handle Errors]]
+  - [[#imports][Imports]]
+  - [[#indent-error-flow][Indent Error Flow]]
+  - [[#initialisms][Initialisms]]
+  - [[#interfaces][Interfaces]]
+  - [[#named-result-parameters][Named Result Parameters]]
+  - [[#package-names][Package Names]]
+  - [[#receiver-names][Receiver Names]]
+  - [[#variable-names][Variable Names]]
+- [[#相关问题][相关问题]]
+  - [[#使用字面量还是使用-make-进行初始化][使用字面量还是使用 make 进行初始化？]]
+  - [[#receiver-使用-value-还是使用-pointer][receiver 使用 value 还是使用 pointer]]
+- [[#相关链接][相关链接]]
+- [[#footnotes][Footnotes]]
+
+* Effective Go
+** Formatting
+   go 中代码基本的格式化通过 gofmt 完成，这会统一缩进、空格等问题，比如：
+   + go 使用 tab 作为缩进符，这和其他语言使用空格不太一样
+   + go 也不限制单行的最大长度
+   + go 通过控制空格的方式让运算符优先级得到更直观的体现
+     #+begin_src go
+       x<<8 + y<<16
+     #+end_src
+
+** Commentary
+   godoc 可以提取紧靠 top-level 声明的注释作为该声明的文档，利用这一便利性，每个包都应包含一段包注释，即放置在包子句前的一个块注释。
+   对于包含多个文件的包，包注释只需出现在其中的任一文件中即可。[fn:1]
+
+   同时，在程序中，每个可导出（首字母大写）的名称都应该有文档注释。
+  
+   文档注释最好是完整的句子，这样它才能适应各种自动化的展示。 第一句应当以被声明的东西开头，并且是单句的摘要：
+   #+begin_src go
+     // Compile parses a regular expression and returns, if successful, a Regexp
+     // object that can be used to match against text.
+     func Compile(str string) (regexp *Regexp, err error) {
+   #+end_src
+   
+   Go 的声明语法允许成组声明。单个文档注释应介绍一组相关的常量或变量。 由于是整体声明，这种注释往往较为笼统：
+   #+begin_src go
+     // Error codes returned by failures to parse an expression.
+     var (
+       ErrInternal      = errors.New("regexp: internal error")
+       ErrUnmatchedLpar = errors.New("regexp: unmatched '('")
+       ErrUnmatchedRpar = errors.New("regexp: unmatched ')'")
+     )
+   #+end_src
+
+** Names
+   Go 中包应当以小写的单个单词来命名，且不应使用下划线或驼峰记法，同时，包应当以小写的单个单词来命名，且不应使用下划线或驼峰记法。
+
+   由于包下名称的使用方式通常为 package.XXX 这一形式，因此，包下名称就不用子以包名作为前缀了，比如使用 tcc.Get 而非 tcc.TccGet。
+
+   Go 里面不建议将 getter 命名为 GetXXX，假如有一个未导出的名称 owner，那么，getter 的命名建议为 Owner()，setter 命名为 SetOwner()。
+
+   只包含一个方法的接口应该以该方法的名称加上 - er 后缀来命名，比如 Reader、Writer、 Formatter、CloseNotifier 等。
+
+   最后，Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式来对多单词名称进行命名。
+
+** Control structures
+   Go 里面 if、for 的语法还是很不错的，但是，go 的错误处理风格使得它们使用起来很难受，又臭又长：
+   #+begin_src go
+     f, err := os.Open(name)
+     if err != nil {
+       return err
+     }
+     d, err := f.Stat()
+     if err != nil {
+       f.Close()
+       return err
+     }
+     codeUsing(f, d)
+   #+end_src
+   
+   但是 Go 的 switch 语句很好用，以将 if-else-if-else 链写成一个 switch：
+   #+begin_src go
+     func unhex(c byte) byte {
+       switch {
+       case '0' <= c && c <= '9':
+         return c - '0'
+       case 'a' <= c && c <= 'f':
+         return c - 'a' + 10
+       case 'A' <= c && c <= 'F':
+         return c - 'A' + 10
+       }
+       return 0
+     }
+   #+end_src
+   
+   switch 并不会自动下溯，但 case 可通过逗号分隔来列举相同的处理条件：
+   #+begin_src go
+     func shouldEscape(c byte) bool {
+       switch c {
+       case ' ', '?', '&', '=', '#', '+', '%':
+         return true
+       }
+       return false
+     }
+   #+end_src
+   
+** Initialization
+   Go 中的常量就是不变量。它们在 *编译时* 创建，即便它们可能是函数中定义的局部变量。常量只能是数字、字符、字符串或布尔值。由于编译时的限制，定义它们的表达式必须也是可被编译器求值的常量表达式。
+   
+   最后，每个源文件都可以通过定义自己的无参数 init 函数来设置一些必要的状态。而它的结束就意味着初始化结束：只有该包中的所有变量声明都通过它们的初始化器求值后 init 才会被调用，
+   而那些 init 只有在所有已导入的包都被初始化后才会被求值。
+   
+   简单来说就是这张图：
+   #+HTML: <img src="https://astaxie.gitbooks.io/build-web-application-with-golang/en/images/2.3.init.png?raw=true">
+   
+** Interfaces and other types
+   若某种现有的类型仅实现了一个接口，且除此之外并无可导出的方法，则该类型本身就无需导出。在这种情况下，构造函数应当返回一个接口值而非实现的类型。
+
+   思考：反之，是不是就应该返回具体的类型呢？即使是未导出的类型？   
+
+   [[*Interfaces][☞ Interfaces]]
+
+* Go Code Review Comments
+** Contexts
+   不要将 Context 成员添加到某个 struct 类型中，而是将 ctx 参数添加到该类型的方法上。一个例外情况是当前方法签名必须与标准库或第三方库中的接口方法匹配。
+
+** Crypto Rand
+   不要使用包 math/rand 来生成密钥，即使是一次性密钥。在没有种子的情况下，生成器是完全可以被预测的。使用 time.Nanoseconds() 作为种子值，熵只有几位。请使用 crypto/rand 的 Reader 作为替代，
+   如果你倾向于使用文本，请输出成十六进制或 base64 编码：
+   #+begin_src go
+     import (
+         "crypto/rand"
+         // "encoding/base64"
+         // "encoding/hex"
+         "fmt"
+     )
+     func Key() string {
+         buf := make([]byte, 16)
+         _, err := rand.Read(buf)
+         if err != nil {
+             panic(err)  // out of randomness, should never happen
+         }
+         return fmt.Sprintf("%x", buf)
+         // or hex.EncodeToString(buf)
+         // or base64.StdEncoding.EncodeToString(buf)
+     }
+   #+end_src
+
+** Declaring Empty Slices
+   当声明一个空 slice 时，倾向于用：
+   #+begin_src go
+     var t []string
+   #+end_src
+
+   代替：
+   #+begin_src go
+     t := []string{}
+   #+end_src
+
+** Error Strings
+   错误信息字符串不应大写（除非以专有名词或首字母缩略词开头）或以标点符号结尾，因为它们通常是在其他上下文后打印的。即使用 fmt.Errorf("something bad") 而不要使用 fmt.Errorf("Something bad")，
+   因此 log.Printf("Reading %s: %v", filename, err) 的格式中将不会出现额外的大写字母。否则这将不适用于日志记录，因为它是隐式的面向行，而不是在其他消息中组合。
+
+   注：针对的是 error.Error() 返回值而非日志，日志该大写还是大写。
+
+** Examples
+   添加新包时，请包含预期用法的示例：可运行的示例，或是演示完整调用链的简单测试。
+   
+   参考：
+   + [[https://blog.golang.org/examples][Testable Examples in Go - The Go Blog]]
+
+** Goroutine Lifetimes
+   当你生成 goroutines 时，要清楚它们何时或是否会退出。
+
+   尽量让并发代码足够简单，从而更容易地确认 goroutine 的生命周期。如果这不可行，请记录 goroutines 退出的时间和原因。
+
+** Handle Errors
+   不要使用 _ 变量丢弃 error。如果函数返回 error，请检查它以确保函数成功。处理 error，返回 error，或者在真正特殊的情况下使用 panic。
+
+** Imports
+   如果发生命名冲突，则更倾向于重命名最接近本地的包或特定于项目的包。
+
+   包导入按组进行组织，组与组之间有空行。标准库包始终位于第一组中。
+
+   可以使用用 goimports 工具。
+
+** Indent Error Flow
+   尝试将正常的代码路径保持在最小的缩进处，优先处理错误并缩进。通过允许快速可视化扫描正常路径来提高代码的可读性。例如，不要写：
+   #+begin_src go
+     if err != nil {
+         // error handling
+     } else {
+         // normal code
+     }
+   #+end_src
+
+   相反，书写以下代码：
+   #+begin_src go
+     if err != nil {
+         // error handling
+         return // or continue, etc.
+     }
+     // normal code
+   #+end_src
+
+   如果 if 语句具有初始化语句，例如：
+   #+begin_src go
+     if x, err := f(); err != nil {
+         // error handling
+         return
+     } else {
+         // use x
+     }
+   #+end_src
+
+   那么这可能需要将短变量声明移动到新行：
+   #+begin_src go
+     x, err := f()
+     if err != nil {
+         // error handling
+         return
+     }
+     // use x
+   #+end_src
+
+** Initialisms
+   名称中的单词是首字母或首字母缩略词（例如 “URL” 或 “NATO” ）需要具有相同的大小写规则。例如，“URL” 应显示为 “URL” 或 “url” （如 “urlPony” 或 “URLPony” ），而不是 “Url”。
+   举个例子：ServeHTTP 不是 ServeHttp。对于具有多个初始化 “单词” 的标识符，也应当显示为 “xmlHTTPRequest” 或 “XMLHTTPRequest”。
+
+   当 “ID” 是 “identifier” 的缩写时，此规则也适用于 “ID” ，因此请写 “appID” 而不是“appId”。
+
+   由协议缓冲区编译器生成的代码不受此规则的约束。人工编写的代码比机器编写的代码要保持更高的标准。
+
+** Interfaces
+   Go 接口通常属于使用 interface 类型值的包，而不是实现这些值的包。实现包应返回具体（通常是指针或结构）类型：这样一来可以将新方法添加到实现中，而无需进行大量重构。
+
+   [[*Interfaces and other types][☞ Interfaces and other types]]   
+
+** Named Result Parameters
+   1. 不要仅仅为了避免在函数内做结果参数的声明而命名结果参数
+   2. 如果函数行数较少，那么非命名结果参数是可以的
+   3. 一旦它是一个中等规模的函数，请明确返回值
+   4. 在某些情况下，您需要命名结果参数，以便在延迟闭包中更改它，这也是可以的
+
+** Package Names
+   包中名称的所有引用都将使用包名完成，因此您可以从标识符中省略该名称。例如，如果有一个 chubby 包，你不应该定义类型名称为 ChubbyFile ，否则使用者将写为 chubby.ChubbyFile。
+   而是应该命名类型名称为 File，使用时将写为 chubby.File。
+
+** Receiver Names
+   方法接收者的名称应该反映其身份。通常，其类型的一个或两个字母缩写就足够了。不要使用通用名称，例如 “this”或“self”，这是面向对象语言的典型标识符，它们更强调方法而不是函数。
+   名称不必像方法论证那样具有描述性，因为它的作用是显而易见的，不起任何记录目的。名称可以非常短，因为它几乎出现在每种类型的每个方法的每一行上。
+   使用上也要保持一致：如果你在一个方法中叫将接收器命名为 “c”，那么在其他方法中不要把它命名为 “cl”。
+
+** Variable Names
+   Go 中的变量名称应该短而不是长。对于范围域中的局部变量尤其如此。
+
+   基本规则：范围域中，越晚使用的变量，名称必须越具有描述性。对于方法接收器，一个或两个字母就足够了。诸如循环索引和读取器（Reader）之类的公共变量可以是单个字母（i，r）。
+   更多不寻常的事物和全局变量则需要更具描述性的名称。
+
+* 相关问题
+** 使用字面量还是使用 make 进行初始化？
+   随便，没有硬性要求。
+
+** receiver 使用 value 还是使用 pointer
+   The Code Review comment can help:
+   #+begin_quote
+   + If the receiver is a map, func or chan, don't use a pointer to it.
+   + If the receiver is a slice and the method doesn't reslice or reallocate the slice, don't use a pointer to it.
+   + If the method needs to mutate the receiver, the receiver must be a pointer.
+   + If the receiver is a struct that contains a sync.Mutex or similar synchronizing field, the receiver must be a pointer to avoid copying.
+   + If the receiver is a large struct or array, a pointer receiver is more efficient. How large is large? Assume it's equivalent to passing all its elements as arguments to the method. If that feels too large, it's also too large for the receiver.
+   + Can function or methods, either concurrently or when called from this method, be mutating the receiver? A value type creates a copy of the receiver when the method is invoked, so outside updates will not be applied to this receiver. If changes must be visible in the original receiver, the receiver must be a pointer.
+   + If the receiver is a struct, array or slice and any of its elements is a pointer to something that might be mutating, prefer a pointer receiver, as it will make the intention more clear to the reader.
+   + If the receiver is a small array or struct that is naturally a value type (for instance, something like the time.Time type), with no mutable fields and no pointers, or is just a simple basic type such as int or string, a value receiver makes sense.
+   + A value receiver can reduce the amount of garbage that can be generated; if a value is passed to a value method, an on-stack copy can be used instead of allocating on the heap. (The compiler tries to be smart about avoiding this allocation, but it can't always succeed.) Don't choose a value receiver type for this reason without profiling first.
+   + Finally, when in doubt, use a pointer receiver.
+   #+end_quote
+  
+   参考：
+   + [[https://stackoverflow.com/questions/27775376/value-receiver-vs-pointer-receiver][function - Value receiver vs. pointer receiver - Stack Overflow]]
+     
+* 相关链接
+  + [[https://github.com/bingohuang/effective-go-zh-en][GitHub - bingohuang/effective-go-zh-en: 《Effective Go》中英双语版]]
+  + [[https://golang.org/doc/effective_go.html][Effective Go - The Go Programming Language]]
+
+* Footnotes
+
+[fn:1] 比如使用 doc.go 作为包注释
+

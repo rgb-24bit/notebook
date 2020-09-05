@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#gotestsum][gotestsum]]
 - [[#monkey][Monkey]]
+- [[#testify][testify]]
 - [[#相关问题][相关问题]]
   - [[#使用-go-test-测试所有包][使用 go test 测试所有包]]
 
@@ -43,6 +44,9 @@
 
   + [[https://studygolang.com/articles/11296][Monkey框架使用指南 - Go语言中文网 - Golang中文社区]]
   
+* testify
+  + [[https://github.com/stretchr/testify][GitHub - stretchr/testify: A toolkit with common assertions and mocks that plays nicely with the standard library]]
+
 * 相关问题
 ** 使用 go test 测试所有包
    #+begin_src sh

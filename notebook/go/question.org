@@ -4,7 +4,9 @@
 - [[#创建动态大小的数组][创建动态大小的数组]]
 - [[#goroutines-和线程][Goroutines 和线程]]
 - [[#包的初始化][包的初始化]]
-- [[#receiver-使用-value-还是使用-pointer][receiver 使用 value 还是使用 pointer]]
+- [[#how-start-web-server-to-open-page-in-browser-in-golang][How start web server to open page in browser in golang?]]
+- [[#如何判断一个文件是否存在][如何判断一个文件是否存在]]
+- [[#how-to-return-a-value-in-a-go-function-that-panics][How to return a value in a Go function that panics?]]
 
 * 创建动态大小的数组
   #+begin_src go
@@ -38,21 +40,47 @@
   参考：
   + [[https://stackoverflow.com/a/49831018][When is the init() function run? - Stack Overflow]]
 
-* receiver 使用 value 还是使用 pointer
-  The Code Review comment can help:
-  #+begin_quote
-  + If the receiver is a map, func or chan, don't use a pointer to it.
-  + If the receiver is a slice and the method doesn't reslice or reallocate the slice, don't use a pointer to it.
-  + If the method needs to mutate the receiver, the receiver must be a pointer.
-  + If the receiver is a struct that contains a sync.Mutex or similar synchronizing field, the receiver must be a pointer to avoid copying.
-  + If the receiver is a large struct or array, a pointer receiver is more efficient. How large is large? Assume it's equivalent to passing all its elements as arguments to the method. If that feels too large, it's also too large for the receiver.
-  + Can function or methods, either concurrently or when called from this method, be mutating the receiver? A value type creates a copy of the receiver when the method is invoked, so outside updates will not be applied to this receiver. If changes must be visible in the original receiver, the receiver must be a pointer.
-  + If the receiver is a struct, array or slice and any of its elements is a pointer to something that might be mutating, prefer a pointer receiver, as it will make the intention more clear to the reader.
-  + If the receiver is a small array or struct that is naturally a value type (for instance, something like the time.Time type), with no mutable fields and no pointers, or is just a simple basic type such as int or string, a value receiver makes sense.
-  + A value receiver can reduce the amount of garbage that can be generated; if a value is passed to a value method, an on-stack copy can be used instead of allocating on the heap. (The compiler tries to be smart about avoiding this allocation, but it can't always succeed.) Don't choose a value receiver type for this reason without profiling first.
-  + Finally, when in doubt, use a pointer receiver.
-  #+end_quote
-  
+* How start web server to open page in browser in golang?
+  #+begin_src go
+    // open opens the specified URL in the default browser of the user.
+    func open(url string) error {
+      var cmd string
+      var args []string
+
+      switch runtime.GOOS {
+      case "windows":
+        cmd = "cmd"
+        args = []string{"/c", "start"}
+      case "darwin":
+        cmd = "open"
+      default: // "linux", "freebsd", "openbsd", "netbsd"
+        cmd = "xdg-open"
+      }
+      args = append(args, url)
+      return exec.Command(cmd, args...).Start()
+    }
+  #+end_src
+
+  这可能需要 url 的前缀是 http，参考：
+  + [[https://stackoverflow.com/questions/39320371/how-start-web-server-to-open-page-in-browser-in-golang][http - How start web server to open page in browser in golang? - Stack Overflow]]
+
+* 如何判断一个文件是否存在
+  如果某个文件不存在，那么使用 os.Lstat 就一定会返回 error，只要判断 error 是否代表文件不存在即可：
+  #+begin_src go
+    func FileExist(path string) bool {
+      _, err := os.Lstat(path)
+      return !os.IsNotExist(err)
+    }
+  #+end_src
+
   参考：
-  + [[https://stackoverflow.com/questions/27775376/value-receiver-vs-pointer-receiver][function - Value receiver vs. pointer receiver - Stack Overflow]]
+  + [[https://www.cnblogs.com/apocelipes/p/10199618.html][golang 判断文件是否存在 - apocelipes - 博客园]]
+
+* How to return a value in a Go function that panics?
+  #+begin_quote
+  If doParse panics, the recovery block will set the return value to nil—deferred functions can modify named return values.
+  #+end_quote
+
+  参考：
+  + [[https://stackoverflow.com/questions/33167282/how-to-return-a-value-in-a-go-function-that-panics][exception handling - How to return a value in a Go function that panics? - Stack Overflow]]
 

@@ -134,6 +134,7 @@
   + [相关问题](notebook/go/question.org)
   + [Go Reflect](notebook/go/reflect.org)
   + [Go 标准库](notebook/go/stdlib.org)
+  + [Go Style](notebook/go/style.org)
   + [Go Test](notebook/go/test.org)
   + [Go Toolkit](notebook/go/toolkit.org)
   + [Go Trick](notebook/go/trick.org)
@@ -209,6 +210,7 @@
   + [Plantuml](notebook/lang/plantuml.org)
   + [UML](notebook/lang/uml.org)
   + [XML](notebook/lang/xml.org)
+  + [YAML](notebook/lang/yaml.org)
 ## linux
   + [Alpine](notebook/linux/alpine.org)
   + [Bash](notebook/linux/bash.org)
@@ -255,6 +257,7 @@
   + [HTTP/HTTPS](notebook/network/http-https.org)
   + [Misc](notebook/network/misc.org)
   + [MQTT](notebook/network/mqtt.org)
+  + [相关问题](notebook/network/question.org)
   + [TCP/IP 相关](notebook/network/tcp-ip.org)
   + [Network Tools](notebook/network/tools.org)
 ## os

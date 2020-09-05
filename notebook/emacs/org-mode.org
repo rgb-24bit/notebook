@@ -122,6 +122,9 @@
   
 * 相关技巧
   + 在 org 文件中，通过 C-c l 生成当前 headline 的链接并保存，可以通过 C-c C-l 粘贴
+    
+    设置 =org-link-file-path-type= 的值可以改变插入的链接类型，参考：
+    + [[https://emacs.stackexchange.com/questions/32601/how-can-i-get-with-org-store-link-relative-path-instead-of-absolute][org mode - How can I get with org-store-link relative path instead of absolute? - Emacs Stack Exchange]]
 
 * 相关问题
   使用 expand-region 时可能遇到的问题：Symbol’s function definition is void: org-outline-overlay-data，原因大概是：

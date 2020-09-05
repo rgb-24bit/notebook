@@ -3,7 +3,11 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#atmoic][atmoic]]
 - [[#expvar][expvar]]
+- [[#databasesql][database/sql]]
+- [[#fmt][fmt]]
 - [[#runtime][runtime]]
+- [[#nethttp][net/http]]
+- [[#ioutil][ioutil]]
 
 * atmoic
   在并发场景下，如果能够使用原子操作替代互斥锁，那么，往往能够在保证并发安全的同时得到更好的性能表现。
@@ -21,9 +25,141 @@
 * expvar
   + [[https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter13/13.3.html][expvar - 公共变量的标准化接口 · Go语言标准库]]
 
+* database/sql
+  Go 里面数据库的操作是基于 database/sql 包完成的，对于使用者来说，需要在导入 database/sql 的同时导入相应的驱动，然后通过如下方式获得 *sql.DB 对象：
+  #+begin_src go
+    db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/hello")
+  #+end_src
+
+  所有的数据库操作都基于 sql.DB 对象完成，使用 Open 创建 sql.DB 对象后并不会与数据库建立连接, 也不会验证连接参数。它只是单纯地为后面的数据库操作建立了一个数据库对象的抽象，
+  在第一次需要的时候，它才与数据库建立实际连接。
+
+  可以通过 db.Ping() 来验证是否能够正常连接到数据库：
+  #+begin_src go
+    err = db.Ping()
+    if err != nil {
+      // do something here
+    }
+  #+end_src
+
+  数据库操作通常就是 CURD，其中，查询应该使用 QueryXXX 方法完成，增删改或者其它更多的操作应该使用 Exec 方法完成：
+  #+begin_example
+    type DB
+        func (db *DB) Exec(query string, args ...interface{}) (Result, error)
+        func (db *DB) Query(query string, args ...interface{}) (*Rows, error)
+        func (db *DB) QueryRow(query string, args ...interface{}) *Row
+  #+end_example
+  
+  查询操作返回 sql.Rows 对象，可以通过如下方式获取结果：
+  #+begin_src go
+    defer rows.Close()
+    for rows.Next() {
+      err := rows.Scan(&id, &name)
+      if err != nil {
+        log.Fatal(err)
+      }
+      log.Println(id, name)
+    }
+  #+end_src
+  
+  Scan 方法可以基于目标变量的类型自动完成数据类型转换的转换，转换失败会返回 err，这可以省略一些工作。
+  
+  当然，裸的 SQL 语句是存在很大的安全隐患的，大多数语言都提供了通过预编译的方式来转义输入参数的方式，Go 中使用 db.Prepare 实现：
+  #+begin_src go
+    stmt, err := db.Prepare("select id, name from users where id = ?")
+    if err != nil {
+      log.Fatal(err)
+    }
+    defer stmt.Close()
+    rows, err := stmt.Query(1)
+    if err != nil {
+      log.Fatal(err)
+    }
+    defer rows.Close()
+    for rows.Next() {
+      // ...
+    }
+    if err = rows.Err(); err != nil {
+      log.Fatal(err)
+    }
+  #+end_src
+  
+  比较特殊的是不同数据库的占位符是不一样的，但 MySQL 还是熟悉的 ? 号。
+
+  单行查询：
+  #+begin_src go
+    err = db.QueryRow("select name from users where id = ?", 1).Scan(&name)
+  #+end_src
+
+  增删改等不需要返回行的任务使用 Exec 方法来执行，方法返回 sql.Result 对象，它提供对语句元数据的访问, 包括最后一行的 ID 和此次操作影响的行数：
+  #+begin_src go
+    stmt, err := db.Prepare("INSERT INTO users(name) VALUES(?)")
+    if err != nil {
+      log.Fatal(err)
+    }
+    res, err := stmt.Exec("Dolly")
+    if err != nil {
+      log.Fatal(err)
+    }
+    lastId, err := res.LastInsertId()
+    if err != nil {
+      log.Fatal(err)
+    }
+    rowCnt, err := res.RowsAffected()
+    if err != nil {
+      log.Fatal(err)
+    }
+    log.Printf("ID = %d, affected = %d\n", lastId, rowCnt)
+  #+end_src
+
+  事务的使用从 db.Begin 开始，该方法返回一个 Tx 对象，在该对象上调用 Query/Exec 方法执行数据库操作，调用 Commit/Rallback 提交回滚事务。
+
+  对于可空的列，可以使用 sql.NullXXX 会自定义类型来接收值：
+  #+begin_src go
+    for rows.Next() {
+      var s sql.NullString
+      err := rows.Scan(&s)
+      // check err
+      if s.Valid {
+        // use s.String
+      } else {
+        // NULL value
+      }
+    }
+  #+end_src
+
+  比较特别的一点是，database/sql 包自身已经实现了一个简单的数据库连接池，需要注意的几点：
+  + 连接是在需要时被创建的, 在池中并没有一条空闲的连接在等待你
+  + 默认情况下，连接的数量没有限制
+  + 可以使用 db.SetMaxIdleConns(N) 来限制池中空闲连接数，但是这并不会限制池的大小
+  + 可以使用 db.SetMaxOpenConns(N) 来限制数据库的总打开连接数
+  + 回收连接的速度相当快，使用 db.SetMaxIdleConns(N) 设置一个比较大的空闲连接数能减少连接的流失
+  + 由于重用长期连接可能会带来一些网络问题，可以通过设置 db.SetConnMaxLifetime(duration) 来指定一个连接的最大重用次数，这个函数会关闭未使用的连接，比如那些可能被延迟关闭的过期连接
+
+  参考：
+  + [[https://github.com/simpleowen/go-database-sql-tutorial-cn][GitHub - simpleowen/go-database-sql-tutorial-cn: http://go-database-sql.org 中文版]]
+  + [[https://golang.org/pkg/database/sql/][sql - The Go Programming Language]]
+
+* fmt
+  和 C 不同，像 %d 这样的数值格式并不接受表示符号或大小的标记， 打印例程会根据实参的类型来决定这些属性：
+  #+begin_src go
+    var x uint64 = 1<<64 - 1
+    fmt.Printf("%d %x; %d %x\n", x, x, int64(x), int64(x))  // => 18446744073709551615 ffffffffffffffff; -1 -1
+  #+end_src
+
 * runtime
   runtime 包提供和 go 运行时环境的互操作，比如通过 runtime.Caller 来获取调用栈，打印行号、方法。
 
   参考：
   + [[https://studygolang.com/articles/28981][Go 日志，打印源码文件名和行号造成的性能开销 - Go语言中文网 - Golang中文社区]]
+
+* net/http
+  可以通过 http.FileServer 实现简单的静态文件服务器，参考：
+  + [[https://shockerli.net/post/golang-pkg-http-file-server/][Go 标准库 http.FileServer 实现静态文件服务 - 格物]]
+
+* ioutil
+  可以使用 ioutil 包中的函数完成一些简单的 io 操作，比如排序列出目录下的文件，读取文件的所有内容等。
+
+  参考：
+  + [[https://golang.org/pkg/io/ioutil/#example_ReadDir][ioutil - The Go Programming Language]]
 

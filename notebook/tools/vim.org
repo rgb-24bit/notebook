@@ -1,12 +1,12 @@
 #+TITLE:      Vim 笔记
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#简单使用][简单使用]]
+- [[#官方教程][官方教程]]
 - [[#特殊操作][特殊操作]]
 - [[#相关问题][相关问题]]
   - [[#粘贴时关闭-autoindent][粘贴时关闭 autoindent]]
 
-* 简单使用
+* 官方教程
   + [[http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor][vimtutor]]  
 
 * 特殊操作
