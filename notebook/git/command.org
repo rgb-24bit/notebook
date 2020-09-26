@@ -124,7 +124,13 @@
 
     这种生成方式可以保留 commit 日志，每个 commit 对应一个 patch 文件。
 
+  遇到 apply 失败的情况可以尝试如下命令：
+  #+begin_example
+    git apply --reject --whitespace=fix mychanges.patch
+  #+end_example
+
   可以参考的文章：
+  + [[https://stackoverflow.com/questions/4770177/git-patch-does-not-apply][msysgit - git: patch does not apply - Stack Overflow]]
   + [[https://juejin.im/post/5b5851976fb9a04f844ad0f4][Git 打补丁-- patch 和 diff 的使用 - 掘金]]
 
 * git archive

@@ -14,6 +14,7 @@
 - [[#日期和时间][日期和时间]]
 - [[#datatypeconverter][DatatypeConverter]]
 - [[#temporalwith][Temporal.with]]
+- [[#stringsplit][String.split]]
 
 * SPI
   SPI 的全称为 (Service Provider Interface) ，是 JDK 内置的一种服务提供发现机制。主要由工具类 ~java.util.ServiceLoader~ 提供相应的支持。
@@ -202,4 +203,8 @@
   
   与之相关的实用工具类：
   + [[https://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoField.html][ChronoField (Java Platform SE 8 )]]
+
+* String.split
+  Java 字符串的 split 方法默认行为和其它语言存在一点区别……参考：
+  + [[https://stackoverflow.com/questions/14602062/java-string-split-removed-empty-values][Java String split removed empty values - Stack Overflow]]
 

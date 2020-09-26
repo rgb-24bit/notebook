@@ -15,10 +15,12 @@
 - [[#标准输出][标准输出]]
 - [[#使用技巧][使用技巧]]
   - [[#简单技巧][简单技巧]]
+  - [[#重复执行命令][重复执行命令]]
 - [[#相关问题][相关问题]]
   - [[#terminalttyshell-等的区别][Terminal、TTY、Shell 等的区别]]
   - [[#获取当前-shell-脚本所在目录][获取当前 Shell 脚本所在目录]]
   - [[#如何获取文件中某几行的内容][如何获取文件中某几行的内容]]
+  - [[#只获取-md5-输出][只获取 md5 输出]]
 
 * 网络操作相关
 ** 网络诊断相关
@@ -343,6 +345,15 @@
   + 通过 bash 函数可以修改当前的位置，在 CMD 中不行
   + 通过 ~%{jobId}~ 的方式快速使用 ~fg~ 命令
 
+** 重复执行命令
+   #+begin_example
+     watch -n <times> <cmd>
+   #+end_example
+   
+   #+begin_example
+     while true; do <...>; sleep 1; done
+   #+end_example
+
 * 相关问题
 ** Terminal、TTY、Shell 等的区别
    这里主要需要区分的概念是终端模拟器 Terminal Emulator 和 Shell，其中，终端模拟器是用来模拟传统终端的一个添软件，
@@ -369,4 +380,9 @@
      sed -n '5,10p' filename
    #+end_src
 
+
+** 只获取 md5 输出
+   #+begin_src bash
+     md5=$(md5sum "$my_iso_file" | cut -c 1-32)
+   #+end_src
 
