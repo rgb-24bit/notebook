@@ -5,7 +5,7 @@
 - [[#shell][Shell]]
 
 * Layer 配置
-  Spacemacs 中 layer 支持很懂配置，除了常用的一些变量配置以外，还支持：
+  Spacemacs 中 layer 支持很多配置，除了常用的一些变量配置以外，还支持：
   #+begin_src elisp
     ;; Disabling layer services in other layers
     (defun dotspacemacs/layers ()

@@ -4,3 +4,6 @@
 * CAS
   + [[https://zh.wikipedia.org/wiki/%E9%9B%86%E4%B8%AD%E5%BC%8F%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1][集中式认证服务 - 维基百科，自由的百科全书]]
 
+* Consul
+  + [[http://blog.didispace.com/consul-service-discovery-exp/][使用 Consul 做服务发现的若干姿势 | 程序猿DD]]
+

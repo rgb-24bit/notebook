@@ -1,0 +1,8 @@
+#+TITLE:      Go Template
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关链接][相关链接]]
+
+* 相关链接
+  + [[https://www.cnblogs.com/f-ck-need-u/p/10053124.html][Go 标准库：Go template 用法详解 - 骏马金龙 - 博客园]]
+

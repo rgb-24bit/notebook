@@ -12,6 +12,7 @@
 - [[#保存-scratch-缓冲区的代码][保存 scratch 缓冲区的代码]]
 - [[#插入文件中的内容][插入文件中的内容]]
 - [[#快速的创建多级目录][快速的创建多级目录]]
+- [[#高亮内容][高亮内容]]
 
 * 批量修改文件名称
   通过 ~dired-mode~ 的编辑模式完成这一工作：
@@ -86,4 +87,8 @@
 
 * 快速的创建多级目录
   通过命令 ~make-directory~ 可以很方便的快速创建多级目录。
+
+* 高亮内容
+  highlight-regexp，highlight-phrase 高亮指定内容，参考：
+  + [[https://stackoverflow.com/questions/385661/how-to-highlight-all-occurrences-of-a-word-in-an-emacs-buffer][highlighting - How to highlight all occurrences of a word in an Emacs buffer? - Stack Overflow]]
 

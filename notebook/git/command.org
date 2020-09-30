@@ -10,6 +10,8 @@
 - [[#git-commit][git commit]]
 - [[#git-apply][git apply]]
 - [[#git-archive][git archive]]
+- [[#git-merge][git merge]]
+- [[#git-fetch][git fetch]]
 
 * git clone
   + 克隆远程库时指定分支或标签：
@@ -141,4 +143,14 @@
   
   参考：
   + [[https://segmentfault.com/a/1190000002443283][git 文件打包命令 - 海诺 - SegmentFault 思否]]
+
+* git merge
+  可以使用 --squash 选项将贡献者的 commits 合并为一个 commit 再 merge。这样会让主分支的提交记录看起来更加好看些，同时也可以以 “pull request” 为单位进行责任追踪(git blame)，
+  这对源码的阅读者是非常友好的，但缺点就是丢失了最原始的提交信息，
+
+* git fetch
+  拉去远程分支并删除本地分支：
+  #+begin_src bash
+    git fetch -p
+  #+end_src
 

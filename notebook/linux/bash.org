@@ -1,13 +1,10 @@
 #+TITLE:      Bash
 
 * 目录                                                    :TOC_4_gh:noexport:
-- [[#基础][基础]]
-  - [[#变量][变量]]
-  - [[#数组][数组]]
-  - [[#字符串替换][字符串替换]]
-  - [[#函数][函数]]
-  - [[#条件语句][条件语句]]
-  - [[#循环][循环]]
+- [[#shebang][shebang]]
+- [[#内置命令][内置命令]]
+- [[#语法][语法]]
+- [[#子-shell][子 shell]]
 - [[#命令行参数][命令行参数]]
 - [[#相关技巧][相关技巧]]
 - [[#相关问题][相关问题]]
@@ -19,180 +16,238 @@
   - [[#执行传入的命令][执行传入的命令]]
   - [[#var-var-和-var-的区别][${var}, "$var" 和 "${var}" 的区别]]
   - [[#单引号和双引号的区别][单引号和双引号的区别]]
+  - [[#-和--的区别][[ 和 [[ 的区别]]
 
-* 基础
+* shebang
   脚本第一行叫做 ~shebang~, 用于告诉 ~shell~ 使用什么程序执行这个脚本。
-
   #+BEGIN_SRC bash
     #!/usr/bin/env bash
   #+END_SRC
 
-** 变量
-   变量名和等号之间不能有空格， 使用变量需要在变量名前面加上 ~$~. 可以使用 ~${}~ 的形式来确定变量边界：
-   #+BEGIN_SRC bash
-     str="hello world"
+* 内置命令
+  set 命令可以用来修改 Shell 环境的运行参数，如果命令行下不带任何参数，直接运行 set，还会显示所有的环境变量和 Shell 函数。
 
-     echo $str  # hello world
-     echo "${str}."  # hello world.
-   #+END_SRC
+  常用的选项：
+  + -u，-o nounset，遇到不存在的变量时报错，并停止执行
+  + -x，-o xtrace，在运行结果之前，先输出执行的那一行命令
+  + -e，-o errexit，脚本只要发生错误，就终止执行
+  + -o pipefail，只要一个子命令失败，整个管道命令就失败，脚本终止执行
 
-** 数组
-   数组的大小没有限制， 数组的第一个元素的下标为 ~0~. 创建数组的几种方法：
-   #+BEGIN_SRC bash
-     array[0] = val
-     array[1] = val
-     array[2] = val
-     array=([2]=val [0]=val [1]=val)
-     array=(val val val)
-   #+END_SRC
+  合并写法：
+  #+begin_example
+    # 写法一
+    set -euxo pipefail
 
-   显示数组某个元素的值：
-   #+BEGIN_SRC bash
-     ${array[i]}     # where i is the index
-   #+END_SRC
+    # 写法二
+    set -eux
+    set -o pipefail
+  #+end_example
 
-   如果未提供索引， 则假定为数组元素 0. 获取数组存在多少元素的方式：
-   #+BEGIN_SRC bash
-     ${#array[@]}
-   #+END_SRC
+  参考：
+  + [[http://www.ruanyifeng.com/blog/2017/11/bash-set.html][Bash 脚本 set 命令教程 - 阮一峰的网络日志]]
 
-   特殊的取值操作：
-   #+BEGIN_SRC bash
-     ${varname:-word}    # if varname exists and isn't null, return its value; otherwise return word
-     ${varname:=word}    # if varname exists and isn't null, return its value; otherwise set it word and then return its value
-     ${varname:+word}    # if varname exists and isn't null, return word; otherwise return null
-     ${varname:offset:length}    # performs substring expansion. It returns the substring of $varname starting at offset and up to length characters
-   #+END_SRC
+  -----
 
-** 字符串替换
-   #+BEGIN_SRC bash
-     ${variable#pattern}         # if the pattern matches the beginning of the variable's value, delete the shortest part that matches and return the rest
-     ${variable##pattern}        # if the pattern matches the beginning of the variable's value, delete the longest part that matches and return the rest
-     ${variable%pattern}         # if the pattern matches the end of the variable's value, delete the shortest part that matches and return the rest
-     ${variable%%pattern}        # if the pattern matches the end of the variable's value, delete the longest part that matches and return the rest
-     ${variable/pattern/string}  # the longest match to pattern in variable is replaced by string. Only the first match is replaced
-     ${variable//pattern/string} # the longest match to pattern in variable is replaced by string. All matches are replaced
-     ${#varname}     # returns the length of the value of the variable as a character string
-   #+END_SRC
+  shopt 命令也可以用来设置选项，-s 打开，-u 关闭，参考：
+  + [[https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html][The Shopt Builtin (Bash Reference Manual)]]
+    
+* 语法
+  变量操作：
+  #+begin_src bash
+    varname=value                       # 定义变量
+    varname=value command               # 定义子进程变量并执行子进程
+    echo $varname                       # 查看变量内容
+    echo $$                             # 查看当前 shell 的进程号
+    echo $!                             # 查看最近调用的后台任务进程号
+    echo $?                             # 查看最近一条命令的返回码
+    export VARNAME=value                # 设置环境变量（将会影响到子进程）
 
-** 函数
-   定义函数的方式：
-   #+BEGIN_SRC bash
-     function name() {
-         shell commands
-     }
-   #+END_SRC
+    array[0]=valA                       # 定义数组
+    array[1]=valB
+    array[2]=valC
+    array=([0]=valA [1]=valB [2]=valC)  # 另一种方式
+    array=(valA valB valC)              # 另一种方式
 
-   例子：
-   #+BEGIN_SRC bash
-     #!/bin/bash
-     function hello {
-         echo world!
-     }
-     hello
+    ${array[i]}                         # 取得数组中的元素
+    ${#array[@]}                        # 取得数组的长度
+    ${#array[i]}                        # 取得数组中某个变量的长度
 
-     function say {
-         echo $1
-     }
-     say "hello world!"
-   #+END_SRC
+    declare -a                          # 查看所有数组
+    declare -f                          # 查看所有函数
+    declare -F                          # 查看所有函数，仅显示函数名
+    declare -i                          # 查看所有整数
+    declare -r                          # 查看所有只读变量
+    declare -x                          # 查看所有被导出成环境变量的东西
+    declare -p varname                  # 输出变量是怎么定义的（类型+值）
 
-   ~$1~ 表示传入函数的第一个参数。
+    ${varname:-word}                    # 如果变量不为空则返回变量，否则返回 word
+    ${varname:=word}                    # 如果变量不为空则返回变量，否则赋值成 word 并返回
+    ${varname:?message}                 # 如果变量不为空则返回变量，否则打印错误信息并退出
+    ${varname:+word}                    # 如果变量不为空则返回 word，否则返回 null
+    ${varname:offset:len}               # 取得字符串的子字符串
 
-** 条件语句
-   #+BEGIN_SRC bash
-     if [ expression ]; then
-         will execute only if expression is true
-     else
-         will execute if expression is false
-     fi
-   #+END_SRC
+    ${variable#pattern}                 # 如果变量头部匹配 pattern，则删除最小匹配部分返回剩下的
+    ${variable##pattern}                # 如果变量头部匹配 pattern，则删除最大匹配部分返回剩下的
+    ${variable%pattern}                 # 如果变量尾部匹配 pattern，则删除最小匹配部分返回剩下的
+    ${variable%%pattern}                # 如果变量尾部匹配 pattern，则删除最大匹配部分返回剩下的
+    ${variable/pattern/str}             # 将变量中第一个匹配 pattern 的替换成 str，并返回
+    ${variable//pattern/str}            # 将变量中所有匹配 pattern 的地方替换成 str 并返回
 
-   ~expression~ 和 ~[]~ 之间必须有空格， 即 *不能* 是 ~[expression]~.
+    ${#varname}                         # 返回字符串长度
 
-   #+BEGIN_SRC bash
-     case expression in
-         pattern1 )
-             statements
-             ;;
-         pattern2 )
-             statements
-             ;;
-         ...
-     esac
-   #+END_SRC
+    ,*(patternlist)                      # 零次或者多次匹配
+    +(patternlist)                      # 一次或者多次匹配
+    ?(patternlist)                      # 零次或者一次匹配
+    @(patternlist)                      # 单词匹配
+    !(patternlist)                      # 不匹配
 
-   分号 ~;;~ 充当 ~break~ 的角色。
+    array=($text)                       # 按空格分隔 text 成数组，并赋值给变量
+    IFS="/" array=($text)               # 按斜杆分隔字符串 text 成数组，并赋值给变量
+    text="${array[*]}"                  # 用空格链接数组并赋值给变量
+    text=$(IFS=/; echo "${array[*]}")   # 用斜杠链接数组并赋值给变量
 
-   各种表达式：
-   #+BEGIN_SRC bash
-     statement1 && statement2  # both statements are true
-     statement1 || statement2  # at least one of the statements is true
+    A=( foo bar "a  b c" 42 )           # 数组定义
+    B=("${A[@]:1:2}")                   # 数组切片：B=( bar "a  b c" )
+    C=("${A[@]:1}")                     # 数组切片：C=( bar "a  b c" 42 )
+    echo "${B[@]}"                      # bar a  b c
+    echo "${B[1]}"                      # a  b c
+    echo "${C[@]}"                      # bar a  b c 42
+    echo "${C[@]: -2:2}"                # a  b c 42  减号前的空格是必须的
 
-     str1=str2       # str1 matches str2
-     str1!=str2      # str1 does not match str2
-     str1<str2       # str1 is less than str2
-     str1>str2       # str1 is greater than str2
-     -n str1         # str1 is not null (has length greater than 0)
-     -z str1         # str1 is null (has length 0)
+    $(UNIX command)                     # 运行命令，并将标准输出内容捕获并返回
+    varname=$(id -u user)               # 将用户名为 user 的 uid 赋值给 varname 变量
 
-     -a file         # file exists
-     -d file         # file exists and is a directory
-     -e file         # file exists; same -a
-     -f file         # file exists and is a regular file (i.e., not a directory or other special type of file)
-     -r file         # you have read permission
-     -s file         # file exists and is not empty
-     -w file         # you have write permission
-     -x file         # you have execute permission on file, or directory search permission if it is a directory
-     -N file         # file was modified since it was last read
-     -O file         # you own file
-     -G file         # file's group ID matches yours (or one of yours, if you are in multiple groups)
+    num=$(expr 1 + 2)                   # 兼容 posix sh 的计算，使用 expr 命令计算结果
+    num=$(expr $num + 1)                # 数字自增
+    expr 2 \* \( 2 + 3 \)               # 兼容 posix sh 的复杂计算，输出 10
 
-     file1 -nt file2     # file1 is newer than file2
-     file1 -ot file2     # file1 is older than file2
+    num=$((1 + 2))                      # 计算 1+2 赋值给 num，使用 bash 独有的 $((..)) 计算
+    num=$(($num + 1))                   # 变量递增
+    num=$((num + 1))                    # 变量递增，双括号内的 $ 可以省略
+    num=$((1 + (2 + 3) * 2))            # 复杂计算
 
-     -lt     # less than
-     -le     # less than or equal
-     -eq     # equal
-     -ge     # greater than or equal
-     -gt     # greater than
-     -ne     # not equal
-   #+END_SRC
+  #+end_src
 
-** 循环
-   ~bash~ 的三种循环为 ~for~, ~while~ 和 ~until~.
+  -----
 
-   三种 ~for~:
-   #+BEGIN_SRC bash
-     for x := 1 to 10 do
-     begin
-         statements
-     end
+  条件判断：
+  #+begin_src bash
+    statement1 && statement2  # and 操作符
+    statement1 || statement2  # or 操作符
 
-     for name [in list]
-     do
-         statements that can use $name
-     done
+    exp1 -a exp2              # exp1 和 exp2 同时为真时返回真（POSIX XSI扩展）
+    exp1 -o exp2              # exp1 和 exp2 有一个为真就返回真（POSIX XSI扩展）
+    ( expression )            # 如果 expression 为真时返回真，输入注意括号前反斜杆
+    ! expression              # 如果 expression 为假那返回真
 
-     for (( initialisation ; ending condition ; update ))
-     do
-         statements...
-     done
-   #+END_SRC
-   
-   ~while~:
-   #+BEGIN_SRC bash
-     while condition; do
-         statements
-     done
-   #+END_SRC
+    str1 = str2               # 判断字符串相等，如 [ "$x" = "$y" ] && echo yes
+    str1 != str2              # 判断字符串不等，如 [ "$x" != "$y" ] && echo yes
+    str1 < str2               # 字符串小于，如 [ "$x" \< "$y" ] && echo yes
+    str2 > str2               # 字符串大于，注意 < 或 > 是字面量，输入时要加反斜杆
+    -n str1                   # 判断字符串不为空（长度大于零）
+    -z str1                   # 判断字符串为空（长度等于零）
 
-   ~until~:
-   #+BEGIN_SRC bash
-     until condition; do
-         statements
-     done
-   #+END_SRC
+    -a file                   # 判断文件存在，如 [ -a /tmp/abc ] && echo "exists"
+    -d file                   # 判断文件存在，且该文件是一个目录
+    -e file                   # 判断文件存在，和 -a 等价
+    -f file                   # 判断文件存在，且该文件是一个普通文件（非目录等）
+    -r file                   # 判断文件存在，且可读
+    -s file                   # 判断文件存在，且尺寸大于0
+    -w file                   # 判断文件存在，且可写
+    -x file                   # 判断文件存在，且执行
+    -N file                   # 文件上次修改过后还没有读取过
+    -O file                   # 文件存在且属于当前用户
+    -G file                   # 文件存在且匹配你的用户组
+    file1 -nt file2           # 文件1 比 文件2 新
+    file1 -ot file2           # 文件1 比 文件2 旧
+
+    num1 -eq num2             # 数字判断：num1 == num2
+    num1 -ne num2             # 数字判断：num1 != num2
+    num1 -lt num2             # 数字判断：num1 < num2
+    num1 -le num2             # 数字判断：num1 <= num2
+    num1 -gt num2             # 数字判断：num1 > num2
+    num1 -ge num2             # 数字判断：num1 >= num2
+
+  #+end_src
+  
+  -----
+
+  分支选择：
+  #+begin_src bash
+    test {expression}         # 判断条件为真的话 test 程序返回0 否则非零
+    [ expression ]            # 判断条件为真的话返回0 否则非零
+
+    test "abc" = "def"        # 查看返回值 echo $? 显示 1，因为条件为假
+    test "abc" != "def"       # 查看返回值 echo $? 显示 0，因为条件为真
+
+    test -a /tmp; echo $?     # 调用 test 判断 /tmp 是否存在，并打印 test 的返回值
+    [ -a /tmp ]; echo $?      # 和上面完全等价，/tmp 肯定是存在的，所以输出是 0
+
+    test cond && cmd1         # 判断条件为真时执行 cmd1
+    [ cond ] && cmd1          # 和上面完全等价
+    [ cond ] && cmd1 || cmd2  # 条件为真执行 cmd1 否则执行 cmd2
+
+    # 判断 /etc/passwd 文件是否存在
+    # 经典的 if 语句就是判断后面的命令返回值为0的话，认为条件为真，否则为假
+    if test -e /etc/passwd; then
+        echo "alright it exists ... "
+    else
+        echo "it doesn't exist ... "
+    fi
+
+    # 和上面完全等价，[ 是个和 test 一样的可执行程序，但最后一个参数必须为 ]
+    # 这个名字为 "[" 的可执行程序一般就在 /bin 或 /usr/bin 下面，比 test 优雅些
+    if [ -e /etc/passwd ]; then   
+        echo "alright it exists ... "
+    else
+        echo "it doesn't exist ... "
+    fi
+
+    # 和上面两个完全等价，其实到 bash 时代 [ 已经是内部命令了，用 enable 可以看到
+    [ -e /etc/passwd ] && echo "alright it exists" || echo "it doesn't exist"
+
+    # 判断变量的值
+    if [ "$varname" = "foo" ]; then
+        echo "this is foo"
+    elif [ "$varname" = "bar" ]; then
+        echo "this is bar"
+    else
+        echo "neither"
+    fi
+
+    # 复杂条件判断，注意 || 和 && 是完全兼容 POSIX 的推荐写法
+    if [ $x -gt 10 ] && [ $x -lt 20 ]; then
+        echo "yes, between 10 and 20"
+    fi
+
+    # 可以用 && 命令连接符来做和上面完全等价的事情
+    [ $x -gt 10 ] && [ $x -lt 20 ] && echo "yes, between 10 and 20"
+
+    # 小括号和 -a -o 是 POSIX XSI 扩展写法，小括号是字面量，输入时前面要加反斜杆
+    if [ \( $x -gt 10 \) -a \( $x -lt 20 \) ]; then
+        echo "yes, between 10 and 20"
+    fi
+
+    # 同样可以用 && 命令连接符来做和上面完全等价的事情
+    [ \( $x -gt 10 \) -a \( $x -lt 20 \) ] && echo "yes, between 10 and 20"
+
+
+    # 判断程序存在的话就执行
+    [ -x /bin/ls ] && /bin/ls -l
+  #+end_src
+
+* 子 shell
+  在 shell 中是否进入子 shell 的情况可以分为几种：
+  1. 执行 bash 内置命令时，父进程不会创建子进程来执行这些命令，而是直接在当前 bash 环境中执行。但如果将内置命令放在管道后，则此内置命令将和管道左边的进程同属于一个进程组
+  2. 执行 bash 命令本身时，会进入新的子 shell 环境
+  3. 通过 ./script.sh 的方式执行 shell 脚本时，进入子 shell 环境
+  4. 执行 shell 函数时，和执行内置命令的情况类似，因此可以通过 shell 函数来使用或修改当前 shell 的环境
+  5. 命令替换，通过 $() 执行命令时会进入子 shell
+  6. 使用括号 () 组合一系列命令时也会进入子 shell
+
+  参考：
+  + [[https://www.cnblogs.com/f-ck-need-u/p/7446194.html][子 shell 以及什么时候进入子 shell - 骏马金龙 - 博客园]]
+  
 * 命令行参数
   在简单的 Shell 脚本中我们可以通过一些内置变量来处理命令行参数，包括：
   |----------+----------------------------------------------------------------------------|
@@ -243,6 +298,7 @@
 * 相关技巧
   + 可以通过 type 判断命令是 可执行文件、shell 内置命令还是别名
   + 可以通过 apropos 和关键词在 man page 描述中查找相应的程序
+  + 通过 command <xxx> 的方式忽略 alias 直接执行程序或者内建命令
 
 * 相关问题
 ** 怎样将字符串转换为小写
@@ -353,4 +409,14 @@
    
    参考：
    + [[https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash][shell - Difference between single and double quotes in Bash - Stack Overflow]]
+
+** [ 和 [[ 的区别
+   单左括号 [ 命令是一个可执行程序，位于 /bin 或者 /usr/bin 下面，它的使用方法和 test 完全一样，只是要求最后一个参数后要多加一个右括号：
+   #+begin_example
+     test -a /tmp; echo $?   # 调用 test 判断 /tmp 是否存在，并打印 test 的返回值
+     [ -a /tmp ]; echo $?    # 和上面完全等价，/tmp 肯定是存在的，所以输出是 0
+   #+end_example
+
+   但是单括号写起来更优雅，而 [[ 则是 bash 的扩展，参考：
+   + [[https://www.zhihu.com/question/266787434][Bash 脚本中 (、((、[、[[ 的区别是什么？ - 知乎]]
 

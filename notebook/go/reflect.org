@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#三大法则][三大法则]]
 - [[#go-tag][Go Tag]]
+- [[#reflecttype][reflect.Type]]
 - [[#理解][理解]]
 
 * 三大法则
@@ -39,6 +40,9 @@
       fmt.Println(tag.Get("key"))
     }
   #+end_src
+
+* reflect.Type
+  + Elem 方法获取 Array, Chan, Map, Ptr, Slice 指向或包含的元素类型，比如 map 的 value 类型就可以通过这个方法获取
 
 * 理解
   + 无论是 Java 还是 Go，反射的两个基本要素都是类型和值（实例），这在 Java 中是 Class 和 Instance，在 Go 中，则是 Type 和 Value

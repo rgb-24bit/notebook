@@ -13,6 +13,7 @@
 - [[#bug-的等级][BUG 的等级]]
 - [[#32-位到-64-位][32 位到 64 位]]
 - [[#canonical-input][Canonical Input]]
+- [[#程序变量命名的几种叫法][程序变量命名的几种叫法]]
 
 * 命令行参数语法
   我们在使用 Linux 上的命令时，使用的语法通常为 [[https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html][Argument Syntax (The GNU C Library)]]，但是，不同的平台上语法还是会有些区别。
@@ -133,3 +134,13 @@
   + [[https://stackoverflow.com/questions/358342/canonical-vs-non-canonical-terminal-input][unix - Canonical vs. non-canonical terminal input - Stack Overflow]]
   + [[https://www.gnu.org/software/libc/manual/html_node/Canonical-or-Not.html][Canonical or Not (The GNU C Library)]]
 
+* 程序变量命名的几种叫法
+  |----------------+------------+------------|
+  | 中             | 英         | 例子       |
+  |----------------+------------+------------|
+  | 驼峰（大驼峰） | camel case | CamelCase  |
+  | 驼峰（小驼峰） | camel case | camelCase  |
+  | 蛇式           | snake case | snake_case |
+  | 拷肉串式       | kebab case | kabab-case |
+  |----------------+------------+------------|
+  

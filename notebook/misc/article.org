@@ -1,0 +1,4 @@
+#+TITLE:      优质文章收藏
+
+- [[https://draveness.me/metaprogramming/][谈元编程与表达能力 - 面向信仰编程]]
+

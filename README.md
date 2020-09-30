@@ -74,6 +74,7 @@
   + [SQLite3](notebook/database/sqlite3.org)
   + [Standard SQL](notebook/database/standsql.org)
   + [数据库理论](notebook/database/theory.org)
+  + [TSDB - 时序数据库](notebook/database/tsdb.org)
   + [Utils](notebook/database/utils.org)
 ## devops
   + [持续集成](notebook/devops/ci.org)
@@ -135,6 +136,7 @@
   + [Go Reflect](notebook/go/reflect.org)
   + [Go 标准库](notebook/go/stdlib.org)
   + [Go Style](notebook/go/style.org)
+  + [Go Template](notebook/go/template.org)
   + [Go Test](notebook/go/test.org)
   + [Go Toolkit](notebook/go/toolkit.org)
   + [Go Trick](notebook/go/trick.org)
@@ -232,6 +234,7 @@
   + [远程过程调用](notebook/microservice/rpc.org)
   + [服务发现](notebook/microservice/service-discovery.org)
 ## misc
+  + [优质文章收藏](notebook/misc/article.org)
   + [异步编程](notebook/misc/async.org)
   + [字符编码](notebook/misc/character-encoding.org)
   + [计算机图形学](notebook/misc/computer-graphics.org)
@@ -303,6 +306,7 @@
 ## solution
   + [访问控制](notebook/solution/ac.org)
   + [接口设计](notebook/solution/api.org)
+  + [Cache](notebook/solution/cache.org)
   + [分布式系统](notebook/solution/distributed.org)
   + [其他解决方案](notebook/solution/misc.org)
   + [存储](notebook/solution/storage.org)

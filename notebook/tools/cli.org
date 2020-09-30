@@ -101,6 +101,7 @@
 
   参考：
   + [[https://www.cnblogs.com/chenpingzhao/p/10758820.html][关于 ffmpeg 的一些常见用法 - 踏雪无痕SS - 博客园]]
+  + [[https://github.com/skywind3000/awesome-cheatsheets/blob/master/tools/ffmpeg.sh][awesome-cheatsheets/ffmpeg.sh at master · skywind3000/awesome-cheatsheets]]
 
   使用：
   #+begin_src bash

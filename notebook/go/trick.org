@@ -5,6 +5,7 @@
 - [[#uintptr--unsafepointer][uintptr & unsafe.Pointer]]
 - [[#short-variable-declarations][Short variable declarations]]
 - [[#匿名字段][匿名字段]]
+- [[#type-switch][type switch]]
 
 * 类型转换
   当两个结构体忽略 tag 后拥有相同的底层类型，那么就可以进行显示类型转换：
@@ -49,4 +50,17 @@
 
 * 匿名字段
   我们可以利用匿名字段的特性，定义一个接口并提供默认的实现，这时，只要其他结构体包含该匿名字段，那么，它就实现了该接口。
+
+* type switch
+  使用 type switch 的时候，可以通过如下方式避免再次进行类型断言：
+  #+begin_src go
+    switch v := i.(type) {
+    case T:
+        // here v has type T
+    case S:
+        // here v has type S
+    default:
+        // no match; here v has the same type as i
+    }
+  #+end_src
 
