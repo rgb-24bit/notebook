@@ -1,77 +1,60 @@
-* Future
-** Agent
-   本来是想看一下调试中断点是怎么一回事，结果，和 Java Agent 扯上了。
+* Agent
+  本来是想看一下调试中断点是怎么一回事，结果，和 Java Agent 扯上了。
 
-   Java Agent 是一种依附于 JVM 进程的程序，可以通过这种方式来监听控制 JVM 进程。
+  Java Agent 是一种依附于 JVM 进程的程序，可以通过这种方式来监听控制 JVM 进程。
 
-   加载 Java Agent 的方式主要有两种：
-   1. 通过命令行参数指定要加载的 Java Agent 程序，主要的选项为：
-      |------------------------------+------------------------------|
-      | 选项                         | 作用                         |
-      |------------------------------+------------------------------|
-      | javaagent:jarpath[=options]  | 加载指定的 jar               |
-      | agentlib:libname[=options]   | 加载 PATH 环境变量下的动态库 |
-      | agentpath:pathname[=options] | 通过完全路径加载动态库       |
-      |------------------------------+------------------------------|
+  加载 Java Agent 的方式主要有两种：
+  1. 通过命令行参数指定要加载的 Java Agent 程序，主要的选项为：
+     |------------------------------+------------------------------|
+     | 选项                         | 作用                         |
+     |------------------------------+------------------------------|
+     | javaagent:jarpath[=options]  | 加载指定的 jar               |
+     | agentlib:libname[=options]   | 加载 PATH 环境变量下的动态库 |
+     | agentpath:pathname[=options] | 通过完全路径加载动态库       |
+     |------------------------------+------------------------------|
 
-      参考：
-      + [[http://www.voidcn.com/article/p-ptghvuzj-bbz.html][6.1 java 选项 -javaagent、-agentlib、-agentpath - 程序园]]
-      + 
+     参考：
+     + [[http://www.voidcn.com/article/p-ptghvuzj-bbz.html][6.1 java 选项 -javaagent、-agentlib、-agentpath - 程序园]]
+     + 
 
-   2. 通过 Sun 公司提供的 VirtualMachine 接口动态加载 Agent，参考：
-      + [[https://www.cnblogs.com/LittleHann/p/4783581.html][Java Attach API - 郑瀚 Andrew.Hann - 博客园]]
-      + [[https://docs.oracle.com/javase/8/docs/jdk/api/attach/spec/com/sun/tools/attach/VirtualMachine.html][VirtualMachine (Attach API )]]
+  2. 通过 Sun 公司提供的 VirtualMachine 接口动态加载 Agent，参考：
+     + [[https://www.cnblogs.com/LittleHann/p/4783581.html][Java Attach API - 郑瀚 Andrew.Hann - 博客园]]
+     + [[https://docs.oracle.com/javase/8/docs/jdk/api/attach/spec/com/sun/tools/attach/VirtualMachine.html][VirtualMachine (Attach API )]]
      
-   其中，Java Agent 程序的编写利用了 java.lang.instrument 包下提供的接口，参考：
-   + [[https://www.cnkirito.moe/instrument/][JAVA 拾遗--Instrument 机制 | 徐靖峰|个人博客]]
-   + [[https://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html][Java SE 6 新特性: Instrumentation 新功能]]
+  其中，Java Agent 程序的编写利用了 java.lang.instrument 包下提供的接口，参考：
+  + [[https://www.cnkirito.moe/instrument/][JAVA 拾遗--Instrument 机制 | 徐靖峰|个人博客]]
+  + [[https://www.ibm.com/developerworks/cn/java/j-lo-jse61/index.html][Java SE 6 新特性: Instrumentation 新功能]]
 
-   至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
+  至于调试：[[https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html][深入 Java 调试体系，第 3 部分: JDWP 协议及实现]]
 
-** 异步
-   + [[https://juejin.im/post/5adbf8226fb9a07aac240a67][Java 8 CompletableFuture 教程 - 掘金]]
-   + [[https://juejin.im/post/5b4622df5188251ac9766f47#heading-7][异步技巧之CompletableFuture - 掘金]]
+* 并发
+  Java 中的并发设计不只是可以用于 Java 中，对于运行在操作系统中的并发程序来说，拥有共同的基础工具：
+  + 操作系统同步原语，如 Mutex 和 Semaphore
+  + 硬件中断/时钟，抢占式和协作式调度
+  + Volatile，可见性和避免重排序
+  + 硬件同步原语，如 CAS 操作
+  + 进程/线程，执行任务
+  + 临界资源
+  + 临界区
+  + ……
 
-** 注解
-   + [[https://www.race604.com/annotation-processing/][Java 注解处理器]]
-   + [[https://github.com/zhuhean/BuilderProcessor][zhuhean/BuilderProcessor: Android注解处理演示项目]]
-   + [[https://github.com/square/javapoet][square/javapoet: A Java API for generating .java source files.]]
-   + [[https://www.jetbrains.com/help/idea/configuring-annotation-processing.html#create_profile][Configuring Annotation Processing - Help | IntelliJ IDEA]]
+  面临着相同的问题：
+  + 原子性
+  + 有序性
+  + 可见性
+  + 临界区
+  + 死锁
+  + ……
 
-** ConcurrentHashMap
-   + [[https://www.cnblogs.com/study-everyday/p/6430462.html][ConcurrentHashMap原理分析（1.7与1.8） - 明志健致远 - 博客园]]
-   + [[https://juejin.im/post/5ca89afa5188257e1d4576ff#heading-3][解读Java8中ConcurrentHashMap是如何保证线程安全的 - 掘金]]
-   + [[https://www.ibm.com/developerworks/cn/java/java-lo-concurrenthashmap/index.html][探索 ConcurrentHashMap 高并发性的实现机制]]
-   + [[https://www.cnblogs.com/aspirant/p/8623864.html][ConcurrentHashMap原理分析（1.7与1.8）]]
-
-** 并发
-   Java 中的并发设计不只是可以用于 Java 中，对于运行在操作系统中的并发程序来说，拥有共同的基础工具：
-   + 操作系统同步原语，如 Mutex 和 Semaphore
-   + 硬件中断/时钟，抢占式和协作式调度
-   + Volatile，可见性和避免重排序
-   + 硬件同步原语，如 CAS 操作
-   + 进程/线程，执行任务
-   + 临界资源
-   + 临界区
-   + ……
-
-   面临着相同的问题：
-   + 原子性
-   + 有序性
-   + 可见性
-   + 临界区
-   + 死锁
-   + ……
-
-   这些是基本的材料，通过这些材料能够做出来什么东西，怎么做，就是并发编程需要考虑的问题。
+  这些是基本的材料，通过这些材料能够做出来什么东西，怎么做，就是并发编程需要考虑的问题。
   
-   + WAIT:
-     1. ObjectMonitor 源码阅读，它和 Object 之间的关系
-     2. ASQ 源码阅读
-        #+BEGIN_QUOTE
-        This class is designed to be a useful basis for most kinds of synchronizers that rely on a _single atomic int value_ to represent state
-        #+END_QUOTE
-     3. [[https://www.infoq.cn/article/1ggzj_oFl8wuJFwVG9et][简明高效的 Java 并发编程学习指南 - InfoQ]]
+  + WAIT:
+    1. ObjectMonitor 源码阅读，它和 Object 之间的关系
+    2. ASQ 源码阅读
+       #+BEGIN_QUOTE
+       This class is designed to be a useful basis for most kinds of synchronizers that rely on a _single atomic int value_ to represent state
+       #+END_QUOTE
+    3. [[https://www.infoq.cn/article/1ggzj_oFl8wuJFwVG9et][简明高效的 Java 并发编程学习指南 - InfoQ]]
 
 * 编程范式
   + [[https://www.ibm.com/developerworks/cn/java/j-understanding-functional-programming-4/index.html][深入理解 Java 函数式编程，第 4 部分: 使用 Vavr 进行函数式编程]]
@@ -144,10 +127,4 @@
   插件：
   + [[https://twitter.github.io/scrooge/MVNPlugin.html][Maven Plugin — Scrooge 20.6.0 documentation]]
     生成的代码默认在对应的 namespace 下
-
-* 库
-  + [[https://github.com/twitter/util][GitHub - twitter/util: Wonderful reusable code from Twitter]]
-
-* Mac IDEA
-  配置文件路径：~/Library/Application Support/JetBrains/IntelliJIdea2020.1
 

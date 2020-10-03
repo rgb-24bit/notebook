@@ -10,7 +10,6 @@
 
   颜色好像都是一样的，就是配置有点区别。
 
-* LSP & DAP
 * hydra
   + [[https://github.com/abo-abo/hydra][abo-abo/hydra: make Emacs bindings that stick around]]
     #+begin_src elisp
@@ -18,9 +17,4 @@
         "Simple cursor move by hydra."
         ("n" next-line "next-line"))
     #+end_src
-
-
-* major mode
-  + [[http://www.wilfred.me.uk/blog/2015/03/19/adding-a-new-language-to-emacs/][Adding A New Language to Emacs – Wilfred Hughes::Blog]]
-  + [[http://ergoemacs.org/emacs/elisp_syntax_coloring.html][How to Write a Emacs Major Mode for Syntax Coloring]]
 

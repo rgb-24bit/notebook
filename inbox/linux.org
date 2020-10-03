@@ -25,12 +25,3 @@
   + [[https://en.wikipedia.org/wiki/List_of_Linux_distributions][List of Linux distributions - Wikipedia]]
   + [[https://juejin.im/post/5d93f518518825092e15ec62][2019 年最好的 Linux 发行版 - 掘金]]
 
-* 登录认证
-  kint……
-
-* 同步服务
-  + samba - 感觉不好用
-  + [[https://www.cnblogs.com/f-ck-need-u/p/7220009.html][第2章 rsync(一)：基本命令和用法 - 骏马金龙 - 博客园]] - 还是 rsync 快
-  + [[https://stackoverflow.com/questions/13713101/rsync-exclude-according-to-gitignore-hgignore-svnignore-like-filter-c][git - rsync exclude according to .gitignore & .hgignore & svn:ignore like --filter=:C - Stack Overflow]]
-
-

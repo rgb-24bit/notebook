@@ -6,6 +6,7 @@
 - [[#ffmpeg][ffmpeg]]
 - [[#nc][nc]]
 - [[#search][search]]
+- [[#figlet][FIGlet]]
 
 * curl
   curl 的常用选项如下：
@@ -130,4 +131,7 @@
 
   更多的可以参考：
   + [[https://github.com/syl20bnr/spacemacs/blob/develop/doc/DOCUMENTATION.org#searching][Searching - With an external tool]]
+
+* FIGlet
+  可以通过 FIGlet 生成字符画。
 

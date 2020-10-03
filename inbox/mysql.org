@@ -1,22 +1,3 @@
-* Future
-** InnoDB
-  + [[https://zhuanlan.zhihu.com/p/65811829][InnoDB Buffer Pool详解 - 知乎]]
-
-** 查询优化   
-   + [[https://www.cnblogs.com/youyoui/p/7851007.html][MySQL 分页查询优化 - 悠悠i - 博客园]]
-   + [[https://www.jianshu.com/p/6446c0118427][数据库索引创建与优化 - 简书]]
-
-* 分区
-  MySQL 中可以在服务器层确定数据在那个分区，减少了 I/O 操作的次数，同时可以通过过滤分区的方式提高查询效率。
-
-* 回表查询
-  + [[https://www.cnblogs.com/myseries/p/11265849.html][MySQL优化：如何避免回表查询？什么是索引覆盖？ (转) - myseries - 博客园]]
-  + [[https://tech.meituan.com/2014/06/30/mysql-index.html][MySQL 索引原理及慢查询优化 - 美团技术团队]] - 磁盘 IO 与预读 - 图
-
-* log
-  + [[https://www.cnblogs.com/wy123/p/8365234.html][MySQL中的重做日志（redo log），回滚日志（undo log），以及二进制日志（binlog）的简单总结 - MSSQL123 - 博客园]]
-  + [[https://laijianfeng.org/2019/03/MySQL-Binlog-%E4%BB%8B%E7%BB%8D/][MySQL Binlog 介绍 | 小旋锋]]
-
 * VARCHAR 碎片
   插入为了性能，都是直接添加到末尾。否则需要维护空闲列表。
 
@@ -28,12 +9,6 @@
   + MySQL只对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE
   + 分页查询优化：将查询落到索引上，根据索引字段定位后，才取出相应内容，避免回表查询
   
-* myisam
-  + [[https://www.cnblogs.com/jayxuan/p/10711435.html][MyIASM 和 Innodb 引擎详解 - 小虾同学 - 博客园]]
-
 * 字段类型
   + [[https://segmentfault.com/q/1010000000121702][Mysql时间字段格式如何选择，TIMESTAMP，DATETIME，INT？ - SegmentFault 思否]]
-
-* 查询
-  + [[https://stackoverflow.com/questions/12125904/select-last-n-rows-from-mysql][database - Select last N rows from MySQL - Stack Overflow]]
 

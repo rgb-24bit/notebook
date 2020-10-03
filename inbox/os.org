@@ -1,9 +1,0 @@
-* 基本知识
-  + [[https://www.cnblogs.com/lemaden/p/10134472.html][操作系统-并发控制原理及其实现 - lemaden - 博客园]]
-
-* 共享内存
-  + [[https://blog.csdn.net/ljianhui/article/details/10253345][Linux进程间通信——使用共享内存_运维_ljianhui的专栏-CSDN博客]]
-
-* 进程线程
-  + [[https://blog.csdn.net/wang664626482/article/details/52523303][父进程，子进程，线程之间的关系_C/C++_TBViwer-CSDN博客]]
-

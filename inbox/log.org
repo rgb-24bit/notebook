@@ -1,1 +1,0 @@
-+ [[https://docs.graylog.org/en/2.3/pages/queries.html][Searching — Graylog 2.3.2 documentation]]
