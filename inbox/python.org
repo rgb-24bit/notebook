@@ -1,0 +1,8 @@
+* re
+  re.findall
+  #+begin_quote
+  Return all non-overlapping matches of pattern in string, as a list of strings. The string is scanned left-to-right, and matches are returned in the order found.
+  _If one or more groups are present in the pattern, return a list of groups; this will be a list of tuples if the pattern has more than one group._
+  Empty matches are included in the result.
+  #+end_quote
+

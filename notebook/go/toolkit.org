@@ -1,8 +1,13 @@
 #+TITLE:      Go Toolkit
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#data-race-detector][Data Race Detector]]
 - [[#相关链接][相关链接]]
 
+* Data Race Detector
+  在并发编程中，race condition 是常见的一个问题，在 Go 中，可以通过 -race 参数来检测排查问题：
+  + [[https://golang.org/doc/articles/race_detector.html][Data Race Detector - The Go Programming Language]]
+  
 * 相关链接
   + [[https://docs.hacknode.org/gopl-zh/ch10/ch10-07.html][工具 | Go语言圣经]]
 

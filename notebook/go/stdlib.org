@@ -10,6 +10,7 @@
 - [[#runtime][runtime]]
 - [[#nethttp][net/http]]
 - [[#ioutil][ioutil]]
+- [[#sync][sync]]
 
 * atmoic
   在并发场景下，如果能够使用原子操作替代互斥锁，那么，往往能够在保证并发安全的同时得到更好的性能表现。
@@ -179,3 +180,17 @@
   参考：
   + [[https://golang.org/pkg/io/ioutil/#example_ReadDir][ioutil - The Go Programming Language]]
 
+* sync
+  可以使用 sync.Pool 来管理重复使用临时对象：
+  #+begin_src go
+    pool := &sync.Pool{
+      New: func () interface{} {
+        return new(struct{}{})
+      },
+    }
+
+    pool.Get()
+    pool.Put(...)
+  #+end_src
+
+  

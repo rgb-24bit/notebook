@@ -1,0 +1,146 @@
+* 采集
+  打点方式通常有：
+  1. Gauge/Store - 直接原样存储上传的值，通常会存储一个采样周期内最后上传的值，适用于只关注每个周期最新状态的监控采集，如线程数，连接数，消费积压量
+  2. Counter - 将上传的值类加起来作为新值，关注的是变化量和变化速率
+  3. Histogram/Timer - 将采样周期内打上来的值缓存起来，然后在采样周期结束时统计本采样周期内打上来的值，通常会重写为多个 metric 带上不同的统计指标后缀，
+     如 .min/.max/.avg/.sum/.counter/.pct50/.pct90/.pct95/.pct99
+
+  metrics 打点的格式通常类似 metrics{tagkv}=value 的形式。
+
+  参考：
+  + [[https://prometheus.io/docs/concepts/metric_types/][Metric types | Prometheus]]
+
+* 存储
+  时序数据库 - Prometheus(spring cloud), opentsdb, influxdb
+
+* 使用
+** opentsdb qurry
+   数据结构：
+   #+begin_example
+     DataPoint(timetamp: long, value: double)
+     DataPointSet: Collection<DataPoint>
+     Tag(key: string, value: string)
+     TagSet: Collection<Tag>
+     InputRecord(metric: string, tags: TagSet, dp: DataPoint)
+     TimeSeries(metric: string, tags: TagSet, dps: DataPointSet)
+   #+end_example
+
+   输入的记录 InputRecord 被存储到 metric 和 tags 相同的 TimeSeries:
+   #+begin_example
+     InputRecord: throughput{host=a}(now: 20)...
+     TimeSeries: throughput{host=a}(now-1: 20, now-2: 30...)
+   #+end_example
+
+   查询时首先根据 metric 和 tags 过滤时序数据：
+   #+begin_example
+     sum:rate:5m-avg-none:throughput:{host=a}
+
+     TimeSeries:
+     throughput{host=a, service=m}(now-1: 20, now-2: 30...)
+     throughput{host=b, service=n}(now-1: 20, now-2: 30...)
+     throughput{host=a, service=n}(now-1: 20, now-2: 30...)
+     ...
+
+     Filter:
+     throughput{host=a, service=m}(now-1: 20, now-2: 30...)
+     throughput{host=a, service=n}(now-1: 20, now-2: 30...)
+     ...
+   #+end_example
+
+   求导（常用于 counter 类型的时序数据）：
+   #+begin_example
+     TimeSeries:
+     throughput{host=a, service=m}(now-60: 10, now-30: 15...)
+
+     Rate:
+     throughput{host=a, service=m}(now-60: 0.33, now-30: 0.16...)
+   #+end_example
+
+   降采样：
+   #+begin_example
+     30s:
+     throughput{host=a, service=m}(now-60: 0.33, now-30: 0.16...)
+
+     5m-avg(300s):
+     throughput{host=a, service=m}(now-600: 0.33, now-300: 0.16...)
+   #+end_example
+
+   分组，根据查询时指定的 tag：
+   #+begin_example
+     throughput{host=a, service=m}(now-600: 0.33, now-300: 0.16...)
+
+     host=a:
+     throughput{host=a, service=m}(now-600: 0.33, now-300: 0.16...)
+
+     host=xxx:
+     ...
+   #+end_example
+
+   将分组数据按照指定的聚合方式进行聚合（查某个 host qps 的时候，自然会将所有 host 相同的时序数据加起来）：
+   #+begin_example
+     sum:
+     throughput{host=a, service=m}(now-600: 0.33, now-300: 0.16...)
+   #+end_example
+
+   查询语句分解：
+   #+begin_example
+     sum:rate:5m-avg-none:throughput:{host=a}
+
+     sum: 聚合方式
+     rate: 求导
+     5m-avg-none: 降采样方式
+     throughput:{host=a}： 过滤条件
+   #+end_example
+   
+   聚合方式：
+   |--------+------------------------+--------------|
+   | 聚合器 | 描述                   | 插值         |
+   |--------+------------------------+--------------|
+   | avg    | 数据点平均值           | 线性插值     |
+   | count  | 集合中原始数据点的数量 | 0 替换缺失值 |
+   | min    | 筛选最小的数据点       | 线性插值     |
+   | max    | 筛选最大的数据点       | 线性插值     |
+   | p50    | 计算 50%               | 线性插值     |
+   | p75    | 计算 75%               | 线性插值     |
+   | p90    | 计算 90%               | 线性插值     |
+   | p95    | 计算 95%               | 线性插值     |
+   | p99    | 计算 99%               | 线性插值     |
+   | p999   | 计算 999%              | 线性插值     |
+   | sum    | 将数据点一起求和       | 线性插值     |
+   | zimsum | 将数据点一起求和       | 0 替换缺失值 |
+   |--------+------------------------+--------------|
+
+   降采样包括三个参数，分别为
+   1. 时间间隔 - 表示希望的输出结果的间隔，对于指定间隔内存在点（一个或多个）的情况，会按照上面指定的聚合策略将这些点的值进行聚合，仅显示聚合后的一个点。对于指定时间间隔内不存在点的情况，会按照补点策略进行补点
+   2. 聚合策略
+      + none 代表不 downsample，指定之后其他 downsample 选项（downsample 间隔，downsample 补点策略）失效
+      + sum/avg/min/max/count 表示将同一个 tagkvset 的 dps(DataPointSet) 在 downsample 间隔内的所有点时间维度上聚合成一个点显示
+   3. 补点策略 - 包括 none, nan, zero, int。如果在 downsample 间隔内一个点都没有，在 downsample 阶段会进行补点。none 表示不补点；nan 表示补上 nan（在 grafana 上面显示的时候 nan 与数之间并没有连线）；
+      zero 表示补上 0；int 表示以前面和后面的值的线性插值进行补点。
+      
+   rate，一般 rate{counter} 就够了
+   + counter - 过滤零值
+   + counterMax - 最大值
+   + resetValue - 超过该值后返回 0
+   + dropResets - 是否只是简单地丢弃滚存或重置数据点
+
+   参考：
+   + [[http://opentsdb.net/docs/build/html/user_guide/query/index.html][Querying or Reading Data — OpenTSDB 2.4 documentation]]
+   + [[http://opentsdb.net/docs/build/html/api_http/query/index.html][/api/query — OpenTSDB 2.4 documentation]]
+
+** bosun
+   bosun 定义了 Scalar、NumberSet 和 SeriesSet（时序数据），在使用不同数据源的时候，bosun 能够将查寻结果统一处理为 SeriesSet，
+   支持各种运算。
+
+   参考：
+   + [[https://bosun.org/expressions#qquery-string-startduration-string-endduration-string-seriesset][Expression Documentation · Bosun]]
+
+* 流程
+  1. cleint/agent 根据指定的打点方式将数据上传至数据库保存
+  2. 通过对应数据库的查询语法查询数据
+  3. 使用 bosun expression 查询处理数据
+  4. 使用 grafana 查询数据，支持 bosun expression
+
+
+* 其他
+  + [[https://zhuanlan.zhihu.com/p/28075841][Logging,Metrics 和 Tracing - 知乎]]

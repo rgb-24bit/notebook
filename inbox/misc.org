@@ -1,0 +1,6 @@
+* SRE
+  + [[https://changchen.me/blog/20180403/impressions-of-google-sre/][《Site Reliability Engineering》by Google 读书笔记 | Henry Z's blog~]]
+
+* editorconfig
+  + [[https://github.com/editorconfig/editorconfig-core-c/blob/master/INSTALL.md][editorconfig-core-c/INSTALL.md at master · editorconfig/editorconfig-core-c]]
+
