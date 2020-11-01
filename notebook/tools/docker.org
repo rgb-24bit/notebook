@@ -90,15 +90,14 @@
    #+begin_src json
      {
        "registry-mirrors": [
-         "https://dockerhub.azk8s.cn",
-         "https://reg-mirror.qiniu.com"
+         "https://hub-mirror.c.163.com",
+         "https://mirror.baidubce.com"
        ]
      }
    #+end_src
 
    保存配置后重启服务就可以了，参考：[[https://yeasy.gitbooks.io/docker_practice/install/mirror.html][镜像加速器 · Docker —— 从入门到实践]]
 
-   
 ** 停止或移除所有 Containers
    #+begin_src sh
      docker stop $(docker ps -a -q)

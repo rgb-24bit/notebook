@@ -7,6 +7,7 @@
 - [[#使用不同的配置][使用不同的配置]]
 - [[#workflow][workflow]]
 - [[#合并多个-commit-为一个][合并多个 commit 为一个]]
+- [[#配置选项-coreautocrlf-的使用][配置选项 core.autocrlf 的使用]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
@@ -60,4 +61,10 @@
   #+end_example
   
   包含二进制文件时可以在 diff 后添加 --binary 参数。
+
+* 配置选项 core.autocrlf 的使用
+  选项 core.autocrlf 有三个值，各自的作用分别为：
+  + =true= - 提交时将 CRLF 转换为 LF，签出时转换为 CRLF
+  + =input= - 提交时将 CRLF 转换为 LF，签出时不转换
+  + =false= - 不进行任何处理
 

@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#base64-编码][Base64 编码]]
+  - [[#urlsafe-base64][urlsafe base64]]
 - [[#lru-cache][LRU Cache]]
 - [[#bitmap][BitMap]]
 - [[#bloomfilter][BloomFilter]]
@@ -89,6 +90,10 @@
 
   参考链接：：
   + [[https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/Base64][Algorithm Implementation/Miscellaneous/Base64 - Wikibooks, open books for an open world]]
+
+** urlsafe base64
+   由于标准的 Base64 编码后可能出现字符 + 和 /，在 URL 中就不能直接作为参数，所以又有一种 "url safe"  的 base64 编码，
+   把字符 + 和 / 分别变成 - 和 _。
 
 * LRU Cache
   LRU Cache 需要保证最近访问的节点保持在限定容量的 Cache 中，如果超过容量则应该把近期最少使用的节点删除掉。
