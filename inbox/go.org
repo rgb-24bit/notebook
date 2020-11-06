@@ -1,0 +1,5 @@
+* 资料
+  + [[https://chai2010.cn/advanced-go-programming-book/][Introduction · Go语言高级编程]]
+  + [[https://github.com/chai2010/go2-book][chai2010/go2-book: 《Go2编程指南》开源图书，重点讲解Go2新特性，以及Go1教程中较少涉及的特性]]
+  + [[https://draveness.me/golang/][Go 语言设计与实现 | Go 语言设计与实现]]
+

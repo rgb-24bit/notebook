@@ -6,3 +6,7 @@
   Empty matches are included in the result.
   #+end_quote
 
+* poetry
+  + [[https://github.com/python-poetry/poetry][python-poetry/poetry: Python dependency management and packaging made easy.]]
+  + [[https://zhuanlan.zhihu.com/p/81025311][相比 Pipenv，Poetry 是一个更好的选择 - 知乎]]
+

@@ -12,6 +12,7 @@
 - [[#git-archive][git archive]]
 - [[#git-merge][git merge]]
 - [[#git-fetch][git fetch]]
+- [[#git-stash][git stash]]
 
 * git clone
   + 克隆远程库时指定分支或标签：
@@ -153,4 +154,35 @@
   #+begin_src bash
     git fetch -p
   #+end_src
+
+* git stash
+  暂存（类似栈，最近暂存的在栈顶）：
+  #+begin_example
+    git stash <save> <message>
+  #+end_example
+  
+  恢复：
+  #+begin_example
+    git stash pop
+    git stash apply
+  #+end_example
+
+  查看：
+  #+begin_example
+    git stash list
+  #+end_example
+  
+  移除：
+  #+begin_example
+    git stash drop
+  #+end_example
+
+  查看 diff：
+  #+begin_example
+    git stash show
+    git stash show -p
+  #+end_example
+
+  参考：
+  + [[https://www.cnblogs.com/tocy/p/git-stash-reference.html][git-stash 用法小结 - Tocy - 博客园]]
 

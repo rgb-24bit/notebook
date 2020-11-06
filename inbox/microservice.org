@@ -1,0 +1,3 @@
+* FaaS
+  + [[https://aws.amazon.com/cn/blogs/china/iaas-faas-serverless/][从IaaS到FaaS—— Serverless架构的前世今生 | 亚马逊AWS官方博客]]
+

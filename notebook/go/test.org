@@ -3,7 +3,10 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#gotestsum][gotestsum]]
 - [[#monkey][Monkey]]
-- [[#testify][testify]]
+- [[#ginkgo][ginkgo]]
+- [[#golangci-lint][golangci-lint]]
+- [[#gomock][gomock]]
+- [[#assert][assert]]
 - [[#相关问题][相关问题]]
   - [[#使用-go-test-测试所有包][使用 go test 测试所有包]]
 
@@ -11,10 +14,14 @@
   #+begin_quote
   gotestsum runs tests using go test --json, prints friendly test output and a summary of the test run. It is designed for both local development, and running tests in a CI system.
   #+end_quote
+  
+  PS: 其实用 Ginkgo 的话这个感觉也没有使用的必要了
 
   + [[https://github.com/gotestyourself/gotestsum][GitHub - gotestyourself/gotestsum: 'go test' runner with output optimized for humans, JUnit XML for CI integration, and a summary of the test results.]]
 
 * Monkey
+  NOTE：在 macOS Catalina 上该库似乎存在问题，谨慎使用。
+
   函数/过程打桩：
   #+begin_src go
     guard := monkey.Patch(function, func(...) (...) {
@@ -44,7 +51,101 @@
 
   + [[https://studygolang.com/articles/11296][Monkey框架使用指南 - Go语言中文网 - Golang中文社区]]
   
-* testify
+* ginkgo
+  使用 ginkgo 来编写 go 的测试用例时，需要在对应包下面执行 ginkgo bootstrap 命令，生成 suite_test 文件，类似：
+  #+begin_src go
+    package pkg_test
+
+    import (
+      "testing"
+
+      . "github.com/onsi/ginkgo"
+      . "github.com/onsi/gomega"
+    )
+
+    func TestPkg(t *testing.T) {
+      RegisterFailHandler(Fail)
+      RunSpecs(t, "Pkg Suite")
+    }
+  #+end_src
+
+  然后在其他测试文件中编写类似如下形式的测试用例：
+  #+begin_src go
+    import 	. "github.com/onsi/ginkgo"
+
+    var _ = Describe("test strings package", func() {
+      t := GinkgoT()
+
+      Context("strings.Contains()", func() {
+        When("the string contains the substring in the middle", func() {
+          It("returns `true`", func() {
+            // ...
+          })
+        })
+      })
+    })
+  #+end_src
+
+  需要注意的是，真正执行测试时，测试是从 suite_test 开始的，在 suite_test 开始前，其他测试文件中的 Describe、Context、When、It 的执行是在包初始化阶段完成的，而 It 注册的函数才是最终要执行的用例。
+
+  因此，注意依赖初始化的位置！！！
+
+  模板：
+  #+begin_example
+    import 	. "github.com/onsi/ginkgo"
+
+    var _ = Describe("$NAME$", func() {
+      t := GinkgoT()
+	
+      $END$
+    })
+  #+end_example
+
+  命令：
+  #+begin_example
+    echo "[+] run ginkgo"
+    ginkgo -noColor -timeout=30m                              \
+           -r -cover -coverprofile=coverage.out -outputdir=.  \
+           -coverpkg=./... ./...                              \
+           -covermode count
+  #+end_example
+
+  链接：[[https://github.com/onsi/ginkgo][onsi/ginkgo: BDD Testing Framework for Go]]
+
+* golangci-lint
+  简单使用方式：
+  #+begin_example
+    golangci-lint run -v --fix
+  #+end_example
+
+  可以使用如下注释关闭针对该行、函数、包的 lint 检测：
+  #+begin_src go
+    // nolint
+    // nolint:linter
+    // nolint // comment
+  #+end_src
+  
+  + [[https://github.com/golangci/golangci-lint][golangci/golangci-lint: Fast linters Runner for Go]]
+
+* gomock
+  gomock 的使用还是比较简单的，主要就是两步：
+  1. 生成 mock 文件，两种方式：
+     #+begin_example
+       mockgen -package <target_package_name> -destination <target_file_name> <package_path> <interface...>
+       mockgen -source=foo.go [other options]
+     #+end_example
+  2. 使用，就更简单了，直接 Any、Return、AnyTimes 走起：
+     #+begin_src go
+       controller := gomock.NewController(t)
+
+       mockXXX := mock.NewMockXXX(controller)
+
+       mockXXX.EXPECT().XXXMethod().Return(XXX).AnyTimes()
+     #+end_src
+
+  + [[https://github.com/golang/mock][golang/mock: GoMock is a mocking framework for the Go programming language.]]
+
+* assert
   + [[https://github.com/stretchr/testify][GitHub - stretchr/testify: A toolkit with common assertions and mocks that plays nicely with the standard library]]
 
 * 相关问题
