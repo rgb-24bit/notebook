@@ -9,6 +9,7 @@
 - [[#auto-fill-mode][auto-fill-mode]]
 - [[#overwrite-mode][overwrite-mode]]
 - [[#which-function-mode][which-function-mode]]
+- [[#picture-mode][picture-mode]]
 
 * abbrev-mode
   可以通过定义缩写的方式避免一些编码错误，比如：
@@ -52,4 +53,8 @@
 * which-function-mode
   用于在状态栏显示当前位于那个函数，当函数很长的时候回很有用，在 =org= 中显示的是 headline：
   + [[help:which-function-mode]]
+
+* picture-mode
+  能够让你的光标自由移动，参考：
+  + [[https://stackoverflow.com/questions/13036465/emacs-mode-for-free-cursor-positioning][Emacs mode for "free" cursor positioning - Stack Overflow]]
 

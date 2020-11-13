@@ -1,3 +1,0 @@
-+ [[https://opentracing.io/specification/][OpenTracing specification]]
-+ [[https://www.w3.org/TR/trace-context/][Trace Context]]
-

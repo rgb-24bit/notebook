@@ -3,6 +3,8 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概览][概览]]
 - [[#finagle][Finagle]]
+- [[#thrift][Thrift]]
+  - [[#使用不规范导致的-bug-记录][使用不规范导致的 BUG 记录]]
 - [[#相关链接][相关链接]]
 
 * 概览
@@ -23,6 +25,29 @@
   + [[http://skaka.me/blog/2016/05/02/finagle3/][微服务框架 Finagle 介绍 Part3: 在 Finagle 中开发基于 Thrift 协议的应用 - skaka的博客]]
   + [[https://www.infoq.cn/article/2014/05/twitter-finagle-intro][Twitter 的 RPC 框架 Finagle 简介 - InfoQ]]
   + [[http://kapsterio.github.io/thrift/2016/10/20/thrift-async-server.html][thrift async server · kaspterio]]
+
+* Thrift
+** 使用不规范导致的 BUG 记录
+   + 问题现象：客户端和服务端 IDL 文件版本不一致，客户端给一个字段传值了，但是服务端接收处理后得到的结果为 nil
+   + 问题原因：修改 IDL 文件的过程中，对旧字段的 index 进行了修改，导致客户端和服务端 IDL 字段 index 的不兼容
+   
+   thrift 生成的代码：
+   #+begin_src go
+     case 3:
+     if fieldTypeId == thrift.LIST {
+       if err := p.ReadField3(iprot); err != nil {
+         return err
+       }
+     } else {
+       if err := iprot.Skip(fieldTypeId); err != nil {
+         return err
+       }
+     }
+   #+end_src
+   
+   当修改了字段 index 导致字段类型不一样时，服务端读取到客户端的传参，发现类型不一样会 SKIP 掉，得到 nil。
+
+   PS：所以为啥不是返回一个 err 而是直接 skip 呢……
 
 * 相关链接
   + [[https://www.cnkirito.moe/rpc-registry/][深入理解 RPC 之服务注册与发现篇 | 徐靖峰|个人博客]]

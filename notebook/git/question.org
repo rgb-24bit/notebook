@@ -21,6 +21,7 @@
 - [[#git-clone---depth-1-之后获取完整记录][git clone --depth 1 之后获取完整记录]]
 - [[#如何删除远程分支][如何删除远程分支]]
 - [[#how-do-i-check-out-a-remote-git-branch][How do I check out a remote Git branch?]]
+- [[#git-merge--rebase-的区别][git merge & rebase 的区别]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -221,4 +222,48 @@
 
   参考：
   [[https://stackoverflow.com/a/1783426/8177747][git checkout - How do I check out a remote Git branch? - Stack Overflow]]
+
+* git merge & rebase 的区别
+  #+HTML: <img src="https://git-scm.com/book/en/v2/images/basic-rebase-1.png">
+
+  对于如上两个分支来说，merge 和 rebase 需要解决的问题是这样的：
+  1. 我们需要同时保留 C4 和 C3 相对于 C2 已经作出的修改
+  2. git commit 对象是不可变的，也就是说，我们不可能通过修改 C4 或 C3 对象应用另一个分支上的修改
+  3. git ref 只是一个引用，是可以随便修改的
+
+  在这样的情况下，git 需要同时保留 C4 和 C3 相对于 C2 已经作出的修改，那么，做法就是创建一个新的 commit 对象，
+  这个 commit 对象同时应用了 C4 和 C3 相对于 C2 已经作出的修改，并将 ref 指向该提交。
+
+  而 merge 和 rebase 的区别就在于，创建新 commit 对象的策略不一样：
+  + merge 会基于 C2、C3、C4 做一个三方合并，创建一个 merge commit 对象，该对象同时存在两个父 commit，得到的效果如下：
+    #+HTML: <img src="https://git-scm.com/book/en/v2/images/basic-rebase-2.png">
+  + rebase 的策略是：
+    1. 选择一个基准分支，这个分支的 commit 记录保留不动，将另一个分支相对于最近公共祖先的修改提取出来，作为临时文件（patch）保存
+    2. 将这些临时文件依次应用在基准分支上
+    3. 将 ref 指向最新的分支
+
+    得到的效果如下：
+    #+HTML: <img src="https://git-scm.com/book/en/v2/images/basic-rebase-3.png">
+    
+  简单来说，在这个过程中，merge 只会创建一个新的 merge commit 对象，但是该对象存在两个父 commit，在历史记录上可能不好看。
+  而 rebase 可能创建多个 commit 对象，但是历史记录好看。
+  
+  也就是说使用 merge 最终在历史记录上能够看到的 commit 对象会比 rebase 多一个。
+
+  但是 rebase 这样的做法，会篡改历史记录，假如这个分支关联了远程分支，那么这时就需要：
+  1. push -f 远程分支
+  2. 或重新 rebase 远程分支
+
+  在 rebase 的过程中，git 或通过一些额外的操作避开相同的修改：
+  1. 检查哪些提交是我们的分支上独有的
+  2. 检查其中哪些提交不是合并操作的结果
+  3. 检查哪些提交在对方覆盖更新时并没有被纳入目标分支
+  4. 把查到的这些提交应用在基准分支上
+
+  PS：包括 cherry-pick、commit --amend 操作的本质都是创建了新的 commit 对象，并将 ref 指向新的 commit 对象，旧的 commit 对象其实还存在的，
+  直到被 git gc 删除。
+
+  参考：
+  + [[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6][Git - 分支的新建与合并]]
+  + [[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA][Git - 变基]]
 

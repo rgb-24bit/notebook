@@ -1,0 +1,22 @@
+#+TITLE:      Text Processing Services
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#re][re]]
+
+* re
+  函数 re.findall 提供了一个很棒的特性：
+  #+begin_quote
+  _If one or more groups are present in the pattern, return a list of groups; this will be a list of tuples if the pattern has more than one group._
+  #+end_quote
+
+  效果：
+  #+begin_example
+    >>> text = 'good good study, day day up!'
+    >>> re.findall(r'\w+', text)
+    ['good', 'good', 'study', 'day', 'day', 'up']
+    >>> re.findall(r'g(\w+)d', text)
+    ['oo', 'oo']
+    >>> re.findall(r'(g(\w+)d)', text)
+    [('good', 'oo'), ('good', 'oo')]
+  #+end_example
+

@@ -1,0 +1,8 @@
+#+TITLE:      Serverless
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#faas][FaaS]]
+
+* FaaS
+  + [[https://aws.amazon.com/cn/blogs/china/iaas-faas-serverless/][从 IaaS 到 FaaS—— Serverless 架构的前世今生 | 亚马逊 AWS 官方博客]]
+
