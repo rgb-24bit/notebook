@@ -128,6 +128,7 @@
   + [Git 内部原理](notebook/git/principle.org)
   + [Git 问题集](notebook/git/question.org)
   + [Git 使用规范](notebook/git/style.org)
+  + [git submodule](notebook/git/submodule.org)
   + [Git 使用技巧](notebook/git/trick.org)
 ## go
   + [Go Development](notebook/go/dev.org)

@@ -47,6 +47,8 @@
 ** 内置函数
    + 内置函数 super 长用来调用父类的方法，一般形式为 ~super(class, self)~, 可以参考：[[https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html][Python: super 没那么简单 - Huang Huang 的博客]]
 
+     当然，Python3 可以通过 =super()= 的形式调用。
+
    + 内置函数 staticmethod 通常作为装饰器使用，未被 ~staticmethod~ 装饰的方法， 如果没有绑定 ~self~ 变量，那么这个方法可以用类名访问， 但是不能用实例访问。
      使用 ~staticmethod~ 来装饰方法， 那么这个方法既可以使用类名访问，也可以使用实例访问。
 
@@ -268,6 +270,7 @@
 
 ** 生命周期
    ~Python~ 的垃圾回收是根据 *引用计数* 来判断的， 当一个对象的 *引用* 为 0 时，该对象便会被回收。
+
 * 作用域
   ~Python~ 没有块级作用域, 也就是: ~if/elif/else/ try/except for/while~ 内定义的变量，外部也是可以访问的。
 

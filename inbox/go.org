@@ -1,4 +1,3 @@
 * 资料
   + [[https://draveness.me/golang/][Go 语言设计与实现 | Go 语言设计与实现]]
-  + [[https://chai2010.cn/advanced-go-programming-book/][Introduction · Go语言高级编程]]
 

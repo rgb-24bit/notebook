@@ -1,0 +1,16 @@
+#+TITLE:      git submodule
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#相关问题][相关问题]]
+  - [[#how-to-mv-or-rm-submodule][how to `mv' or `rm' submodule]]
+
+* 相关问题
+** how to `mv' or `rm' submodule
+   mv 比较简单：
+   #+begin_example
+     $ git mv old/submod new/submod
+   #+end_example
+
+   删除比较复杂，参考：
+   + [[https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule][git - How do I remove a submodule? - Stack Overflow]]
+

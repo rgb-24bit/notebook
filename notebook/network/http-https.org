@@ -89,6 +89,9 @@
    使用 HTTP 协议时，常常会通过 Cookie 来使的基于无状态的 HTTP 协议能够记录稳定的状态信息，Cookie 可以通过 ~Set-Cookie~ 创建：
    + 默认情况下，不指定 ~Expires~ 或 ~Max-Age~ 时创建的 Cookie 为会话期 Cookie，关闭页面后就会失效
 
+   可以通过 Domain 和 Path 指定 Cookie 的作用域，在没有设置 Secure 属性时，在 http schema 下设置的 cookie 在 https 下也可以访问，
+   反之亦然。
+
    参考：
    + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies][HTTP cookies - HTTP | MDN]]
 

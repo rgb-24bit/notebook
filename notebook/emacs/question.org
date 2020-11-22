@@ -14,6 +14,7 @@
 - [[#spacemacs-中进行粘贴时怎样保留内容缩进格式][Spacemacs 中进行粘贴时怎样保留内容缩进格式]]
 - [[#怎样判断当前的环境是不是终端环境][怎样判断当前的环境是不是终端环境]]
 - [[#如何自定义快捷键][如何自定义快捷键]]
+- [[#编译-emacs][编译 Emacs]]
 
 * 怎样在 org-mode 的表格中插入竖线
   使用符号 ~\vert~ 代替，导出时会显示为竖线，参考：
@@ -105,4 +106,10 @@
   通过 ~local-set-key~ 和 ~local-unset-key~ 设置指定模式下的快捷键。
 
   缓冲区本地快捷键可以参考： [[https://www.emacswiki.org/emacs/BufferLocalKeys][EmacsWiki: Buffer Local Keys]]
+
+  
+* 编译 Emacs
+  1. 需要 makeinfo，但是找不到这个包？
+
+     下载 texinfo 就可以了。
 
