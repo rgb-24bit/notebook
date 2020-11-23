@@ -1740,6 +1740,7 @@
   而 Pointer 就更加爽了，可以包含任意类型变量的地址，然后通过其他方式来操作。
 
 * 相关链接
+  + [[https://draveness.me/golang/][Go 语言设计与实现 | Go 语言设计与实现]]
   + [[https://tour.golang.org/welcome/1][A Tour of Go]]
   + [[https://books.studygolang.com/gopl-zh/][Go 语言圣经]]
 

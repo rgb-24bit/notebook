@@ -6,6 +6,7 @@
 - [[#qos][QoS]]
 - [[#绩效][绩效]]
 - [[#mutaleimmutable][mutale/immutable]]
+- [[#cc][CC]]
 
 * noop
   在自定义协议的时候，常常可以用 ~noop~ 这个单词来代表无，比如：
@@ -41,4 +42,8 @@
 
 * mutale/immutable
   可变和不可变对象，在并发编程的场景下，用它们来命名是很好的。
+
+
+* CC
+  CC 英文全称是 Carbon Copy(抄送)
 

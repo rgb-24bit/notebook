@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#动态-dns-和静态-dns][动态 DNS 和静态 DNS]]
+- [[#泛域名][泛域名]]
 - [[#相关问题][相关问题]]
   - [[#如何在-windowslinuxmacos-中快速的切换-dns][如何在 Windows、Linux、MacOS 中快速的切换 DNS]]
   - [[#首选-dns-和备选-dns-的区别][首选 DNS 和备选 DNS 的区别]]
@@ -14,6 +15,10 @@
 
   而指定静态 DNS 往往可以省略本地 DNS 查询这一步，提高 DNS 的解析速度，缺点就是无法解析本地网络下的域名。
 
+* 泛域名
+  类似 *.example.com 的域名，允许将 *.example.com 解析到同一地址，参考：
+  + [[https://en.wikipedia.org/wiki/Wildcard_DNS_record][Wildcard DNS record - Wikipedia]]
+  
 * 相关问题
 ** 如何在 Windows、Linux、MacOS 中快速的切换 DNS
    Windows 中可以通过命令 ~netsh~ 进行 DNS 切换，具体操作可以参考：

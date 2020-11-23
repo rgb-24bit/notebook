@@ -1,3 +1,0 @@
-* 资料
-  + [[https://draveness.me/golang/][Go 语言设计与实现 | Go 语言设计与实现]]
-

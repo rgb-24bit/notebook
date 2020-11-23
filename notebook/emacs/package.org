@@ -1,0 +1,50 @@
+#+TITLE:      Emacs - Package
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#load-package][load package]]
+- [[#package-manager][package manager]]
+
+* load package
+  Emacs 加载包的逻辑还是比较简单的，就是通过 load 函数和 load-path 取找包，找的到就加载。
+
+  load 的加载顺序为：
+  #+begin_example
+    filename.elc -> filename.el -> filename.ext -> filename
+
+    filename.gz
+  #+end_example
+
+  使用 require 会判断 feature 中是否存在要加载的服务，不存在才调用 load 加载。
+
+  位于 load-path 前面的包会被优先加载，因此，当第三方包和内置包同名时， 在 load-path 前面的才会被加载。
+
+  通过 add-to-list 添加的 path 会放在 load-path 前面，而 normal-top-level-add-subdirs-to-load-path 添加的 path 在后面，
+  如果想要使用 normal-top-level-add-subdirs-to-load-path 又希望添加到 path 前面，可以通过这种方式加载：
+  #+begin_src elisp
+    (defun emacsc/add-subdirs-to-load-path (dir)
+      "Recursive add directories to `load-path'."
+      (let ((default-directory (file-name-as-directory dir))
+            (orig-load-path load-path))
+        (setq load-path (cons dir nil))
+        (normal-top-level-add-subdirs-to-load-path)
+        (nconc load-path orig-load-path)
+        (delete-dups load-path)))
+  #+end_src
+
+  参考：
+  + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Loading.html#Loading][Loading]]
+
+* package manager  
+  Emacs 除了内置的 package.el 以外还有其他如 el-get、quelpa、straight 这些第三方包管理器。
+
+  就我理解，这些包管理器主要干两件事：
+  + 下载包并将包路径添加到 load-path
+  + install info
+
+  对于默认的 package.el 来说，老版本的 emacs 需要在 inite. 开头调用 package-initialize 将下载的包路径添加到 load-path，
+  而新版本就不需要了。
+
+  而包的加载和配置可以用内置的 require、load 或者第三方工具如 use-package 完成，use-package 使用参考：
+  + [[https://phenix3443.github.io/notebook/emacs/modes/use-package-manual.html][use-package manual]]
+
+
