@@ -15,6 +15,7 @@
 - [[#mysql-如何对死锁进行检测][MySQL 如何对死锁进行检测]]
 - [[#mysql-中-varchar-类型到底能存多少汉字][MySQL 中 VARCHAR 类型到底能存多少汉字]]
 - [[#join-using-和-join-on][JOIN USING 和 JOIN ON]]
+- [[#mysql-中比较操作对于字符串尾空字符的处理][MySQL 中比较操作对于字符串尾空字符的处理]]
 
 * MySQL 中 Schema 和 Database 的区别是什么
   MySQL 中 Schema 和 Database 在语义上是等价的，两者可以等价替换。
@@ -165,4 +166,28 @@
 
   参考：
   + [[https://stackoverflow.com/questions/11366006/mysql-on-vs-using][join - MySQL ON vs USING? - Stack Overflow]]
+
+* MySQL 中比较操作对于字符串尾空字符的处理
+  在测试环境中遇到的问题，执行类似如下的 SQL 时得到了 TRUE 结果：
+  #+begin_src sql
+    SELECT 'string' = 'string   '
+  #+end_src
+
+  当场觉得 SQL 白学了，官方对此的文档是这样的([[https://dev.mysql.com/doc/refman/8.0/en/charset-binary-collations.html#charset-binary-collations-trailing-space-comparisons][link]])：
+  #+begin_quote
+  MySQL collations have a pad attribute, which has a value of PAD SPACE or NO PAD:
+  + Most MySQL collations have a pad attribute of PAD SPACE.
+  + The Unicode collations based on UCA 9.0.0 and higher have a pad attribute of NO PAD; see Section 10.10.1, “Unicode Character Sets”.
+
+  For nonbinary strings (CHAR, VARCHAR, and TEXT values), the string collation pad attribute determines treatment in comparisons of trailing spaces at the end of strings:
+  + For PAD SPACE collations, trailing spaces are insignificant in comparisons; strings are compared without regard to trailing spaces.
+  + NO PAD collations treat trailing spaces as significant in comparisons, like any other character.
+  #+end_quote
+
+  简单来说，对于大多数的编码方式来说，字符串的 = 比较是不会比较尾空串的……
+
+  可以通过 binary 关键字避免这一行为：
+  #+begin_src sql
+    SELECT BINARY 'string' = 'string   '
+  #+end_src
 

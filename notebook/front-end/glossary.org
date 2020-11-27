@@ -1,0 +1,25 @@
+#+TITLE:      Glossary
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#truthy--flasy][Truthy & Flasy]]
+- [[#iife][IIFE]]
+
+* Truthy & Flasy
+  Truthy - 在 Boolean 上下文中认定为 True 的值，Flasy - 在 Boolean 上下文中认定为 False 的值。
+
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy][Truthy（真值） - 术语表 | MDN]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Glossary/Boolean][Boolean - 术语表 | MDN]]
+  + [[https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy][Falsy - 术语表 | MDN]]
+
+* IIFE
+  定义时就立即执行的 JavaScript 函数：
+  #+begin_src js
+    (function () { 
+      var name = "Barry";
+    })();
+  #+end_src
+
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Glossary/%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F][IIFE（立即调用函数表达式） - 术语表 | MDN]]
+

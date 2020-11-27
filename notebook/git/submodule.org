@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#相关问题][相关问题]]
   - [[#how-to-mv-or-rm-submodule][how to `mv' or `rm' submodule]]
+  - [[#change-submodule-remote][change submodule remote]]
 
 * 相关问题
 ** how to `mv' or `rm' submodule
@@ -13,4 +14,13 @@
 
    删除比较复杂，参考：
    + [[https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule][git - How do I remove a submodule? - Stack Overflow]]
+
+** change submodule remote
+   #+begin_example
+     1. edit .gitmodules
+     2. git submodule sync --recursive
+   #+end_example
+
+   参考：
+   + [[https://stackoverflow.com/questions/913701/how-to-change-the-remote-repository-for-a-git-submodule][How to change the remote repository for a git submodule? - Stack Overflow]]
 

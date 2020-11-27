@@ -6,6 +6,7 @@
 - [[#short-variable-declarations][Short variable declarations]]
 - [[#匿名字段][匿名字段]]
 - [[#type-switch][type switch]]
+- [[#comparison-operators][Comparison operators]]
 
 * 类型转换
   当两个结构体忽略 tag 后拥有相同的底层类型，那么就可以进行显示类型转换：
@@ -63,4 +64,30 @@
         // no match; here v has the same type as i
     }
   #+end_src
+
+* Comparison operators
+  在使用 struct{}{} 作为 context 的 key 的时候遇到的问题，两个包下面的 key 值被判相等了 QAQ
+
+  原因：
+  #+begin_quote
+  + Interface values are comparable. Two interface values are equal if they have identical dynamic types and equal dynamic values or if both have value nil.
+  + Struct values are comparable if all their fields are comparable. Two struct values are equal if their corresponding non-blank fields are equal.
+  #+end_quote
+
+  context 的 key 就被转换为 interface 存储，根据 [[file:go.org::*复合类型][复合类型]] 中的描述，当两个结构体不存在 private 字段，同时 public 字段相同时，他们的类型便是一样的。
+
+  而 struct{}{}，不存在任何字段，因此，在任意地方，它们的类型都是一样的，值也是一样的。
+
+  可以通过声明一个类型的方式避免这种情况：
+  #+begin_src go
+    type TA struct{}
+    type TB struct{}
+  #+end_src
+
+  这里 TA 和 TB 是两个类型，同时，TA{} 和 TA{} 的值相等。
+
+  参考：
+  + [[https://en.wikipedia.org/wiki/Bottom_type][Bottom type - Wikipedia]]
+  + [[https://golang.org/ref/spec#Comparison_operators][Comparison operators ¶]]
+  + [[https://en.wikipedia.org/wiki/Unit_type][Unit type - Wikipedia]]
 

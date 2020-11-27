@@ -149,7 +149,9 @@
     var x uint64 = 1<<64 - 1
     fmt.Printf("%d %x; %d %x\n", x, x, int64(x), int64(x))  // => 18446744073709551615 ffffffffffffffff; -1 -1
   #+end_src
-
+  
+  fmt 在输出指针的时候，经常会只输出指针地址，可以通过实现 stringer 接口让 fmt 输出更清楚的内容。
+  
 * json
   tag:
   + omitempty - 字段为零值时省略该字段
@@ -160,7 +162,11 @@
   #+begin_src go
     pattern := regexp.MustCompile(`pattern`)  // 不会返回 error，存在错误就直接 panic
   #+end_src
-
+  
+  操作：
+  + 在字符串开始的地方匹配：正则以 ^ 开头就可以了
+  + 转义正则元字符：regexp.QuoteMeta
+  
   参考：
   + [[https://www.cnblogs.com/golove/p/3269099.html][基础知识 - Golang 中的正则表达式 - GoLove - 博客园]]
 
