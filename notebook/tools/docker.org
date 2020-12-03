@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#docker-架构][Docker 架构]]
 - [[#linux-unionfs][Linux UnionFS]]
+- [[#数据卷][数据卷]]
 - [[#常用容器][常用容器]]
   - [[#mysql][mysql]]
   - [[#redis][redis]]
@@ -11,6 +12,7 @@
 - [[#相关问题][相关问题]]
   - [[#怎样配置-docker-的镜像加速器][怎样配置 Docker 的镜像加速器]]
   - [[#停止或移除所有-containers][停止或移除所有 Containers]]
+- [[#相关资源][相关资源]]
 
 * Docker 架构
   Docker 使用客户端 - 服务器架构模式，使用远程 API 来管理和创建 Docker 容器。
@@ -33,6 +35,28 @@
   参考链接：
   + [[https://www.jianshu.com/p/e3a4b69f649c][Docker 镜像分层存储与镜像精简 - 简书]]
   + [[https://coolshell.cn/articles/17061.html][Docker 基础技术：AUFS | | 酷 壳 - CoolShell]]
+
+* 数据卷
+  数据卷是一个可供一个或多个容器使用的特殊目录，它绕过 UFS，可以提供很多有用的特性：
+  + 数据卷可以在容器之间共享和重用
+  + 对数据卷的修改会立马生效
+  + 对数据卷的更新，不会影响镜像
+  + 数据卷默认会一直存在，即使容器被删除
+
+  数据卷命令：
+  #+begin_src sh
+    $ docker volume create my-vol   # create volume
+    $ docker volume ls
+    $ docker volume inspect my-vol  # info
+    $ docker run -d -P --name web --mount source=my-vol,target=/usr/share/nginx/html nginx:alpine  # mount to container
+    $ docker volume rm my-vol
+    $ docker volume prune
+  #+end_src
+
+  也可以挂载本地/目录：
+  #+begin_src sh
+    docker run -d -P --name web --mount type=bind,source=/src/webapp,target=/usr/share/nginx/html nginx:alpine
+  #+end_src
 
 * 常用容器
 ** mysql
@@ -96,7 +120,7 @@
      }
    #+end_src
 
-   保存配置后重启服务就可以了，参考：[[https://yeasy.gitbooks.io/docker_practice/install/mirror.html][镜像加速器 · Docker —— 从入门到实践]]
+   保存配置后重启服务就可以了。
 
 ** 停止或移除所有 Containers
    #+begin_src sh
@@ -104,3 +128,7 @@
      docker rm $(docker ps -a -q)
    #+end_src
    
+
+* 相关资源
+  + [[https://yeasy.gitbook.io/docker_practice/][Docker —— 从入门到实践]]
+

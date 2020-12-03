@@ -14,6 +14,7 @@
 - [[#32-位到-64-位][32 位到 64 位]]
 - [[#canonical-input][Canonical Input]]
 - [[#程序变量命名的几种叫法][程序变量命名的几种叫法]]
+- [[#hash-avatars][Hash Avatars]]
 
 * 命令行参数语法
   我们在使用 Linux 上的命令时，使用的语法通常为 [[https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html][Argument Syntax (The GNU C Library)]]，但是，不同的平台上语法还是会有些区别。
@@ -144,3 +145,8 @@
   | 拷肉串式       | kebab case | kabab-case |
   |----------------+------------+------------|
   
+* Hash Avatars
+  网站自动为用户生成头像时可以考虑使用 Hash Avatars，参考：
+  + [[https://barro.github.io/2018/02/avatars-identicons-and-hash-visualization/][Avatars, identicons, and hash visualization]]
+
+

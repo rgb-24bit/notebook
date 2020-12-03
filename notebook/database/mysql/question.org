@@ -16,6 +16,7 @@
 - [[#mysql-中-varchar-类型到底能存多少汉字][MySQL 中 VARCHAR 类型到底能存多少汉字]]
 - [[#join-using-和-join-on][JOIN USING 和 JOIN ON]]
 - [[#mysql-中比较操作对于字符串尾空字符的处理][MySQL 中比较操作对于字符串尾空字符的处理]]
+- [[#mysql-时间字段格式如何选择timestampdatetimeint][MySQL 时间字段格式如何选择，TIMESTAMP，DATETIME，INT？]]
 
 * MySQL 中 Schema 和 Database 的区别是什么
   MySQL 中 Schema 和 Database 在语义上是等价的，两者可以等价替换。
@@ -190,4 +191,12 @@
   #+begin_src sql
     SELECT BINARY 'string' = 'string   '
   #+end_src
+
+* MySQL 时间字段格式如何选择，TIMESTAMP，DATETIME，INT？
+  感觉三个类型都可以选择，各有优劣吧：
+  + TIMESTAMP 和 DATETIME 都是事件类型，底层是用 INT 来表示的，但多了一层转换，查询时相对 INT 会慢一些
+  + INT 在存储上的消耗会小一些，但相对的，需要自己来进行类型转换
+
+  参考：
+  + [[https://segmentfault.com/q/1010000000121702][Mysql 时间字段格式如何选择，TIMESTAMP，DATETIME，INT？ - SegmentFault 思否]]
 

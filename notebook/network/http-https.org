@@ -17,6 +17,7 @@
     - [[#生成方式][生成方式]]
     - [[#信任问题][信任问题]]
     - [[#参考链接][参考链接]]
+- [[#hsts][HSTS]]
 - [[#相关问题][相关问题]]
   - [[#http-header-大小写敏感吗][HTTP Header 大小写敏感吗]]
   - [[#http-协议中的无状态是什么意思][HTTP 协议中的无状态是什么意思]]
@@ -267,6 +268,13 @@
     + [[http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html][图解SSL/TLS协议 - 阮一峰的网络日志]]
     + [[https://rootdeep.github.io/posts/ssl/#%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6][理解数字证书及制作过程]]
 
+* HSTS
+  HTTP Strict Transport Security（通常简称为HSTS）是一个安全功能，它告诉浏览器只能通过 HTTPS 访问当前资源，而不是 HTTP。
+
+  参考：
+  + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/HTTP_Strict_Transport_Security][HTTP Strict Transport Security - HTTP | MDN]]
+  + [[https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/][HTTP Strict Transport Security (HSTS) and NGINX - NGINX]]
+  
 * 相关问题
 ** HTTP Header 大小写敏感吗
    HTTP Header 大小写不敏感，参考：

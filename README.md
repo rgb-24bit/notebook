@@ -131,6 +131,7 @@
   + [git submodule](notebook/git/submodule.org)
   + [Git 使用技巧](notebook/git/trick.org)
 ## go
+  + [Go Concurrent](notebook/go/concurrent.org)
   + [Go Development](notebook/go/dev.org)
   + [GoLang](notebook/go/go.org)
   + [相关问题](notebook/go/question.org)
@@ -205,7 +206,6 @@
   + [Java - 流相关](notebook/java/stream.org)
   + [Java 编码规范](notebook/java/style.org)
   + [Java Sun Package](notebook/java/sun.org)
-  + [Swing](notebook/java/swing.org)
   + [Java Tricks](notebook/java/tricks.org)
 ## lang
   + [Dot](notebook/lang/dot.org)

@@ -10,7 +10,7 @@
 - [[#runtime][runtime]]
 - [[#nethttp][net/http]]
 - [[#ioutil][ioutil]]
-- [[#sync][sync]]
+- [[#io][io]]
 
 * atmoic
   在并发场景下，如果能够使用原子操作替代互斥锁，那么，往往能够在保证并发安全的同时得到更好的性能表现。
@@ -186,17 +186,22 @@
   参考：
   + [[https://golang.org/pkg/io/ioutil/#example_ReadDir][ioutil - The Go Programming Language]]
 
-* sync
-  可以使用 sync.Pool 来管理重复使用临时对象：
-  #+begin_src go
-    pool := &sync.Pool{
-      New: func () interface{} {
-        return new(struct{}{})
-      },
-    }
+* io
+  提供的 Reader 和 Writer：
+  + LimitReader - 读取到 n 个字节后返回 EOF
+    #+begin_example
+      func LimitReader(r Reader, n int64) Reader
+    #+end_example
+  + MultiReader - 所有 Reader 都返回 EOF 后返回 EOF
+    #+begin_example
+      func MultiReader(readers ...Reader) Reader
+    #+end_example
+  + TeeReader - 读取的内容同时写入 Writer
+    #+begin_example
+      func TeeReader(r Reader, w Writer) Reader
+    #+end_example
+  + MultiWriter - 写入到多个 Writer
+    #+begin_example
+      func MultiWriter(writers ...Writer) Writer
+    #+end_example
 
-    pool.Get()
-    pool.Put(...)
-  #+end_src
-
-  

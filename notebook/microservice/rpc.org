@@ -2,9 +2,13 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#概览][概览]]
-- [[#finagle][Finagle]]
-- [[#thrift][Thrift]]
-  - [[#使用不规范导致的-bug-记录][使用不规范导致的 BUG 记录]]
+- [[#核心模块][核心模块]]
+- [[#实现][实现]]
+  - [[#finagle][Finagle]]
+  - [[#thrift][Thrift]]
+    - [[#使用不规范导致的-bug-记录][使用不规范导致的 BUG 记录]]
+- [[#相关问题][相关问题]]
+  - [[#既然有-http-请求为什么还要用-rpc-调用][既然有 http 请求，为什么还要用 rpc 调用？]]
 - [[#相关链接][相关链接]]
 
 * 概览
@@ -16,38 +20,64 @@
   远程过程调用采用客户机/服务器(C/S)模式。请求程序就是一个客户机，而服务提供程序就是一台服务器。和常规或本地过程调用一样，远程过程调用是同步操作，在远程过程结果返回之前，需要暂时中止请求程序。
   使用相同地址空间的低权进程或低权线程允许同时运行多个远程过程调用。
 
-* Finagle
-  对于 RPC 框架来说，通常需要提供 Server/Client SDK 来完成通信和调用，具体的协议可能不同。
+* 核心模块
+  一个 RPC 的核心功能主要有 5 个部分组成，分别是：客户端、客户端 Stub、网络传输模块、服务端 Stub、服务端等：
+  + 客户端(Client)：服务调用方
+  + 客户端存根(Client Stub)：存放服务端地址信息，将客户端的请求参数数据信息打包成网络消息，再通过网络传输发送给服务端
+  + 服务端存根(Server Stub)：接收客户端发送过来的请求消息并进行解包，然后再调用本地服务进行处理
+  + 服务端(Server)：服务的真正提供者
+  + Network Service：底层传输，可以是 TCP 或 HTTP
 
-  其中，Finagle 是协议无关的 RPC 框架，可以搭配多种协议和语言，支持编译得到多种语言的 Server/Client SDK。
+  需要注意区分 RPC 协议和框架，两者常常绑定在一起，但不绝对，RPC 协议关注的应该是编解码、序列化等问题，和传输方式相对立，而框架则对调用进行包装，
+  负责负责均衡、服务发现等。
 
-  参考：
-  + [[http://skaka.me/blog/2016/05/02/finagle3/][微服务框架 Finagle 介绍 Part3: 在 Finagle 中开发基于 Thrift 协议的应用 - skaka的博客]]
-  + [[https://www.infoq.cn/article/2014/05/twitter-finagle-intro][Twitter 的 RPC 框架 Finagle 简介 - InfoQ]]
-  + [[http://kapsterio.github.io/thrift/2016/10/20/thrift-async-server.html][thrift async server · kaspterio]]
+  #+HTML: <img src="https://pic3.zhimg.com/80/v2-0854647c8265ba5b4f79897c3504aa8f_1440w.jpg">
 
-* Thrift
-** 使用不规范导致的 BUG 记录
-   + 问题现象：客户端和服务端 IDL 文件版本不一致，客户端给一个字段传值了，但是服务端接收处理后得到的结果为 nil
-   + 问题原因：修改 IDL 文件的过程中，对旧字段的 index 进行了修改，导致客户端和服务端 IDL 字段 index 的不兼容
+* 实现
+** Finagle
+   对于 RPC 框架来说，通常需要提供 Server/Client SDK 来完成通信和调用，具体的协议可能不同。
+
+   其中，Finagle 是协议无关的 RPC 框架，可以搭配多种协议和语言，支持编译得到多种语言的 Server/Client SDK。
+
+   参考：
+   + [[http://skaka.me/blog/2016/05/02/finagle3/][微服务框架 Finagle 介绍 Part3: 在 Finagle 中开发基于 Thrift 协议的应用 - skaka的博客]]
+   + [[https://www.infoq.cn/article/2014/05/twitter-finagle-intro][Twitter 的 RPC 框架 Finagle 简介 - InfoQ]]
+   + [[http://kapsterio.github.io/thrift/2016/10/20/thrift-async-server.html][thrift async server · kaspterio]]
+
+** Thrift
+*** 使用不规范导致的 BUG 记录
+    + 问题现象：客户端和服务端 IDL 文件版本不一致，客户端给一个字段传值了，但是服务端接收处理后得到的结果为 nil
+    + 问题原因：修改 IDL 文件的过程中，对旧字段的 index 进行了修改，导致客户端和服务端 IDL 字段 index 的不兼容
    
-   thrift 生成的代码：
-   #+begin_src go
-     case 3:
-     if fieldTypeId == thrift.LIST {
-       if err := p.ReadField3(iprot); err != nil {
-         return err
-       }
-     } else {
-       if err := iprot.Skip(fieldTypeId); err != nil {
-         return err
-       }
-     }
-   #+end_src
+    thrift 生成的代码：
+    #+begin_src go
+      case 3:
+      if fieldTypeId == thrift.LIST {
+        if err := p.ReadField3(iprot); err != nil {
+          return err
+        }
+      } else {
+        if err := iprot.Skip(fieldTypeId); err != nil {
+          return err
+        }
+      }
+    #+end_src
    
-   当修改了字段 index 导致字段类型不一样时，服务端读取到客户端的传参，发现类型不一样会 SKIP 掉，得到 nil。
+    当修改了字段 index 导致字段类型不一样时，服务端读取到客户端的传参，发现类型不一样会 SKIP 掉，得到 nil。
 
-   PS：所以为啥不是返回一个 err 而是直接 skip 呢……
+    PS：所以为啥不是返回一个 err 而是直接 skip 呢……
+
+* 相关问题
+** 既然有 http 请求，为什么还要用 rpc 调用？
+   REST 是一种设计风格，它的很多思维方式与 RPC 是完全冲突的。 RPC 的思想是把本地函数映射到 API，也就是说一个 API 对应的是一个 function，我本地有一个 getAllUsers，
+   远程也能通过某种约定的协议来调用这个 getAllUsers。至于这个协议是 Socket、是 HTTP 还是别的什么并不重要； RPC 中的主体都是动作，是个动词，表示我要做什么。
+   而REST则不然，它的 URL 主体是资源，是个名词。而且也仅支持 HTTP 协议，规定了使用 HTTP Method 表达本次要做的动作，类型一般也不超过那四五种。
+   这些动作表达了对资源仅有的几种转化方式。
+
+   RPC 的根本问题是耦合。RPC 客户端以多种方式与服务实现紧密耦合，并且很难在不中断客户端的情况下更改服务实现。RPC 更偏向内部调用，REST 更偏向外部调用。
+
+   参考：
+   + [[https://www.jianshu.com/p/b0343bfd216e][RPC 简介及框架选择 - 简书]]
 
 * 相关链接
   + [[https://www.cnkirito.moe/rpc-registry/][深入理解 RPC 之服务注册与发现篇 | 徐靖峰|个人博客]]

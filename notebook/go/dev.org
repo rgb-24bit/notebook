@@ -4,6 +4,7 @@
 - [[#环境变量][环境变量]]
 - [[#配置代理][配置代理]]
 - [[#依赖管理][依赖管理]]
+- [[#go-modget][go modget]]
 
 * 环境变量
   Go 环境变量可以通过配置系统环境变量的方式配置，但是在 ~Go version >= 1.13~ 时可以通过 =go env -w= 命令设置：
@@ -78,4 +79,39 @@
   #+end_src
 
   另外需要注意，Go 1.13 后使用 go get 命令下载依赖时会到特定位置下载和效验，这时，应该将私有库前缀放在 GOPRIVATE 环境变量里面。
+
+
+* go modget
+  在高版本的 go 中，使用 go module 的时候，go get 命令对应的其实是 go modget，没有开启 go module 特性时才会替换为 go path get：
+  #+begin_src go
+    if args[0] == "get" || args[0] == "help" {
+      if !modload.WillBeEnabled() {
+        // Replace module-aware get with GOPATH get if appropriate.
+        ,*modget.CmdGet = *get.CmdGet
+      }
+    }
+  #+end_src
+  
+  对于 go modget 来说，在不使用 -u 选项时会默认获取最新版本的指定 package，但不会更新其依赖：
+  #+begin_quote
+  For each named package or package pattern, get must decide which version of
+  the corresponding module to use. By default, get looks up the latest tagged
+  release version, such as v0.4.5 or v1.2.3. If there are no tagged release
+  versions, get looks up the latest tagged pre-release version, such as
+  v0.0.1-pre1. If there are no tagged versions at all, get looks up the latest
+  known commit. If the module is not already required at a later version
+  (for example, a pre-release newer than the latest release), get will use
+  the version it looked up. Otherwise, get will use the currently
+  required version.
+  #+end_quote
+
+  使用 -u 选项时还会更新 package 的依赖项：
+  #+begin_quote
+  The -u flag instructs get to update modules providing dependencies
+  of packages named on the command line to use newer minor or patch
+  releases when available. Continuing the previous example, 'go get -u A'
+  will use the latest A with B v1.3.1 (not B v1.2.3). If B requires module C,
+  but C does not provide any packages needed to build packages in A
+  (not including tests), then C will not be updated.
+  #+end_quote
 

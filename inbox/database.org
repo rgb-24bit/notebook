@@ -1,0 +1,4 @@
+* 软删除
+  - 性能有影响吗？
+  - [[https://blog.wolfogre.com/posts/trap-of-soft-delete/][软删除之痛 | Wolfogre's Blog]]
+

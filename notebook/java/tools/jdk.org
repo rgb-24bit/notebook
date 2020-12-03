@@ -4,6 +4,7 @@
 - [[#javap][javap]]
 - [[#jshell][JShell]]
 - [[#sdkmain][SDKMAIN]]
+- [[#jdk11][jdk11]]
 
 * javap
   javap 是 JDK 内置的反编译工具，可以通过 javap 获得类文件的字节码，从而学习编译器内部的工作。
@@ -34,3 +35,10 @@
   可惜不支持 Windows，参考：
   + [[https://sdkman.io/][Home - SDKMAN! the Software Development Kit Manager]]
 
+* jdk11
+  jdk11 是在 2018.09.25 发布的，时间已经不就了，增添了不少新特性，但是感觉直接影响写代码的新特性不多，var 算一个。
+
+  参考：
+  + [[https://www.wmyskxz.com/2020/08/22/java11-ban-ben-te-xing-xiang-jie/][Java11 版本特性详解 - 我没有三颗心脏的博客]]
+  + [[https://openjdk.java.net/projects/jdk/11/][JDK 11]]
+  

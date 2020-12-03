@@ -1,0 +1,6 @@
+* backlog
+  + [[https://www.cnblogs.com/orgliny/p/5780796.html][TCP/IP协议中backlog参数 - Orgliny - 博客园]]
+
+* 499
+  + [[https://www.cnblogs.com/anker/p/7078497.html][Nginx的 HTTP 499 状态码处理 - Rabbit_Dale - 博客园]]
+

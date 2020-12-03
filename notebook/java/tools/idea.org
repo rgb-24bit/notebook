@@ -27,6 +27,7 @@
   - [[#怎样关闭某段代码的自动格式化][怎样关闭某段代码的自动格式化]]
   - [[#intellij-idea-module-的-language-level-的问题][Intellij IDEA Module 的 Language Level 的问题]]
   - [[#关闭参数提示][关闭参数提示]]
+  - [[#配置文件路径][配置文件路径]]
 
 * 简单使用
   在 Emacs 键位下的一些常用快捷键：
@@ -215,4 +216,7 @@
 ** 关闭参数提示
    #+HTML: <img src="https://resources.jetbrains.com/help/img/idea/2020.1/inlay_hints_example.png">
    + [[https://www.jetbrains.com/help/idea/inlay-hints.html][Inlay Hints - Help | IntelliJ IDEA]]
+
+** 配置文件路径
+   MacOS - ~/Library/Application Support/JetBrains/IntelliJIdea2020.1
 

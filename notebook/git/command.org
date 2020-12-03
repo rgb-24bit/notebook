@@ -13,6 +13,7 @@
 - [[#git-merge][git merge]]
 - [[#git-fetch][git fetch]]
 - [[#git-stash][git stash]]
+- [[#git-cherry-pick][git cherry-pick]]
 
 * git clone
   + 克隆远程库时指定分支或标签：
@@ -73,6 +74,19 @@
     #+BEGIN_SRC bash
       $ git log --author="$(git config --get user.name)" --after="2018-01-01" --before="2019-01-01" --pretty= tformat: --numstat | awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s remo ved lines : %s total lines: %s\n",add,subs,loc }'
     #+END_SRC
+
+  + 显示指定提交范围内的历史
+    #+begin_example
+      git log A..B
+    #+end_example
+
+  + 显示两个 ref 间不同的 commit
+    #+begin_example
+      git log A...B
+    #+end_example
+
+  格式化 log，参考：
+  + [[https://www.cnblogs.com/bellkosmos/p/5923439.html][git log命令全解析，打 log 还能这么随心所欲！ - 赛艇队长 - 博客园]]
 
 * git branch
   + 获取所有远程分支的名称：
@@ -185,4 +199,16 @@
 
   参考：
   + [[https://www.cnblogs.com/tocy/p/git-stash-reference.html][git-stash 用法小结 - Tocy - 博客园]]
+
+
+* git cherry-pick
+  转移一系列 commit：
+  #+begin_example
+    $ git cherry-pick A..B
+  #+end_example
+
+  包含 A：
+  #+begin_example
+    $ git cherry-pick A^..B 
+  #+end_example
 

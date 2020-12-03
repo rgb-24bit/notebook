@@ -1,0 +1,8 @@
+* 单线程和原子性
+  Redis 在 4.0 以前的版本是单线程的，而 4.0 之后的版本，虽然引入了多线程，单也只是针对部分指令，核心依然是单线程的。
+
+  这也就保证了 Redis 单个指令的原子性。
+
+  参考：
+  + [[https://draveness.me/whys-the-design-redis-single-thread/][为什么 Redis 选择单线程模型 - 面向信仰编程]]
+

@@ -1,0 +1,36 @@
+#+TITLE:      Go Concurrent
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#synccond][sync.Cond]]
+- [[#syncpool][sync.Pool]]
+- [[#context][context]]
+
+* sync.Cond
+  Go 语言标准库中的 sync.Cond 一个条件变量，它可以让一系列的 Goroutine 都在满足特定条件时被唤醒。
+
+  在调用 Wait 方法时，会：
+  1. 调用 runtime.notifyListAdd 将等待计数器加一并解锁
+  2. 调用 runtime.notifyListWait 等待其他 Goroutine 的唤醒并加锁
+  
+* sync.Pool
+  可以使用 sync.Pool 来管理重复使用临时对象：
+  #+begin_src go
+    pool := &sync.Pool{
+      New: func () interface{} {
+        return new(struct{}{})
+      },
+    }
+
+    pool.Get()
+    pool.Put(...)
+  #+end_src
+
+* context
+  在使用 context 的过程中，可以通过 context.WithValue 将一个值保存到 context，这会创建一个新的 context 并引用上一个 context。
+
+  这个模式很像 git commit，git 的 commit 对象也是不可变的，同时，git 本身也可以算是在一个分布式并发场景下进行修改。
+
+  利用不可变对象和链表构建的结构，来保证并发场景下前面对后面的可见性。
+
+  tracing context 也有类似的感觉。
+
