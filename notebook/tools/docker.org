@@ -4,6 +4,7 @@
 - [[#docker-架构][Docker 架构]]
 - [[#linux-unionfs][Linux UnionFS]]
 - [[#数据卷][数据卷]]
+- [[#网络][网络]]
 - [[#常用容器][常用容器]]
   - [[#mysql][mysql]]
   - [[#redis][redis]]
@@ -58,6 +59,21 @@
     docker run -d -P --name web --mount type=bind,source=/src/webapp,target=/usr/share/nginx/html nginx:alpine
   #+end_src
 
+* 网络
+  创建容器时可以通过 -p 参数来指定端口映射关系，通常使用的格式为 hostPort:containerPort。而对于多个容器，
+  还可以通过创建 docker 网络来实现它们的互联。
+
+  创建网络：
+  #+begin_example
+    $ docker network create -d bridge example
+  #+end_example
+
+  创建容器时加入网络：
+  #+begin_example
+    $ docker run --name busybox --network example -d busybox
+  #+end_example
+
+  
 * 常用容器
 ** mysql
    创建 MySQL 容器，使用最新镜像：

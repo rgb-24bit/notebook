@@ -1,0 +1,33 @@
+#+TITLE:      相关问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#动态作用域--词法作用域][动态作用域 & 词法作用域]]
+
+* 动态作用域 & 词法作用域
+  词法作用域又叫静态作用域，在词法作用域规则下，变量作用域在定义时就确定了，而动态作用域，则是在运行时确定：
+  #+begin_src elisp
+    (setq text "global")
+
+    (defun foo ()
+      (message text))
+
+    (defun bar ()
+      (let (text "local") (foo)))
+  #+end_src
+
+  在词法作用域下，作用域链会确定是下面两条，这时，在 foo 中访问 text 时必然会输出 gloabl：
+  #+begin_example
+    foo -> global
+    bar -> global
+  #+end_example
+
+  在动态作用域下，作用域就不一定了，在这个例子下是这两条：
+  #+begin_example
+    foo -> global
+    foo -> bar -> global
+  #+end_example
+
+  因此，在动态作用域下，函数 bar 调用会输出 local。
+
+  简单来说就是，词法作用域的作用域链在定义时确定，而动态作用域的作用域链有运行时的作用域链确定。
+

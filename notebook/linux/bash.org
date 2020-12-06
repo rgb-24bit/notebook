@@ -6,7 +6,10 @@
 - [[#语法][语法]]
 - [[#子-shell][子 shell]]
 - [[#命令行参数][命令行参数]]
+- [[#代理配置][代理配置]]
+- [[#配置文件][配置文件]]
 - [[#相关技巧][相关技巧]]
+  - [[#获取当前目录][获取当前目录]]
 - [[#相关问题][相关问题]]
   - [[#怎样将字符串转换为小写][怎样将字符串转换为小写]]
   - [[#怎样在命令行格式化-json-字符串][怎样在命令行格式化 json 字符串]]
@@ -235,7 +238,7 @@
     # 判断程序存在的话就执行
     [ -x /bin/ls ] && /bin/ls -l
   #+end_src
-
+  
 * 子 shell
   在 shell 中是否进入子 shell 的情况可以分为几种：
   1. 执行 bash 内置命令时，父进程不会创建子进程来执行这些命令，而是直接在当前 bash 环境中执行。但如果将内置命令放在管道后，则此内置命令将和管道左边的进程同属于一个进程组
@@ -295,11 +298,90 @@
   参考：
   + [[https://www.cnblogs.com/franktan/archive/2010/03/01/1634516.html][Bash Shell 中命令行选项/参数处理 - Frank Tan - 博客园]]
 
+* 代理配置
+  |-------------+----------------------------------------------------+------------------------------------------|
+  | 变量        | 描述                                               | 值示例                                   |
+  |-------------+----------------------------------------------------+------------------------------------------|
+  | http_proxy  | 为 http 网站设置代理                               | 10.0.0.51:8080,socks5://192.168.1.1:1080 |
+  | https_proxy | 为 https 网站设置代理                              | 同上                                     |
+  | ftp_proxy   | 为 ftp 协议设置代理                                | socks5://192.168.1.1:1080                |
+  | no_proxy    | 无需代理的主机或域名，可以使用通配符，用「，」分隔 | *.aiezu.com                              |
+  |-------------+----------------------------------------------------+------------------------------------------|
+
+  配置为函数：
+  #+begin_src sh
+    proxy() {
+        http_proxy=<addr> https_proxy=<addr> $@
+    }
+  #+end_src
+
+  参考：
+  + [[https://aiezu.com/article/linux_bash_set_proxy.html][Linux bash终端设置代理（proxy）访问 - 爱E族]]
+
+* 配置文件
+  Bash 配置文件的读取需要区分 login shell 和 non-login shell，而是不是 login shell 则是在交互式 shell 中判断的。
+
+  交互式 shell 就是指平时那种输入命令执行的 shell，而非交互式 shell，可以理解为 bash script 的运行环境。
+
+  登录式 shell 是用户使用自己的 user ID 登录交互式 shell 的第一个进程，而在 login shell 内打开的新 shell 就不是 login shell 了，
+  不同 shell 读取的配置文件顺序为：
+  #+begin_example
+    +----------------+-----------+-----------+------+
+    |                |Interactive|Interactive|Script|
+    |                |login      |non-login  |      |
+    +----------------+-----------+-----------+------+
+    |/etc/profile    |   A       |           |      |
+    +----------------+-----------+-----------+------+
+    |/etc/bash.bashrc|           |    A      |      |
+    +----------------+-----------+-----------+------+
+    |~/.bashrc       |           |    B      |      |
+    +----------------+-----------+-----------+------+
+    |~/.bash_profile |   B1      |           |      |
+    +----------------+-----------+-----------+------+
+    |~/.bash_login   |   B2      |           |      |
+    +----------------+-----------+-----------+------+
+    |~/.profile      |   B3      |           |      |
+    +----------------+-----------+-----------+------+
+    |                |           |           |      |
+    +----------------+-----------+-----------+------+
+    |BASH_ENV        |           |           |  A   |
+    +----------------+-----------+-----------+------+
+    |                |           |           |      |
+    +----------------+-----------+-----------+------+
+    |~/.bash_logout  |    C      |           |      |
+    +----------------+-----------+-----------+------+
+  #+end_example
+
+  其中，读取顺序 A -> B -> C，B1 B2 B3 表示只读取其中第一个发现的文件。
+
+  参考：
+  + [[https://superuser.com/questions/183870/difference-between-bashrc-and-bash-profile][bash - Difference between .bashrc and .bash_profile - Super User]]
+  + [[http://einverne.github.io/post/2019/01/login-shell-vs-non-login-shell.html][登录式 shell 和非登录式 shell 区别 | Verne in GitHub]]
+
 * 相关技巧
   + 可以通过 type 判断命令是 可执行文件、shell 内置命令还是别名
   + 可以通过 apropos 和关键词在 man page 描述中查找相应的程序
   + 通过 command <xxx> 的方式忽略 alias 直接执行程序或者内建命令
 
+** 获取当前目录
+   #+begin_src sh
+     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+   #+end_src
+
+   遍历目录下文件：
+   #+begin_src sh
+     loadScripts() {
+         for __SCRIPT in $__CURRENT_DIR/$1/*; do
+             if [ -r $__SCRIPT ]; then
+                 source $__SCRIPT
+             fi
+         done
+     }
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself][How to get the source directory of a Bash script from within the script itself? - Stack Overflow]]
+  
 * 相关问题
 ** 怎样将字符串转换为小写
    简单点的方式可以使用 ~tr~ 命令来完成这一操作：
@@ -419,4 +501,5 @@
 
    但是单括号写起来更优雅，而 [[ 则是 bash 的扩展，参考：
    + [[https://www.zhihu.com/question/266787434][Bash 脚本中 (、((、[、[[ 的区别是什么？ - 知乎]]
+
 

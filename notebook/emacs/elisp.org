@@ -1,6 +1,7 @@
 #+TITLE:     Emacs Lisp
 
 * 目录                                                    :TOC_4_gh:noexport:
+- [[#variables][Variables]]
 - [[#lisp-data-types][Lisp Data Types]]
   - [[#alist--plist][alist & plist]]
   - [[#quote--backquote][Quote & Backquote]]
@@ -26,6 +27,16 @@
   - [[#let-和-let-的区别][let 和 let* 的区别]]
   - [[#以--开头的参数是怎么一回事][以 : 开头的参数是怎么一回事]]
 
+* Variables
+  Elisp 中变量的值是什么受到作用域规则的影响，Elisp 同时支持词法作用域和动态作用域，其中，通过 defvar 和 defconst 定义的变量为动态作用域。
+
+  在 Elisp 中，变量值存储在 Symbol 的 Value Cell 中，当局部变量和全局变量同名时，访问变量会得到一个 local binding 的值，而 global binding 此时会作为 shadowed 存在，
+  在退出局部作用域时会恢复 shadowed 值。
+
+  函数 setq 设置的值是 current binding 的值，也就是说，可能不会改变 global binding 值，如果需要，可以通过 setq-default 改变默认值。
+
+  参考：[[file:../compile/question.org::*动态作用域 & 词法作用域][动态作用域 & 词法作用域]]
+  
 * Lisp Data Types
 ** alist & plist
    alist 的常见的两种形式：
@@ -123,16 +134,21 @@
    #+END_SRC
 
 * Symbols
-  #+BEGIN_SRC elisp
-    ;; 符号列表
-    (setq lst '(symbolA symbolB symbolC))
-    (symbolp (car lst))  ;; => t
+  每个 symbol 都包含四个组件（cells），分别为：
+  #+begin_quote
+  Print name
+     The symbol’s name.
 
-    ;; 符号根据不同的使用场景，使用其代表的 值、函数、符号
-    (symbol x x x)       ;; => 函数
-    (+ symbolA symbolB)  ;; => 值
-    'symbol              ;; => 符号
-  #+END_SRC
+  Value
+       The symbol’s current value as a variable.
+  
+  Function
+       The symbol’s function definition.  It can also hold a symbol, a
+       keymap, or a keyboard macro.
+  
+  Property list
+       The symbol’s property list.
+  #+end_quote
 
 * Macros
   宏是一种可以生成代码的代码。类比与 C 语言中的宏以及 C++中的模板：

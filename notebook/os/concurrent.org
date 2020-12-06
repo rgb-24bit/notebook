@@ -47,6 +47,9 @@
    参考：
    + [[https://www.jianshu.com/p/c1015f5ffa74][进程间通信 IPC (InterProcess Communication) - 简书]]
 
+   补充：
+   + 对于不同的系统来说，可能还存在单独适用于某个系统的通信方式，比如 Linux 的 Dbus
+   
 ** 进程的状态
    + 三态模型：就绪、运行、阻塞
    + 五态模型：新建、终止、运行、就绪、阻塞

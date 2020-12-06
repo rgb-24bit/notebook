@@ -60,6 +60,7 @@
 ## compile
   + [编译原理 - 语法分析](notebook/compile/grammar.org)
   + [编译原理 - 词法分析](notebook/compile/lex.org)
+  + [相关问题](notebook/compile/question.org)
   + [编译原理 - 简单的语法制导翻译器](notebook/compile/simple-compile.org)
 ## database
   + **mysql**

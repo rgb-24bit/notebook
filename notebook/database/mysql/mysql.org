@@ -11,6 +11,7 @@
   - [[#索引类型][索引类型]]
   - [[#最左前缀匹配规则][最左前缀匹配规则]]
   - [[#distinct--group-by][distinct & group by]]
+  - [[#null][NULL]]
 - [[#sql-语法][SQL 语法]]
   - [[#sql-子查询][SQL 子查询]]
   - [[#注意事项][注意事项]]
@@ -230,6 +231,9 @@
    因此，使用索引时，会在执行计划的 Extra 中显示「Using index for group-by」。
 
    但是，在没有索引的时候，就需要进行全表扫描，因此，需要注意使用 distinct 和 group by。
+   
+** NULL
+   IS NULL 可以走索引，但是 IS NOT NULL 是走不了索引的，因此，对于 NULL 列的查询需要注意下。
    
 * SQL 语法
 ** SQL 子查询
