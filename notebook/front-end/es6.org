@@ -2,6 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#ellipsis][Ellipsis]]
+- [[#正则的扩展][正则的扩展]]
 - [[#相关问题][相关问题]]
   - [[#通过字面量定义对象时如何将变量做为一个对象的-key][通过字面量定义对象时如何将变量做为一个对象的 Key]]
   - [[#es6commonjs-和-amd-之间的关系][ES6、CommonJS 和 AMD 之间的关系]]
@@ -37,6 +38,20 @@
       sum(1, 2, 3, 4, 5)  // 15
     #+end_src
     
+* 正则的扩展
+  如果一个正则表达式在字符串里面有多个匹配，现在可以使用 g 修饰符或 y 修饰符，在循环里面逐一取出：
+  #+begin_src js
+    const string = 'test1test2test3';
+    const regex = /t(e)(st(\d?))/g;
+
+    for (const match of string.matchAll(regex)) {
+      console.log(match);
+    }
+    // ["test1", "e", "st1", "1", index: 0, input: "test1test2test3"]
+    // ["test2", "e", "st2", "2", index: 5, input: "test1test2test3"]
+    // ["test3", "e", "st3", "3", index: 10, input: "test1test2test3"]''
+  #+end_src
+  
 * 相关问题
 ** 通过字面量定义对象时如何将变量做为一个对象的 Key
    ES6 允许字面量定义对象时，用表达式作为对象的属性名：

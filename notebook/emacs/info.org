@@ -3,7 +3,6 @@
 - [[#getting-started][Getting Started]]
   - [[#menu-fromat][Menu Fromat]]
 - [[#advanced-info-commands][Advanced Info Commands]]
-- [[#system-info-file][System Info File]]
 
 * Getting Started
   |-----------+--------------------------+----------------------------------------------|
@@ -51,9 +50,4 @@
   | =M-n=    | 克隆当前 =info= 缓冲区   |
   | =1...9=  | 快速选择菜单中的子主题 |
   |--------+------------------------|
-
-
-* System Info File
-  Emacs 通过 info-dirctory-list 读取 info 文件，可以通过添加系统 info 目录到该 list 来用 emacs 阅读 info 文件，参考：
-  + [[https://www.emacswiki.org/emacs/InfoPath][EmacsWiki: Info Path]]
 

@@ -5,6 +5,8 @@
 - [[#文件传输][文件传输]]
 - [[#git-ssh-私钥][git ssh 私钥]]
 - [[#gssapi][GSSAPI]]
+- [[#相关问题][相关问题]]
+  - [[#连接后长时间未使用终端-hang-住怎么办][连接后长时间未使用终端 hang 住怎么办？]]
 
 * 简单使用
   使用用户名和密码登录：
@@ -73,4 +75,56 @@
 
   参考：
   + [[https://jaminzhang.github.io/linux/GSSAPI-related-options-in-ssh-configuration/][SSH 中的 GSSAPI 相关选项 - Jamin Zhang]]
+
+
+* 相关问题
+** 连接后长时间未使用终端 hang 住怎么办？
+   通过 ssh 连接后所在环境是 ssh，而非 bash，需要通过 ssh 指令来断开连接：
+   #+begin_quote
+     ESCAPE CHARACTERS
+          When a pseudo-terminal has been requested, ssh supports a number of func-
+          tions through the use of an escape character.
+     
+          A single tilde character can be sent as ~~ or by following the tilde by a
+          character other than those described below.  The escape character must
+          always follow a newline to be interpreted as special.  The escape charac-
+          ter can be changed in configuration files using the EscapeChar configura-
+          tion directive or on the command line by the -e option.
+     
+          The supported escapes (assuming the default `~') are:
+     
+          ~.      Disconnect.
+     
+          ~^Z     Background ssh.
+     
+          ~#      List forwarded connections.
+     
+          ~&      Background ssh at logout when waiting for forwarded connection /
+                  X11 sessions to terminate.
+     
+          ~?      Display a list of escape characters.
+     
+          ~B      Send a BREAK to the remote system (only useful if the peer sup-
+                  ports it).
+     
+          ~C      Open command line.  Currently this allows the addition of port
+                  forwardings using the -L, -R and -D options (see above).  It also
+                  allows the cancellation of existing port-forwardings with
+                  -KL[bind_address:]port for local, -KR[bind_address:]port for
+                  remote and -KD[bind_address:]port for dynamic port-forwardings.
+                  !command allows the user to execute a local command if the
+                  PermitLocalCommand option is enabled in ssh_config(5).  Basic
+                  help is available, using the -h option.
+     
+          ~R      Request rekeying of the connection (only useful if the peer sup-
+                  ports it).
+     
+          ~V      Decrease the verbosity (LogLevel) when errors are being written
+                  to stderr.
+     
+          ~v      Increase the verbosity (LogLevel) when errors are being written
+                  to stderr.t    
+   #+end_quote
+
+   但是感觉没有生效……不知道是不是姿势不对 QAQ
 

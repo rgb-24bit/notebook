@@ -7,10 +7,11 @@
 - [[#fmt][fmt]]
 - [[#json][json]]
 - [[#regexp][regexp]]
-- [[#runtime][runtime]]
 - [[#nethttp][net/http]]
+- [[#runtime][runtime]]
 - [[#ioutil][ioutil]]
 - [[#io][io]]
+- [[#time][time]]
 
 * atmoic
   在并发场景下，如果能够使用原子操作替代互斥锁，那么，往往能够在保证并发安全的同时得到更好的性能表现。
@@ -170,15 +171,15 @@
   参考：
   + [[https://www.cnblogs.com/golove/p/3269099.html][基础知识 - Golang 中的正则表达式 - GoLove - 博客园]]
 
+* net/http
+  可以通过 http.FileServer 实现简单的静态文件服务器，参考：
+  + [[https://shockerli.net/post/golang-pkg-http-file-server/][Go 标准库 http.FileServer 实现静态文件服务 - 格物]]
+
 * runtime
   runtime 包提供和 go 运行时环境的互操作，比如通过 runtime.Caller 来获取调用栈，打印行号、方法。
 
   参考：
   + [[https://studygolang.com/articles/28981][Go 日志，打印源码文件名和行号造成的性能开销 - Go语言中文网 - Golang中文社区]]
-
-* net/http
-  可以通过 http.FileServer 实现简单的静态文件服务器，参考：
-  + [[https://shockerli.net/post/golang-pkg-http-file-server/][Go 标准库 http.FileServer 实现静态文件服务 - 格物]]
 
 * ioutil
   可以使用 ioutil 包中的函数完成一些简单的 io 操作，比如排序列出目录下的文件，读取文件的所有内容等。
@@ -204,4 +205,11 @@
     #+begin_example
       func MultiWriter(writers ...Writer) Writer
     #+end_example
+
+* time
+  + What is “m=+” in GO time string?
+    The m=±<value> is monotonic clock reading in second.
+
+    参考：
+    - [[https://stackoverflow.com/questions/52809661/what-is-m-in-go-time-string][What is "m=+" in GO time string? - Stack Overflow]]
 

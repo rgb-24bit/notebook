@@ -64,7 +64,7 @@
     def convert(string, *encodings):
         for i in range(len(encodings) - 1):
             string = decode(encode(string, encodings[i]), encodings[i + 1], errors='ignore')
-            print(' -> '.join(encodings), string)
+        print(' -> '.join(encodings), string)
 
     string = '测试字符串'
 
@@ -77,7 +77,7 @@
   #+end_src
 
   详情的可以看图片：
-  #+HTML: <img src="https://i.loli.net/2019/09/03/hyHxNGtP18glXaO.jpg">
+  #+HTML: <img src="https://i.loli.net/2020/12/10/lqYETKpSVZ2jJw7.png">
 
 * 单字节字符集
   单字节字符集如 ~latin-1~ 的一种使用：

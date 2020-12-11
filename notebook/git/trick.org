@@ -9,6 +9,7 @@
 - [[#合并多个-commit-为一个][合并多个 commit 为一个]]
 - [[#配置选项-coreautocrlf-的使用][配置选项 core.autocrlf 的使用]]
 - [[#批量删除分支][批量删除分支]]
+- [[#重新历史][重新历史]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
@@ -72,4 +73,8 @@
 
 * 批量删除分支
   git br -d $(git br | grep feature)
+
+* 重新历史
+  除了使用 git commit --amend 修改最后一个提交的历史以外，还可以使用 git rebase 修改多个提交的历史，参考：
+  + [[https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2][Git - 重写历史]]
 

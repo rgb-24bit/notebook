@@ -17,6 +17,7 @@
 - [[#如何通过-shell-脚本分发软件包][如何通过 Shell 脚本分发软件包]]
 - [[#在命令行生成文本-hash-摘要时得到的值不正确][在命令行生成文本 Hash 摘要时得到的值不正确]]
 - [[#系统平均负载的含义][系统平均负载的含义]]
+- [[#man-1-2-3-的含义][man 1 2 3…… 的含义]]
 
 * 如何快速删除文件
   + [[https://www.slashroot.in/which-is-the-fastest-method-to-delete-files-in-linux][Which is the fastest method to delete files in Linux]]
@@ -176,4 +177,22 @@
   一般来说，如果每个 CPU 内核的当前活动进程数不大于 3 的话，那么系统的性能是良好的。如果每个 CPU 内核的任务数大于 5，那么这台机器的性能就有严重问题。
 
   使用平均负载值除以 CPU 的数目，既是每个 CPU 的活动进程数。
+
+* man 1 2 3…… 的含义
+  #+begin_quote
+    MANUAL SECTIONS
+        The standard sections of the manual include:
+    
+        1      User Commands
+        2      System Calls
+        3      C Library Functions
+        4      Devices and Special Files
+        5      File Formats and Conventions
+        6      Games et. al.
+        7      Miscellanea
+        8      System Administration tools and Daemons
+    
+        Distributions customize the manual section to their specifics,
+        which often include additional sections.
+  #+end_quote
 

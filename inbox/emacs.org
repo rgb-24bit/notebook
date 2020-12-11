@@ -1,6 +1,0 @@
-* org
-  + [[https://emacs.stackexchange.com/questions/32601/how-can-i-get-with-org-store-link-relative-path-instead-of-absolute][org mode - How can I get with org-store-link relative path instead of absolute? - Emacs Stack Exchange]]
-
-* dired-local
-  + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][dired-local]] 包括子目录
-

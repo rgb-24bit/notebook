@@ -115,3 +115,6 @@
   (not including tests), then C will not be updated.
   #+end_quote
 
+  参考：
+  + [[https://github.com/golang/go/issues/28156][cmd/go: go get -u on a single module results in indirect modules being updated too · Issue #28156 · golang/go]]
+
