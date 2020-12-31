@@ -175,6 +175,17 @@
   可以通过 http.FileServer 实现简单的静态文件服务器，参考：
   + [[https://shockerli.net/post/golang-pkg-http-file-server/][Go 标准库 http.FileServer 实现静态文件服务 - 格物]]
 
+  构建 query 参数：
+  #+begin_src go
+    q := req.URL.Query()
+    q.Add("api_key", "key_from_environment_or_flag")
+    q.Add("another_thing", "foo & bar")
+    req.URL.RawQuery = q.Encode()
+  #+end_src
+
+  参考：
+  + [[https://stackoverflow.com/questions/30652577/go-doing-a-get-request-and-building-the-querystring][http - Go doing a GET request and building the Querystring - Stack Overflow]]
+
 * runtime
   runtime 包提供和 go 运行时环境的互操作，比如通过 runtime.Caller 来获取调用栈，打印行号、方法。
 

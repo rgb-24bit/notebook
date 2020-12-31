@@ -23,6 +23,7 @@
 - [[#how-do-i-check-out-a-remote-git-branch][How do I check out a remote Git branch?]]
 - [[#git-merge--rebase-的区别][git merge & rebase 的区别]]
 - [[#git-submodule-shalow-clone][git submodule shalow clone]]
+- [[#how-to-replace-local-branch-with-remote-branch-entirely-in-git][How to replace local branch with remote branch entirely in Git?]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -269,5 +270,27 @@
   + [[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA][Git - 变基]]
 
 * git submodule shalow clone
+  #+begin_example
+    # clone
+    $ git clone <repo> --recursive --shallow-submodules
+
+    # update
+    $ git pull
+    $ git submodule update --init --recursive --depth 1
+  #+end_example
+
+  参考：
   + [[https://stackoverflow.com/questions/2144406/how-to-make-shallow-git-submodules][How to make shallow git submodules? - Stack Overflow]]
+
+* How to replace local branch with remote branch entirely in Git?
+  #+begin_example
+    $ git reset --hard origin/<branch>
+
+    or
+
+    $ git reset --hard @{u}
+  #+end_example
+
+  参考：
+  + [[https://stackoverflow.com/questions/9210446/how-to-replace-local-branch-with-remote-branch-entirely-in-git][How to replace local branch with remote branch entirely in Git? - Stack Overflow]]
 

@@ -1,0 +1,6 @@
+* venv
+  + python -m venv venv --prompt=prompt
+
+* json
+  + [[https://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object][How to convert JSON data into a Python object - Stack Overflow]]
+

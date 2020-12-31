@@ -12,6 +12,7 @@
 - [[#python-中重复定义的对象如何处理][Python 中重复定义的对象如何处理]]
 - [[#jupyter-和-ipython-的关系][Jupyter 和 Ipython 的关系]]
 - [[#python-not-working-in-the-command-line-of-git-bash][Python not working in the command line of git bash]]
+- [[#load-json-数据得到类似-js-object-的结果][Load Json 数据得到类似 JS Object 的结果]]
 
 * Python 运行速度为什么那么慢
   对于 ~C~ 和 ~C++~ 来说，它们会被编译为 *本机代码*, 因此执行速度很快。
@@ -87,4 +88,32 @@
 
   参考：
   + [[https://stackoverflow.com/questions/32597209/python-not-working-in-the-command-line-of-git-bash][windows - Python not working in the command line of git bash - Stack Overflow]]
+
+* Load Json 数据得到类似 JS Object 的结果
+  使用 Python3 时，可以通过 object_hook 和 SimpleNamespace 实现：
+  #+begin_src python
+    import json
+    from types import SimpleNamespace
+
+    data = '{"name": "John Smith", "hometown": {"name": "New York", "id": 123}}'
+
+    # Parse JSON into an object with attributes corresponding to dict keys.
+    x = json.loads(data, object_hook=lambda d: SimpleNamespace(**d))
+    print(x.name, x.hometown.name, x.hometown.id)
+  #+end_src
+
+  SimpleNamespace 实现：
+  #+begin_src python
+    class SimpleNamespace:
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
+
+        def __repr__(self):
+            keys = sorted(self.__dict__)
+            items = ("{}={!r}".format(k, self.__dict__[k]) for k in keys)
+            return "{}({})".format(type(self).__name__, ", ".join(items))
+
+        def __eq__(self, other):
+            return self.__dict__ == other.__dict__
+  #+end_src
 

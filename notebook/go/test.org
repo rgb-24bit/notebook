@@ -6,9 +6,11 @@
 - [[#ginkgo][ginkgo]]
 - [[#golangci-lint][golangci-lint]]
 - [[#gomock][gomock]]
+  - [[#执行顺序][执行顺序]]
 - [[#assert][assert]]
 - [[#相关问题][相关问题]]
   - [[#使用-go-test-测试所有包][使用 go test 测试所有包]]
+  - [[#测试在另一个协程的-panic][测试在另一个协程的 panic]]
 
 * gotestsum
   #+begin_quote
@@ -144,6 +146,19 @@
      #+end_src
 
   + [[https://github.com/golang/mock][golang/mock: GoMock is a mocking framework for the Go programming language.]]
+** 执行顺序
+   可以通过两种方式来设置单个函数多次调用的结果顺序：
+   #+begin_example
+     firstCall := mockObj.EXPECT().SomeMethod(1, "first")
+     secondCall := mockObj.EXPECT().SomeMethod(2, "second").After(firstCall)
+     mockObj.EXPECT().SomeMethod(3, "third").After(secondCall)
+
+     gomock.InOrder(
+         mockObj.EXPECT().SomeMethod(1, "first"),
+         mockObj.EXPECT().SomeMethod(2, "second"),
+         mockObj.EXPECT().SomeMethod(3, "third"),
+     )
+   #+end_example
 
 * assert
   + [[https://github.com/stretchr/testify][GitHub - stretchr/testify: A toolkit with common assertions and mocks that plays nicely with the standard library]]
@@ -157,4 +172,16 @@
   
    参考：
    + [[https://stackoverflow.com/questions/16353016/how-to-go-test-all-tests-in-my-project][testing - How to `go test` all tests in my project? - Stack Overflow]]
+
+** 测试在另一个协程的 panic
+   类似于这样的代码会在另一个协程抛出 panic，此时，这个 panic 是不可测的，因为它不在当前协程，同时会导致测试进程异常退出：
+   #+begin_src go
+     func function() {
+       go func() {
+         panic(err)
+       }
+     }
+   #+end_src
+
+  对于这种情况，应该考虑将这个新协程包装在另一个函数中单独测试，并保证测试外部函数时不会导致 panic。
 

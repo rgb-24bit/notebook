@@ -131,7 +131,7 @@
    思考：反之，是不是就应该返回具体的类型呢？即使是未导出的类型？   
 
    [[*Interfaces][☞ Interfaces]]
-
+   
 * Go Code Review Comments
 ** Contexts
    不要将 Context 成员添加到某个 struct 类型中，而是将 ctx 参数添加到该类型的方法上。一个例外情况是当前方法签名必须与标准库或第三方库中的接口方法匹配。
@@ -246,7 +246,7 @@
 ** Interfaces
    Go 接口通常属于使用 interface 类型值的包，而不是实现这些值的包。实现包应返回具体（通常是指针或结构）类型：这样一来可以将新方法添加到实现中，而无需进行大量重构。
 
-   [[*Interfaces and other types][☞ Interfaces and other types]]   
+   [[*Interfaces and other types][☞ Interfaces and other types]]
 
 ** Named Result Parameters
    1. 不要仅仅为了避免在函数内做结果参数的声明而命名结果参数
@@ -294,6 +294,7 @@
 * 相关链接
   + [[https://github.com/bingohuang/effective-go-zh-en][GitHub - bingohuang/effective-go-zh-en: 《Effective Go》中英双语版]]
   + [[https://golang.org/doc/effective_go.html][Effective Go - The Go Programming Language]]
+  + [[https://github.com/golang/go/wiki/CodeReviewComments][CodeReviewComments · golang/go Wiki]]
 
 * Footnotes
 

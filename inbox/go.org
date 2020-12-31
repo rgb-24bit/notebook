@@ -1,0 +1,12 @@
+* http mock
+  + [[https://github.com/h2non/gock][h2non/gock: HTTP traffic mocking and testing made easy in Go]]
+    + 原理 - 替换 http.client.Transport
+
+* mock import cycle
+  + [[https://stackoverflow.com/questions/50986170/how-to-avoid-import-cycles-in-mock-generation][go - How to avoid import cycles in mock generation? - Stack Overflow]]
+  + mockgen -self_package
+
+* 类型转换
+  + 强转 (type) v
+  + 显示 type(v)
+

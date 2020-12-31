@@ -5,6 +5,7 @@
 - [[#配置代理][配置代理]]
 - [[#依赖管理][依赖管理]]
 - [[#go-modget][go modget]]
+- [[#编译参数][编译参数]]
 
 * 环境变量
   Go 环境变量可以通过配置系统环境变量的方式配置，但是在 ~Go version >= 1.13~ 时可以通过 =go env -w= 命令设置：
@@ -80,7 +81,6 @@
 
   另外需要注意，Go 1.13 后使用 go get 命令下载依赖时会到特定位置下载和效验，这时，应该将私有库前缀放在 GOPRIVATE 环境变量里面。
 
-
 * go modget
   在高版本的 go 中，使用 go module 的时候，go get 命令对应的其实是 go modget，没有开启 go module 特性时才会替换为 go path get：
   #+begin_src go
@@ -117,4 +117,22 @@
 
   参考：
   + [[https://github.com/golang/go/issues/28156][cmd/go: go get -u on a single module results in indirect modules being updated too · Issue #28156 · golang/go]]
+
+
+* 编译参数
+  golang 支持通过编译参数在编译时修改变量的值：
+  #+begin_quote
+  -X importpath.name=value
+      Set the value of the string variable in importpath named name to value.
+      Note that before Go 1.5 this option took two separate arguments.
+      Now it takes one argument split on the first = sign.
+  #+end_quote
+
+  比如：
+  #+begin_example
+    go build -ldflags "-X my/package/config.Version=1.0.0"
+  #+end_example
+
+  参考：
+  + [[https://stackoverflow.com/questions/47509272/how-to-set-package-variable-using-ldflags-x-in-golang-build][go - How to set package variable using -ldflags -X in Golang build - Stack Overflow]]
 

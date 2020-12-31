@@ -108,8 +108,11 @@
 
    将分组数据按照指定的聚合方式进行聚合（查某个 host qps 的时候，自然会将所有 host 相同的时序数据加起来）：
    #+begin_example
-     sum:
      throughput{host=a, service=m}(now-600: 0.33, now-300: 0.16...)
+     throughput{host=a, service=n}(now-600: 0.33, now-300: 0.16...)
+
+     sum:
+     throughput{host=a, service=m|n}(now-600: 0.66, now-300: 0.32...)
    #+end_example
 
    查询语句分解：

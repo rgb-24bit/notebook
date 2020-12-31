@@ -7,6 +7,7 @@
 - [[#匿名字段][匿名字段]]
 - [[#type-switch][type switch]]
 - [[#comparison-operators][Comparison operators]]
+- [[#functional-options][Functional Options]]
 
 * 类型转换
   当两个结构体忽略 tag 后拥有相同的底层类型，那么就可以进行显示类型转换：
@@ -90,4 +91,51 @@
   + [[https://en.wikipedia.org/wiki/Bottom_type][Bottom type - Wikipedia]]
   + [[https://golang.org/ref/spec#Comparison_operators][Comparison operators ¶]]
   + [[https://en.wikipedia.org/wiki/Unit_type][Unit type - Wikipedia]]
+
+
+* Functional Options
+  可以利用 Functional Options 的模式来配置对象：
+  #+begin_src go
+    type Option func(*Server)
+
+    func Protocol(p string) Option {
+        return func(s *Server) {
+            s.Protocol = p
+        }
+    }
+    func Timeout(timeout time.Duration) Option {
+        return func(s *Server) {
+            s.Timeout = timeout
+        }
+    }
+    func MaxConns(maxconns int) Option {
+        return func(s *Server) {
+            s.MaxConns = maxconns
+        }
+    }
+    func TLS(tls *tls.Config) Option {
+        return func(s *Server) {
+            s.TLS = tls
+        }
+    }
+
+    func NewServer(addr string, port int, options ...func(*Server)) (*Server, error) {
+      srv := Server{
+        Addr:     addr,
+        Port:     port,
+        Protocol: "tcp",
+        Timeout:  30 * time.Second,
+        MaxConns: 1000,
+        TLS:      nil,
+      }
+      for _, option := range options {
+        option(&srv)
+      }
+      //...
+      return &srv, nil
+    }
+  #+end_src
+
+  参考：
+  + [[https://coolshell.cn/articles/21146.html][Go 编程模式：Functional Options | 酷 壳 - CoolShell]]
 
