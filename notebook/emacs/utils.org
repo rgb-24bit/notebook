@@ -74,4 +74,5 @@
 
   参考：
   + [[https://stackoverflow.com/questions/2177687/open-file-via-ssh-and-sudo-with-emacs][Open file via SSH and Sudo with Emacs - Stack Overflow]]
+  + [[https://phenix3443.github.io/notebook/emacs/modes/tramp-mode.html][TRAMP 2.4.1 User Manual]]
 

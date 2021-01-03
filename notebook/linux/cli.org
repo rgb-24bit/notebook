@@ -21,6 +21,7 @@
   - [[#获取当前-shell-脚本所在目录][获取当前 Shell 脚本所在目录]]
   - [[#如何获取文件中某几行的内容][如何获取文件中某几行的内容]]
   - [[#只获取-md5-输出][只获取 md5 输出]]
+  - [[#git-log-没有进入-less][git log 没有进入 less]]
 
 * 网络操作相关
 ** 网络诊断相关
@@ -380,9 +381,12 @@
      sed -n '5,10p' filename
    #+end_src
 
-
 ** 只获取 md5 输出
    #+begin_src bash
      md5=$(md5sum "$my_iso_file" | cut -c 1-32)
    #+end_src
+
+** git log 没有进入 less
+   可能是 PAGER 设置出了问题，可以尝试 export PAGER=less，参考：
+   + [[https://stackoverflow.com/questions/21163327/when-i-use-the-git-log-command-it-is-no-longer-implicitly-piping-through-less][pager - When I use the "git log" command it is no longer implicitly piping through "less" - Stack Overflow]]
 

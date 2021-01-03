@@ -33,6 +33,9 @@
     $ ssh -i file user@host
   #+END_SRC
 
+  教程：
+  + [[https://wangdoc.com/ssh/index.html][SSH 教程 - 网道]]
+
 * 文件传输
   1. 从服务器上下载文件
      #+BEGIN_EXAMPLE
@@ -75,7 +78,6 @@
 
   参考：
   + [[https://jaminzhang.github.io/linux/GSSAPI-related-options-in-ssh-configuration/][SSH 中的 GSSAPI 相关选项 - Jamin Zhang]]
-
 
 * 相关问题
 ** 连接后长时间未使用终端 hang 住怎么办？
