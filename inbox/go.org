@@ -10,3 +10,5 @@
   + 强转 (type) v
   + 显示 type(v)
 
+* go generate mock
+

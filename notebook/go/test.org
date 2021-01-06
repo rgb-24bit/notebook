@@ -8,6 +8,7 @@
 - [[#gomock][gomock]]
   - [[#执行顺序][执行顺序]]
 - [[#assert][assert]]
+- [[#example][example]]
 - [[#相关问题][相关问题]]
   - [[#使用-go-test-测试所有包][使用 go test 测试所有包]]
   - [[#测试在另一个协程的-panic][测试在另一个协程的 panic]]
@@ -146,6 +147,7 @@
      #+end_src
 
   + [[https://github.com/golang/mock][golang/mock: GoMock is a mocking framework for the Go programming language.]]
+
 ** 执行顺序
    可以通过两种方式来设置单个函数多次调用的结果顺序：
    #+begin_example
@@ -162,7 +164,20 @@
 
 * assert
   + [[https://github.com/stretchr/testify][GitHub - stretchr/testify: A toolkit with common assertions and mocks that plays nicely with the standard library]]
+    
+* example
+  *_test 文件中以 Example 开头的函数可以作为 godoc 的一部分提取出来，在存在 Output 注释的时候还可以被当作测试用例执行：
+  #+begin_src go
+    func ExampleFoo()     // 作为Foo函数或者类型例子
+    func ExampleBar_Qux() // 作为Bar类型的Qux函数例子
+    func Example()        // 作为整个库的例子
 
+    func ExampleReverse() {
+        fmt.Println(stringutil.Reverse("hello"))
+        // Output: golly
+    }
+  #+end_src
+  
 * 相关问题
 ** 使用 go test 测试所有包
    #+begin_src sh

@@ -8,6 +8,7 @@
 - [[#命令行参数][命令行参数]]
 - [[#代理配置][代理配置]]
 - [[#配置文件][配置文件]]
+- [[#prompt_command][PROMPT_COMMAND]]
 - [[#相关技巧][相关技巧]]
   - [[#获取当前目录][获取当前目录]]
 - [[#相关问题][相关问题]]
@@ -356,6 +357,13 @@
   参考：
   + [[https://superuser.com/questions/183870/difference-between-bashrc-and-bash-profile][bash - Difference between .bashrc and .bash_profile - Super User]]
   + [[http://einverne.github.io/post/2019/01/login-shell-vs-non-login-shell.html][登录式 shell 和非登录式 shell 区别 | Verne in GitHub]]
+    
+* PROMPT_COMMAND
+  PROMPT_COMMAND 是一个 bash 环境变量，这个变量的中内容是作为一个普通的 bash 命令执行的，而且执行时间是在 bash 显示 prompt 之前，可以通过这个变量来记录执行日志：
+  #+begin_src sh
+    LOGIN_IP=$(who am i | awk '{print $NF}')
+    \export PROMPT_COMMAND='{ msg=$(history 1 | { read x y; echo $y; });echo $(date +"%Y-%m-%d %H:%M:%S") [$(whoami)@$SSH_USER$LOGIN_IP `pwd` ]" $msg" >> /var/log/.history; }'
+  #+end_src
 
 * 相关技巧
   + 可以通过 type 判断命令是 可执行文件、shell 内置命令还是别名

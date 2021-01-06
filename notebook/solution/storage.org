@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#图片的存储方案][图片的存储方案]]
 - [[#数据库分片][数据库分片]]
+- [[#文件存储块存储和对象存储][文件存储、块存储和对象存储]]
 - [[#相关问题][相关问题]]
   - [[#文件数量对性能的影响][文件数量对性能的影响]]
 
@@ -44,6 +45,16 @@
   分片和分区的区别：分区是用于跨表或数据库划分数据的通用术语。分片是一种特定的分区类型，即水平分区，参考：
   + [[https://stackoverflow.com/questions/20771435/database-sharding-vs-partitioning][mysql - Database sharding vs partitioning - Stack Overflow]]
 
+* 文件存储、块存储和对象存储
+  文件存储和对象存储的概念其实都比较好理解，相对陌生的是块存储。块存储将数据拆分成块，并单独存储各个块。同时每个数据块都有一个唯一标识符。
+
+  块存储通常会被配置为将数据与用户环境分离，并会将数据分布到可以更好地为其提供服务的多个环境中。然后，当用户请求数据时，
+  底层存储软件会重新组装来自这些环境的数据块，并将它们呈现给用户。
+
+  参考：
+  + [[https://www.netapp.com/zh-hans/data-storage/storagegrid/what-is-object-storage/][什么是对象存储— 对象、文件与块 | NetApp]]
+  + [[https://www.redhat.com/zh/topics/data-storage/file-block-object-storage][文件存储、块存储还是对象存储？]]
+  
 * 相关问题
 ** 文件数量对性能的影响
    当文件夹和文件的数量很多时，多少还是会影响找到文件的速度的，参考：

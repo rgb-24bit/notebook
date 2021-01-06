@@ -1549,6 +1549,8 @@
       }
     }
   #+end_src
+
+  channels 的容量可以在 make 时指定，并通过 len 函数判断已用的长度。
   
 * 并发控制
   我们可以通过 channel 来进行并发控制，但 Go 也提供了预置的工具，使用互斥锁 sync.Mutex，它有 Lock 和 UnLock 两个方法：

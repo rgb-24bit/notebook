@@ -19,7 +19,7 @@
   + [[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop][并发模型与事件循环 - JavaScript | MDN]]
 
 * Promise
-  Promise 对象的状态值只可能时 Pending、Fulfilled 和 Rejected 中的一个，且变换方式只能为 Pending -> Fulfilled 或 Pending -> Rejected：
+  Promise 对象的状态值只可能是 Pending、Fulfilled 和 Rejected 中的一个，且变换方式只能为 Pending -> Fulfilled 或 Pending -> Rejected：
   #+begin_src js
     const PromiseStatus = {
       Pending: 1, Fulfilled: 2, Rejected: 3

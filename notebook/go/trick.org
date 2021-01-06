@@ -8,6 +8,7 @@
 - [[#type-switch][type switch]]
 - [[#comparison-operators][Comparison operators]]
 - [[#functional-options][Functional Options]]
+- [[#错误处理][错误处理]]
 
 * 类型转换
   当两个结构体忽略 tag 后拥有相同的底层类型，那么就可以进行显示类型转换：
@@ -138,4 +139,39 @@
 
   参考：
   + [[https://coolshell.cn/articles/21146.html][Go 编程模式：Functional Options | 酷 壳 - CoolShell]]
+
+
+* 错误处理
+  Go 1.13 开始支持 error 之间的 wrap 和 unwrap，并提供了 errors.Is 和 errors.As 方法来辅助判断错误类型：
+  #+begin_src go
+    func (e *QueryError) Unwrap() error { return e.Err }
+
+    // Similar to:
+    //   if err == ErrNotFound { … }
+    if errors.Is(err, ErrNotFound) {
+        // something wasn't found
+    }
+
+    // Similar to:
+    //   if e, ok := err.(*QueryError); ok { … }
+    var e *QueryError
+    // Note: *QueryError is the type of the error.
+    if errors.As(err, &e) {
+        // err is a *QueryError, and e is set to the error's value
+    }
+  #+end_src
+
+  也可以通过 %w 方便进行 wrap：
+  #+begin_src go
+    if err != nil {
+        // Return an error which unwraps to err.
+        return fmt.Errorf("decompress %v: %w", name, err)
+    }
+  #+end_src
+
+  但是在实际的使用中可能存在一些问题，比如当实际的 error 是一个 value 的时候，errors.As 很可能会误用：
+  + [[https://github.com/golang/go/issues/34091][errors, cmd/vet: too easy to pass a pointer-to-pointer to `errors.As` when it should be a pointer-to-value · Issue #34091 · golang/go]]
+
+  参考：
+  + [[https://blog.golang.org/go1.13-errors][Working with Errors in Go 1.13 - The Go Blog]]
 

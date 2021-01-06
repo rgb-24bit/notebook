@@ -17,6 +17,7 @@
 - [[#join-using-和-join-on][JOIN USING 和 JOIN ON]]
 - [[#mysql-中比较操作对于字符串尾空字符的处理][MySQL 中比较操作对于字符串尾空字符的处理]]
 - [[#mysql-时间字段格式如何选择timestampdatetimeint][MySQL 时间字段格式如何选择，TIMESTAMP，DATETIME，INT？]]
+- [[#how-to-delete-duplicate-rows-in-mysql][How To Delete Duplicate Rows in MySQL]]
 
 * MySQL 中 Schema 和 Database 的区别是什么
   MySQL 中 Schema 和 Database 在语义上是等价的，两者可以等价替换。
@@ -199,4 +200,17 @@
 
   参考：
   + [[https://segmentfault.com/q/1010000000121702][Mysql 时间字段格式如何选择，TIMESTAMP，DATETIME，INT？ - SegmentFault 思否]]
+
+* How To Delete Duplicate Rows in MySQL
+  Delete duplicate rows using DELETE JOIN statement:
+  #+begin_src sql
+    DELETE t1 FROM contacts t1
+           INNER JOIN contacts t2
+     WHERE
+       t1.id < t2.id AND
+       t1.email = t2.email;
+  #+end_src
+
+  参考：
+  + [[https://www.mysqltutorial.org/mysql-delete-duplicate-rows/][How To Delete Duplicate Rows in MySQL]]
 

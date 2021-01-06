@@ -4,3 +4,5 @@
 * mysql
   + default sort
 
+* mysql
+  limit rows, pageSize
