@@ -21,6 +21,7 @@
 - [[#ffi][FFI]]
 - [[#云计算超卖][云计算超卖]]
 - [[#规则引擎][规则引擎]]
+- [[#协变和逆变][协变和逆变]]
 
 * DevOps
   DevOps 是一个完整的面向IT运维的工作流，以 IT 自动化以及持续集成（CI）、持续部署（CD）为基础，来优化程式开发、测试、系统运维等所有环节。
@@ -159,4 +160,46 @@
   代码就会变得越来越难以维护。
 
   针对这样的场景，可以考虑通过规则引擎来替代大量 if-else 的场景。
+
+* 协变和逆变
+  约定：
+  + =A ≦ B= 意味着 A 是 B 的子类型
+  + =A → B= 指的是以 A 为参数类型，以 B 为返回值类型的函数类型
+  + =x : A= 意味着 x 的类型为 A
+    
+  协变和逆变的概念可以借助实际的变量类型来理解：
+  + 协变和普通变量 ::
+    
+    在 C# 中，List<T> 类实现 IEnumerable<T> 接口，因此 List<Derived> 实现 IEnumerable<Derived>：
+    #+begin_example
+      IEnumerable<Derived> d = new List<Derived>();
+      IEnumerable<Base> b = d;
+    #+end_example
+    
+    简单来说，协变就和面向对象概念中的多态一样，指可以使用父类型引用指向子类型实例的情况。
+
+  + 逆变和函数变量 :: 
+
+    假如我有这样一个类型链：C ≦ B ≦ A，此时有一个函数是这样的：f(B → B)，这个函数接收一个 B → B 函数作为参数，
+    那么这种情况下，怎样的函数可以作为 f 的参数呢？
+    
+    首先，对于 =C → *= 来说都是不行的，因为 f 调用函数时参数类型可能是 B 或 B 的其他子类型，而 =C → *= 只支持 C 类型的入参。
+
+    然后，对于 =* → A= 来说也是不行的，因为 f 要求的返回值是 B 或 B 的其他子类型，但是 =* → A= 可能会返回 B 的父类型 A。
+
+    最后，对于 =A → C= 来说却是可行的，因为 f 的参数只会是 B 或 B 的其他子类型，而 =A → C= 的入参类型是 A，满足。
+    同时，函数 =A → C= 的返回值是 C，是 B 的子类型，返回值类型也满足。
+
+    这时，神奇的情况便发生了，当函数类型是 =B → B= 时，我们可以使用 =<? super B> → <? extend B>= 进行赋值：
+    #+begin_example
+      Action<Base> b = (target) => { Console.WriteLine(target.GetType().Name); };
+      Action<Derived> d = b;
+    #+end_example
+
+    这就是逆变。
+
+  参考：
+  + [[https://zh.wikipedia.org/wiki/%E5%8D%8F%E5%8F%98%E4%B8%8E%E9%80%86%E5%8F%98][协变与逆变 - 维基百科，自由的百科全书]]
+  + [[https://docs.microsoft.com/zh-cn/dotnet/standard/generics/covariance-and-contravariance?redirectedfrom=MSDN][泛型中的协变和逆变 | Microsoft Docs]]
+  + [[https://jkchao.github.io/typescript-book-chinese/tips/covarianceAndContravariance.html#%E4%B8%80%E4%B8%AA%E6%9C%89%E8%B6%A3%E7%9A%84%E9%97%AE%E9%A2%98][协变与逆变 | 深入理解 TypeScript]]
 
