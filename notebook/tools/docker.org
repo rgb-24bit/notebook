@@ -5,6 +5,7 @@
 - [[#linux-unionfs][Linux UnionFS]]
 - [[#数据卷][数据卷]]
 - [[#网络][网络]]
+- [[#oci--cri][OCI & CRI]]
 - [[#常用容器][常用容器]]
   - [[#mysql][mysql]]
   - [[#redis][redis]]
@@ -73,7 +74,21 @@
     $ docker run --name busybox --network example -d busybox
   #+end_example
 
-  
+* OCI & CRI
+  前段时间通过 [[https://www.infoq.cn/article/47HcIxefRy1cETbZuGWd][Kubernetes 弃用 Docker 后怎么办？-InfoQ]] 这篇文章了解到 k8s 和 docker 之间并不是强绑定的，同时，Docker 也并不是容器的唯一实现。
+
+  对于容器来说，Docker 只是 [[https://opencontainers.org/][OCI(Open Container Initiative)]] 的一种实现，除了 Docker 以外，还有如：
+  + [[https://github.com/cri-o/cri-o][cri-o/cri-o: Open Container Initiative-based implementation of Kubernetes Container Runtime Interface]]
+  + [[https://github.com/containerd/containerd][containerd/containerd: An open and reliable container runtime]]
+
+  对于 k8s 来说，则可以通过 CRI(Kubernetes Container Runtime Interface) 来控制编排容器。
+
+  由于 Docker 并没有标准的 CRI 实现，现在是通过 dockershim 来间接实现的，因此，为了更符合 k8s 的发展策略，k8s 弃用了 Docker。
+
+  参考：
+  + [[https://developer.ibm.com/technologies/containers/blogs/kube-cri-overview/][An overview of the Kubernetes Container Runtime Interface (CRI) – IBM Developer]]
+  + [[https://www.infoq.cn/article/47HcIxefRy1cETbZuGWd][Kubernetes 弃用 Docker 后怎么办？-InfoQ]]
+
 * 常用容器
 ** mysql
    创建 MySQL 容器，使用 5.7 镜像：
@@ -124,6 +139,7 @@
      # grep vm.max_map_count /etc/sysctl.conf
      sysctl -w vm.max_map_count=262144
    #+end_src
+
 * 相关问题
 ** 怎样配置 Docker 的镜像加速器
    国内无需账号密码即可使用的 Docker 镜像加速器：
@@ -144,7 +160,6 @@
      docker rm $(docker ps -a -q)
    #+end_src
    
-
 * 相关资源
   + [[https://yeasy.gitbook.io/docker_practice/][Docker —— 从入门到实践]]
 
