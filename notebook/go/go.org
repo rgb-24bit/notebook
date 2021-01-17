@@ -23,7 +23,7 @@
 - [[#并发控制][并发控制]]
 - [[#反射][反射]]
 - [[#底层编程][底层编程]]
-- [[#相关链接][相关链接]]
+- [[#参考资料][参考资料]]
 
 * Go 语言起源
   Go 语言的设计主要受到 CSP、Pascal 和 C 三个分支的影响，其中，CSP 只是一个用于描述并发性基本概念的描述语言，
@@ -1551,6 +1551,16 @@
   #+end_src
 
   channels 的容量可以在 make 时指定，并通过 len 函数判断已用的长度。
+
+  -----
+
+  通常，我们使用的都是双向 channel，但是注意观察的话可以发现，如标准库 time.NewTimer().C 对应的 channel 是一个单向的 channel，
+  也就是说，channel 根据方向是存在多个类型的：
+  #+begin_example
+    ChannelType = ( "chan" | "chan" "<-" | "<-" "chan" ) ElementType .
+  #+end_example
+
+  双向可以给单向的 channel 赋值，但是单向的不能给双向的赋值。
   
 * 并发控制
   我们可以通过 channel 来进行并发控制，但 Go 也提供了预置的工具，使用互斥锁 sync.Mutex，它有 Lock 和 UnLock 两个方法：
@@ -1745,7 +1755,8 @@
 
   而 Pointer 就更加爽了，可以包含任意类型变量的地址，然后通过其他方式来操作。
 
-* 相关链接
+* 参考资料
+  + [[https://gfw.go101.org/article/101.html][Go语言101 - Go语言101（通俗版Go白皮书）]]
   + [[https://draveness.me/golang/][Go 语言设计与实现 | Go 语言设计与实现]]
   + [[https://chai2010.cn/advanced-go-programming-book/][Introduction · Go语言高级编程]]
   + [[https://tour.golang.org/welcome/1][A Tour of Go]]

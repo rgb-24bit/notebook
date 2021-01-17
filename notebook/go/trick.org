@@ -9,6 +9,8 @@
 - [[#comparison-operators][Comparison operators]]
 - [[#functional-options][Functional Options]]
 - [[#错误处理][错误处理]]
+- [[#类型系统][类型系统]]
+- [[#footnotes][Footnotes]]
 
 * 类型转换
   当两个结构体忽略 tag 后拥有相同的底层类型，那么就可以进行显示类型转换：
@@ -175,3 +177,43 @@
   参考：
   + [[https://blog.golang.org/go1.13-errors][Working with Errors in Go 1.13 - The Go Blog]]
 
+* 类型系统
+  Go 中可以通过如下语法 *定义* 一个新的类型，这个过程被叫做类型定义，但需要注意区分类型别名的声明，类型定义和声明别名都是类型声明方式的一种，
+  但是类型定义会影响到赋值、类型转换操作，而类型别名不会：
+  #+begin_example
+    TypeDecl = "type" ( TypeSpec | "(" { TypeSpec ";" } ")" ) .
+    TypeSpec = AliasDecl | TypeDef .
+    TypeDef = identifier Type .
+  #+end_example
+
+  和类型定义相关的一个概念是命名类型和未命名类型：
+  + 如果一个类型有一个名称，该名称必须是一个标识符，并且它的名称不是空白标识符 _，那么这种类型被称为命名类型。所有基本类型都是命名类型
+  + 如果一个类型不能用一个纯粹的标识符来表示，那么这个类型就是一个未命名的类型。比如通过类型字面量表示的复合类型[fn:1]都是未命名的类型
+
+  受到类型系统的影响，很多地方都需要对两个类型是否相同进行判断，判断规则为：
+  + 两个定义类型之间必然是不同的，也就是通过类型定义定义的类型都是不一样的
+  + 数组的元素类型和长度相同时两个数组类型相同
+  + Slice 的元素类型相同相同时两个 Slice 类型相同
+  + 结构体字段顺序、类型和 Tag 都相同是两个结构体类型相同，特殊的，对于字段的判断，不在同一个包下的为导出字段必然是不一样的，
+    也就是说如果 A 类型和 B 类型不在同一个包下，且具有为导出字段，那么，就是它们的定义看上去一模一样，它们也不是相同的类型
+  + 指针的基础类型一样是两个指针类型相同
+  + 函数的参数返回值顺序、类型和数量相同时两个函数类型相同
+  + 接口的方法集相同时两个接口类型相同，顺序无关。如果有未导出方法，且位于不同包，那么和结构体字段判断规则一样，两个接口必然是不一样的
+  + Map 的 Key 和 Value 类型一样时两个 Map 类型一样
+  + Channel 的元素类型和方向一样时两个 Channel 类型一样
+
+  在这个复杂的类型系统下，赋值操作同样遵循一些规则，值 x 能够赋值给类型 T 的变量需要满足如下条件之一：
+  + x 的类型和 T 一样
+  + x 的类型 V 和 T 有相同的底层类型，同时两者中至少有一个未命名类型
+  + T 是一个接口类型且 x 实现了 T 接口
+  + x 是一个双向 Channel，T 是一个 Channel，x 和 T 的元素类型相同，且其中至少有一个类型是未命名类型
+  + x 是 nil，T 的类型是能接收 nil 值的类型
+  + x 是可由 T 表示的 *无类型常量*
+
+  参考：
+  + [[https://golang.org/ref/spec#Properties_of_types_and_values][Properties of types and values]]
+  + [[https://lingchao.xin/post/type-system-overview.html#%E6%A6%82%E5%BF%B5-%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B][Go 类型系统概述]]
+
+* Footnotes
+
+[fn:1] 复合类型包括指针、函数、数组、Slice、Map、结构体、Channel 和 Interface

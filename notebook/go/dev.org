@@ -6,6 +6,7 @@
 - [[#依赖管理][依赖管理]]
 - [[#go-modget][go modget]]
 - [[#编译参数][编译参数]]
+- [[#pprof][pprof]]
 
 * 环境变量
   Go 环境变量可以通过配置系统环境变量的方式配置，但是在 ~Go version >= 1.13~ 时可以通过 =go env -w= 命令设置：
@@ -117,8 +118,7 @@
 
   参考：
   + [[https://github.com/golang/go/issues/28156][cmd/go: go get -u on a single module results in indirect modules being updated too · Issue #28156 · golang/go]]
-
-
+    
 * 编译参数
   golang 支持通过编译参数在编译时修改变量的值：
   #+begin_quote
@@ -135,4 +135,29 @@
 
   参考：
   + [[https://stackoverflow.com/questions/47509272/how-to-set-package-variable-using-ldflags-x-in-golang-build][go - How to set package variable using -ldflags -X in Golang build - Stack Overflow]]
+
+
+* pprof
+  Go 语言内置了性能分析工具 pprof，可以通过导入 net/http/pprof 包使用：
+  #+begin_src go
+    package main
+
+    import (
+        "net/http"
+        _ "net/http/pprof"
+    )
+
+    func main() {
+        http.ListenAndServe("0.0.0.0:10086", nil)
+    }
+  #+end_src
+
+  但是内置的分析工具没有提供火焰图，可以使用 google/pprof 进行火焰图展示：
+  #+begin_example
+    pprof -http=:8080 http://hots:port/debug/pprof/profile
+  #+end_example
+
+  参考：
+  + [[https://github.com/google/pprof][google/pprof: pprof is a tool for visualization and analysis of profiling data]]
+  + [[https://segmentfault.com/a/1190000016412013][Golang 大杀器之性能剖析 PProf - SegmentFault 思否]]
 

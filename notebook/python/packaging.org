@@ -53,6 +53,7 @@
 
   + [[https://www.python.org/dev/peps/pep-0518/][PEP 518 -- Specifying Minimum Build System Requirements for Python Projects | Python.org]]
   + [[https://github.com/python-poetry/poetry][python-poetry/poetry: Python dependency management and packaging made easy.]]
+  + [[https://aber.sh/articles/python-poetry/][poetry 使用指北 - Aber's blog]]
   + [[https://github.com/EmilyQiRabbit/gold-miner/blob/58c3b7dcd653ebccb5b5c1a18f36f170b76eb698/TODO1/current-status-of-python-packaging.md][Python 的打包现状]]
 
 * pip

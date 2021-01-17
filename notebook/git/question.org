@@ -24,6 +24,7 @@
 - [[#git-merge--rebase-的区别][git merge & rebase 的区别]]
 - [[#git-submodule-shalow-clone][git submodule shalow clone]]
 - [[#how-to-replace-local-branch-with-remote-branch-entirely-in-git][How to replace local branch with remote branch entirely in Git?]]
+- [[#执行-git-diff-时忽略-m][执行 git diff 时忽略 ^M]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -293,4 +294,17 @@
 
   参考：
   + [[https://stackoverflow.com/questions/9210446/how-to-replace-local-branch-with-remote-branch-entirely-in-git][How to replace local branch with remote branch entirely in Git? - Stack Overflow]]
+
+* 执行 git diff 时忽略 ^M
+  #+begin_example
+    $ git diff --ignore-space-at-eol
+
+    or
+
+    $ git diff --ignore-space-change
+
+    or
+
+    $ git diff --ignore-all-space
+  #+end_example
 

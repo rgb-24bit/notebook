@@ -125,6 +125,11 @@
       $ git push --tags
     #+END_EXAMPLE
 
+  + 相对安全地更新远程分支：
+    #+begin_example
+      $ git push --force-with-lease
+    #+end_example
+    
 * git commit
   + 直接提交所有的修改：
     #+BEGIN_EXAMPLE
