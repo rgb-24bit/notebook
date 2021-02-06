@@ -195,8 +195,8 @@
      struct Example {  // 0x4
        int i;   // 4, 4 % 4 == 0
        char c;  // 5, 5 % 1 == 0
-       char d;  // 8, 8 % 8 == 0
-       long j;  // 16
+       char d;  // 6, 6 % 1 == 0
+       long j;  // 8，8 % 8 == 0
      }
    #+END_SRC
 

@@ -6,3 +6,19 @@
 
 * mysql
   limit rows, pageSize
+
+* 联表查询
+  + [[https://www.cnblogs.com/youzhibing/p/12004986.html][神奇的 SQL 之 联表细节 → MySQL JOIN 的执行过程（一） - 青石路 - 博客园]]
+
+* 慢查询日志
+  + [[https://www.cnblogs.com/huchong/p/10238263.html][(6) MySQL慢查询日志的使用 - 听风。 - 博客园]]
+
+* ddl 锁表问题
+  + [[https://www.cnblogs.com/sanduzxcvbnm/p/12697930.html][MySQL5.7之在线DDL不会锁表 - 三度 - 博客园]]
+
+* Tips
+  数据库的很多问题和数据库版本有关，需要注意区分，不能一概而论。
+
+* 自动限流
+  思路 - [[https://help.aliyun.com/document_detail/164859.html][自动SQL限流 - 数据库自治服务 DAS - 阿里云]]
+

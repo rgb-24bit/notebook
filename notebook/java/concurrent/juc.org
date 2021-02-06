@@ -138,11 +138,11 @@
    |-----------------------+----------------------------------|
 
 ** Synchronizers
-   + [[https://segmentfault.com/a/1190000015918459][Semaphore - 透彻理解 Java 并发编程 - SegmentFault 思否]]
-   + [[https://segmentfault.com/a/1190000015886497][CountDownLatch - 透彻理解 Java 并发编程 - SegmentFault 思否]]
-   + [[https://segmentfault.com/a/1190000015888316][CyclicBarrier - 透彻理解 Java 并发编程 - SegmentFault 思否]]
-   + [[https://segmentfault.com/a/1190000015979879][Phaser - 透彻理解 Java 并发编程 - SegmentFault 思否]]
-   + [[https://segmentfault.com/a/1190000015963932][Exchanger - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   * [[https://segmentfault.com/a/1190000015918459][Semaphore - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   * [[https://segmentfault.com/a/1190000015886497][CountDownLatch - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   * [[https://segmentfault.com/a/1190000015888316][CyclicBarrier - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   * [[https://segmentfault.com/a/1190000015979879][Phaser - 透彻理解 Java 并发编程 - SegmentFault 思否]]
+   * [[https://segmentfault.com/a/1190000015963932][Exchanger - 透彻理解 Java 并发编程 - SegmentFault 思否]]
 
 ** Concurrent Collections
 *** ConcurrentHashMap

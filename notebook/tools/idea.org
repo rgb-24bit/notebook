@@ -29,6 +29,7 @@
   - [[#intellij-idea-module-的-language-level-的问题][Intellij IDEA Module 的 Language Level 的问题]]
   - [[#关闭参数提示][关闭参数提示]]
   - [[#配置文件路径][配置文件路径]]
+  - [[#配置-python-virtual-environment][配置 Python virtual environment﻿]]
 
 * 简单使用
   在 Emacs 键位下的一些常用快捷键：
@@ -235,4 +236,8 @@
 
 ** 配置文件路径
    MacOS - ~/Library/Application Support/JetBrains/IntelliJIdea2020.1
+
+
+** 配置 Python virtual environment﻿
+   + ☞ [[https://www.jetbrains.com/help/idea/creating-virtual-environment.html][Configure a virtual environment—IntelliJ IDEA]]
 

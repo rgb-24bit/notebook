@@ -24,6 +24,7 @@
   - [[#get-和-post-之间的区别][GET 和 POST 之间的区别]]
   - [[#状态码-200201-的使用][状态码 200/201 的使用]]
   - [[#名称相同的-cookie-的处理规则][名称相同的 Cookie 的处理规则]]
+  - [[#服务端通过-set-cookie-头清除-cookie][服务端通过 Set-Cookie 头清除 Cookie]]
 
 * HTTP
 ** HTTP 概述
@@ -310,7 +311,6 @@
 
    一般来说还是 200 要用的多一些吧……
 
-
 ** 名称相同的 Cookie 的处理规则
    在设置 Cookie 时，Domain 和 Path 属性可能使得一个请求匹配到多个名称相同的 Cookie，比如：
    #+begin_example
@@ -340,4 +340,13 @@
 
    参考：
    + [[https://tools.ietf.org/html/rfc6265#section-5.4][RFC 6265 - 5.4 The Cookie Header]]
+
+
+** 服务端通过 Set-Cookie 头清除 Cookie
+   #+begin_example
+     Set-Cookie: token=deleted; path=/; expires=<Now>
+   #+end_example
+
+   参考：
+   + [[https://stackoverflow.com/questions/5285940/correct-way-to-delete-cookies-server-side][http - Correct way to delete cookies server-side - Stack Overflow]]
 
