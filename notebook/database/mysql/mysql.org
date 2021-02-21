@@ -45,6 +45,8 @@
 
   然而，官方文档中似乎没有行锁和表锁这种说法，但大致上的意思还是差不多的……
 
+  NOTE: select 默认不加锁！！！
+  
   参考文档：
   + [[https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html][MySQL 5.7 Reference Manual - 14.7.1 InnoDB Locking]]
   + [[https://juejin.im/post/5b82e0196fb9a019f47d1823#comment][全面了解 MySQL 锁机制（InnoDB）与问题排查 - 掘金]]
@@ -139,6 +141,19 @@
    + [[https://tech.youzan.com/-ci-da-liang-shan-chu-dao-zhi-mysqlman-cha-de-fen-xi/][一次大量删除导致 MySQL 慢查的分析]]
    + [[https://rgb-24bit.github.io/blog/2020/mysql-mvcc.html][MySQL MVCC - 多版本并发控制]]
 
+   -----
+
+   查询操作可以分为快照读 snapshot read 和当前读两类，快照读就是指直接 select 的形式，而当前读包括：
+   + select ... lock in share mode
+   + select ... for update
+   + insert
+   + update
+   + delete
+
+   快照读可以通过 MVCC 和 undo log 实现，是非阻塞的读操作，而当前读会阻塞其他事务的当前读，不会阻塞快照读。
+
+   也就是说，select ... for update/share 都不会阻塞普通的 select 操作。
+   
 * 执行计划
   MySQL 数据库索引使用的是 B+ 树结构，我们查询数据时，查询条件命中索引时，查询效率会特别高，如果没有命中索引，此时，则会全表扫描，耗时且消耗性能。
 

@@ -9,6 +9,7 @@
   - [[#执行顺序][执行顺序]]
 - [[#assert][assert]]
 - [[#example][example]]
+- [[#benchmark][benchmark]]
 - [[#相关问题][相关问题]]
   - [[#使用-go-test-测试所有包][使用 go test 测试所有包]]
   - [[#测试在另一个协程的-panic][测试在另一个协程的 panic]]
@@ -177,6 +178,22 @@
         // Output: golly
     }
   #+end_src
+  
+* benchmark
+  golang 可以通过编写 BentchmarkXXX 测试函数来进行性能测试，通常的形式为：
+  #+begin_src go
+    func BenchmarkSomething(b *testing.B) {
+      b.ResetTimer()
+      for i := 0; i < b.N; i++ {
+        // do something
+      }
+    }
+  #+end_src
+  
+  运行测试，-benchmem 选项可以统计每次操作分配内存的次数以及每次操作分配的字节数：
+  #+begin_example
+    go test -bench=. -benchmem
+  #+end_example
   
 * 相关问题
 ** 使用 go test 测试所有包

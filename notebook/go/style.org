@@ -294,6 +294,7 @@
 * 相关链接
   + [[https://github.com/bingohuang/effective-go-zh-en][GitHub - bingohuang/effective-go-zh-en: 《Effective Go》中英双语版]]
   + [[https://golang.org/doc/effective_go.html][Effective Go - The Go Programming Language]]
+  + [[https://github.com/uber-go/guide/blob/master/style.md][guide/style.md at master · uber-go/guide]]
   + [[https://github.com/golang/go/wiki/CodeReviewComments][CodeReviewComments · golang/go Wiki]]
 
 * Footnotes

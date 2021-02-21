@@ -68,5 +68,6 @@
    但应该注意，尽可能只选择一种。
 
    参考：
+   + [[https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm][What are CJS, AMD, UMD, and ESM in Javascript? - DEV Community]]
    + [[https://www.cnblogs.com/cag2050/p/7419258.html][commonJS 模块规范 和 es6 模块规范 区别 - cag2050 - 博客园]]
 

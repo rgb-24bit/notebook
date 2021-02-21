@@ -4,6 +4,8 @@
 - [[#事件循环][事件循环]]
 - [[#promise][Promise]]
 - [[#generator][Generator]]
+- [[#相关问题][相关问题]]
+  - [[#怎样实现-sleep-函数][怎样实现 sleep 函数]]
 
 * 事件循环
   JavaScript 的宿主环境，如浏览器和 Node.js 原生提供了对事件循环和异步操作的支持，整个模型的主要组成为：
@@ -231,3 +233,18 @@
   + [[https://es6.ruanyifeng.com/#docs/generator][Generator 函数的语法 - ECMAScript 6入门]]
   + [[https://es6.ruanyifeng.com/#docs/async][async 函数 - ECMAScript 6入门]]  
 
+
+* 相关问题
+** 怎样实现 sleep 函数
+   #+begin_src js
+     function sleep(ms) {
+       return new Promise(resolve => setTimeout(resolve, ms));
+     }
+
+     // or
+
+     await new Promise(r => setTimeout(r, 2000));
+   #+end_src
+
+   参考：
+   + [[https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep][What is the JavaScript version of sleep()? - Stack Overflow]]

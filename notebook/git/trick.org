@@ -28,9 +28,17 @@
   + [[https://git-scm.com/docs/gitignore][Git - gitignore Documentation]]
 
 * git merge strategy
-  在 merge 的时候可以通过 ~-X~ 选项指定合并策略，比如 ~theirs~ 和 ~ours~ 这两种简易的策略，可以参考：
-  + [[https://stackoverflow.com/questions/173919/is-there-a-theirs-version-of-git-merge-s-ours][Is there a "theirs" version of "git merge -s ours"? - Stack Overflow]]
+  git 支持多种 merge 策略，部分策略还支持额外的合并选项，使用方式为：
+  #+begin_example
+    $ git merge -s/--strategy <strategy> -X <strategy option>
+  #+end_example
 
+  默认使用的策略为 recursive，使用递归三路合并算法进行合并，可以使用 ours 或 theirs 选项使得在遇到冲突时自动应用 ours 或 theirs 的修改。
+
+  参考：
+  + [[https://git-scm.com/docs/git-merge#_pre_merge_checks][Git - git-merge Documentation]]
+  + [[https://blog.walterlv.com/post/git-merge-strategy.html#recursive][git 合并策略 - walterlv]]
+  
 * 使用不同的配置
   当自己在 Github 上的用户名和在公司使用的用户名不一样时，可以选择将公司的仓库全部克隆在一个目录下，
   然后在 =~/.gitconfig= 添加如下配置：
@@ -69,7 +77,6 @@
   + =true= - 提交时将 CRLF 转换为 LF，签出时转换为 CRLF
   + =input= - 提交时将 CRLF 转换为 LF，签出时不转换
   + =false= - 不进行任何处理
-
 
 * 批量删除分支
   git br -d $(git br | grep feature)

@@ -10,6 +10,7 @@
 - [[#functional-options][Functional Options]]
 - [[#错误处理][错误处理]]
 - [[#类型系统][类型系统]]
+- [[#byte--string][[]byte & string]]
 - [[#footnotes][Footnotes]]
 
 * 类型转换
@@ -94,8 +95,7 @@
   + [[https://en.wikipedia.org/wiki/Bottom_type][Bottom type - Wikipedia]]
   + [[https://golang.org/ref/spec#Comparison_operators][Comparison operators ¶]]
   + [[https://en.wikipedia.org/wiki/Unit_type][Unit type - Wikipedia]]
-
-
+    
 * Functional Options
   可以利用 Functional Options 的模式来配置对象：
   #+begin_src go
@@ -141,7 +141,6 @@
 
   参考：
   + [[https://coolshell.cn/articles/21146.html][Go 编程模式：Functional Options | 酷 壳 - CoolShell]]
-
 
 * 错误处理
   Go 1.13 开始支持 error 之间的 wrap 和 unwrap，并提供了 errors.Is 和 errors.As 方法来辅助判断错误类型：
@@ -214,6 +213,22 @@
   + [[https://golang.org/ref/spec#Properties_of_types_and_values][Properties of types and values]]
   + [[https://lingchao.xin/post/type-system-overview.html#%E6%A6%82%E5%BF%B5-%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B][Go 类型系统概述]]
 
+* []byte & string
+  在 golang 中通过显式类型转换转换 []byte 和 string 类型时会进行一次 copy 操作，如果是在只读环境下，可以考虑通过 unsafe.pointer 完成两者的转换：
+  #+begin_src go
+    func stringToBytes(s string) []byte {
+      x := (*[2]uintptr)(unsafe.Pointer(&s))
+      b := [3]uintptr{x[0], x[1], x[1]}
+      return *(*[]byte)(unsafe.Pointer(&b))
+    }
+
+    func bytesToString(b []byte) string {
+      return *(*string)(unsafe.Pointer(&b))
+    }
+  #+end_src
+  
+  这样在性能表现上会更好。
+  
 * Footnotes
 
 [fn:1] 复合类型包括指针、函数、数组、Slice、Map、结构体、Channel 和 Interface

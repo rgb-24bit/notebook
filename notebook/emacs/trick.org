@@ -13,6 +13,7 @@
 - [[#插入文件中的内容][插入文件中的内容]]
 - [[#快速的创建多级目录][快速的创建多级目录]]
 - [[#高亮内容][高亮内容]]
+- [[#使用不同的配置][使用不同的配置]]
 
 * 批量修改文件名称
   通过 ~dired-mode~ 的编辑模式完成这一工作：
@@ -91,4 +92,9 @@
 * 高亮内容
   highlight-regexp，highlight-phrase 高亮指定内容，参考：
   + [[https://stackoverflow.com/questions/385661/how-to-highlight-all-occurrences-of-a-word-in-an-emacs-buffer][highlighting - How to highlight all occurrences of a word in an Emacs buffer? - Stack Overflow]]
+
+* 使用不同的配置
+  #+begin_src sh
+    HOME=<path> emacs
+  #+end_src
 

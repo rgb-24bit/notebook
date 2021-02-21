@@ -87,6 +87,6 @@
 
 
 * Go 1.16 使用 go:embed 需要导入 embed 包的原因
-  就是通过 import 老进行标识，避免对每个文件都进行扫描，但还是很突厄，参考：
+  就是通过 import 部分进行标识，避免对每个文件都进行扫描，但还是很突厄，参考：
   + https://go-review.googlesource.com/c/go/+/243941/1
 
