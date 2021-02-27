@@ -25,6 +25,7 @@
 - [[#git-submodule-shalow-clone][git submodule shalow clone]]
 - [[#how-to-replace-local-branch-with-remote-branch-entirely-in-git][How to replace local branch with remote branch entirely in Git?]]
 - [[#执行-git-diff-时忽略-m][执行 git diff 时忽略 ^M]]
+- [[#修改-tag-的-message][修改 tag 的 message]]
 
 * Windows 上设置大小写敏感
   #+BEGIN_SRC bash
@@ -307,4 +308,12 @@
 
     $ git diff --ignore-all-space
   #+end_example
+
+* 修改 tag 的 message
+  #+begin_example
+    git tag <tag name> <tag name>^{} -f -m "<new message>"
+  #+end_example
+
+  参考：
+  + [[https://stackoverflow.com/questions/7813194/how-do-i-edit-an-existing-tag-message-in-git][git tag - How do I edit an existing tag message in git? - Stack Overflow]]
 

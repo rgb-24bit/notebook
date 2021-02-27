@@ -1,6 +1,72 @@
-* venv
-  + python -m venv venv --prompt=prompt
+* Future
+  1. Python Language Reference 可以重温一下，特别是 Data Model 部分
+  2. 词汇表也看一下 [[https://docs.python.org/3/glossary.html#term-awaitable][Glossary — Python 3.8.1 documentation]]
 
-* json
-  + [[https://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object][How to convert JSON data into a Python object - Stack Overflow]]
+* 异步编程
+  + [[https://docs.python.org/3/library/asyncio.html][asyncio — Asynchronous I/O — Python 3.8.1 documentation]]
+  + [[http://xiaorui.cc/2016/04/27/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B9%8Bgevent-monkey-patch_all%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/][源码分析之gevent monkey.patch_all实现原理 – 峰云就她了]]
+  + [[https://github.com/python/cpython/blob/master/Lib/asyncio/coroutines.py#L105][cpython/coroutines.py at master · python/cpython]]
+  + [[https://blog.csdn.net/tinyzhao/article/details/52684473][async with和async for_flyingzhao-CSDN博客]]
+  + [[https://zhuanlan.zhihu.com/p/25228075][从0到1，Python异步编程的演进之路 - 知乎]]
+  + [[https://rgb-24bit.github.io/blog/2019/python-selectors.html][Python 高级 I/O 多路复用]]
+  + [[https://rgb-24bit.github.io/blog/2019/python-coroutine-event-loop.html][Python 协程和事件循环]]
 
+** 使用教程
+   + [[https://realpython.com/async-io-python/][Async IO in Python: A Complete Walkthrough – Real Python]]
+   + [[https://docs.python.org/3/library/asyncio-task.html#asyncio-generator-based-coro][Generator-based Coroutines]]
+   + [[https://docs.python.org/3/library/asyncio-future.html#asyncio.Future][Futures — Python 3.8.1 documentation]]
+     #+begin_src python
+       async def set_after(fut, delay, value):
+           # Sleep for *delay* seconds.
+           await asyncio.sleep(delay)
+
+           # Set *value* as a result of *fut* Future.
+           fut.set_result(value)
+
+       async def main():
+           # Get the current event loop.
+           loop = asyncio.get_running_loop()
+
+           # Create a new Future object.
+           fut = loop.create_future()
+
+           # Run "set_after()" coroutine in a parallel Task.
+           # We are using the low-level "loop.create_task()" API here because
+           # we already have a reference to the event loop at hand.
+           # Otherwise we could have just used "asyncio.create_task()".
+           loop.create_task(
+               set_after(fut, 1, '... world'))
+
+           print('hello ...')
+
+           # Wait until *fut* has a result (1 second) and print it.
+           print(await fut)
+
+       asyncio.run(main())
+     #+end_src
+   + [[https://docs.python.org/3/library/asyncio-task.html#coroutine][Coroutines and Tasks — Python 3.8.1 documentation]]
+
+** 理解
+   1. Task 创建时便被加入事件循环
+
+** 问题
+   + [[https://stackoverflow.com/questions/33409888/how-can-i-await-inside-future-like-objects-await][python - How can I await inside future-like object's __await__? - Stack Overflow]]
+
+* 异步编程
+  撇开 I/O 的异步编程模型理解：
+  1. 在主线程上存在一个耗时的 Task，为了不让这个 Task 阻塞主线程，于是，可以考虑安排它到另一个线程执行
+  2. 我们需要这个 Task 执行的结果，所以说，我看可以用一个 Future 来保存这个 Task 的引用，当 Task 执行完成后就将结果保存到 Future
+  3. 为了不影响后续的任务的执行，我们可以将一个回调函数和 Task 关联，当 Task 执行完成就调用回调函数
+  4. 回调函数的调用肯定不能由主线程来完成，于是，可以通过一个事件系统来管理这些 Task，执行完 Task 就调用相应的回到函数
+
+  扩展的理解：
+  + 可以将事件系统作为主线程，每个 Task 是一个协程，类似 Python 的模式
+    
+  参考：
+  + [[https://woshijpf.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html][Linux I/O 模型详解]]
+  + [[https://rgb-24bit.github.io/blog/2019/python-coroutine-event-loop.html][Python 协程和事件循环]]
+  + [[https://rgb-24bit.github.io/blog/2019/python-selectors.html][Python 高级 I/O 多路复用]]
+  + [[https://segmentfault.com/a/1190000013039660][JavaScript同步和异步 - aincrad - SegmentFault 思否]]
+  + [[https://www.zhihu.com/question/19732473][怎样理解阻塞非阻塞与同步异步的区别？ - 知乎]]
+  + [[https://juejin.im/post/5c0f1739f265da616c65724e][linux的IO模型 - 掘金]]
+  + [[https://www.cnkirito.moe/future-and-promise/][JAVA 拾遗 --Future 模式与 Promise 模式 | 徐靖峰|个人博客]]

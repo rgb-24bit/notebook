@@ -4,6 +4,3 @@
   + 目前暂时可以用 org-store-link 或其他轻量方案
   + [[https://www.orgroam.com/manual.html][Org-roam User Manual]]
 
-* keymap
-  keymap 概念
-

@@ -1,3 +1,0 @@
-* Object
-  + [[https://zhuanlan.zhihu.com/p/26169639][从 Chrome 源码看 JS Object 的实现 - 知乎]]
-

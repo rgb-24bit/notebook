@@ -1,0 +1,26 @@
+#+TITLE:      MySQL 性能相关
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#分页查询][分页查询]]
+- [[#慢日志分析][慢日志分析]]
+
+* 分页查询
+  分页查询优化是一个老生常谈的问题，常见的查询模式有：
+  + offset + pageSize，这在 mysql 中会扫描 offset + pageSize 行，当 offset 很大时，查询效率会很低
+  + cursor + pageSize，通过 cursor 过滤数据，并扫描 pageSize 行，效率上会好不少
+
+  相对来说，offset + pageSize 的模式会比较简单，同时，可以使用 count(*) 的方式查询总的页数，
+  需要注意的是，这需要扫全表才能得到总行数。
+
+  在对精确的总量要求不高时，可以考虑给出一个近似值，并使用 cursor + pageSize 模式不断查询。
+
+* 慢日志分析
+  SQL 慢日志各字段含义：
+  + Query_time 执行查询花费时间
+  + Lock_time 执行查询加锁时长
+  + Rows_sent 返回给客户端的行数
+  + Rows_examined 服务端扫描的行数
+
+  参考：
+  + [[https://dev.mysql.com/doc/refman/5.7/en/slow-query-log.html][The Slow Query Log]]
+

@@ -4,6 +4,7 @@
 - [[#synccond][sync.Cond]]
 - [[#syncpool][sync.Pool]]
 - [[#context][context]]
+- [[#footnotes][Footnotes]]
 
 * sync.Cond
   Go 语言标准库中的 sync.Cond 一个条件变量，它可以让一系列的 Goroutine 都在满足特定条件时被唤醒。
@@ -26,11 +27,30 @@
   #+end_src
 
 * context
-  在使用 context 的过程中，可以通过 context.WithValue 将一个值保存到 context，这会创建一个新的 context 并引用上一个 context。
+  context.Context 是 Go 语言在 1.7 版本中引入标准库的接口，该接口定义了四个需要实现的方法，其中包括：
+  + Deadline — 返回通过 context.WithDeadline 或 context,WithTimeout 指定的取消的时间，未指定时返回 0001-01-01 00:00:00 +0000 UTC
+  + Done - 返回一个 Channel，这个 Channel 会在当前上下文被取消后关闭，多次调用 Done 方法会返回同一个 Channel[fn:1]
+  + Err - 返回 context.Context 结束的原因，它只会在 Done 方法对应的 Channel 关闭时返回非空的值
+    - 如果 context.Context 被取消，会返回 Canceled 错误
+    - 如果 context.Context 超时，会返回 DeadlineExceeded 错误
+  + Value - 从 context.Context 中获取键对应的值，不存在时返回 nil
 
-  这个模式很像 git commit，git 的 commit 对象也是不可变的，同时，git 本身也可以算是在一个分布式并发场景下进行修改。
+  通常，可以使用 context.WithValue 在上下文中传递值，使用 context.WithDeadline、context.WithTimeout 和 context.WithCancel 创建可取消的上下文，
+  取消时，当前上下文及子上下文都会被取消，Done 函数返回的 channel 会被关闭，其上的接收操作会立刻返回一个零值。
 
-  利用不可变对象和链表构建的结构，来保证并发场景下前面对后面的可见性。
+  参考：
+  + [[https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-context/][Go 语言并发编程与 Context | Go 语言设计与实现]]
+  + [[https://golang.org/pkg/context/#example_WithCancel][context - The Go Programming Language]]
+
+  -----
+  
+  思考：这个模式很像 git commit，git 的 commit 对象是不可变的，context 对象也是不可变的，同时，git 本身也可以算是在一个分布式并发场景下进行修改。
+
+  利用不可变对象和链表构建的树状结构，来保证并发场景下前面对后面的可见性。
 
   tracing context 也有类似的感觉。
+  
+* Footnotes
+
+[fn:1] 一个已被关闭的 channel 上的接收操作会立刻返回剩余的为接收的值或零值，而发送操作会 panic
 

@@ -1,10 +1,5 @@
 #+TITLE:      Emacs
 
-* 目录                                                    :TOC_4_gh:noexport:
-- [[#important-general-concepts][Important General Concepts]]
-- [[#fundamental-editing-commands][Fundamental Editing Commands]]
-- [[#important-text-changing-commands][Important Text-Changing Commands]]
-
 * Important General Concepts
   也许是 Emacs 的诞生比较早的原因，操作系统层面的单个窗口或终端界面在 Emacs 中的名称为 Frame。
   
@@ -41,6 +36,11 @@
   在 Unix/Linux 系统中，通过命令行启动 Emacs 时可以使用 =&= 后缀避免阻塞终端界面。
 
   可以通过变量 =confirm-kill-emacs= 和 =confirm-kill-processes= 来控制关闭 Emacs 时的行为。
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#important-general-concepts][Important General Concepts]]
+- [[#fundamental-editing-commands][Fundamental Editing Commands]]
+- [[#important-text-changing-commands][Important Text-Changing Commands]]
 
 * Fundamental Editing Commands
   在 Emacs 中，只有可见字符是可以通过关联的按键直接插入的，其他的按键会绑定相应的命令来进行相关的操作。

@@ -19,6 +19,7 @@
   + [network](#network)
   + [os](#os)
   + [python](#python)
+  + [security](#security)
   + [solution](#solution)
   + [tools](#tools)
   + [windows](#windows)
@@ -66,6 +67,8 @@
   + **mysql**
     + [InnoDB 引擎相关](notebook/database/mysql/innodb.org)
     + [MySQL](notebook/database/mysql/mysql.org)
+    + [MySQL 性能相关](notebook/database/mysql/performance.org)
+    + [执行查询](notebook/database/mysql/query.org)
     + [相关问题](notebook/database/mysql/question.org)
   + [MongoDB](notebook/database/mongo.org)
   + [SQL Server](notebook/database/mssql.org)
@@ -307,6 +310,8 @@
   + [Tkinter](notebook/python/tkinter.org)
   + [typing - Support for type hints](notebook/python/typing.org)
   + [Python - 弱引用](notebook/python/weakref.org)
+## security
+  + [Web Security](notebook/security/web.org)
 ## solution
   + [访问控制](notebook/solution/ac.org)
   + [接口设计](notebook/solution/api.org)

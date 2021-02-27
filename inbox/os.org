@@ -1,3 +1,0 @@
-* 数据对齐
-  + [[https://www.cnblogs.com/bakari/archive/2012/08/27/2658956.html][数据对齐详解 - 猿大白 - 博客园]]
-    
