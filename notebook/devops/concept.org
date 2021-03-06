@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#oos---对象存储服务][OOS - 对象存储服务]]
 - [[#cdn---内容分发网络][CDN - 内容分发网络]]
+  - [[#cdn-回源][CDN 回源]]
 
 * OOS - 对象存储服务
   对象存储服务，顾名思义，就是用来存储某些对象的一个服务，其中，存储的对象包括：
@@ -23,4 +24,9 @@
   参考：
   + [[https://www.zhihu.com/question/36514327?rf=37353035][CDN 是什么？使用 CDN 有什么优势？ - 知乎]]
   + [[https://help.aliyun.com/document_detail/27102.html?spm=a2c4g.11186623.2.14.63835cd5Z5YUBl#concept-plh-jlc-5db][基本概念_产品简介_CDN - 阿里云]]
+
+** CDN 回源
+
+   当用户访问 CDN 边缘节点发现资源不存在或已过期时，边缘节点会向源站发出请求获取最新数据，这一流程被称作 CDN 回源，参考：
+   + [[https://cloud.tencent.com/developer/article/1439913][这就是 CDN 回源原理和 CDN 多级缓存啊！ - 云+社区 - 腾讯云]]
 

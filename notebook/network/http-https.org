@@ -232,8 +232,15 @@
    同时，根据响应头中的 ~Content-Length~ 获取数据的总长度，参考：
    + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Range][Range - HTTP | MDN]]
    + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Length][Content-Length - HTTP | MDN]]
+
 ** HTTP Auth
-   + [[https://coolshell.cn/articles/19395.html][HTTP API 认证授权术 - 酷 壳 - CoolShell]]
+   HTTP Auth 本质上是利用公认的 Header 来完成客户端和服务端之间的认证，其中，服务端通过 WWW-Authenticate Header 来指定客户端应该使用的 Auth 方式，
+   然后客户端通过 Authorization Header 携带相应的 Auth 信息，由服务端进行效验。
+
+   而对于 Basic 和 Bearer 这样具体的实现方式来说，就是更进一步的话题了，某种程度上来说，虽然都还算是 HTTP Auth，但又自成一体。
+   
+   参考：
+   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication][HTTP 身份验证 - HTTP | MDN]]
 
 * HTTPS
 ** SSL 和 TLS 协议
@@ -276,6 +283,13 @@
   参考：
   + [[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/HTTP_Strict_Transport_Security][HTTP Strict Transport Security - HTTP | MDN]]
   + [[https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/][HTTP Strict Transport Security (HSTS) and NGINX - NGINX]]
+
+  和 301 之间的区别：
+  + HSTS 服务端通过 response header 的方式告诉客户端应该使用 HTTPS 访问网站，重定向由客户端完成，服务端依然接受 HTTP 流量
+  + 强制 HTTPS 301 跳转，服务端拒绝 HTTP 流量，并将 HTTP 流量通过 301 状态码重定向到对应 HTTPS 路径
+
+  参考：
+  + [[https://security.stackexchange.com/questions/129273/whats-the-difference-between-using-hsts-and-doing-a-301-redirection][tls - What's the difference between using HSTS and doing a 301 redirection? - Information Security Stack Exchange]]
   
 * 相关问题
 ** HTTP Header 大小写敏感吗

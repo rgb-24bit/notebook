@@ -25,6 +25,8 @@
   - [[#package-names][Package Names]]
   - [[#receiver-names][Receiver Names]]
   - [[#variable-names][Variable Names]]
+- [[#misc][Misc]]
+  - [[#initialisms-1][Initialisms]]
 - [[#相关问题][相关问题]]
   - [[#使用字面量还是使用-make-进行初始化][使用字面量还是使用 make 进行初始化？]]
   - [[#receiver-使用-value-还是使用-pointer][receiver 使用 value 还是使用 pointer]]
@@ -269,6 +271,15 @@
    基本规则：范围域中，越晚使用的变量，名称必须越具有描述性。对于方法接收器，一个或两个字母就足够了。诸如循环索引和读取器（Reader）之类的公共变量可以是单个字母（i，r）。
    更多不寻常的事物和全局变量则需要更具描述性的名称。
 
+* Misc
+** Initialisms
+   Golang 规范中提到的一点，对于 ID、URL 这类缩略词，命名时要么全大写，要么全小写，不要出现 Url，Id 的情况。这类缩略词列表可以参考：
+   + [[https://staticcheck.io/docs/options][Staticcheck - The advanced Go linter]]   
+
+   #+begin_example
+     ["ACL", "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "QPS", "RAM", "RPC", "SLA", "SMTP", "SQL", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "GID", "UID", "UUID", "URI", "URL", "UTF8", "VM", "XML", "XMPP", "XSRF", "XSS"]
+   #+end_example
+     
 * 相关问题
 ** 使用字面量还是使用 make 进行初始化？
    随便，没有硬性要求。
