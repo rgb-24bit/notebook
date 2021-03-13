@@ -1,0 +1,3 @@
+* git reset
+  + --soft/--hard，[[https://www.jianshu.com/p/97341ed9d89e][撤销 git commit --amend - 简书]]
+  + [[https://stackoverflow.com/questions/5203535/practical-uses-of-git-reset-soft][Practical uses of git reset --soft? - Stack Overflow]]
