@@ -54,7 +54,7 @@
 
   shopt 命令也可以用来设置选项，-s 打开，-u 关闭，参考：
   + [[https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html][The Shopt Builtin (Bash Reference Manual)]]
-    
+
 * 语法
   变量操作：
   #+begin_src bash
@@ -172,7 +172,7 @@
     num1 -gt num2             # 数字判断：num1 > num2
     num1 -ge num2             # 数字判断：num1 >= num2
   #+end_src
-  
+
   -----
 
   分支选择：
@@ -200,7 +200,7 @@
 
     # 和上面完全等价，[ 是个和 test 一样的可执行程序，但最后一个参数必须为 ]
     # 这个名字为 "[" 的可执行程序一般就在 /bin 或 /usr/bin 下面，比 test 优雅些
-    if [ -e /etc/passwd ]; then   
+    if [ -e /etc/passwd ]; then
         echo "alright it exists ... "
     else
         echo "it doesn't exist ... "
@@ -238,7 +238,7 @@
     # 判断程序存在的话就执行
     [ -x /bin/ls ] && /bin/ls -l
   #+end_src
-  
+
 * 子 shell
   在 shell 中是否进入子 shell 的情况可以分为几种：
   1. 执行 bash 内置命令时，父进程不会创建子进程来执行这些命令，而是直接在当前 bash 环境中执行。但如果将内置命令放在管道后，则此内置命令将和管道左边的进程同属于一个进程组
@@ -250,7 +250,7 @@
 
   参考：
   + [[https://www.cnblogs.com/f-ck-need-u/p/7446194.html][子 shell 以及什么时候进入子 shell - 骏马金龙 - 博客园]]
-  
+
 * 命令行参数
   在简单的 Shell 脚本中我们可以通过一些内置变量来处理命令行参数，包括：
   |----------+----------------------------------------------------------------------------|
@@ -264,7 +264,7 @@
   | =$?=       | 上个命令的退出状态，或函数的返回值                                         |
   | =$$=       | 当前 Shell 进程 ID                                                         |
   |----------+----------------------------------------------------------------------------|
-  
+
   但是在复杂的脚本中我们往往需要更好的处理命令行参数的方式，这时可以使用内置的 ~getopts~ 命令：
   #+begin_src bash
     while getopts "a:bc" arg            # 选项后面的冒号表示该选项需要参数
@@ -315,6 +315,9 @@
     }
   #+end_src
 
+  注意，这两项配置对 ssh 是不起作用的，ssh 代理的配置需要修改 ~/.ssh/config 文件，不同系统的配置也不一样，可以参考：
+  + [[https://stackoverflow.com/questions/5103083/ssh-in-git-behind-proxy-on-windows-7][SSH in git behind proxy on windows 7 - Stack Overflow]]
+
   参考：
   + [[https://aiezu.com/article/linux_bash_set_proxy.html][Linux bash终端设置代理（proxy）访问 - 爱E族]]
 
@@ -357,7 +360,7 @@
   参考：
   + [[https://superuser.com/questions/183870/difference-between-bashrc-and-bash-profile][bash - Difference between .bashrc and .bash_profile - Super User]]
   + [[http://einverne.github.io/post/2019/01/login-shell-vs-non-login-shell.html][登录式 shell 和非登录式 shell 区别 | Verne in GitHub]]
-    
+
 * PROMPT_COMMAND
   PROMPT_COMMAND 是一个 bash 环境变量，这个变量的中内容是作为一个普通的 bash 命令执行的，而且执行时间是在 bash 显示 prompt 之前，可以通过这个变量来记录执行日志：
   #+begin_src sh
@@ -388,7 +391,7 @@
 
    参考：
    + [[https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself][How to get the source directory of a Bash script from within the script itself? - Stack Overflow]]
-  
+
 * 相关问题
 ** 怎样将字符串转换为小写
    简单点的方式可以使用 ~tr~ 命令来完成这一操作：
@@ -415,7 +418,7 @@
      source another_script.sh
      . another_script.sh
    #+end_src
-   
+
    参考：
    + [[https://stackoverflow.com/questions/8352851/how-to-call-one-shell-script-from-another-shell-script][bash - How to call one shell script from another shell script? - Stack Overflow]]
 
@@ -495,7 +498,7 @@
      $ echo '$(echo "upg")'
      $(echo "upg")
    #+end_src
-   
+
    参考：
    + [[https://stackoverflow.com/questions/6697753/difference-between-single-and-double-quotes-in-bash][shell - Difference between single and double quotes in Bash - Stack Overflow]]
 
@@ -508,4 +511,3 @@
 
    但是单括号写起来更优雅，而 [[ 则是 bash 的扩展，参考：
    + [[https://www.zhihu.com/question/266787434][Bash 脚本中 (、((、[、[[ 的区别是什么？ - 知乎]]
-

@@ -36,7 +36,7 @@
   函数 setq 设置的值是 current binding 的值，也就是说，可能不会改变 global binding 值，如果需要，可以通过 setq-default 改变默认值。
 
   参考：[[file:../compile/question.org::*动态作用域 & 词法作用域][动态作用域 & 词法作用域]]
-  
+
 * Lisp Data Types
 ** alist & plist
    alist 的常见的两种形式：
@@ -141,11 +141,11 @@
 
   Value
        The symbol’s current value as a variable.
-  
+
   Function
        The symbol’s function definition.  It can also hold a symbol, a
        keymap, or a keyboard macro.
-  
+
   Property list
        The symbol’s property list.
   #+end_quote
@@ -269,7 +269,7 @@
 
    + [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html][Simple Packages - GNU Emacs Lisp Reference Manual]]
 
-** 命名风格  
+** 命名风格
    #+BEGIN_SRC elisp
      ;; define custom variable
      (setq rgb-24bit/variable-name)
@@ -341,4 +341,3 @@
 
    参考：
    + [[https://stackoverflow.com/questions/26102889/how-do-i-make-named-arguments-in-elisp][emacs - How do I make named arguments in ELisp? - Stack Overflow]]
-

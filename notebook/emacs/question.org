@@ -83,8 +83,8 @@
 * 怎样判断当前的环境是不是终端环境
   可以通过函数 ~display-graphic-p~ 进行判断，在配置主题这些东西的时候是一个很好用的功能：
   #+begin_src elisp
-    (if (display-graphic-p) 
-        (enable-theme 'solarized) 
+    (if (display-graphic-p)
+        (enable-theme 'solarized)
       (enable-theme 'wheatgrass))
   #+end_src
 
@@ -107,9 +107,12 @@
 
   缓冲区本地快捷键可以参考： [[https://www.emacswiki.org/emacs/BufferLocalKeys][EmacsWiki: Buffer Local Keys]]
 
-  
+  也可以通过 define-key 来取消快捷键绑定：
+  #+begin_src elisp
+    (define-key KEYMAP KEY nil)
+  #+end_src
+
 * 编译 Emacs
   1. 需要 makeinfo，但是找不到这个包？
 
      下载 texinfo 就可以了。
-

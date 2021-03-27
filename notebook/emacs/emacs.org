@@ -1,8 +1,13 @@
 #+TITLE:      Emacs
 
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#important-general-concepts][Important General Concepts]]
+- [[#fundamental-editing-commands][Fundamental Editing Commands]]
+- [[#important-text-changing-commands][Important Text-Changing Commands]]
+
 * Important General Concepts
   也许是 Emacs 的诞生比较早的原因，操作系统层面的单个窗口或终端界面在 Emacs 中的名称为 Frame。
-  
+
   在 =Frame= 内部的才是 Emacs 的 Window，每个 Window 的最后一行是一个 mode line，整体结构为：
   #+begin_example
     Frame
@@ -13,7 +18,7 @@
         scroll bar
         mode line
       Echo area
-  #+end_example  
+  #+end_example
 
   其中，echo area 还被用来显示 minibuffer（一个特殊的 Window），可以用个快捷键 =C-g= 退出 minibuffer。
 
@@ -21,7 +26,7 @@
   + Simple characters 简单字符，包括字母、数字、符号和空格
   + Control characters 控制字符，包括 <RET>、<TAB>、<DEL>、<ESC>、<F1>、<HOME> 和 <LEFT> 等
   + Modifier keys，通过 <Control> 和 <Meta> 可以改变接下来输入的字符的含义，变为控制字符
-     
+
   可以使用 <ESC> 来代替 <Meta> 键，而且 <ESC> 按下后可以松开，但是 <Meta> 不行，但是 <Meta> 近一点。
 
   在 Emacs 中，一个按键序列 key sequnce，如 C-x C-f，或者一个短按键，如 C-f，被称作 =compile key=.
@@ -36,11 +41,6 @@
   在 Unix/Linux 系统中，通过命令行启动 Emacs 时可以使用 =&= 后缀避免阻塞终端界面。
 
   可以通过变量 =confirm-kill-emacs= 和 =confirm-kill-processes= 来控制关闭 Emacs 时的行为。
-
-* 目录                                                    :TOC_4_gh:noexport:
-- [[#important-general-concepts][Important General Concepts]]
-- [[#fundamental-editing-commands][Fundamental Editing Commands]]
-- [[#important-text-changing-commands][Important Text-Changing Commands]]
 
 * Fundamental Editing Commands
   在 Emacs 中，只有可见字符是可以通过关联的按键直接插入的，其他的按键会绑定相应的命令来进行相关的操作。
@@ -94,7 +94,7 @@
   |---------+-------------------|
 
   快捷键 =C-x C-l= 和 =C-x C-u= 可以切换 region 中的大小写情况。
-  
+
   快捷键 =C-M-\= 调整 region 中的 Indentation。
 
   mark-ring，在 =set-mark-command= 后，会将 mark 的位置 push 到 mark-ring 中，可以通过 =C-u C-SPC= pop 并跳转到该位置。
@@ -110,4 +110,3 @@
   | delete-duplicate-line | 删除重复行，但保留一个   |
   | C-S-backspace         | 删除整行                 |
   |-----------------------+--------------------------|
-  
