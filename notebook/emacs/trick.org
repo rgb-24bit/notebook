@@ -14,6 +14,7 @@
 - [[#快速的创建多级目录][快速的创建多级目录]]
 - [[#高亮内容][高亮内容]]
 - [[#使用不同的配置][使用不同的配置]]
+- [[#删除匹配不匹配行][删除匹配/不匹配行]]
 
 * 批量修改文件名称
   通过 ~dired-mode~ 的编辑模式完成这一工作：
@@ -26,12 +27,12 @@
 
   可以通过快捷键 ~C-x C-k n~ 为最近使用的宏命名，然后使用 ~insert-kbd-macro~ 将宏转换为 ~Lisp~ 代码。
 
-* 版本控制 VC 
+* 版本控制 VC
   通过命令 ~vc-version-diff~ 进行版本对比。
 
 * undotree
   ~Emacs~ 默认的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-g C-/~.
-   
+
   但是很多的配置中都使用了 ~undo-tree.el~ 这个扩展，修改了撤销的快捷键。
 
   ~undo-tree.el~ 定义的撤销快捷键为 ~C-/~, 而撤销撤销为 ~C-?~.
@@ -97,4 +98,11 @@
   #+begin_src sh
     HOME=<path> emacs
   #+end_src
+
+* 删除匹配/不匹配行
+  + flush-line or alias delete-matching-lines
+  + keep-line or alias delete-non-matching-lines
+
+  Ref:
+  + [[https://emacs.stackexchange.com/questions/40596/how-do-i-quickly-remove-lines-from-emacs-buffer][regular expressions - how do I quickly remove lines from emacs buffer - Emacs Stack Exchange]]
 

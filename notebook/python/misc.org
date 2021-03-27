@@ -6,6 +6,7 @@
 - [[#获取命令行参数][获取命令行参数]]
 - [[#获取某一周的第一天][获取某一周的第一天]]
 - [[#python-在不同平台上的环境控制工具][Python 在不同平台上的环境控制工具]]
+- [[#鸭子类型][鸭子类型]]
 
 * 使用 str.maketrans 转换消除字符
   #+BEGIN_SRC python
@@ -23,11 +24,11 @@
     >>> 2 ** .5
     1.4142135623730951
   #+END_SRC
-  
+
 * 获取命令行参数
   #+begin_src python
     prog, *args = sys.argv
-  #+end_src  
+  #+end_src
 
 * 获取某一周的第一天
   #+BEGIN_SRC python
@@ -43,3 +44,11 @@
 
   另外，虚拟环境常用 ~virtualenv~ 和 ~venv~ 来进行创建和使用。
 
+
+* 鸭子类型
+  鸭子类型（英语：duck typing）在程序设计中是动态类型的一种风格。在这种风格中，一个对象有效的语义，不是由继承自特定的类或实现特定的接口，而是由 *当前方法和属性的集合* 决定。
+
+  这一点上有点像接口或 Ad-hoc 多态，定义一组行为集合，只要某个类型实现了这些行为，那么它就实现了对应的接口。
+
+  相关问题：
+  + [[https://stackoverflow.com/questions/1549801/what-are-the-differences-between-type-and-isinstance][python - What are the differences between type() and isinstance()? - Stack Overflow]]

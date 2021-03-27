@@ -11,6 +11,7 @@
 - [[#错误处理][错误处理]]
 - [[#类型系统][类型系统]]
 - [[#byte--string][[]byte & string]]
+- [[#listen-n-channels][listen N channels]]
 - [[#footnotes][Footnotes]]
 
 * 类型转换
@@ -228,7 +229,28 @@
   #+end_src
   
   这样在性能表现上会更好。
-  
+
+* listen N channels
+  有时可能存在动态监听多个 channel 的情况，这时可以通过如下方式合并多个 channel：
+  #+begin_src go
+    agg := make(chan string)
+    for _, ch := range chans {
+      go func(c chan string) {
+        for msg := range c {
+          agg <- msg
+        }
+      }(ch)
+    }
+
+    select {
+    case msg <- agg:
+        fmt.Println("received ", msg)
+    }
+  #+end_src
+
+  参考：
+  + [[https://stackoverflow.com/questions/19992334/how-to-listen-to-n-channels-dynamic-select-statement/32381409][go - how to listen to N channels? (dynamic select statement) - Stack Overflow]]
+
 * Footnotes
 
 [fn:1] 复合类型包括指针、函数、数组、Slice、Map、结构体、Channel 和 Interface
