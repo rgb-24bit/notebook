@@ -2,7 +2,7 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#快捷键][快捷键]]
-- [[#dired-local][dired-local]]
+- [[#base-mode][Base Mode]]
 - [[#概念问题][概念问题]]
   - [[#前缀参数][前缀参数]]
   - [[#编码问题][编码问题]]
@@ -28,8 +28,9 @@
   缓冲区操作相关快捷键：
   + 保存所有缓冲区 - ~C-u C-x s~
 
-* dired-local
-  dired-local 变量可以（应该）通过 =add-dir-local-variable= 创建，Spacemacs 的快捷键是 =M-m f v d=.
+* Base Mode
+  常用 Base Mode：prog-mode、special-mode、text-mode，参考：
+  + [[https://www.emacswiki.org/emacs/ProgMode][EmacsWiki: Prog Mode]]
 
 * 概念问题
 ** 前缀参数
@@ -54,7 +55,7 @@
          (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
              (match-string 1 buf-coding)
            buf-coding)))
-   #+END_SRC  
+   #+END_SRC
 
 ** emacs server
    在 Windows 系统上可以通过 ~runemacs --daemon~ 的方式启动 ~emacs server~, 通过 ~emacsclient~ 连接服务器。
@@ -84,4 +85,3 @@
 
    参考：
    + [[https://emacs.stackexchange.com/questions/31375/how-can-i-bind-c-return-with-define-key-and-kbd][key bindings - How can I bind C-return with define-key and kbd? - Emacs Stack Exchange]]
-
