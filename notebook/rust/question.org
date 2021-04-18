@@ -1,0 +1,13 @@
+#+TITLE:      相关问题
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#is-return-5-a-statement-or-expression-in-rust][Is `return 5;` a statement or expression in Rust?]]
+
+* Is `return 5;` a statement or expression in Rust?
+  在 Rust 中，类似 =expression;= 的代码叫做表达式语句，返回 ()，在部分说法中，return 被认为是 expression，
+  但是在 return 后面跟 ; 时并不影响返回值。
+
+  不知道是不是 rust 对 return 单独进行了特殊的处理，但是这样单独的特殊处理又感觉不太和谐 @_@
+
+  参考：
+  + [[https://stackoverflow.com/questions/52475457/is-return-5-a-statement-or-expression-in-rust][Is `return 5;` a statement or expression in Rust? - Stack Overflow]]
