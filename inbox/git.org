@@ -5,3 +5,6 @@
 * submoudle
   + git submodule update --init
 
+* revison
+  + [[https://git-scm.com/docs/gitrevisions][Git - gitrevisions Documentation]]
+
