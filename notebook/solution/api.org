@@ -3,6 +3,7 @@
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#restful-api][RESTful API]]
   - [[#token][Token]]
+- [[#graphql][GraphQL]]
 
 * RESTful API
   目前来说最为流行的一种接口设计方式大概就是 RESTful API 了，可以参考的学习资料：
@@ -18,4 +19,59 @@
    5. 客户端得到 401 状态码时跳转至认证页面获取 Token
 
    其中，虽然客户端是在 *获取* Token，但实际上是要求服务端 *创建* 一个 Token，所以说选择使用 POST 方法。
+
+* GraphQL
+  GraphQL 是一个基于 Schema，内省可验证的接口设计方式，我们所有的查询都建立在通过 Schema 定义的类型上。
+
+  类型可以分为标量 scalar 类型和对象 object 类型，其中：
+  + 标量类型是不可再细分的类型，实际上可以是任意的 JSON 类型，只不过在 GraphQL 的查询中不能再细分，内置的标量类型有：
+    |----------+----------------------------------------------------|
+    | 标量类型 | 含义                                               |
+    |----------+----------------------------------------------------|
+    | Int      | 有符号 32 位整数                                   |
+    | Float    | 有符号双精度浮点数                                 |
+    | String   | UTF‐8 字符序列                                     |
+    | Boolean  | true 或者 false                                    |
+    | ID       | 表示一个唯一标识符，使用和 String 一样的方式序列化 |
+    |----------+----------------------------------------------------|
+  + 对象类型是包含其他字段的类型，每个字段都拥有其名称、类型、可选的参数、是否非空的约束
+    #+begin_src graphql
+      type Character {
+        name: String!
+        appearsIn: [Episode!]!
+      }
+    #+end_src
+
+  执行查询时，如果字段类型为标量，那么就不需要指定需要选择的字段，如果是对象，那么就需要指定需要查询的字段。
+
+  对象类型的每个字段可以视为返回子类型的父类型函数或方法（类别面向对象设计中对象字段的 getter/setter）。
+
+  对于一个 Schema 服务来说，通常存在一个顶级对象 schema，定义了所有的查询和修改操作：
+  #+begin_src graphql
+    schema {
+      query: Query
+      mutation: Mutation
+    }
+
+    type Query {
+      hero(episode: Episode): Character
+      droid(id: ID!): Droid
+    }
+  #+end_src
+  
+  我们的查询相对于就是在 schema 对象上选择字段的过程：
+  #+begin_src graphql
+    # query(Query) => hero(Character) => name, appearsIn
+    {
+      hero {
+        name
+        appearsIn
+      }
+    }
+  #+end_src
+
+  基于标量和对象类型，GraphQL 提供了更多的如接口、枚举、内联片段等丰富功能。
+
+  参考：
+  + [[https://graphql.cn/learn/][GraphQL 入门 | GraphQL]]
 
