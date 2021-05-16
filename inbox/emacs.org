@@ -13,3 +13,6 @@
   + :xxx 自动成为 symbol
   + xxx 不会
 
+* autoloads
+  package.el/straight 生成 autoload 文件并加载
+

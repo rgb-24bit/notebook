@@ -18,6 +18,7 @@
 - [[#mysql-中比较操作对于字符串尾空字符的处理][MySQL 中比较操作对于字符串尾空字符的处理]]
 - [[#mysql-时间字段格式如何选择timestampdatetimeint][MySQL 时间字段格式如何选择，TIMESTAMP，DATETIME，INT？]]
 - [[#how-to-delete-duplicate-rows-in-mysql][How To Delete Duplicate Rows in MySQL]]
+- [[#新增一列值为-null此时可以在该列上创建唯一索引吗][新增一列值为 NULL，此时可以在该列上创建唯一索引吗？]]
 
 * MySQL 中 Schema 和 Database 的区别是什么
   MySQL 中 Schema 和 Database 在语义上是等价的，两者可以等价替换。
@@ -213,4 +214,14 @@
 
   参考：
   + [[https://www.mysqltutorial.org/mysql-delete-duplicate-rows/][How To Delete Duplicate Rows in MySQL]]
+
+* 新增一列值为 NULL，此时可以在该列上创建唯一索引吗？
+  #+begin_quote
+  A UNIQUE index creates a constraint such that all values in the index must be distinct. An error occurs if you try to add a new row with a key value that matches an existing row.
+  If you specify a prefix value for a column in a UNIQUE index, the column values must be unique within the prefix length.
+  _A UNIQUE index permits multiple NULL values for columns that can contain NULL._
+  #+end_quote
+
+  参考：
+  + [[https://dev.mysql.com/doc/refman/8.0/en/create-index.html#create-index-unique][MySQL 8.0 Reference Manual - 13.1.15 CREATE INDEX Statement]]
 

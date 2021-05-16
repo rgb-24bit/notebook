@@ -84,6 +84,9 @@
   官方文档 [[https://dev.mysql.com/doc/refman/5.7/en/innodb-online-ddl-operations.html][Online DDL Operations]] 对支持并发 DML 的 DDL 进行了介绍，参考：
   + [[https://cloud.tencent.com/developer/article/1005177][MySQL Online DDL - 云+社区 - 腾讯云]]
   
+  但似乎 DBA 们更喜欢第三方的 Online DDL 工具，参考：
+  + [[https://zhuanlan.zhihu.com/p/115277009][MySQL 8.0 Online DDL和pt-osc、gh-ost深度对比分析 - 知乎]]
+
 * 相关问题
 ** 当表没有主键时 InnoDB 会怎样做
    InnoDB 底层存储数据时是通过聚集索引来保存数据的，即使没有显式创建主键，也会生成默认的聚集索引。

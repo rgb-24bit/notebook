@@ -2,6 +2,8 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#is-return-5-a-statement-or-expression-in-rust][Is `return 5;` a statement or expression in Rust?]]
+- [[#当前的类型到底是-string-还是-str][当前的类型到底是 String 还是 str？]]
+- [[#trait--dyn-trait--boxtrait--boxdyn-trait][&Trait & &dyn Trait & Box<Trait> & Box<dyn Trait>]]
 
 * Is `return 5;` a statement or expression in Rust?
   在 Rust 中，类似 =expression;= 的代码叫做表达式语句，返回 ()，在部分说法中，return 被认为是 expression，
@@ -11,3 +13,35 @@
 
   参考：
   + [[https://stackoverflow.com/questions/52475457/is-return-5-a-statement-or-expression-in-rust][Is `return 5;` a statement or expression in Rust? - Stack Overflow]]
+
+* 当前的类型到底是 String 还是 str？
+  这是在初学 rust 时容易遇到的一个问题（大概），很有可能写了一段代码，涉及到字符串的处理，结果因为没分清 String 和 str 导致编译失败 QAQ
+
+  首先，对于字符串字面量来说，和大多数语言一样，rust 会将它们放入进程地址空间的只读区域，我们持有的是对应字符串的一个切片 str，
+  由于 str 属于 unsize 类型，所以我们实际持有的就是 &str：
+  #+begin_src rust
+    let my_str = "hello world!";  // my_str type is &str
+  #+end_src
+  
+  需要记住：
+  + str 是 String Slice，属于 usize 类型，因此实际使用是通常使用其引用形式 &str
+  + 字符串字面量的类型为 &str，带上生命周期参数的话就是 &'static str
+
+  而 String，则是 rust 中实际拥有字符串所有权的类型，同时，实现了 =Deref<Target=str>= trait，因此，对于使用 &str 的场景，
+  可以传入 &String。
+
+  参考：
+  + [[https://blog.thoughtram.io/string-vs-str-in-rust/][String vs &str in Rust | Articles by thoughtram]]
+  + [[https://doc.rust-lang.org/std/string/struct.String.html#deref][std::string::String#Deref - Rust]]
+
+* &Trait & &dyn Trait & Box<Trait> & Box<dyn Trait>
+  这些写法都是 trait object 的表示方式，其中，&Trait 和 Box<Trait> 都是 Rust 2015 的写法，而 &dyn Trait 和 Box<dyn Trait> 是 Rust 2018 的写法。
+
+  这些写法本质上没有区别，需要注意区分的是：
+  + Box<&dyn Trait> 是一个智能指针，有所有权
+  + &dyn Trait 是一个引用，没有所有权
+
+  参考：
+  + [[https://cotigao.medium.com/dyn-impl-and-trait-objects-rust-fd7280521bea][dyn , impl and Trait Objects — Rust | by vikram fugro | Medium]]
+  + [[https://zhuanlan.zhihu.com/p/109990547][捋捋 Rust 中的 impl Trait 和 dyn Trait - 知乎]]
+

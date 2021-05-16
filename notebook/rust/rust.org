@@ -1,0 +1,56 @@
+#+TITLE:      Rust
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#patterns-and-matching][Patterns and Matching]]
+
+* Patterns and Matching
+  Rust 中模式匹配是一个很常用也很强大的功能，本质上，通过 let 绑定变量也是一种模式匹配，函数参数也是一种隐式 let 绑定。
+
+  详细的语法可参考：
+  + [[https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html][Pattern Syntax - The Rust Programming Language]]
+  + [[https://doc.rust-lang.org/stable/reference/patterns.html][Patterns - The Rust Reference]]
+
+  这里记录一下有关于 ref 模式在 2015 和 2018 下不同引发的困惑：
+  1. 在官方文档中，Rust 2015 不能自动推断 ref，所以会存在下面形式的代码：
+     #+begin_src rust
+       // Rust 2015
+
+       let s: &Option<String> = &Some("hello".to_string());
+
+       match s {
+           &Some(ref s) => println!("s is: {}", s),
+           _ => (),
+       };
+     #+end_src
+
+     这里，&Some 匹配 &Option 类型，而 ref s 用于创建变量的引用。
+
+  2. 在 Rust 2018 中，则可以写成下面的形式：
+     #+begin_src rust
+       let s: &Option<String> = &Some("hello".to_string());
+
+       match s {
+           Some(s) => println!("s is: {}", s),
+           _ => (),
+       };
+     #+end_src
+
+  简单来说，在 Rust 2018 中，对于 &Enum::Type(ref x) 类型的匹配，可以直接写成 Enum::Type：
+  #+begin_src rust
+    let v1: Option<i32> = Some(3);
+    match v1 {
+        Some(x) => println!("{}", x),  // x is i32
+        None => println!("None"),
+    }
+
+    let v2: Option<i32> = Some(3);
+    match &v1 {
+        Some(x) => println!("{}", x),  // x is &i32
+        None => println!("None"),
+    }
+  #+end_src
+
+  参考：
+  + [[https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html][Default match bindings - The Edition Guide]]
+  + [[https://doc.rust-lang.org/rust-by-example/scope/borrow/ref.html][The ref pattern - Rust By Example]]
+
