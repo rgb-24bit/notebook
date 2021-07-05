@@ -70,3 +70,7 @@
   + [[https://www.zhihu.com/question/19732473][怎样理解阻塞非阻塞与同步异步的区别？ - 知乎]]
   + [[https://juejin.im/post/5c0f1739f265da616c65724e][linux的IO模型 - 掘金]]
   + [[https://www.cnkirito.moe/future-and-promise/][JAVA 拾遗 --Future 模式与 Promise 模式 | 徐靖峰|个人博客]]
+
+* string builder
+  + [[https://waymoot.org/home/python_string/][Efficient String Concatenation in Python]]
+

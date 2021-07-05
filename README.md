@@ -19,6 +19,7 @@
   + [network](#network)
   + [os](#os)
   + [python](#python)
+  + [rust](#rust)
   + [security](#security)
   + [solution](#solution)
   + [tools](#tools)
@@ -101,7 +102,6 @@
   + [Emacs - Package](notebook/emacs/package.org)
   + [Emacs - 问题集](notebook/emacs/question.org)
   + [Emacs - 正则表达式](notebook/emacs/regex.org)
-  + [scimax](notebook/emacs/scimax.org)
   + [Emacs Site Lisp](notebook/emacs/site-lisp.org)
   + [Spacemacs](notebook/emacs/spacemacs.org)
   + [使用技巧](notebook/emacs/trick.org)
@@ -310,6 +310,10 @@
   + [Tkinter](notebook/python/tkinter.org)
   + [typing - Support for type hints](notebook/python/typing.org)
   + [Python - 弱引用](notebook/python/weakref.org)
+## rust
+  + [错误处理](notebook/rust/error.org)
+  + [相关问题](notebook/rust/question.org)
+  + [Rust](notebook/rust/rust.org)
 ## security
   + [Web Security](notebook/security/web.org)
 ## solution

@@ -1,5 +1,0 @@
-* 图最短路径
-  + Dijkstra
-  + Floyd
-  + SPFA
-

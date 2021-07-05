@@ -5,3 +5,10 @@
 * dot
   + [[https://itopic.org/graphviz.html#2-2-3-%E5%B8%B8%E7%94%A8%E8%BE%B9%E5%B1%9E%E6%80%A7][Graphviz绘图 - DOT语言]]
   + https://dreampuf.github.io/GraphvizOnline/
+
+* rcu
+  + [[https://en.wikipedia.org/wiki/Read-copy-update][Read-copy-update - Wikipedia]]
+
+* BFF
+  + [[https://juejin.cn/post/6844903959333699598][初识BFF架构设计]]
+

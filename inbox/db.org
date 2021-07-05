@@ -1,3 +1,0 @@
-* 图数据库
-  + [[https://tinkerpop.apache.org/][Apache TinkerPop]]
-

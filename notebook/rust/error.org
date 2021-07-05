@@ -1,0 +1,54 @@
+#+TITLE:      错误处理
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#string-or-str-into-error][String or &str into Error]]
+
+* String or &str into Error
+  Rust 为 Box<dyn std::error::Error> 实现了 From<String> 和 From<&str> 这两个 trait，方便直接使用 String 作为 Err 返回：
+  #+begin_src rust
+    #[stable(feature = "rust1", since = "1.0.0")]
+    impl From<String> for Box<dyn Error + Send + Sync> {
+        #[inline]
+        fn from(err: String) -> Box<dyn Error + Send + Sync> {
+            struct StringError(String);
+
+            impl Error for StringError {
+                #[allow(deprecated)]
+                fn description(&self) -> &str {
+                    &self.0
+                }
+            }
+
+            impl Display for StringError {
+                fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                    Display::fmt(&self.0, f)
+                }
+            }
+
+            // Purposefully skip printing "StringError(..)"
+            impl Debug for StringError {
+                fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                    Debug::fmt(&self.0, f)
+                }
+            }
+
+            Box::new(StringError(err))
+        }
+    }
+
+    #[stable(feature = "rust1", since = "1.0.0")]
+    impl<'a> From<&str> for Box<dyn Error + Send + Sync + 'a> {
+        #[inline]
+        fn from(err: &str) -> Box<dyn Error + Send + Sync + 'a> {
+            From::from(String::from(err))
+        }
+    }
+  #+end_src
+
+  Ref https://github.com/rust-lang/rust/blob/master/library/std/src/error.rs#L239
+
+  使用：
+  #+begin_src rust
+    let r: Result<(), Err<Box<dyn Error>>> = Err("err".into());
+  #+end_src
+
