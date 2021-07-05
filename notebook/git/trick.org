@@ -9,7 +9,8 @@
 - [[#合并多个-commit-为一个][合并多个 commit 为一个]]
 - [[#配置选项-coreautocrlf-的使用][配置选项 core.autocrlf 的使用]]
 - [[#批量删除分支][批量删除分支]]
-- [[#重新历史][重新历史]]
+- [[#重写历史][重写历史]]
+- [[#gitrevisions][gitrevisions]]
 
 * git pull 时使用存储库的链接
   git pull 不一定必须使用远程存储库的名称，也可以直接使用远程存储库的链接。
@@ -81,7 +82,36 @@
 * 批量删除分支
   git br -d $(git br | grep feature)
 
-* 重新历史
+* 重写历史
   除了使用 git commit --amend 修改最后一个提交的历史以外，还可以使用 git rebase 修改多个提交的历史，参考：
   + [[https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2][Git - 重写历史]]
 
+
+* gitrevisions
+  Git 很多命令都需要一个 revision 参数，除了常用的 /<sha1 id>、<refname>/ 以外，还支持：
+  + <refname>@{<n>}, e.g. master@{1} ::
+
+    通常配合 git reflog 使用，通过这种形式可以快速定位到 ref 变更记录中的某个 commit。
+
+  + [<branchname>]@{upstream}, e.g. master@{upstream}, @{u} :: 
+
+    分支对应的远程分支。
+
+  + <rev>^[<n>], e.g. HEAD^, v1.5.1^0 ::
+
+    ^ 后缀表示对应 rev 的第一个父 commit，^<n> 表示第 n 个父 commit，rev^ 等价于 rev^1，
+    rev^0 表示 rev 自己。
+
+    通常 n 取值为 0-1。
+    
+  + <rev>~[<n>], e.g. HEAD~, master~3 :: 
+
+    和 <rev>^[<n>]，但 n 取值范围更大。
+
+  + <rev1>..<rev2> ::
+    
+    <rev1> 到 <rev2> 之间的 commit，不包含 rev1。
+
+  参考：
+  + [[https://git-scm.com/docs/gitrevisions#Documentation/gitrevisions.txt-emltsha1gtemegemdae86e1950b1277e545cee180551750029cfe735ememdae86eem][Git - gitrevisions Documentation]]
+  

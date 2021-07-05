@@ -1,0 +1,8 @@
+#+TITLE:      并发
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#rcu][RCU]]
+
+* RCU
+  RCU 适用于读多很少写的场景，无阻塞读，复制更新，参考 [[https://en.wikipedia.org/wiki/Read-copy-update][Read-copy-update - Wikipedia]]。
+

@@ -6,7 +6,9 @@
   - [[#负载均衡下的状态同步][负载均衡下的状态同步]]
   - [[#oauth2][OAuth2]]
   - [[#jwt][JWT]]
+- [[#sso][SSO]]
 - [[#rbac][RBAC]]
+- [[#iam][IAM]]
 
 * 认证和授权
 ** 常用的几种认证方式
@@ -36,9 +38,16 @@
    JWT 的出现大概是为了让服务端不在存储状态，但是，如果存在单点登录啊、需要 Token 过期之类的需求，使用 JWT 的意义也就不大了……
    + [[http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html][JSON Web Token 入门教程 - 阮一峰的网络日志]]
 
+* SSO
+  + [[https://apereo.github.io/cas/6.3.x/index.html][CAS - Home]]
+
 * RBAC
   RBAC 是一种经典的权限系统设计方案，通过用户、角色和权限三个层次将用户和其权限之间解耦出来，便于管理和设计。
 
   可以参考：
   + [[https://en.wikipedia.org/wiki/Role-based_access_control][Role-based access control - Wikipedia]]
+
+* IAM
+  源自 AWS 的一种权限管理模型，基本上所有云厂商都会实现一套，可以参考：
+  + [[https://aws.amazon.com/cn/iam/][AWS Identity and Access Management(IAM)_云中的访问权限管理-AWS云服务]]
 

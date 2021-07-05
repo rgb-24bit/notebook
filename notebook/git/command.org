@@ -13,6 +13,7 @@
 - [[#git-merge][git merge]]
 - [[#git-fetch][git fetch]]
 - [[#git-stash][git stash]]
+- [[#git-reset][git reset]]
 - [[#git-cherry-pick][git cherry-pick]]
 
 * git clone
@@ -205,7 +206,14 @@
   参考：
   + [[https://www.cnblogs.com/tocy/p/git-stash-reference.html][git-stash 用法小结 - Tocy - 博客园]]
 
-
+* git reset
+  --soft 和 --hard 的区别：
+  #+begin_example
+    $ git reset
+        --soft                reset only HEAD
+        --hard                reset HEAD, index and working tree
+  #+end_example
+  
 * git cherry-pick
   转移一系列 commit：
   #+begin_example

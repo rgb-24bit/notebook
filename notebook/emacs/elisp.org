@@ -16,7 +16,6 @@
 - [[#operating-system-interface][Operating System Interface]]
   - [[#timer][Timer]]
 - [[#functions][Functions]]
-  - [[#关键字参数][关键字参数]]
   - [[#interactive][interactive]]
   - [[#有用的函数][有用的函数]]
 - [[#风格规范][风格规范]]
@@ -198,14 +197,6 @@
 
   + [[https://stackoverflow.com/questions/18390586/why-use-before-function-arguments-in-emacs-lisp?rq=1][Why use #' before function arguments in emacs-lisp? - Stack Overflow]]
 
-** 关键字参数
-   使用 cl-defun 可以更方便的定义带关键字参数的函数：
-   #+BEGIN_SRC elisp
-     (cl-defun func (&key foo bar))
-   #+END_SRC
-
-   + [[https://www.emacswiki.org/emacs/KeywordArguments][EmacsWiki: Keyword Arguments]]
-
 ** interactive
    ~Emacs~ 中存在 *两种函数*:
    1) 可以作为命令执行的函数
@@ -304,7 +295,7 @@
    #+END_SRC
 
 ** 以 : 开头的参数是怎么一回事
-   Elisp 中以符号 *:* 开头的符号属于 *关键字*, 声明一个 *:xxx* 形式的变量会自动变为关键字：
+   Elisp 中以符号 *:* 开头的符号属于 *关键字*, 声明一个 *:xxx* 形式的变量会自动变为 Symbol：
    #+BEGIN_SRC elisp
      ELISP> (intern-soft ":key-1")
      nil

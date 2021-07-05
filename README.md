@@ -320,6 +320,7 @@
   + [访问控制](notebook/solution/ac.org)
   + [接口设计](notebook/solution/api.org)
   + [Cache](notebook/solution/cache.org)
+  + [并发](notebook/solution/concurrent.org)
   + [分布式系统](notebook/solution/distributed.org)
   + [其他解决方案](notebook/solution/misc.org)
   + [存储](notebook/solution/storage.org)
