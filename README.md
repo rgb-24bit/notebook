@@ -315,7 +315,8 @@
   + [相关问题](notebook/rust/question.org)
   + [Rust](notebook/rust/rust.org)
 ## security
-  + [Web Security](notebook/security/web.org)
+  + [Dos](notebook/security/dos.org)
+  + [Web](notebook/security/web.org)
 ## solution
   + [访问控制](notebook/solution/ac.org)
   + [接口设计](notebook/solution/api.org)

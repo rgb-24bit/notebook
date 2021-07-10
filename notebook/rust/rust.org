@@ -2,7 +2,9 @@
 
 * 目录                                                    :TOC_4_gh:noexport:
 - [[#patterns-and-matching][Patterns and Matching]]
-- [[#smart-pointers][Smart Pointers]]
+- [[#type-conversions][Type Conversions]]
+  - [[#smart-pointers][Smart Pointers]]
+  - [[#the-dot-operator][The Dot Operator]]
 
 * Patterns and Matching
   Rust 中模式匹配是一个很常用也很强大的功能，本质上，通过 let 绑定变量也是一种模式匹配，函数参数也是一种隐式 let 绑定。
@@ -55,41 +57,66 @@
   + [[https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html][Default match bindings - The Edition Guide]]
   + [[https://doc.rust-lang.org/rust-by-example/scope/borrow/ref.html][The ref pattern - Rust By Example]]
 
-* Smart Pointers
-  当某个类型 T 实现了 Deref<Target=U> 时，我们可以将 &T 当作 &U 来使用，Rust 可以自动完成隐式的类型转换。
-
-  与之相应的还有 DerefMut 这个 trait，允许我们将 &mut T 当作 &mut U 来使用。
-
-  trait 定义：
-  #+begin_src rust
-    pub trait Deref {
-        type Target: ?Sized;
-        #[must_use]
-        pub fn deref(&self) -> &Self::Target;
-    }
-
-    pub trait DerefMut: Deref {
-        pub fn deref_mut(&mut self) -> &mut Self::Target;
-    }
-  #+end_src
-
-  具体的规则：
+* Type Conversions
+  Rust 支持某些类型之间的隐式强制转换，主要有：
   #+begin_quote
-  + From &T to &U when T: Deref<Target=U>
-  + From &mut T to &mut U when T: DerefMut<Target=U>
-  + From &mut T to &U when T: Deref<Target=U>
+  + Transitivity: T_1 to T_3 where T_1 coerces to T_2 and T_2 coerces to T_3
+  + Pointer Weakening:
+    + &mut T to &T
+    + *mut T to *const T
+    + &T to *const T
+    + &mut T to *mut T
+  + Unsizing: T to U if T implements CoerceUnsized<U>
+  + Deref coercion: Expression &x of type &T to &*x of type &U if T derefs to U (i.e. T: Deref<Target=U>)
+  + Non-capturing closure to a function pointer (RFC 1558, e.g. || 8usize to fn() -> usize)
   #+end_quote
 
-  例子：
-  #+begin_src rust
-    let box_i32 = Box::new(0i32);       // Box<T>, Deref<Target=T>, &Box => &T
-    let ref_i32: &i32 = &box_i32;
-    let val_i32: i32 = *box_i32;
+  更多可参考：
+  + [[https://doc.rust-lang.org/nomicon/coercions.html][Coercions - The Rustonomicon]]
 
-    let slice: &[u8] = &vec![0u8];      // Vec<T>, Deref<Target=[T]>, &Vec => &[]
-    let s: &str = &String::from("0");   // String, Deref<Target=str>, &String => &str
-  #+end_src
+** Smart Pointers
+   当某个类型 T 实现了 Deref<Target=U> 时，我们可以将 &T 当作 &U 来使用，Rust 可以自动完成隐式的类型转换。
+
+   与之相应的还有 DerefMut 这个 trait，允许我们将 &mut T 当作 &mut U 来使用。
+
+   trait 定义：
+   #+begin_src rust
+     pub trait Deref {
+         type Target: ?Sized;
+         #[must_use]
+         pub fn deref(&self) -> &Self::Target;
+     }
+
+     pub trait DerefMut: Deref {
+         pub fn deref_mut(&mut self) -> &mut Self::Target;
+     }
+   #+end_src
+
+   具体的规则：
+   #+begin_quote
+   + From &T to &U when T: Deref<Target=U>
+   + From &mut T to &mut U when T: DerefMut<Target=U>
+   + From &mut T to &U when T: Deref<Target=U>
+   #+end_quote
+
+   例子：
+   #+begin_src rust
+     let box_i32 = Box::new(0i32);       // Box<T>, Deref<Target=T>, &Box => &T
+     let ref_i32: &i32 = &box_i32;
+     let val_i32: i32 = *box_i32;
+
+     let slice: &[u8] = &vec![0u8];      // Vec<T>, Deref<Target=[T]>, &Vec => &[]
+     let s: &str = &String::from("0");   // String, Deref<Target=str>, &String => &str
+   #+end_src
   
-  参考：
-  + [[https://doc.rust-lang.org/book/ch15-02-deref.html#how-deref-coercion-interacts-with-mutability][Treating Smart Pointers Like Regular References with the Deref Trait - The Rust Programming Language]]
+   参考：
+   + [[https://doc.rust-lang.org/book/ch15-02-deref.html#how-deref-coercion-interacts-with-mutability][Treating Smart Pointers Like Regular References with the Deref Trait - The Rust Programming Language]]
+
+** The Dot Operator
+   在 Rust 中，有的方法在引用类型上，有的在原始类型上，如果每次调用这些方法都需要显示创建引用或解引用无疑会很麻烦，
+   因此，Rust 语言中点操作符可以通过自动创建引用、自动解引用和隐式强制类型转换来尝试匹配到可以执行目标操作的类型。
+
+   参考：
+   + [[https://stackoverflow.com/questions/28519997/what-are-rusts-exact-auto-dereferencing-rules/28552082#28552082][reference - What are Rust's exact auto-dereferencing rules? - Stack Overflow]]
+   + [[https://doc.rust-lang.org/nomicon/dot-operator.html][The Dot Operator - The Rustonomicon]]
 

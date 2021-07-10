@@ -1,0 +1,27 @@
+#+TITLE:      Dos
+
+* 目录                                                    :TOC_4_gh:noexport:
+- [[#redos][ReDOS]]
+- [[#ocert][oCERT]]
+
+* ReDOS
+  ReDOS(Regular expression Denial of Service) 正则表达式拒绝服务攻击，开发人员使用了正则表达式来对用户输入的数据进行有效性校验，
+  当编写校验的正则表达式存在缺陷或者不严谨时，攻击者可以构造特殊的字符串来大量消耗服务器的系统资源，造成服务器的服务中断或停止。
+
+  常见的存在漏洞的正则：
+  #+begin_example
+    (a+)+
+    ([a-zA-Z]+)*
+    (a|aa)+
+    (a|a?)+
+  #+end_example
+
+  参考：
+  + [[http://www.lmxspace.com/2019/02/16/ReDOS%E5%88%9D%E6%8E%A2/][ReDOS 初探]]
+
+* oCERT
+  在知道散列表具体实现的情况下，可以利用在特定实现下容易产生 hash 碰撞的数据进行 dos 攻击，很多语言都存这个漏洞。
+
+  参考：
+  + [[http://ocert.org/advisories/ocert-2011-003.html][oCERT archive]]
+
