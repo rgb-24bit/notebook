@@ -1,0 +1,3 @@
++ [[https://pingcap.com/blog-cn/why-htap-matters/][Why HTAP Matters | PingCAP]]
++ [[https://docs.mongodb.com/manual/core/index-partial/][Partial Indexes — MongoDB Manual]]
+

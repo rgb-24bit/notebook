@@ -118,3 +118,5 @@
      }
    #+end_src
 
+   更多：[[https://rgb-24bit.github.io/blog/2019/java-spi.html#org4f9a56c][Java SPI 机制及其实现]]
+

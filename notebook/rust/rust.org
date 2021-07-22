@@ -5,6 +5,9 @@
 - [[#type-conversions][Type Conversions]]
   - [[#smart-pointers][Smart Pointers]]
   - [[#the-dot-operator][The Dot Operator]]
+- [[#option-like-enums][Option-like enums]]
+- [[#try-trait][Try trait]]
+- [[#async-pin][Async Pin]]
 
 * Patterns and Matching
   Rust 中模式匹配是一个很常用也很强大的功能，本质上，通过 let 绑定变量也是一种模式匹配，函数参数也是一种隐式 let 绑定。
@@ -119,4 +122,79 @@
    参考：
    + [[https://stackoverflow.com/questions/28519997/what-are-rusts-exact-auto-dereferencing-rules/28552082#28552082][reference - What are Rust's exact auto-dereferencing rules? - Stack Overflow]]
    + [[https://doc.rust-lang.org/nomicon/dot-operator.html][The Dot Operator - The Rustonomicon]]
+
+* Option-like enums
+  在 Rust 中，当一个枚举只有一个单元枚举值和一个非空指针枚举时，编译器可以针对这种情况做优化，省略需要用于存储 tag 的空间：
+  #+begin_quote
+  The classic case of this is Rust's "null pointer optimization": an enum consisting of a single outer unit variant (e.g. None) and a (potentially nested) non- nullable pointer variant (e.g. Some(&T)) makes the tag unnecessary.
+  A null pointer can safely be interpreted as the unit (None) variant. The net result is that, for example, size_of::<Option<&T>>() == size_of::<&T>().
+  #+end_quote
+
+  #+begin_src rust
+    use std::mem::size_of;
+
+    fn main() {
+        println!("{}, {}", size_of::<&i32>(), size_of::<Option<&i32>>());  // 8, 8
+        println!("{}, {}", size_of::<i32>(), size_of::<Option<i32>>());    // 4, 8
+    }
+  #+end_src
+
+  参考：
+  + [[https://rust-lang.github.io/unsafe-code-guidelines/layout/enums.html#layout-of-a-data-carrying-enums-without-a-repr-annotation][Enums - Unsafe Code Guidelines Reference]]
+  + [[https://doc.rust-lang.org/nomicon/repr-rust.html][repr(Rust) - The Rustonomicon]]
+  + [[https://doc.rust-lang.org/std/option/index.html#representation][std::option - Rust]]
+
+* Try trait
+  Rust RFC 1859 允许用 Try trait 来自定义可以使用 ? 操作的类型，目前可以使用 ? 操作的类型有：
+  #+begin_src rust
+    impl<B, C> Try for ControlFlow<B, C>;
+    impl<T> Try for Option<T>;
+    impl<T, E> Try for Result<T, E>;
+    impl<T, E> Try for Poll<Option<Result<T, E>>>;
+    impl<T, E> Try for Poll<Result<T, E>>;
+  #+end_src
+
+  比如：
+  #+begin_src rust
+    fn try_it() -> Option<String> {
+        Some(foo()?)
+    }
+
+    fn foo() -> Option<String> {
+        Some("13".into())
+    }
+  #+end_src
+  
+  目前 Try trait 还是 experimental API，可以期待 stable 的一天。
+
+  参考：
+  + [[https://github.com/rust-lang/rfcs/blob/master/text/1859-try-trait.md][rfcs/1859-try-trait.md at master · rust-lang/rfcs]]
+  + [[https://doc.rust-lang.org/std/ops/trait.Try.html][Try in std::ops - Rust]]
+
+* Async Pin
+  Rust 在实现 async/.await 时，可能会生成自引用结构体，自引用结构体在使用类似 std::mem::swap 的操作进行移动时，就可能出现问题：
+  #+begin_src rust
+    #[derive(Debug)]
+    struct Test {
+        a: String,
+        b: *const String,
+    }
+
+    fn main() {
+        let mut test1 = Test::new("test1");
+        test1.init();
+        let mut test2 = Test::new("test2");
+        test2.init();
+
+        println!("a: {}, b: {}", test1.a(), test1.b());
+        std::mem::swap(&mut test1, &mut test2);
+        // The pointer to test2.b still points to the old location which is inside test1 now
+        println!("a: {}, b: {}", test2.a(), test2.b());
+    }
+  #+end_src
+
+  而这类操作通常都需要用的 &mut T，因此，Rust 引入了 Pin 类型，让 &mut T 的获取隐藏，达到保护自引用结构的目的。
+
+  参考：
+  + [[https://rust-lang.github.io/async-book/04_pinning/01_chapter.html][Pinning - Asynchronous Programming in Rust]]
 
