@@ -8,6 +8,7 @@
 - [[#option-like-enums][Option-like enums]]
 - [[#try-trait][Try trait]]
 - [[#async-pin][Async Pin]]
+- [[#bastion-of-the-turbofish][Bastion of the Turbofish]]
 
 * Patterns and Matching
   Rust 中模式匹配是一个很常用也很强大的功能，本质上，通过 let 绑定变量也是一种模式匹配，函数参数也是一种隐式 let 绑定。
@@ -197,4 +198,22 @@
 
   参考：
   + [[https://rust-lang.github.io/async-book/04_pinning/01_chapter.html][Pinning - Asynchronous Programming in Rust]]
+
+* Bastion of the Turbofish  
+  在 Rust 中，当编译无法自动推断泛型参数时，可以使用 =::<...>= 语法来显式指定类型，这种语法叫做 Turbofish。
+
+  但也有人觉得这样写不好看，就想去掉 =::= 直接写 =<...>=, 但是去掉 =::= 后下面的写法就会存在歧义：
+  #+begin_src rust
+    fn main() {
+        let (oh, woe, is, me) = ("the", "Turbofish", "remains", "undefeated");
+        let _: (bool, bool) = (oh<woe, is>(me));
+    }
+  #+end_src
+
+  如果没有 ::，这里可能是 =oh<woe, is>(me)= 的函数调用，也可以是 =oh < woe= 和 =is > (me)= 两个布尔判断。
+
+  这就是 Bastion of the Turbofish。
+
+  参考：
+  + [[https://github.com/rust-lang/rust/blob/master/src/test/ui/bastion-of-the-turbofish.rs][rust/bastion-of-the-turbofish.rs at master · rust-lang/rust]]
 
